@@ -26,6 +26,7 @@ For each of these checks we design a prompt that can be optmized based on a test
 
 Each check is defined by a JSON file in the `data/checks/` directory.
 
+```json
 {
   "id": "CHECK-001",
   "name": "check-experimental-method-mentioned",
@@ -45,51 +46,53 @@ Each check is defined by a JSON file in the `data/checks/` directory.
     }
   ]
 }
+```
 
 Checklists:
 
 Several checks can be grouped in a single JSON file, for instance checks related to the statistics, editorial and microscopy standards can be grouped in their respective checklist files:
 
-data/checklist/
-  ├── editorial.json       # Checklist for editorial compliance
-  ├── statistics.json      # Checklist for statistical integrity
-  ├── microscopy.json      # Checklist for microscopy-specific guidelines
+
+    data/checklist/
+      ├── editorial.json       # Checklist for editorial compliance
+      ├── statistics.json      # Checklist for statistical integrity
+      ├── microscopy.json      # Checklist for microscopy-specific guidelines
 
 Structure of the data:
 
 The structure of the repository keeps each example as human readable directories, grouping the image, the caption as well as the expected output for each of the checks:
 
-data/
-  ├── figures/
-  │   ├── FIG001/
-  │   │   ├── FIG001.png
-  │   │   ├── caption.txt
-  │   │   ├── check-experimental-method-mentioned/
-  │   │   │   ├── expected_output.txt
-  │   │
-  │   ├── FIG002/
-  │   │   ├── FIG002.tiff
-  │   │   ├── caption.txt
-  │   │   ├── check-experimental-method-mentioned/
-  │   │   │   ├── expected_output.txt
-  │
-  ├── prompts/
-  │   ├── CHECK-001_prompt.txt
-  │   ├── CHECK-002_prompt.txt
-  │
-  ├── checklist/
-  │   ├── editorial.json       # Checklist for editorial compliance
-  │   ├── statistics.json      # Checklist for statistical integrity
-  │   ├── microscopy.json      # Checklist for microscopy-specific guidelines
-  │
-  ├── evaluation/
-  │   ├── results/
-  │   │   ├── editorial/
-  │   │   │   ├── CHECK-001_metrics.json
-  │   │   │   ├── CHECK-005_metrics.json
-  │   │   ├── statistics/
-  │   │   │   ├── CHECK-010_metrics.json
-  │   │   │   ├── CHECK-011_metrics.json
-  │   │   ├── microscopy/
-  │   │   │   ├── CHECK-020_metrics.json
+    data/
+      ├── figures/
+      │   ├── FIG001/
+      │   │   ├── FIG001.png
+      │   │   ├── caption.txt
+      │   │   ├── check-experimental-method-mentioned/
+      │   │   │   ├── expected_output.txt
+      │   │
+      │   ├── FIG002/
+      │   │   ├── FIG002.tiff
+      │   │   ├── caption.txt
+      │   │   ├── check-experimental-method-mentioned/
+      │   │   │   ├── expected_output.txt
+      │
+      ├── prompts/
+      │   ├── CHECK-001_prompt.txt
+      │   ├── CHECK-002_prompt.txt
+      │
+      ├── checklist/
+      │   ├── editorial.json       # Checklist for editorial compliance
+      │   ├── statistics.json      # Checklist for statistical integrity
+      │   ├── microscopy.json      # Checklist for microscopy-specific guidelines
+      │
+      ├── evaluation/
+      │   ├── results/
+      │   │   ├── editorial/
+      │   │   │   ├── CHECK-001_metrics.json
+      │   │   │   ├── CHECK-005_metrics.json
+      │   │   ├── statistics/
+      │   │   │   ├── CHECK-010_metrics.json
+      │   │   │   ├── CHECK-011_metrics.json
+      │   │   ├── microscopy/
+      │   │   │   ├── CHECK-020_metrics.json
 
