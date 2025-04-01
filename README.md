@@ -1,7 +1,7 @@
 The open multimodal checklist for scientific figures and data (mmQC)
 ===============================================================
 
-This is an open library of multimodal prompts to verify the quality, rigor and compliance to editorial policy of scientific figures, including the image depicting the results, the respective figure caption and the linked research data. 
+This is an open library of multimodal prompts to verify the quality, rigor and compliance to editorial policies of scientific figures, including the image depicting the results, the respective figure caption and the linked research data. 
 
 Example of checks:
 
@@ -46,12 +46,16 @@ Each check is defined by a JSON file in the `data/checks/` directory.
   ]
 }
 
+Checklists:
+
 Several checks can be grouped in a single JSON file, for instance checks related to the statistics, editorial and microscopy standards can be grouped in their respective checklist files:
 
 data/checklist/
   ├── editorial.json       # Checklist for editorial compliance
   ├── statistics.json      # Checklist for statistical integrity
   ├── microscopy.json      # Checklist for microscopy-specific guidelines
+
+Structure of the data:
 
 The structure of the repository keeps each example as human readable directories, grouping the image, the caption as well as the expected output for each of the checks:
 
@@ -88,8 +92,4 @@ data/
   │   │   │   ├── CHECK-011_metrics.json
   │   │   ├── microscopy/
   │   │   │   ├── CHECK-020_metrics.json
-
-
-Each expected_output.txt contains the expected model response for that check.
-
 
