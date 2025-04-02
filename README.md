@@ -1,7 +1,7 @@
-The open multimodal checklist for scientific figures and data (mmQC)
+The Open Library of Multimodal Data Checklists (mmQC)
 ===============================================================
 
-This is an open library of multimodal prompts to verify the quality, rigor and compliance to editorial policies of scientific figures, including the image depicting the results, the respective figure caption and the linked research data. 
+This is an open library of multimodal prompts dedicated to the verification of the quality, rigor and compliance to editorial policies of scientific figures, including the image depicting the results, the respective figure caption and the linked research data. 
 
 Example of checks:
 
