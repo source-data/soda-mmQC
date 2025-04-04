@@ -1,3 +1,56 @@
+# SODA MMQC
+
+A tool for evaluating figure caption quality.
+
+## Installation
+
+You can install the package in development mode using pip:
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/soda-mmqc.git
+cd soda-mmqc
+
+# Install in development mode
+pip install -e .
+```
+
+## Usage
+
+After installation, you can run the tool using:
+
+```bash
+# Run all checklists
+soda-mmqc
+
+# Run a specific checklist
+soda-mmqc --checklist checklist-name
+
+# Set logging level
+soda-mmqc --log-level DEBUG
+
+# Specify custom results directory
+soda-mmqc --results-dir path/to/results
+```
+
+## Project Structure
+
+```
+soda-mmqc/
+├── soda_mmqc/
+│   ├── __init__.py
+│   ├── scripts/
+│   │   ├── __init__.py
+│   │   └── run.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── checklist/
+│   ├── model_api.py
+│   └── evaluation.py
+├── pyproject.toml
+└── README.md
+```
+
 The Open Library of Multimodal Data Checklists (mmQC)
 ===============================================================
 

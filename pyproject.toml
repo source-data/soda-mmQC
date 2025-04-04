@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "soda-mmqc"
+version = "0.1.0"
+description = "SODA MMQC - A tool for evaluating figure caption quality"
+requires-python = ">=3.8"
+dependencies = [
+    "tqdm",
+]
+
+[project.scripts]
+soda-mmqc = "soda_mmqc.scripts.run:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["soda_mmqc"] 
