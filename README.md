@@ -20,7 +20,7 @@ Example of checks:
 - If statistical significance or testing is mentioned in the caption or displayed on the image, is the statistical test specified?
 
 
-Benchmarking:
+## Checks:
 
 For each of these checks we design a prompt that can be optmized based on a test set assembling examples covering the expected outcomes.
 
@@ -28,27 +28,24 @@ Each check is defined by a JSON file in the `data/checks/` directory.
 
 ```json
 {
-  "id": "CHECK-001",
-  "name": "check-experimental-method-mentioned",
-  "description": "Checks whether the experimental method, platform, or assay is explicitly mentioned in the figure caption.",
-  "prompt_path": "prompts/CHECK-001_prompt.txt",
+  "name": "error-bars-defined",
+  "description": "Checks whether the error bars are defined in the figure caption.",
+  "prompt_path": "prompts/error-bars-defined.txt",
   "metrics": ["exact_match", "semantic_similarity", "BLEU"],
   "examples": [
     {
-      "figure_id": "FIG001",
-      "figure_path": "data/figures/FIG001/",
-      "expected_output_path": "data/figures/FIG001/check-experimental-method-mentioned/expected_output.txt"
+      "figure_path": "data/figure/10.1038_emboj.2009.312/1/",
+      "expected_output_path": "data/figure/10.1038_emboj.2009.312/1/error-bars-defined/expected_output.txt"
     },
     {
-      "figure_id": "FIG002",
-      "figure_path": "data/figures/FIG002/",
-      "expected_output_path": "data/figures/FIG002/check-experimental-method-mentioned/expected_output.txt"
+      "figure_path": "data/figure/10.1038_emboj.2009.340/3/",
+      "expected_output_path": "data/figure/10.1038_emboj.2009.340/3/error-bars-defined/expected_output.txt"
     }
   ]
 }
 ```
 
-Checklists:
+## Checklists:
 
 Several checks can be grouped in a single JSON file, for instance checks related to the statistics, editorial and microscopy standards can be grouped in their respective checklist files:
 
@@ -58,41 +55,114 @@ Several checks can be grouped in a single JSON file, for instance checks related
       ├── statistics.json      # Checklist for statistical integrity
       ├── microscopy.json      # Checklist for microscopy-specific guidelines
 
-Structure of the data:
+
+## Benchmarking data:
 
 The structure of the repository keeps each example as human readable directories, grouping the image, the caption as well as the expected output for each of the checks:
 
     data/
-      ├── figures/
-      │   ├── FIG001/
-      │   │   ├── FIG001.png
+      ├── figure/
+      │   ├── 10.1038_embor.2009.233/
+      │   │   ├── figure.png
       │   │   ├── caption.txt
-      │   │   ├── check-experimental-method-mentioned/
-      │   │   │   ├── expected_output.txt
-      │   │
-      │   ├── FIG002/
-      │   │   ├── FIG002.tiff
+      │   │   └── checks/
+      │   │       ├── check-experimental-method-mentioned/
+      │   │       │   └── expected_output.txt
+      │   │       └── check-error-bars-defined/
+      │   │           └── expected_output.txt
+      │   ├── 10.1038_embor.2009.217/
+      │   │   ├── figure.png
       │   │   ├── caption.txt
-      │   │   ├── check-experimental-method-mentioned/
-      │   │   │   ├── expected_output.txt
-      │
-      ├── prompts/
-      │   ├── CHECK-001_prompt.txt
-      │   ├── CHECK-002_prompt.txt
+      │   │   └── checks/
+      │   │       └── ...
+      │   └── ...
       │
       ├── checklist/
-      │   ├── editorial.json       # Checklist for editorial compliance
-      │   ├── statistics.json      # Checklist for statistical integrity
-      │   ├── microscopy.json      # Checklist for microscopy-specific guidelines
+      │   └── minimal-requirement-for-figure-caption/
+      │       ├── checks.json
+      │       └── prompts/
+      │           ├── check-experimental-method-mentioned.txt
+      │           └── check-error-bars-defined.txt
       │
-      ├── evaluation/
-      │   ├── results/
-      │   │   ├── editorial/
-      │   │   │   ├── CHECK-001_metrics.json
-      │   │   │   ├── CHECK-005_metrics.json
-      │   │   ├── statistics/
-      │   │   │   ├── CHECK-010_metrics.json
-      │   │   │   ├── CHECK-011_metrics.json
-      │   │   ├── microscopy/
-      │   │   │   ├── CHECK-020_metrics.json
+      └── evaluation/
+          └── results/
+              └── minimal-requirement-for-figure-caption/
+                  ├── check-experimental-method-mentioned_metrics.json
+                  └── check-error-bars-defined_metrics.json
+
+
+## Exepected output:
+
+The expected output is a JSON file that contains the expected output for each of the checks.
+
+```json
+{
+    "name": "error-bars-defined",
+    [
+        {
+            "panel_label": "A",
+            "error_bar_on_figure": "no",
+            "error_bar_defined_in_legend": "not needed",
+            "error_bar_meaning": "not applicable",
+        },
+        {
+            "panel_label": "B",
+            "error_bar_on_figure": "no",
+            "error_bar_defined_in_legend": "not needed",
+            "error_bar_meaning": "not applicable",
+        },
+        {
+            "panel_label": "C",
+            "error_bar_on_figure": "no",
+            "error_bar_defined_in_legend": "not needed",
+            "error_bar_meaning": "not applicable",
+        },
+        {
+            "panel_label": "D",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "from_the_caption": "Error bars indicate mean±s.d.",
+        },
+        {
+            "panel_label": "E",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "from_the_caption": "Error bars indicate mean±s.d.",
+        },
+        {
+            "panel_label": "F",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "from_the_caption": "Error bars indicate mean±s.d.",
+        },
+         {
+            "panel_label": "G",
+            "error_bar_on_figure": "no",
+            "error_bar_defined_in_legend": "not needed",
+            "from_the_caption": "Error bars indicate mean±s.d.",
+        },
+        {
+            "panel_label": "H",
+            "error_bar_on_figure": "no",
+            "error_bar_defined_in_legend": "not needed",
+            "error_bar_meaning": "not applicable",
+        },
+         {
+            "panel_label": "I",
+            "error_bar_on_figure": "no",
+            "error_bar_defined_in_legend": "not needed",
+            "from_the_caption": "Error bars indicate mean±s.d.",
+        },
+        {
+            "panel_label": "J",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_legend": "yes",
+            "from_the_caption": "Error bars indicate mean±s.d.",
+        }
+    ]
+}
+```
+
+
+
 
