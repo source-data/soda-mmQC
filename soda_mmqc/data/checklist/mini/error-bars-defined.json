@@ -2,7 +2,7 @@
   "name": "error-bars-defined",
   "description": "Checks whether the error bars are defined in the figure caption.",
   "prompt_path": "error-bars-defined.txt",
-  "metrics": ["exact_match", "semantic_similarity", "BLEU"],
+  "metrics": ["exact_match", "BLEU"],
   "examples": [
     {
       "doi": "10.1038_emboj.2009.312",
@@ -30,7 +30,7 @@
     },
     {
       "doi": "10.1038_s44318-025-00416-1",
-      "figure_id": "1"
+      "figure_id": "8"
     },
     {
       "doi": "10.1038_s44319-025-00415-7",
