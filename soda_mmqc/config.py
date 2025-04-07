@@ -41,7 +41,6 @@ def list_checklist_files(checklist_name: str = None) -> Dict[str, List[Path]]:
     Returns:
         Dictionary mapping checklist names to lists of their JSON files
     """
-    import pdb; pdb.set_trace()
     if checklist_name:
         checklist_path = CHECKLIST_DIR / checklist_name
         if not checklist_path.exists():
@@ -66,9 +65,10 @@ def get_figure_path(doi: str, figure_id: str) -> Path:
     return FIGURE_DIR / doi / figure_id
 
 
-def get_expected_output_relative_path(check_name: str) -> Path:
+def get_expected_output_path(doi: str, figure_id: str, check_name: str) -> Path:
     """Get the relative path to expected results for a check."""
-    return Path(EXPECTED_OUTPUT_SUBDIR) / check_name / "expected_output.json"
+    fig_path = get_figure_path(doi, figure_id)
+    return fig_path / EXPECTED_OUTPUT_SUBDIR / check_name / "expected_output.json"
 
 
 def get_evaluation_path(checklist_name: str) -> Path:

@@ -8,11 +8,26 @@ version = "0.1.0"
 description = "SODA MMQC - A tool for evaluating figure caption quality"
 requires-python = ">=3.8"
 dependencies = [
+    "python-dotenv>=1.0.0",
+    "openai>=1.0.0",
+    "anthropic>=0.5.0",
+    "Pillow>=10.0.0",
+    "nltk>=3.8.1",
+    "sentence-transformers>=2.2.2",
+    "scikit-learn>=1.3.0",
+    "numpy>=1.24.0",
     "tqdm",
+    "pytest>=7.0.0"
 ]
 
 [project.scripts]
-soda-mmqc = "soda_mmqc.scripts.run:main"
+mmqc_run = "soda_mmqc.scripts.run:main"
+mmqc_eval = "soda_mmqc.scripts.evaluate:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["soda_mmqc"] 
+packages = ["soda_mmqc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v" 
