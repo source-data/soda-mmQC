@@ -5,13 +5,13 @@
             "panel_label": "A",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "quote_from_caption": ""
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "no",
-            "quote_from_caption": ""
+            "from_the_caption": ""
         }
     ]
 }
