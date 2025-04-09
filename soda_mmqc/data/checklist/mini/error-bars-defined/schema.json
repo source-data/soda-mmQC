@@ -1,7 +1,7 @@
 {
     "format": {
         "type": "json_schema",
-        "name": "figure_quality_check",
+        "name": "error-bars-defined",
         "schema": {
             "type": "object",
             "properties": {

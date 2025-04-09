@@ -114,28 +114,30 @@ Several checks can be grouped in a single JSON file, for instance checks related
 The structure of the repository keeps each example as human readable directories, grouping the image, the caption as well as the expected output for each of the checks:
 
     data/
-      ├── figure/
+      ├── examples/
       │   ├── 10.1038_embor.2009.233/
-      │   │   ├── figure.png
-      │   │   ├── caption.txt
+      │   │   ├── content/
+      │   │   │   ├── figure.png
+      │   │   │   └── caption.txt
       │   │   └── checks/
       │   │       ├── check-experimental-method-mentioned/
       │   │       │   └── expected_output.txt
       │   │       └── check-error-bars-defined/
       │   │           └── expected_output.txt
       │   ├── 10.1038_embor.2009.217/
-      │   │   ├── figure.png
-      │   │   ├── caption.txt
+      │   │   ├── content/
+      │   │   │   ├── figure.png
+      │   │   │   └── caption.txt
       │   │   └── checks/
       │   │       └── ...
       │   └── ...
       │
       ├── checklist/
-      │   └── minimal-requirement-for-figure-caption/
-      │       ├── checks.json
-      │       └── prompts/
-      │           ├── check-experimental-method-mentioned.txt
-      │           └── check-error-bars-defined.txt
+      │   └── mini/
+      │       └── error-bars-defined/
+      │           ├── prompt.txt
+      │           ├── schema.json
+      │           └── benchmark.json
       │
       └── evaluation/
           └── results/
@@ -151,66 +153,30 @@ The expected output is a JSON file that contains the expected output for each of
 ```json
 {
     "name": "error-bars-defined",
-    [
+    "results": [
         {
             "panel_label": "A",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_legend": "not needed",
-            "error_bar_meaning": "not applicable",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "quote_from_caption": "Mean±s.d. of three experiments is reported.",
         },
         {
             "panel_label": "B",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_legend": "not needed",
-            "error_bar_meaning": "not applicable",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "quote_from_caption": "Mean±s.d. of three experiments is reported.",
         },
         {
             "panel_label": "C",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_legend": "not needed",
-            "error_bar_meaning": "not applicable",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "quote_from_caption": "Mean±s.d. of three experiments is reported.",
         },
         {
             "panel_label": "D",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Error bars indicate mean±s.d.",
-        },
-        {
-            "panel_label": "E",
-            "error_bar_on_figure": "yes",
-            "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Error bars indicate mean±s.d.",
-        },
-        {
-            "panel_label": "F",
-            "error_bar_on_figure": "yes",
-            "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Error bars indicate mean±s.d.",
-        },
-         {
-            "panel_label": "G",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_legend": "not needed",
-            "from_the_caption": "Error bars indicate mean±s.d.",
-        },
-        {
-            "panel_label": "H",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_legend": "not needed",
-            "error_bar_meaning": "not applicable",
-        },
-         {
-            "panel_label": "I",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_legend": "not needed",
-            "from_the_caption": "Error bars indicate mean±s.d.",
-        },
-        {
-            "panel_label": "J",
-            "error_bar_on_figure": "yes",
-            "error_bar_defined_in_legend": "yes",
-            "from_the_caption": "Error bars indicate mean±s.d.",
+            "from_the_caption": "Mean±s.d. of three experiments is reported.",
         }
     ]
 }

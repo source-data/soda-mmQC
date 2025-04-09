@@ -1,7 +1,7 @@
 {
   "name": "error-bars-defined",
   "description": "Checks whether the error bars are defined in the figure caption.",
-  "metrics": ["exact_match", "BLEU"],
+  "metrics": ["exact_match", "semantic_similarity", "BLEU"],
   "examples": [
     {
       "doi": "10.1038_emboj.2009.312",

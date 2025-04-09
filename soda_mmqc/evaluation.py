@@ -1,5 +1,4 @@
 import json
-import difflib
 from nltk.translate.bleu_score import sentence_bleu
 import nltk
 from sentence_transformers import SentenceTransformer
@@ -17,166 +16,216 @@ try:
 except LookupError:
     nltk.download('punkt_tab')
 
-
-def exact_match_score(predicted, expected):
-    """Calculate exact match score between predicted and expected outputs."""
-    try:
-        # Parse JSON strings if they are strings
-        if isinstance(predicted, str):
-            predicted = json.loads(predicted)
-        if isinstance(expected, str):
-            expected = json.loads(expected)
-        
-        # Compare the JSON objects
-        return 1.0 if predicted == expected else 0.0
-    except (json.JSONDecodeError, TypeError):
-        # If parsing fails, compare as strings
-        return 1.0 if predicted == expected else 0.0
+SENTENCE_TRANSFORMER = SentenceTransformer('all-MiniLM-L6-v2')
 
 
 def get_text_fields(json_obj):
-    """Extract text fields that contain semantic content from the JSON object."""
+    """Extract text fields with semantic content from the JSON object."""
     if isinstance(json_obj, str):
         json_obj = json.loads(json_obj)
-    
-    text_fields = []
-    
-    # Add name field if present
-    if "name" in json_obj:
-        text_fields.append(json_obj["name"])
-    
+
+    # Initialize dictionaries for each field type
+    field_types = {
+        "panel_label": [],
+        "error_bar_on_figure": [],
+        "error_bar_defined_in_caption": [],
+        "from_the_caption": []
+    }
+
     # Process panels
-    if "panels" in json_obj and isinstance(json_obj["panels"], list):
-        for panel in json_obj["panels"]:
+    if "outputs" in json_obj:
+        for output in json_obj["outputs"]:
             # Add caption text which contains semantic content
-            if "from_the_caption" in panel:
-                text_fields.append(panel["from_the_caption"])
+            if "panel_label" in output:
+                field_types["panel_label"].append(output["panel_label"])
+            if "error_bar_on_figure" in output:
+                field_types["error_bar_on_figure"].append(
+                    output["error_bar_on_figure"]
+                )
+            if "error_bar_defined_in_caption" in output:
+                field_types["error_bar_defined_in_caption"].append(
+                    output["error_bar_defined_in_caption"]
+                )
+            if "from_the_caption" in output:
+                field_types["from_the_caption"].append(
+                    output["from_the_caption"]
+                )
+    return field_types
+
+
+def exact_match_score(predicted, expected):
+    """Calculate exact match score between predicted and expected outputs."""
+    # Get text fields with semantic content
+    pred_fields = get_text_fields(predicted)
+    exp_fields = get_text_fields(expected)
+
+    # Calculate exact match score for each field type
+    results = {}
+    overall_score = 0.0
+    total_fields = 0
+
+    for field_type in pred_fields:
+        pred_texts = pred_fields[field_type]
+        exp_texts = exp_fields[field_type]
+        
+        # Skip if no fields of this type
+        if not pred_texts or not exp_texts:
+            results[field_type] = 0.0
+            continue
             
-            # Add error bar meaning if it's not a standard enum value
-            if "error_bar_meaning" in panel:
-                meaning = panel["error_bar_meaning"]
-                if meaning not in [
-                    "standard deviation",
-                    "standard error",
-                    "confidence interval",
-                    "not applicable"
-                ]:
-                    text_fields.append(meaning)
+        # Calculate score for this field type
+        field_score = 0.0
+        field_count = 0
+        
+        for pred_text, exp_text in zip(pred_texts, exp_texts):
+            field_score += int(pred_text == exp_text)
+            field_count += 1
+            
+        field_result = field_score / field_count if field_count > 0 else 0.0
+        results[field_type] = field_result
+        
+        # Add to overall score
+        overall_score += field_score
+        total_fields += field_count
     
-    return text_fields
+    # Add overall score
+    results["overall"] = overall_score / total_fields if total_fields > 0 else 0.0
+    
+    return results
 
 
-def semantic_similarity_score(predicted, expected):
-    """Calculate semantic similarity score between text fields of predicted and 
-    expected outputs."""
+def semantic_similarity_score(predicted, expected, model=SENTENCE_TRANSFORMER):
+    """Calculate semantic similarity between predicted and expected outputs."""
     try:
         # Get text fields with semantic content
-        pred_texts = get_text_fields(predicted)
-        exp_texts = get_text_fields(expected)
-        
-        if not pred_texts or not exp_texts:
-            return 0.0
-            
-        # Load the model
-        model = SentenceTransformer('all-MiniLM-L6-v2')
-        
-        # Calculate pairwise similarities between all text fields
-        similarities = []
-        for pred_text in pred_texts:
-            pred_embedding = model.encode([pred_text])[0]
-            pred_embedding = np.array(pred_embedding).reshape(1, -1)
-            
-            for exp_text in exp_texts:
+        pred_fields = get_text_fields(predicted)
+        exp_fields = get_text_fields(expected)
+
+        # Calculate semantic similarity for each field type
+        results = {}
+        overall_score = 0.0
+        total_fields = 0
+
+        for field_type in pred_fields:
+            pred_texts = pred_fields[field_type]
+            exp_texts = exp_fields[field_type]
+
+            # Skip if no fields of this type
+            if not pred_texts or not exp_texts:
+                results[field_type] = 0.0
+                continue
+
+            # Calculate similarity for this field type
+            similarities = []
+
+            for pred_text, exp_text in zip(pred_texts, exp_texts):
+                pred_embedding = model.encode([pred_text])[0]
+                pred_embedding = np.array(pred_embedding).reshape(1, -1)
                 exp_embedding = model.encode([exp_text])[0]
                 exp_embedding = np.array(exp_embedding).reshape(1, -1)
-                similarity = cosine_similarity(pred_embedding, exp_embedding)[0][0]
-                similarities.append(similarity)
+                similarity = cosine_similarity(
+                    pred_embedding, exp_embedding
+                )[0][0]
+                similarities.append(float(similarity))
+            
+            # Calculate average for this field type
+            field_result = (
+                float(sum(similarities) / len(similarities)) 
+                if similarities else 0.0
+            )
+            results[field_type] = field_result
+            
+            # Add to overall score
+            overall_score += sum(similarities)
+            total_fields += len(similarities)
         
-        # Return maximum similarity found between any pair of texts
-        return max(similarities) if similarities else 0.0
+        # Add overall score
+        results["overall"] = (
+            overall_score / total_fields if total_fields > 0 else 0.0
+        )
         
+        return results
+
     except (json.JSONDecodeError, TypeError, ImportError):
-        return 0.0
+        # Return zeros for all field types in case of error
+        return {
+            "panel_label": 0.0,
+            "error_bar_on_figure": 0.0,
+            "error_bar_defined_in_caption": 0.0,
+            "from_the_caption": 0.0,
+            "overall": 0.0
+        }
 
 
 def bleu_score(predicted, expected):
-    """Calculate BLEU score between text fields of predicted and expected outputs."""
+    """Calculate BLEU score between predicted and expected outputs."""
     try:
         # Get text fields with semantic content
-        pred_texts = get_text_fields(predicted)
-        exp_texts = get_text_fields(expected)
-        
-        if not pred_texts or not exp_texts:
-            return 0.0
-            
-        # Calculate BLEU scores between all text pairs
-        bleu_scores = []
-        for pred_text in pred_texts:
-            pred_tokens = nltk.word_tokenize(pred_text.lower())
-            
-            for exp_text in exp_texts:
-                exp_tokens = nltk.word_tokenize(exp_text.lower())
-                score = sentence_bleu([exp_tokens], pred_tokens)
+        pred_fields = get_text_fields(predicted)
+        exp_fields = get_text_fields(expected)
+
+        # Calculate BLEU score for each field type
+        results = {}
+        overall_score = 0.0
+        total_fields = 0
+
+        for field_type in pred_fields:
+            pred_texts = pred_fields[field_type]
+            exp_texts = exp_fields[field_type]
+
+            # Skip if no fields of this type
+            if not pred_texts or not exp_texts:
+                results[field_type] = 0.0
+                continue
+
+            # Calculate BLEU scores for this field type
+            bleu_scores = []
+
+            for pred_text, exp_text in zip(pred_texts, exp_texts):
+                # Case 1: Both empty - perfect match
+                if (not exp_text) and (not pred_text):
+                    score = 1.0
+                # Case 2: Expected empty but predicted has content - wrong
+                elif (not exp_text) and pred_text:
+                    score = 0.0
+                # Case 3: Expected has content and predicted contains it - good
+                elif exp_text and (exp_text in pred_text):
+                    score = 1.0
+                # Case 4: Expected has content but predicted doesn't contain it - use BLEU
+                else:
+                    # Standard BLEU calculation
+                    pred_tokens = nltk.word_tokenize(pred_text.lower())
+                    exp_tokens = nltk.word_tokenize(exp_text.lower())
+                    score = sentence_bleu([pred_tokens], exp_tokens)
+                
                 bleu_scores.append(score)
-        
-        # Return maximum BLEU score found between any pair of texts
-        return max(bleu_scores) if bleu_scores else 0.0
-        
-    except (json.JSONDecodeError, TypeError):
-        return 0.0
-
-
-def structured_match_score(predicted, expected):
-    """Calculate structured match score based on the schema requirements."""
-    try:
-        # Parse JSON strings if they are strings
-        if isinstance(predicted, str):
-            predicted = json.loads(predicted)
-        if isinstance(expected, str):
-            expected = json.loads(expected)
-
-        # Check required fields
-        required_fields = ["name", "panels"]
-        if not all(field in predicted for field in required_fields):
-            return 0.0
-
-        # Check panels structure
-        if not isinstance(predicted["panels"], list):
-            return 0.0
-
-        # Calculate panel-wise scores
-        panel_scores = []
-        for pred_panel, exp_panel in zip(
-            predicted["panels"], expected["panels"]
-        ):
-            panel_score = 0.0
-            total_fields = 0
-
-            # Check required panel fields
-            required_panel_fields = [
-                "panel_label",
-                "error_bar_on_figure",
-                "error_bar_defined_in_legend",
-                "error_bar_defined_in_caption",
-                "error_bar_meaning",
-                "from_the_caption"
-            ]
-
-            for field in required_panel_fields:
-                if field in pred_panel and field in exp_panel:
-                    total_fields += 1
-                    if pred_panel[field] == exp_panel[field]:
-                        panel_score += 1.0
-
-            panel_scores.append(
-                panel_score / total_fields if total_fields > 0 else 0.0
+            
+            # Calculate average for this field type
+            field_result = (
+                sum(bleu_scores) / len(bleu_scores) if bleu_scores else 0.0
             )
+            results[field_type] = field_result
+            
+            # Add to overall score
+            overall_score += sum(bleu_scores)
+            total_fields += len(bleu_scores)
+        
+        # Add overall score
+        results["overall"] = (
+            overall_score / total_fields if total_fields > 0 else 0.0
+        )
+        
+        return results
 
-        # Return average score across all panels
-        return sum(panel_scores) / len(panel_scores) if panel_scores else 0.0
-
-    except (json.JSONDecodeError, TypeError, KeyError, ZeroDivisionError):
-        return 0.0
+    except (json.JSONDecodeError, TypeError):
+        # Return zeros for all field types in case of error
+        return {
+            "panel_label": 0.0,
+            "error_bar_on_figure": 0.0,
+            "error_bar_defined_in_caption": 0.0,
+            "from_the_caption": 0.0,
+            "overall": 0.0
+        }
 
 
 def evaluate_response(model_output, expected_output, metrics):
@@ -192,11 +241,14 @@ def evaluate_response(model_output, expected_output, metrics):
             )
         elif metric == "BLEU":
             results[metric] = bleu_score(model_output, expected_output)
-        elif metric == "structured_match":
-            results[metric] = structured_match_score(
-                model_output, expected_output
-            )
         else:
-            results[metric] = 0.0  # Unknown metric
+            # For unknown metrics, return zeros for all field types
+            results[metric] = {
+                "panel_label": 0.0,
+                "error_bar_on_figure": 0.0,
+                "error_bar_defined_in_caption": 0.0,
+                "from_the_caption": 0.0,
+                "overall": 0.0
+            }
 
     return results

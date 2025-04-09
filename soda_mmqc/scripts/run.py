@@ -1,5 +1,6 @@
 import os
 import json
+import hashlib
 import argparse
 import logging
 from pathlib import Path
@@ -8,11 +9,14 @@ from tqdm import tqdm
 from soda_mmqc.model_api import generate_response
 from soda_mmqc.model_cache import ModelCache
 from soda_mmqc.config import (
-    get_prompt_path,
-    get_figure_path,
+    get_content_path,
     get_expected_output_path,
-    list_checklist_files
+    get_cache_path,
+    get_checklist,
+    list_checks,
+    get_evaluation_path
 )
+from soda_mmqc.evaluation import evaluate_response
 
 
 # Configure logging
@@ -30,7 +34,7 @@ def load_json(file_path):
         return json.load(f)
 
 
-def gather_inputs(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+def gather_examples(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Step 1: Gather all necessary inputs and validate file paths.
     
     Args:
@@ -40,41 +44,45 @@ def gather_inputs(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         List of dictionaries containing all necessary inputs for model processing
     """
     check_name = check_data["name"]
-    prompt_name = Path(check_data["prompt_path"]).stem
     examples = check_data["examples"]
 
     logger.info(f"Gathering inputs for check: {check_name}")
     logger.info(f"Found {len(examples)} examples to process")
 
-    # Get and validate prompt file
-    prompt_path = get_prompt_path(prompt_name)
-    if not prompt_path.exists():
-        logger.error(f"Prompt file not found: {prompt_path}")
-        raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
-
-    with open(prompt_path, "r", encoding="utf-8") as f:
-        prompt_template = f.read()
-
     # Gather and validate all inputs
     inputs = []
     for example in tqdm(examples, desc="Validating inputs", unit="example"):
+        
         doi = example["doi"]
         figure_id = example["figure_id"]
-        
+
         # Get and validate paths
-        figure_path = get_figure_path(doi, figure_id)
-        expected_output_path = get_expected_output_path(
-            doi, figure_id, check_name
-        )
-        
-        logger.debug(f"Loading figure: {doi}/{figure_id}")
-        
+        content_path = get_content_path(example)
+
         # Validate caption file
-        caption_path = figure_path / "caption.txt"
+        caption_path = content_path / "caption.txt"
         if not caption_path.exists():
             logger.error(f"Caption file not found: {caption_path}")
             raise FileNotFoundError(f"Caption file not found: {caption_path}")
-            
+        # Read caption and expected output
+        with open(caption_path, "r", encoding="utf-8") as f:
+            caption = f.read().strip()
+
+        # Find and validate image file
+        image_path = None
+        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+            for img_file in content_path.glob(f"*{ext}"):
+                image_path = img_file
+                break
+        # we delay the loading and encoding of the image until the last moment when call the model
+        # but we keep a hash so that it is part of the cache key
+        if not image_path:
+            logger.error(f"No image found for {example['doi']}/{example['figure_id']}")
+            raise ValueError(f"No image found for {example['doi']}/{example['figure_id']}")
+        with open(image_path, "rb") as f:
+            img_hash = hashlib.sha256(f.read()).hexdigest()
+
+        expected_output_path = get_expected_output_path(example, check_name)
         # Validate expected output file
         if not expected_output_path.exists():
             logger.error(
@@ -83,43 +91,23 @@ def gather_inputs(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
             raise FileNotFoundError(
                 f"Expected output file not found: {expected_output_path}"
             )
-            
-        # Find and validate image file
-        image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
-            for img_file in figure_path.glob(f"*{ext}"):
-                image_path = img_file
-                break
-            if image_path:
-                break
-                
-        if not image_path:
-            logger.error(f"No image found for {doi}/{figure_id}")
-            raise ValueError(f"No image found for {doi}/{figure_id}")
-            
-        # Read caption and expected output
-        with open(caption_path, "r", encoding="utf-8") as f:
-            caption = f.read().strip()
-            
-        with open(expected_output_path, "r", encoding="utf-8") as f:
-            expected_output = f.read().strip()
-            
+        expected_output = load_json(expected_output_path)
+
         # Store all inputs
         inputs.append({
             "doi": doi,
             "figure_id": figure_id,
-            "image_path": str(image_path),
             "caption": caption,
+            "image_path": str(image_path),
+            "img_hash": img_hash,
             "expected_output": expected_output,
-            "prompt_template": prompt_template,
-            "check_name": check_name
         })
-        
+
     return inputs
 
 
 def run_model(
-    inputs: List[Dict[str, Any]], 
+    inputs: Dict[str, Any], 
     mock: bool = False,
     use_cache: bool = True
 ) -> List[Dict[str, Any]]:
@@ -136,31 +124,49 @@ def run_model(
     logger.info("Running model on all inputs")
     
     # Initialize model cache
-    cache_dir = Path("evaluation/cache")
+    cache_dir = get_cache_path()
     model_cache = ModelCache(cache_dir)
-    
+
     results = []
-    for input_data in tqdm(inputs, desc="Running model", unit="example"):
+
+    check_data = inputs["check_data"]
+    check_name = check_data["name"]
+    examples = inputs["examples"]
+    prompt = inputs["prompt"]
+    schema = inputs["schema"]
+
+    for example in tqdm(examples, desc="Running model", unit="example"):
         try:
             if mock:
                 # In mock mode, use expected output as model output
-                model_output = input_data["expected_output"]
+                model_output = example["expected_output"]
             else:
                 # Check cache first if enabled
                 if use_cache:
-                    cached_result = model_cache.get_cached_output(input_data)
+                    # the cache key needs to be unique with respect to 
+                    # the example, the prompt, the schema, and the check name
+                    data_for_cache_key = {
+                        "example": example,
+                        "prompt": prompt,
+                        "schema": schema,
+                        "check_name": check_name,
+                    }
+                    cached_result = model_cache.get_cached_output(data_for_cache_key)
                     if cached_result:
                         logger.debug(
                             "Using cached output for "
-                            f"{input_data['doi']}"
+                            f"{example['doi']}/{example['figure_id']}"
                         )
-                        model_output = cached_result["output"]
+                        # cache entries have a data and metadata field
+                        # we only need the data field
+                        model_output = cached_result["data"]
                     else:
                         # Generate new output if not cached
                         model_input = {
-                            "prompt": input_data["prompt_template"],
-                            "image": input_data["image_path"],
-                            "caption": input_data["caption"]
+                            "prompt": prompt,
+                            "schema": schema,
+                            "image_path": example["image_path"],
+                            "caption": example["caption"],
                         }
                         try:
                             model_output = generate_response(model_input)
@@ -173,25 +179,26 @@ def run_model(
                         except Exception as e:
                             logger.error(
                                 f"Error generating response for "
-                                f"{input_data['doi']}: {str(e)}"
+                                f"{example['doi']}: {str(e)}"
                             )
                             raise
                         # Cache the new output
                         model_cache.cache_output(
-                            input_data,
-                            {"output": model_output},
-                            {
-                                "doi": input_data["doi"],
-                                "figure_id": input_data["figure_id"],
-                                "check_name": input_data["check_name"]
+                            data_for_cache_key,
+                            data=model_output,
+                            metadata={
+                                "doi": example["doi"],
+                                "figure_id": example["figure_id"],
+                                "check_name": check_name
                             }
                         )
                 else:
                     # Generate new output without caching
                     model_input = {
-                        "prompt": input_data["prompt_template"],
-                        "image": input_data["image_path"],
-                        "caption": input_data["caption"]
+                        "prompt": prompt,
+                        "schema": schema,
+                        "image_path": example["image_path"],
+                        "caption": example["caption"],
                     }
                     try:
                         model_output = generate_response(model_input)
@@ -204,34 +211,101 @@ def run_model(
                     except Exception as e:
                         logger.error(
                             f"Error generating response for "
-                            f"{input_data['doi']}: {str(e)}"
+                            f"{example['doi']}: {str(e)}"
                         )
                         raise
-            
-            # Store result
+
+            # Accumulate result
             results.append({
-                "doi": input_data["doi"],
-                "figure_id": input_data["figure_id"],
-                "expected_output": input_data["expected_output"],
+                "doi": example["doi"],
+                "figure_id": example["figure_id"],
+                "expected_output": example["expected_output"],
                 "model_output": model_output
             })
+
         except Exception as e:
             logger.error(
                 f"Error processing example "
-                f"{input_data['doi']}/{input_data['figure_id']}: {str(e)}"
+                f"{example['doi']}/{example['figure_id']}: {str(e)}"
             )
             # Continue with next example instead of failing completely
             continue
-        
+
     return results
 
 
+def analyze_results(
+    results: List[Dict[str, Any]], 
+    metrics: List[str]
+) -> List[Dict[str, Any]]:
+    """Analyze model outputs against expected outputs using specified metrics.
+    
+    Args:
+        results: List of dictionaries containing model outputs
+        metrics: List of metrics to compute
+        
+    Returns:
+        List of dictionaries containing analysis results
+    """
+    logger.info("Analyzing all results")
+
+    analyzed_results = []
+    for result in tqdm(results, desc="Analyzing results", unit="example"):
+        # Analyze response
+        analysis_results = evaluate_response(
+            result["model_output"],
+            result["expected_output"],
+            metrics
+        )
+
+        # Store analyzed result
+        analyzed_results.append({
+            "doi": result["doi"],
+            "figure_id": result["figure_id"],
+            "expected_output": result["expected_output"],
+            "model_output": result["model_output"],
+            "analysis": analysis_results
+        })
+
+    return analyzed_results
+
+
+def save_analysis(
+    analyzed_results: List[Dict[str, Any]],
+    checklist_name: str,
+    check_name: str
+):
+    """Save the analysis results to a file.
+    
+    Args:
+        analyzed_results: List of dictionaries containing analysis results
+        checklist_name: Name of the checklist
+        check_name: Name of the check
+    """
+    
+    # Save analysis results
+    try:
+        analysis_path = get_evaluation_path(checklist_name) / check_name
+        os.makedirs(analysis_path, exist_ok=True)
+        analysis_file = analysis_path / "analysis.json"
+
+        with open(analysis_file, "w", encoding="utf-8") as f:
+            json.dump(analyzed_results, f, indent=4, ensure_ascii=False)
+
+        logger.info(f"Saved analysis for {check_name} to {analysis_file}")
+    except Exception as e:
+        logger.error(
+            f"Error saving analysis results for {check_name}: {str(e)}"
+        )
+        logger.debug("Save exception details:", exc_info=True)
+        raise
+
+
 def process_check(
-    check_data: Dict[str, Any], 
-    cache_dir: Path,
+    check_dir: Path,
     mock: bool = False,
     use_cache: bool = True
-) -> None:
+) -> List[Dict[str, Any]]:
     """Process a single check through two steps:
     1. Gather and validate all inputs
     2. Run the model on all inputs and cache outputs
@@ -242,20 +316,70 @@ def process_check(
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
     """
+    check_data = load_json(check_dir/'benchmark.json')
     check_name = check_data["name"]
-    
+    with open(check_dir/'prompt.txt', 'r') as f:
+        prompt = f.read()
+    schema = load_json(check_dir/'schema.json')
     try:
-        # Step 1: Gather inputs
-        inputs = gather_inputs(check_data)
-        
+        # Step 1: Gather examples
+        examples = gather_examples(check_data)
+
+        inputs = {
+            "check_data": check_data,  # will be part of the hash key
+            "examples": examples,
+            "prompt": prompt,
+            "schema": schema
+        }
+
         # Step 2: Run model and cache outputs
-        run_model(inputs, mock=mock, use_cache=use_cache)
-        
-        logger.info(f"Completed processing for {check_name}")
-        
+        results = run_model(
+            inputs,
+            mock=mock,
+            use_cache=use_cache
+        )
+
+        # Step 3: Evaluate results
+        metrics = check_data["metrics"]
+        analyzed_results = analyze_results(results, metrics)
+        return analyzed_results
+
     except Exception as e:
         logger.error(f"Error processing check {check_name}: {str(e)}")
         raise
+
+
+def process_checklist(
+    checklist_dir: Path,
+    checklist_name: str,
+    mock: bool = False,
+    use_cache: bool = True
+):
+    """Process all checks in a checklist."""
+
+    # Get all checks frmo the checklist
+    checks = list_checks(checklist_dir)
+
+    if not checks:
+        logger.error(
+            f"Checklist not found: {checklist_name}"
+        )
+        return
+
+    for check_dir_name, check_dir in checks.items():
+        try:
+            analyzed_results = process_check(
+                check_dir,
+                mock=mock,
+                use_cache=use_cache
+            )
+            save_analysis(analyzed_results, checklist_name, check_dir_name)
+
+        except Exception as e:
+            logger.error(
+                f"Error processing check in {check_dir_name}: {str(e)}"
+            )
+            continue
 
 
 def main():
@@ -263,9 +387,9 @@ def main():
     parser = argparse.ArgumentParser(
         description="Run model for figure caption quality checks"
     )
+    # positional argument
     parser.add_argument(
-        "--checklist", 
-        "-c",
+        "checklist",
         help=(
             "Name of the checklist subfolder to process (e.g., "
             "'mini'). "
@@ -273,19 +397,7 @@ def main():
         ),
         default=None
     )
-    parser.add_argument(
-        "--check",
-        help=(
-            "Name of the specific check to process (without .json extension). "
-            "If not provided, all checks in the checklist will be processed."
-        ),
-        default=None
-    )
-    parser.add_argument(
-        "--cache-dir",
-        help="Directory to save cached outputs (default: evaluation/cache)",
-        default="evaluation/cache"
-    )
+    # optional arguments
     parser.add_argument(
         "--log-level",
         "-l",
@@ -313,42 +425,18 @@ def main():
     logging.getLogger().setLevel(getattr(logging, args.log_level))
 
     # Create cache directory
-    cache_dir = Path(args.cache_dir)
-    os.makedirs(cache_dir, exist_ok=True)
-    logger.info(f"Cached outputs will be saved to: {cache_dir}")
-    
-    # Get all checklist files
-    checklist_files = list_checklist_files(args.checklist)
-    
-    if not checklist_files:
-        logger.error(
-            f"No checklist files found for checklist: {args.checklist}"
-        )
-        return
-        
-    # Process each checklist file
-    for checklist_name, files in checklist_files.items():
-        for checklist_file in files:
-            try:
-                # Load checklist data
-                check_data = load_json(checklist_file)
-                
-                # Skip if check name doesn't match filter
-                if args.check and check_data["name"] != args.check:
-                    continue
-                    
-                process_check(
-                    check_data,
-                    cache_dir,
-                    mock=args.mock,
-                    use_cache=not args.no_cache
-                )
-                    
-            except Exception as e:
-                logger.error(
-                    f"Error processing checklist {checklist_file}: {str(e)}"
-                )
-                continue
+    if not args.no_cache:
+        cache_dir = get_cache_path()
+        logger.info(f"Cached outputs will be saved to: {cache_dir}")
+
+    checklist_dir = get_checklist(args.checklist)
+
+    process_checklist(
+        checklist_dir=checklist_dir,
+        checklist_name=args.checklist,
+        mock=args.mock,
+        use_cache=not args.no_cache
+    )
 
 
 if __name__ == "__main__":
