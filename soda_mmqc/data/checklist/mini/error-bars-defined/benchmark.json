@@ -1,7 +1,6 @@
 {
   "name": "error-bars-defined",
   "description": "Checks whether the error bars are defined in the figure caption.",
-  "prompt_path": "error-bars-defined.txt",
   "metrics": ["exact_match", "BLEU"],
   "examples": [
     {
