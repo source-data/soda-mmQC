@@ -133,6 +133,7 @@ def run_model(
     check_name = check_data["name"]
     examples = inputs["examples"]
     prompt = inputs["prompt"]
+    prompt_name = inputs["prompt_name"]
     schema = inputs["schema"]
 
     for example in tqdm(examples, desc="Running model", unit="example"):
@@ -150,6 +151,7 @@ def run_model(
                         "prompt": prompt,
                         "schema": schema,
                         "check_name": check_name,
+                        "prompt_name": prompt_name,
                     }
                     cached_result = model_cache.get_cached_output(data_for_cache_key)
                     if cached_result:
@@ -189,7 +191,8 @@ def run_model(
                             metadata={
                                 "doi": example["doi"],
                                 "figure_id": example["figure_id"],
-                                "check_name": check_name
+                                "check_name": check_name,
+                                "prompt_name": prompt_name
                             }
                         )
                 else:
@@ -220,7 +223,8 @@ def run_model(
                 "doi": example["doi"],
                 "figure_id": example["figure_id"],
                 "expected_output": example["expected_output"],
-                "model_output": model_output
+                "model_output": model_output,
+                "prompt_name": prompt_name
             })
 
         except Exception as e:
@@ -236,7 +240,8 @@ def run_model(
 
 def analyze_results(
     results: List[Dict[str, Any]], 
-    metrics: List[str]
+    metrics: List[str],
+    schema: Dict[str, Any]
 ) -> List[Dict[str, Any]]:
     """Analyze model outputs against expected outputs using specified metrics.
     
@@ -255,7 +260,8 @@ def analyze_results(
         analysis_results = evaluate_response(
             result["model_output"],
             result["expected_output"],
-            metrics
+            metrics,
+            schema
         )
 
         # Store analyzed result
@@ -271,14 +277,15 @@ def analyze_results(
 
 
 def save_analysis(
-    analyzed_results: List[Dict[str, Any]],
+    analyzed_results: Dict[str, List[Dict[str, Any]]],
     checklist_name: str,
     check_name: str
 ):
     """Save the analysis results to a file.
     
     Args:
-        analyzed_results: List of dictionaries containing analysis results
+        analyzed_results: Dictionary mapping prompt names to their analysis 
+            results
         checklist_name: Name of the checklist
         check_name: Name of the check
     """
@@ -287,12 +294,32 @@ def save_analysis(
     try:
         analysis_path = get_evaluation_path(checklist_name) / check_name
         os.makedirs(analysis_path, exist_ok=True)
-        analysis_file = analysis_path / "analysis.json"
-
-        with open(analysis_file, "w", encoding="utf-8") as f:
+        
+        # Save results for each prompt
+        for prompt_name, results in analyzed_results.items():
+            # Create a subdirectory for each prompt
+            prompt_dir = analysis_path / prompt_name
+            os.makedirs(prompt_dir, exist_ok=True)
+            
+            # Save the analysis results for this prompt
+            analysis_file = prompt_dir / "analysis.json"
+            with open(analysis_file, "w", encoding="utf-8") as f:
+                json.dump(results, f, indent=4, ensure_ascii=False)
+            
+            logger.info(
+                f"Saved analysis for {check_name} with prompt {prompt_name} "
+                f"to {analysis_file}"
+            )
+            
+        # Also save a summary file with all prompts
+        summary_file = analysis_path / "summary.json"
+        with open(summary_file, "w", encoding="utf-8") as f:
             json.dump(analyzed_results, f, indent=4, ensure_ascii=False)
-
-        logger.info(f"Saved analysis for {check_name} to {analysis_file}")
+            
+        logger.info(
+            f"Saved summary for {check_name} to {summary_file}"
+        )
+        
     except Exception as e:
         logger.error(
             f"Error saving analysis results for {check_name}: {str(e)}"
@@ -305,45 +332,76 @@ def process_check(
     check_dir: Path,
     mock: bool = False,
     use_cache: bool = True
-) -> List[Dict[str, Any]]:
+) -> Dict[str, List[Dict[str, Any]]]:
     """Process a single check through two steps:
     1. Gather and validate all inputs
     2. Run the model on all inputs and cache outputs
     
     Args:
-        check_data: The checklist data
-        cache_dir: Directory to save cached outputs
+        check_dir: Path to the check directory
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
+        
+    Returns:
+        Dictionary mapping prompt names to their analysis results
     """
     check_data = load_json(check_dir/'benchmark.json')
     check_name = check_data["name"]
-    with open(check_dir/'prompt.txt', 'r') as f:
-        prompt = f.read()
     schema = load_json(check_dir/'schema.json')
+    
+    # Get all prompts from the prompts directory
+    prompts_dir = check_dir / 'prompts'
+    if not prompts_dir.exists():
+        logger.error(f"Prompts directory not found: {prompts_dir}")
+        raise FileNotFoundError(f"Prompts directory not found: {prompts_dir}")
+    
+    # Get all prompt files
+    prompt_files = list(prompts_dir.glob('*.txt'))
+    # sort the prompt files by name in ascending order
+    prompt_files.sort()
+    if not prompt_files:
+        logger.error(f"No prompt files found in {prompts_dir}")
+        raise FileNotFoundError(f"No prompt files found in {prompts_dir}")
+    
+    # Dictionary to store results for each prompt
+    all_results = {}
+    
     try:
-        # Step 1: Gather examples
+        # Step 1: Gather examples (only need to do this once)
         examples = gather_examples(check_data)
-
-        inputs = {
-            "check_data": check_data,  # will be part of the hash key
-            "examples": examples,
-            "prompt": prompt,
-            "schema": schema
-        }
-
-        # Step 2: Run model and cache outputs
-        results = run_model(
-            inputs,
-            mock=mock,
-            use_cache=use_cache
-        )
-
-        # Step 3: Evaluate results
-        metrics = check_data["metrics"]
-        analyzed_results = analyze_results(results, metrics)
-        return analyzed_results
-
+        
+        # Process each prompt
+        for prompt_file in prompt_files:
+            prompt_name = prompt_file.stem
+            logger.info(f"Processing prompt: {prompt_name}")
+            
+            with open(prompt_file, 'r') as f:
+                prompt = f.read()
+            
+            inputs = {
+                "check_data": check_data,  # will be part of the hash key
+                "examples": examples,
+                "prompt": prompt,
+                "schema": schema,
+                "prompt_name": prompt_name
+            }
+            
+            # Step 2: Run model and cache outputs
+            results = run_model(
+                inputs,
+                mock=mock,
+                use_cache=use_cache
+            )
+            
+            # Step 3: Evaluate results
+            metrics = check_data["metrics"]
+            analyzed_results = analyze_results(results, metrics, schema)
+            
+            # Store results for this prompt
+            all_results[prompt_name] = analyzed_results
+            
+        return all_results
+        
     except Exception as e:
         logger.error(f"Error processing check {check_name}: {str(e)}")
         raise

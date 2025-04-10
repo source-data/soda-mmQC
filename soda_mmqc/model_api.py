@@ -45,7 +45,7 @@ def generate_response_openai(
 
     # Initialize OpenAI client
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    
+
     # Call API with structured output
     response = client.responses.create(
         model="gpt-4o-2024-08-06",

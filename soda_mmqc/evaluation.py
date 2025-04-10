@@ -19,45 +19,59 @@ except LookupError:
 SENTENCE_TRANSFORMER = SentenceTransformer('all-MiniLM-L6-v2')
 
 
-def get_text_fields(json_obj):
-    """Extract text fields with semantic content from the JSON object."""
+def get_text_fields(json_obj, schema):
+    """Extract text fields with semantic content from the JSON object.
+    
+    Args:
+        json_obj: The JSON object to extract fields from
+        schema: Schema to derive field types from.
+        
+    Returns:
+        Dictionary with field types as keys and lists of values as values.
+        
+    Raises:
+        ValueError: If schema is missing or invalid.
+    """
     if isinstance(json_obj, str):
         json_obj = json.loads(json_obj)
+        
+    if not schema or not isinstance(schema, dict):
+        raise ValueError("Schema must be provided and must be a dictionary")
 
-    # Initialize dictionaries for each field type
-    field_types = {
-        "panel_label": [],
-        "error_bar_on_figure": [],
-        "error_bar_defined_in_caption": [],
-        "from_the_caption": []
-    }
+    # Initialize field types from schema
+    field_types = {}
+
+    # Extract required fields from schema
+    try:
+        required_fields = schema.get("format", {}).get("schema", {}).get(
+            "properties", {}).get("outputs", {}).get("items", {}).get(
+            "required", [])
+
+        if not required_fields:
+            raise ValueError("Schema does not contain required fields")
+            
+        # Initialize empty lists for each required field
+        for field in required_fields:
+            field_types[field] = []
+    except (KeyError, AttributeError) as e:
+        raise ValueError(f"Invalid schema format: {str(e)}")
 
     # Process panels
     if "outputs" in json_obj:
         for output in json_obj["outputs"]:
             # Add caption text which contains semantic content
-            if "panel_label" in output:
-                field_types["panel_label"].append(output["panel_label"])
-            if "error_bar_on_figure" in output:
-                field_types["error_bar_on_figure"].append(
-                    output["error_bar_on_figure"]
-                )
-            if "error_bar_defined_in_caption" in output:
-                field_types["error_bar_defined_in_caption"].append(
-                    output["error_bar_defined_in_caption"]
-                )
-            if "from_the_caption" in output:
-                field_types["from_the_caption"].append(
-                    output["from_the_caption"]
-                )
+            for field in field_types:
+                if field in output:
+                    field_types[field].append(output[field])
+    
     return field_types
 
 
-def exact_match_score(predicted, expected):
+def exact_match_score(predicted, expected, schema):
     """Calculate exact match score between predicted and expected outputs."""
     # Get text fields with semantic content
-    pred_fields = get_text_fields(predicted)
-    exp_fields = get_text_fields(expected)
+    pred_fields = get_text_fields(predicted, schema)
+    exp_fields = get_text_fields(expected, schema)
 
     # Calculate exact match score for each field type
     results = {}
@@ -89,17 +103,19 @@ def exact_match_score(predicted, expected):
         total_fields += field_count
     
     # Add overall score
-    results["overall"] = overall_score / total_fields if total_fields > 0 else 0.0
+    results["overall"] = (overall_score / total_fields
+                          if total_fields > 0 else 0.0)
     
     return results
 
 
-def semantic_similarity_score(predicted, expected, model=SENTENCE_TRANSFORMER):
+def semantic_similarity_score(predicted, expected, model=SENTENCE_TRANSFORMER,
+                             schema=None):
     """Calculate semantic similarity between predicted and expected outputs."""
     try:
         # Get text fields with semantic content
-        pred_fields = get_text_fields(predicted)
-        exp_fields = get_text_fields(expected)
+        pred_fields = get_text_fields(predicted, schema)
+        exp_fields = get_text_fields(expected, schema)
 
         # Calculate semantic similarity for each field type
         results = {}
@@ -146,23 +162,22 @@ def semantic_similarity_score(predicted, expected, model=SENTENCE_TRANSFORMER):
         
         return results
 
-    except (json.JSONDecodeError, TypeError, ImportError):
+    except (json.JSONDecodeError, TypeError, ImportError, ValueError) as e:
+        # Re-raise ValueError, but handle other errors
+        if isinstance(e, ValueError):
+            raise
         # Return zeros for all field types in case of error
         return {
-            "panel_label": 0.0,
-            "error_bar_on_figure": 0.0,
-            "error_bar_defined_in_caption": 0.0,
-            "from_the_caption": 0.0,
             "overall": 0.0
         }
 
 
-def bleu_score(predicted, expected):
+def bleu_score(predicted, expected, schema):
     """Calculate BLEU score between predicted and expected outputs."""
     try:
         # Get text fields with semantic content
-        pred_fields = get_text_fields(predicted)
-        exp_fields = get_text_fields(expected)
+        pred_fields = get_text_fields(predicted, schema)
+        exp_fields = get_text_fields(expected, schema)
 
         # Calculate BLEU score for each field type
         results = {}
@@ -191,7 +206,8 @@ def bleu_score(predicted, expected):
                 # Case 3: Expected has content and predicted contains it - good
                 elif exp_text and (exp_text in pred_text):
                     score = 1.0
-                # Case 4: Expected has content but predicted doesn't contain it - use BLEU
+                # Case 4: Expected has content but predicted doesn't contain it
+                # - use BLEU
                 else:
                     # Standard BLEU calculation
                     pred_tokens = nltk.word_tokenize(pred_text.lower())
@@ -217,37 +233,33 @@ def bleu_score(predicted, expected):
         
         return results
 
-    except (json.JSONDecodeError, TypeError):
+    except (json.JSONDecodeError, TypeError, ValueError) as e:
+        # Re-raise ValueError, but handle other errors
+        if isinstance(e, ValueError):
+            raise
         # Return zeros for all field types in case of error
         return {
-            "panel_label": 0.0,
-            "error_bar_on_figure": 0.0,
-            "error_bar_defined_in_caption": 0.0,
-            "from_the_caption": 0.0,
             "overall": 0.0
         }
 
 
-def evaluate_response(model_output, expected_output, metrics):
+def evaluate_response(model_output, expected_output, metrics, schema):
     """Evaluate model output against expected output using specified metrics."""
     results = {}
 
     for metric in metrics:
         if metric == "exact_match":
-            results[metric] = exact_match_score(model_output, expected_output)
+            results[metric] = exact_match_score(model_output, expected_output,
+                                               schema)
         elif metric == "semantic_similarity":
             results[metric] = semantic_similarity_score(
-                model_output, expected_output
+                model_output, expected_output, schema=schema
             )
         elif metric == "BLEU":
-            results[metric] = bleu_score(model_output, expected_output)
+            results[metric] = bleu_score(model_output, expected_output, schema)
         else:
             # For unknown metrics, return zeros for all field types
             results[metric] = {
-                "panel_label": 0.0,
-                "error_bar_on_figure": 0.0,
-                "error_bar_defined_in_caption": 0.0,
-                "from_the_caption": 0.0,
                 "overall": 0.0
             }
 
