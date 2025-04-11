@@ -14,7 +14,8 @@ from soda_mmqc.config import (
     get_cache_path,
     get_checklist,
     list_checks,
-    get_evaluation_path
+    get_evaluation_path,
+    get_check_data_file
 )
 from soda_mmqc.evaluation import evaluate_response
 
@@ -82,17 +83,6 @@ def gather_examples(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         with open(image_path, "rb") as f:
             img_hash = hashlib.sha256(f.read()).hexdigest()
 
-        expected_output_path = get_expected_output_path(example, check_name)
-        # Validate expected output file
-        if not expected_output_path.exists():
-            logger.error(
-                f"Expected output file not found: {expected_output_path}"
-            )
-            raise FileNotFoundError(
-                f"Expected output file not found: {expected_output_path}"
-            )
-        expected_output = load_json(expected_output_path)
-
         # Store all inputs
         inputs.append({
             "doi": doi,
@@ -100,7 +90,6 @@ def gather_examples(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
             "caption": caption,
             "image_path": str(image_path),
             "img_hash": img_hash,
-            "expected_output": expected_output,
         })
 
     return inputs
@@ -121,8 +110,8 @@ def run_model(
     Returns:
         List of dictionaries containing model outputs
     """
-    logger.info("Running model on all inputs")
-    
+    logger.info(f"Running model on {len(inputs.get('examples', []))} inputs")
+
     # Initialize model cache
     cache_dir = get_cache_path()
     model_cache = ModelCache(cache_dir)
@@ -222,7 +211,7 @@ def run_model(
             results.append({
                 "doi": example["doi"],
                 "figure_id": example["figure_id"],
-                "expected_output": example["expected_output"],
+                "example": example,
                 "model_output": model_output,
                 "prompt_name": prompt_name
             })
@@ -328,6 +317,98 @@ def save_analysis(
         raise
 
 
+def prepare_check_data(check_dir: Path):
+    """Prepare data for processing a check.
+    
+    This function consolidates common functionality for loading check data,
+    schema, prompts, and gathering examples. It can be used by both
+    initialize() and process_check() functions.
+    
+    Args:
+        check_dir: Path to the check directory
+        use_all_prompts: If True, return all prompts; if False, return only the first prompt
+        
+    Returns:
+        Dictionary containing prepared data for the check, or None if preparation fails
+    """
+    check_dir_name = check_dir.name
+    logger.info(f"Preparing data for check: {check_dir_name}")
+    
+    # Load check data
+    check_data_file = get_check_data_file(check_dir)
+    if not check_data_file.exists():
+        logger.error(f"Check data file not found: {check_data_file}")
+        return None
+    
+    try:
+        check_data = load_json(check_data_file)
+    except Exception as e:
+        logger.error(f"Error loading check data: {str(e)}")
+        return None
+    
+    # Load schema
+    schema_file = check_dir / "schema.json"
+    if not schema_file.exists():
+        logger.error(f"Schema file not found: {schema_file}")
+        return None
+    
+    try:
+        schema = load_json(schema_file)
+    except Exception as e:
+        logger.error(f"Error loading schema: {str(e)}")
+        return None
+    
+    # Get all prompts from the prompts directory
+    prompts_dir = check_dir / "prompts"
+    if not prompts_dir.exists():
+        logger.error(f"Prompts directory not found: {prompts_dir}")
+        return None
+    
+    # Get all prompt files
+    prompt_files = list(prompts_dir.glob("*.txt"))
+    if not prompt_files:
+        logger.error(f"No prompt files found in {prompts_dir}")
+        return None
+    
+    # Sort the prompt files by name in ascending order
+    prompt_files.sort()
+    
+    # Load prompts
+    prompts = {}
+    for prompt_file in prompt_files:
+        prompt_name = prompt_file.stem
+        with open(prompt_file, "r", encoding="utf-8") as f:
+            prompts[prompt_name] = f.read()
+    
+    # Get examples from benchmark.json
+    examples = check_data.get("examples", [])
+    if not examples:
+        logger.warning(f"No examples found in check: {check_dir_name}")
+        return None
+    
+    # Use the existing gather_examples function
+    try:
+        gathered_examples = gather_examples(check_data)
+    except Exception as e:
+        logger.error(f"Error gathering examples: {str(e)}")
+        return None
+    
+    if not gathered_examples:
+        logger.warning(
+            f"No valid examples gathered for check: {check_dir_name}"
+        )
+        return None
+    
+    # Return prepared data
+    return {
+        "check_dir_name": check_dir_name,
+        "check_data": check_data,
+        "schema": schema,
+        "prompts": prompts,
+        "examples": gathered_examples
+    }
+
+
 def process_check(
     check_dir: Path,
     mock: bool = False,
@@ -345,66 +426,182 @@ def process_check(
     Returns:
         Dictionary mapping prompt names to their analysis results
     """
-    check_data = load_json(check_dir/'benchmark.json')
+    
+    def get_expected_output(example: Dict[str, Any], check_name: str) -> Dict[str, Any]:
+        expected_output_path = get_expected_output_path(example, check_name)
+        # Validate expected output file
+        if not expected_output_path.exists():
+            logger.error(
+                f"Expected output file not found: {expected_output_path}"
+            )
+            raise FileNotFoundError(
+                f"Expected output file not found: {expected_output_path}"
+        )
+        expected_output = load_json(expected_output_path)
+        return expected_output
+    
+    # Prepare check data
+    prepared_data = prepare_check_data(check_dir)
+    if not prepared_data:
+        return {}
+
+    # check_dir_name = prepared_data["check_dir_name"]
+    check_data = prepared_data["check_data"]
     check_name = check_data["name"]
-    schema = load_json(check_dir/'schema.json')
-    
-    # Get all prompts from the prompts directory
-    prompts_dir = check_dir / 'prompts'
-    if not prompts_dir.exists():
-        logger.error(f"Prompts directory not found: {prompts_dir}")
-        raise FileNotFoundError(f"Prompts directory not found: {prompts_dir}")
-    
-    # Get all prompt files
-    prompt_files = list(prompts_dir.glob('*.txt'))
-    # sort the prompt files by name in ascending order
-    prompt_files.sort()
-    if not prompt_files:
-        logger.error(f"No prompt files found in {prompts_dir}")
-        raise FileNotFoundError(f"No prompt files found in {prompts_dir}")
-    
+    metrics = check_data["metrics"]
+    schema = prepared_data["schema"]
+    prompts = prepared_data["prompts"]
+    examples = prepared_data["examples"]
+
     # Dictionary to store results for each prompt
     all_results = {}
     
-    try:
-        # Step 1: Gather examples (only need to do this once)
-        examples = gather_examples(check_data)
+    # Process each prompt
+    for prompt_name, prompt in prompts.items():
+        logger.info(f"Processing prompt: {prompt_name}")
         
-        # Process each prompt
-        for prompt_file in prompt_files:
-            prompt_name = prompt_file.stem
-            logger.info(f"Processing prompt: {prompt_name}")
-            
-            with open(prompt_file, 'r') as f:
-                prompt = f.read()
-            
-            inputs = {
-                "check_data": check_data,  # will be part of the hash key
-                "examples": examples,
-                "prompt": prompt,
-                "schema": schema,
-                "prompt_name": prompt_name
-            }
-            
-            # Step 2: Run model and cache outputs
+        # Prepare inputs for run_model
+        inputs = {
+            "check_data": check_data,
+            "examples": examples,
+            "prompt": prompt,
+            "schema": schema,
+            "prompt_name": prompt_name
+        }
+        
+        # Run model and cache outputs
+        results = run_model(
+            inputs,
+            mock=mock,
+            use_cache=use_cache
+        )
+        
+        # Evaluate results
+
+        # add expected outputs to results
+        for result in results:
+            example = result["example"]
+            expected_output = get_expected_output(example, check_name)
+            result["expected_output"] = expected_output
+
+        analyzed_results = analyze_results(results, metrics, schema)
+    
+    # Store results for this prompt
+    all_results[prompt_name] = analyzed_results
+    
+    return all_results
+
+
+def initialize(checklist_name: str, use_cache: bool = True):
+    """Initialize expected_output.json files for all examples in a checklist.
+    
+    This function iterates through the checks of a checklist. For each check,
+    it uses the prompts in prompts/ and the schema.json to execute the check
+    using the image and caption of each example. The output becomes the
+    preliminary expected_output.json which is written in the
+    <doi>/checks/<check_name>/ folder.
+    
+    Args:
+        checklist_name: Name of the checklist subfolder (e.g., 'mini')
+        use_cache: If True, use cached outputs when available
+    """
+    
+    def create_expected_output(example: Dict[str, Any], check_name: str) -> Path:
+        doi = example["doi"]
+        figure_id = example["figure_id"]
+        model_output = example["model_output"]
+        # Create expected output directory
+        example = {"doi": doi, "figure_id": figure_id}
+        expected_output_path = get_expected_output_path(
+            example, check_name
+        )
+        expected_output_dir = expected_output_path.parent
+        expected_output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Check if expected output already exists
+        if expected_output_path.exists():
+            logger.info(
+                f"Expected output already exists: {expected_output_path}"
+            )
+            return expected_output_path
+        
+        # Write expected output
+        with open(expected_output_path, "w", encoding="utf-8") as f:
+            json.dump(model_output, f, indent=4, ensure_ascii=False)
+        
+        logger.info(
+            f"Created expected output: {expected_output_path}"
+        )
+        return expected_output_path
+
+    logger.info(f"Initializing expected outputs for checklist: {checklist_name}")
+    
+    # Get the checklist directory
+    checklist_dir = get_checklist(checklist_name)
+    if not checklist_dir.exists():
+        logger.error(f"Checklist directory not found: {checklist_dir}")
+        return
+    
+    # Get all checks from the checklist
+    checks = list_checks(checklist_dir)
+    if not checks:
+        logger.error(f"No checks found in checklist: {checklist_name}")
+        return
+    
+    # Process each check
+    for check_dir_name, check_dir in checks.items():
+        logger.info(f"Processing check: {check_dir_name}")
+        
+        # Prepare check data (use only the first prompt)
+        prepared_data = prepare_check_data(check_dir)
+        if not prepared_data:
+            continue
+        
+        check_dir_name = prepared_data["check_dir_name"]
+        check_data = prepared_data["check_data"]
+        check_name = check_data["name"]
+        schema = prepared_data["schema"]
+        prompts = prepared_data["prompts"]
+        examples = prepared_data["examples"]
+        
+        # Get the first prompt for initialization
+        # they are sorted alphabetically
+        prompt_name = list(prompts.keys())[0]
+        prompt = prompts[prompt_name]
+        
+        # Prepare inputs for run_model
+        inputs = {
+            "check_data": check_data,
+            "examples": examples,
+            "prompt": prompt,
+            "schema": schema,
+            "prompt_name": prompt_name
+        }
+        
+        # Run the model
+        try:
             results = run_model(
                 inputs,
-                mock=mock,
+                mock=False,
                 use_cache=use_cache
             )
             
-            # Step 3: Evaluate results
-            metrics = check_data["metrics"]
-            analyzed_results = analyze_results(results, metrics, schema)
-            
-            # Store results for this prompt
-            all_results[prompt_name] = analyzed_results
-            
-        return all_results
-        
-    except Exception as e:
-        logger.error(f"Error processing check {check_name}: {str(e)}")
-        raise
+            # Write expected outputs
+            for result in results:
+                try:
+                    create_expected_output(result, check_name)
+                except Exception as e:
+                    logger.error(
+                        f"Error writing expected output for "
+                        f"{doi}/{figure_id}: {str(e)}"
+                    )
+                    continue
+
+        except Exception as e:
+            logger.error(
+                f"Error running model for check {check_dir_name}: {str(e)}"
+            )
+            continue
 
 
 def process_checklist(
@@ -477,6 +674,12 @@ def main():
         action="store_true",
         help="Disable caching of model outputs"
     )
+    parser.add_argument(
+        "--initialize",
+        "-i",
+        action="store_true",
+        help="Initialize expected_output.json files for all examples"
+    )
     args = parser.parse_args()
 
     # Set logging level from command line argument
@@ -489,12 +692,15 @@ def main():
 
     checklist_dir = get_checklist(args.checklist)
 
-    process_checklist(
-        checklist_dir=checklist_dir,
-        checklist_name=args.checklist,
-        mock=args.mock,
-        use_cache=not args.no_cache
-    )
+    if args.initialize:
+        initialize(args.checklist, use_cache=not args.no_cache)
+    else:
+        process_checklist(
+            checklist_dir=checklist_dir,
+            checklist_name=args.checklist,
+            mock=args.mock,
+            use_cache=not args.no_cache
+        )
 
 
 if __name__ == "__main__":
