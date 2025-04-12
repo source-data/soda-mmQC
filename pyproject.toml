@@ -24,7 +24,9 @@ dependencies = [
 ]
 
 [project.scripts]
-mmqc_run = "soda_mmqc.scripts.run:main"
+run = "soda_mmqc.scripts.run:main"
+curate = "soda_mmqc.tools.benchmark_curation:main"
+initialize = "soda_mmqc.scripts.run:initialize_main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["soda_mmqc"]

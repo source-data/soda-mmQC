@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from PIL import Image
 import pandas as pd
-
+from datetime import datetime
 
 # Set page config for wider layout
 st.set_page_config(
@@ -52,9 +52,16 @@ def load_example_data(example_path):
     
     # Load image if available
     try:
-        image_files = list(content_dir.glob("*.jpg")) + list(content_dir.glob("*.png"))
-        if image_files:
-            data["image_path"] = str(image_files[0])
+        # Find and validate image file
+        image_path = None
+        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+            for img_file in content_dir.glob(f"*{ext}"):
+                image_path = img_file
+                break
+            if image_path:
+                break
+        if image_path:
+            data["image_path"] = str(image_path)
     except Exception as e:
         st.warning(f"Error finding images: {e}")
     
@@ -75,6 +82,8 @@ def load_example_data(example_path):
 
 def save_check_output(example_path, check_name, output_data):
     """Save the updated check output."""
+    # update just in time the field "updated_at"
+    output_data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     output_path = Path(example_path) / "checks" / check_name / "expected_output.json"
     try:
         # Ensure the directory exists
@@ -100,7 +109,11 @@ def get_example_hierarchy(examples_dir):
 
 
 def main():
-    st.title("SODA MMQC Example Visualizer")
+    st.title("mmQC Curation")
+    
+    # Initialize session state for tracking saved files
+    if "saved_files" not in st.session_state:
+        st.session_state.saved_files = {}
     
     # Example selection
     workspace_root = get_workspace_root()
@@ -118,7 +131,7 @@ def main():
     
     # DOI selection
     selected_doi = st.selectbox(
-        "Select DOI",
+        "Select Example",
         list(example_hierarchy.keys())
     )
     
@@ -167,18 +180,54 @@ def main():
                     if selected_check:
                         output_data = example_data["check_outputs"][selected_check]
                         if "outputs" in output_data:
-                            df = pd.DataFrame(output_data["outputs"])
+                            # Convert list fields to comma-separated strings for editing
+                            processed_outputs = []
+                            for item in output_data["outputs"]:
+                                processed_item = item.copy()
+                                # Convert list fields to comma-separated strings
+                                for key, value in processed_item.items():
+                                    if isinstance(value, list):
+                                        processed_item[key] = ", ".join(value) if value else ""
+                                processed_outputs.append(processed_item)
+                            
+                            df = pd.DataFrame(processed_outputs)
                             edited_df = st.data_editor(
                                 df,
                                 num_rows="dynamic",
                                 height=300
                             )
                             
+                            # Create a unique key for this file
+                            file_key = f"{selected_fig}_{selected_check}"
+                            
+                            # Check if the file has been saved in this session
+                            has_been_saved = file_key in st.session_state.saved_files
+                            
+                            # Show warning if the file has never been checked and not saved in this session
+                            if "updated_at" not in output_data and not has_been_saved:
+                                st.error("This annotation file has never been checked!")
+                            else:
+                                st.success(f"Last saved on {output_data['updated_at']}")
+                            
                             # Update button
                             if st.button(f"Save changes for {selected_check}"):
-                                output_data["outputs"] = edited_df.to_dict("records")
+                                # Convert comma-separated strings back to lists
+                                processed_records = []
+                                for _, row in edited_df.iterrows():
+                                    processed_record = row.to_dict()
+                                    # Convert comma-separated strings back to lists
+                                    for key, value in processed_record.items():
+                                        if key in ["symbols", "symbols_defined_in_caption", "from_the_caption"]:
+                                            # Split by comma and strip whitespace
+                                            processed_record[key] = [item.strip() for item in value.split(",")] if value else []
+                                    processed_records.append(processed_record)
+                                
+                                output_data["outputs"] = processed_records
                                 if save_check_output(selected_fig, selected_check, output_data):
-                                    st.success(f"Saved changes for {selected_check}")
+                                    # Mark this file as saved in the session state
+                                    st.session_state.saved_files[file_key] = True
+                                    # Force a rerun to update the UI
+                                    st.rerun()
                 else:
                     st.info("No check outputs available for this example")
 

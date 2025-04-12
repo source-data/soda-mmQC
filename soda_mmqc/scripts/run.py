@@ -639,68 +639,46 @@ def process_checklist(
 
 def main():
     # Set up argument parser
-    parser = argparse.ArgumentParser(
-        description="Run model for figure caption quality checks"
-    )
-    # positional argument
-    parser.add_argument(
-        "checklist",
-        help=(
-            "Name of the checklist subfolder to process (e.g., "
-            "'mini'). "
-            "If not provided, all checklists will be processed."
-        ),
-        default=None
-    )
-    # optional arguments
-    parser.add_argument(
-        "--log-level",
-        "-l",
-        help="Set the logging level (default: INFO)",
-        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-        default="INFO"
-    )
-    parser.add_argument(
-        "--mock",
-        "-m",
-        action="store_true",
-        help=(
-            "Run in mock mode - use expected outputs as model outputs "
-            "(no API calls)"
-        )
-    )
-    parser.add_argument(
-        "--no-cache",
-        action="store_true",
-        help="Disable caching of model outputs"
-    )
-    parser.add_argument(
-        "--initialize",
-        "-i",
-        action="store_true",
-        help="Initialize expected_output.json files for all examples"
-    )
+    parser = argparse.ArgumentParser(description="Run MMQC checks on examples")
+    parser.add_argument("checklist", type=str, help="Name of the checklist to process")
+    parser.add_argument("--initialize", action="store_true", help="Initialize expected output files")
+    parser.add_argument("--mock", action="store_true", help="Use mock responses instead of calling the model")
+    parser.add_argument("--no-cache", action="store_true", help="Disable caching of model responses")
+    parser.add_argument("--check", type=str, help="Name of the check to process")
     args = parser.parse_args()
 
-    # Set logging level from command line argument
-    logging.getLogger().setLevel(getattr(logging, args.log_level))
+    # Get the workspace root directory
+    workspace_root = Path(__file__).resolve().parent.parent.parent
+    checklists_dir = workspace_root / "soda_mmqc/data/checklists"
 
-    # Create cache directory
-    if not args.no_cache:
-        cache_dir = get_cache_path()
-        logger.info(f"Cached outputs will be saved to: {cache_dir}")
-
-    checklist_dir = get_checklist(args.checklist)
-
+    # Initialize if requested
     if args.initialize:
-        initialize(args.checklist, use_cache=not args.no_cache)
+        initialize(args.checklist, not args.no_cache)
+        return
+
+    # Process checklist or check
+    checklist_dir = checklists_dir / args.checklist
+    if not checklist_dir.exists():
+        logger.error(f"Checklist directory not found: {checklist_dir}")
+        return
+        
+    if args.check:
+        # Find the check in the checklist
+        check_dir = checklist_dir / args.check
+        if check_dir.exists():
+            process_check(check_dir, args.mock, not args.no_cache)
+        else:
+            logger.error(f"Check not found: {args.check}")
     else:
-        process_checklist(
-            checklist_dir=checklist_dir,
-            checklist_name=args.checklist,
-            mock=args.mock,
-            use_cache=not args.no_cache
-        )
+        # Process the entire checklist
+        process_checklist(checklist_dir, args.checklist, args.mock, not args.no_cache)
+
+
+def initialize_main():
+    """Entry point for the initialize command that passes --initialize to main."""
+    import sys
+    sys.argv.append("--initialize")
+    main()
 
 
 if __name__ == "__main__":
