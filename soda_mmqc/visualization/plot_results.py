@@ -5,6 +5,8 @@ import plotly.express as px
 from pathlib import Path
 import argparse
 from soda_mmqc.config import get_schema_path, get_evaluation_path
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 
 def load_schema(checklist_name, check_name):
@@ -239,6 +241,164 @@ def process_check(checklist_name, check_name, output_dir):
     return True
 
 
+def create_checklist_report(checklist_name, output_dir):
+    """Create a single report for all checks in a checklist, organized by metric.
+    
+    Args:
+        checklist_name: Name of the checklist (e.g., 'mini')
+        output_dir: Directory to save the output file
+    """
+    # Get all checks for the checklist
+    try:
+        checks = get_checks_for_checklist(checklist_name)
+    except ValueError as e:
+        print(f"Error: {e}")
+        return False
+    
+    if not checks:
+        print(f"No checks found for checklist: {checklist_name}")
+        return False
+    
+    # Dictionary to store data for each metric
+    metric_data = {}
+    
+    # Process each check
+    for check_name in checks:
+        print(f"Processing check: {check_name}")
+        
+        # Load schema and get features
+        try:
+            schema = load_schema(checklist_name, check_name)
+            features = get_features_from_schema(schema)
+            
+            # Skip if no features found in schema
+            if not features:
+                print(f"No features found in schema for check: {check_name}")
+                continue
+                
+        except ValueError as e:
+            print(f"Error loading schema for check {check_name}: {e}")
+            continue
+        
+        # Load and process results
+        results_by_prompt = load_analysis_results(checklist_name, check_name)
+        if not results_by_prompt:
+            print(f"No results found for check: {check_name}")
+            continue
+        
+        # Prepare data for this check
+        df = prepare_data_for_plotting(results_by_prompt, features)
+        if df.empty:
+            print(f"No data to plot for check: {check_name}")
+            continue
+        
+        # Add check name to the dataframe
+        df['check'] = check_name
+        
+        # Group by metric and append to the appropriate metric data
+        for metric in df['metric'].unique():
+            metric_df = df[df['metric'] == metric].copy()
+            if metric not in metric_data:
+                metric_data[metric] = []
+            metric_data[metric].append(metric_df)
+    
+    # Create a report for each metric
+    for metric, dfs in metric_data.items():
+        if not dfs:
+            continue
+ 
+        
+        # Create a figure with subplots
+        fig = make_subplots(
+            rows=1, 
+            cols=len(dfs),
+            subplot_titles=[df['check'].iloc[0].replace('-', ' ').title() 
+                           for df in dfs],
+            shared_yaxes=True
+        )
+        
+        # Create individual bar charts for each check and add them to the figure
+        for i, df in enumerate(dfs, 1):
+            
+                   
+        # Check if there are multiple prompts across all checks
+            prompts = df['prompt'].unique()
+            
+            has_multiple_prompts = len(prompts) > 1
+            # Create a bar chart for this check using Plotly Express
+            check_name = df['check'].iloc[0]
+            check_df = df.copy()
+            
+            # Create the bar chart
+            check_fig = px.bar(
+                check_df,
+                x='feature',
+                y='mean',
+                color='prompt' if has_multiple_prompts else None,
+                error_y='std',
+                title=f"{check_name.replace('-', ' ').title()}",
+                labels={
+                    'mean': 'Score',
+                    'feature': 'Feature',
+                    'prompt': 'Prompt'
+                },
+                # barmode='group' if has_multiple_prompts else 'relative',
+                color_discrete_sequence=px.colors.qualitative.Set1,
+            )
+            
+            # Extract traces from the check figure and add them to the main figure
+            for trace in check_fig.data:
+                fig.add_trace(trace, row=1, col=i)
+        
+        # Update layout
+        fig.update_layout(
+            height=600,  # Increased height to accommodate angled labels
+            width=300 * len(dfs),
+            template='plotly_white',
+            title=(f'Checklist "{checklist_name}" Performance - '
+                   f'{metric.replace("_", " ").title()}'),
+            barmode='group',
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",  # Use paper (canvas) as reference
+                y=-0.5,
+                xanchor="right",
+                x=0.2  # Position from right edge of the canvas
+            ),
+            margin=dict(b=100, t=150)  # Add more bottom and top margin
+        )
+        
+        # Update y-axis for all subplots
+        for i in range(1, len(dfs) + 1):
+            fig.update_yaxes(range=[0, 1.2], row=1, col=i)
+            fig.update_xaxes(
+                row=1, 
+                col=i,
+                tickangle=45,  # Angle the tick labels to prevent overlap
+                tickfont=dict(size=10)  # Slightly smaller font for tick labels
+            )
+        
+        # Update y-axis title for the first subplot only
+        fig.update_yaxes(title_text="Score", row=1, col=1)
+        
+        # Adjust the position of subplot titles to create more space between titles and plots
+        for i in range(1, len(dfs) + 1):
+            # Get the current title
+            title = fig.layout.annotations[i-1].text
+            # Update the title with more space
+            fig.layout.annotations[i-1].update(
+                text=title,
+                y=1.05  # Move titles up to create more space (1.0 is the default)
+            )
+        
+        # Save the combined figure
+        output_path = Path(output_dir) / f'{checklist_name}_{metric}_report.html'
+        fig.write_html(str(output_path))
+        print(f"Report for {metric} saved to {output_path}")
+    
+    return True
+
+
 def main():
     # Set up argument parser
     parser = argparse.ArgumentParser(
@@ -256,6 +416,12 @@ def main():
         help=('Directory to save the output files '
               '(default: soda_mmqc/visualization/results)')
     )
+    parser.add_argument(
+        '--report-only',
+        action='store_true',
+        help=('Generate only the checklist report '
+              '(no individual check visualizations)')
+    )
 
     args = parser.parse_args()
 
@@ -263,26 +429,32 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Get all checks for the checklist
-    try:
-        checks = get_checks_for_checklist(args.checklist)
-    except ValueError as e:
-        print(f"Error: {e}")
-        return
-
-    if not checks:
-        print(f"No checks found for checklist: {args.checklist}")
-        return
-
-    print(f"Processing {len(checks)} checks for checklist: {args.checklist}")
-
-    # Process each check
-    successful_checks = 0
-    for check_name in checks:
-        if process_check(args.checklist, check_name, output_dir):
-            successful_checks += 1
+    # Generate the checklist report
+    create_checklist_report(args.checklist, output_dir)
     
-    print(f"\nProcessed {successful_checks} out of {len(checks)} checks")
+    # If report-only flag is not set, also generate individual check visualizations
+    if not args.report_only:
+        # Get all checks for the checklist
+        try:
+            checks = get_checks_for_checklist(args.checklist)
+        except ValueError as e:
+            print(f"Error: {e}")
+            return
+
+        if not checks:
+            print(f"No checks found for checklist: {args.checklist}")
+            return
+
+        print(f"Processing {len(checks)} checks for checklist: {args.checklist}")
+
+        # Process each check
+        successful_checks = 0
+        for check_name in checks:
+            if process_check(args.checklist, check_name, output_dir):
+                successful_checks += 1
+        
+        print(f"\nProcessed {successful_checks} out of {len(checks)} checks")
+    
     print(f"All visualizations have been saved to: {output_dir}")
 
 
