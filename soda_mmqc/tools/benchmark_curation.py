@@ -169,7 +169,7 @@ def main():
             
             # Column 3: Check Output
             with col3:
-                st.header("Check Output")
+                st.header("Expected Output")
                 if example_data["check_outputs"]:
                     # Check selection dropdown
                     selected_check = st.selectbox(

@@ -468,7 +468,7 @@ def process_check(
             "schema": schema,
             "prompt_name": prompt_name
         }
-        
+
         # Run model and cache outputs
         results = run_model(
             inputs,
@@ -485,14 +485,14 @@ def process_check(
             result["expected_output"] = expected_output
 
         analyzed_results = analyze_results(results, metrics, schema)
-    
-    # Store results for this prompt
-    all_results[prompt_name] = analyzed_results
-    
+
+        # Store results for this prompt
+        all_results[prompt_name] = analyzed_results
+
     return all_results
 
 
-def initialize(checklist_name: str, use_cache: bool = True):
+def initialize(checklist_dir: Path, use_cache: bool = True):
     """Initialize expected_output.json files for all examples in a checklist.
     
     This function iterates through the checks of a checklist. For each check,
@@ -502,7 +502,7 @@ def initialize(checklist_name: str, use_cache: bool = True):
     <doi>/checks/<check_name>/ folder.
     
     Args:
-        checklist_name: Name of the checklist subfolder (e.g., 'mini')
+        checklist_dir: Path to the checklist directory
         use_cache: If True, use cached outputs when available
     """
     
@@ -534,18 +534,12 @@ def initialize(checklist_name: str, use_cache: bool = True):
         )
         return expected_output_path
 
-    logger.info(f"Initializing expected outputs for checklist: {checklist_name}")
-    
-    # Get the checklist directory
-    checklist_dir = get_checklist(checklist_name)
-    if not checklist_dir.exists():
-        logger.error(f"Checklist directory not found: {checklist_dir}")
-        return
+    logger.info(f"Initializing expected outputs for checklist: {checklist_dir.name}")
     
     # Get all checks from the checklist
     checks = list_checks(checklist_dir)
     if not checks:
-        logger.error(f"No checks found in checklist: {checklist_name}")
+        logger.error(f"No checks found in checklist: {checklist_dir.name}")
         return
     
     # Process each check
@@ -593,7 +587,7 @@ def initialize(checklist_name: str, use_cache: bool = True):
                 except Exception as e:
                     logger.error(
                         f"Error writing expected output for "
-                        f"{doi}/{figure_id}: {str(e)}"
+                        f"{result['doi']}/{result['figure_id']}: {str(e)}"
                     )
                     continue
 
@@ -647,19 +641,15 @@ def main():
     parser.add_argument("--check", type=str, help="Name of the check to process")
     args = parser.parse_args()
 
-    # Get the workspace root directory
-    workspace_root = Path(__file__).resolve().parent.parent.parent
-    checklists_dir = workspace_root / "soda_mmqc/data/checklists"
+    # Get the checklist directory using the config function
+    checklist_dir = get_checklist(args.checklist)
+    if not checklist_dir.exists():
+        logger.error(f"Checklist directory not found: {checklist_dir}")
+        return
 
     # Initialize if requested
     if args.initialize:
-        initialize(args.checklist, not args.no_cache)
-        return
-
-    # Process checklist or check
-    checklist_dir = checklists_dir / args.checklist
-    if not checklist_dir.exists():
-        logger.error(f"Checklist directory not found: {checklist_dir}")
+        initialize(checklist_dir, not args.no_cache)
         return
         
     if args.check:
@@ -679,6 +669,42 @@ def initialize_main():
     import sys
     sys.argv.append("--initialize")
     main()
+
+
+def launch_curation():
+    """Launch the curation interface using streamlit."""
+    import sys
+    import os
+    from pathlib import Path
+    
+    # Set environment variables before importing streamlit
+    os.environ["STREAMLIT_SERVER_RUN_ON_SAVE"] = "false"
+    os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
+    os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"  # Disable file watching completely
+    
+    # Import streamlit after environment is configured
+    import streamlit.web.cli as stcli
+    
+    # Get the path to the benchmark_curation.py file
+    workspace_root = Path(__file__).resolve().parent.parent
+    curation_script = workspace_root / "tools" / "benchmark_curation.py"
+    
+    # Prepare streamlit arguments
+    sys.argv = [
+        "streamlit",
+        "run",
+        str(curation_script),
+        "--server.headless=true",
+        "--server.address=localhost",
+        "--server.port=8501",
+        "--server.enableCORS=false",
+        "--server.enableXsrfProtection=false",
+        "--global.developmentMode=false",
+        "--server.fileWatcherType=none"  # Disable file watching via CLI as well
+    ]
+    
+    # Run streamlit
+    stcli.main()
 
 
 if __name__ == "__main__":

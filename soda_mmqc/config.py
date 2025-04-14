@@ -21,7 +21,7 @@ CONTENT_SUBDIR = "content"
 EXPECTED_OUTPUT_SUBDIR = "checks"
 EXPECTED_OUTPUT_FILE = "expected_output.json"
 CHECK_DATA_FILE = "benchmark.json"
-
+SCHEMA_FILE = "schema.json"
 # Ensure all directories exist
 for directory in [CHECKLIST_DIR, EXAMPLES_DIR, EVALUATION_DIR, CACHE_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
@@ -45,6 +45,7 @@ def get_check(checklist_name: str, check_name: str) -> Path:
     """
     return get_checklist(checklist_name) / check_name / CHECK_DATA_FILE
 
+
 def get_check_data_file(check_dir: Path) -> Path:
     """Get the full path to a checklist file.
     
@@ -52,6 +53,11 @@ def get_check_data_file(check_dir: Path) -> Path:
         check_dir: Path to the check directory
     """
     return check_dir / CHECK_DATA_FILE
+
+
+def get_schema_path(checklist_name: str, check_name: str) -> Path:
+    """Get the full path to a schema file."""
+    return get_checklist(checklist_name) / check_name / SCHEMA_FILE
 
 
 def list_checks(checklist_dir: Path) -> Dict[str, Path]:
