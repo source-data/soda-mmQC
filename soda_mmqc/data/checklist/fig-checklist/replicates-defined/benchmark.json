@@ -1,0 +1,71 @@
+{
+  "name": "replicates-defined",
+  "description": "Checks whether the number and nature of replicates are clearly stated in the figure caption.",
+  "metrics": ["exact_match", "semantic_similarity", "BLEU"],
+  "examples": [
+    {
+      "doi": "10.1038_emboj.2009.312",
+      "figure_id": "1"
+    },
+    {
+      "doi": "10.1038_emboj.2009.340",
+      "figure_id": "3"
+    },
+    {
+      "doi": "10.1038_embor.2009.217",
+      "figure_id": "4"
+    },
+    {
+      "doi": "10.1038_embor.2009.233",
+      "figure_id": "2"
+    },
+    {
+      "doi": "10.1038_s44318-025-00409-0",
+      "figure_id": "1"
+    },
+    {
+      "doi": "10.1038_s44318-025-00412-5",
+      "figure_id": "1"
+    },
+    {
+      "doi": "10.1038_s44318-025-00416-1",
+      "figure_id": "8"
+    },
+    {
+      "doi": "10.1038_s44319-025-00415-7",
+      "figure_id": "2"
+    },
+    {
+      "doi": "10.1038_s44319-025-00432-6",
+      "figure_id": "7"
+    },
+    {
+      "doi": "10.1038_s44319-025-00438-0",
+      "figure_id": "1"
+    },
+    {
+      "doi": "10.1038_s44320-025-00092-7",
+      "figure_id": "1"
+    },
+    {
+      "doi": "10.1038_s44320-025-00092-7",
+      "figure_id": "2"
+    },
+    {
+      "doi": "10.1038_s44320-025-00094-5",
+      "figure_id": "2"
+    },
+    {
+      "doi": "10.1038_s44320-025-00096-3",
+      "figure_id": "9"
+    },
+    {
+      "doi": "10.1038_s44321-025-00219-1",
+      "figure_id": "1"
+    },
+    {
+      "doi": "10.1038_s44321-025-00224-4",
+      "figure_id": "1"
+    }
+  ]
+}

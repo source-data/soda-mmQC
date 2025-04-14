@@ -1,0 +1,28 @@
+{
+    "outputs": [
+        {
+            "panel_label": "Ai",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "Aii",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "B",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "C",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "involves_replicates": "no",
+            "number_of_replicates": "",
+            "type_of_replicates": ""
+        },
+        {
+            "panel_label": "B",
+            "involves_replicates": "no",
+            "number_of_replicates": "",
+            "type_of_replicates": ""
+        }
+    ]
+}

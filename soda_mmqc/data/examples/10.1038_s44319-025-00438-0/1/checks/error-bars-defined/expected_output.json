@@ -41,13 +41,13 @@
             "panel_label": "G",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean ± SEM."
+            "from_the_caption": "Data are presented as mean\u2009\u00b1\u2009SEM."
         },
         {
             "panel_label": "H",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean ± SEM."
+            "from_the_caption": "Data are presented as mean\u2009\u00b1\u2009SEM."
         },
         {
             "panel_label": "I",
@@ -59,7 +59,7 @@
             "panel_label": "J",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean ± SEM."
+            "from_the_caption": "Data are presented as mean\u2009\u00b1\u2009SEM."
         },
         {
             "panel_label": "K",
@@ -71,7 +71,7 @@
             "panel_label": "L",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean ± SEM."
+            "from_the_caption": "Data are presented as mean\u2009\u00b1\u2009SEM."
         },
         {
             "panel_label": "M",
@@ -107,7 +107,8 @@
             "panel_label": "R",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean ± SEM."
+            "from_the_caption": "Data are presented as mean\u2009\u00b1\u2009SEM."
         }
-    ]
+    ],
+    "updated_at": "2025-04-12 10:28:32"
 }

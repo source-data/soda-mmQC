@@ -1,0 +1,78 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "no",
+            "symbols": [
+                "grey structure"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "Apical end showing a single actin filament being nucleated at the pre-conoidal rings (grey)."
+            ]
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "no",
+            "symbols": [
+                "white arrowhead"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "White arrowhead indicates an actin filament going through a basal pore."
+            ]
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "no",
+            "symbols": [
+                "green filament"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "Some filaments have been highlighted in green."
+            ]
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [
+                "dark line"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "Dark lines on the outer surface of the IMC represent thin pellicular filaments (TPFs)."
+            ]
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "yes",
+            "symbols": [
+                "red arrow",
+                "white arrow"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "Pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions."
+            ]
+        }
+    ]
+}

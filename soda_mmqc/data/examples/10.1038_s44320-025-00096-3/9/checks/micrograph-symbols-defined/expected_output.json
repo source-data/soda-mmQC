@@ -1,0 +1,116 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "no",
+            "symbols": [
+                "blue cylinder",
+                "blue text"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "Blue cylinders represent the 7 HEAT repeat domains of HTT.",
+                "Antibodies in blue text had sufficient IP efficiency for further evaluation."
+            ]
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [
+                "orange circle"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "Enrichment ratio of HTT bait is indicated by orange circle."
+            ]
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "symbols": [
+                "orange circle"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "Enrichment ratio of HTT bait is indicated by orange circle."
+            ]
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "no",
+            "symbols": [
+                "dark blue label",
+                "light blue label"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "Dark blue: selected aligned amino acids of Synj1/HTT in an alpha-helix.",
+                "Light blue: forms hydrogen bond contacts with a proximal alpha-helix."
+            ]
+        },
+        {
+            "panel_label": "G",
+            "micrograph": "no",
+            "symbols": [
+                "red circle",
+                "orange circle",
+                "light blue circle"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "Bait HTT denoted in red circles.",
+                "Selected positive control interactions are denoted in orange circles.",
+                "HTT interactions annotated in at least 2/3 of the previously reported HTT IP-MS studies from mouse brain are indicated in light blue circles."
+            ]
+        },
+        {
+            "panel_label": "H",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "I",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "J",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ]
+}

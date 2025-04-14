@@ -1,0 +1,52 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "involves_replicates": "yes",
+            "number_of_replicates": "141",
+            "type_of_replicates": "biological or technical (undefined explicitly in A itself, see B and C for details on the sample analysis structure of downstream panels utilizing these data.)"
+        },
+        {
+            "panel_label": "B",
+            "involves_replicates": "yes",
+            "number_of_replicates": "2–6",
+            "type_of_replicates": "biological, technical"
+        },
+        {
+            "panel_label": "C",
+            "involves_replicates": "yes",
+            "number_of_replicates": "1–6",
+            "type_of_replicates": "technical"
+        },
+        {
+            "panel_label": "D",
+            "involves_replicates": "yes",
+            "number_of_replicates": "4–12",
+            "type_of_replicates": "biological or technical (undefined explicitly in D itself, see B and C for details on the sample analysis structure of downstream panels utilizing these data.)"
+        },
+        {
+            "panel_label": "E",
+            "involves_replicates": "yes",
+            "number_of_replicates": "undefined, per cell line",
+            "type_of_replicates": "undefined"
+        },
+        {
+            "panel_label": "F",
+            "involves_replicates": "yes",
+            "number_of_replicates": "1–4",
+            "type_of_replicates": "undefined"
+        },
+        {
+            "panel_label": "G",
+            "involves_replicates": "no",
+            "number_of_replicates": "undefined",
+            "type_of_replicates": "undefined"
+        },
+        {
+            "panel_label": "H",
+            "involves_replicates": "yes",
+            "number_of_replicates": "117",
+            "type_of_replicates": "biological"
+        }
+    ]
+}

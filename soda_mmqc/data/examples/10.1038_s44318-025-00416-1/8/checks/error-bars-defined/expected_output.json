@@ -5,12 +5,12 @@
             "panel_label": "A",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are mean ± SD"
+            "from_the_caption": "Data are mean\u2009\u00b1\u2009SD"
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "yes",
-            "error_bar_defined_in_caption": "Data are mean ± SD",
+            "error_bar_defined_in_caption": "Data are mean\u2009\u00b1\u2009SD",
             "from_the_caption": ""
         },
         {
@@ -49,5 +49,6 @@
             "error_bar_defined_in_caption": "not needed",
             "from_the_caption": ""
         }
-    ]
+    ],
+    "updated_at": "2025-04-12 10:32:17"
 }
