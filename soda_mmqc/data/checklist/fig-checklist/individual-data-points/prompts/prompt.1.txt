@@ -18,10 +18,14 @@ For each and every labeled panel in the figure:
 Provide your analysis in the following JSON format for EACH and EVERY panel:
 
 {
-    "panel_label": "[panel letter]",
-    "plot": "[yes/no]",
-    "average_values": "[yes/no]",
-    "individual_values": "[yes/no/not needed]"
+    "outputs": [
+        {
+            "panel_label": "[panel letter]",
+            "plot": "[yes/no]",
+            "average_values": "[yes/no]",
+            "individual_values": "[yes/no/not needed]"
+        }
+    ]
 }
 
 Be thorough and precise in your analysis. Include all panels visible in the figure, even if they don't contain error bars.

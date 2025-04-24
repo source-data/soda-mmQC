@@ -26,13 +26,18 @@
                             "type_of_replicates": {
                                 "type": "string",
                                 "description": "Nature of the replicates"
-                            }
+                            },
+                            "from_the_caption": {
+                                "type": "string",
+                                "description": "Extracted text explaining the nature of the replicates"
+                            } 
                         },
                         "required": [
                             "panel_label",
                             "involves_replicates",
                             "number_of_replicates",
-                            "type_of_replicates"
+                            "type_of_replicates",
+                            "from_the_caption"
                         ],
                         "additionalProperties": false
                     }

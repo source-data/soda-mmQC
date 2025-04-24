@@ -17,10 +17,14 @@ IMPORTANT: When extracting error bar definitions from the caption, ONLY include 
 Provide your analysis in the following JSON format for EACH and EVERY panel:
 
 {
-    "panel_label": "[panel letter]",
-    "error_bar_on_figure": "[yes/no]",
-    "error_bar_defined_in_caption": "[yes/no/not needed]",
-    "error_bar_definition": "[exact text describing what the error bars represent, or an empty string]"
+    "outputs": [
+        {
+            "panel_label": "[panel letter]",
+            "error_bar_on_figure": "[yes/no]",
+            "error_bar_defined_in_caption": "[yes/no/not needed]",
+            "error_bar_definition": "[exact text describing what the error bars represent, or an empty string]"
+        }
+    ]
 }
 
 If the caption defines error bars for multiple panels, include the same definition for each relevant panel.

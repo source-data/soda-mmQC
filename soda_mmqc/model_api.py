@@ -5,6 +5,12 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import logging
 import mimetypes
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_exponential,
+    retry_if_exception_type
+)
 # Load environment variables
 load_dotenv()
 
@@ -34,6 +40,12 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=4, max=10),
+    retry=retry_if_exception_type((json.JSONDecodeError, ValueError)),
+    reraise=True
+)
 def generate_response_openai(
     encoded_image: str, 
     mime_type: str, 
@@ -74,7 +86,10 @@ def generate_response_openai(
     )
     # Extract and return response
     try:
-        parsed_response = json.loads(response.output_text)
+        content = response.output_text
+        if content is None:
+            raise ValueError("API returned empty response")
+        parsed_response = json.loads(content)
         # Format the response with proper indentation
         return parsed_response
     except json.JSONDecodeError as e:

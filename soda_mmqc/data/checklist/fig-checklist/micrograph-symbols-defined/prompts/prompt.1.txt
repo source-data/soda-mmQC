@@ -16,27 +16,31 @@ IMPORTANT: When extracting explanations about symbols from the caption, ONLY inc
 Provide your analysis in the following JSON format for EACH and EVERY panel:
 
 {
-    "panel_label": "A",
-    "micrograph": "yes",
-    "symbols": [
-        "white arrow", "red arrowhead"
-    ],
-    "symbols_defined_in_caption": [
-        "yes",
-        "yes"
-    ],
-    "from_the_caption": [
-        "Arrows indicate crossing points of dendritic branches.",
-        "Arrowheads point at axonal terminals"
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "yes",
+            "symbols": [
+                "white arrow", "red arrowhead"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "Arrows indicate crossing points of dendritic branches.",
+                "Arrowheads point at axonal terminals"
+            ]
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
     ]
-},
-{
-    "panel_label": "B",
-    "micrograph": "no",
-    "symbols": [],
-    "symbols_defined_in_caption": [],
-    "from_the_caption": []
-},
+}
 
 If the caption defines symbols for multiple panels, include the same definition for each relevant panel.
 

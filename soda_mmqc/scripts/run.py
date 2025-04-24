@@ -284,29 +284,13 @@ def save_analysis(
         analysis_path = get_evaluation_path(checklist_name) / check_name
         os.makedirs(analysis_path, exist_ok=True)
         
-        # Save results for each prompt
-        for prompt_name, results in analyzed_results.items():
-            # Create a subdirectory for each prompt
-            prompt_dir = analysis_path / prompt_name
-            os.makedirs(prompt_dir, exist_ok=True)
-            
-            # Save the analysis results for this prompt
-            analysis_file = prompt_dir / "analysis.json"
-            with open(analysis_file, "w", encoding="utf-8") as f:
-                json.dump(results, f, indent=4, ensure_ascii=False)
-            
-            logger.info(
-                f"Saved analysis for {check_name} with prompt {prompt_name} "
-                f"to {analysis_file}"
-            )
-            
         # Also save a summary file with all prompts
-        summary_file = analysis_path / "summary.json"
-        with open(summary_file, "w", encoding="utf-8") as f:
+        analysis_file = analysis_path / "analysis.json"
+        with open(analysis_file, "w", encoding="utf-8") as f:
             json.dump(analyzed_results, f, indent=4, ensure_ascii=False)
-            
+
         logger.info(
-            f"Saved summary for {check_name} to {summary_file}"
+            f"Saved analysis for {check_name} to {analysis_file}"
         )
         
     except Exception as e:
@@ -669,42 +653,6 @@ def initialize_main():
     import sys
     sys.argv.append("--initialize")
     main()
-
-
-def launch_curation():
-    """Launch the curation interface using streamlit."""
-    import sys
-    import os
-    from pathlib import Path
-    
-    # Set environment variables before importing streamlit
-    os.environ["STREAMLIT_SERVER_RUN_ON_SAVE"] = "false"
-    os.environ["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
-    os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"  # Disable file watching completely
-    
-    # Import streamlit after environment is configured
-    import streamlit.web.cli as stcli
-    
-    # Get the path to the benchmark_curation.py file
-    workspace_root = Path(__file__).resolve().parent.parent
-    curation_script = workspace_root / "tools" / "benchmark_curation.py"
-    
-    # Prepare streamlit arguments
-    sys.argv = [
-        "streamlit",
-        "run",
-        str(curation_script),
-        "--server.headless=true",
-        "--server.address=localhost",
-        "--server.port=8501",
-        "--server.enableCORS=false",
-        "--server.enableXsrfProtection=false",
-        "--global.developmentMode=false",
-        "--server.fileWatcherType=none"  # Disable file watching via CLI as well
-    ]
-    
-    # Run streamlit
-    stcli.main()
 
 
 if __name__ == "__main__":

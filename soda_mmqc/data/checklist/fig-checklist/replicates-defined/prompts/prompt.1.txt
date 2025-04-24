@@ -23,27 +23,31 @@ IMPORTANT: When extracting text from the caption, ONLY include the text that is 
 Provide your analysis in the following JSON format for EACH and EVERY panel:
 
 {
-    "panel_label": "A",
-    "involves_replicates": "yes",
-    "number_of_replicates: [
-        "2", "3-5"
+    "outputs": [
+        {
+            "panel_label": "A",
+            "involves_replicates": "yes",
+            "number_of_replicates: [
+                "2", "3-5"
+            ]
+            "type_of_replicates": [
+                "technical",
+                "biological"
+            ],
+            "from_the_caption": [
+                "every sample was analyzed twice",
+                "data show the results from three to five independent samples"
+            ]
+        },
+        {
+            "panel_label": "B",
+            "involves_replicates": "no",
+            "number_of_replicates": []
+            "type_of_replicates": [],
+            "from_the_caption": []
+        },
     ]
-    "type_of_replicates": [
-        "technical",
-        "biological"
-    ],
-    "from_the_caption": [
-        "every sample was analyzed twice",
-        "data show the results from three to five independent samples"
-    ]
-},
-{
-    "panel_label": "B",
-    "involves_replicates": "no",
-    "number_of_replicates": []
-    "type_of_replicates": [],
-    "from_the_caption": []
-},
+}
 
 If the caption defines replicates for multiple panels, include the same definition for each relevant panel.
 

@@ -1,0 +1,2077 @@
+{
+    "prompt.1": [
+        {
+            "doi": "10.1038_emboj.2009.312",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "K",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "L",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "K",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "L",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000198682149,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0000000049670537
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_emboj.2009.340",
+            "figure_id": "3",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000596046448,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0000000149011612
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_embor.2009.217",
+            "figure_id": "4",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000298023224,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0000000074505806
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_embor.2009.233",
+            "figure_id": "2",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    }
+                ],
+                "updated_at": "2025-04-12 10:16:29"
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 0.8571428571428571,
+                    "average_values": 1.0,
+                    "individual_values": 0.8571428571428571,
+                    "overall": 0.9285714285714286
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000170298986,
+                    "plot": 0.9619278737476894,
+                    "average_values": 1.0,
+                    "individual_values": 0.9014550021716526,
+                    "overall": 0.9658457232373101
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 0.8571428571428571,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 0.9642857142857143
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44318-025-00409-0",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 0.9,
+                    "average_values": 0.9,
+                    "individual_values": 0.9,
+                    "overall": 0.925
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.000000035762787,
+                    "plot": 0.9733495116233826,
+                    "average_values": 0.9250400215387344,
+                    "individual_values": 0.9310185015201569,
+                    "overall": 0.9573520176112652
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 0.9,
+                    "average_values": 0.9,
+                    "individual_values": 0.9,
+                    "overall": 0.925
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44318-025-00412-5",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "K",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "K",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000325116245,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0000000081279061
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44318-025-00416-1",
+            "figure_id": "8",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 0.75,
+                    "overall": 0.9375
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 0.9333737790584564,
+                    "overall": 0.9833434447646141
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 0.75,
+                    "overall": 0.9375
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44319-025-00415-7",
+            "figure_id": "2",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 0.0,
+                    "individual_values": 1.0,
+                    "overall": 0.75
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 0.3101850152015686,
+                    "individual_values": 1.0,
+                    "overall": 0.8275462538003922
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44319-025-00432-6",
+            "figure_id": "7",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44319-025-00438-0",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "K",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "L",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "M",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "N",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "O",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "P",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "Q",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "R",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "K",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "L",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "M",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "N",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "O",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "P",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "Q",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "R",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 0.9444444444444444,
+                    "average_values": 0.9444444444444444,
+                    "individual_values": 0.9444444444444444,
+                    "overall": 0.9583333333333334
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000264909532,
+                    "plot": 0.9851941731241014,
+                    "average_values": 0.9583555675215192,
+                    "individual_values": 0.9616769452889761,
+                    "overall": 0.9763066781063875
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 0.9444444444444444,
+                    "average_values": 0.9444444444444444,
+                    "individual_values": 1.0,
+                    "overall": 0.9722222222222222
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44320-025-00092-7",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 0.8888888888888888,
+                    "individual_values": 0.7777777777777778,
+                    "overall": 0.9166666666666666
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000132454767,
+                    "plot": 1.0,
+                    "average_values": 0.9703883462482028,
+                    "individual_values": 0.893742236826155,
+                    "overall": 0.9660326490799586
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 0.8888888888888888,
+                    "individual_values": 0.8888888888888888,
+                    "overall": 0.9444444444444444
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44320-025-00092-7",
+            "figure_id": "2",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "not needed",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 0.875,
+                    "average_values": 0.75,
+                    "individual_values": 1.0,
+                    "overall": 0.90625
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0,
+                    "plot": 0.9666868895292282,
+                    "average_values": 0.8200731538236141,
+                    "individual_values": 1.0,
+                    "overall": 0.9466900108382106
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 0.875,
+                    "average_values": 0.875,
+                    "individual_values": 1.0,
+                    "overall": 0.9375
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44320-025-00094-5",
+            "figure_id": "2",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44320-025-00096-3",
+            "figure_id": "9",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "no"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "G",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "H",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "I",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "J",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 0.9,
+                    "average_values": 0.5,
+                    "individual_values": 0.3,
+                    "overall": 0.675
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.000000035762787,
+                    "plot": 0.9733495116233826,
+                    "average_values": 0.8184380680322647,
+                    "individual_values": 0.5778776109218597,
+                    "overall": 0.8424163065850735
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 0.9,
+                    "average_values": 0.5,
+                    "individual_values": 0.4,
+                    "overall": 0.7
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44321-025-00219-1",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "Ai",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "Aii",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "Ai",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "Aii",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "no",
+                        "individual_values": "not needed"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0000000447034836,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.000000011175871
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        },
+        {
+            "doi": "10.1038_s44321-025-00224-4",
+            "figure_id": "1",
+            "expected_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "model_output": {
+                "outputs": [
+                    {
+                        "panel_label": "A",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "B",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "C",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "D",
+                        "plot": "no",
+                        "average_values": "not needed",
+                        "individual_values": "not needed"
+                    },
+                    {
+                        "panel_label": "E",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    },
+                    {
+                        "panel_label": "F",
+                        "plot": "yes",
+                        "average_values": "yes",
+                        "individual_values": "yes"
+                    }
+                ]
+            },
+            "analysis": {
+                "exact_match": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "semantic_similarity": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                },
+                "BLEU": {
+                    "panel_label": 1.0,
+                    "plot": 1.0,
+                    "average_values": 1.0,
+                    "individual_values": 1.0,
+                    "overall": 1.0
+                }
+            }
+        }
+    ]
+}

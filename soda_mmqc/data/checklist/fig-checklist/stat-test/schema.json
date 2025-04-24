@@ -1,0 +1,58 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "stat-test",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "panel_label": {
+                                "type": "string",
+                                "description": "Label of the panel (e.g., A, B, C)"
+                            },
+                            "is_a_plot": {
+                                "type": "string",
+                                "enum": ["yes", "no"],
+                                "description": "Whether the figure is a plot"
+                            },
+                            "statistical_test_needed": {
+                                "type": "string",
+                                "enum": ["yes", "no"],
+                                "description": "Whether a statistical test is needed"
+                            },
+                            "statistical_test_mentioned": {
+                                "type": "string",
+                                "enum": ["yes", "no", "not needed"],
+                                "description": "Whether the statistical test is mentioned"
+                            },
+                            "justify_why_test_is_missing": {
+                                "type": "string",
+                                "description": "Justification for why the statistical test is missing"
+                            },
+                            "from_the_caption": {
+                                "type": "string",
+                                "description": "Extracted text explaining the statistical test"
+                            }
+                        },
+                        "required": [
+                            "panel_label",
+                            "is_a_plot",
+                            "statistical_test_needed",
+                            "statistical_test_mentioned",
+                            "justify_why_test_is_missing",
+                            "from_the_caption"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}
