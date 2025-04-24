@@ -207,7 +207,19 @@ def main(checklist_name):
                 if example_data["image_path"]:
                     try:
                         image = Image.open(example_data["image_path"])
+                        
+                        # Define and decorate the dialog function with large width
+                        @st.dialog('Zoomed in', width="large")
+                        def show_magnified():
+                            st.image(image)
+                        
+                        # Button to trigger dialog
+                        if st.button("", icon=":material/zoom_in:"):
+                            show_magnified()  # Actually call the function
+                        
+                        # Show the main image
                         st.image(image, use_container_width=True)
+                        
                     except Exception as e:
                         st.error(f"Error displaying image: {e}")
                 else:
@@ -259,8 +271,8 @@ def main(checklist_name):
                                 # Serialize values to strings
                                 for key, value in processed_item.items():
                                     if key in schema_path:
-                                        if value is None:
-                                            processed_item[key] = ""
+                                        if not value:
+                                            processed_item[key] = None
                                         elif isinstance(value, str):
                                             processed_item[key] = value
                                         elif isinstance(value, list):
@@ -268,8 +280,8 @@ def main(checklist_name):
                                             processed_item[key] = ", ".join(str(v) for v in value)
                                         else:
                                             processed_item[key] = json.dumps(value, ensure_ascii=False)
-                                
-                                processed_outputs.append(processed_item)
+                                if not all(value is None for value in processed_item.values()):
+                                    processed_outputs.append(processed_item)
                             
                             df = pd.DataFrame(processed_outputs)
                             edited_df = st.data_editor(
@@ -299,7 +311,7 @@ def main(checklist_name):
                                     # Parse each field back to its original type
                                     for key, value in processed_record.items():
                                         if key in schema_path:
-                                            if value == "":
+                                            if not value:
                                                 processed_record[key] = None
                                             else:
                                                 try:
