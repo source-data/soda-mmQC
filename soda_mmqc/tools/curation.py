@@ -1,11 +1,13 @@
 import streamlit as st
 import json
+import yaml
 from pathlib import Path
 from PIL import Image
 import pandas as pd
 from datetime import datetime
 import argparse
 from soda_mmqc.config import get_checklist, EXAMPLES_DIR
+from streamlit_image_zoom import image_zoom
 
 # Set page config for wider layout
 st.set_page_config(
@@ -155,9 +157,80 @@ def load_checklist(checklist_dir):
     return checklist
    
 
-def main(checklist_name):
-    st.title("mmQC Curation")
+def serialize_value(value):
+    """Serialize a value to a string representation."""
+    if value is None:
+        return None
+    elif isinstance(value, str):
+        return value
+    elif isinstance(value, (list, tuple, dict)):
+        return yaml.dump(value, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    else:
+        return str(value)
+
+
+def deserialize_value(value, schema):
+    """Deserialize a value according to its schema type."""
+    if value is None:
+        return None
     
+    schema_type = schema.get("type")
+    
+    if schema_type == "array":
+        try:
+            # Try to parse as YAML first
+            parsed = yaml.safe_load(value)
+            # If it's a list, return it directly
+            if isinstance(parsed, list):
+                return parsed
+            # Otherwise try JSON as fallback
+            parsed = json.loads(value)
+            if isinstance(parsed, list):
+                return parsed
+            return []
+        except (yaml.YAMLError, json.JSONDecodeError):
+            st.error(f"Error deserializing value: {value}")
+            return []
+    elif schema_type == "object":
+        try:
+            # Try to parse as YAML first
+            return yaml.safe_load(value)
+        except yaml.YAMLError:
+            try:
+                # If YAML fails, try JSON as fallback
+                return json.loads(value)
+            except json.JSONDecodeError:
+                return value
+    elif schema_type == "string":
+        return str(value)
+    elif schema_type == "number":
+        try:
+            return float(value)
+        except ValueError:
+            return value
+    elif schema_type == "integer":
+        try:
+            return int(value)
+        except ValueError:
+            return value
+    elif schema_type == "boolean":
+        if isinstance(value, str):
+            return value.lower() == "true"
+        return bool(value)
+    else:
+        # If no type specified or unknown type, try YAML first, then JSON
+        try:
+            return yaml.safe_load(value)
+        except yaml.YAMLError:
+            try:
+                return json.loads(value)
+            except json.JSONDecodeError:
+                return value
+
+
+def main(checklist_name):
+    st.title("mmQC Benchmark Curation")
+
     # Initialize session state for tracking saved files
     if "saved_files" not in st.session_state:
         st.session_state.saved_files = {}
@@ -165,7 +238,7 @@ def main(checklist_name):
     # load the checklist
     checklist_dir = get_checklist(checklist_name)
     checklist = load_checklist(checklist_dir)
-    
+
     st.subheader(checklist_name)
     
     examples_dir = EXAMPLES_DIR
@@ -181,18 +254,24 @@ def main(checklist_name):
         return
     
     # DOI selection
-    selected_doi = st.selectbox(
-        "Select Example",
-        list(example_hierarchy.keys())
-    )
+    col_select_doi, col_select_fig, _ = st.columns([0.2, 0.2, 0.6])
+
+    with col_select_doi:
+        selected_doi = st.selectbox(
+            "Select Paper",
+            list(example_hierarchy.keys()),
+            help="Select the paper to curate"
+        )
     
     if selected_doi:
         # Figure selection
-        selected_fig = st.selectbox(
-            "Select Figure",
-            example_hierarchy[selected_doi],
-            format_func=lambda x: x.name
-        )
+        with col_select_fig:
+            selected_fig = st.selectbox(
+                "Select Figure",
+                example_hierarchy[selected_doi],
+                format_func=lambda x: x.name,
+                help="Select the figure to curate"
+            )
         
         if selected_fig:
             # Load example data with checklist for validation
@@ -207,19 +286,7 @@ def main(checklist_name):
                 if example_data["image_path"]:
                     try:
                         image = Image.open(example_data["image_path"])
-                        
-                        # Define and decorate the dialog function with large width
-                        @st.dialog('Zoomed in', width="large")
-                        def show_magnified():
-                            st.image(image)
-                        
-                        # Button to trigger dialog
-                        if st.button("", icon=":material/zoom_in:"):
-                            show_magnified()  # Actually call the function
-                        
-                        # Show the main image
-                        st.image(image, use_container_width=True)
-                        
+                        st.image(image)
                     except Exception as e:
                         st.error(f"Error displaying image: {e}")
                 else:
@@ -237,7 +304,8 @@ def main(checklist_name):
                     # Check selection dropdown
                     selected_check = st.selectbox(
                         "Select Check",
-                        list(example_data["check_outputs"].keys())
+                        list(example_data["check_outputs"].keys()),
+                        help=f"Select one of the checks from {checklist_name}"
                     )
                     
                     if selected_check:
@@ -271,15 +339,7 @@ def main(checklist_name):
                                 # Serialize values to strings
                                 for key, value in processed_item.items():
                                     if key in schema_path:
-                                        if not value:
-                                            processed_item[key] = None
-                                        elif isinstance(value, str):
-                                            processed_item[key] = value
-                                        elif isinstance(value, list):
-                                            # For lists, join with commas
-                                            processed_item[key] = ", ".join(str(v) for v in value)
-                                        else:
-                                            processed_item[key] = json.dumps(value, ensure_ascii=False)
+                                        processed_item[key] = serialize_value(value)
                                 if not all(value is None for value in processed_item.values()):
                                     processed_outputs.append(processed_item)
                             
@@ -314,18 +374,11 @@ def main(checklist_name):
                                             if not value:
                                                 processed_record[key] = None
                                             else:
-                                                try:
-                                                    # First try to parse as JSON
-                                                    parsed = json.loads(value)
-                                                    processed_record[key] = parsed
-                                                except json.JSONDecodeError:
-                                                    # If JSON parsing fails, check if it's a comma-separated list
-                                                    if "," in value:
-                                                        processed_record[key] = [
-                                                            v.strip() for v in value.split(",")
-                                                        ]
-                                                    else:
-                                                        processed_record[key] = value
+                                                # deserialize the value according to schema
+                                                processed_record[key] = deserialize_value(
+                                                    value, 
+                                                    schema_path[key]
+                                                )
                                     processed_records.append(processed_record)
                                 
                                 output_data["outputs"] = processed_records
