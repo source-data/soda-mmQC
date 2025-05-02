@@ -26,8 +26,8 @@
         },
         {
             "panel_label": "E",
-            "plot": "no",
-            "average_values": "not needed",
+            "plot": "yes",
+            "average_values": "no",
             "individual_values": "not needed"
         },
         {
@@ -60,5 +60,6 @@
             "average_values": "not needed",
             "individual_values": "not needed"
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 14:11:24"
 }

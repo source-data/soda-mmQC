@@ -21,14 +21,14 @@
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "average_values": "no",
+            "individual_values": "not needed"
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "average_values": "yes",
+            "individual_values": "no"
         },
         {
             "panel_label": "F",
@@ -38,10 +38,10 @@
         },
         {
             "panel_label": "G",
-            "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "no"
         }
     ],
-    "updated_at": "2025-04-12 10:16:29"
+    "updated_at": "2025-04-30 16:59:41"
 }

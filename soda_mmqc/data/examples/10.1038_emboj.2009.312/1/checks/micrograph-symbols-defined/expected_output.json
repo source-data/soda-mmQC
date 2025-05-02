@@ -14,7 +14,9 @@
             "symbols": [
                 "white arrow"
             ],
-            "symbols_defined_in_caption": ["yes"],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
             "from_the_caption": [
                 "Arrows indicate crossing points of dendritic branches."
             ]
@@ -25,7 +27,9 @@
             "symbols": [
                 "white arrow"
             ],
-            "symbols_defined_in_caption": ["yes"],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
             "from_the_caption": [
                 "Arrows indicate crossing points of dendritic branches."
             ]
@@ -64,7 +68,9 @@
             "symbols": [
                 "red arrow"
             ],
-            "symbols_defined_in_caption": ["yes"],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
             "from_the_caption": [
                 "Arrows indicate the crossing points of the dendrites."
             ]
@@ -72,8 +78,12 @@
         {
             "panel_label": "I",
             "micrograph": "yes",
-            "symbols": ["red arrow"],
-            "symbols_defined_in_caption": ["yes"],
+            "symbols": [
+                "red arrow"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
             "from_the_caption": [
                 "Arrows indicate the crossing points of the dendrites."
             ]
@@ -99,5 +109,6 @@
             "symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 11:00:25"
 }

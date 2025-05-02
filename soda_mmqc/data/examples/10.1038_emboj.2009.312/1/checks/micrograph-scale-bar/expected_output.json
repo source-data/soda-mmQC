@@ -1,0 +1,89 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "yes",
+            "scale_bar_on_image": "no",
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "yes",
+            "scale_bar_on_image": "no",
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "yes",
+            "scale_bar_on_image": "yes",
+            "scale_bar_defined_in_caption": "yes",
+            "from_the_caption": "Scale bar=50 \u03bcm"
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "scale_bar_on_image": null,
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "scale_bar_on_image": null,
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "no",
+            "scale_bar_on_image": null,
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "G",
+            "micrograph": "yes",
+            "scale_bar_on_image": "no",
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "H",
+            "micrograph": "yes",
+            "scale_bar_on_image": "no",
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "I",
+            "micrograph": "yes",
+            "scale_bar_on_image": "yes",
+            "scale_bar_defined_in_caption": "yes",
+            "from_the_caption": "Scale bar=50 \u03bcm"
+        },
+        {
+            "panel_label": "J",
+            "micrograph": "no",
+            "scale_bar_on_image": null,
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "K",
+            "micrograph": "no",
+            "scale_bar_on_image": null,
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "L",
+            "micrograph": "no",
+            "scale_bar_on_image": null,
+            "scale_bar_defined_in_caption": null,
+            "from_the_caption": null
+        }
+    ],
+    "updated_at": "2025-05-01 10:58:27"
+}

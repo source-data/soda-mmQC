@@ -5,13 +5,14 @@
             "panel_label": "A",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": null
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "no",
-            "from_the_caption": ""
+            "from_the_caption": null
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 12:57:07"
 }

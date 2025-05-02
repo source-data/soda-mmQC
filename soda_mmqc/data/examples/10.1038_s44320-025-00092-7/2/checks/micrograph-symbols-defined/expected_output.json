@@ -24,18 +24,9 @@
         {
             "panel_label": "D",
             "micrograph": "no",
-            "symbols": [
-                "red horizontal lines",
-                "red crosses"
-            ],
-            "symbols_defined_in_caption": [
-                "yes",
-                "yes"
-            ],
-            "from_the_caption": [
-                "Median values are marked by red horizontal lines.",
-                "Outliers by red crosses."
-            ]
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "E",
@@ -54,15 +45,9 @@
         {
             "panel_label": "G",
             "micrograph": "no",
-            "symbols": [
-                "dark red amplitude decay trace"
-            ],
-            "symbols_defined_in_caption": [
-                "yes"
-            ],
-            "from_the_caption": [
-                "Dark red amplitude decay trace is sketched for illustration purposes."
-            ]
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "H",
@@ -71,5 +56,6 @@
             "symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 16:14:02"
 }

@@ -1,0 +1,84 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": true
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Body weight (g)"
+                }
+            ]
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": true
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "DNA (\u03bcg)"
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        }
+    ],
+    "updated_at": "2025-04-30 17:31:11"
+}

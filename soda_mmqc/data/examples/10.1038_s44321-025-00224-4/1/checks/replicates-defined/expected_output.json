@@ -3,38 +3,39 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "5",
-            "type_of_replicates": "biological, technical unclear in caption context as not explicit beyond number of NS/HFD groups separately outlined, hence presumed biological replicates given distinct separate groups NC/HFD context implication in animal studies at standard level of biological detail exclusion of assignment to inherent technical classification absence–yet emphasis on separate independent treatment groups each explored totals labeled with overall number affirmatively for NC and separately conclusively evidencing repeated biological alongside additional sample metrics application specification demonstrated precise NC/HFD individually citing a fixed repeat count common biological formative implication in typical culminating data repetition mean contextual elucidation assignment suggestion even as supporting source information provided files not accessible from current output per se yet rationally ncycles described precisely as 5 repetitions each for NC and HFD) overall reflected inherent experimental designed sampling (indicating significance threshold reliability conceptual detail included source simulation emphasized transparent entry),"
+            "number_of_replicates": "- 5",
+            "type_of_replicates": "-mice"
         },
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "C",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "D",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "5",
-            "type_of_replicates": "biological Brazilian underlying Nently directing repeated ratification fixed uniformity through internally inferred patterns insight specific as common broad enclosure characterization repeated natter across structured assessment "
+            "number_of_replicates": "-5 ",
+            "type_of_replicates": "-mice"
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "6-7",
-            "type_of_replicates": "biological across lines with ratio consistent replication declared through discrete NC to HFD pattern confirmations parts elevated precision output trace and clarity uniquely demonstrated extrapolated across replicated even for variances usual separation reliant structured treatments independently sample distinct lines repeat multiples"
+            "number_of_replicates": "- 6-7",
+            "type_of_replicates": "-mice"
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 11:13:51"
 }

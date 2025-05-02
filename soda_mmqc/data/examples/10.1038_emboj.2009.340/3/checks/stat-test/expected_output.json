@@ -1,0 +1,21 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        }
+    ],
+    "updated_at": "2025-05-01 12:58:26"
+}

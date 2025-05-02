@@ -1,0 +1,53 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": "Wilcoxon rank-sum test."
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": "Wilcoxon rank-sum test."
+        }
+    ],
+    "updated_at": "2025-05-02 16:43:50"
+}

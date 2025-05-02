@@ -3,110 +3,111 @@
         {
             "panel_label": "A",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "C",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "D",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "E",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "3",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 3",
+            "type_of_replicates": "- independent experiments"
         },
         {
             "panel_label": "G",
             "involves_replicates": "yes",
-            "number_of_replicates": "3",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 3",
+            "type_of_replicates": "- independent experiments"
         },
         {
             "panel_label": "H",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "I",
             "involves_replicates": "yes",
-            "number_of_replicates": "30 images from three independent experiments",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 30\n- 3",
+            "type_of_replicates": "- images\n- ndependent experiments"
         },
         {
             "panel_label": "J",
             "involves_replicates": "yes",
-            "number_of_replicates": "30 images from three independent experiments",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 30\n- 3",
+            "type_of_replicates": "- images\n- ndependent experiments"
         },
         {
             "panel_label": "K",
             "involves_replicates": "yes",
-            "number_of_replicates": "60 cells from three independent experiments",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 60 cells\n- 3 ",
+            "type_of_replicates": "- cells\n- independent experiments"
         },
         {
             "panel_label": "L",
             "involves_replicates": "yes",
-            "number_of_replicates": "60 cells from three independent experiments",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 60 cells\n- 3 ",
+            "type_of_replicates": "- cells\n- independent experiments"
         },
         {
             "panel_label": "M",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "N",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "O",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "P",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "Q",
             "involves_replicates": "yes",
-            "number_of_replicates": "15 mitotic cells from three independent experiments",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 15 mitotic cells \n- three independent experiments",
+            "type_of_replicates": "- technical\n- biological"
         },
         {
             "panel_label": "R",
             "involves_replicates": "yes",
-            "number_of_replicates": "15 mitotic cells from three independent experiments",
-            "type_of_replicates": "independent experiments"
+            "number_of_replicates": "- 15 mitotic cells \n- three independent experiments",
+            "type_of_replicates": "- technical\n- biological"
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 11:17:53"
 }

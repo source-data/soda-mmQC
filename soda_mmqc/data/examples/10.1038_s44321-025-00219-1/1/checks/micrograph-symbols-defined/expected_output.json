@@ -3,40 +3,31 @@
         {
             "panel_label": "Ai",
             "micrograph": "yes",
-            "symbols": [],
-            "symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "symbols": null,
+            "symbols_defined_in_caption": null,
+            "from_the_caption": null
         },
         {
             "panel_label": "Aii",
             "micrograph": "yes",
-            "symbols": [
-                "white arrow"
-            ],
-            "symbols_defined_in_caption": [
-                "no"
-            ],
-            "from_the_caption": []
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": null
         },
         {
             "panel_label": "B",
             "micrograph": "yes",
-            "symbols": [],
-            "symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "symbols": null,
+            "symbols_defined_in_caption": null,
+            "from_the_caption": null
         },
         {
             "panel_label": "C",
             "micrograph": "yes",
-            "symbols": [
-                "white arrow"
-            ],
-            "symbols_defined_in_caption": [
-                "yes"
-            ],
-            "from_the_caption": [
-                "White arrows indicate cell regions experiencing membrane bulging."
-            ]
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2025-04-30 17:08:27"
 }

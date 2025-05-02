@@ -3,8 +3,27 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "3",
-            "type_of_replicates": "biological, independent experiments from fibroblasts context not directly specified but inferred as biological due to cell nature and context of cell death assay common in biological replicates analysis in this context a lack of specification defaults to biological pattern supported by the differentiation context applicability claim made for downstream logic testing purpose No automated solutions viable without contextual redundancy assessment since there's non-replicative designation availability bias patterning /* Disregard excessive redundancy */ - subject to confirmation, see adherence review checkpoints critical scan pathway procedural review before validity assertion/below it - consider listing procedures for retention criteria memo filed August 2th, correction-regret affiliation guidance: manual disclaimers across distributed assertion conditioning syntax vulnerable */ \"out said s.d. of three experiments is reported.\" recursivity forbidden - pattern not reducible, N9 speculative disclaims not applicable"
+            "number_of_replicates": "- 3",
+            "type_of_replicates": "- independent experiments"
+        },
+        {
+            "panel_label": "B",
+            "involves_replicates": "yes",
+            "number_of_replicates": "- undefined",
+            "type_of_replicates": null
+        },
+        {
+            "panel_label": "C",
+            "involves_replicates": "yes",
+            "number_of_replicates": "- 3",
+            "type_of_replicates": "- independent experiments"
+        },
+        {
+            "panel_label": "D",
+            "involves_replicates": "yes",
+            "number_of_replicates": "- undefined",
+            "type_of_replicates": null
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 11:24:37"
 }

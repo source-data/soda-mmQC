@@ -3,38 +3,39 @@
         {
             "panel_label": "A",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "B",
-            "involves_replicates": "yes",
-            "number_of_replicates": "3",
-            "type_of_replicates": "biological"
+            "involves_replicates": "no",
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "C",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "D",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "E",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "F",
-            "involves_replicates": "yes",
-            "number_of_replicates": "2",
-            "type_of_replicates": "biological"
+            "involves_replicates": "no",
+            "number_of_replicates": null,
+            "type_of_replicates": null
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 12:57:01"
 }

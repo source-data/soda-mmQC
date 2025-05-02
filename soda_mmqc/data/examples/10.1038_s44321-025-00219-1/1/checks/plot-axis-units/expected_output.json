@@ -1,0 +1,33 @@
+{
+    "outputs": [
+        {
+            "panel_label": "Ai",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "Aii",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        }
+    ],
+    "updated_at": "2025-04-30 17:08:22"
+}

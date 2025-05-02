@@ -3,50 +3,51 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "141",
-            "type_of_replicates": "biological or technical (undefined explicitly in A itself, see B and C for details on the sample analysis structure of downstream panels utilizing these data.)"
+            "number_of_replicates": "- 141",
+            "type_of_replicates": "- samples"
         },
         {
             "panel_label": "B",
             "involves_replicates": "yes",
-            "number_of_replicates": "2–6",
-            "type_of_replicates": "biological, technical"
+            "number_of_replicates": "- 1-2\n- 2-3",
+            "type_of_replicates": "- biological replicates\n- technical duplicates or triplicates"
         },
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "1–6",
-            "type_of_replicates": "technical"
+            "number_of_replicates": "- 1-4",
+            "type_of_replicates": "- cell line models"
         },
         {
             "panel_label": "D",
             "involves_replicates": "yes",
-            "number_of_replicates": "4–12",
-            "type_of_replicates": "biological or technical (undefined explicitly in D itself, see B and C for details on the sample analysis structure of downstream panels utilizing these data.)"
+            "number_of_replicates": "- 4\u201312",
+            "type_of_replicates": "- samples per cell line"
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "undefined, per cell line",
-            "type_of_replicates": "undefined"
+            "number_of_replicates": "- 3-36",
+            "type_of_replicates": "-  Bmal1-Per2-combinations per cell line"
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "1–4",
-            "type_of_replicates": "undefined"
+            "number_of_replicates": "- 1\u20134",
+            "type_of_replicates": "- cell line models"
         },
         {
             "panel_label": "G",
             "involves_replicates": "no",
-            "number_of_replicates": "undefined",
-            "type_of_replicates": "undefined"
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "H",
             "involves_replicates": "yes",
-            "number_of_replicates": "117",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 117",
+            "type_of_replicates": "- samples"
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 16:40:07"
 }

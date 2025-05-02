@@ -1,0 +1,26 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "gaps_defined": null,
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "gaps_defined": null,
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "gaps_defined": null,
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        }
+    ],
+    "updated_at": "2025-04-30 17:07:58"
+}

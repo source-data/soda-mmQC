@@ -3,14 +3,14 @@
         {
             "panel_label": "A",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "C",
@@ -18,5 +18,6 @@
             "number_of_replicates": "3",
             "type_of_replicates": "biological"
         }
-    ]
+    ],
+    "updated_at": "2025-04-30 17:08:43"
 }

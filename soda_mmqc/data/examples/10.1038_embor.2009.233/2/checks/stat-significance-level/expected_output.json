@@ -1,0 +1,64 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": null,
+            "significance_level_symbols_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": null,
+            "significance_level_symbols_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "*",
+                "***"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": "- '*P<0.05'\n- '***P<0.001'"
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": null,
+            "significance_level_symbols_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": null,
+            "significance_level_symbols_defined_in_caption": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "*"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": "- '*P<0.05'"
+        }
+    ],
+    "updated_at": "2025-04-30 16:55:05"
+}

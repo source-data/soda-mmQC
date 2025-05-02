@@ -3,40 +3,22 @@
         {
             "panel_label": "A",
             "micrograph": "no",
-            "symbols": [
-                "blue arrowhead",
-                "red arrowhead",
-                "orange arrowhead",
-                "light blue arrowhead"
-            ],
-            "symbols_defined_in_caption": [
-                "no",
-                "no",
-                "no",
-                "no"
-            ],
+            "symbols": [],
+            "symbols_defined_in_caption": [],
             "from_the_caption": []
         },
         {
             "panel_label": "B",
             "micrograph": "no",
-            "symbols": [
-                "yellow question mark"
-            ],
-            "symbols_defined_in_caption": [
-                "no"
-            ],
+            "symbols": [],
+            "symbols_defined_in_caption": [],
             "from_the_caption": []
         },
         {
             "panel_label": "C",
             "micrograph": "no",
-            "symbols": [
-                "white question mark"
-            ],
-            "symbols_defined_in_caption": [
-                "no"
-            ],
+            "symbols": [],
+            "symbols_defined_in_caption": [],
             "from_the_caption": []
         },
         {
@@ -77,15 +59,10 @@
         {
             "panel_label": "I",
             "micrograph": "no",
-            "symbols": [
-                "colored circle",
-                "arrow"
-            ],
-            "symbols_defined_in_caption": [
-                "no",
-                "no"
-            ],
+            "symbols": [],
+            "symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 14:46:47"
 }

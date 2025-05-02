@@ -10,8 +10,8 @@
         {
             "panel_label": "B",
             "error_bar_on_figure": "yes",
-            "error_bar_defined_in_caption": "not needed",
-            "quote_from_caption": "Data represents the mean ± s.d."
+            "error_bar_defined_in_caption": "yes",
+            "quote_from_caption": "Data represents the mean\u2009\u00b1\u2009s.d."
         },
         {
             "panel_label": "C",
@@ -49,5 +49,6 @@
             "error_bar_defined_in_caption": "not needed",
             "quote_from_caption": "Error bars represent the standard deviation of the fitted parameters"
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 15:47:13"
 }

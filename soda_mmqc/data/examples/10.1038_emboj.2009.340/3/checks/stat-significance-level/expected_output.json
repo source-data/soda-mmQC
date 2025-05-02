@@ -1,0 +1,19 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": null
+        }
+    ],
+    "updated_at": "2025-05-01 12:58:35"
+}

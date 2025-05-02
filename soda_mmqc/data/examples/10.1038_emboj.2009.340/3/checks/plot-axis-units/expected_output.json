@@ -1,0 +1,37 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Time is indicated on the x-axis in seconds [s]."
+                },
+                {
+                    "axis": "y",
+                    "definition": "Intensity is reported in arbitrary units [a.u.]."
+                }
+            ]
+        }
+    ],
+    "updated_at": "2025-05-01 13:00:20"
+}

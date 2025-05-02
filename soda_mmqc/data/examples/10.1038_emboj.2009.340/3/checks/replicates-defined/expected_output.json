@@ -3,14 +3,15 @@
         {
             "panel_label": "A",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "number_of_replicates": null,
+            "type_of_replicates": null
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 13:01:17"
 }

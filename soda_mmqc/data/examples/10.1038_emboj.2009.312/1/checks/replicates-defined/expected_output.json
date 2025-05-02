@@ -2,75 +2,76 @@
     "outputs": [
         {
             "panel_label": "A",
-            "involves_replicates": "yes",
-            "number_of_replicates": "15",
-            "type_of_replicates": "biological"
+            "involves_replicates": "no",
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "B",
-            "involves_replicates": "yes",
-            "number_of_replicates": "25",
-            "type_of_replicates": "biological"
+            "involves_replicates": "no",
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "C",
-            "involves_replicates": "yes",
-            "number_of_replicates": "25",
-            "type_of_replicates": "biological"
+            "involves_replicates": "no",
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "D",
             "involves_replicates": "yes",
-            "number_of_replicates": "15, 25",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 15,25",
+            "type_of_replicates": "- branch points"
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "15, 25",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 15, 25",
+            "type_of_replicates": "- branch points"
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "15, 25",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 15, 25",
+            "type_of_replicates": "- branch points"
         },
         {
             "panel_label": "G",
             "involves_replicates": "yes",
-            "number_of_replicates": "5",
-            "type_of_replicates": "biological"
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "H",
             "involves_replicates": "yes",
-            "number_of_replicates": "11",
-            "type_of_replicates": "biological"
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "I",
             "involves_replicates": "yes",
-            "number_of_replicates": "9",
-            "type_of_replicates": "biological"
+            "number_of_replicates": null,
+            "type_of_replicates": null
         },
         {
             "panel_label": "J",
             "involves_replicates": "yes",
-            "number_of_replicates": "5, 11, 9",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 5, 11, 9",
+            "type_of_replicates": "- branch points"
         },
         {
             "panel_label": "K",
             "involves_replicates": "yes",
-            "number_of_replicates": "5, 11, 9",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 5, 11, 9",
+            "type_of_replicates": "- branch points"
         },
         {
             "panel_label": "L",
             "involves_replicates": "yes",
-            "number_of_replicates": "5, 11, 9",
-            "type_of_replicates": "biological"
+            "number_of_replicates": "- 5, 11, 9",
+            "type_of_replicates": "- branch points"
         }
-    ]
+    ],
+    "updated_at": "2025-05-01 11:09:59"
 }

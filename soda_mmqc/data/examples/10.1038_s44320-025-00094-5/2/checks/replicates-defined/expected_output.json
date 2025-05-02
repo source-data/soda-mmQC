@@ -3,38 +3,39 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "5912",
-            "type_of_replicates": "biological/technical (interpretation based) - on promoters not specified separately in caption but involves multiple samples due to 'promoters' count per plot interpretation in biological sense as variety important to context rather than same repeatedly studied so consider logical deduction per replicates use - possibly mixed signifying single biological replicate for condition with observations (technical) repeated across varied) - preference biological for logical validity with potential technical for deviations, underlying more DNA accurate observations for distinction - repeat clarify if needed analyzer specific context) - depicted as binary assumption with decisions centralized in order to iterate over possibilities methodologically: assumption in potential formality need expansion in diff depth to interact through variant case files representative of plurality - followed directly after prefix clarified adjustment to base initialization of text value coupling diversity, integrity syntax nodes indicated relational to type terminology valid compliance aggregate distinguishable clear end variable results, conceived under interpretation based methodical replicate within param average/historical notation separate in terms accurate supplemental) - conclusions led inherently objective due direction indication context centered circumstantial verification or omit if unnecessary repeating research case based justify extendable precise consensus frame labeled residual overview thorough all inverse conditions qualitative) Verified - requires justification circumstantial exception"
+            "number_of_replicates": "- 5912",
+            "type_of_replicates": "- Drosophila promoters"
         },
         {
             "panel_label": "B",
-            "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "involves_replicates": "yes",
+            "number_of_replicates": "- 2952",
+            "type_of_replicates": "- DNA single molecules"
         },
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "6122",
-            "type_of_replicates": "biological/technical (interpretation based) - on promoters not specified separately in the caption but involves multiple samples due to 'promoters' count per plot - similar reasoning as panel A interpretation"
+            "number_of_replicates": "- 6122",
+            "type_of_replicates": "- Drosophila promoters"
         },
         {
             "panel_label": "D",
-            "involves_replicates": "no",
-            "number_of_replicates": "",
-            "type_of_replicates": ""
+            "involves_replicates": "yes",
+            "number_of_replicates": "- 2871",
+            "type_of_replicates": "- DNA single molecules"
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "separate for cases with values: 422, 71 (Drosophila TATA-less, TATA respectively), 572, 64 (Mouse TATA-less, TATA respectively) - comprehensive stratification over Pol II frequency coverage tied to cited locale this analysis - individually assessment based per frequency detail)[title references evaluated],[intrinsic variables variety explainable strictly data context association considerations divergence methodology precede where biological contingent hybridize final experimentation ongoing doprime].",
-            "type_of_replicates": "biological constructive combined for task-specific clarity coding marketing guidelines adaptability variations multiple segregations collisions directional compile intricate summary long manually calculated data point reevaluation later section memory conditionality executive glossed converged too overview remarks identical redundancy offer partial exact reproduction cycled assortment original tally total internal symmetric deposition"
+            "number_of_replicates": "- 572\n- \u200964\n- 422\n- \u200971",
+            "type_of_replicates": "- mouse TATA-less promoters\n- mouse TATA-containing promoters\n- Drosophila TATA-less 422 promoters\n- TATA-containing promoters"
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "same distribution as Panel E cause same experimental setups/focus referenced aggregate commonality including boxplots compared direct stratified alternative retention postulated accommodations changed verification inferred arrangements section contextually demonstrates regulatory sections statistical use reflected conditional principles",
-            "type_of_replicates": "biological selections devising explored centered species scope custom post-integrated range adjust considering stipulations proximal analysis experimentation places through exploration basis Pol II dataset aforementioned continues comparing strict factor immediate focus extension paper rationalizations further subsets detailed infer analyzed fortify observations deeper throughout repeated dynamics observed collecting decisive descriptions"
+            "number_of_replicates": "- 572\n- \u200964\n- 422\n- \u200971",
+            "type_of_replicates": "- mouse TATA-less promoters\n- mouse TATA-containing promoters\n- Drosophila TATA-less 422 promoters\n- TATA-containing promoters"
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 17:00:31"
 }

@@ -1,0 +1,61 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "Statistical significance is indicated by asterisks without mentioning the test used.",
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": null,
+            "from_the_caption": null
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "Statistical significance is indicated by asterisks without mentioning the test used.",
+            "from_the_caption": null
+        }
+    ],
+    "updated_at": "2025-04-30 16:53:42"
+}

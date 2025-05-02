@@ -20,27 +20,27 @@
         },
         {
             "panel_label": "D",
-            "plot": "yes",
-            "average_values": "no",
+            "plot": "no",
+            "average_values": "not needed",
             "individual_values": "not needed"
         },
         {
             "panel_label": "E",
-            "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "plot": "no",
+            "average_values": "not needed",
+            "individual_values": "not needed"
         },
         {
             "panel_label": "F",
-            "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "plot": "no",
+            "average_values": "not needed",
+            "individual_values": "not needed"
         },
         {
             "panel_label": "G",
-            "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "plot": "no",
+            "average_values": "not needed",
+            "individual_values": "not needed"
         },
         {
             "panel_label": "H",
@@ -50,9 +50,10 @@
         },
         {
             "panel_label": "I",
-            "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "plot": "no",
+            "average_values": "not needed",
+            "individual_values": "not needed"
         }
-    ]
+    ],
+    "updated_at": "2025-05-02 14:43:57"
 }

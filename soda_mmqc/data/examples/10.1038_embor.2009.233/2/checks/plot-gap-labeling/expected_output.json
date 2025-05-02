@@ -1,0 +1,95 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "gaps_defined": null,
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "gaps_defined": null,
+            "gap_description": null,
+            "justify_why_gaps_are_missing": null
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "gap_description": [
+                {
+                    "axis": "y",
+                    "description": "two wiggly lines interupt the y axis"
+                }
+            ],
+            "justify_why_gaps_are_missing": null
+        }
+    ],
+    "updated_at": "2025-04-30 16:52:08"
+}

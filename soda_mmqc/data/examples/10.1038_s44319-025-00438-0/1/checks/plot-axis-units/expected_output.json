@@ -1,0 +1,172 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "I",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "J",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "thickness is measured in micrometers (\u00b5m)"
+                }
+            ]
+        },
+        {
+            "panel_label": "K",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "L",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "M",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "N",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "O",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "P",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "Q",
+            "is_a_plot": "no",
+            "units_provided": null,
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        },
+        {
+            "panel_label": "R",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": null,
+            "unit_definition_as_provided": null
+        }
+    ],
+    "updated_at": "2025-05-01 09:28:45"
+}

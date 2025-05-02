@@ -1,0 +1,33 @@
+{
+    "outputs": [
+        {
+            "panel_label": "Ai",
+            "micrograph": "yes",
+            "scale_bar_on_image": "yes",
+            "scale_bar_defined_in_caption": "yes",
+            "from_the_caption": "2 \u03bcm"
+        },
+        {
+            "panel_label": "Aii",
+            "micrograph": "yes",
+            "scale_bar_on_image": "yes",
+            "scale_bar_defined_in_caption": "yes",
+            "from_the_caption": "2 \u03bcm"
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "yes",
+            "scale_bar_on_image": "yes",
+            "scale_bar_defined_in_caption": "no",
+            "from_the_caption": "4 \u03bcm"
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "yes",
+            "scale_bar_on_image": "yes",
+            "scale_bar_defined_in_caption": "no",
+            "from_the_caption": "2 \u03bcm"
+        }
+    ],
+    "updated_at": "2025-05-02 10:01:21"
+}
