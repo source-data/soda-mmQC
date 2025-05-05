@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+DEVICE = os.getenv("DEVICE", "cpu")
+
 # Get the package root directory
 PACKAGE_ROOT = Path(__file__).parent
 

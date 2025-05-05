@@ -4,7 +4,11 @@ import nltk
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+from soda_mmqc.config import DEVICE
+import logging
 
+# Suppress progress bars from SentenceTransformer
+logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
 
 # Download NLTK data for BLEU score calculation
 try:
@@ -16,7 +20,10 @@ try:
 except LookupError:
     nltk.download('punkt_tab')
 
-SENTENCE_TRANSFORMER = SentenceTransformer('all-MiniLM-L6-v2')
+SENTENCE_TRANSFORMER = SentenceTransformer(
+    'all-MiniLM-L6-v2',
+    device=DEVICE
+)
 
 
 def get_text_fields(json_obj, schema):
@@ -135,6 +142,12 @@ def semantic_similarity_score(predicted, expected, model=SENTENCE_TRANSFORMER,
             similarities = []
 
             for pred_text, exp_text in zip(pred_texts, exp_texts):
+                if not pred_text or not exp_text:
+                    logging.warning(f"Empty text field: {field_type}")
+                    logging.warning(f"Pred: {pred_text}")
+                    logging.warning(f"Exp: {exp_text}")
+                    similarities.append(0.0)
+                    continue
                 pred_embedding = model.encode([pred_text])[0]
                 pred_embedding = np.array(pred_embedding).reshape(1, -1)
                 exp_embedding = model.encode([exp_text])[0]

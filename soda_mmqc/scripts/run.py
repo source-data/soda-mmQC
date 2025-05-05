@@ -17,16 +17,8 @@ from soda_mmqc.config import (
     get_evaluation_path,
     get_check_data_file
 )
-from soda_mmqc.evaluation import evaluate_response
-
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-logger = logging.getLogger(__name__)
+from soda_mmqc.tools.evaluator import JSONEvaluator
+from soda_mmqc import logger
 
 
 def load_json(file_path):
@@ -95,10 +87,24 @@ def gather_examples(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
     return inputs
 
 
+def get_expected_output(example: Dict[str, Any], check_name: str) -> Dict[str, Any]:
+    expected_output_path = get_expected_output_path(example, check_name)
+    # Validate expected output file
+    if not expected_output_path.exists():
+        logger.error(
+            f"Expected output file not found: {expected_output_path}"
+        )
+        raise FileNotFoundError(
+            f"Expected output file not found: {expected_output_path}"
+    )
+    expected_output = load_json(expected_output_path)
+    return expected_output
+
+
 def run_model(
-    inputs: Dict[str, Any], 
-    mock: bool = False,
-    use_cache: bool = True
+    inputs: Dict[str, Any],
+    use_cache: bool = True,
+    mock: bool = False
 ) -> List[Dict[str, Any]]:
     """Step 2: Run the model on all inputs.
     
@@ -117,20 +123,28 @@ def run_model(
     model_cache = ModelCache(cache_dir)
 
     results = []
-
+    
     check_data = inputs["check_data"]
     check_name = check_data["name"]
     examples = inputs["examples"]
     prompt = inputs["prompt"]
     prompt_name = inputs["prompt_name"]
     schema = inputs["schema"]
-
-    for example in tqdm(examples, desc="Running model", unit="example"):
-        try:
-            if mock:
-                # In mock mode, use expected output as model output
-                model_output = example["expected_output"]
-            else:
+    
+    if mock:
+        for i, example in tqdm(enumerate(examples), desc="Mock run", unit="example"):
+            expected_output = get_expected_output(example, check_name)
+            results.append({
+                "doi": example["doi"],
+                "figure_id": example["figure_id"],
+                "example": example,
+                "model_output": expected_output,
+                "expected_output": expected_output,
+                "prompt_name": prompt_name
+            })
+    else:
+        for example in tqdm(examples, desc="Running model", unit="example"):
+            try:
                 # Check cache first if enabled
                 if use_cache:
                     # the cache key needs to be unique with respect to 
@@ -207,22 +221,24 @@ def run_model(
                         )
                         raise
 
-            # Accumulate result
-            results.append({
-                "doi": example["doi"],
-                "figure_id": example["figure_id"],
-                "example": example,
-                "model_output": model_output,
-                "prompt_name": prompt_name
-            })
+                # Accumulate result
+                expected_output = get_expected_output(example, check_name)
+                results.append({
+                    "doi": example["doi"],
+                    "figure_id": example["figure_id"],
+                    "example": example,
+                    "model_output": model_output,
+                    "expected_output": expected_output,
+                    "prompt_name": prompt_name
+                })
 
-        except Exception as e:
-            logger.error(
-                f"Error processing example "
-                f"{example['doi']}/{example['figure_id']}: {str(e)}"
-            )
-            # Continue with next example instead of failing completely
-            continue
+            except Exception as e:
+                logger.error(
+                    f"Error processing example "
+                    f"{example['doi']}/{example['figure_id']}: {str(e)}"
+                )
+                # Continue with next example instead of failing completely
+                continue
 
     return results
 
@@ -245,21 +261,22 @@ def analyze_results(
 
     analyzed_results = []
     for result in tqdm(results, desc="Analyzing results", unit="example"):
+        logger.debug(f"\n\n\n========= Analyzing: {result['doi']} fig_id:{result['figure_id']}\n\n\n")
         # Analyze response
-        analysis_results = evaluate_response(
-            result["model_output"],
-            result["expected_output"],
-            metrics,
-            schema
-        )
-
+        analysis = {}
+        for metric in metrics:
+            evaluator = JSONEvaluator(schema, metric)
+            analysis[metric] = evaluator.evaluate(
+                result["model_output"],
+                result["expected_output"],
+            )
         # Store analyzed result
         analyzed_results.append({
             "doi": result["doi"],
             "figure_id": result["figure_id"],
             "expected_output": result["expected_output"],
             "model_output": result["model_output"],
-            "analysis": analysis_results
+            "analysis": analysis
         })
 
     return analyzed_results
@@ -349,7 +366,7 @@ def prepare_check_data(check_dir: Path):
         return None
     
     # Get all prompt files
-    prompt_files = list(prompts_dir.glob("*.txt"))
+    prompt_files = list(prompts_dir.glob("prompt*.txt"))
     if not prompt_files:
         logger.error(f"No prompt files found in {prompts_dir}")
         return None
@@ -395,6 +412,7 @@ def prepare_check_data(check_dir: Path):
 
 def process_check(
     check_dir: Path,
+    checklist_name: str,
     mock: bool = False,
     use_cache: bool = True
 ) -> Dict[str, List[Dict[str, Any]]]:
@@ -410,19 +428,6 @@ def process_check(
     Returns:
         Dictionary mapping prompt names to their analysis results
     """
-    
-    def get_expected_output(example: Dict[str, Any], check_name: str) -> Dict[str, Any]:
-        expected_output_path = get_expected_output_path(example, check_name)
-        # Validate expected output file
-        if not expected_output_path.exists():
-            logger.error(
-                f"Expected output file not found: {expected_output_path}"
-            )
-            raise FileNotFoundError(
-                f"Expected output file not found: {expected_output_path}"
-        )
-        expected_output = load_json(expected_output_path)
-        return expected_output
     
     # Prepare check data
     prepared_data = prepare_check_data(check_dir)
@@ -456,22 +461,17 @@ def process_check(
         # Run model and cache outputs
         results = run_model(
             inputs,
-            mock=mock,
-            use_cache=use_cache
+            use_cache=use_cache,
+            mock=mock
         )
-        
-        # Evaluate results
 
-        # add expected outputs to results
-        for result in results:
-            example = result["example"]
-            expected_output = get_expected_output(example, check_name)
-            result["expected_output"] = expected_output
-
+        # Analyze results
         analyzed_results = analyze_results(results, metrics, schema)
 
         # Store results for this prompt
         all_results[prompt_name] = analyzed_results
+        
+    save_analysis(all_results, checklist_name, check_name)
 
     return all_results
 
@@ -601,12 +601,13 @@ def process_checklist(
 
     for check_dir_name, check_dir in checks.items():
         try:
-            analyzed_results = process_check(
+            process_check(
                 check_dir,
+                checklist_name,
                 mock=mock,
                 use_cache=use_cache
             )
-            save_analysis(analyzed_results, checklist_name, check_dir_name)
+            
 
         except Exception as e:
             logger.error(
@@ -640,7 +641,7 @@ def main():
         # Find the check in the checklist
         check_dir = checklist_dir / args.check
         if check_dir.exists():
-            process_check(check_dir, args.mock, not args.no_cache)
+            process_check(check_dir, args.checklist, args.mock, not args.no_cache)
         else:
             logger.error(f"Check not found: {args.check}")
     else:
