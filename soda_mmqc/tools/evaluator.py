@@ -119,6 +119,16 @@ class JSONEvaluator:
         logger.debug(f"cos_sim({pred}, {exp}): {score}")
         return (score + 1) / 2  # Map from [-1, 1] to [0, 1]
     
+    def _exact_string_match(self, pred: str, exp: str) -> float:
+        """Calculate exact string match between two strings.
+        
+        Args:
+            pred: Prediction string
+            exp: Expected string
+        """
+        logger.debug(f"exact_match({pred}, {exp}): {1.0 if pred == exp else 0.0}")
+        return 1.0 if pred == exp else 0.0
+    
     def _bleu_score(self, pred: str, exp: str) -> float:
         """Calculate BLEU score between two strings.
         

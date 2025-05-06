@@ -19,13 +19,14 @@ CACHE_DIR = Path(os.getenv("SODA_MMQC_CACHE_DIR", DATA_DIR / "cache"))
 CHECKLIST_DIR = DATA_DIR / "checklist"
 EXAMPLES_DIR = DATA_DIR / "examples"
 EVALUATION_DIR = DATA_DIR / "evaluation"
+PLOTS_DIR = DATA_DIR / "plots"
 CONTENT_SUBDIR = "content"
 EXPECTED_OUTPUT_SUBDIR = "checks"
 EXPECTED_OUTPUT_FILE = "expected_output.json"
 CHECK_DATA_FILE = "benchmark.json"
 SCHEMA_FILE = "schema.json"
 # Ensure all directories exist
-for directory in [CHECKLIST_DIR, EXAMPLES_DIR, EVALUATION_DIR, CACHE_DIR]:
+for directory in [CHECKLIST_DIR, EXAMPLES_DIR, EVALUATION_DIR, CACHE_DIR, PLOTS_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
 
@@ -95,3 +96,8 @@ def get_evaluation_path(checklist_name: str) -> Path:
 def get_cache_path() -> Path:
     """Get the full path to cache results."""
     return CACHE_DIR
+
+
+def get_plots_path() -> Path:
+    """Get the full path to plots directory."""
+    return PLOTS_DIR
