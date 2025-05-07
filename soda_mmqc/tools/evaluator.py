@@ -32,17 +32,32 @@ class ComparisonResult:
     """
     score: float
     errors: List[str]
-    field_scores: Dict[str, float]
+    field_scores: Dict[str, Any]
     
     def __init__(
         self, 
         score: float, 
         errors: Optional[List[str]] = None,
-        field_scores: Optional[Dict[str, float]] = None
+        field_scores: Optional[Dict[str, Any]] = None
     ):
         self.score = max(0.0, min(1.0, score))
         self.errors = errors or []
         self.field_scores = field_scores or {}
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert the ComparisonResult to a dictionary.
+        
+        Returns:
+            Dictionary representation of the ComparisonResult
+        """
+        return {
+            "score": self.score,
+            "errors": self.errors,
+            "field_scores": {
+                k: v.to_dict() if isinstance(v, ComparisonResult) else v
+                for k, v in self.field_scores.items()
+            }
+        }
 
 
 class JSONEvaluator:
@@ -169,12 +184,6 @@ class JSONEvaluator:
             - field_scores: Dictionary of scores for each field
             - errors: List of error messages if any
         """
-        results = {
-            "score": 0.0,
-            "field_scores": {},
-            "errors": []
-        }
-        
         # Get the schema structure
         schema_structure = self.schema["format"]["schema"]
         
@@ -183,104 +192,27 @@ class JSONEvaluator:
             pred_outputs = prediction.get("outputs", [])
             exp_outputs = expected.get("outputs", [])
             
-            if len(pred_outputs) != len(exp_outputs):
-                msg = (
-                    f"Number of outputs mismatch: predicted {len(pred_outputs)}, "
-                    f"expected {len(exp_outputs)}"
-                )
-                results["errors"].append(msg)
-                return results
+            # Get the outputs schema
+            outputs_schema = self._get_schema_for_path(["outputs"])
             
-            output_scores = []
-            for i, (pred, exp) in enumerate(zip(pred_outputs, exp_outputs)):
-                field_result = self._compare_objects(
-                    pred, 
-                    exp, 
-                    ["outputs", "items"]
-                )
-                results["field_scores"][f"output_{i}"] = {
-                    "score": field_result.score,
-                    "field_scores": field_result.field_scores,
-                    "errors": field_result.errors
-                }
-                output_scores.append(field_result.score)
-                results["errors"].extend(field_result.errors)
-            
-            if output_scores:
-                results["score"] = sum(output_scores) / len(output_scores)
-        
-        return results
-    
-    def _compare_objects(
-        self, 
-        pred: Dict[str, Any], 
-        exp: Dict[str, Any],
-        schema_path: List[str]
-    ) -> ComparisonResult:
-        """Compare two objects field by field using schema information.
-        
-        Args:
-            pred: Prediction object
-            exp: Expected object
-            schema_path: Path to the schema definition for this object
-            
-        Returns:
-            ComparisonResult with:
-            - score: Average score across matched elements
-            - field_scores: Dictionary of scores for each element
-            - errors: List of error messages
-        """
-        logger.debug(f"Comparing objects:\n\texpected: {exp}\n\tprediction: {pred}")
-        
-        field_scores = {}
-        errors = []
-        
-        # Get schema for this object
-        schema = self._get_schema_for_path(schema_path)
-        
-        # Get required fields from schema
-        required_fields = schema.get("required", [])
-        
-        # Check all required fields
-        for field in required_fields:
-            field_scores[field] = {}
-            logger.debug(f"Analyzing object field: {field}")
-            if field not in pred:
-                errors.append(f"Missing field in prediction: {field}")
-                field_scores[field]["score"] = 0.0
-                field_scores[field]["field_scores"] = {}
-                continue
-
-            if field not in exp:
-                errors.append(f"Missing field in expected: {field}")
-                field_scores[field]["score"] = 0.0
-                field_scores[field]["field_scores"] = {}
-                continue
-
-            pred_value = pred[field]
-            exp_value = exp[field]
-
-            # Get field schema
-            field_schema = self._get_schema_for_path(schema_path + [field])
-            
-            # Compare values based on schema type
-            field_result = self._compare_values_with_schema(
-                pred_value, 
-                exp_value, 
-                field_schema,
-                schema_path + [field]
+            # Compare outputs using _compare_values_with_schema
+            outputs_result = self._compare_values_with_schema(
+                pred_outputs,
+                exp_outputs,
+                outputs_schema,
+                ["outputs"]
             )
-            field_scores[field]["score"] = field_result.score
-            field_scores[field]["field_scores"] = field_result.field_scores
-            errors.extend(field_result.errors)
+            
+            # Convert the entire ComparisonResult to a dictionary
+            return outputs_result.to_dict()
         
-        if not field_scores:
-            return ComparisonResult(0.0, errors, {})
-        
-        # Calculate average score across all fields
-        avg_score = sum([f['score'] for f in field_scores.values()]) / len(field_scores)
-        return ComparisonResult(avg_score, errors, field_scores)
-    
+        return {
+            "score": 0.0,
+            "field_scores": {},
+            "errors": []
+        }
+
+
     def _compare_values_with_schema(
         self,
         pred_value: Any,
@@ -320,7 +252,7 @@ class JSONEvaluator:
             if not isinstance(pred_value, list) or not isinstance(exp_value, list):
                 return ComparisonResult(
                     0.0,
-                    [f"Type mismatch: expected array, got {type(pred_value)}"],
+                    [f"Type mismatch: expected array, got {type(pred_value)}, {type(exp_value)}"],
                     {}
                 )
             
@@ -332,10 +264,9 @@ class JSONEvaluator:
             if not isinstance(pred_value, dict) or not isinstance(exp_value, dict):
                 return ComparisonResult(
                     0.0,
-                    [f"Type mismatch: expected object, got {type(pred_value)}"],
+                    [f"Type mismatch: expected object, got {type(pred_value)}, {type(exp_value)}"],
                     {}
                 )
-            
             return self._compare_objects(pred_value, exp_value, schema_path)
         
         else:
@@ -348,6 +279,74 @@ class JSONEvaluator:
                     {"value": score}
                 )
             return ComparisonResult(score, [], {"value": score})
+
+    def _compare_objects(
+        self, 
+        pred: Dict[str, Any], 
+        exp: Dict[str, Any],
+        schema_path: List[str]
+    ) -> ComparisonResult:
+        """Compare two objects field by field using schema information.
+        
+        Args:
+            pred: Prediction object
+            exp: Expected object
+            schema_path: Path to the schema definition for this object
+            
+        Returns:
+            ComparisonResult with:
+            - score: Average score across matched elements
+            - field_scores: Dictionary of ComparisonResults for each element
+            - errors: List of error messages
+        """
+        logger.debug(f"Comparing objects:\n\texpected: {exp}\n\tprediction: {pred}")
+        
+        field_scores = {}
+        errors = []
+        
+        # Get schema for this object
+        schema = self._get_schema_for_path(schema_path)
+        
+        # Get required fields from schema
+        required_fields = schema.get("required", [])
+        
+        # Check all required fields
+        for field in required_fields:
+            field_scores[field] = {}
+            logger.debug(f"Analyzing object field: {field}")
+            if field not in pred:
+                errors.append(f"Missing field in prediction: {field}")
+                field_scores[field] = ComparisonResult(0.0, [f"Missing field in prediction: {field}"], {})
+                continue
+
+            if field not in exp:
+                errors.append(f"Missing field in expected: {field}")
+                field_scores[field] = ComparisonResult(0.0, [f"Missing field in expected: {field}"], {})
+                continue
+
+            pred_value = pred[field]
+            exp_value = exp[field]
+
+            # Get field schema
+            field_schema = self._get_schema_for_path(schema_path + [field])
+            
+            # Compare values based on schema type
+            field_result = self._compare_values_with_schema(
+                pred_value, 
+                exp_value, 
+                field_schema,
+                schema_path + [field]
+            )
+            field_scores[field] = field_result
+            errors.extend(field_result.errors)
+        
+        if not field_scores:
+            return ComparisonResult(0.0, errors, {})
+        
+        # Calculate average score across all fields
+        avg_score = sum(f.score for f in field_scores.values()) / len(field_scores)
+        return ComparisonResult(avg_score, errors, field_scores)
+
     
     def _compare_lists(
         self, 
@@ -360,32 +359,37 @@ class JSONEvaluator:
         Args:
             pred: Prediction list
             exp: Expected list
-            schema: Schema definition for this list
             schema_path: Path to the schema definition
             
         Returns:
             ComparisonResult with:
             - score: Average score across matched elements
-            - field_scores: Dictionary of scores for each element
+            - field_scores: Dictionary of ComparisonResults for each element
             - errors: List of error messages
         """
         logger.debug(f"Comparing lists:\n\texpected: {exp}\n\tprediction: {pred}")
         if not exp:
             if not pred:
                 logger.debug("Comparing 2 empty lists")
-                return ComparisonResult(1.0, [], {"empty_list": 1.0})
+                return ComparisonResult(1.0, [], {
+                    "empty_list": ComparisonResult(1.0, [], {})
+                })
             return ComparisonResult(
                 0.0,
                 ["Expected empty list"], 
-                {"empty_list": 0.0}
+                {"empty_list": ComparisonResult(0.0, ["Expected empty list"], {})}
             )
         
         if not pred:
             logger.debug(f"Comparing {exp} with empty pred")
+            missing_elements = {
+                f"missing_element_{i}": ComparisonResult(0.0, [f"Missing element at index {i}"], {})
+                for i in range(len(exp))
+            }
             return ComparisonResult(
                 0.0, 
                 ["Prediction list is empty"], 
-                {f"missing_element_{i}": 0.0 for i in range(len(exp))}
+                missing_elements
             )
         
         # Track which prediction elements have been matched
@@ -400,6 +404,7 @@ class JSONEvaluator:
         for i, exp_item in enumerate(exp):
             best_score = 0.0
             best_pred_idx = None
+            best_result = None
 
             # Try to match with each unmatched prediction element
             for j, pred_item in enumerate(pred):
@@ -415,20 +420,29 @@ class JSONEvaluator:
                 if item_result.score > best_score:
                     best_score = item_result.score
                     best_pred_idx = j
+                    best_result = item_result
 
             if best_pred_idx is not None:
                 matched_pred_indices.add(best_pred_idx)
-                element_scores[f"element_{i}"] = best_score
+                element_scores[f"element_{i}"] = best_result
                 logger.debug(f"best match for {exp_item}: {pred[best_pred_idx]} with score {best_score}")
                 
             else:
-                element_scores[f"missing_element_{i}"] = 0.0
+                element_scores[f"missing_element_{i}"] = ComparisonResult(
+                    0.0,
+                    [f"Missing element at index {i}"],
+                    {}
+                )
                 errors.append(f"Missing element at index {i}")
 
         # Check for extra elements in prediction
         for j in range(len(pred)):
             if j not in matched_pred_indices:
-                element_scores[f"extra_element_{j}"] = 0.0
+                element_scores[f"extra_element_{j}"] = ComparisonResult(
+                    0.0,
+                    [f"Extra element at index {j}"],
+                    {}
+                )
                 errors.append(f"Extra element at index {j}")
 
         if not element_scores:
@@ -436,7 +450,7 @@ class JSONEvaluator:
             return ComparisonResult(0.0, errors, {})
 
         # Calculate average score across all elements (including missing/extra)
-        avg_score = sum(element_scores.values()) / len(element_scores)
+        avg_score = sum(e.score for e in element_scores.values()) / len(element_scores)
         return ComparisonResult(avg_score, errors, element_scores)
 
     def _compare_strings(self, pred: str, exp: str) -> ComparisonResult:
@@ -448,4 +462,6 @@ class JSONEvaluator:
         """
         logger.debug(f"Comparing strings:\n\texpected: {exp}\n\tprediction: {pred}")
         score = self.string_comparator(pred, exp)
-        return ComparisonResult(score, [], {"value": score})
+        return ComparisonResult(score, [], {
+            "value": ComparisonResult(score, [], {})
+        })

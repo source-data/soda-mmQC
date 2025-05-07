@@ -2,6 +2,7 @@ import json
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from pathlib import Path
 from soda_mmqc.config import get_schema_path, get_evaluation_path, get_plots_path
 from soda_mmqc import logger
@@ -103,21 +104,33 @@ def prepare_data_for_plotting(results_by_prompt):
             # The structure of the data is as follows:
             # "analysis": {
             #     "exact_match": {
-            #         "score": 1.0,
+            #         "score": 0.6875,
+            #         "errors": [],
             #         "field_scores": {
-            #             "output_0": {
+            #             "element_0": {
             #                 "score": 1.0,
+            #                 "errors": [],
             #                 "field_scores": {
             #                     "panel_label": {
             #                         "score": 1.0,
+            #                         "errors": [],
             #                         "field_scores": {
-            #                             "value": 1.0
+            #                             "value": {
+            #                                 "score": 1.0,
+            #                                 "errors": [],
+            #                                 "field_scores": {}
+            #                             }
             #                         }
             #                     },
-            #                     "error_bar_on_figure": {
+            #                     "involves_replicates": {
             #                         "score": 1.0,
+            #                         "errors": [],
             #                         "field_scores": {
-            #                             "value": 1.0
+            #                             "value": {
+            #                                 "score": 1.0,
+            #                                 "errors": [],
+            #                                 "field_scores": {}
+            #                             }
             #                         }
             #                     },
             for result in results:
@@ -357,68 +370,64 @@ def create_global_checklist_visualization(checklist_name, output_dir):
     
     # Create a separate plot for each metric
     for metric in metrics:
-        # Filter data for this metric
         metric_df = combined_df[combined_df['metric'] == metric]
-        
-        # Separate overall scores and feature scores
         overall_scores = metric_df[metric_df['feature'] == 'overall']
         feature_scores = metric_df[metric_df['feature'] != 'overall']
-        # Create the visualization
-        fig = px.bar(
-            overall_scores,
-            x='check',
-            y='mean',
-            error_y='std',
-            title=(
-                f'{metric.replace("_", " ").title()} Scores - '
-                f'{checklist_name.title()} Checklist'
-            ),
-            labels={
-                'mean': 'Score',
-                'check': 'Check'
-            },
-            color="check",
-            color_discrete_sequence=px.colors.qualitative.Set1,
-            template='plotly_dark'
-        )
-        
-        # Add individual feature scores as points
-        fig.add_trace(
-            px.scatter(
-                feature_scores,
-                x='check',
-                y='mean',
-                symbol='feature',
-                labels='feature',
-                hover_data=['check', 'feature'],
-                size=[10] * len(feature_scores),  # Set fixed size for all points
-            ).data[0]
-        )
-        
-        # Update layout for better readability
+        prompts = list(overall_scores['prompt'].unique())
+        checks = list(overall_scores['check'].unique())
+        color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
+        fig = go.Figure()
+        # Add bars for each prompt
+        for prompt in prompts:
+            prompt_bars = overall_scores[overall_scores['prompt'] == prompt]
+            fig.add_trace(go.Bar(
+                x=prompt_bars['check'],
+                y=prompt_bars['mean'],
+                # error_y=dict(type='data', array=prompt_bars['std']),
+                name=prompt,
+                marker_color=color_map[prompt],
+                offsetgroup=prompt,
+                legendgroup=prompt,
+                showlegend=True,
+            ))
+        # Add feature points for each prompt
+        for prompt in prompts:
+            prompt_points = feature_scores[feature_scores['prompt'] == prompt]
+            fig.add_trace(go.Scatter(
+                x=prompt_points['check'],
+                y=prompt_points['mean'],
+                mode='markers',
+                name=f'{prompt} tasks',
+                marker=dict(size=10, color=color_map[prompt], opacity=0.7, line=dict(width=1, color='white')),
+                legendgroup=prompt,
+                showlegend=True,
+                customdata=prompt_points['feature'],
+                hovertemplate=f"Task: %{{customdata}}<br>Score: %{{y:.2f}}<extra>{prompt}</extra>",
+            ))
+
         fig.update_layout(
+            barmode='group',
             height=600,
             width=1200,
-            showlegend=False,
+            showlegend=True,
+            title=(
+                f'Benchmarking "{checklist_name.title()}"<br>'
+                f'({metric.replace("_", " ").title()})'
+            ),
             title_x=0.5,
-            title_font_size=12,
-            barmode='overlay',
+            title_font_size=24,
+            template='plotly_dark',
+            xaxis=dict(title='Check', tickangle=45, categoryorder='array', categoryarray=checks),
+            yaxis=dict(title='Score', range=[0, 1.1]),
         )
-        
-        # Update axes
-        fig.update_xaxes(tickangle=45)
-        fig.update_yaxes(range=[0, 1], title="Score")
-        
-        # Add hover template
         fig.update_traces(
             hovertemplate="<br>".join([
                 "Check: %{x}",
                 "Score: %{y:.2f}",
                 "<extra></extra>"
-            ])
+            ]),
+            selector=dict(type='bar')
         )
-        
-        # Save the visualization
         output_path = Path(output_dir) / f'{checklist_name}_{metric}_analysis.html'
         fig.write_html(str(output_path))
         logger.info(f"Visualization for {metric} saved to {output_path}")

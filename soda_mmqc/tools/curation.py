@@ -7,7 +7,7 @@ import pandas as pd
 from datetime import datetime
 import argparse
 from soda_mmqc.config import get_checklist, EXAMPLES_DIR
-from streamlit_image_zoom import image_zoom
+from soda_mmqc import logger
 
 # Set page config for wider layout
 st.set_page_config(
@@ -172,35 +172,43 @@ def serialize_value(value):
 def deserialize_value(value, schema):
     """Deserialize a value according to its schema type."""
     if value is None:
-        return None
+        return None  # TODO return either "", or {} or [] or None depending on the schema type
     
     schema_type = schema.get("type")
     
     if schema_type == "array":
         try:
             # Try to parse as YAML first
-            parsed = yaml.safe_load(value)
-            # If it's a list, return it directly
+            if isinstance(value, str):
+                parsed = yaml.safe_load(value)
+            else:
+                parsed = value
             if isinstance(parsed, list):
-                return parsed
+                # deserialize each item in the list
+                parsed_list = [deserialize_value(item, schema["items"]) for item in parsed]
+                return parsed_list
+            return value
             # Otherwise try JSON as fallback
-            parsed = json.loads(value)
-            if isinstance(parsed, list):
-                return parsed
-            return []
-        except (yaml.YAMLError, json.JSONDecodeError):
-            st.error(f"Error deserializing value: {value}")
-            return []
+        except Exception as e:
+            st.error(f"Error deserializing value with YAML: {value}")
+            logger.error(f"Error deserializing value with YAML: {value}\n{e}")
+            return value
     elif schema_type == "object":
         try:
             # Try to parse as YAML first
-            return yaml.safe_load(value)
-        except yaml.YAMLError:
-            try:
-                # If YAML fails, try JSON as fallback
-                return json.loads(value)
-            except json.JSONDecodeError:
-                return value
+            if isinstance(value, str):
+                parsed = yaml.safe_load(value)
+            else:
+                parsed = value
+            if isinstance(parsed, dict):
+                # deserialize each item in the dictionary
+                parsed_dict = {k: deserialize_value(v, schema["properties"][k]) for k, v in parsed.items()}
+                return parsed_dict
+            return value
+        except Exception as e:
+            st.error(f"Error deserializing value with YAML: {value}")
+            logger.error(f"Error deserializing value with YAML: {value}\n{e}")
+            return value
     elif schema_type == "string":
         return str(value)
     elif schema_type == "number":
@@ -326,7 +334,6 @@ def main(checklist_name):
                                 st.error(f"Check {selected_check} not found in checklist")
                                 return
                             
-                            # Convert list fields to comma-separated strings for editing
                             processed_outputs = []
                             # Get the schema for the selected check
                             schema_format = checklist[selected_check]["schema"]["format"]
@@ -376,7 +383,7 @@ def main(checklist_name):
                                             else:
                                                 # deserialize the value according to schema
                                                 processed_record[key] = deserialize_value(
-                                                    value, 
+                                                    value,
                                                     schema_path[key]
                                                 )
                                     processed_records.append(processed_record)

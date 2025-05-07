@@ -132,7 +132,7 @@ def run_model(
     schema = inputs["schema"]
     
     if mock:
-        for i, example in tqdm(enumerate(examples), desc="Mock run", unit="example"):
+        for i, example in tqdm(enumerate(examples), desc="Mock run ", unit="example"):
             expected_output = get_expected_output(example, check_name)
             results.append({
                 "doi": example["doi"],
