@@ -3,8 +3,10 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 5",
-            "type_of_replicates": "-mice"
+            "number_of_replicates": [
+                "5"
+            ],
+            "type_of_replicates": []
         },
         {
             "panel_label": "B",
@@ -27,15 +29,17 @@
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "-5 ",
-            "type_of_replicates": "-mice"
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 6-7",
-            "type_of_replicates": "-mice"
+            "number_of_replicates": [
+                "6-7"
+            ],
+            "type_of_replicates": []
         }
     ],
-    "updated_at": "2025-05-01 11:13:51"
+    "updated_at": "2025-05-07 00:11:43"
 }

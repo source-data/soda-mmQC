@@ -3,27 +3,39 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- independent experiments"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "independent experiments"
+            ]
         },
         {
             "panel_label": "B",
             "involves_replicates": "yes",
-            "number_of_replicates": "- undefined",
+            "number_of_replicates": [
+                "undefined"
+            ],
             "type_of_replicates": null
         },
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- independent experiments"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "independent experiments"
+            ]
         },
         {
             "panel_label": "D",
             "involves_replicates": "yes",
-            "number_of_replicates": "- undefined",
+            "number_of_replicates": [
+                "undefined"
+            ],
             "type_of_replicates": null
         }
     ],
-    "updated_at": "2025-05-01 11:24:37"
+    "updated_at": "2025-05-07 00:07:40"
 }

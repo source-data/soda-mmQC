@@ -3,8 +3,12 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 4",
-            "type_of_replicates": "- independent experiments"
+            "number_of_replicates": [
+                "4"
+            ],
+            "type_of_replicates": [
+                "independent experiments"
+            ]
         },
         {
             "panel_label": "B",
@@ -15,8 +19,12 @@
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- independent experiments"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "independent experiments"
+            ]
         },
         {
             "panel_label": "D",
@@ -27,8 +35,12 @@
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- independent experiments"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "independent experiments"
+            ]
         },
         {
             "panel_label": "F",
@@ -39,20 +51,32 @@
         {
             "panel_label": "G",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 2 ",
-            "type_of_replicates": "- technical replicates"
+            "number_of_replicates": [
+                "2"
+            ],
+            "type_of_replicates": [
+                "technical replicates"
+            ]
         },
         {
             "panel_label": "H",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 2",
-            "type_of_replicates": "- technical replicates"
+            "number_of_replicates": [
+                "2"
+            ],
+            "type_of_replicates": [
+                "technical replicates"
+            ]
         },
         {
             "panel_label": "I",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- technical replicates"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "technical replicates"
+            ]
         },
         {
             "panel_label": "J",
@@ -63,9 +87,13 @@
         {
             "panel_label": "K",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- technical replicates"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "technical replicates"
+            ]
         }
     ],
-    "updated_at": "2025-05-02 09:54:46"
+    "updated_at": "2025-05-07 00:12:38"
 }

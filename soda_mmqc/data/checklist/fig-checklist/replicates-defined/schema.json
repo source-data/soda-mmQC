@@ -20,24 +20,27 @@
                                 "description": "Whether the experiment involves replicates"
                             },
                             "number_of_replicates": {
-                                "type": "string",
-                                "description": "Number of replicates"
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "Number of replicates"
+                                },
+                                "description": "List of the number of replicates for each type of replicates"
                             },
                             "type_of_replicates": {
-                                "type": "string",
-                                "description": "Nature of the replicates"
-                            },
-                            "from_the_caption": {
-                                "type": "string",
-                                "description": "Extracted text explaining the nature of the replicates"
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "The replicated things"
+                                },
+                                "description": "List of the replicated things"
                             } 
                         },
                         "required": [
                             "panel_label",
                             "involves_replicates",
                             "number_of_replicates",
-                            "type_of_replicates",
-                            "from_the_caption"
+                            "type_of_replicates"
                         ],
                         "additionalProperties": false
                     }

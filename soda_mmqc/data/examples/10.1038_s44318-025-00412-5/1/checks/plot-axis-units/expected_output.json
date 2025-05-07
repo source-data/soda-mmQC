@@ -164,13 +164,6 @@
                     "definition": "Time is indicated on the x-axis in hours [h]."
                 }
             ]
-        },
-        {
-            "panel_label": null,
-            "is_a_plot": null,
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
         }
     ],
     "updated_at": "2025-05-02 09:45:18"

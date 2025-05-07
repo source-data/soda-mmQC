@@ -15,8 +15,12 @@
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 2",
-            "type_of_replicates": "- biological replicates"
+            "number_of_replicates": [
+                "2"
+            ],
+            "type_of_replicates": [
+                "biological replicates"
+            ]
         },
         {
             "panel_label": "D",
@@ -27,8 +31,12 @@
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 4",
-            "type_of_replicates": "- mice"
+            "number_of_replicates": [
+                "4"
+            ],
+            "type_of_replicates": [
+                "mice"
+            ]
         },
         {
             "panel_label": "F",
@@ -61,5 +69,5 @@
             "type_of_replicates": null
         }
     ],
-    "updated_at": "2025-05-01 22:18:31"
+    "updated_at": "2025-05-07 00:12:28"
 }

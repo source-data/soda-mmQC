@@ -3,39 +3,75 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 5912",
-            "type_of_replicates": "- Drosophila promoters"
+            "number_of_replicates": [
+                "5912"
+            ],
+            "type_of_replicates": [
+                "Drosophila promoters"
+            ]
         },
         {
             "panel_label": "B",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 2952",
-            "type_of_replicates": "- DNA single molecules"
+            "number_of_replicates": [
+                "2952"
+            ],
+            "type_of_replicates": [
+                "DNA single molecules"
+            ]
         },
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 6122",
-            "type_of_replicates": "- Drosophila promoters"
+            "number_of_replicates": [
+                "6122"
+            ],
+            "type_of_replicates": [
+                "Drosophila promoters"
+            ]
         },
         {
             "panel_label": "D",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 2871",
-            "type_of_replicates": "- DNA single molecules"
+            "number_of_replicates": [
+                "2871"
+            ],
+            "type_of_replicates": [
+                "DNA single molecules"
+            ]
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 572\n- \u200964\n- 422\n- \u200971",
-            "type_of_replicates": "- mouse TATA-less promoters\n- mouse TATA-containing promoters\n- Drosophila TATA-less 422 promoters\n- TATA-containing promoters"
+            "number_of_replicates": [
+                "572",
+                "\u200964",
+                "422",
+                "\u200971"
+            ],
+            "type_of_replicates": [
+                "mouse TATA-less promoters",
+                "mouse TATA-containing promoters",
+                "Drosophila TATA-less 422 promoters",
+                "TATA-containing promoters"
+            ]
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 572\n- \u200964\n- 422\n- \u200971",
-            "type_of_replicates": "- mouse TATA-less promoters\n- mouse TATA-containing promoters\n- Drosophila TATA-less 422 promoters\n- TATA-containing promoters"
+            "number_of_replicates": [
+                "572",
+                "\u200964",
+                "422",
+                "\u200971"
+            ],
+            "type_of_replicates": [
+                "mouse TATA-less promoters",
+                "mouse TATA-containing promoters",
+                "Drosophila TATA-less 422 promoters",
+                "TATA-containing promoters"
+            ]
         }
     ],
-    "updated_at": "2025-05-02 17:00:31"
+    "updated_at": "2025-05-07 00:14:01"
 }

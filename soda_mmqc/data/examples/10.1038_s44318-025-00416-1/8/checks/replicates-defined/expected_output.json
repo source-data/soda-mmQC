@@ -3,26 +3,42 @@
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- biological replicates"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "biological replicates"
+            ]
         },
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": "- 3",
-            "type_of_replicates": "- biological replicates"
+            "number_of_replicates": [
+                "3"
+            ],
+            "type_of_replicates": [
+                "biological replicates"
+            ]
         },
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 187-240",
-            "type_of_replicates": "- patients"
+            "number_of_replicates": [
+                "187-240"
+            ],
+            "type_of_replicates": [
+                "patients"
+            ]
         },
         {
             "panel_label": "D",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 65-73",
-            "type_of_replicates": "- patients"
+            "number_of_replicates": [
+                "65-73"
+            ],
+            "type_of_replicates": [
+                "patients"
+            ]
         },
         {
             "panel_label": "E",
@@ -49,5 +65,5 @@
             "type_of_replicates": null
         }
     ],
-    "updated_at": "2025-05-01 11:16:05"
+    "updated_at": "2025-05-07 00:11:49"
 }

@@ -15,19 +15,29 @@
         {
             "panel_label": "C",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 8\u201318",
-            "type_of_replicates": "- mice"
+            "number_of_replicates": [
+                "8\u201318"
+            ],
+            "type_of_replicates": [
+                "mice"
+            ]
         },
         {
             "panel_label": "D",
             "involves_replicates": "yes",
-            "number_of_replicates": "- 24\u201327",
-            "type_of_replicates": "- mice"
+            "number_of_replicates": [
+                "24\u201327"
+            ],
+            "type_of_replicates": [
+                "mice"
+            ]
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": "- undefined",
+            "number_of_replicates": [
+                "undefined"
+            ],
             "type_of_replicates": null
         },
         {
@@ -43,5 +53,5 @@
             "type_of_replicates": null
         }
     ],
-    "updated_at": "2025-05-01 11:11:18"
+    "updated_at": "2025-05-06 22:58:38"
 }
