@@ -4,9 +4,18 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
-from soda_mmqc.config import get_schema_path, get_evaluation_path, get_plots_path
+from soda_mmqc.config import (
+    get_schema_path, get_evaluation_path, get_plots_path,
+    get_content_path, get_image_path, get_caption_path
+)
 from soda_mmqc import logger
-
+from typing import Dict, Any
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import matplotlib.gridspec as gridspec
+from collections import defaultdict
+from IPython.display import display, HTML
+import base64
 
 def load_schema(checklist_name, check_name):
     """Load the schema for a check from the checklist directory.
@@ -67,179 +76,173 @@ def load_analysis_results(checklist_name, check_name):
     return {}
 
 
-def prepare_data_for_plotting(results_by_prompt):
+def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame:
     """Convert the results into a pandas DataFrame for plotting.
     
     Args:
         results_by_prompt: Dictionary mapping prompt names to their analysis results
-        features: List of feature names to plot
         
     Returns:
-        DataFrame with columns: feature, metric, prompt, mean, std
+        DataFrame with columns: feature, metric, prompt, mean, std, precision, recall, f1_score
     """
-
-    
     metrics = ['exact_match', 'semantic_similarity', 'BLEU']
     logger.debug(f"Processing data for metrics: {metrics}")
     
     # Create a list to store all data points
     data_points = []
-    # {
-    # "prompt.1": [
-    #     {
-    #         "doi": "10.1038_emboj.2009.312",
-    #         "figure_id": "1",
-    #         "analysis": {
-    #             "exact_match": {
-    
+
     for prompt_name, results in results_by_prompt.items():
         logger.debug(f"Processing prompt: {prompt_name}")
         for metric in metrics:
             if not results or metric not in results[0]['analysis']:
                 continue
 
-            # Get the overall score for this metric across all examples
-            overall_scores = []
-            field_scores = {}
-            # The structure of the data is as follows:
-            # "analysis": {
-            #     "exact_match": {
-            #         "score": 0.6875,
-            #         "errors": [],
-            #         "field_scores": {
-            #             "element_0": {
-            #                 "score": 1.0,
-            #                 "errors": [],
-            #                 "field_scores": {
-            #                     "panel_label": {
-            #                         "score": 1.0,
-            #                         "errors": [],
-            #                         "field_scores": {
-            #                             "value": {
-            #                                 "score": 1.0,
-            #                                 "errors": [],
-            #                                 "field_scores": {}
-            #                             }
-            #                         }
-            #                     },
-            #                     "involves_replicates": {
-            #                         "score": 1.0,
-            #                         "errors": [],
-            #                         "field_scores": {
-            #                             "value": {
-            #                                 "score": 1.0,
-            #                                 "errors": [],
-            #                                 "field_scores": {}
-            #                             }
-            #                         }
-            #                     },
-            for result in results:
-                # 1 result per figure
-                # several outputs per figure (one per panel)
-
-                if 'analysis' not in result or metric not in result['analysis']:
+            for figure in results:
+                doi = figure['doi']
+                figure_id = figure['figure_id']
+                if 'analysis' not in figure or metric not in figure['analysis']:
                     continue
                 
-                analysis = result['analysis'][metric]
-
-                # Get overall score for this figure if available
-                if 'score' in analysis:
-                    overall_scores.append(analysis['score'])
-                
-                # Get field scores from each output
-                if 'field_scores' in analysis:
-                    for output_key, output_data in analysis['field_scores'].items():
-                        # one output per panel
-                        if 'field_scores' in output_data:
-                            for field_name, field_data in output_data['field_scores'].items():
-                                # each field is a "feature" or one of the "tasks" that makes up the check
-                                # Get the score from the field_scores.value
-                                if 'score' in field_data:
-                                    if field_name not in field_scores:
-                                        field_scores[field_name] = []
-                                    field_scores[field_name].append(
-                                        field_data['score']
-                                    )
-            
-            # Calculate statistics for overall score over all figures
-            if overall_scores:
-                data_points.append({
-                    'feature': 'overall',
-                    'metric': metric,
-                    'prompt': prompt_name,
-                    'mean': np.mean(overall_scores),  # mean over the figures
-                    'std': np.std(overall_scores)
-                })
-            
-            # Calculate statistics for each field over all panels
-            for feature, scores in field_scores.items():
-                if scores:  # Only add if we have scores for this feature
-                    data_points.append({
-                        'feature': feature,
+                figure_analysis = figure['analysis'][metric]
+                # data structure for one model output corresponding to one figure::
+                # "analysis": {
+                #     "exact_match": {
+                #         "score": 0.5,
+                #         "errors": [],
+                #         "field_scores": {
+                #             "element_0": {
+                #                 "score": 1.0,
+                #                 "errors": [],
+                #                 "field_scores": {
+                #                     "panel_label": {
+                #                         "score": 1.0,
+                #                         "errors": [],
+                #                         "field_scores": {
+                #                             "value": 1.0
+                #                         },
+                #                         "true_positives": 1
+                #                     },
+                #                     "error_bar_on_figure": {
+                #                         "score": 1.0,
+                #                         "errors": [],
+                #                         "field_scores": {
+                #                             "value": 1.0
+                #                         },
+                #                         "true_positives": 1
+                #                     },
+                #                     "error_bar_defined_in_caption": {
+                #                         "score": 1.0,
+                #                         "errors": [],
+                #                         "field_scores": {
+                #                             "value": 1.0
+                #                         },
+                #                         "true_positives": 1
+                #                     },
+                #                     "from_the_caption": {
+                #                         "score": 1.0,
+                #                         "errors": [],
+                #                         "field_scores": {
+                #                             "value": 1.0
+                #                         },
+                #                         "true_positives": 1
+                #                     }
+                #                 },
+                #                 "std_score": 0.0,
+                #                 "true_positives": 4,
+                #                 "false_positives": 0,
+                #                 "false_negatives": 0,
+                #                 "precision": 1.0,
+                #                 "recall": 1.0,
+                #                 "f1_score": 1.0
+                #             }
+                #         },
+                #         "std_score": 0.13055824196677338,
+                #         "true_positives": 42,
+                #         "false_positives": 6,
+                #         "false_negatives": 0,
+                #         "precision": 0.875,
+                #         "recall": 1.0,
+                #         "f1_score": 0.9333333333333333,
+                #         "detailed_scores": {
+                #             "panel_label": {
+                #                 "avg_score": 1.0,
+                #                 "std_score": 0.0,
+                #                 "num_matches": 12,
+                #                 "num_false_negatives": 0,
+                #                 "num_false_positives": 0,
+                #                 "precision": 1.0,
+                #                 "recall": 1.0,
+                #                 "f1_score": 1.0
+                #             }
+                #         }
+                #     }
+                # }
+                try:
+                    # Get overall score for this figure if available
+                    new_data_point = {
+                        'doi': doi,
+                        'figure_id': figure_id,
+                        'panel_id': None,
+                        'aggregation_level': 'figure',
                         'metric': metric,
                         'prompt': prompt_name,
-                        'mean': np.mean(scores),
-                        'std': np.std(scores)
-                    })
+                        'score': figure_analysis.get('score', None),
+                        'std_score': figure_analysis.get('std_score', None),
+                        'precision': figure_analysis.get('precision', None),
+                        'recall': figure_analysis.get('recall', None),
+                        'f1_score': figure_analysis.get('f1_score', None)
+                    }
+                    detailed_scores = {}
+                    for field, field_scores in figure_analysis['detailed_scores'].items():
+                        detailed_scores[field] = {
+                            'avg_score': field_scores.get('avg_score', None),
+                            'std_score': field_scores.get('std_score', None),
+                            'num_matches': field_scores.get('num_matches', None),
+                            'num_false_negatives': field_scores.get('num_false_negatives', None),
+                            'num_false_positives': field_scores.get('num_false_positives', None),
+                            'precision': field_scores.get('precision', None),
+                            'recall': field_scores.get('recall', None),
+                            'f1_score': field_scores.get('f1_score', None)
+                        }
+                    new_data_point['detailed_scores'] = detailed_scores
+                    data_points.append(new_data_point)
+                except Exception as e:
+                    logger.error(f"Error processing figure {figure_id}: {e}")
+                    continue
+
+                try:
+                    for panel, panel_analysis in figure_analysis['field_scores'].items():
+                        new_data_point = {
+                            'doi': doi,
+                            'figure_id': figure_id,
+                            'panel_id': panel,
+                            'aggregation_level': 'panel',
+                            'metric': metric,
+                            'prompt': prompt_name,
+                            'score': panel_analysis.get('score', None),
+                            'std_score': panel_analysis.get('std_score', None),
+                            'precision': panel_analysis.get('precision', None),
+                            'recall': panel_analysis.get('recall', None),
+                            'f1_score': panel_analysis.get('f1_score', None)
+                        }
+                        task_scores = {}
+                        for task, task_analysis in panel_analysis['field_scores'].items():
+                            task_scores[task] = {
+                                'score': task_analysis.get('score', None),
+                                'true_positives': task_analysis.get('true_positives', None),
+                                'false_positives': task_analysis.get('false_positives', None),
+                                'false_negatives': task_analysis.get('false_negatives', None)
+                            }
+                        new_data_point['task_scores'] = task_scores
+                        data_points.append(new_data_point)
+                except Exception as e:
+                    logger.error(f"Error processing panel {panel}: {e}")
+                    continue
     
     # Convert to DataFrame
     df = pd.DataFrame(data_points)
     logger.debug(f"Created DataFrame with {len(df)} data points")
     return df
-
-
-def create_multipanel_chart(df, output_dir, check_name):
-    """Create a multipanel bar chart with one panel for each feature.
-    
-    Args:
-        df: DataFrame with columns: feature, metric, prompt, mean, std
-        output_dir: Directory to save the output file
-        check_name: Name of the check (e.g., 'error-bars-defined')
-    """
-    # Get unique features
-    features = df['feature'].unique()
-    logger.debug(f"Creating multipanel chart for features: {features}")
-
-    # Create a combined figure with subplots
-    fig = px.bar(
-        df,
-        x='metric',
-        y='mean',
-        color='prompt',
-        error_y='std',
-        facet_row='feature',
-        title=f'Tasklist "{check_name.replace("-", " ").title()}" Performance',
-        labels={
-            'mean': 'Score',
-            'metric': 'Metric',
-            'prompt': 'Prompt'
-        },
-        barmode='group',
-        color_discrete_sequence=px.colors.qualitative.Set1
-    )
-    
-    # Update layout
-    fig.update_layout(
-        height=300 * len(features),
-        width=1200,
-        template='plotly_white',
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1
-        )
-    )
-    
-    # Update y-axis for all subplots
-    for i in range(1, len(features) + 1):
-        fig.update_yaxes(range=[0, 1], row=i, col=1)
-    
-    # Save the combined figure
-    output_path = Path(output_dir) / f'{check_name}_combined_scores.html'
-    fig.write_html(str(output_path))
-    logger.info(f"Combined visualization saved to {output_path}")
 
 
 def get_checks_for_checklist(checklist_name):
@@ -268,72 +271,48 @@ def get_checks_for_checklist(checklist_name):
     return checks
 
 
-def process_check(checklist_name, check_name, output_dir):
-    """Process a single check and create its visualizations.
+def get_check_data(checklist_name, check_name) -> pd.DataFrame | None:
+    """Get data for all checks in a checklist.
     
     Args:
         checklist_name: Name of the checklist (e.g., 'mini')
         check_name: Name of the check (e.g., 'error-bars-defined')
-        output_dir: Path object for the output directory
-        
     Returns:
-        bool: True if visualization was created successfully, False otherwise
+        List of DataFrames, one for each check
     """
-    logger.info(f"Processing check: {check_name}")
-    
-    # Load schema and get features
+
     try:
-        schema = load_schema(checklist_name, check_name)
-        features = get_features_from_schema(schema)
-        logger.debug(f"Loaded schema and found features: {features}")
-    except ValueError as e:
-        logger.error(f"Error loading schema: {e}")
-        return False
+        results = load_analysis_results(checklist_name, check_name)
+    except Exception as e:
+        logger.error(f"Error loading analysis results for check {check_name}: {e}")
+        return None
+
+    try:
+        df = prepare_data_for_plotting(results)
+    except Exception as e:
+        logger.error(f"Error preparing data for check {check_name}: {e}")
+        return None
     
-    # Load and process results
-    results_by_prompt = load_analysis_results(checklist_name, check_name)
-    if not results_by_prompt:
-        logger.warning(f"No results found for check: {check_name}")
-        return False
-
-    df = prepare_data_for_plotting(results_by_prompt)
-    if df.empty:
-        logger.warning(f"No data to plot for check: {check_name}")
-        return False
-
-    # Create visualization
-    create_multipanel_chart(df, output_dir, check_name)
-    return True
+    if not df.empty:
+        df['check'] = check_name
+        return df
+    else:
+        logger.warning(f"No data found for check {check_name}")
+        return None
 
 
-def create_checklist_report(checklist_name, output_dir):
-    """Create a single report for all checks in a checklist.
-    
-    Args:
-        checklist_name: Name of the checklist (e.g., 'mini')
-        output_dir: Directory to save the output file
-    """
-    # Get all checks for this checklist
-    checks = get_checks_for_checklist(checklist_name)
-    if not checks:
-        logger.warning(f"No checks found for checklist: {checklist_name}")
-        return
-
-    logger.info(f"Processing {len(checks)} checks for checklist: {checklist_name}")
-    # Process each check
-    for check_name in checks:
-        process_check(checklist_name, check_name, output_dir)
-
-
-def create_global_checklist_visualization(checklist_name, output_dir):
+def global_checklist_visualization(checklist_name, output_dir=None, metric="semantic_similarity"):
     """Create a comprehensive visualization of all checks in a checklist.
     
     Args:
         checklist_name: Name of the checklist (e.g., 'mini')
         output_dir: Directory to save the output file
+        metric: Metric to visualize
     """
     # Get all checks for this checklist
+ 
     checks = get_checks_for_checklist(checklist_name)
+
     if not checks:
         logger.warning(f"No checks found for checklist: {checklist_name}")
         return
@@ -341,105 +320,386 @@ def create_global_checklist_visualization(checklist_name, output_dir):
     logger.info(f"Creating global visualization for {len(checks)} checks")
     
     # Collect data from all checks
-    all_data = []
+    data = []
     for check_name in checks:
-        try:
-            results = load_analysis_results(checklist_name, check_name)
+        df = get_check_data(checklist_name, check_name)
+        if df is not None:
+            data.append(df)
             
-            if not results:
-                continue
-                
-            df = prepare_data_for_plotting(results)
-            if not df.empty:
-                df['check'] = check_name
-                all_data.append(df)
-                
-        except Exception as e:
-            logger.error(f"Error processing check {check_name}: {e}")
-            continue
-    
-    if not all_data:
-        logger.warning("No data collected for visualization")
+    if not data:
+        logger.warning(f"No data found for checklist: {checklist_name}")
         return
-        
-    # Combine all data
-    combined_df = pd.concat(all_data, ignore_index=True)
-    
-    # Get unique metrics
-    metrics = combined_df['metric'].unique()
-    
-    # Create a separate plot for each metric
-    for metric in metrics:
-        metric_df = combined_df[combined_df['metric'] == metric]
-        overall_scores = metric_df[metric_df['feature'] == 'overall']
-        feature_scores = metric_df[metric_df['feature'] != 'overall']
-        prompts = list(overall_scores['prompt'].unique())
-        checks = list(overall_scores['check'].unique())
-        color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
-        fig = go.Figure()
-        # Add bars for each prompt
-        for prompt in prompts:
-            prompt_bars = overall_scores[overall_scores['prompt'] == prompt]
-            fig.add_trace(go.Bar(
-                x=prompt_bars['check'],
-                y=prompt_bars['mean'],
-                # error_y=dict(type='data', array=prompt_bars['std']),
-                name=prompt,
-                marker_color=color_map[prompt],
-                offsetgroup=prompt,
-                legendgroup=prompt,
-                showlegend=True,
-            ))
-        # Add feature points for each prompt
-        for prompt in prompts:
-            prompt_points = feature_scores[feature_scores['prompt'] == prompt]
-            fig.add_trace(go.Scatter(
-                x=prompt_points['check'],
-                y=prompt_points['mean'],
-                mode='markers',
-                name=f'{prompt} tasks',
-                marker=dict(size=10, color=color_map[prompt], opacity=0.7, line=dict(width=1, color='white')),
-                legendgroup=prompt,
-                showlegend=True,
-                customdata=prompt_points['feature'],
-                hovertemplate=f"Task: %{{customdata}}<br>Score: %{{y:.2f}}<extra>{prompt}</extra>",
-            ))
 
-        fig.update_layout(
-            barmode='group',
-            height=600,
-            width=1200,
-            showlegend=True,
-            title=(
-                f'Benchmarking "{checklist_name.title()}"<br>'
-                f'({metric.replace("_", " ").title()})'
+    # Combine all data
+    df = pd.concat(data, ignore_index=True)
+    
+    # Check that chosen metrics is available
+    if metric not in df['metric'].unique():
+        logger.warning(f"Metric {metric} not found in data")
+        return
+
+    prompts = list(df['prompt'].unique())
+    checks = list(df['check'].unique())
+    
+    color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
+    
+    plot = go.Figure()
+
+    # Add scatter plots for each prompt
+    for i, prompt in enumerate(prompts):
+        logger.info(f"Creating plot for prompt: {prompt}...")
+        # Filter data for this prompt and metric
+        plotting_panel_data = df.loc[
+            (df['prompt'] == prompt) &
+            (df['metric'] == metric) &
+            (df['aggregation_level'] == 'panel')
+        ]
+        
+        # Add a small offset to x-coordinates to prevent overlapping
+        x_offset = (i - (len(prompts) - 1) / 2) * 0.2
+        # Create numerical x-positions by mapping checks to numbers and adding offset
+        check_to_num = {check: j for j, check in enumerate(checks)}
+        x_positions = plotting_panel_data['check'].map(check_to_num) + x_offset
+        
+        plot.add_trace(go.Scatter(
+            x=x_positions,
+            y=plotting_panel_data['score'],
+            mode='markers',
+            name=prompt,
+            marker=dict(
+                color=color_map[prompt],
+                size=8,
+                opacity=0.7,
+                line=dict(width=1, color='white')
             ),
-            title_x=0.5,
-            title_font_size=24,
-            template='plotly_dark',
-            xaxis=dict(title='Check', tickangle=45, categoryorder='array', categoryarray=checks),
-            yaxis=dict(title='Score', range=[0, 1.1]),
-        )
-        fig.update_traces(
-            hovertemplate="<br>".join([
-                "Check: %{x}",
-                "Score: %{y:.2f}",
-                "<extra></extra>"
-            ]),
-            selector=dict(type='bar')
-        )
+            showlegend=True,
+            hovertext=plotting_panel_data['doi'] + ' ' + plotting_panel_data['figure_id'] + ' ' + plotting_panel_data['panel_id']
+        ))
+        average_score = plotting_panel_data.groupby('check')['score'].mean().reset_index()
+        x_positions = average_score['check'].map(check_to_num) + x_offset
+        plot.add_trace(go.Bar(
+            x=x_positions,
+            y=average_score['score'],  # Use just the score column
+            name=prompt,
+            marker_color=color_map[prompt],
+            showlegend=True,
+            width=0.2,  # Control the width of the bars
+            hovertext=[
+                f"Check: {check}<br>Average Score: {score:.3f}<br>Prompt: {prompt}" 
+                for check, score in zip(average_score['check'], average_score['score'])
+            ]
+        ))
+
+    plot.update_layout(
+        height=600,
+        width=1200,
+        title=(
+            f'Benchmarking "{checklist_name.title()}"<br>'
+            f'({metric.replace("_", " ").title()})'
+        ),
+        title_x=0.5,
+        title_font_size=24,
+        template='plotly_dark',
+        xaxis=dict(
+            title='Check',
+            tickangle=45,
+            ticktext=checks,
+            tickvals=list(range(len(checks))),
+            range=[-0.5, len(checks) - 0.5]  # Add some padding on the sides
+        ),
+        yaxis=dict(
+            title='Score',
+            range=[0, 1.1]  # Adjusted range since scores are typically between 0 and 1
+        ),
+        barmode='group',
+        # boxmode='group',  # This ensures boxes are grouped by check
+        # boxgap=0.1,  # Controls spacing between boxes in the same group
+        # boxgroupgap=0.3  # Controls spacing between different groups
+    )
+    
+    if output_dir:
         output_path = Path(output_dir) / f'{checklist_name}_{metric}_analysis.html'
-        fig.write_html(str(output_path))
+        plot.write_html(str(output_path))
         logger.info(f"Visualization for {metric} saved to {output_path}")
+
+    return plot
+
+
+def remap_task_scores_to_df(plotting_data):
+    """
+    Remap a DataFrame with a 'task_scores' column (containing dicts) into a flat DataFrame.
+    Args:
+        task_data (pd.DataFrame): DataFrame with columns ['doi', 'figure_id', 'panel_id', 'task_scores']
+    Returns:
+        pd.DataFrame: DataFrame with columns ['doi', 'figure_id', 'panel_id', 'task', 'score', 'true_positives', 'false_positives', 'false_negatives']
+    """
+    task_data = plotting_data[['doi', 'figure_id', 'panel_id', 'task_scores']]
+    remapped_task_data = pd.DataFrame(columns=[
+        'doi', 'figure_id', 'panel_id', 'task', 'score', 'true_positives', 'false_positives', 'false_negatives'
+    ])
+    for j, row in task_data.iterrows():
+        task_scores = row['task_scores']
+        for key, value in task_scores.items():
+            remapped_task_data.loc[len(remapped_task_data)] = {
+                'doi': row['doi'],
+                'figure_id': row['figure_id'],
+                'panel_id': row['panel_id'],
+                'task': key,
+                'score': value['score'],
+                'true_positives': value['true_positives'],
+                'false_positives': value['false_positives'],
+                'false_negatives': value['false_negatives']
+            }
+    return remapped_task_data
+
+
+def check_specific_plot(checklist_name, check_name, output_dir=None, metric="semantic_similarity"):
+    """Create a visualization of a specific check in a checklist.
     
-    # Create a summary statistics table
-    summary_df = combined_df.groupby(['check', 'metric', 'feature']).agg({
-        'mean': ['mean', 'std', 'min', 'max']
-    }).round(3)
+    Args:
+        checklist_name: Name of the checklist (e.g., 'mini')
+        check_name: Name of the check (e.g., 'error-bars-defined')
+        output_dir: Directory to save the output file
+        metric: Metric to visualize
+    """
+
+    # Get data for this check
+    df = get_check_data(checklist_name, check_name)
+    if df is None:
+        logger.warning(f"No data found for check {check_name}")
+        return  
     
-    # Save summary statistics
-    summary_path = Path(output_dir) / f'{checklist_name}_summary_stats.csv'
-    summary_df.to_csv(summary_path)
-    logger.info(f"Summary statistics saved to {summary_path}")
+    # Check that chosen metrics is available
+    if metric not in df['metric'].unique():
+        logger.warning(f"Metric {metric} not found in data")
+        return
     
-    return summary_df 
+    prompts = list(df['prompt'].unique())
+    color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
+    
+    plot = go.Figure()
+    
+    # scatter plot and bar chart for each tasks of the check
+    for i, prompt in enumerate(prompts):
+        logger.info(f"Creating plot for prompt: {prompt}...")
+        plotting_data = df.loc[
+            (df['prompt'] == prompt) &
+            (df['metric'] == metric) &
+            (df['aggregation_level'] == 'panel')
+        ]
+        
+        remapped_task_data = remap_task_scores_to_df(plotting_data)
+        tasks = list(remapped_task_data['task'].unique())
+
+        # Add a small offset to x-coordinates to prevent overlapping
+        x_offset = (i - (len(prompts) - 1) / 2) * 0.2
+        # Create numerical x-positions by mapping checks to numbers and adding offset
+        cat_to_num = {task: j for j, task in enumerate(tasks)}
+        x_positions = remapped_task_data['task'].map(cat_to_num) + x_offset
+        plot.add_trace(go.Scatter(
+            x=x_positions,
+            y=remapped_task_data['score'],
+            name=prompt,  # Use prompt name instead of task column
+            mode='markers',
+            marker=dict(
+                color=color_map[prompt],
+                size=8,
+                opacity=0.7,
+                line=dict(width=1, color='white')
+            ),
+            showlegend=True,
+            hovertext=remapped_task_data['doi'] + ' fig. ' + remapped_task_data['figure_id'] + ' ' + remapped_task_data['panel_id']
+        ))
+        
+        average_score = remapped_task_data.groupby('task')['score'].mean().reset_index()
+        std_score = remapped_task_data.groupby('task')['score'].std().reset_index()
+        x_positions = average_score['task'].map(cat_to_num) + x_offset
+        # Add a bar chart for each task
+        plot.add_trace(go.Bar(
+            x=x_positions,
+            y=average_score['score'],
+            name=prompt,
+            error_y=dict(
+                type='data',
+                array=std_score['score'],
+                visible=True
+            ),
+            marker_color=color_map[prompt],
+            showlegend=True,
+            width=0.2,  # Control the width of the bars
+            hovertext=[
+                f"Task: {task}<br>Score: {score:.3f}<br>Prompt: {prompt}" 
+                for task, score in zip(remapped_task_data['task'], average_score['score'])
+            ]
+        ))
+        
+        plot.update_layout(
+            title=f'{check_name.replace("_", " ").title()} - {metric.replace("_", " ").title()}',
+            xaxis=dict(
+                title='Task',
+                tickangle=45,
+                ticktext=tasks,
+                tickvals=list(range(len(tasks))),
+                range=[-0.5, len(tasks) - 0.5]  # Add some padding on the sides
+            ),
+            yaxis_title='Score',
+            boxmode='group',  # Group boxes by task
+            showlegend=True,
+            template='plotly_dark'
+        )
+
+    return plot
+
+
+def check_specific_report(checklist_name, check_name, output_dir=None, metric="semantic_similarity", k=3):
+    """Create a comprehensive report of a specific check in a checklist.
+    
+    Args:
+        checklist_name: Name of the checklist (e.g., 'mini')
+        check_name: Name of the check (e.g., 'error-bars-defined')
+        output_dir: Directory to save the output file
+        metric: Metric to visualize
+        k: Number of worst panels to consider per task
+    """
+    
+    df = get_check_data(checklist_name, check_name)
+    if df is None:
+        logger.warning(f"No data found for check {check_name}")
+        return
+    prompts = list(df['prompt'].unique())
+    all_panels = df[df['aggregation_level'] == 'panel']
+    tasks = list(all_panels.iloc[0]["task_scores"].keys())
+
+    # Aggregate problematic figures and panels
+    problematic_figures = defaultdict(lambda: {'panel_tasks': defaultdict(set)})
+    for task in tasks:
+        for prompt in prompts:
+            panel_level_data = df[
+                (df['metric'] == metric) &
+                (df['prompt'] == prompt) &
+                (df['aggregation_level'] == 'panel')
+            ]
+            remapped_task_data = remap_task_scores_to_df(panel_level_data)
+            task_data = remapped_task_data[remapped_task_data['task'] == task]
+            worst_panels = task_data.sort_values(by='score', ascending=True).head(k)
+            for _, row in worst_panels.iterrows():
+                fig_key = (row['doi'], row['figure_id'])
+                problematic_figures[fig_key]['panel_tasks'][row['panel_id']].add(task)
+
+    # For each unique figure, create a multiplot page
+    for (doi, figure_id), info in problematic_figures.items():
+        figure_dict = {'doi': doi, 'figure_id': figure_id}
+        image_path = get_image_path(figure_dict)
+        caption_path = get_caption_path(figure_dict)
+        if image_path is None or not image_path.exists():
+            continue
+        if caption_path.exists():
+            with open(caption_path, 'r') as f:
+                caption = f.read()
+        else:
+            caption = "(No caption found)"
+        # Prepare table data
+        table_data = [(panel, ', '.join(sorted(tasks))) for panel, tasks in info['panel_tasks'].items()]
+        col_labels = ['Panel', 'Problematic Tasks']
+        # Create figure
+        fig = plt.figure(figsize=(8.3, 11.7))
+        gs = gridspec.GridSpec(2, 3, height_ratios=[2, 1], width_ratios=[7, 2.5, 0.5])
+        # Image (left, larger)
+        ax_img = fig.add_subplot(gs[0, 0])
+        img = mpimg.imread(str(image_path))
+        ax_img.imshow(img)
+        ax_img.set_anchor('N')
+        ax_img.axis('off')
+        # Caption using fig.text in figure coordinates
+        fig.text(0.15, 1.0, caption, ha='left', va='top', wrap=True, fontsize=6,
+                 bbox=dict(facecolor='none', edgecolor='blue', pad=10))
+        # Table (bottom, spanning all columns)
+        ax_table = fig.add_subplot(gs[1, :])
+        ax_table.axis('off')
+        table = ax_table.table(cellText=table_data, colLabels=col_labels, loc='center')
+        table.auto_set_font_size(False)
+        table.set_fontsize(7)
+        table.scale(1.0, 1.0)  # Make table more narrow and compact
+        fig.suptitle(f"{doi} - {figure_id}", fontsize=16)
+        plt.tight_layout(rect=[0, 0, 1, 0.96])
+        if output_dir:
+            output_path = Path(output_dir) / f'{check_name}_{doi}_{figure_id}_report.png'
+            plt.savefig(output_path, bbox_inches='tight')
+            logger.info(f"Matplotlib report saved to {output_path}")
+            plt.close(fig)
+        else:
+            plt.show()
+        break
+
+
+def check_specific_report_html(checklist_name, check_name, k=3):
+    """Display a comprehensive report of a specific check in a checklist as HTML in a notebook.
+    Args:
+        checklist_name: Name of the checklist (e.g., 'mini')
+        check_name: Name of the check (e.g., 'error-bars-defined')
+        k: Number of worst panels to consider per task
+    """
+    df = get_check_data(checklist_name, check_name)
+    if df is None:
+        logger.warning(f"No data found for check {check_name}")
+        return
+    prompts = list(df['prompt'].unique())
+    all_panels = df[df['aggregation_level'] == 'panel']
+    tasks = list(all_panels.iloc[0]["task_scores"].keys())
+
+    # Aggregate problematic figures and panels
+    problematic_figures = defaultdict(lambda: {'panel_tasks': defaultdict(set)})
+    for task in tasks:
+        for prompt in prompts:
+            panel_level_data = df[
+                (df['metric'] == 'semantic_similarity') &
+                (df['prompt'] == prompt) &
+                (df['aggregation_level'] == 'panel')
+            ]
+            remapped_task_data = remap_task_scores_to_df(panel_level_data)
+            task_data = remapped_task_data[remapped_task_data['task'] == task]
+            worst_panels = task_data.sort_values(by='score', ascending=True).head(k)
+            for _, row in worst_panels.iterrows():
+                fig_key = (row['doi'], row['figure_id'])
+                problematic_figures[fig_key]['panel_tasks'][row['panel_id']].add(task)
+
+    for (doi, figure_id), info in problematic_figures.items():
+        figure_dict = {'doi': doi, 'figure_id': figure_id}
+        image_path = get_image_path(figure_dict)
+        caption_path = get_caption_path(figure_dict)
+        if image_path is None or not image_path.exists():
+            continue
+        if caption_path.exists():
+            with open(caption_path, 'r') as f:
+                caption = f.read()
+        else:
+            caption = "(No caption found)"
+        # Prepare table data
+        table_rows = ""
+        for panel, tasks_set in info['panel_tasks'].items():
+            tasks_str = ', '.join(sorted(tasks_set))
+            table_rows += f"<tr><td>{panel}</td><td>{tasks_str}</td></tr>"
+        table_html = f"""
+        <table style='border-collapse: collapse; width: 80%; margin: 20px;'>
+            <tr><th>Panel</th><th>Problematic Tasks</th></tr>
+            {table_rows}
+        </table>
+        """
+        # Image as base64
+        with open(image_path, 'rb') as img_f:
+            img_b64 = base64.b64encode(img_f.read()).decode('utf-8')
+        img_html = f"<img src='data:image/png;base64,{img_b64}' style='max-width:400px; vertical-align:top; margin-right:20px;'/>"
+        # Caption
+        caption_html = f"<div style='display:inline-block; max-width:400px; vertical-align:top; padding:10px; border:1px solid #0074D9; background:#000000; color:#FFFFFF;'>{caption}</div>"
+        # Layout
+        html = f"""
+        <h3>Paper: {doi} - Figure: {figure_id}</h3>
+        {table_html}
+        <div style='display:flex; flex-direction:row; align-items:flex-start;'>
+            {img_html}
+            {caption_html}
+        </div>
+        <hr>
+        """
+        display(HTML(html))
+
