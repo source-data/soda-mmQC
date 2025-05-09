@@ -170,9 +170,27 @@ def serialize_value(value):
 
 
 def deserialize_value(value, schema):
-    """Deserialize a value according to its schema type."""
+    """Deserialize a value according to its schema type.
+    
+    Args:
+        value: The value to deserialize
+        schema: The JSON schema defining the value's type and structure
+        
+    Returns:
+        The deserialized value. If value is None, returns an appropriate empty value
+        based on the schema type (empty string for strings, empty list for arrays,
+        empty dict for objects, None for other types).
+    """
     if value is None:
-        return None  # TODO return either "", or {} or [] or None depending on the schema type
+        schema_type = schema.get("type")
+        if schema_type == "string":
+            return ""
+        elif schema_type == "array":
+            return []
+        elif schema_type == "object":
+            return {}
+        else:
+            return None  # For numbers, booleans, etc.
     
     schema_type = schema.get("type")
     
@@ -190,8 +208,9 @@ def deserialize_value(value, schema):
             return value
             # Otherwise try JSON as fallback
         except Exception as e:
-            st.error(f"Error deserializing value with YAML: {value}")
-            logger.error(f"Error deserializing value with YAML: {value}\n{e}")
+            error_msg = f"{e.__class__.__name__} deserializing YAML string: {value}"
+            st.session_state.deserialization_errors.append(error_msg)
+            logger.error(error_msg)
             return value
     elif schema_type == "object":
         try:
@@ -202,12 +221,13 @@ def deserialize_value(value, schema):
                 parsed = value
             if isinstance(parsed, dict):
                 # deserialize each item in the dictionary
-                parsed_dict = {k: deserialize_value(v, schema["properties"][k]) for k, v in parsed.items()}
+                parsed_dict = {k: deserialize_value(parsed[k], schema["properties"][k]) for k in schema["required"]}
                 return parsed_dict
             return value
         except Exception as e:
-            st.error(f"Error deserializing value with YAML: {value}")
-            logger.error(f"Error deserializing value with YAML: {value}\n{e}")
+            error_msg = f"{e.__class__.__name__} deserializing YAML string: {value} with schema requiring: {schema['required']}"
+            st.session_state.deserialization_errors.append(error_msg)
+            logger.error(error_msg)
             return value
     elif schema_type == "string":
         return str(value)
@@ -239,10 +259,12 @@ def deserialize_value(value, schema):
 def main(checklist_name):
     st.title("mmQC Benchmark Curation")
 
-    # Initialize session state for tracking saved files
+    # Initialize session state for tracking saved files and deserialization errors
     if "saved_files" not in st.session_state:
         st.session_state.saved_files = {}
-    
+    if "deserialization_errors" not in st.session_state:
+        st.session_state.deserialization_errors = []
+
     # load the checklist
     checklist_dir = get_checklist(checklist_name)
     checklist = load_checklist(checklist_dir)
@@ -369,8 +391,19 @@ def main(checklist_name):
                             else:
                                 st.success(f"Last saved on {output_data['updated_at']}")
                             
+                            
+                            # Display any deserialization errors from previous run
+                            if st.session_state.deserialization_errors:
+                                for error in st.session_state.deserialization_errors:
+                                    st.error(error)
+                                # Clear the errors after displaying them
+                                st.session_state.deserialization_errors = []
+
                             # Update button
                             if st.button(f"Save changes for {selected_check}"):
+                                # Clear previous deserialization errors
+                                st.session_state.deserialization_errors = []
+                                
                                 # Parse strings back to their original types
                                 processed_records = []
                                 for _, row in edited_df.iterrows():
@@ -378,14 +411,11 @@ def main(checklist_name):
                                     # Parse each field back to its original type
                                     for key, value in processed_record.items():
                                         if key in schema_path:
-                                            if not value:
-                                                processed_record[key] = None
-                                            else:
-                                                # deserialize the value according to schema
-                                                processed_record[key] = deserialize_value(
-                                                    value,
-                                                    schema_path[key]
-                                                )
+                                            # deserialize the value according to schema
+                                            processed_record[key] = deserialize_value(
+                                                value,
+                                                schema_path[key]
+                                            )
                                     processed_records.append(processed_record)
                                 
                                 output_data["outputs"] = processed_records
