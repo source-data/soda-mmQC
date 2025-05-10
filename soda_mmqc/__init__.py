@@ -3,6 +3,7 @@
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
+from logging.handlers import RotatingFileHandler
 
 
 # Load environment variables
@@ -27,9 +28,14 @@ console_handler = logging.StreamHandler()
 console_handler.setFormatter(formatter)
 console_handler.setLevel(logging.INFO)  # Console shows INFO and above
 
-# Create file handler
+# Create rotating file handler
 log_file = logs_dir / "soda_mmqc.log"
-file_handler = logging.FileHandler(log_file)
+file_handler = RotatingFileHandler(
+    log_file,
+    maxBytes=5*1024*1024,  # 5MB per file
+    backupCount=3,  # Keep 3 backup files
+    encoding='utf-8'
+)
 file_handler.setFormatter(formatter)
 file_handler.setLevel(logging.DEBUG)  # File shows DEBUG and above
 

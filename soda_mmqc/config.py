@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, Optional
 
 from dotenv import load_dotenv
 
@@ -25,6 +25,7 @@ EXPECTED_OUTPUT_SUBDIR = "checks"
 EXPECTED_OUTPUT_FILE = "expected_output.json"
 CHECK_DATA_FILE = "benchmark.json"
 SCHEMA_FILE = "schema.json"
+CAPTION_FILE = "caption.txt"
 # Ensure all directories exist
 for directory in [CHECKLIST_DIR, EXAMPLES_DIR, EVALUATION_DIR, CACHE_DIR, PLOTS_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
@@ -81,6 +82,23 @@ def get_figure_path(example: Dict[str, Any]) -> Path:
 def get_content_path(example: Dict[str, Any]) -> Path:
     """Get the full path to a figure directory."""
     return get_figure_path(example) / CONTENT_SUBDIR
+
+
+def get_caption_path(example: Dict[str, Any]) -> Path:
+    """Get the full path to a caption file."""
+    return get_content_path(example) / CAPTION_FILE
+
+
+def get_image_path(example: Dict[str, Any]) -> Optional[Path]:
+    """Get the full path to an image file."""
+    content_path = get_content_path(example)
+    image_path = None
+    for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+        image_files = list(content_path.glob(f"*{ext}"))
+        if image_files:
+            image_path = image_files[0]
+            break
+    return image_path
 
 
 def get_expected_output_path(example: Dict[str, Any], check_name: str) -> Path:
