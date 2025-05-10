@@ -3,31 +3,31 @@
         {
             "panel_label": "Ai",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "Aii",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-04-30 17:08:11"
+    "updated_at": "2025-05-08 13:51:43"
 }

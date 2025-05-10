@@ -6,7 +6,7 @@
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
             "justify_why_test_is_missing": "The panel shows flow cytometric plots without indications of statistical analysis.",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
@@ -14,7 +14,7 @@
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
             "justify_why_test_is_missing": "The panel displays flow cytometric plots with no mention of statistical analysis requirements.",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
@@ -22,7 +22,7 @@
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
             "justify_why_test_is_missing": "This panel also includes flow cytometry data, which does not inherently require statistical tests.",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
@@ -30,7 +30,7 @@
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
             "justify_why_test_is_missing": "Flow cytometric overlays shown in this panel do not imply statistical tests.",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
@@ -38,8 +38,8 @@
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
             "justify_why_test_is_missing": "This panel includes gating strategies rather than statistical comparisons.",
-            "from_the_caption": null
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-01 10:42:09"
+    "updated_at": "2025-05-08 13:44:03"
 }

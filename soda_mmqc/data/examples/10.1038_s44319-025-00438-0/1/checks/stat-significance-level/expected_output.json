@@ -3,44 +3,44 @@
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "G",
@@ -56,16 +56,16 @@
         {
             "panel_label": "H",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "I",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "J",
@@ -81,9 +81,9 @@
         {
             "panel_label": "K",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "L",
@@ -99,37 +99,37 @@
         {
             "panel_label": "M",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "N",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "O",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "P",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "Q",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "R",
@@ -143,5 +143,5 @@
             "from_the_caption": "*P\u2009<\u20090.05"
         }
     ],
-    "updated_at": "2025-05-01 09:22:45"
+    "updated_at": "2025-05-08 13:52:11"
 }

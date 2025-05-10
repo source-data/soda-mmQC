@@ -3,44 +3,44 @@
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "G",
@@ -55,22 +55,22 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "I",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "J",
@@ -85,7 +85,7 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": null,
+            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
@@ -96,9 +96,9 @@
         {
             "panel_label": "K",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "L",
@@ -113,43 +113,43 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "M",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "N",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "O",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "P",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "Q",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "R",
@@ -164,9 +164,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         }
     ],
-    "updated_at": "2025-05-01 09:28:45"
+    "updated_at": "2025-05-08 15:15:23"
 }

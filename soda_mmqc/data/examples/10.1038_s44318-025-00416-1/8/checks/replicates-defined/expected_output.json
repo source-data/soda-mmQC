@@ -43,27 +43,27 @@
         {
             "panel_label": "E",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "F",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "G",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "H",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         }
     ],
-    "updated_at": "2025-05-07 00:11:49"
+    "updated_at": "2025-05-08 15:11:59"
 }

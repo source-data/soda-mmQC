@@ -5,31 +5,31 @@
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "*P<0.01 (Student's t\u2010test)"
         },
         {
@@ -37,7 +37,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "*P<0.01 (Student's t\u2010test)"
         },
         {
@@ -45,7 +45,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "*P<0.01 (Student's t\u2010test)"
         },
         {
@@ -53,31 +53,31 @@
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "I",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "J",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "*P<0.01 (Student's t\u2010test)"
         },
         {
@@ -85,7 +85,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "*P<0.01 (Student's t\u2010test)"
         },
         {
@@ -93,9 +93,9 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "*P<0.01 (Student's t\u2010test)"
         }
     ],
-    "updated_at": "2025-05-01 10:56:34"
+    "updated_at": "2025-05-08 13:44:29"
 }

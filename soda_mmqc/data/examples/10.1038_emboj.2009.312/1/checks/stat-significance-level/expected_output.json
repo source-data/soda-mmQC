@@ -5,28 +5,28 @@
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
@@ -55,35 +55,35 @@
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "I",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "J",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "K",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "L",
@@ -97,5 +97,5 @@
             "from_the_caption": "*P<0.01"
         }
     ],
-    "updated_at": "2025-05-01 10:56:45"
+    "updated_at": "2025-05-08 13:52:30"
 }

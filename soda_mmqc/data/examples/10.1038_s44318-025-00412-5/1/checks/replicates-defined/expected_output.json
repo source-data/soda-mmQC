@@ -13,8 +13,8 @@
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "C",
@@ -29,8 +29,8 @@
         {
             "panel_label": "D",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "E",
@@ -45,8 +45,8 @@
         {
             "panel_label": "F",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "G",
@@ -81,8 +81,8 @@
         {
             "panel_label": "J",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "K",
@@ -95,5 +95,5 @@
             ]
         }
     ],
-    "updated_at": "2025-05-07 00:12:38"
+    "updated_at": "2025-05-08 15:12:42"
 }

@@ -4,15 +4,15 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "gaps_defined": [],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "gaps_defined": null,
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "C",
@@ -27,8 +27,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "D",
@@ -43,8 +43,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "E",
@@ -59,15 +59,15 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
-            "gaps_defined": null,
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "G",
@@ -85,11 +85,11 @@
             "gap_description": [
                 {
                     "axis": "y",
-                    "description": "two wiggly lines interupt the y axis"
+                    "definition": "two wiggly lines interupt the y axis"
                 }
             ],
-            "justify_why_gaps_are_missing": null
+            "justify_why_gaps_are_missing": []
         }
     ],
-    "updated_at": "2025-04-30 16:52:08"
+    "updated_at": "2025-05-08 10:59:45"
 }

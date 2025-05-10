@@ -13,29 +13,29 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "gaps_defined": null,
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "gaps_defined": null,
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
-            "gaps_defined": null,
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "E",
@@ -50,8 +50,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "F",
@@ -66,9 +66,9 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         }
     ],
-    "updated_at": "2025-04-30 17:09:17"
+    "updated_at": "2025-05-08 11:00:19"
 }

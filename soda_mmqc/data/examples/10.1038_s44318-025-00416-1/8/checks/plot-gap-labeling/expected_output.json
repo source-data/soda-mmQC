@@ -13,8 +13,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "B",
@@ -29,8 +29,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "C",
@@ -45,8 +45,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "D",
@@ -61,8 +61,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "E",
@@ -77,8 +77,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "F",
@@ -93,8 +93,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "G",
@@ -109,8 +109,8 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         },
         {
             "panel_label": "H",
@@ -125,9 +125,9 @@
                     "answer": "not needed"
                 }
             ],
-            "gap_description": null,
-            "justify_why_gaps_are_missing": null
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
         }
     ],
-    "updated_at": "2025-05-01 00:23:23"
+    "updated_at": "2025-05-08 11:00:25"
 }

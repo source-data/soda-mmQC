@@ -10,10 +10,10 @@
                 },
                 {
                     "axis": "y",
-                    "answer": true
+                    "answer": "True"
                 }
             ],
-            "justify_why_units_are_missing": null,
+            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
@@ -24,23 +24,23 @@
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "E",
@@ -52,10 +52,10 @@
                 },
                 {
                     "axis": "y",
-                    "answer": true
+                    "answer": "True"
                 }
             ],
-            "justify_why_units_are_missing": null,
+            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
@@ -76,9 +76,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         }
     ],
-    "updated_at": "2025-04-30 17:31:11"
+    "updated_at": "2025-05-08 14:01:01"
 }

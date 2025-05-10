@@ -3,59 +3,59 @@
         {
             "panel_label": "A",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "B",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "C",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "D",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "E",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "F",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "G",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "H",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         }
     ],
-    "updated_at": "2025-05-01 01:02:02"
+    "updated_at": "2025-05-10 14:56:32"
 }

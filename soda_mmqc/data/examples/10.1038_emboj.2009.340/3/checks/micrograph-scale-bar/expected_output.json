@@ -10,10 +10,10 @@
         {
             "panel_label": "B",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-01 12:58:48"
+    "updated_at": "2025-05-08 13:54:37"
 }

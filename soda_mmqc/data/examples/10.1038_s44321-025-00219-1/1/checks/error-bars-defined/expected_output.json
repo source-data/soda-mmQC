@@ -5,26 +5,26 @@
             "panel_label": "Ai",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "Aii",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-04-30 17:08:02"
+    "updated_at": "2025-05-08 13:39:02"
 }

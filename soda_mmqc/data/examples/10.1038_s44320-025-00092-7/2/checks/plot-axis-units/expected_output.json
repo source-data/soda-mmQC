@@ -111,7 +111,7 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
+            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -125,7 +125,7 @@
             "units_provided": [
                 {
                     "axis": "x",
-                    "answer": false
+                    "answer": "False"
                 },
                 {
                     "axis": "y",
@@ -138,8 +138,8 @@
                     "justification": "the decay rate (\u0263) should be dimensionless per hour (h^-1) but this is not indicated"
                 }
             ],
-            "unit_definition_as_provided": null
+            "unit_definition_as_provided": []
         }
     ],
-    "updated_at": "2025-05-02 16:13:33"
+    "updated_at": "2025-05-08 15:14:21"
 }

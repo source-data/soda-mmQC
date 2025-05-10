@@ -5,19 +5,19 @@
             "panel_label": "A",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
@@ -41,19 +41,19 @@
             "panel_label": "G",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "H",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "I",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "J",
@@ -74,5 +74,5 @@
             "from_the_caption": "Error bars indicate mean\u00b1s.d."
         }
     ],
-    "updated_at": "2025-05-01 10:55:41"
+    "updated_at": "2025-05-08 13:41:35"
 }

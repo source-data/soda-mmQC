@@ -5,17 +5,17 @@
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": null,
-            "from_the_caption": null
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-01 12:58:26"
+    "updated_at": "2025-05-08 13:44:39"
 }

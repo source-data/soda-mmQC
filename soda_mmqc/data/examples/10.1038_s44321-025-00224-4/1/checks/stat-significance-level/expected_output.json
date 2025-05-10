@@ -9,28 +9,28 @@
                 "p=0.047"
             ],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
@@ -39,7 +39,7 @@
                 "p=0.002"
             ],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "F",
@@ -49,8 +49,8 @@
                 "p=0.031"
             ],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-04-30 17:30:20"
+    "updated_at": "2025-05-08 13:51:56"
 }

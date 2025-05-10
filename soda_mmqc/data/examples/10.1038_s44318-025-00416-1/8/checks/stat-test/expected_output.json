@@ -5,7 +5,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "unpaired two-tailed student\u2019s t-test (A)"
         },
         {
@@ -13,7 +13,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "one-way ANOVA (B)"
         },
         {
@@ -21,7 +21,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "unpaired two-tailed student\u2019s t-test (C)"
         },
         {
@@ -29,7 +29,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "unpaired two-tailed student\u2019s t-test (D)"
         },
         {
@@ -37,7 +37,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "log-rank test (E)"
         },
         {
@@ -45,7 +45,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "log-rank test (F)"
         },
         {
@@ -53,7 +53,7 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "log-rank test (G)"
         },
         {
@@ -61,9 +61,9 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": null,
+            "justify_why_test_is_missing": "",
             "from_the_caption": "log-rank test (H)"
         }
     ],
-    "updated_at": "2025-05-01 00:32:55"
+    "updated_at": "2025-05-08 13:43:50"
 }

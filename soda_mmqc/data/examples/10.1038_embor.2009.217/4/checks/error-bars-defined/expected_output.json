@@ -11,7 +11,7 @@
             "panel_label": "B",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "no",
-            "from_the_caption": null
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
@@ -23,8 +23,8 @@
             "panel_label": "D",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "no",
-            "from_the_caption": null
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-01 11:25:53"
+    "updated_at": "2025-05-08 13:41:46"
 }

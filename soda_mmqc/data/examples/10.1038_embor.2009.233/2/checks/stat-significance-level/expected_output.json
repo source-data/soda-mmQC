@@ -3,16 +3,16 @@
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
@@ -31,22 +31,22 @@
             "panel_label": "D",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "yes",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
-            "significance_level_symbols_on_image": null,
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "G",
@@ -60,5 +60,5 @@
             "from_the_caption": "- '*P<0.05'"
         }
     ],
-    "updated_at": "2025-04-30 16:55:05"
+    "updated_at": "2025-05-08 13:45:55"
 }

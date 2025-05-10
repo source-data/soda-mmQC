@@ -3,16 +3,16 @@
         {
             "panel_label": "A",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
@@ -24,9 +24,9 @@
         {
             "panel_label": "D",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
@@ -43,5 +43,5 @@
             "from_the_caption": "50 nm"
         }
     ],
-    "updated_at": "2025-05-02 09:59:22"
+    "updated_at": "2025-05-08 13:55:06"
 }

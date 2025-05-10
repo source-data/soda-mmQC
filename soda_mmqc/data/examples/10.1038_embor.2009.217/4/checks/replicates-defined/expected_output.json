@@ -16,7 +16,7 @@
             "number_of_replicates": [
                 "undefined"
             ],
-            "type_of_replicates": null
+            "type_of_replicates": []
         },
         {
             "panel_label": "C",
@@ -34,8 +34,8 @@
             "number_of_replicates": [
                 "undefined"
             ],
-            "type_of_replicates": null
+            "type_of_replicates": []
         }
     ],
-    "updated_at": "2025-05-07 00:07:40"
+    "updated_at": "2025-05-08 15:12:18"
 }

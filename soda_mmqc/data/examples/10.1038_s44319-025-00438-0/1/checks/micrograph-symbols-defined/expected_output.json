@@ -3,58 +3,58 @@
         {
             "panel_label": "A",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "B",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "C",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "D",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "E",
             "micrograph": "yes",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "F",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "G",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "H",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "I",
@@ -65,14 +65,14 @@
             "symbols_defined_in_caption": [
                 "no"
             ],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "J",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "K",
@@ -83,14 +83,14 @@
             "symbols_defined_in_caption": [
                 "no"
             ],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "L",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "M",
@@ -101,7 +101,7 @@
             "symbols_defined_in_caption": [
                 "no"
             ],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "N",
@@ -112,14 +112,14 @@
             "symbols_defined_in_caption": [
                 "no"
             ],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "O",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "P",
@@ -130,22 +130,22 @@
             "symbols_defined_in_caption": [
                 "no"
             ],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "Q",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "R",
             "micrograph": "no",
-            "symbols": null,
-            "symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         }
     ],
-    "updated_at": "2025-05-01 09:29:49"
+    "updated_at": "2025-05-10 14:56:38"
 }

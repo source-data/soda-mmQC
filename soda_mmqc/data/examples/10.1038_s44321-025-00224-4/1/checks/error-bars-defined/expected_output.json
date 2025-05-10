@@ -10,20 +10,20 @@
         {
             "panel_label": "B",
             "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "error_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
             "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "error_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
             "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "error_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
@@ -38,5 +38,5 @@
             "from_the_caption": "Data are presented as mean \u00b1 S.D."
         }
     ],
-    "updated_at": "2025-04-30 17:10:56"
+    "updated_at": "2025-05-08 13:40:36"
 }

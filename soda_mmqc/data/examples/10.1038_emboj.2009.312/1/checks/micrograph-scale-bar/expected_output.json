@@ -4,15 +4,15 @@
             "panel_label": "A",
             "micrograph": "yes",
             "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
             "micrograph": "yes",
             "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
@@ -24,37 +24,37 @@
         {
             "panel_label": "D",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "F",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "G",
             "micrograph": "yes",
             "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "H",
             "micrograph": "yes",
             "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "I",
@@ -66,24 +66,24 @@
         {
             "panel_label": "J",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "K",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         },
         {
             "panel_label": "L",
             "micrograph": "no",
-            "scale_bar_on_image": null,
-            "scale_bar_defined_in_caption": null,
-            "from_the_caption": null
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-01 10:58:27"
+    "updated_at": "2025-05-08 13:54:28"
 }

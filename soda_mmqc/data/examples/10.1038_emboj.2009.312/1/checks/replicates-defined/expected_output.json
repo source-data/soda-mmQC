@@ -3,20 +3,20 @@
         {
             "panel_label": "A",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "B",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "C",
             "involves_replicates": "no",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "D",
@@ -51,20 +51,20 @@
         {
             "panel_label": "G",
             "involves_replicates": "yes",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "H",
             "involves_replicates": "yes",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "I",
             "involves_replicates": "yes",
-            "number_of_replicates": null,
-            "type_of_replicates": null
+            "number_of_replicates": [],
+            "type_of_replicates": []
         },
         {
             "panel_label": "J",
@@ -97,5 +97,5 @@
             ]
         }
     ],
-    "updated_at": "2025-05-06 23:00:09"
+    "updated_at": "2025-05-08 15:12:13"
 }

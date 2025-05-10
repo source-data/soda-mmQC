@@ -3,16 +3,16 @@
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "C top",
@@ -27,8 +27,8 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "C bottom",
@@ -40,18 +40,18 @@
                 },
                 {
                     "axis": "y",
-                    "answer": true
+                    "answer": "True"
                 },
                 {
                     "axis": "z",
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
+            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
-                    "defintion": "Polyp diameter (mm)"
+                    "definition": "Polyp diameter (mm)"
                 }
             ]
         },
@@ -61,14 +61,14 @@
             "units_provided": [
                 {
                     "axis": "x",
-                    "answer": true
+                    "answer": "True"
                 },
                 {
                     "axis": "y",
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
+            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -89,15 +89,15 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
-            "units_provided": null,
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         },
         {
             "panel_label": "G",
@@ -112,9 +112,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": null,
-            "unit_definition_as_provided": null
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
         }
     ],
-    "updated_at": "2025-04-30 17:02:23"
+    "updated_at": "2025-05-08 15:14:37"
 }

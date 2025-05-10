@@ -8,8 +8,8 @@
                 "P=6.5e-5",
                 "P=1.2e-4"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "B",
@@ -18,8 +18,8 @@
                 "P=0.003",
                 "ns"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "C",
@@ -27,8 +27,8 @@
             "significance_level_symbols_on_image": [
                 "P=3.7e-5"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "D",
@@ -36,8 +36,8 @@
             "significance_level_symbols_on_image": [
                 "P=0.022"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "E",
@@ -45,8 +45,8 @@
             "significance_level_symbols_on_image": [
                 "P=0.047"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "F",
@@ -54,8 +54,8 @@
             "significance_level_symbols_on_image": [
                 "P=0.008"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "G",
@@ -63,8 +63,8 @@
             "significance_level_symbols_on_image": [
                 "P=0.22"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         },
         {
             "panel_label": "H",
@@ -72,9 +72,9 @@
             "significance_level_symbols_on_image": [
                 "P=0.99"
             ],
-            "significance_level_symbols_defined_in_caption": null,
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-01 00:53:39"
+    "updated_at": "2025-05-08 13:52:01"
 }
