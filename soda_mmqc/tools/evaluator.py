@@ -197,8 +197,9 @@ class JSONEvaluator:
             pred: Prediction string
             exp: Expected string
         """
-        logger.debug(f"exact_match({pred}, {exp}): {1.0 if pred == exp else 0.0}")
-        return 1.0 if pred == exp else 0.0
+        score = 1.0 if pred == exp else 0.0
+        logger.debug(f"exact_match({pred}, {exp}): {score}")
+        return score
     
     def _bleu_score(self, pred: str, exp: str) -> float:
         """Calculate BLEU score between two strings.
@@ -286,6 +287,7 @@ class JSONEvaluator:
         Returns:
             ComparisonResult with the comparison score
         """
+        logger.debug(f"Comparing values with schema: {schema_path}")
         value_type = schema.get("type")
         logger.debug(f"Comparing values of type {value_type}")
 
@@ -384,8 +386,8 @@ class JSONEvaluator:
                 continue
 
             if field not in exp:
-                errors.append(f"Missing field in expected: {field}")
-                field_scores[field] = ComparisonResult(0.0, [f"Missing field in expected: {field}"], {}, false_positives=1)
+                errors.append(f"Unexpected field in prediction: {field}")
+                field_scores[field] = ComparisonResult(0.0, [f"Unexpected field in prediction: {field}"], {}, false_positives=1)
                 continue
 
             pred_value = pred[field]
@@ -410,15 +412,15 @@ class JSONEvaluator:
         
         # Aggregate metrics from all field comparisons
         true_positives = sum(
-            result.true_positives or 0 
+            result.true_positives or 0
             for result in field_scores.values()
         )
         false_positives = sum(
-            result.false_positives or 0 
+            result.false_positives or 0
             for result in field_scores.values()
         )
         false_negatives = sum(
-            result.false_negatives or 0 
+            result.false_negatives or 0
             for result in field_scores.values()
         )
         
@@ -444,7 +446,7 @@ class JSONEvaluator:
             f1_score=f1_score
         )
 
-    
+
     def _compare_lists(
         self, 
         pred: List[Any], 
@@ -498,61 +500,16 @@ class JSONEvaluator:
                 missing_elements,
                 false_negatives=len(exp)
             )
-        
-        # Track which prediction elements have been matched
-        matched_pred_indices = set()
-        element_scores = {}
-        errors = []
-        matched_scores = []
-        
-        # Track detailed scores per field
-        detailed_scores = {}
-        field_scores_by_field = {}
-        field_false_positives = {}
 
         # Get item schema
         item_schema = self._get_schema_for_path(schema_path + ["items"])
 
         # For each expected element, find the best matching prediction element
+        element_scores = {}
+        errors = []
         for i, exp_item in enumerate(exp):
-            best_score = 0.0
-            best_pred_idx = None
-            best_result = None
-
-            # Try to match with each unmatched prediction element
-            for j, pred_item in enumerate(pred):
-                if j in matched_pred_indices:
-                    continue
-
-                item_result = self._compare_values_with_schema(
-                    pred_item,
-                    exp_item,
-                    item_schema,
-                    schema_path + ["items"]
-                )
-                if item_result.score > best_score:
-                    best_score = item_result.score
-                    best_pred_idx = j
-                    best_result = item_result
-
-            if best_pred_idx is not None:
-                matched_pred_indices.add(best_pred_idx)
-                element_scores[f"element_{i}"] = best_result
-                matched_scores.append(best_score)
-                logger.debug(f"best match for {exp_item}: {pred[best_pred_idx]} with score {best_score}")
-                
-                # Track field scores for matched elements
-                if isinstance(best_result.field_scores, dict):
-                    for field, field_result in best_result.field_scores.items():
-                        if field not in field_scores_by_field:
-                            field_scores_by_field[field] = []
-                            field_false_positives[field] = 0
-                        if isinstance(field_result, ComparisonResult):
-                            field_scores_by_field[field].append(field_result.score)
-                        else:
-                            field_scores_by_field[field].append(field_result)
-                
-            else:
+            if i >= len(pred):
+                # num of fals negative is the number of missing elements
                 element_scores[f"missing_element_{i}"] = ComparisonResult(
                     0.0,
                     [f"Missing expected element at index {i}"],
@@ -560,59 +517,76 @@ class JSONEvaluator:
                     false_negatives=1
                 )
                 errors.append(f"Missing expected element at index {i}")
-
-        # Check for extra elements in prediction
-        for j in range(len(pred)):
-            if j not in matched_pred_indices:
-                element_scores[f"extra_element_{j}"] = ComparisonResult(
-                    0.0,
-                    [f"Extra predicted element at index {j}"],
-                    {},
-                    false_positives=1
-                )
-                errors.append(f"Extra predicted element at index {j}")
-                
-                # Track false positives per field for extra elements
-                extra_result = self._compare_values_with_schema(
-                    pred[j],
-                    None,  # No expected value to compare against
+            else:
+                pred_item = pred[i]
+                item_result = self._compare_values_with_schema(
+                    pred_item,
+                    exp_item,
                     item_schema,
                     schema_path + ["items"]
                 )
-                if isinstance(extra_result.field_scores, dict):
-                    for field in extra_result.field_scores:
-                        if field not in field_false_positives:
-                            field_false_positives[field] = 0
-                        field_false_positives[field] += 1
+                element_scores[f"element_{i}"] = item_result
+                
+                # Track field scores for matched elements
+                field_scores_by_field = {}
+                for field, field_result in item_result.field_scores.items():
+                    if field not in field_scores_by_field:
+                        field_scores_by_field[field] = []
+                    if isinstance(field_result, ComparisonResult):
+                        field_scores_by_field[field].append(field_result.score)
+                    else:
+                        field_scores_by_field[field].append(field_result)
 
-        if not element_scores:
-            logger.debug(f"No elements from {exp} matched {pred}")
-            return ComparisonResult(0.0, errors, {})
+        # Check for extra elements in prediction
+        field_false_positives = {}
+        for j in range(len(exp), len(pred)):
+            element_scores[f"extra_element_{j}"] = ComparisonResult(
+                0.0,
+                [f"Extra predicted element at index {j}"],
+                {},
+                false_positives=1
+            )
+            errors.append(f"Extra predicted element at index {j}")
+            
+            # Track false positives per field for extra elements
+            extra_result = self._compare_values_with_schema(
+                pred[j],
+                None,  # No expected value to compare against
+                item_schema,
+                schema_path + ["items"]
+            )
+            for field in extra_result.field_scores:
+                if field not in field_false_positives:
+                    field_false_positives[field] = 0
+                field_false_positives[field] += 1
 
         # Aggregate metrics from all element comparisons
         true_positives = sum(
-            result.true_positives or 0 
+            result.true_positives or 0
             for result in element_scores.values()
         )
         false_positives = sum(
-            result.false_positives or 0 
+            result.false_positives or 0
             for result in element_scores.values()
         )
         false_negatives = sum(
-            result.false_negatives or 0 
+            result.false_negatives or 0
             for result in element_scores.values()
         )
+        all_scores = [
+            result.score
+            for result in element_scores.values()
+        ]
         
-        # Calculate precision, recall, F1
+        # Calculate average, stad, precision, recall, F1
+        avg_score = sum(all_scores) / len(all_scores) if all_scores else 0
+        std_score = statistics.stdev(all_scores) if len(all_scores) > 1 else 0
         precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
         recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
         f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
         
-        # Calculate average score and standard deviation
-        avg_score = sum(matched_scores) / len(matched_scores) if matched_scores else 0
-        std_score = statistics.stdev(matched_scores) if len(matched_scores) > 1 else 0
-
         # Calculate detailed scores per field
+        detailed_scores = {}
         for field, scores in field_scores_by_field.items():
             if scores:
                 # Calculate average including false negatives (0 scores)
@@ -623,7 +597,7 @@ class JSONEvaluator:
                 field_precision = len(scores) / (len(scores) + field_false_positives.get(field, 0)) if (len(scores) + field_false_positives.get(field, 0)) > 0 else 0
                 field_recall = len(scores) / total_expected if total_expected > 0 else 0
                 field_f1 = 2 * (field_precision * field_recall) / (field_precision + field_recall) if (field_precision + field_recall) > 0 else 0
-                
+            
                 detailed_scores[field] = {
                     "avg_score": avg_score,
                     "std_score": statistics.stdev(scores) if len(scores) > 1 else 0,
@@ -649,7 +623,7 @@ class JSONEvaluator:
             detailed_scores=detailed_scores
         )
 
-    def _compare_strings(self, pred: str, exp: str) -> ComparisonResult:
+    def _compare_strings(self, pred: Optional[str], exp: Optional[str]) -> ComparisonResult:
         """Compare two strings using the configured string comparator.
 
         Args:

@@ -110,12 +110,12 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                 #         "score": 0.5,
                 #         "errors": [],
                 #         "field_scores": {
-                #             "element_0": {
+                #             "element_0": {    ##### PANEL ID #####
                 #                 "score": 1.0,
                 #                 "errors": [],
-                #                 "field_scores": {
-                #                     "panel_label": {
-                #                         "score": 1.0,
+                #                 "field_scores": {    ##### SCORES FOR EACH TASK #####
+                #                     "panel_label": {   ##### TASK NAME #####
+                #                         "score": 1.0,  
                 #                         "errors": [],
                 #                         "field_scores": {
                 #                             "value": 1.0
@@ -186,23 +186,25 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                         'aggregation_level': 'figure',
                         'metric': metric,
                         'prompt': prompt_name,
+                        # scores aggregate over all panel for this figure
                         'score': figure_analysis.get('score', None),
                         'std_score': figure_analysis.get('std_score', None),
                         'precision': figure_analysis.get('precision', None),
                         'recall': figure_analysis.get('recall', None),
                         'f1_score': figure_analysis.get('f1_score', None)
                     }
+                    # the scores detailed by TASK
                     detailed_scores = {}
-                    for field, field_scores in figure_analysis['detailed_scores'].items():
-                        detailed_scores[field] = {
-                            'avg_score': field_scores.get('avg_score', None),
-                            'std_score': field_scores.get('std_score', None),
-                            'num_matches': field_scores.get('num_matches', None),
-                            'num_false_negatives': field_scores.get('num_false_negatives', None),
-                            'num_false_positives': field_scores.get('num_false_positives', None),
-                            'precision': field_scores.get('precision', None),
-                            'recall': field_scores.get('recall', None),
-                            'f1_score': field_scores.get('f1_score', None)
+                    for task, task_scores in figure_analysis['detailed_scores'].items():
+                        detailed_scores[task] = {
+                            'avg_score': task_scores.get('avg_score', None),
+                            'std_score': task_scores.get('std_score', None),
+                            'num_matches': task_scores.get('num_matches', None),
+                            'num_false_negatives': task_scores.get('num_false_negatives', None),
+                            'num_false_positives': task_scores.get('num_false_positives', None),
+                            'precision': task_scores.get('precision', None),
+                            'recall': task_scores.get('recall', None),
+                            'f1_score': task_scores.get('f1_score', None)
                         }
                     new_data_point['detailed_scores'] = detailed_scores
                     data_points.append(new_data_point)
@@ -211,32 +213,35 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                     continue
 
                 try:
-                    for panel, panel_analysis in figure_analysis['field_scores'].items():
+                    for panel_id, panel_analysis in figure_analysis['field_scores'].items():
                         new_data_point = {
                             'doi': doi,
                             'figure_id': figure_id,
-                            'panel_id': panel,
+                            'panel_id': panel_id,
                             'aggregation_level': 'panel',
                             'metric': metric,
                             'prompt': prompt_name,
+                            # this is not so useful, aggreagation across all tasks for this panel
                             'score': panel_analysis.get('score', None),
                             'std_score': panel_analysis.get('std_score', None),
                             'precision': panel_analysis.get('precision', None),
                             'recall': panel_analysis.get('recall', None),
                             'f1_score': panel_analysis.get('f1_score', None)
                         }
+                        # the scores detailed by TASK for this panel
+                        # this is the most useful part
                         task_scores = {}
-                        for task, task_analysis in panel_analysis['field_scores'].items():
+                        for task, scores in panel_analysis['field_scores'].items():
                             task_scores[task] = {
-                                'score': task_analysis.get('score', None),
-                                'true_positives': task_analysis.get('true_positives', None),
-                                'false_positives': task_analysis.get('false_positives', None),
-                                'false_negatives': task_analysis.get('false_negatives', None)
+                                'score': scores.get('score', None),
+                                'true_positives': scores.get('true_positives', None),
+                                'false_positives': scores.get('false_positives', None),
+                                'false_negatives': scores.get('false_negatives', None)
                             }
                         new_data_point['task_scores'] = task_scores
                         data_points.append(new_data_point)
                 except Exception as e:
-                    logger.error(f"Error processing panel {panel}: {e}")
+                    logger.error(f"Error processing panel {panel_id}: {e}")
                     continue
     
     # Convert to DataFrame
@@ -278,7 +283,7 @@ def get_check_data(checklist_name, check_name) -> pd.DataFrame | None:
         checklist_name: Name of the checklist (e.g., 'mini')
         check_name: Name of the check (e.g., 'error-bars-defined')
     Returns:
-        List of DataFrames, one for each check
+        DataFrame with columns: doi, figure_id, panel_id, aggregation_level, metric, prompt, score, std_score, precision, recall, f1_score, detailed_scores, task_scores
     """
 
     try:
@@ -438,17 +443,18 @@ def remap_task_scores_to_df(plotting_data):
         'doi', 'figure_id', 'panel_id', 'task', 'score', 'true_positives', 'false_positives', 'false_negatives'
     ])
     for j, row in task_data.iterrows():
+        # the task_scores is a dict of task names to their scores
         task_scores = row['task_scores']
-        for key, value in task_scores.items():
+        for task_name, task_scores in task_scores.items():
             remapped_task_data.loc[len(remapped_task_data)] = {
                 'doi': row['doi'],
                 'figure_id': row['figure_id'],
                 'panel_id': row['panel_id'],
-                'task': key,
-                'score': value['score'],
-                'true_positives': value['true_positives'],
-                'false_positives': value['false_positives'],
-                'false_negatives': value['false_negatives']
+                'task': task_name,
+                'score': task_scores['score'],
+                'true_positives': task_scores['true_positives'],
+                'false_positives': task_scores['false_positives'],
+                'false_negatives': task_scores['false_negatives']
             }
     return remapped_task_data
 
@@ -481,13 +487,14 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
     
     # scatter plot and bar chart for each tasks of the check
     for i, prompt in enumerate(prompts):
-        logger.info(f"Creating plot for prompt: {prompt}...")
         plotting_data = df.loc[
             (df['prompt'] == prompt) &
             (df['metric'] == metric) &
             (df['aggregation_level'] == 'panel')
         ]
-        
+        logger.info(f"Creating plot ({prompt}, {metric}, {check_name})...")
+        logger.info(f"Plotting data: {len(plotting_data)} rows")
+
         remapped_task_data = remap_task_scores_to_df(plotting_data)
         tasks = list(remapped_task_data['task'].unique())
 
@@ -551,87 +558,6 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
     return plot
 
 
-def check_specific_report(checklist_name, check_name, output_dir=None, metric="semantic_similarity", k=3):
-    """Create a comprehensive report of a specific check in a checklist.
-    
-    Args:
-        checklist_name: Name of the checklist (e.g., 'mini')
-        check_name: Name of the check (e.g., 'error-bars-defined')
-        output_dir: Directory to save the output file
-        metric: Metric to visualize
-        k: Number of worst panels to consider per task
-    """
-    
-    df = get_check_data(checklist_name, check_name)
-    if df is None:
-        logger.warning(f"No data found for check {check_name}")
-        return
-    prompts = list(df['prompt'].unique())
-    all_panels = df[df['aggregation_level'] == 'panel']
-    tasks = list(all_panels.iloc[0]["task_scores"].keys())
-
-    # Aggregate problematic figures and panels
-    problematic_figures = defaultdict(lambda: {'panel_tasks': defaultdict(set)})
-    for task in tasks:
-        for prompt in prompts:
-            panel_level_data = df[
-                (df['metric'] == metric) &
-                (df['prompt'] == prompt) &
-                (df['aggregation_level'] == 'panel')
-            ]
-            remapped_task_data = remap_task_scores_to_df(panel_level_data)
-            task_data = remapped_task_data[remapped_task_data['task'] == task]
-            worst_panels = task_data.sort_values(by='score', ascending=True).head(k)
-            for _, row in worst_panels.iterrows():
-                fig_key = (row['doi'], row['figure_id'])
-                problematic_figures[fig_key]['panel_tasks'][row['panel_id']].add(task)
-
-    # For each unique figure, create a multiplot page
-    for (doi, figure_id), info in problematic_figures.items():
-        figure_dict = {'doi': doi, 'figure_id': figure_id}
-        image_path = get_image_path(figure_dict)
-        caption_path = get_caption_path(figure_dict)
-        if image_path is None or not image_path.exists():
-            continue
-        if caption_path.exists():
-            with open(caption_path, 'r') as f:
-                caption = f.read()
-        else:
-            caption = "(No caption found)"
-        # Prepare table data
-        table_data = [(panel, ', '.join(sorted(tasks))) for panel, tasks in info['panel_tasks'].items()]
-        col_labels = ['Panel', 'Problematic Tasks']
-        # Create figure
-        fig = plt.figure(figsize=(8.3, 11.7))
-        gs = gridspec.GridSpec(2, 3, height_ratios=[2, 1], width_ratios=[7, 2.5, 0.5])
-        # Image (left, larger)
-        ax_img = fig.add_subplot(gs[0, 0])
-        img = mpimg.imread(str(image_path))
-        ax_img.imshow(img)
-        ax_img.set_anchor('N')
-        ax_img.axis('off')
-        # Caption using fig.text in figure coordinates
-        fig.text(0.15, 1.0, caption, ha='left', va='top', wrap=True, fontsize=6,
-                 bbox=dict(facecolor='none', edgecolor='blue', pad=10))
-        # Table (bottom, spanning all columns)
-        ax_table = fig.add_subplot(gs[1, :])
-        ax_table.axis('off')
-        table = ax_table.table(cellText=table_data, colLabels=col_labels, loc='center')
-        table.auto_set_font_size(False)
-        table.set_fontsize(7)
-        table.scale(1.0, 1.0)  # Make table more narrow and compact
-        fig.suptitle(f"{doi} - {figure_id}", fontsize=16)
-        plt.tight_layout(rect=[0, 0, 1, 0.96])
-        if output_dir:
-            output_path = Path(output_dir) / f'{check_name}_{doi}_{figure_id}_report.png'
-            plt.savefig(output_path, bbox_inches='tight')
-            logger.info(f"Matplotlib report saved to {output_path}")
-            plt.close(fig)
-        else:
-            plt.show()
-        break
-
-
 def check_specific_report_html(checklist_name, check_name, k=3):
     """Display a comprehensive report of a specific check in a checklist as HTML in a notebook.
     Args:
@@ -648,7 +574,11 @@ def check_specific_report_html(checklist_name, check_name, k=3):
     tasks = list(all_panels.iloc[0]["task_scores"].keys())
 
     # Aggregate problematic figures and panels
-    problematic_figures = defaultdict(lambda: {'panel_tasks': defaultdict(set)})
+    problematic_figures = defaultdict(lambda: {
+        'panel_tasks': defaultdict(dict),
+        # 'prompt': defaultdict(set),
+    })
+    
     for task in tasks:
         for prompt in prompts:
             panel_level_data = df[
@@ -657,11 +587,19 @@ def check_specific_report_html(checklist_name, check_name, k=3):
                 (df['aggregation_level'] == 'panel')
             ]
             remapped_task_data = remap_task_scores_to_df(panel_level_data)
+            logger.debug(f"Task: {task}")
             task_data = remapped_task_data[remapped_task_data['task'] == task]
-            worst_panels = task_data.sort_values(by='score', ascending=True).head(k)
+            logger.debug(f"Task data: {
+                task_data[['doi', 'figure_id', 'panel_id', 'score']].head(6)
+            }")
+            # check worse panels with score < 1.0
+            worst_panels = task_data[task_data['score'] < 1.0]
+            worst_panels = worst_panels.sort_values(by='score', ascending=True).head(k)
+            logger.debug(f"Worst panels ({prompt}): {worst_panels}")
             for _, row in worst_panels.iterrows():
                 fig_key = (row['doi'], row['figure_id'])
-                problematic_figures[fig_key]['panel_tasks'][row['panel_id']].add(task)
+                problematic_figures[fig_key]['panel_tasks'][row['panel_id']][task] = row['score']
+                # problematic_figures[fig_key]['prompt'][row['panel_id']].add(prompt)
 
     for (doi, figure_id), info in problematic_figures.items():
         figure_dict = {'doi': doi, 'figure_id': figure_id}
@@ -674,27 +612,66 @@ def check_specific_report_html(checklist_name, check_name, k=3):
                 caption = f.read()
         else:
             caption = "(No caption found)"
-        # Prepare table data
-        table_rows = ""
-        for panel, tasks_set in info['panel_tasks'].items():
-            tasks_str = ', '.join(sorted(tasks_set))
-            table_rows += f"<tr><td>{panel}</td><td>{tasks_str}</td></tr>"
-        table_html = f"""
-        <table style='border-collapse: collapse; width: 80%; margin: 20px;'>
-            <tr><th>Panel</th><th>Problematic Tasks</th></tr>
-            {table_rows}
-        </table>
-        """
         # Image as base64
         with open(image_path, 'rb') as img_f:
             img_b64 = base64.b64encode(img_f.read()).decode('utf-8')
+            
+        # make a first table that lists the panels and the tasks that are problematic
+        problematic_tasks_table_rows = ""
+        for panel, tasks_dict in info['panel_tasks'].items():
+            tasks_str = ', '.join([f"{task} [{score:.2f}]" for task, score in tasks_dict.items()])
+            problematic_tasks_table_rows += f"<tr><td>{panel}</td><td>{tasks_str}</td></tr>"
+        problematic_tasks_table_html = f"""
+        <table style='border-collapse: collapse; width: 80%; margin: 20px;'>
+            <tr><th>Panel</th><th>Problematic Tasks</th></tr>
+            {problematic_tasks_table_rows}
+        </table>
+        """
+        
+        prediction_output_table_html = ""
+        for prompt in prompts:
+            # get the analysis for this figure
+            analysis_path = get_evaluation_path(checklist_name) / check_name / 'analysis.json'
+            if analysis_path.exists():
+                with open(analysis_path, 'r') as f:
+                    analysis_data = json.load(f)
+                    prompt_data = analysis_data.get(prompt, [])
+                    for figure_data in prompt_data:
+                        if figure_data.get('doi') == doi and figure_data.get('figure_id') == figure_id:
+                            model_outputs = figure_data.get('model_output', {}).get('outputs', [])
+                            expected_results = figure_data.get('expected_output', {})
+                            break
+                    
+            prediction_table_rows = "<tr>"
+            for task in tasks:
+                prediction_table_rows += f"<td>{task}</td>"
+            prediction_table_rows += "</tr>"
+            for model_out in model_outputs:
+                prediction_table_rows += "<tr>"
+                for k, v in model_out.items():
+                    prediction_table_rows += f"<td>{v}</td>"
+                prediction_table_rows += "</tr>"
+            logger.info(f"num predictions: {len(model_outputs)}")
+            
+            prediction_output_table_html += f"""
+            <div style='display:flex; flex-direction:row; align-items:flex-start;'>
+            <table style='border-collapse: collapse; width: 80%; margin: 20px;'>
+                <tr><th>Predictions with {prompt}</th></tr>
+                {prediction_table_rows}
+            </table>
+            </div>
+            """
+        # Image
         img_html = f"<img src='data:image/png;base64,{img_b64}' style='max-width:400px; vertical-align:top; margin-right:20px;'/>"
         # Caption
         caption_html = f"<div style='display:inline-block; max-width:400px; vertical-align:top; padding:10px; border:1px solid #0074D9; background:#000000; color:#FFFFFF;'>{caption}</div>"
         # Layout
         html = f"""
         <h3>Paper: {doi} - Figure: {figure_id}</h3>
-        {table_html}
+        <div style='display:flex; flex-direction:row; align-items:flex-start;'>
+            {problematic_tasks_table_html}
+        </div>
+        {prediction_output_table_html}
         <div style='display:flex; flex-direction:row; align-items:flex-start;'>
             {img_html}
             {caption_html}
