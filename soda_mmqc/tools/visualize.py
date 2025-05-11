@@ -635,7 +635,7 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
                 task_data[['doi', 'figure_id', 'panel_id', 'score']].head(6)
             }")
             # check worse panels with score < 1.0
-            not_perfect = task_data[task_data['score'] < 1.0]
+            not_perfect = task_data[task_data['score'] < 0.99]
             bad_panels = not_perfect[not_perfect['score'] < 0.6]
             if len(bad_panels) > 0:
                 worst_panels = bad_panels.sort_values(by='score', ascending=True)
@@ -645,7 +645,6 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
             for _, row in worst_panels.iterrows():
                 fig_key = (row['doi'], row['figure_id'])
                 problematic_figures[fig_key]['panel_tasks'][row['panel_id']][task] = row['score']
-                # problematic_figures[fig_key]['prompt'][row['panel_id']].add(prompt)
 
     for (doi, figure_id), info in problematic_figures.items():
         figure_dict = {'doi': doi, 'figure_id': figure_id}
@@ -665,7 +664,7 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
         # make a first table that lists the panels and the tasks that are problematic
         problematic_tasks_table_rows = ""
         for panel, tasks_dict in info['panel_tasks'].items():
-            tasks_str = ', '.join([f"{task} [{score:.2f}]" for task, score in tasks_dict.items()])
+            tasks_str = ', '.join([f"{t} [{s:.3f}]" for t, s in tasks_dict.items()])
             problematic_tasks_table_rows += f"<tr><td>{panel}</td><td>{tasks_str}</td></tr>"
         problematic_tasks_table_html = f"""
         <table style='border-collapse: collapse; width: 80%; margin: 20px;'>
@@ -710,7 +709,7 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
         # Image
         img_html = f"<img src='data:image/png;base64,{img_b64}' style='max-width:400px; vertical-align:top; margin-right:20px;'/>"
         # Caption
-        caption_html = f"<div style='display:inline-block; max-width:400px; vertical-align:top; padding:10px; border:1px solid #0074D9; background:#000000; color:#FFFFFF;'>{caption}</div>"
+        caption_html = f"<div style='display:inline-block; max-width:400px; vertical-align:top; padding:10px; border:1px solid white; background:#000000; color:#FFFFFF;'>{caption}</div>"
         # Layout
         html = f"""
         <h3>Paper: {doi} - Figure: {figure_id}</h3>
