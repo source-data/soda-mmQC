@@ -6,17 +6,14 @@ The first task is to understand the figure image and see where there are labeled
 
 The task here is to check whether the number and nature of replicates are clearly stated in the figure caption.
 
-Generally speaking, replicates are used to estimate the source of variability in experimental results. Replicates can be "technical" replicates, where the same sample is analyzed multiple times to estimate the technical variability of an assay. In contrast, "biological" replicates involve analyzing multiple independent samples. 
+Generally speaking, replicates are used to estimate the source of variability in experimental results. This can be obtained by analyzing indpendent samples, running independent experiments, analyzing individual samples multiple times, etc... The nature of the replicates should be specified in the figure caption. If several sources of variability are estimated, the types of replicates are used (for example independent samples and repeated measurements per sample). 
 
-The number of replicates should also be specified explicitely. It is ofen indicated as "n=<number of replicates>" in the caption. Sometimes it can also be given as a range, for example "n=5-7 replicates". 
+For each type of replicates, the number of replicates should also be specified explicitely. It is ofen indicated as "n=<number of replicates>" in the caption. Sometimes it can also be given as a range, for example "n=5-7 replicates". 
 
 For each panel in the figure:
 
 1. Determine whether the panel shows results from an experiment involving multiple replicates. To do that you must look at the figure panel but also read the corresponding figure caption to understand whether the experiment involves replicates. 
-2. If the experiment involves replicates, verify whether the number of replicates is mentioned.
-3. If the experiment involves replicates, verify whether the nature of these replicates is stated.
-4. If there replicates, extract the respecitive text of the caption that specifies their number for this panel.
-5. If the nature of the replicates is mentioned, extract the respecitve text that specifies their nature. 
+2. If the experiment involves replicates, provide the numnber and the type of replicates for each type of replicates. Stick to the exact wording provided in the figure caption to describe the type of replicates.
 
 IMPORTANT: When extracting text from the caption, ONLY include the text that is specific to replicates. Do NOT include general descriptions of the figure or panel content.
 
@@ -27,28 +24,24 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
         {
             "panel_label": "A",
             "involves_replicates": "yes",
-            "number_of_replicates: [
-                "2", "3-5"
+            "number_of_replicates": [
+                "3-4",
+                "2",
             ]
+            },
             "type_of_replicates": [
-                "technical",
-                "biological"
-            ],
-            "from_the_caption": [
-                "every sample was analyzed twice",
-                "data show the results from three to five independent samples"
-            ]
-        },
+                "independent experiments",
+                "technical replicates",
+            ] 
         {
             "panel_label": "B",
             "involves_replicates": "no",
             "number_of_replicates": []
-            "type_of_replicates": [],
-            "from_the_caption": []
+            "type_of_replicates": []
         },
     ]
 }
 
 If the caption defines replicates for multiple panels, include the same definition for each relevant panel.
 
-Be thorough and precise in your analysis. Include all panels visible in the figure, even if they don't contain micrographs or microscopy images.
+Be thorough and precise in your analysis.

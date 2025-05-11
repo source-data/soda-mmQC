@@ -361,46 +361,65 @@ def global_checklist_visualization(checklist_name, output_dir=None, metric="sema
         ]
         
         # Add a small offset to x-coordinates to prevent overlapping
-        x_offset = (i - (len(prompts) - 1) / 2) * 0.2
+        offset_width = 0.25
+        x_offset = (i - (len(prompts) - 1) / 2) * offset_width
         # Create numerical x-positions by mapping checks to numbers and adding offset
         check_to_num = {check: j for j, check in enumerate(checks)}
         x_positions = plotting_panel_data['check'].map(check_to_num) + x_offset
         
+        # Add jitter to x positions
+        jitter = np.random.normal(0, 0.03, size=len(x_positions))
+        x_positions = x_positions + jitter
+                
         plot.add_trace(go.Scatter(
             x=x_positions,
             y=plotting_panel_data['score'],
             mode='markers',
             name=prompt,
             marker=dict(
-                color=color_map[prompt],
-                size=8,
-                opacity=0.7,
-                line=dict(width=1, color='white')
+                color="white", #color_map[prompt],
+                size=3,
+                opacity=0.4,
+                line=dict(width=0, color='white')
             ),
             showlegend=True,
             hovertext=plotting_panel_data['doi'] + ' ' + plotting_panel_data['figure_id'] + ' ' + plotting_panel_data['panel_id']
         ))
+
         average_score = plotting_panel_data.groupby('check')['score'].mean().reset_index()
+        std_score = plotting_panel_data.groupby('check')['score'].std().reset_index()
         x_positions = average_score['check'].map(check_to_num) + x_offset
+        num_points = plotting_panel_data['check'].value_counts()
+        
         plot.add_trace(go.Bar(
             x=x_positions,
             y=average_score['score'],  # Use just the score column
+            error_y=dict(
+                type='data',
+                array=std_score['score'],
+                visible=True,
+                color="grey",
+                thickness=1,
+                width=3
+            ),
             name=prompt,
             marker_color=color_map[prompt],
             showlegend=True,
-            width=0.2,  # Control the width of the bars
+            width=offset_width,  # Control the width of the bars
+            # add num_points to hovertext
             hovertext=[
-                f"Check: {check}<br>Average Score: {score:.3f}<br>Prompt: {prompt}" 
+                f"Check: {check}<br>Average Score: {score:.3f}<br>Prompt: {prompt}<br>Num Points: {num_points[check]}"
                 for check, score in zip(average_score['check'], average_score['score'])
             ]
         ))
 
     plot.update_layout(
+        width=1000,
         height=600,
-        width=1200,
-        title=(
-            f'Benchmarking "{checklist_name.title()}"<br>'
-            f'({metric.replace("_", " ").title()})'
+        title=dict(
+            text=f'Benchmarking of "{checklist_name.title()}"<br><span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span>',
+            x=0.5,
+            y=0.95
         ),
         title_x=0.5,
         title_font_size=24,
@@ -499,20 +518,23 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
         tasks = list(remapped_task_data['task'].unique())
 
         # Add a small offset to x-coordinates to prevent overlapping
-        x_offset = (i - (len(prompts) - 1) / 2) * 0.2
+        offset_width = 0.25
+        x_offset = (i - (len(prompts) - 1) / 2) * offset_width
         # Create numerical x-positions by mapping checks to numbers and adding offset
         cat_to_num = {task: j for j, task in enumerate(tasks)}
         x_positions = remapped_task_data['task'].map(cat_to_num) + x_offset
+        jitter = np.random.normal(0, 0.04, size=len(x_positions))
+        x_positions = x_positions + jitter
         plot.add_trace(go.Scatter(
             x=x_positions,
             y=remapped_task_data['score'],
             name=prompt,  # Use prompt name instead of task column
             mode='markers',
             marker=dict(
-                color=color_map[prompt],
-                size=8,
-                opacity=0.7,
-                line=dict(width=1, color='white')
+                color="white",
+                size=3,
+                opacity=0.4,
+                line=dict(width=0, color='white')
             ),
             showlegend=True,
             hovertext=remapped_task_data['doi'] + ' fig. ' + remapped_task_data['figure_id'] + ' ' + remapped_task_data['panel_id']
@@ -529,41 +551,55 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
             error_y=dict(
                 type='data',
                 array=std_score['score'],
-                visible=True
+                visible=True,
+                color="grey",
+                thickness=1,
+                width=3
             ),
             marker_color=color_map[prompt],
             showlegend=True,
-            width=0.2,  # Control the width of the bars
+            width=offset_width,  # Control the width of the bars
             hovertext=[
                 f"Task: {task}<br>Score: {score:.3f}<br>Prompt: {prompt}" 
                 for task, score in zip(remapped_task_data['task'], average_score['score'])
             ]
         ))
         
-        plot.update_layout(
-            title=f'{check_name.replace("_", " ").title()} - {metric.replace("_", " ").title()}',
-            xaxis=dict(
-                title='Task',
-                tickangle=45,
-                ticktext=tasks,
-                tickvals=list(range(len(tasks))),
-                range=[-0.5, len(tasks) - 0.5]  # Add some padding on the sides
-            ),
-            yaxis_title='Score',
-            boxmode='group',  # Group boxes by task
-            showlegend=True,
-            template='plotly_dark'
-        )
+    num_points = plotting_data['prompt'].value_counts()
+    
+    # Format num_points string
+    min_points = num_points.min()
+    max_points = num_points.max()
+    num_points_str = str(min_points) if min_points == max_points else f"{min_points}-{max_points}"
+    
+    plot.update_layout(
+        width=800,
+        height=600,
+        title=f'{check_name.replace("_", " ").title()} (n={num_points_str})<br><span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span>',
+        xaxis=dict(
+            title='Task',
+            tickangle=45,
+            ticktext=tasks,
+            tickvals=list(range(len(tasks))),
+            range=[-0.5, len(tasks) - 0.5]  # Add some padding on the sides
+        ),
+        yaxis_title='Score',
+        boxmode='group',  # Group boxes by task
+        showlegend=True,
+        template='plotly_dark'
+    )
 
     return plot
 
 
-def check_specific_report_html(checklist_name, check_name, k=3):
+def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None, figure_id=None):
     """Display a comprehensive report of a specific check in a checklist as HTML in a notebook.
     Args:
         checklist_name: Name of the checklist (e.g., 'mini')
         check_name: Name of the check (e.g., 'error-bars-defined')
         k: Number of worst panels to consider per task
+        doi: DOI of the paper to display
+        figure_id: Figure ID of the figure to display
     """
     df = get_check_data(checklist_name, check_name)
     if df is None:
@@ -586,6 +622,12 @@ def check_specific_report_html(checklist_name, check_name, k=3):
                 (df['prompt'] == prompt) &
                 (df['aggregation_level'] == 'panel')
             ]
+            if search_doi is not None:
+                # search doi field for search_doi
+                doi_match = panel_level_data['doi'].str.contains(search_doi)
+                panel_level_data = panel_level_data[doi_match]
+            if figure_id is not None:
+                panel_level_data = panel_level_data[panel_level_data['figure_id'] == str(figure_id)]
             remapped_task_data = remap_task_scores_to_df(panel_level_data)
             logger.debug(f"Task: {task}")
             task_data = remapped_task_data[remapped_task_data['task'] == task]
@@ -593,8 +635,12 @@ def check_specific_report_html(checklist_name, check_name, k=3):
                 task_data[['doi', 'figure_id', 'panel_id', 'score']].head(6)
             }")
             # check worse panels with score < 1.0
-            worst_panels = task_data[task_data['score'] < 1.0]
-            worst_panels = worst_panels.sort_values(by='score', ascending=True).head(k)
+            not_perfect = task_data[task_data['score'] < 1.0]
+            bad_panels = not_perfect[not_perfect['score'] < 0.6]
+            if len(bad_panels) > 0:
+                worst_panels = bad_panels.sort_values(by='score', ascending=True)
+            else:
+                worst_panels = not_perfect.sort_values(by='score', ascending=True).head(k)
             logger.debug(f"Worst panels ({prompt}): {worst_panels}")
             for _, row in worst_panels.iterrows():
                 fig_key = (row['doi'], row['figure_id'])

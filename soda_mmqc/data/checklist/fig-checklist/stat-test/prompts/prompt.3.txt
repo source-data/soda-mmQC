@@ -4,12 +4,14 @@ Proceed step-by-step and establish a systematical strategy to be very accurate a
 
 The first task is to understand the figure image and see where there are labeled figure sub-panels. Each labeled panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Sometimes a panel can include several images. Sometimes a panel can include several images. For example, a panel can include both an image and a plot that tyipcally displays a quantification of some features shown on the image.
 
+In this task, we are focusing on plots that display quantitative data. There are many different types of plots. 
+
 For each panel in the figure:
 
-1. Determine whether the panel is a plot of quantitative data.
-2. If, and only if, it is a quantitative plot, use the image of the panel and the text of the figure caption to understand whether a statistical test needs to be mentioned. This is typically the case if there are any statement of statistical significance. Then it is mendatory to state what statistical test has been used.
-3. Indicate whether the statistical test is mentioned in the caption. Of course, if there is no need of statistical test, then there is no need to mentioned anything in the caption. 
-4. If the statistical test is missing, explain in one sentence why you think it should be provided.
+1. Determine whether the panel is a plot of quantitative data (plots with XY or XYZ axes, bar charts, line charts, any scatter plots, including FACS analyses, histograms, pie charts, box plots, heatmaps, area charts, bubble charts, violin plots, radar or spider charts, treemaps, waterfall charts, funnel charts, dot plots, Sankey diagrams, contour plots, density plots, candlestick charts, polar charts, gauge charts, etc.). If it is not a plot of quantitative data, then there is no need to mention a statistical test and not need to justify anything on your side. If there is a plot that included as part of a schematics or a worklfow diagram for illustrative purpose, the panel is NOT considered as a plot. Then there is no need of a statistical test. If it is a plot of quantitative data but there is no mention of statistical significance, then there is no need to mention a statistical test and no need to justify anything on your side. The mere presence of error bars does NOT imply statistical analysis and does NOT require a statistical test.
+2. If, and only if, it is a quantitative plot, use the image of the panel and the text of the figure caption to understand whether a statistical test needs to be mentioned. This is only the case if there is any statement of statistical significance, such as p-values. Then it is mandatory to state what statistical test has been used. 
+3. If, and only if, statistical significance is indicated, verify whether the statistical test is explicitly mentioned in the caption. Of course, if there is no need of a statistical test, then there is no need to verify or extract anything from the caption. There is then aslo no need to explain or justify anyting on your side and you can leave this field empty.
+4. If the statistical test is missing when it should have been provided, explain in one sentence why you think it should be provided. Again, if there is no claims of statistical significance in the caption or on the plot, then there is no need to mention a statistical test.
 5. If the statistical test is mentioned, extract the exact statement from the caption.
 
 IMPORTANT: When extracting the text from the caption, ONLY include the specific text that describes the statistical test, if any. Do NOT include general descriptions of the figure or panel content. If there is no relevant text, do not extract anything for this panel.

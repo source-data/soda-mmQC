@@ -31,11 +31,11 @@
                             },
                             "justify_why_test_is_missing": {
                                 "type": "string",
-                                "description": "Justification for why the statistical test is missing"
+                                "description": "Only when needed, justify why the statistical test is missing"
                             },
                             "from_the_caption": {
                                 "type": "string",
-                                "description": "Extracted text explaining the statistical test"
+                                "description": "Only when needed, extracted text explaining the statistical test"
                             }
                         },
                         "required": [

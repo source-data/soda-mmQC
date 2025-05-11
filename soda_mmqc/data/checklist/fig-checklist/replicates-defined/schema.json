@@ -23,17 +23,17 @@
                                 "type": "array",
                                 "items": {
                                     "type": "string",
-                                    "description": "Number of replicates"
+                                    "description": "Number of replicates of a given type"
                                 },
-                                "description": "List of the number of replicates for each type of replicates"
+                                "description": "Number of replicates for each type of replicates"
                             },
                             "type_of_replicates": {
                                 "type": "array",
                                 "items": {
                                     "type": "string",
-                                    "description": "The replicated things"
+                                    "description": "The type of replicates"
                                 },
-                                "description": "List of the replicated things"
+                                "description": "List of types of replicates"
                             } 
                         },
                         "required": [
