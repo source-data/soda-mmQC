@@ -18,10 +18,10 @@
         },
         {
             "panel_label": "C",
-            "is_a_plot": "no",
-            "statistical_test_needed": "no",
-            "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "A statistical level of significance is mentioned in the caption (P<0.05) but the test is not specified.",
             "from_the_caption": ""
         },
         {
@@ -145,5 +145,5 @@
             "from_the_caption": "Unpaired two-tailed Student\u2019s t test was performed."
         }
     ],
-    "updated_at": "2025-05-08 13:43:55"
+    "updated_at": "2025-05-11 18:38:49"
 }
