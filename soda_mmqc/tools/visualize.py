@@ -55,7 +55,7 @@ def get_features_from_schema(schema):
         return []
 
 
-def load_analysis_results(checklist_name, check_name):
+def load_analysis_results(checklist_name, check_name, model):
     """Load the analysis results from JSON files for all prompts.
     
     Args:
@@ -66,14 +66,16 @@ def load_analysis_results(checklist_name, check_name):
         Dictionary mapping prompt names to their analysis results
     """
     # Get the evaluation directory using the config function
-    base_path = get_evaluation_path(checklist_name) / check_name
+    base_path = get_evaluation_path(checklist_name) / check_name / model
 
     # Check if we have a summary file
     analysis_file = base_path / 'analysis.json'
     if analysis_file.exists():
         with open(analysis_file, 'r') as f:
             return json.load(f)
-    return {}
+    else:
+        logger.warning(f"Does not exist: {str(analysis_file)}")
+        return {}
 
 
 def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame:
@@ -273,22 +275,19 @@ def get_checks_for_checklist(checklist_name):
     checklist_path = get_evaluation_path(checklist_name)
     if not checklist_path.exists():
         raise ValueError(f"Checklist directory not found: {checklist_path}")
-    
+
     # Get all subdirectories that contain analysis results
     checks = []
     for check_dir in checklist_path.iterdir():
         if check_dir.is_dir():
-            # Check if this directory contains analysis results
-            has_analysis = (check_dir / 'analysis.json').exists()
-            if has_analysis:
-                checks.append(check_dir.name)
-    
+            checks.append(check_dir.name)
+
     return checks
 
 
-def get_check_data(checklist_name, check_name) -> pd.DataFrame | None:
+def get_check_data(checklist_name, check_name, model) -> pd.DataFrame | None:
     """Get data for all checks in a checklist.
-    
+
     Args:
         checklist_name: Name of the checklist (e.g., 'mini')
         check_name: Name of the check (e.g., 'error-bars-defined')
@@ -297,7 +296,7 @@ def get_check_data(checklist_name, check_name) -> pd.DataFrame | None:
     """
 
     try:
-        results = load_analysis_results(checklist_name, check_name)
+        results = load_analysis_results(checklist_name, check_name, model)
     except Exception as e:
         logger.error(f"Error loading analysis results for check {check_name}: {e}")
         return None
@@ -307,7 +306,7 @@ def get_check_data(checklist_name, check_name) -> pd.DataFrame | None:
     except Exception as e:
         logger.error(f"Error preparing data for check {check_name}: {e}")
         return None
-    
+
     if not df.empty:
         df['check'] = check_name
         return df
@@ -316,7 +315,12 @@ def get_check_data(checklist_name, check_name) -> pd.DataFrame | None:
         return None
 
 
-def global_checklist_visualization(checklist_name, output_dir=None, metric="semantic_similarity"):
+def global_checklist_visualization(
+    checklist_name, 
+    model,
+    output_dir=None,
+    metric="semantic_similarity"
+):
     """Create a comprehensive visualization of all checks in a checklist.
     
     Args:
@@ -337,7 +341,7 @@ def global_checklist_visualization(checklist_name, output_dir=None, metric="sema
     # Collect data from all checks
     data = []
     for check_name in checks:
-        df = get_check_data(checklist_name, check_name)
+        df = get_check_data(checklist_name, check_name, model)
         if df is not None:
             data.append(df)
             
@@ -427,7 +431,9 @@ def global_checklist_visualization(checklist_name, output_dir=None, metric="sema
         width=1000,
         height=600,
         title=dict(
-            text=f'Benchmarking of "{checklist_name.title()}"<br><span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span>',
+            text=f'Benchmarking of "{checklist_name.title()}"<br>'
+            f'<span style="font-size: 0.5em; color: #888;">Comparing values with {metric.replace("_", " ")}</span><br>'
+            f'<span style="font-size: 0.5em; color: #888;">Model: {model}</span>',
             x=0.5,
             y=0.95
         ),
@@ -495,7 +501,9 @@ def remap_task_scores_to_df(plotting_data):
 
 
 def check_specific_plot(
-    checklist_name, check_name,
+    checklist_name,
+    check_name,
+    model,
     output_dir=None,
     score: str = "score",  # true_positives, false_positives, false_negatives, precision, recall, f1_score, semantic_similarity
     metric: str = "semantic_similarity",
@@ -510,7 +518,7 @@ def check_specific_plot(
     """
 
     # Get data for this check
-    df = get_check_data(checklist_name, check_name)
+    df = get_check_data(checklist_name, check_name, model)
     if df is None:
         logger.warning(f"No data found for check {check_name}")
         return  
@@ -604,7 +612,9 @@ def check_specific_plot(
     plot.update_layout(
         width=800,
         height=600,
-        title=f'{score.replace("_", " ")} for {check_name.replace("_", " ")} (n={num_points_str})<br><span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span>',
+        title=f'{score.replace("_", " ")} for {check_name.replace("_", " ")} (n={num_points_str})<br>'
+        f'<span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span><br>'
+        f'<span style="font-size: 0.8em; color: #888;">Model: {model}</span>',
         xaxis=dict(
             title='Task',
             tickangle=45,
@@ -628,6 +638,7 @@ def check_specific_plot(
 def check_specific_report_html(
     checklist_name, 
     check_name, 
+    model,
     k=3, 
     search_doi=None, 
     figure_id=None,
@@ -643,7 +654,7 @@ def check_specific_report_html(
         doi: DOI of the paper to display
         figure_id: Figure ID of the figure to display
     """
-    df = get_check_data(checklist_name, check_name)
+    df = get_check_data(checklist_name, check_name, model)
     if df is None:
         logger.warning(f"No data found for check {check_name}")
         return
@@ -721,7 +732,7 @@ def check_specific_report_html(
         prediction_output_table_html = ""
         for prompt in prompts:
             # get the analysis for this figure
-            analysis_path = get_evaluation_path(checklist_name) / check_name / 'analysis.json'
+            analysis_path = get_evaluation_path(checklist_name) / check_name / model / 'analysis.json'
             if analysis_path.exists():
                 with open(analysis_path, 'r') as f:
                     analysis_data = json.load(f)
@@ -757,7 +768,7 @@ def check_specific_report_html(
         caption_html = f"<div style='display:inline-block; max-width:400px; vertical-align:top; padding:10px; border:1px solid white; background:#000000; color:#FFFFFF;'>{caption}</div>"
         # Layout
         html = f"""
-        <h3>Paper: {doi} - Figure: {figure_id}</h3>
+        <h3>Paper: {doi} - Figure: {figure_id} with model {model}</h3>
         <div style='display:flex; flex-direction:row; align-items:flex-start;'>
             {problematic_tasks_table_html}
         </div>

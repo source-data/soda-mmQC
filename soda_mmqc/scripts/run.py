@@ -221,7 +221,16 @@ def run_model(
                         "caption": example["caption"],
                     }
                     try:
-                        model_output = generate_response(model_input, model=model)
+                        model_output, raw_response = generate_response(
+                            model_input,
+                            model=model,
+                            metadata={
+                                "doi": example["doi"],
+                                "figure_id": example["figure_id"],
+                                "check_name": check_name,
+                                "prompt_name": prompt_name
+                            }
+                        )
                     except KeyError as e:
                         logger.error(
                             f"Missing required key in model_input: {e}. "
@@ -299,7 +308,8 @@ def analyze_results(
 def save_analysis(
     analyzed_results: Dict[str, List[Dict[str, Any]]],
     checklist_name: str,
-    check_name: str
+    check_name: str,
+    model: str
 ):
     """Save the analysis results to a file.
     
@@ -312,7 +322,7 @@ def save_analysis(
     
     # Save analysis results
     try:
-        analysis_path = get_evaluation_path(checklist_name) / check_name
+        analysis_path = get_evaluation_path(checklist_name) / check_name / model
         os.makedirs(analysis_path, exist_ok=True)
         
         # Also save a summary file with all prompts
@@ -486,8 +496,8 @@ def process_check(
 
         # Store results for this prompt
         all_results[prompt_name] = analyzed_results
-        
-    save_analysis(all_results, checklist_name, check_name)
+
+    save_analysis(all_results, checklist_name, check_name, model)
 
     return all_results
 
