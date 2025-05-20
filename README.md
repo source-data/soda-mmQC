@@ -17,21 +17,38 @@ pip install -e .
 
 ## Usage
 
-After installation, you can run the tool using:
+After installation, you can use the following commands:
 
 ```bash
 # Run all checklists
-soda-mmqc
+soda-mmqc run [--model MODEL_NAME] [--mock] [--no-cache]
 
 # Run a specific checklist
-soda-mmqc --checklist checklist-name
+soda-mmqc run --checklist CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache]
+
+# Initialize the project (first time setup)
+soda-mmqc init
+
+# Curate and manage checklists
+soda-mmqc curate CHECKLIST_NAME
+
+# Visualize results
+soda-mmqc viz
 
 # Set logging level
-soda-mmqc --log-level DEBUG
+soda-mmqc run --log-level DEBUG
 
 # Specify custom results directory
-soda-mmqc --results-dir path/to/results
+soda-mmqc run --results-dir path/to/results
 ```
+
+Command line options:
+- `--model`: Specify the model to use (default: "gpt-4o-2024-08-06")
+- `--mock`: Use expected outputs as model outputs (no API calls)
+- `--no-cache`: Disable caching of model outputs
+- `--checklist`: Specify a particular checklist to run
+- `--log-level`: Set logging level (DEBUG, INFO, WARNING, ERROR)
+- `--results-dir`: Specify custom directory for results
 
 ## Project Structure
 
@@ -39,17 +56,55 @@ soda-mmqc --results-dir path/to/results
 soda-mmqc/
 ├── soda_mmqc/
 │   ├── __init__.py
+│   ├── config.py
+│   ├── model_api.py
+│   ├── model_cache.py
+│   ├── evaluation.py
 │   ├── scripts/
 │   │   ├── __init__.py
-│   │   └── run.py
+│   │   ├── run.py
+│   │   ├── curate.py
+│   │   └── visualize.py
+│   ├── tools/
+│   │   └── ...
 │   ├── data/
 │   │   ├── __init__.py
-│   │   └── checklist/
-│   ├── model_api.py
-│   └── evaluation.py
+│   │   ├── checklist/
+│   │   ├── examples/
+│   │   ├── evaluation/
+│   │   │   └── fig-checklist/
+│   │   │       ├── error-bars-defined/
+│   │   │       ├── individual-data-points/
+│   │   │       ├── micrograph-scale-bar/
+│   │   │       ├── micrograph-symbols-defined/
+│   │   │       ├── plot-axis-units/
+│   │   │       ├── plot-gap-labeling/
+│   │   │       ├── replicates-defined/
+│   │   │       ├── stat-significance-level/
+│   │   │       └── stat-test/
+│   │   └── plots/
+│   └── logs/
+├── notebooks/
+│   ├── plots.ipynb
+│   ├── images/
+│   └── cache/
 ├── pyproject.toml
 └── README.md
 ```
+
+## Dependencies
+
+The project requires Python 3.8 or higher and includes the following main dependencies:
+
+- python-dotenv: Environment variable management
+- openai & anthropic: LLM API integration
+- Pillow: Image processing
+- nltk & sentence-transformers: Text processing and embeddings
+- scikit-learn & numpy: Data processing and analysis
+- plotly & matplotlib: Data visualization
+- streamlit: Web interface
+- jupyter & jupyterlab: Interactive development
+- pytest: Testing framework
 
 The Open Library of Multimodal Data Checklists (mmQC)
 ===============================================================
@@ -100,14 +155,28 @@ Each check is defined by a JSON file in the `data/checks/` directory.
 
 ## Checklists:
 
-Several checks can be grouped in a single JSON file, for instance checks related to the statistics, editorial and microscopy standards can be grouped in their respective checklist files:
+A checklist is a collection of related checks, organized in a directory structure. Each check in a checklist has its own directory containing:
 
+```
+checklist/
+├── fig-checklist/                    # Main checklist directory
+│   ├── error-bars-defined/           # Individual check directory
+│   │   ├── prompts/                  # Directory containing prompt templates
+│   │   ├── benchmark.json           # Test examples and expected outputs
+│   │   └── schema.json              # JSON schema for check output
+│   ├── individual-data-points/
+│   │   ├── prompts/
+│   │   ├── benchmark.json
+│   │   └── schema.json
+│   └── ...
+└── doc-checklist/                    # Another checklist
+    └── ...
+```
 
-    data/checklist/
-      ├── editorial.json       # Checklist for editorial compliance
-      ├── statistics.json      # Checklist for statistical integrity
-      ├── microscopy.json      # Checklist for microscopy-specific guidelines
-
+Each check directory contains:
+- `prompts/`: Directory containing the prompt templates used for the check
+- `benchmark.json`: Contains the test examples and their expected outputs
+- `schema.json`: Defines the structure of the expected output for the check
 
 ## Benchmarking data:
 
