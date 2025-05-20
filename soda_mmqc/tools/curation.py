@@ -208,7 +208,7 @@ def deserialize_value(value, schema):
             return value
             # Otherwise try JSON as fallback
         except Exception as e:
-            error_msg = f"{e.__class__.__name__} deserializing YAML string: {value}"
+            error_msg = f"{e.__class__.__name__} deserializing YAML string: {value}\n{e}"
             st.session_state.deserialization_errors.append(error_msg)
             logger.error(error_msg)
             return value

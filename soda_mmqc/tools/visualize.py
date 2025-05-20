@@ -191,7 +191,8 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                         'std_score': figure_analysis.get('std_score', None),
                         'precision': figure_analysis.get('precision', None),
                         'recall': figure_analysis.get('recall', None),
-                        'f1_score': figure_analysis.get('f1_score', None)
+                        'f1_score': figure_analysis.get('f1_score', None),
+                        'semantic_similarity': figure_analysis.get('semantic_similarity', None)
                     }
                     # the scores detailed by TASK
                     detailed_scores = {}
@@ -204,7 +205,8 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                             'num_false_positives': task_scores.get('num_false_positives', None),
                             'precision': task_scores.get('precision', None),
                             'recall': task_scores.get('recall', None),
-                            'f1_score': task_scores.get('f1_score', None)
+                            'f1_score': task_scores.get('f1_score', None),
+                            'semantic_similarity': task_scores.get('semantic_similarity', None)
                         }
                     new_data_point['detailed_scores'] = detailed_scores
                     data_points.append(new_data_point)
@@ -224,9 +226,13 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                             # this is not so useful, aggreagation across all tasks for this panel
                             'score': panel_analysis.get('score', None),
                             'std_score': panel_analysis.get('std_score', None),
+                            'true_positives': panel_analysis.get('true_positives', None),
+                            'false_positives': panel_analysis.get('false_positives', None),
+                            'false_negatives': panel_analysis.get('false_negatives', None),
                             'precision': panel_analysis.get('precision', None),
                             'recall': panel_analysis.get('recall', None),
-                            'f1_score': panel_analysis.get('f1_score', None)
+                            'f1_score': panel_analysis.get('f1_score', None),
+                            'semantic_similarity': panel_analysis.get('semantic_similarity', None)
                         }
                         # the scores detailed by TASK for this panel
                         # this is the most useful part
@@ -236,7 +242,11 @@ def prepare_data_for_plotting(results_by_prompt: Dict[str, Any]) -> pd.DataFrame
                                 'score': scores.get('score', None),
                                 'true_positives': scores.get('true_positives', None),
                                 'false_positives': scores.get('false_positives', None),
-                                'false_negatives': scores.get('false_negatives', None)
+                                'false_negatives': scores.get('false_negatives', None),
+                                'precision': scores.get('precision', None),
+                                'recall': scores.get('recall', None),
+                                'f1_score': scores.get('f1_score', None),
+                                'semantic_similarity': scores.get('semantic_similarity', None)
                             }
                         new_data_point['task_scores'] = task_scores
                         data_points.append(new_data_point)
@@ -361,7 +371,7 @@ def global_checklist_visualization(checklist_name, output_dir=None, metric="sema
         ]
         
         # Add a small offset to x-coordinates to prevent overlapping
-        offset_width = 0.25
+        offset_width = 1 / (len(prompts)+1)
         x_offset = (i - (len(prompts) - 1) / 2) * offset_width
         # Create numerical x-positions by mapping checks to numbers and adding offset
         check_to_num = {check: j for j, check in enumerate(checks)}
@@ -459,7 +469,9 @@ def remap_task_scores_to_df(plotting_data):
     """
     task_data = plotting_data[['doi', 'figure_id', 'panel_id', 'task_scores']]
     remapped_task_data = pd.DataFrame(columns=[
-        'doi', 'figure_id', 'panel_id', 'task', 'score', 'true_positives', 'false_positives', 'false_negatives'
+        'doi', 'figure_id', 'panel_id', 'task', 'score',
+        'true_positives', 'false_positives', 'false_negatives',
+        'precision', 'recall', 'f1_score', 'semantic_similarity'
     ])
     for j, row in task_data.iterrows():
         # the task_scores is a dict of task names to their scores
@@ -473,12 +485,21 @@ def remap_task_scores_to_df(plotting_data):
                 'score': task_scores['score'],
                 'true_positives': task_scores['true_positives'],
                 'false_positives': task_scores['false_positives'],
-                'false_negatives': task_scores['false_negatives']
+                'false_negatives': task_scores['false_negatives'],
+                'precision': task_scores['precision'],
+                'recall': task_scores['recall'],
+                'f1_score': task_scores['f1_score'],
+                'semantic_similarity': task_scores['semantic_similarity'],
             }
     return remapped_task_data
 
 
-def check_specific_plot(checklist_name, check_name, output_dir=None, metric="semantic_similarity"):
+def check_specific_plot(
+    checklist_name, check_name,
+    output_dir=None,
+    score: str = "score",  # true_positives, false_positives, false_negatives, precision, recall, f1_score, semantic_similarity
+    metric: str = "semantic_similarity",
+):
     """Create a visualization of a specific check in a checklist.
     
     Args:
@@ -505,20 +526,22 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
     plot = go.Figure()
     
     # scatter plot and bar chart for each tasks of the check
+    num_points = {}
     for i, prompt in enumerate(prompts):
-        plotting_data = df.loc[
+        panel_data = df.loc[
             (df['prompt'] == prompt) &
             (df['metric'] == metric) &
             (df['aggregation_level'] == 'panel')
         ]
-        logger.info(f"Creating plot ({prompt}, {metric}, {check_name})...")
-        logger.info(f"Plotting data: {len(plotting_data)} rows")
+        num_points[prompt] = len(panel_data)
+        logger.info(f"Creating plot ({prompt}, {metric}), plotting {score} for {check_name}...")
+        logger.info(f"Plotting data: {len(panel_data)} rows")
 
-        remapped_task_data = remap_task_scores_to_df(plotting_data)
+        remapped_task_data = remap_task_scores_to_df(panel_data)
         tasks = list(remapped_task_data['task'].unique())
 
         # Add a small offset to x-coordinates to prevent overlapping
-        offset_width = 0.25
+        offset_width = 1 / (len(prompts)+1)
         x_offset = (i - (len(prompts) - 1) / 2) * offset_width
         # Create numerical x-positions by mapping checks to numbers and adding offset
         cat_to_num = {task: j for j, task in enumerate(tasks)}
@@ -527,7 +550,7 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
         x_positions = x_positions + jitter
         plot.add_trace(go.Scatter(
             x=x_positions,
-            y=remapped_task_data['score'],
+            y=remapped_task_data[score],
             name=prompt,  # Use prompt name instead of task column
             mode='markers',
             marker=dict(
@@ -539,18 +562,24 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
             showlegend=True,
             hovertext=remapped_task_data['doi'] + ' fig. ' + remapped_task_data['figure_id'] + ' ' + remapped_task_data['panel_id']
         ))
-        
-        average_score = remapped_task_data.groupby('task')['score'].mean().reset_index()
-        std_score = remapped_task_data.groupby('task')['score'].std().reset_index()
+
+        # check_data = df.loc[
+        #     (df['prompt'] == prompt) &
+        #     (df['metric'] == metric) &
+        #     (df['aggregation_level'] == 'check')
+        # ]
+
+        average_score = remapped_task_data.groupby('task')[score].mean().reset_index()
+        std_score = remapped_task_data.groupby('task')[score].std().reset_index()
         x_positions = average_score['task'].map(cat_to_num) + x_offset
         # Add a bar chart for each task
         plot.add_trace(go.Bar(
             x=x_positions,
-            y=average_score['score'],
+            y=average_score[score],
             name=prompt,
             error_y=dict(
                 type='data',
-                array=std_score['score'],
+                array=std_score[score],
                 visible=True,
                 color="grey",
                 thickness=1,
@@ -560,22 +589,22 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
             showlegend=True,
             width=offset_width,  # Control the width of the bars
             hovertext=[
-                f"Task: {task}<br>Score: {score:.3f}<br>Prompt: {prompt}" 
-                for task, score in zip(remapped_task_data['task'], average_score['score'])
+                f"Task: {t}<br>{s}: {s:.3f}<br>Prompt: {prompt}" 
+                for t, s in zip(remapped_task_data['task'], average_score[score])
             ]
         ))
-        
-    num_points = plotting_data['prompt'].value_counts()
+    
+     
     
     # Format num_points string
-    min_points = num_points.min()
-    max_points = num_points.max()
+    min_points = min(num_points.values())
+    max_points = max(num_points.values())
     num_points_str = str(min_points) if min_points == max_points else f"{min_points}-{max_points}"
     
     plot.update_layout(
         width=800,
         height=600,
-        title=f'{check_name.replace("_", " ").title()} (n={num_points_str})<br><span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span>',
+        title=f'{score.replace("_", " ")} for {check_name.replace("_", " ")} (n={num_points_str})<br><span style="font-size: 0.8em; color: #888;">Comparing values with {metric.replace("_", " ")}</span>',
         xaxis=dict(
             title='Task',
             tickangle=45,
@@ -583,16 +612,29 @@ def check_specific_plot(checklist_name, check_name, output_dir=None, metric="sem
             tickvals=list(range(len(tasks))),
             range=[-0.5, len(tasks) - 0.5]  # Add some padding on the sides
         ),
-        yaxis_title='Score',
+        yaxis_title=f'{score.replace("_", " ")}',
         boxmode='group',  # Group boxes by task
         showlegend=True,
         template='plotly_dark'
     )
+    if output_dir:
+        output_path = Path(output_dir) / f'{check_name}_{score}_{metric}_analysis.html'
+        plot.write_html(str(output_path))
+        logger.info(f"Visualization for {score} saved to {output_path}")
 
     return plot
 
 
-def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None, figure_id=None):
+def check_specific_report_html(
+    checklist_name, 
+    check_name, 
+    k=3, 
+    search_doi=None, 
+    figure_id=None,
+    score: str = "score",  # true_positives, false_positives, false_negatives, precision, recall, f1_score, semantic_similarity
+    metric: str = "semantic_similarity",
+    prompt: str = "",
+):
     """Display a comprehensive report of a specific check in a checklist as HTML in a notebook.
     Args:
         checklist_name: Name of the checklist (e.g., 'mini')
@@ -605,7 +647,10 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
     if df is None:
         logger.warning(f"No data found for check {check_name}")
         return
-    prompts = list(df['prompt'].unique())
+    if prompt:
+        prompts = [prompt]
+    else:
+        prompts = list(df['prompt'].unique())
     all_panels = df[df['aggregation_level'] == 'panel']
     tasks = list(all_panels.iloc[0]["task_scores"].keys())
 
@@ -618,7 +663,7 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
     for task in tasks:
         for prompt in prompts:
             panel_level_data = df[
-                (df['metric'] == 'semantic_similarity') &
+                (df['metric'] == metric) &
                 (df['prompt'] == prompt) &
                 (df['aggregation_level'] == 'panel')
             ]
@@ -635,16 +680,16 @@ def check_specific_report_html(checklist_name, check_name, k=3, search_doi=None,
                 task_data[['doi', 'figure_id', 'panel_id', 'score']].head(6)
             }")
             # check worse panels with score < 1.0
-            not_perfect = task_data[task_data['score'] < 0.99]
-            bad_panels = not_perfect[not_perfect['score'] < 0.6]
+            not_perfect = task_data[task_data[score] < 0.99]
+            bad_panels = not_perfect[not_perfect[score] < 0.6]
             if len(bad_panels) > 0:
-                worst_panels = bad_panels.sort_values(by='score', ascending=True)
+                worst_panels = bad_panels.sort_values(by=score, ascending=True)
             else:
-                worst_panels = not_perfect.sort_values(by='score', ascending=True).head(k)
+                worst_panels = not_perfect.sort_values(by=score, ascending=True).head(k)
             logger.debug(f"Worst panels ({prompt}): {worst_panels}")
             for _, row in worst_panels.iterrows():
                 fig_key = (row['doi'], row['figure_id'])
-                problematic_figures[fig_key]['panel_tasks'][row['panel_id']][task] = row['score']
+                problematic_figures[fig_key]['panel_tasks'][row['panel_id']][task] = row[score]
 
     for (doi, figure_id), info in problematic_figures.items():
         figure_dict = {'doi': doi, 'figure_id': figure_id}
