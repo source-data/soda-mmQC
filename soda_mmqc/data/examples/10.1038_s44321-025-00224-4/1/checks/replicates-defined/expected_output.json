@@ -4,9 +4,13 @@
             "panel_label": "A",
             "involves_replicates": "yes",
             "number_of_replicates": [
+                "5",
                 "5"
             ],
-            "type_of_replicates": []
+            "type_of_replicates": [
+                "in NC",
+                "in HFD"
+            ]
         },
         {
             "panel_label": "B",
@@ -29,17 +33,27 @@
         {
             "panel_label": "E",
             "involves_replicates": "yes",
-            "number_of_replicates": [],
-            "type_of_replicates": []
+            "number_of_replicates": [
+                "5",
+                "5"
+            ],
+            "type_of_replicates": [
+                "in NC",
+                "in HFD"
+            ]
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "6-7"
+                "6",
+                "7"
             ],
-            "type_of_replicates": []
+            "type_of_replicates": [
+                "in NC",
+                "in HFD"
+            ]
         }
     ],
-    "updated_at": "2025-05-08 15:11:51"
+    "updated_at": "2025-05-16 10:17:32"
 }

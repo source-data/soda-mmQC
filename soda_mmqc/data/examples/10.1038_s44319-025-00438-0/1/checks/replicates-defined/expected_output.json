@@ -84,7 +84,7 @@
             "panel_label": "K",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "60 cells",
+                "60",
                 "3"
             ],
             "type_of_replicates": [
@@ -96,7 +96,7 @@
             "panel_label": "L",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "60 cells",
+                "60",
                 "3"
             ],
             "type_of_replicates": [
@@ -132,26 +132,26 @@
             "panel_label": "Q",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "15 mitotic cells",
-                "three independent experiments"
+                "15",
+                "3"
             ],
             "type_of_replicates": [
-                "technical",
-                "biological"
+                "mitotic cells",
+                "independent experiments"
             ]
         },
         {
             "panel_label": "R",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "15 mitotic cells",
-                "three independent experiments"
+                "15",
+                "3"
             ],
             "type_of_replicates": [
-                "technical",
-                "biological"
+                "mitotic cells",
+                "independent experiments"
             ]
         }
     ],
-    "updated_at": "2025-05-08 15:12:04"
+    "updated_at": "2025-05-15 16:34:57"
 }

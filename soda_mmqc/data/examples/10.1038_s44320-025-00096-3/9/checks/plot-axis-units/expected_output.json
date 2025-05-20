@@ -65,11 +65,16 @@
                 },
                 {
                     "axis": "y",
-                    "answer": "not needed"
+                    "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "justify_why_units_are_missing": "",
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "number of tryptic peptides"
+                }
+            ]
         },
         {
             "panel_label": "F",
@@ -143,5 +148,5 @@
             "unit_definition_as_provided": []
         }
     ],
-    "updated_at": "2025-05-08 15:17:05"
+    "updated_at": "2025-05-19 11:02:15"
 }

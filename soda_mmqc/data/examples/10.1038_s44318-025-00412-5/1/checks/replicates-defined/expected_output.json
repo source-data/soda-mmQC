@@ -52,30 +52,36 @@
             "panel_label": "G",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "2"
+                "2",
+                "3"
             ],
             "type_of_replicates": [
-                "technical replicates"
+                "technical duplicates",
+                "independent experiments"
             ]
         },
         {
             "panel_label": "H",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "2"
+                "2",
+                "3"
             ],
             "type_of_replicates": [
-                "technical replicates"
+                "technical duplicates",
+                "independent experiments"
             ]
         },
         {
             "panel_label": "I",
             "involves_replicates": "yes",
             "number_of_replicates": [
+                "3",
                 "3"
             ],
             "type_of_replicates": [
-                "technical replicates"
+                "technical duplicates",
+                "independent experiments"
             ]
         },
         {
@@ -95,5 +101,5 @@
             ]
         }
     ],
-    "updated_at": "2025-05-08 15:12:42"
+    "updated_at": "2025-05-16 10:35:15"
 }

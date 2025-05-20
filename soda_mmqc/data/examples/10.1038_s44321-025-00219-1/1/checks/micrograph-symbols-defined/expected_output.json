@@ -10,9 +10,15 @@
         {
             "panel_label": "Aii",
             "micrograph": "yes",
-            "symbols": [],
-            "symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "symbols": [
+                "white arrow"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "White arrows indicate cell regions experiencing membrane bulging"
+            ]
         },
         {
             "panel_label": "B",
@@ -24,10 +30,16 @@
         {
             "panel_label": "C",
             "micrograph": "yes",
-            "symbols": [],
-            "symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "symbols": [
+                "white arrow"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "White arrows indicate cell regions experiencing membrane bulging"
+            ]
         }
     ],
-    "updated_at": "2025-05-10 14:56:15"
+    "updated_at": "2025-05-14 10:51:26"
 }

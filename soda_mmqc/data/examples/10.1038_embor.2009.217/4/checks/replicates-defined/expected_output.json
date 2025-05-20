@@ -7,7 +7,7 @@
                 "3"
             ],
             "type_of_replicates": [
-                "independent experiments"
+                "experiments"
             ]
         },
         {
@@ -25,7 +25,7 @@
                 "3"
             ],
             "type_of_replicates": [
-                "independent experiments"
+                "experiments"
             ]
         },
         {
@@ -37,5 +37,5 @@
             "type_of_replicates": []
         }
     ],
-    "updated_at": "2025-05-08 15:12:18"
+    "updated_at": "2025-05-16 10:27:44"
 }

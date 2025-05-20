@@ -22,30 +22,36 @@
             "panel_label": "D",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "15,25"
+                "15",
+                "25"
             ],
             "type_of_replicates": [
-                "branch points"
+                "WT dendrites",
+                "mutant dendrites"
             ]
         },
         {
             "panel_label": "E",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "15, 25"
+                "15",
+                "25"
             ],
             "type_of_replicates": [
-                "branch points"
+                "WT dendrites",
+                "mutant dendrites"
             ]
         },
         {
             "panel_label": "F",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "15, 25"
+                "15",
+                "25"
             ],
             "type_of_replicates": [
-                "branch points"
+                "WT dendrites",
+                "mutant dendrites"
             ]
         },
         {
@@ -70,32 +76,44 @@
             "panel_label": "J",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "5, 11, 9"
+                "5",
+                "11",
+                "9"
             ],
             "type_of_replicates": [
-                "branch points"
+                "WT",
+                "sin1",
+                "rictor"
             ]
         },
         {
             "panel_label": "K",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "5, 11, 9"
+                "5",
+                "11",
+                "9"
             ],
             "type_of_replicates": [
-                "branch points"
+                "WT",
+                "sin1",
+                "rictor"
             ]
         },
         {
             "panel_label": "L",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "5, 11, 9"
+                "5",
+                "11",
+                "9"
             ],
             "type_of_replicates": [
-                "branch points"
+                "WT",
+                "sin1",
+                "rictor"
             ]
         }
     ],
-    "updated_at": "2025-05-08 15:12:13"
+    "updated_at": "2025-05-16 10:23:00"
 }

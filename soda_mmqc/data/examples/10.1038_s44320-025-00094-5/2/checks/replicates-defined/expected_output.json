@@ -45,9 +45,9 @@
             "involves_replicates": "yes",
             "number_of_replicates": [
                 "572",
-                "\u200964",
+                "64",
                 "422",
-                "\u200971"
+                "71"
             ],
             "type_of_replicates": [
                 "mouse TATA-less promoters",
@@ -61,9 +61,9 @@
             "involves_replicates": "yes",
             "number_of_replicates": [
                 "572",
-                "\u200964",
+                "64",
                 "422",
-                "\u200971"
+                "71"
             ],
             "type_of_replicates": [
                 "mouse TATA-less promoters",
@@ -73,5 +73,5 @@
             ]
         }
     ],
-    "updated_at": "2025-05-08 15:13:12"
+    "updated_at": "2025-05-15 16:22:44"
 }

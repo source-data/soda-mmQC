@@ -1,7 +1,15 @@
 {
     "outputs": [
         {
-            "panel_label": "A",
+            "panel_label": "Ai",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "Aii",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
@@ -25,5 +33,5 @@
             "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-08 13:43:36"
+    "updated_at": "2025-05-14 10:39:44"
 }

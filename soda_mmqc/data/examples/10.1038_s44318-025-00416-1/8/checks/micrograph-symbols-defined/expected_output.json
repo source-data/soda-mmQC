@@ -9,7 +9,7 @@
         },
         {
             "panel_label": "B",
-            "micrograph": "no",
+            "micrograph": "yes",
             "symbols": [],
             "symbols_defined_in_caption": [],
             "from_the_caption": []
@@ -57,5 +57,5 @@
             "from_the_caption": []
         }
     ],
-    "updated_at": "2025-05-10 14:56:32"
+    "updated_at": "2025-05-14 10:06:38"
 }

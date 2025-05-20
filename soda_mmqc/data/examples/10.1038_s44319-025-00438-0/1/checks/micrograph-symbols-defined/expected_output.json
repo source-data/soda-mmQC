@@ -23,7 +23,7 @@
         },
         {
             "panel_label": "D",
-            "micrograph": "no",
+            "micrograph": "yes",
             "symbols": [],
             "symbols_defined_in_caption": [],
             "from_the_caption": []
@@ -78,9 +78,11 @@
             "panel_label": "K",
             "micrograph": "yes",
             "symbols": [
-                "dashed line"
+                "dashed line",
+                "white rectangle"
             ],
             "symbols_defined_in_caption": [
+                "no",
                 "no"
             ],
             "from_the_caption": []
@@ -147,5 +149,5 @@
             "from_the_caption": []
         }
     ],
-    "updated_at": "2025-05-10 14:56:38"
+    "updated_at": "2025-05-15 09:30:43"
 }

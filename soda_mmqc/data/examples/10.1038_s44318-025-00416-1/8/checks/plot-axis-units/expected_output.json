@@ -3,79 +3,161 @@
         {
             "panel_label": "A",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
             "justify_why_units_are_missing": [],
             "unit_definition_as_provided": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
             "justify_why_units_are_missing": [],
             "unit_definition_as_provided": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
             "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "count"
+                }
+            ]
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
             "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "count"
+                }
+            ]
         },
         {
             "panel_label": "E",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
             "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Overall survival in years is indicated on the x-axis."
+                    "definition": "Overall survival in years."
                 }
             ]
         },
         {
             "panel_label": "F",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
             "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Overall survival in years is indicated on the x-axis."
+                    "definition": "Overall survival in years."
                 }
             ]
         },
         {
             "panel_label": "G",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
             "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Overall survival in years is indicated on the x-axis."
+                    "definition": "Overall survival in years."
                 }
             ]
         },
         {
             "panel_label": "H",
             "is_a_plot": "yes",
-            "units_provided": [],
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
             "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Overall survival in years is indicated on the x-axis."
+                    "definition": "Overall survival in years."
                 }
             ]
         }
     ],
-    "updated_at": "2025-05-08 15:18:43"
+    "updated_at": "2025-05-19 12:40:05"
 }

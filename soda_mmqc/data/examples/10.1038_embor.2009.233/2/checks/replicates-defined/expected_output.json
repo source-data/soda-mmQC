@@ -36,9 +36,11 @@
             "panel_label": "E",
             "involves_replicates": "yes",
             "number_of_replicates": [
-                "undefined"
+                "unknown"
             ],
-            "type_of_replicates": []
+            "type_of_replicates": [
+                "unknown"
+            ]
         },
         {
             "panel_label": "F",
@@ -49,9 +51,13 @@
         {
             "panel_label": "G",
             "involves_replicates": "yes",
-            "number_of_replicates": [],
-            "type_of_replicates": []
+            "number_of_replicates": [
+                "unknown"
+            ],
+            "type_of_replicates": [
+                "unknown"
+            ]
         }
     ],
-    "updated_at": "2025-05-08 15:09:14"
+    "updated_at": "2025-05-16 10:16:28"
 }

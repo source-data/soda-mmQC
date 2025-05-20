@@ -1,7 +1,13 @@
 {
     "outputs": [
         {
-            "panel_label": "A",
+            "panel_label": "Aii",
+            "involves_replicates": "no",
+            "number_of_replicates": [],
+            "type_of_replicates": []
+        },
+        {
+            "panel_label": "Aii",
             "involves_replicates": "no",
             "number_of_replicates": [],
             "type_of_replicates": []
@@ -23,5 +29,5 @@
             ]
         }
     ],
-    "updated_at": "2025-05-08 15:10:13"
+    "updated_at": "2025-05-14 10:45:08"
 }
