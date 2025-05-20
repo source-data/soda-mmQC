@@ -104,7 +104,8 @@ def get_expected_output(example: Dict[str, Any], check_name: str) -> Dict[str, A
 def run_model(
     inputs: Dict[str, Any],
     use_cache: bool = True,
-    mock: bool = False
+    mock: bool = False,
+    model: str = "gpt-4o-2024-08-06"
 ) -> List[Dict[str, Any]]:
     """Step 2: Run the model on all inputs.
     
@@ -112,6 +113,7 @@ def run_model(
         inputs: List of dictionaries containing model inputs
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
+        model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
         
     Returns:
         List of dictionaries containing model outputs
@@ -123,14 +125,14 @@ def run_model(
     model_cache = ModelCache(cache_dir)
 
     results = []
-    
+
     check_data = inputs["check_data"]
     check_name = check_data["name"]
     examples = inputs["examples"]
     prompt = inputs["prompt"]
     prompt_name = inputs["prompt_name"]
     schema = inputs["schema"]
-    
+
     if mock:
         for i, example in tqdm(enumerate(examples), desc="Mock run ", unit="example"):
             expected_output = get_expected_output(example, check_name)
@@ -148,13 +150,14 @@ def run_model(
                 # Check cache first if enabled
                 if use_cache:
                     # the cache key needs to be unique with respect to 
-                    # the example, the prompt, the schema, and the check name
+                    # the example, the prompt, the schema, the check name, and the model
                     data_for_cache_key = {
                         "example": example,
                         "prompt": prompt,
                         "schema": schema,
                         "check_name": check_name,
                         "prompt_name": prompt_name,
+                        "model": model,
                     }
                     cached_result = model_cache.get_cached_output(data_for_cache_key)
                     if cached_result:
@@ -174,7 +177,18 @@ def run_model(
                             "caption": example["caption"],
                         }
                         try:
-                            model_output = generate_response(model_input)
+                            ##########  HERE IS THE MODEL CALL  ##########
+                            model_output, raw_response = generate_response(
+                                model_input,
+                                model=model,
+                                metadata={
+                                    "doi": example["doi"],
+                                    "figure_id": example["figure_id"],
+                                    "check_name": check_name,
+                                    "prompt_name": prompt_name
+                                }
+                            )
+                            ##############################################
                         except KeyError as e:
                             logger.error(
                                 f"Missing required key in model_input: {e}. "
@@ -207,7 +221,7 @@ def run_model(
                         "caption": example["caption"],
                     }
                     try:
-                        model_output = generate_response(model_input)
+                        model_output = generate_response(model_input, model=model)
                     except KeyError as e:
                         logger.error(
                             f"Missing required key in model_input: {e}. "
@@ -414,19 +428,20 @@ def process_check(
     check_dir: Path,
     checklist_name: str,
     mock: bool = False,
-    use_cache: bool = True
+    use_cache: bool = True,
+    model: str = "gpt-4o-2024-08-06"
 ) -> Dict[str, List[Dict[str, Any]]]:
-    """Process a single check through two steps:
-    1. Gather and validate all inputs
-    2. Run the model on all inputs and cache outputs
+    """Process a single check.
     
     Args:
         check_dir: Path to the check directory
+        checklist_name: Name of the checklist
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
+        model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
         
     Returns:
-        Dictionary mapping prompt names to their analysis results
+        Dictionary containing analyzed results
     """
     
     # Prepare check data
@@ -462,7 +477,8 @@ def process_check(
         results = run_model(
             inputs,
             use_cache=use_cache,
-            mock=mock
+            mock=mock,
+            model=model
         )
 
         # Analyze results
@@ -586,9 +602,18 @@ def process_checklist(
     checklist_dir: Path,
     checklist_name: str,
     mock: bool = False,
-    use_cache: bool = True
+    use_cache: bool = True,
+    model: str = "gpt-4o-2024-08-06"
 ):
-    """Process all checks in a checklist."""
+    """Process an entire checklist.
+    
+    Args:
+        checklist_dir: Path to the checklist directory
+        checklist_name: Name of the checklist
+        mock: If True, use expected outputs as model outputs (no API calls)
+        use_cache: If True, use cached outputs when available
+        model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
+    """
 
     # Get all checks frmo the checklist
     checks = list_checks(checklist_dir)
@@ -605,10 +630,9 @@ def process_checklist(
                 check_dir,
                 checklist_name,
                 mock=mock,
-                use_cache=use_cache
+                use_cache=use_cache,
+                model=model
             )
-            
-
         except Exception as e:
             logger.error(
                 f"Error processing check in {check_dir_name}: {str(e)}"
@@ -624,6 +648,7 @@ def main():
     parser.add_argument("--mock", action="store_true", help="Use mock responses instead of calling the model")
     parser.add_argument("--no-cache", action="store_true", help="Disable caching of model responses")
     parser.add_argument("--check", type=str, help="Name of the check to process")
+    parser.add_argument("--model", type=str, default="gpt-4o-2024-08-06", help="The model to use for generation")
     args = parser.parse_args()
 
     # Get the checklist directory using the config function
@@ -641,12 +666,12 @@ def main():
         # Find the check in the checklist
         check_dir = checklist_dir / args.check
         if check_dir.exists():
-            process_check(check_dir, args.checklist, args.mock, not args.no_cache)
+            process_check(check_dir, args.checklist, args.mock, not args.no_cache, model=args.model)
         else:
             logger.error(f"Check not found: {args.check}")
     else:
         # Process the entire checklist
-        process_checklist(checklist_dir, args.checklist, args.mock, not args.no_cache)
+        process_checklist(checklist_dir, args.checklist, args.mock, not args.no_cache, model=args.model)
 
 
 def initialize_main():

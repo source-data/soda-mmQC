@@ -47,11 +47,13 @@ def encode_image(image_path):
     reraise=True
 )
 def generate_response_openai(
-    encoded_image: str, 
-    mime_type: str, 
-    caption: str, 
-    prompt: str, 
-    schema: dict
+    encoded_image: str,
+    mime_type: str,
+    caption: str,
+    prompt: str,
+    schema: dict,
+    model: str,
+    metadata: dict
 ) -> dict:
     """Generate response using OpenAI API with structured output."""
 
@@ -59,8 +61,8 @@ def generate_response_openai(
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     # Call API with structured output
-    response = client.responses.create(
-        model="gpt-4o-2024-08-06",
+    raw_response = client.responses.create(
+        model=model,
         input=[
             {
                 "role": "system",
@@ -82,24 +84,36 @@ def generate_response_openai(
                 ]
             }
         ],
-        text=schema
+        text=schema,
+        metadata=metadata
     )
     # Extract and return response
     try:
-        content = response.output_text
+        content = raw_response.output_text
         if content is None:
             raise ValueError("API returned empty response")
         parsed_response = json.loads(content)
         # Format the response with proper indentation
-        return parsed_response
+        return parsed_response, raw_response
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse JSON response: {e}")
-        logger.error(f"Raw response: {response.output_text}")
+        logger.error(f"Raw response: {raw_response}")
         raise ValueError(f"Invalid JSON response from API: {str(e)}")
 
 
-def generate_response(model_input):
-    """Generate response using the selected API provider."""
+def generate_response(
+    model_input,
+    model="gpt-4o-2024-08-06",
+    metadata={}
+):
+    """Generate response using the selected API provider.
+    
+    Args:
+        model_input (dict): Dictionary containing image_path, caption, prompt, and 
+            schema
+        model (str): The model to use for generation. Defaults to 
+            "gpt-4o-2024-08-06"
+    """
     # Extract inputs
     try:
         image_path = model_input["image_path"]
@@ -135,7 +149,7 @@ def generate_response(model_input):
     try:
         if API_PROVIDER == "openai":
             return generate_response_openai(
-                encoded_image, mime_type, caption, prompt, schema
+                encoded_image, mime_type, caption, prompt, schema, model, metadata
             )
         else:
             raise ValueError(f"Unsupported API provider: {API_PROVIDER}")
