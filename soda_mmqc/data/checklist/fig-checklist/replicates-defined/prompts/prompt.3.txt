@@ -6,7 +6,7 @@ The first task is to understand the figure image and see where there are labeled
 
 The task here is to check whether the number and nature of replicates are clearly stated in the figure caption.
 
-Generally speaking, replicates are used to estimate the source of variability in experimental results. This can be obtained by analyzing independent samples, running independent experiments, analyzing individual samples multiple times, etc... The number of replicates should be specified explicitely in the caption. In addition, the caption should make clear what is the nature of the replicates: number of independent samples, number of patient, animals, cells, number of independent experiments, number of technical replicates, etc... There are many possibilities but the nature of the replicate should be stated, and not only their number.)
+Generally speaking, replicates are used to estimate the source of variability in experimental results. This can be obtained by analyzing independent samples, running independent experiments, analyzing individual samples multiple times, etc... The number of replicates should be specified explicitely in the caption. In addition, the caption should make clear what is the nature of the replicates: number of independent samples, number of patient, animals, cells, number of independent experiments, number of technical replicates, etc... There are many possibilities but the nature of the replicate should be stated, and not only their number.
 
 For each panel in the figure:
 

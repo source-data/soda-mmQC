@@ -103,7 +103,7 @@ def generate_response_openai(
 
 def generate_response(
     model_input,
-    model="gpt-4o-2024-08-06",
+    model="gpt-4o-2024-08-06",  #o3-mini-2025-01-31  # o4-mini-2025-04-16
     metadata={}
 ):
     """Generate response using the selected API provider.
