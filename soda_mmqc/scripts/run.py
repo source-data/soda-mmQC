@@ -1,8 +1,6 @@
 import os
 import json
-import hashlib
 import argparse
-import logging
 from pathlib import Path
 from typing import List, Dict, Any
 from tqdm import tqdm
@@ -19,6 +17,7 @@ from soda_mmqc.config import (
 )
 from soda_mmqc.tools.evaluator import JSONEvaluator
 from soda_mmqc import logger
+from soda_mmqc.examples import FigureExample, WordExample, DataFigureWordExample
 
 
 def load_json(file_path):
@@ -44,45 +43,28 @@ def gather_examples(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
 
     # Gather and validate all inputs
     inputs = []
-    for example in tqdm(examples, desc="Validating inputs", unit="example"):
-        
-        doi = example["doi"]
-        figure_id = example["figure_id"]
-
-        # Get and validate paths
-        content_path = get_content_path(example)
-
-        # Validate caption file
-        caption_path = content_path / "caption.txt"
-        if not caption_path.exists():
-            logger.error(f"Caption file not found: {caption_path}")
-            raise FileNotFoundError(f"Caption file not found: {caption_path}")
-        # Read caption and expected output
-        with open(caption_path, "r", encoding="utf-8") as f:
-            caption = f.read().strip()
-
-        # Find and validate image file
-        image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
-            for img_file in content_path.glob(f"*{ext}"):
-                image_path = img_file
-                break
-        # we delay the loading and encoding of the image until the last moment when call the model
-        # but we keep a hash so that it is part of the cache key
-        if not image_path:
-            logger.error(f"No image found for {example['doi']}/{example['figure_id']}")
-            raise ValueError(f"No image found for {example['doi']}/{example['figure_id']}")
-        with open(image_path, "rb") as f:
-            img_hash = hashlib.sha256(f.read()).hexdigest()
-
-        # Store all inputs
-        inputs.append({
-            "doi": doi,
-            "figure_id": figure_id,
-            "caption": caption,
-            "image_path": str(image_path),
-            "img_hash": img_hash,
-        })
+    for example_dict in tqdm(examples, desc="Validating inputs", unit="example"):
+        try:
+            # Try to create a FigureExample first
+            try:
+                example_obj = FigureExample(example_dict)
+            except (FileNotFoundError, ValueError):
+                # If that fails, try WordExample
+                try:
+                    example_obj = WordExample(example_dict)
+                except FileNotFoundError:
+                    # If both fail, try DataFigureWordExample
+                    example_obj = DataFigureWordExample(example_dict)
+            
+            # Store all inputs
+            inputs.append(example_obj.to_dict())
+            
+        except Exception as e:
+            logger.error(
+                f"Error processing example "
+                f"{example_dict['doi']}/{example_dict.get('figure_id', 'N/A')}: {str(e)}"
+            )
+            continue
 
     return inputs
 
@@ -110,10 +92,15 @@ def run_model(
     """Step 2: Run the model on all inputs.
     
     Args:
-        inputs: List of dictionaries containing model inputs
-        mock: If True, use expected outputs as model outputs (no API calls)
+        inputs: Dictionary containing:
+            - check_data: The checklist data
+            - examples: List of Example instances
+            - prompt: The prompt to use
+            - schema: The schema for structured output
+            - prompt_name: Name of the prompt being used
         use_cache: If True, use cached outputs when available
-        model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
+        mock: If True, use expected outputs as model outputs (no API calls)
+        model: The model to use for generation
         
     Returns:
         List of dictionaries containing model outputs
@@ -134,11 +121,10 @@ def run_model(
     schema = inputs["schema"]
 
     if mock:
-        for i, example in tqdm(enumerate(examples), desc="Mock run ", unit="example"):
-            expected_output = get_expected_output(example, check_name)
+        for example in tqdm(examples, desc="Mock run", unit="example"):
+            expected_output = example.get_expected_output(check_name)
             results.append({
-                "doi": example["doi"],
-                "figure_id": example["figure_id"],
+                "doi": example.metadata.doi,
                 "example": example,
                 "model_output": expected_output,
                 "expected_output": expected_output,
@@ -149,10 +135,10 @@ def run_model(
             try:
                 # Check cache first if enabled
                 if use_cache:
-                    # the cache key needs to be unique with respect to 
-                    # the example, the prompt, the schema, the check name, and the model
+                    # The cache key needs to be unique with respect to 
+                    # the example content, the prompt, the schema, the check name, and the model
                     data_for_cache_key = {
-                        "example": example,
+                        "content_hash": example.get_content_hash(),
                         "prompt": prompt,
                         "schema": schema,
                         "check_name": check_name,
@@ -163,42 +149,30 @@ def run_model(
                     if cached_result:
                         logger.debug(
                             "Using cached output for "
-                            f"{example['doi']}/{example['figure_id']}"
+                            f"{example.metadata.doi}"
                         )
-                        # cache entries have a data and metadata field
-                        # we only need the data field
                         model_output = cached_result["data"]
                     else:
                         # Generate new output if not cached
                         model_input = {
+                            "example": example,
                             "prompt": prompt,
-                            "schema": schema,
-                            "image_path": example["image_path"],
-                            "caption": example["caption"],
+                            "schema": schema
                         }
                         try:
-                            ##########  HERE IS THE MODEL CALL  ##########
                             model_output, raw_response = generate_response(
                                 model_input,
                                 model=model,
                                 metadata={
-                                    "doi": example["doi"],
-                                    "figure_id": example["figure_id"],
+                                    **example.get_metadata(),
                                     "check_name": check_name,
                                     "prompt_name": prompt_name
                                 }
                             )
-                            ##############################################
-                        except KeyError as e:
-                            logger.error(
-                                f"Missing required key in model_input: {e}. "
-                                f"Available keys: {list(model_input.keys())}"
-                            )
-                            raise
                         except Exception as e:
                             logger.error(
                                 f"Error generating response for "
-                                f"{example['doi']}: {str(e)}"
+                                f"{example.metadata.doi}: {str(e)}"
                             )
                             raise
                         # Cache the new output
@@ -206,8 +180,7 @@ def run_model(
                             data_for_cache_key,
                             data=model_output,
                             metadata={
-                                "doi": example["doi"],
-                                "figure_id": example["figure_id"],
+                                **example.get_metadata(),
                                 "check_name": check_name,
                                 "prompt_name": prompt_name
                             }
@@ -215,40 +188,31 @@ def run_model(
                 else:
                     # Generate new output without caching
                     model_input = {
+                        "example": example,
                         "prompt": prompt,
-                        "schema": schema,
-                        "image_path": example["image_path"],
-                        "caption": example["caption"],
+                        "schema": schema
                     }
                     try:
                         model_output, raw_response = generate_response(
                             model_input,
                             model=model,
                             metadata={
-                                "doi": example["doi"],
-                                "figure_id": example["figure_id"],
+                                **example.get_metadata(),
                                 "check_name": check_name,
                                 "prompt_name": prompt_name
                             }
                         )
-                    except KeyError as e:
-                        logger.error(
-                            f"Missing required key in model_input: {e}. "
-                            f"Available keys: {list(model_input.keys())}"
-                        )
-                        raise
                     except Exception as e:
                         logger.error(
                             f"Error generating response for "
-                            f"{example['doi']}: {str(e)}"
+                            f"{example.metadata.doi}: {str(e)}"
                         )
                         raise
 
                 # Accumulate result
-                expected_output = get_expected_output(example, check_name)
+                expected_output = example.get_expected_output(check_name)
                 results.append({
-                    "doi": example["doi"],
-                    "figure_id": example["figure_id"],
+                    "doi": example.metadata.doi,
                     "example": example,
                     "model_output": model_output,
                     "expected_output": expected_output,
@@ -258,7 +222,7 @@ def run_model(
             except Exception as e:
                 logger.error(
                     f"Error processing example "
-                    f"{example['doi']}/{example['figure_id']}: {str(e)}"
+                    f"{example.metadata.doi}: {str(e)}"
                 )
                 # Continue with next example instead of failing completely
                 continue
@@ -284,7 +248,9 @@ def analyze_results(
 
     analyzed_results = []
     for result in tqdm(results, desc="Analyzing results", unit="example"):
-        logger.debug(f"\n\n\n========= Analyzing: {result['doi']} fig_id:{result['figure_id']}\n\n\n")
+        logger.debug(
+            f"\n\n\n========= Analyzing: {result['doi']}\n\n\n"
+        )
         # Analyze response
         analysis = {}
         for metric in metrics:
@@ -295,8 +261,7 @@ def analyze_results(
             )
         # Store analyzed result
         analyzed_results.append({
-            "doi": result["doi"],
-            "figure_id": result["figure_id"],
+            **{k: v for k, v in result.items() if k not in ["model_output", "expected_output"]},
             "expected_output": result["expected_output"],
             "model_output": result["model_output"],
             "analysis": analysis
@@ -515,35 +480,6 @@ def initialize(checklist_dir: Path, use_cache: bool = True):
         checklist_dir: Path to the checklist directory
         use_cache: If True, use cached outputs when available
     """
-    
-    def create_expected_output(example: Dict[str, Any], check_name: str) -> Path:
-        doi = example["doi"]
-        figure_id = example["figure_id"]
-        model_output = example["model_output"]
-        # Create expected output directory
-        example = {"doi": doi, "figure_id": figure_id}
-        expected_output_path = get_expected_output_path(
-            example, check_name
-        )
-        expected_output_dir = expected_output_path.parent
-        expected_output_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Check if expected output already exists
-        if expected_output_path.exists():
-            logger.info(
-                f"Expected output already exists: {expected_output_path}"
-            )
-            return expected_output_path
-        
-        # Write expected output
-        with open(expected_output_path, "w", encoding="utf-8") as f:
-            json.dump(model_output, f, indent=4, ensure_ascii=False)
-        
-        logger.info(
-            f"Created expected output: {expected_output_path}"
-        )
-        return expected_output_path
-
     logger.info(f"Initializing expected outputs for checklist: {checklist_dir.name}")
     
     # Get all checks from the checklist
@@ -593,11 +529,15 @@ def initialize(checklist_dir: Path, use_cache: bool = True):
             # Write expected outputs
             for result in results:
                 try:
-                    create_expected_output(result, check_name)
+                    example = result["example"]
+                    example.save_expected_output(
+                        result["model_output"],
+                        check_name
+                    )
                 except Exception as e:
                     logger.error(
                         f"Error writing expected output for "
-                        f"{result['doi']}/{result['figure_id']}: {str(e)}"
+                        f"{result['doi']}: {str(e)}"
                     )
                     continue
 

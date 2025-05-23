@@ -8,6 +8,7 @@ from datetime import datetime
 import argparse
 from soda_mmqc.config import get_checklist, EXAMPLES_DIR
 from soda_mmqc import logger
+from soda_mmqc.examples import FigureExample
 
 # Set page config for wider layout
 st.set_page_config(
@@ -33,76 +34,74 @@ def get_workspace_root():
     return current_dir.parent.parent
 
 
-def load_example_data(example_path, checklist=None):
-    """Load all relevant data for an example."""
-    content_dir = Path(example_path) / "content"
-    checks_dir = Path(example_path) / "checks"
+def load_example_data(doi, fig, checklist=None):
+    """Load all relevant data for an example.
     
-    # Initialize default values
-    data = {
-        "caption": "No caption available",
-        "image_path": None,
-        "check_outputs": {}
-    }
-    
-    # Load caption if available
-    caption_file = content_dir / "caption.txt"
-    if caption_file.exists():
-        try:
-            with open(caption_file, "r") as f:
-                data["caption"] = f.read().strip()
-        except Exception as e:
-            st.warning(f"Error reading caption: {e}")
-    
-    # Load image if available
+    Args:
+        doi: The DOI of the example
+        fig: Path object pointing to the figure directory
+        checklist: Optional dictionary of valid checks
+        
+    Returns:
+        Dictionary containing example data or None if loading fails
+    """
     try:
-        # Find and validate image file
-        image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
-            for img_file in content_dir.glob(f"*{ext}"):
-                image_path = img_file
-                break
-            if image_path:
-                break
-        if image_path:
-            data["image_path"] = str(image_path)
-    except Exception as e:
-        st.warning(f"Error finding images: {e}")
-    
-    # Load check outputs if available
-    if checks_dir.exists():
-        for check_dir in checks_dir.glob("*"):
-            if check_dir.is_dir():
-                # Only load check outputs for checks that exist in the checklist
-                if checklist is None or check_dir.name in checklist:
-                    expected_output_path = check_dir / "expected_output.json"
-                    if expected_output_path.exists():
+        # Create FigureExample object with the correct dictionary structure
+        example_dict = {
+            "doi": doi,
+            "figure_id": fig.name  # Use the directory name as figure_id
+        }
+        example = FigureExample(example_dict)
+        
+        # Convert to dict to maintain compatibility with existing code
+        data = example.to_dict()
+        
+        # Load check outputs if available
+        checks_dir = fig / "checks"
+        if checks_dir.exists():
+            for check_dir in checks_dir.glob("*"):
+                if check_dir.is_dir():
+                    # Only load check outputs for checks that exist in the checklist
+                    if checklist is None or check_dir.name in checklist:
                         try:
-                            with open(expected_output_path, "r") as f:
-                                data["check_outputs"][check_dir.name] = json.load(f)
-                        except Exception as e:
+                            data["check_outputs"][check_dir.name] = example.get_expected_output(check_dir.name)
+                        except FileNotFoundError:
                             st.warning(
-                                f"Error reading {check_dir.name} output: {e}"
+                                f"Expected output not found for {check_dir.name}"
                             )
-                else:
-                    st.warning(
-                        f"Check {check_dir.name} not found in checklist, "
-                        "skipping its output"
-                    )
-    
-    return data
+                    else:
+                        st.warning(
+                            f"Check {check_dir.name} not found in checklist, "
+                            "skipping its output"
+                        )
+        
+        return data
+    except Exception as e:
+        st.error(f"Error loading example data: {e}")
+        return None
 
 
 def save_check_output(example_path, check_name, output_data):
-    """Save the updated check output."""
-    # update just in time the field "updated_at"
-    output_data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    output_path = Path(example_path) / "checks" / check_name / "expected_output.json"
+    """Save the updated check output.
+    
+    Args:
+        example_path: Path object pointing to the figure directory
+        check_name: Name of the check
+        output_data: Dictionary containing the output data
+        
+    Returns:
+        bool: True if save was successful, False otherwise
+    """
     try:
-        # Ensure the directory exists
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(output_path, "w") as f:
-            json.dump(output_data, f, indent=4)
+        # Create FigureExample object with the correct dictionary structure
+        example_dict = {
+            "doi": example_path.parent.name,  # Parent directory is the DOI
+            "figure_id": example_path.name    # Directory name is the figure_id
+        }
+        example = FigureExample(example_dict)
+        
+        # Save using Example class method
+        example.save_expected_output(output_data, check_name)
         return True
     except Exception as e:
         st.error(f"Error saving output: {e}")
@@ -305,7 +304,7 @@ def main(checklist_name):
         
         if selected_fig:
             # Load example data with checklist for validation
-            example_data = load_example_data(selected_fig, checklist)
+            example_data = load_example_data(selected_doi, selected_fig, checklist)
             
             # Create three columns for the layout with adjusted widths
             col1, col2, col3 = st.columns([1, 0.7, 1.3])

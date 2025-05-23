@@ -11,6 +11,10 @@ from tenacity import (
     wait_exponential,
     retry_if_exception_type
 )
+from typing import Dict, Any, Tuple
+from soda_mmqc.examples import Example
+from soda_mmqc import logger
+
 # Load environment variables
 load_dotenv()
 
@@ -47,18 +51,29 @@ def encode_image(image_path):
     reraise=True
 )
 def generate_response_openai(
-    encoded_image: str,
-    mime_type: str,
-    caption: str,
+    example: Example,
     prompt: str,
     schema: dict,
     model: str,
     metadata: dict
-) -> dict:
-    """Generate response using OpenAI API with structured output."""
-
+) -> Tuple[dict, dict]:
+    """Generate response using OpenAI API with structured output.
+    
+    Args:
+        example: The example to process
+        prompt: The prompt to use
+        schema: The schema for structured output
+        model: The model to use
+        metadata: Additional metadata for the API call
+        
+    Returns:
+        Tuple of (parsed response, raw response)
+    """
     # Initialize OpenAI client
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    # Prepare model input
+    model_input = example.prepare_model_input(prompt)
 
     # Call API with structured output
     raw_response = client.responses.create(
@@ -66,95 +81,58 @@ def generate_response_openai(
         input=[
             {
                 "role": "system",
-                "content": (
-                    "You are a scientific figure quality control expert."
-                )
+                "content": "You are a scientific figure quality control expert."
             },
             {
                 "role": "user",
-                "content": [
-                    {
-                        "type": "input_text",
-                        "text": f"{prompt}\n\nFigure Caption:\n{caption}"
-                    },
-                    {
-                        "type": "input_image",
-                        "image_url": f"data:{mime_type};base64,{encoded_image}"
-                    }
-                ]
+                "content": model_input["content"]
             }
         ],
         text=schema,
-        metadata=metadata
+        metadata={**metadata, **model_input["metadata"]}
     )
-    # Extract and return response
+
+    # Parse response
     try:
-        content = raw_response.output_text
-        if content is None:
-            raise ValueError("API returned empty response")
-        parsed_response = json.loads(content)
-        # Format the response with proper indentation
-        return parsed_response, raw_response
+        response = json.loads(raw_response.text)
     except json.JSONDecodeError as e:
-        logger.error(f"Failed to parse JSON response: {e}")
-        logger.error(f"Raw response: {raw_response}")
-        raise ValueError(f"Invalid JSON response from API: {str(e)}")
+        logger.error(f"Error parsing response: {str(e)}")
+        raise
+
+    return response, raw_response
 
 
 def generate_response(
-    model_input,
-    model="gpt-4o-2024-08-06",  #o3-mini-2025-01-31  # o4-mini-2025-04-16
-    metadata={}
-):
-    """Generate response using the selected API provider.
+    model_input: Dict[str, Any],
+    model: str = "gpt-4o-2024-08-06",
+    metadata: Dict[str, Any] = None
+) -> Tuple[dict, dict]:
+    """Generate response using the specified model.
     
     Args:
-        model_input (dict): Dictionary containing image_path, caption, prompt, and 
-            schema
-        model (str): The model to use for generation. Defaults to 
-            "gpt-4o-2024-08-06"
+        model_input: Dictionary containing:
+            - example: The example to process
+            - prompt: The prompt to use
+            - schema: The schema for structured output
+        model: The model to use
+        metadata: Additional metadata for the API call
+        
+    Returns:
+        Tuple of (parsed response, raw response)
     """
+    if metadata is None:
+        metadata = {}
+
     # Extract inputs
-    try:
-        image_path = model_input["image_path"]
-        caption = model_input["caption"]
-        prompt = model_input["prompt"]
-        schema = model_input["schema"]
-    except KeyError as e:
-        logger.error(
-            f"Missing required key in model_input: {e}. "
-            f"Available keys: {list(model_input.keys())}"
-        )
-        raise
+    example = model_input["example"]
+    prompt = model_input["prompt"]
+    schema = model_input["schema"]
 
-    # Get the correct MIME type
-    try:
-        mime_type = get_image_mime_type(image_path)
-    except Exception as e:
-        logger.error(
-            f"Error getting MIME type for {image_path}: {str(e)}"
-        )
-        raise
-
-    # Encode image (both APIs use base64 encoding)
-    try:
-        encoded_image = encode_image(image_path)
-    except Exception as e:
-        logger.error(
-            f"Error encoding image at {image_path}: {str(e)}"
-        )
-        raise
-
-    # Call the appropriate API provider
-    try:
-        if API_PROVIDER == "openai":
-            return generate_response_openai(
-                encoded_image, mime_type, caption, prompt, schema, model, metadata
-            )
-        else:
-            raise ValueError(f"Unsupported API provider: {API_PROVIDER}")
-    except Exception as e:
-        logger.error(
-            f"Error calling {API_PROVIDER} API: {str(e)}"
-        )
-        raise
+    # Generate response
+    return generate_response_openai(
+        example=example,
+        prompt=prompt,
+        schema=schema,
+        model=model,
+        metadata=metadata
+    )
