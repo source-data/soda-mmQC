@@ -13,7 +13,7 @@
 
 ---
 
-A tool for evaluating figure caption quality.
+A resource to develop, evaluate and distributeAI-generated quality checks of scientific manuscritps.
 
 ## Installation
 
@@ -70,21 +70,61 @@ soda-mmqc/
 ├── soda_mmqc/
 │   ├── __init__.py
 │   ├── config.py
+│   ├── curation.py
 │   ├── model_api.py
 │   ├── model_cache.py
 │   ├── evaluation.py
+│   ├── examples.py
 │   ├── scripts/
 │   │   ├── __init__.py
 │   │   ├── run.py
 │   │   ├── curate.py
 │   │   └── visualize.py
-│   ├── tools/
-│   │   └── ...
+│   ├── utils/
+│   │   └── hash_utils.py
 │   ├── data/
 │   │   ├── __init__.py
 │   │   ├── checklist/
+│   │   │   ├── doc-checklist/
+│   │   │   │   ├── extract-figures/
+│   │   │   │   ├── section-order/
+│   │   │   │   └── species-identified/
+│   │   │   ├── docconsistency-checklist/
+│   │   │   ├── fig-checklist/
+│   │   │   │   ├── error-bars-defined/
+│   │   │   │   ├── individual-data-points/
+│   │   │   │   ├── micrograph-scale-bar/
+│   │   │   │   ├── micrograph-symbols-defined/
+│   │   │   │   ├── plot-axis-units/
+│   │   │   │   ├── plot-gap-labeling/
+│   │   │   │   ├── replicates-defined/
+│   │   │   │   ├── stat-significance-level/
+│   │   │   │   ├── stat-test/
+│   │   │   │   └── structure-identified/
+│   │   │   └── figclarity-checklist/
 │   │   ├── examples/
+│   │   │   ├── 10.1038_emboj.2009.312/
+│   │   │   ├── 10.1038_emboj.2009.340/
+│   │   │   ├── 10.1038_embor.2009.217/
+│   │   │   ├── 10.1038_embor.2009.233/
+│   │   │   ├── 10.1038_s44318-025-00409-0/
+│   │   │   ├── 10.1038_s44318-025-00412-5/
+│   │   │   ├── 10.1038_s44318-025-00416-1/
+│   │   │   ├── 10.1038_s44319-025-00415-7/
+│   │   │   ├── 10.1038_s44319-025-00432-6/
+│   │   │   ├── 10.1038_s44319-025-00438-0/
+│   │   │   ├── 10.1038_s44320-025-00092-7/
+│   │   │   ├── 10.1038_s44320-025-00094-5/
+│   │   │   ├── 10.1038_s44320-025-00096-3/
+│   │   │   ├── 10.1038_s44321-025-00219-1/
+│   │   │   ├── 10.1038_s44321-025-00224-4/
+│   │   │   ├── EMBOJ-2024-119734R/
+│   │   │   ├── EMBOR-2025-61250V2/
+│   │   │   ├── EMM-2025-21341/
+│   │   │   └── EMM-2025-21532/
 │   │   ├── evaluation/
+│   │   │   ├── doc-checklist/
+│   │   │   │   └── section-order/
 │   │   │   └── fig-checklist/
 │   │   │       ├── error-bars-defined/
 │   │   │       ├── individual-data-points/
@@ -98,10 +138,13 @@ soda-mmqc/
 │   │   └── plots/
 │   └── logs/
 ├── notebooks/
-│   ├── plots.ipynb
+│   ├── plots-doc-checklist.ipynb
+│   ├── plots-fig-checklist.ipynb
 │   ├── images/
 │   └── cache/
 ├── pyproject.toml
+├── requirements.txt
+├── run_tests.py
 └── README.md
 ```
 
@@ -168,22 +211,50 @@ Each check is defined by a JSON file in the `data/checks/` directory.
 
 ## Checklists:
 
-A checklist is a collection of related checks, organized in a directory structure. Each check in a checklist has its own directory containing:
+A checklist is a collection of related checks, organized in a directory structure. The project currently supports four main checklist types:
 
+### 1. Document Checklists (`doc-checklist/`)
+Checks that analyze entire documents or manuscript structure:
+- **extract-figures**: Extracts and identifies figures from documents
+- **section-order**: Validates the order and structure of document sections
+- **species-identified**: Checks if species are properly identified in the document
+
+### 2. Figure Checklists (`fig-checklist/`)
+Checks that analyze individual figures and their captions:
+- **error-bars-defined**: Verifies if error bars are explained in captions
+- **individual-data-points**: Checks if individual data points are shown in bar charts
+- **micrograph-scale-bar**: Validates presence of scale bars in micrographs
+- **micrograph-symbols-defined**: Ensures symbols in micrographs are explained
+- **plot-axis-units**: Checks if axis units are properly labeled
+- **plot-gap-labeling**: Validates gap labeling in plots
+- **replicates-defined**: Verifies if replicates are properly defined
+- **stat-significance-level**: Checks statistical significance reporting
+- **stat-test**: Validates statistical test specifications
+- **structure-identified**: Ensures structures are properly identified
+
+### 3. Document Consistency Checklists (`docconsistency-checklist/`)
+Checks for consistency across document sections (currently empty)
+
+### 4. Figure Clarity Checklists (`figclarity-checklist/`)
+Checks for figure clarity and readability (currently empty)
+
+Each check directory contains:
 ```
 checklist/
-├── fig-checklist/                    # Main checklist directory
-│   ├── error-bars-defined/           # Individual check directory
+├── doc-checklist/                    # Document-level checks
+│   ├── section-order/
 │   │   ├── prompts/                  # Directory containing prompt templates
 │   │   ├── benchmark.json           # Test examples and expected outputs
 │   │   └── schema.json              # JSON schema for check output
-│   ├── individual-data-points/
+│   └── ...
+├── fig-checklist/                    # Figure-level checks
+│   ├── error-bars-defined/
 │   │   ├── prompts/
 │   │   ├── benchmark.json
 │   │   └── schema.json
 │   └── ...
-└── doc-checklist/                    # Another checklist
-    └── ...
+├── docconsistency-checklist/         # Document consistency checks
+└── figclarity-checklist/             # Figure clarity checks
 ```
 
 Each check directory contains:
@@ -193,39 +264,105 @@ Each check directory contains:
 
 ## Benchmarking data:
 
-The structure of the repository keeps each example as human readable directories, grouping the image, the caption as well as the expected output for each of the checks:
+The structure of the repository keeps each example as human readable directories, grouping the content files as well as the expected output for each of the checks:
 
-    data/
-      ├── examples/
-      │   ├── 10.1038_embor.2009.233/
-      │   │   ├── content/
-      │   │   │   ├── figure.png
-      │   │   │   └── caption.txt
-      │   │   └── checks/
-      │   │       ├── check-experimental-method-mentioned/
-      │   │       │   └── expected_output.txt
-      │   │       └── check-error-bars-defined/
-      │   │           └── expected_output.txt
-      │   ├── 10.1038_embor.2009.217/
-      │   │   ├── content/
-      │   │   │   ├── figure.png
-      │   │   │   └── caption.txt
-      │   │   └── checks/
-      │   │       └── ...
-      │   └── ...
+### Examples Structure:
+
+    data/examples/
+      ├── 10.1038_emboj.2009.312/           # Figure-based example
+      │   ├── content/
+      │   │   └── 1/                        # Figure 
+      │   │       ├── content/
+      │   │       │   ├── embj2009312-fig-0001-m.jpg
+      │   │       │   ├── 10.1038-emboj.2009.312Figure20093120001.pptx
+      │   │       │   └── caption.txt
+      │   │       └── checks/
+      │   │           ├── error-bars-defined/
+      │   │           ├── individual-data-points/
+      │   │           ├── micrograph-scale-bar/
+      │   │           ├── micrograph-symbols-defined/
+      │   │           ├── plot-axis-units/
+      │   │           ├── plot-gap-labeling/
+      │   │           ├── replicates-defined/
+      │   │           ├── stat-significance-level/
+      │   │           └── stat-test/
+      │   └── checks/                       # Document-level checks
       │
-      ├── checklist/
-      │   └── mini/
-      │       └── error-bars-defined/
-      │           ├── prompt.txt
-      │           ├── schema.json
-      │           └── benchmark.json
+      ├── EMBOJ-2024-119734R/               # Document-based example
+      │   ├── content/
+      │   │   └── EMBOJ-2024-119734R-Manuscript_Text-mstxt.docx
+      │   └── checks/
+      │       └── section-order/
+      │           └── expected_output.json
       │
-      └── evaluation/
-          └── results/
-              └── minimal-requirement-for-figure-caption/
-                  ├── check-experimental-method-mentioned_metrics.json
-                  └── check-error-bars-defined_metrics.json
+      ├── 10.1038_embor.2009.217/           # Another example
+      │   ├── content/
+      │   │   └── 4/                        # Figure 
+      │   │       ├── content/
+      │   │       │   ├── figure.jpg
+      │   │       │   ├── figure.pptx
+      │   │       │   └── caption.txt
+      │   │       └── checks/
+      │   └── checks/
+      │       └── section-order/
+      │           └── expected_output.json
+      └── ...
+
+### Checklist Structure:
+
+    data/checklist/
+      ├── doc-checklist/                    # A series of checks
+      │   ├── extract-figures/
+      │   │   ├── prompts/
+      │   │   ├── schema.json
+      │   │   └── benchmark.json
+      │   ├── section-order/
+      │   │   ├── prompts/
+      │   │   ├── schema.json
+      │   │   └── benchmark.json
+      │   └── species-identified/
+      │       ├── prompts/
+      │       ├── schema.json
+      │       └── benchmark.json
+      │
+      ├── fig-checklist/                    # Another series of checks
+      │   ├── error-bars-defined/
+      │   │   ├── prompts/
+      │   │   ├── schema.json
+      │   │   └── benchmark.json
+      │   ├── individual-data-points/
+      │   ├── micrograph-scale-bar/
+      │   ├── micrograph-symbols-defined/
+      │   ├── plot-axis-units/
+      │   ├── plot-gap-labeling/
+      │   ├── replicates-defined/
+      │   ├── stat-significance-level/
+      │   ├── stat-test/
+      │   └── structure-identified/
+      │
+      ├── ...
+
+### Evaluation Structure:
+
+    data/evaluation/
+      ├── doc-checklist/
+      │   └── section-order/
+      │       └── gpt-4o-2024-08-06/
+      │           └── analysis.json
+      └── fig-checklist/
+          ├── error-bars-defined/
+          │   ├── gpt-4o-2024-08-06/
+          │   ├── gpt-4o-mini/
+          │   └── o4-mini-2025-04-16/
+          │       └── analysis.json
+          ├── individual-data-points/
+          ├── micrograph-scale-bar/
+          ├── micrograph-symbols-defined/
+          ├── plot-axis-units/
+          ├── plot-gap-labeling/
+          ├── replicates-defined/
+          ├── stat-significance-level/
+          └── stat-test/
 
 
 ## Exepected output:
