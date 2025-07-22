@@ -75,7 +75,7 @@ def load_analysis_results(checklist_name, check_name, model):
 
 def data_to_tabular(analysis, item_id, aggregation_level, metric, prompt_name):
     assert isinstance(analysis, dict), f"Analysis is not a dict: {analysis}"
-    logger.debug(f"data to tabulart for {item_id} at aggregation level {aggregation_level}")
+    logger.debug(f"data to tabular for {item_id} at aggregation level {aggregation_level}")
     try:
         # Get overall score for this figure if available
         item_data_point = {
@@ -89,7 +89,7 @@ def data_to_tabular(analysis, item_id, aggregation_level, metric, prompt_name):
             'precision': analysis.get('precision', None),
             'recall': analysis.get('recall', None),
             'f1_score': analysis.get('f1_score', None),
-            'field': ''
+            'field': 'all_fields_aggregated'
         }
     except Exception as e:
         logger.error(f"Error processing document to tabular data {item_id}: {e}")
@@ -282,7 +282,7 @@ def checklist_visualization(
         plotting_item_data = df.loc[
             (df['prompt'] == prompt) &
             (df['metric'] == metric) &
-            (df['field'] == '') &
+            (df['field'] == 'all_fields_aggregated') &
             (df['aggregation_level'] == aggregation_level)
         ]
 
@@ -315,7 +315,10 @@ def checklist_visualization(
 
         # Add jitter to x positions
         jitter = np.random.normal(0, 0.03, size=len(plotting_item_data))
-        x_scattered_positions = x_positions + jitter
+        x_scattered_positions = [
+            check_to_num[check] + x_offset + j
+            for check, j in zip(plotting_item_data['check'], jitter)
+        ]
 
         plot.add_trace(go.Scatter(
             x=x_scattered_positions,
@@ -408,25 +411,24 @@ def check_visualization(
         item_data = df.loc[
             (df['prompt'] == prompt) &
             (df['metric'] == metric) &
-            (df['field'] != '') &
+            (df['field'] != 'all_fields_aggregated') &
             (df['aggregation_level'] == aggregation_level)
         ]
-        logger.info(f"len df: {len(df)}")
-        logger.info(f"len item_data: {len(item_data)}")
-        item_ids = item_data['item_id'].unique()
+        
         logger.info(f"Creating plot ({prompt}, {metric}), plotting {score} for {check_name}...")
         logger.info(f"Plotting data: {len(item_data)} rows")
-        logger.info(f"Item IDs: {item_ids}")
-        logger.info(f"Fields: {item_data['field'].unique()}")
 
         # Add a small offset to x-coordinates to prevent overlapping
         offset_width = 1 / (len(prompts)+1)
         x_offset = (i - (len(prompts) - 1) / 2) * offset_width
         # Create numerical x-positions by mapping fields to numbers and adding offset
-        field_to_num = {field: j for j, field in enumerate(item_data['field'].unique())}
-        x_positions = [field_to_num[field] + x_offset for field in item_data['field'].unique()]
-        jitter = np.random.normal(0, 0.04, size=len(item_data['item_id'].unique()))
-        x_scattered_positions = x_positions + jitter
+        fields = item_data['field'].unique()
+        field_to_num = {field: j for j, field in enumerate(fields)}
+        jitter = np.random.normal(0, 0.04, size=len(item_data))
+        x_scattered_positions = [
+            field_to_num[field] + x_offset + j
+            for field, j in zip(item_data['field'], jitter)
+        ]
 
         plot.add_trace(go.Scatter(
             x=x_scattered_positions,
@@ -435,44 +437,45 @@ def check_visualization(
             mode='markers',
             marker=dict(
                 color="white",
-                size=3,
+                size=5,
                 opacity=0.4,
                 line=dict(width=0, color='white')
             ),
             showlegend=True,
-            # hovertext=item_ids
+            hovertext=item_data['item_id']
         ))
 
-        # average_score = item_data.groupby(['item_id', 'field'])[score].mean().reset_index()
-        # std_score = item_data.groupby(['item_id', 'field'])[score].std().reset_index()
-        # x_positions = [field_to_num[field] + x_offset for field in fields]
-        # # Add a bar chart for each task
-        # plot.add_trace(go.Bar(
-        #     x=x_positions,
-        #     y=average_score[score],
-        #     name=prompt,
-        #     error_y=dict(
-        #         type='data',
-        #         array=std_score[score],
-        #         visible=True,
-        #         color="grey",
-        #         thickness=1,
-        #         width=3
-        #     ),
-        #     marker_color=color_map[prompt],
-        #     showlegend=True,
-        #     width=offset_width,  # Control the width of the bars
-        #     hovertext=[
-        #         f"Field: {f}<br>{s}: {s:.3f}<br>Prompt: {prompt}" 
-        #         for f, s in zip(average_score['field'], average_score[score])
-        #     ]
-        # ))
+        average_score = item_data.groupby(['field'])[score].mean().reset_index()
+        std_score = item_data.groupby(['field'])[score].std().reset_index()
+        x_positions = [field_to_num[field] + x_offset for field in average_score['field']]
+        # Add a bar chart for each task
+        plot.add_trace(go.Bar(
+            x=x_positions,
+            y=average_score[score],
+            name=prompt,
+            error_y=dict(
+                type='data',
+                array=std_score[score],
+                visible=True,
+                color="grey",
+                thickness=1,
+                width=3
+            ),
+            marker_color=color_map[prompt],
+            showlegend=True,
+            width=offset_width,  # Control the width of the bars
+            hovertext=[
+                f"Field: {f}<br>{s}: {s:.3f}<br>Prompt: {prompt}" 
+                for f, s in zip(average_score['field'], average_score[score])
+            ]
+        ))
 
     # Format num_points string
-    # min_points = min(num_points.values())
-    # max_points = max(num_points.values())
-    num_points_str = "fix this later"  #str(min_points) if min_points == max_points else f"{min_points}-{max_points}"
-    
+    num_points = item_data.groupby('field')['item_id'].count()
+    min_points = num_points.min()
+    max_points = num_points.max()
+    num_points_str = str(min_points) if min_points == max_points else f"{min_points} - {max_points}"
+
     plot.update_layout(
         width=800,
         height=600,
