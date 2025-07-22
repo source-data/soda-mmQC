@@ -1,0 +1,35 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "plot": "yes",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "B",
+            "plot": "yes",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "C",
+            "plot": "yes",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "D",
+            "plot": "yes",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "E",
+            "plot": "yes",
+            "average_values": "no",
+            "individual_values": "not needed"
+        }
+    ],
+    "updated_at": "2025-05-08 13:56:31"
+}

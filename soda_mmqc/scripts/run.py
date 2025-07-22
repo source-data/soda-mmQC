@@ -2,22 +2,72 @@ import os
 import json
 import argparse
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
+from dataclasses import dataclass
 from tqdm import tqdm
 from soda_mmqc.model_api import generate_response
 from soda_mmqc.model_cache import ModelCache
 from soda_mmqc.config import (
-    get_content_path,
-    get_expected_output_path,
-    get_cache_path,
-    get_checklist,
-    list_checks,
-    get_evaluation_path,
-    get_check_data_file
+    CHECKLIST_DIR,
+    CACHE_DIR,
+    EVALUATION_DIR,
 )
-from soda_mmqc.tools.evaluator import JSONEvaluator
+from soda_mmqc.evaluation import JSONEvaluator
 from soda_mmqc import logger
-from soda_mmqc.examples import FigureExample, WordExample, DataFigureWordExample
+from soda_mmqc.examples import EXAMPLE_FACTORY, Example
+
+
+@dataclass
+class CheckData:
+    """Container for all data needed to process a single check.
+    
+    This dataclass holds the essential information required to run a check
+    against a set of examples, including the schema, examples, and metadata.
+    
+    Attributes:
+        check_dir_name: Directory name of the check (e.g., 
+            "error-bars-defined")
+        check_name: Human-readable name of the check (e.g., 
+            "Error Bars Defined")
+        schema: JSON schema defining the expected output structure
+        examples: List of Example instances
+        expected_outputs: List of expected outputs for each example
+    """
+    check_dir_name: str
+    check_name: str
+    schema: Dict[str, Any]
+    examples: List[Example]
+    expected_outputs: List[Dict[str, Any]]
+
+
+@dataclass
+class ModelInput:
+    """Container for model input data.
+    
+    Holds all the data needed to generate a response from the model,
+    including the example, prompt, and expected output schema.
+    
+    Attributes:
+        example: The Example instance containing image and caption data
+        prompt: The prompt template to send to the model
+        schema: JSON schema defining the expected structured output format
+    """
+    example: Example
+    prompt: str
+    schema: Dict[str, Any]
+
+
+@dataclass
+class ModelResult:
+    """Container for a single model evaluation result.
+    
+    Attributes:
+        doc_id: The document identifier for the example (e.g., 
+            "10.1038/emboj.2009.312")
+        model_output: The raw structured output from the model API
+    """
+    doc_id: str | None
+    model_output: Dict[str, Any]
 
 
 def load_json(file_path):
@@ -26,69 +76,12 @@ def load_json(file_path):
         return json.load(f)
 
 
-def gather_examples(check_data: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """Step 1: Gather all necessary inputs and validate file paths.
-    
-    Args:
-        check_data: The checklist data containing examples and prompt info
-        
-    Returns:
-        List of dictionaries containing all necessary inputs for model processing
-    """
-    check_name = check_data["name"]
-    examples = check_data["examples"]
-
-    logger.info(f"Gathering inputs for check: {check_name}")
-    logger.info(f"Found {len(examples)} examples to process")
-
-    # Gather and validate all inputs
-    inputs = []
-    for example_dict in tqdm(examples, desc="Validating inputs", unit="example"):
-        try:
-            # Try to create a FigureExample first
-            try:
-                example_obj = FigureExample(example_dict)
-            except (FileNotFoundError, ValueError):
-                # If that fails, try WordExample
-                try:
-                    example_obj = WordExample(example_dict)
-                except FileNotFoundError:
-                    # If both fail, try DataFigureWordExample
-                    example_obj = DataFigureWordExample(example_dict)
-            
-            # Store all inputs
-            inputs.append(example_obj.to_dict())
-            
-        except Exception as e:
-            logger.error(
-                f"Error processing example "
-                f"{example_dict['doi']}/{example_dict.get('figure_id', 'N/A')}: {str(e)}"
-            )
-            continue
-
-    return inputs
-
-
-def get_expected_output(example: Dict[str, Any], check_name: str) -> Dict[str, Any]:
-    expected_output_path = get_expected_output_path(example, check_name)
-    # Validate expected output file
-    if not expected_output_path.exists():
-        logger.error(
-            f"Expected output file not found: {expected_output_path}"
-        )
-        raise FileNotFoundError(
-            f"Expected output file not found: {expected_output_path}"
-    )
-    expected_output = load_json(expected_output_path)
-    return expected_output
-
-
 def run_model(
-    inputs: Dict[str, Any],
+    check_data: CheckData,
+    prompt: str,
     use_cache: bool = True,
-    mock: bool = False,
     model: str = "gpt-4o-2024-08-06"
-) -> List[Dict[str, Any]]:
+) -> List[ModelResult]:
     """Step 2: Run the model on all inputs.
     
     Args:
@@ -105,165 +98,118 @@ def run_model(
     Returns:
         List of dictionaries containing model outputs
     """
-    logger.info(f"Running model on {len(inputs.get('examples', []))} inputs")
+    logger.info(f"Running model on {len(check_data.examples)} inputs")
 
     # Initialize model cache
-    cache_dir = get_cache_path()
+    cache_dir = CACHE_DIR
     model_cache = ModelCache(cache_dir)
 
     results = []
 
-    check_data = inputs["check_data"]
-    check_name = check_data["name"]
-    examples = inputs["examples"]
-    prompt = inputs["prompt"]
-    prompt_name = inputs["prompt_name"]
-    schema = inputs["schema"]
+    check_name = check_data.check_name
+    examples = check_data.examples
+    schema = check_data.schema
 
-    if mock:
-        for example in tqdm(examples, desc="Mock run", unit="example"):
-            expected_output = example.get_expected_output(check_name)
-            results.append({
-                "doi": example.metadata.doi,
-                "example": example,
-                "model_output": expected_output,
-                "expected_output": expected_output,
-                "prompt_name": prompt_name
-            })
-    else:
-        for example in tqdm(examples, desc="Running model", unit="example"):
-            try:
-                # Check cache first if enabled
-                if use_cache:
-                    # The cache key needs to be unique with respect to 
-                    # the example content, the prompt, the schema, the check name, and the model
-                    data_for_cache_key = {
-                        "content_hash": example.get_content_hash(),
-                        "prompt": prompt,
-                        "schema": schema,
-                        "check_name": check_name,
-                        "prompt_name": prompt_name,
-                        "model": model,
-                    }
-                    cached_result = model_cache.get_cached_output(data_for_cache_key)
-                    if cached_result:
-                        logger.debug(
-                            "Using cached output for "
-                            f"{example.metadata.doi}"
-                        )
-                        model_output = cached_result["data"]
-                    else:
-                        # Generate new output if not cached
-                        model_input = {
-                            "example": example,
-                            "prompt": prompt,
-                            "schema": schema
-                        }
-                        try:
-                            model_output, raw_response = generate_response(
-                                model_input,
-                                model=model,
-                                metadata={
-                                    **example.get_metadata(),
-                                    "check_name": check_name,
-                                    "prompt_name": prompt_name
-                                }
-                            )
-                        except Exception as e:
-                            logger.error(
-                                f"Error generating response for "
-                                f"{example.metadata.doi}: {str(e)}"
-                            )
-                            raise
-                        # Cache the new output
-                        model_cache.cache_output(
-                            data_for_cache_key,
-                            data=model_output,
-                            metadata={
-                                **example.get_metadata(),
-                                "check_name": check_name,
-                                "prompt_name": prompt_name
-                            }
-                        )
+    for example in tqdm(examples, desc="Running model", unit="example"):
+        try:
+            # Generate new output without caching
+            model_input = ModelInput(
+                example=example,
+                prompt=prompt,
+                schema=schema
+            )
+            # Check cache first if enabled
+            if use_cache:
+                cache_key = model_cache.generate_cache_key(
+                    model_input, check_name, model
+                )
+                cached_result = model_cache.get_cached_output(cache_key)
+                if cached_result:
+                    logger.debug(
+                        "Using cached output for "
+                        f"{example.doc_id}"
+                    )
+                    model_output = cached_result["data"]
                 else:
-                    # Generate new output without caching
-                    model_input = {
-                        "example": example,
-                        "prompt": prompt,
-                        "schema": schema
-                    }
                     try:
                         model_output, raw_response = generate_response(
                             model_input,
                             model=model,
-                            metadata={
-                                **example.get_metadata(),
-                                "check_name": check_name,
-                                "prompt_name": prompt_name
-                            }
                         )
                     except Exception as e:
                         logger.error(
                             f"Error generating response for "
-                            f"{example.metadata.doi}: {str(e)}"
+                            f"{example.doc_id}: {str(e)}"
                         )
                         raise
+                    # Cache the new output
+                    model_cache.cache_output(
+                        cache_key,
+                        data=model_output,
+                    )
+            else:
+                try:
+                    model_output, raw_response = generate_response(
+                        model_input,
+                        model=model,
+                    )
+                except Exception as e:
+                    logger.error(
+                        f"Error generating response for "
+                        f"{example.doc_id}: {str(e)}"
+                    )
+                    raise
 
-                # Accumulate result
-                expected_output = example.get_expected_output(check_name)
-                results.append({
-                    "doi": example.metadata.doi,
-                    "example": example,
-                    "model_output": model_output,
-                    "expected_output": expected_output,
-                    "prompt_name": prompt_name
-                })
+            # Accumulate result
+            results.append(ModelResult(
+                doc_id=example.doc_id,
+                model_output=model_output,
+            ))
 
-            except Exception as e:
-                logger.error(
-                    f"Error processing example "
-                    f"{example.metadata.doi}: {str(e)}"
-                )
-                # Continue with next example instead of failing completely
-                continue
-
+        except Exception as e:
+            logger.error(
+                f"Error processing example "
+                f"{example.doc_id}: {str(e)}"
+            )
+            # Continue with next example instead of failing completely
+            continue
     return results
 
 
 def analyze_results(
-    results: List[Dict[str, Any]], 
-    metrics: List[str],
-    schema: Dict[str, Any]
+    results: List[ModelResult],
+    schema: Dict[str, Any],
+    expected_outputs: List[Dict[str, Any]]
 ) -> List[Dict[str, Any]]:
-    """Analyze model outputs against expected outputs using specified metrics.
+    """Analyze model outputs against expected outputs using the evaluator.
     
     Args:
-        results: List of dictionaries containing model outputs
-        metrics: List of metrics to compute
-        
+        results: List of ModelResult objects containing model outputs
+        schema: Dict[str, Any] for the check
     Returns:
         List of dictionaries containing analysis results
     """
     logger.info("Analyzing all results")
 
     analyzed_results = []
-    for result in tqdm(results, desc="Analyzing results", unit="example"):
+    evaluator = JSONEvaluator(schema, string_metric="semantic_similarity")
+    for result, expected_output in tqdm(
+        zip(results, expected_outputs), 
+        desc="Analyzing results", 
+        unit=" example"
+    ):
         logger.debug(
-            f"\n\n\n========= Analyzing: {result['doi']}\n\n\n"
+            f"\n\n\n========= Analyzing: {result.doc_id}\n\n\n"
         )
-        # Analyze response
-        analysis = {}
-        for metric in metrics:
-            evaluator = JSONEvaluator(schema, metric)
-            analysis[metric] = evaluator.evaluate(
-                result["model_output"],
-                result["expected_output"],
-            )
-        # Store analyzed result
+        # Analyze response (metrics are set inside the evaluator)
+        analysis = evaluator.evaluate(
+            result.model_output,
+            expected_output,
+        )
         analyzed_results.append({
-            **{k: v for k, v in result.items() if k not in ["model_output", "expected_output"]},
-            "expected_output": result["expected_output"],
-            "model_output": result["model_output"],
+            "doc_id": result.doc_id,
+            "expected_output": expected_output,
+            "model_output": result.model_output,
             "analysis": analysis
         })
 
@@ -287,7 +233,7 @@ def save_analysis(
     
     # Save analysis results
     try:
-        analysis_path = get_evaluation_path(checklist_name) / check_name / model
+        analysis_path = EVALUATION_DIR / checklist_name / check_name / model
         os.makedirs(analysis_path, exist_ok=True)
         
         # Also save a summary file with all prompts
@@ -307,7 +253,9 @@ def save_analysis(
         raise
 
 
-def prepare_check_data(check_dir: Path):
+def prepare_check_data(
+    check_dir: Path
+) -> Tuple[CheckData | None, Dict[str, str]]:
     """Prepare data for processing a check.
     
     This function consolidates common functionality for loading check data,
@@ -316,87 +264,146 @@ def prepare_check_data(check_dir: Path):
     
     Args:
         check_dir: Path to the check directory
-        use_all_prompts: If True, return all prompts; if False, return only the first prompt
-        
     Returns:
-        Dictionary containing prepared data for the check, or None if preparation fails
+        Tuple of (CheckData object, prompts dict) or (None, {}) if 
+        preparation fails
     """
-    check_dir_name = check_dir.name
-    logger.info(f"Preparing data for check: {check_dir_name}")
-    
+    logger.info(f"Preparing data for check: {check_dir.name}")
+
     # Load check data
-    check_data_file = get_check_data_file(check_dir)
-    if not check_data_file.exists():
-        logger.error(f"Check data file not found: {check_data_file}")
-        return None
-    
+    check_benchmark_file = check_dir / "benchmark.json"
+    if not check_benchmark_file.exists():
+        logger.error(
+            f"Check data file not found: {check_benchmark_file}"
+        )
+        return (None, {})
+
     try:
-        check_data = load_json(check_data_file)
+        benchmark_data = load_json(check_benchmark_file)
     except Exception as e:
         logger.error(f"Error loading check data: {str(e)}")
-        return None
-    
+        return (None, {})
+
+    check_name = benchmark_data["name"]
+
     # Load schema
     schema_file = check_dir / "schema.json"
     if not schema_file.exists():
         logger.error(f"Schema file not found: {schema_file}")
-        return None
-    
+        return (None, {})
+
     try:
         schema = load_json(schema_file)
     except Exception as e:
         logger.error(f"Error loading schema: {str(e)}")
-        return None
-    
+        return (None, {})
+
     # Get all prompts from the prompts directory
     prompts_dir = check_dir / "prompts"
     if not prompts_dir.exists():
-        logger.error(f"Prompts directory not found: {prompts_dir}")
-        return None
-    
+        logger.error(
+            f"Prompts directory not found: {prompts_dir}"
+        )
+        return (None, {})
+
     # Get all prompt files
     prompt_files = list(prompts_dir.glob("prompt*.txt"))
     if not prompt_files:
         logger.error(f"No prompt files found in {prompts_dir}")
-        return None
-    
+        return (None, {})
+
     # Sort the prompt files by name in ascending order
     prompt_files.sort()
-    
+
     # Load prompts
     prompts = {}
     for prompt_file in prompt_files:
         prompt_name = prompt_file.stem
         with open(prompt_file, "r", encoding="utf-8") as f:
             prompts[prompt_name] = f.read()
-    
-    # Get examples from benchmark.json
-    examples = check_data.get("examples", [])
-    if not examples:
-        logger.warning(f"No examples found in check: {check_dir_name}")
-        return None
-    
-    # Use the existing gather_examples function
+
+    # Get list of paths to examples from benchmark.json
+    example_paths = benchmark_data.get("examples", [])
+    if not example_paths:
+        logger.warning(f"No examples found in check: {check_dir.name}")
+        return (None, {})
+
+    # Get example class from benchmark.json
     try:
-        gathered_examples = gather_examples(check_data)
+        example_class_name = benchmark_data["example_class"]
+    except KeyError:
+        logger.error(f"No example class found in {check_benchmark_file}")
+        return (None, {})
+
+    try:
+        examples = [
+            EXAMPLE_FACTORY.create(ex_path, example_class_name)
+            for ex_path in example_paths
+        ]
     except Exception as e:
         logger.error(f"Error gathering examples: {str(e)}")
-        return None
-    
-    if not gathered_examples:
+        return (None, {})
+    if not examples:
         logger.warning(
-            f"No valid examples gathered for check: {check_dir_name}"
+            f"No valid examples gathered for check: {check_dir.name}"
         )
-        return None
-    
-    # Return prepared data
-    return {
-        "check_dir_name": check_dir_name,
-        "check_data": check_data,
-        "schema": schema,
-        "prompts": prompts,
-        "examples": gathered_examples
-    }
+        return (None, {})
+
+    try:
+        expected_outputs = []
+        for example in examples:
+            try:
+                expected_output = example.get_expected_output(check_name)
+            except Exception as e:
+                logger.error(f"Error getting expected outputs ({example.doc_id}): {str(e)}")
+                continue
+            if expected_output is not None:
+                expected_outputs.append(expected_output)
+            else:
+                logger.warning(
+                    f"No expected output found for example: {example.doc_id}. "
+                    f"This may indicate that the example is not properly "
+                    f"initialized."
+                )
+                continue
+    except Exception as e:
+        logger.error(f"Error getting expected outputs: {str(e)}")
+        return (None, {})
+    if not expected_outputs:
+        # this can happen when initializing
+        logger.warning(
+            f"No valid expected outputs gathered for check: {check_dir.name}"
+        )
+        return (None, {})
+    else:
+        # this should not happen and indicates some expected outputs are 
+        # missing
+        assert len(expected_outputs) == len(examples), (
+            f"Expected outputs not found for all examples in "
+            f"check: {check_dir.name}"
+        )
+
+    # Validate that we have the same number of examples with doc_ids as 
+    # expected outputs
+    # This ensures consistency between examples and expected_outputs
+    if len(examples) != len(expected_outputs):
+        logger.error(
+            f"Mismatch between examples with doc_ids "
+            f"({len(examples)}) and expected outputs "
+            f"({len(expected_outputs)}) for check: {check_dir.name}. "
+            f"This may indicate examples with None doc_ids."
+        )
+        return (None, {})
+
+    check_data = CheckData(
+        check_dir_name=check_dir.name,
+        check_name=check_name,
+        schema=schema,
+        examples=examples,
+        expected_outputs=expected_outputs
+    )
+
+    return check_data, prompts
 
 
 def process_check(
@@ -414,57 +421,62 @@ def process_check(
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
         model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
-        
     Returns:
         Dictionary containing analyzed results
     """
     
     # Prepare check data
-    prepared_data = prepare_check_data(check_dir)
-    if not prepared_data:
+    check_data, prompts = prepare_check_data(check_dir)
+    if not check_data:
         return {}
-
-    # check_dir_name = prepared_data["check_dir_name"]
-    check_data = prepared_data["check_data"]
-    check_name = check_data["name"]
-    metrics = check_data["metrics"]
-    schema = prepared_data["schema"]
-    prompts = prepared_data["prompts"]
-    examples = prepared_data["examples"]
 
     # Dictionary to store results for each prompt
     all_results = {}
-    
+
     # Process each prompt
     for prompt_name, prompt in prompts.items():
         logger.info(f"Processing prompt: {prompt_name}")
-        
-        # Prepare inputs for run_model
-        inputs = {
-            "check_data": check_data,
-            "examples": examples,
-            "prompt": prompt,
-            "schema": schema,
-            "prompt_name": prompt_name
-        }
-
-        # Run model and cache outputs
-        results = run_model(
-            inputs,
-            use_cache=use_cache,
-            mock=mock,
-            model=model
-        )
+        if mock:
+            results = [
+                ModelResult(
+                    doc_id=example.doc_id,
+                    model_output=expected_output,
+                )
+                for example, expected_output in zip(
+                    check_data.examples, check_data.expected_outputs
+                )
+            ]
+        else:
+            results = run_model(
+                check_data,
+                prompt,
+                use_cache=use_cache,
+                model=model
+            )
 
         # Analyze results
-        analyzed_results = analyze_results(results, metrics, schema)
+        analyzed_results = analyze_results(
+            results, check_data.schema, check_data.expected_outputs
+        )
 
         # Store results for this prompt
         all_results[prompt_name] = analyzed_results
 
-    save_analysis(all_results, checklist_name, check_name, model)
+    save_analysis(
+        all_results, checklist_name, check_data.check_name, model
+    )
 
     return all_results
+
+
+def list_checks(checklist_dir: Path) -> Dict[str, Path]:
+    """List all checks in a checklist."""
+    # enumerate the subdirectories of the checklist directory
+    checks = {}
+    for check_dir in checklist_dir.iterdir():
+        if check_dir.is_dir():
+            checks[check_dir.name] = check_dir
+    return checks
 
 
 def initialize(checklist_dir: Path, use_cache: bool = True):
@@ -474,13 +486,15 @@ def initialize(checklist_dir: Path, use_cache: bool = True):
     it uses the prompts in prompts/ and the schema.json to execute the check
     using the image and caption of each example. The output becomes the
     preliminary expected_output.json which is written in the
-    <doi>/checks/<check_name>/ folder.
+    <doc_id>/checks/<check_name>/ folder.
     
     Args:
         checklist_dir: Path to the checklist directory
         use_cache: If True, use cached outputs when available
     """
-    logger.info(f"Initializing expected outputs for checklist: {checklist_dir.name}")
+    logger.info(
+        f"Initializing expected outputs for checklist: {checklist_dir.name}"
+    )
     
     # Get all checks from the checklist
     checks = list_checks(checklist_dir)
@@ -493,51 +507,35 @@ def initialize(checklist_dir: Path, use_cache: bool = True):
         logger.info(f"Processing check: {check_dir_name}")
         
         # Prepare check data (use only the first prompt)
-        prepared_data = prepare_check_data(check_dir)
+        prepared_data, prompts = prepare_check_data(check_dir)
+
         if not prepared_data:
             continue
-        
-        check_dir_name = prepared_data["check_dir_name"]
-        check_data = prepared_data["check_data"]
-        check_name = check_data["name"]
-        schema = prepared_data["schema"]
-        prompts = prepared_data["prompts"]
-        examples = prepared_data["examples"]
-        
+
         # Get the first prompt for initialization
-        # they are sorted alphabetically
-        prompt_name = list(prompts.keys())[0]
-        prompt = prompts[prompt_name]
-        
-        # Prepare inputs for run_model
-        inputs = {
-            "check_data": check_data,
-            "examples": examples,
-            "prompt": prompt,
-            "schema": schema,
-            "prompt_name": prompt_name
-        }
-        
-        # Run the model
+        # sort prompts alphabetically
+        prompts_sorted = sorted(prompts.keys())
+        first_prompt_name = prompts_sorted[0]
+        first_prompt = prompts[first_prompt_name]
+
         try:
             results = run_model(
-                inputs,
-                mock=False,
+                prepared_data,
+                first_prompt,
                 use_cache=use_cache
             )
-            
+
             # Write expected outputs
-            for result in results:
+            for result, example in zip(results, prepared_data.examples):
                 try:
-                    example = result["example"]
                     example.save_expected_output(
-                        result["model_output"],
-                        check_name
+                        result.model_output,
+                        prepared_data.check_name
                     )
                 except Exception as e:
                     logger.error(
                         f"Error writing expected output for "
-                        f"{result['doi']}: {str(e)}"
+                        f"{result.doc_id}: {str(e)}"
                     )
                     continue
 
@@ -592,17 +590,36 @@ def process_checklist(
 
 def main():
     # Set up argument parser
-    parser = argparse.ArgumentParser(description="Run MMQC checks on examples")
-    parser.add_argument("checklist", type=str, help="Name of the checklist to process")
-    parser.add_argument("--initialize", action="store_true", help="Initialize expected output files")
-    parser.add_argument("--mock", action="store_true", help="Use mock responses instead of calling the model")
-    parser.add_argument("--no-cache", action="store_true", help="Disable caching of model responses")
-    parser.add_argument("--check", type=str, help="Name of the check to process")
-    parser.add_argument("--model", type=str, default="gpt-4o-2024-08-06", help="The model to use for generation")
+    parser = argparse.ArgumentParser(
+        description="Run MMQC checks on examples"
+    )
+    parser.add_argument(
+        "checklist", type=str, help="Name of the checklist to process"
+    )
+    parser.add_argument(
+        "--initialize", action="store_true", 
+        help="Initialize expected output files"
+    )
+    parser.add_argument(
+        "--mock", action="store_true", 
+        help="Use mock responses instead of calling the model"
+    )
+    parser.add_argument(
+        "--no-cache", action="store_true", 
+        help="Disable caching of model responses"
+    )
+    parser.add_argument(
+        "--check", type=str, help="Name of the check to process"
+    )
+    parser.add_argument(
+        "--model", type=str, default="gpt-4o-2024-08-06", 
+        help="The model to use for generation"
+    )
     args = parser.parse_args()
 
     # Get the checklist directory using the config function
-    checklist_dir = get_checklist(args.checklist)
+    checklist_name = args.checklist
+    checklist_dir = CHECKLIST_DIR / checklist_name
     if not checklist_dir.exists():
         logger.error(f"Checklist directory not found: {checklist_dir}")
         return
@@ -611,21 +628,28 @@ def main():
     if args.initialize:
         initialize(checklist_dir, not args.no_cache)
         return
-        
+
     if args.check:
         # Find the check in the checklist
         check_dir = checklist_dir / args.check
         if check_dir.exists():
-            process_check(check_dir, args.checklist, args.mock, not args.no_cache, model=args.model)
+            process_check(
+                check_dir, args.checklist, args.mock, not args.no_cache, 
+                model=args.model
+            )
         else:
             logger.error(f"Check not found: {args.check}")
     else:
         # Process the entire checklist
-        process_checklist(checklist_dir, args.checklist, args.mock, not args.no_cache, model=args.model)
+        process_checklist(
+            checklist_dir, args.checklist, args.mock, not args.no_cache, 
+            model=args.model
+        )
 
 
 def initialize_main():
-    """Entry point for the initialize command that passes --initialize to main."""
+    """Entry point for the initialize command that passes --initialize to 
+    main."""
     import sys
     sys.argv.append("--initialize")
     main()

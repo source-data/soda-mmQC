@@ -1,0 +1,89 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "section-order",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "sections_as_in_manuscript": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "List of sections as they appear in the manuscript"
+                            },
+                            "missing_sections": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "List of sections that are missing from the manuscript"
+                            },
+                            "sections_to_remove": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "List of sections that are present but should be removed"
+                            },
+                            "sections_to_rename": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "original": {
+                                            "type": "string",
+                                            "description": "Original section name in manuscript"
+                                        },
+                                        "renamed": {
+                                            "type": "string",
+                                            "description": "Suggested standardized name for the section"
+                                        }
+                                    },
+                                    "required": ["original", "renamed"],
+                                    "additionalProperties": false
+                                },
+                                "description": "List of sections that should be renamed"
+                            },
+                            "sections_to_move": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "section_in_manuscript": {
+                                            "type": "string",
+                                            "description": "Name of the section that is in incorrect position"
+                                        },
+                                        "move_before": {
+                                            "type": "string",
+                                            "description": "Section that this should come before"
+                                        }
+                                    },
+                                    "required": ["section_in_manuscript", "move_before"],
+                                    "additionalProperties": false
+                                },
+                                "description": "List of sections that are in incorrect positions"
+                            }
+                        },
+                        "required": [
+                            "sections_as_in_manuscript",
+                            "missing_sections",
+                            "sections_to_remove",
+                            "sections_to_rename",
+                            "sections_to_move"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}

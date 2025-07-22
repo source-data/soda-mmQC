@@ -30,19 +30,38 @@ class ModelCache:
         sorted_data = json.dumps(data, sort_keys=True)
         return hashlib.sha256(sorted_data.encode()).hexdigest()
 
-    def get_cached_output(
-        self, 
-        data_for_cache_key: Dict[str, Any]
-    ) -> Optional[Dict[str, Any]]:
-        """Get cached output for given inputs if it exists.
+    def generate_cache_key(
+        self, model_input, check_name: str, model: str
+    ) -> str:
+        """Generate a cache key for model input.
         
         Args:
-            data_for_cache_key: Dictionary containing data for the cache key
+            model_input: The ModelInput object containing example, prompt, and 
+                schema
+            check_name: Name of the check being processed
+            model: The model being used for generation
+            
+        Returns:
+            String hash of the cache key data
+        """
+        cache_key_data = {
+            "content_hash": model_input.example.get_content_hash(),
+            "prompt": model_input.prompt,
+            "schema": model_input.schema,
+            "check_name": check_name,
+            "model": model,
+        }
+        return self._generate_cache_key(cache_key_data)
+
+    def get_cached_output(self, cache_key: str) -> Optional[Dict[str, Any]]:
+        """Get cached output for given cache key if it exists.
+        
+        Args:
+            cache_key: String hash of the cache key data
             
         Returns:
             Cached output if found, None otherwise
         """
-        cache_key = self._generate_cache_key(data_for_cache_key)
         cache_file = self.cache_dir / f"{cache_key}.json"
 
         if cache_file.exists():
@@ -52,18 +71,17 @@ class ModelCache:
 
     def cache_output(
         self,
-        data_for_cache_key: Dict[str, Any],
+        cache_key: str,
         data: Dict[str, Any],
-        metadata: Dict[str, Any]
+        metadata: Dict[str, Any] = {}
     ) -> None:
         """Cache model output with metadata.
 
         Args:
-            inputs: Dictionary containing model inputs
-            output: Model output to cache
+            cache_key: String hash of the cache key data
+            data: Model output to cache
             metadata: Additional metadata about the model call
         """
-        cache_key = self._generate_cache_key(data_for_cache_key)
         cache_file = self.cache_dir / f"{cache_key}.json"
 
         cache_entry = {

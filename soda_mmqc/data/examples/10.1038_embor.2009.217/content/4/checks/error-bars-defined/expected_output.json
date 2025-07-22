@@ -1,0 +1,30 @@
+{
+    "name": "error-bars-defined",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "from_the_caption": "Mean\u00b1s.d. of three independent experiments is reported."
+        },
+        {
+            "panel_label": "B",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "no",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "C",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "yes",
+            "from_the_caption": "Mean\u00b1s.d. of three independent experiments is reported."
+        },
+        {
+            "panel_label": "D",
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "no",
+            "from_the_caption": ""
+        }
+    ],
+    "updated_at": "2025-05-08 13:41:46"
+}

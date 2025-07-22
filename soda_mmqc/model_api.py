@@ -1,10 +1,7 @@
 import os
-import base64
 import json
 from dotenv import load_dotenv
 from openai import OpenAI
-import logging
-import mimetypes
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -20,28 +17,6 @@ load_dotenv()
 
 # Determine which API to use
 API_PROVIDER = os.getenv("API_PROVIDER", "openai").lower()
-
-# Set up logger
-logger = logging.getLogger(__name__)
-
-
-def get_image_mime_type(image_path):
-    """Get the MIME type of an image file based on its extension."""
-    mime_type, _ = mimetypes.guess_type(image_path)
-    if mime_type:
-        if mime_type.startswith('image/'):
-            return mime_type
-        else:
-            raise ValueError(f"Not an image: {image_path}")
-    else:
-        # Default to JPEG if we can't determine the type
-        raise ValueError(f"Could not guess mime type: {image_path}")
-
-
-def encode_image(image_path):
-    """Encode image to base64 string."""
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
 
 
 @retry(
@@ -81,7 +56,9 @@ def generate_response_openai(
         input=[
             {
                 "role": "system",
-                "content": "You are a scientific figure quality control expert."
+                "content": (
+                    "You are a scientific figure quality control expert."
+                )
             },
             {
                 "role": "user",
@@ -89,12 +66,12 @@ def generate_response_openai(
             }
         ],
         text=schema,
-        metadata={**metadata, **model_input["metadata"]}
+        metadata={**metadata}
     )
 
     # Parse response
     try:
-        response = json.loads(raw_response.text)
+        response = json.loads(raw_response.output_text)
     except json.JSONDecodeError as e:
         logger.error(f"Error parsing response: {str(e)}")
         raise
@@ -103,14 +80,14 @@ def generate_response_openai(
 
 
 def generate_response(
-    model_input: Dict[str, Any],
+    model_input,
     model: str = "gpt-4o-2024-08-06",
-    metadata: Dict[str, Any] = None
+    metadata: Dict[str, Any] = {}
 ) -> Tuple[dict, dict]:
     """Generate response using the specified model.
     
     Args:
-        model_input: Dictionary containing:
+        model_input: ModelInput object containing:
             - example: The example to process
             - prompt: The prompt to use
             - schema: The schema for structured output
@@ -120,13 +97,11 @@ def generate_response(
     Returns:
         Tuple of (parsed response, raw response)
     """
-    if metadata is None:
-        metadata = {}
 
-    # Extract inputs
-    example = model_input["example"]
-    prompt = model_input["prompt"]
-    schema = model_input["schema"]
+    # Extract inputs from ModelInput object
+    example = model_input.example
+    prompt = model_input.prompt
+    schema = model_input.schema
 
     # Generate response
     return generate_response_openai(

@@ -1,0 +1,96 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": "- ****P\u2009\u2264\u20090.0001"
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "**"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": "- **P\u2009\u2264\u20090.01"
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "*",
+                "**"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": "- *P\u2009\u2264\u20090.05\n- **P\u2009\u2264\u20090.01"
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "I",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "J",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "K",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": ""
+        }
+    ],
+    "updated_at": "2025-05-08 13:52:53"
+}

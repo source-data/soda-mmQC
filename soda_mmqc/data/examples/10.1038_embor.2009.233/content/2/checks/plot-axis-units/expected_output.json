@@ -1,0 +1,120 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "C top",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "C bottom",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "True"
+                },
+                {
+                    "axis": "z",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Polyp diameter (mm)"
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "True"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Time after birth (months)"
+                }
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        }
+    ],
+    "updated_at": "2025-05-19 10:58:03"
+}

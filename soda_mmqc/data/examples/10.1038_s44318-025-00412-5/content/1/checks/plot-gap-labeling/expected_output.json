@@ -1,0 +1,175 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "y",
+                    "justification": "The y-axis data range seems compressed with values starting from nearly zero and then a large jump between lower ticks, but no explicit breaks are indicated."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "y",
+                    "justification": "There is an abrupt increase in the value range, but no explicit breaks are indicated."
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "y",
+                    "justification": "Though data increases smoothly, the relationship between low and high values is not linear, but no explicit breaks are indicated."
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "y",
+                    "justification": "Data shown have variance, but no explicit breaks are indicated on the axis."
+                }
+            ]
+        },
+        {
+            "panel_label": "I",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "y",
+                    "justification": "Data increase continuously without axis break indication."
+                }
+            ]
+        },
+        {
+            "panel_label": "J",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "K",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "y",
+                    "justification": "There is a continuous increase without axis break indication, implying a persistent trend."
+                }
+            ]
+        }
+    ],
+    "updated_at": "2025-05-08 11:01:27"
+}

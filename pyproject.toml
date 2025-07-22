@@ -5,7 +5,10 @@ build-backend = "hatchling.build"
 [project]
 name = "soda-mmqc"
 version = "0.1.0"
-description = "SODA MMQC - A tool for evaluating figure caption quality"
+description = "SODA MMQC: A tool for quality control of scientific figures"
+authors = [
+    {name = "SODA Team", email = "soda@example.com"},
+]
 requires-python = ">=3.8"
 dependencies = [
     "python-dotenv>=1.0.0",
@@ -29,10 +32,11 @@ dependencies = [
     "ipywidgets>=8.0.0",
     "jupyter>=1.0.0",
     "jupyterlab>=4.0.0",
+    "python-docx>=0.8.11",
 ]
 
 [project.scripts]
-run = "soda_mmqc.scripts.run:main"
+evaluate = "soda_mmqc.scripts.run:main"
 curate = "soda_mmqc.scripts.curate:main"
 init = "soda_mmqc.scripts.run:initialize_main"
 viz = "soda_mmqc.scripts.visualize:main"

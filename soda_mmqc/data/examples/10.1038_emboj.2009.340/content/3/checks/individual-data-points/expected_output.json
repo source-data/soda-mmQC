@@ -1,0 +1,17 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "plot": "no",
+            "average_values": "not needed",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "B",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        }
+    ],
+    "updated_at": "2025-05-08 13:56:43"
+}

@@ -1,5 +1,18 @@
 # SODA MMQC
 
+## System Requirements
+
+- Python 3.8+
+- [Pandoc](https://pandoc.org/installing.html) (must be installed and available in your PATH)
+
+### Install Pandoc
+
+- **macOS:** `brew install pandoc`
+- **Ubuntu/Debian:** `sudo apt-get install pandoc`
+- **Windows:** [Download installer](https://pandoc.org/installing.html)
+
+---
+
 A tool for evaluating figure caption quality.
 
 ## Installation

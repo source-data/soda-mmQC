@@ -1,1 +1,0 @@
-"""Compares the results obtained with different prompts and writes a better one."""

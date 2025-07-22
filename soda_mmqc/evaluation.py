@@ -1,279 +1,902 @@
-import json
-from nltk.translate.bleu_score import sentence_bleu
-import nltk
+"""Tools for evaluating model predictions against expected outputs."""
+
+from typing import Dict, Any, List, Callable, Optional, Union
+from dataclasses import dataclass, field
+import torch
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
+from nltk.translate.bleu_score import sentence_bleu
+from nltk.tokenize import word_tokenize
+import nltk
 from soda_mmqc.config import DEVICE
 import logging
+from soda_mmqc import logger
+import statistics
+from scipy.optimize import linear_sum_assignment
+import numpy as np
 
 # Suppress progress bars from SentenceTransformer
 logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
 
-# Download NLTK data for BLEU score calculation
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
-try:        
-    nltk.data.find('tokenizers/punkt_tab')
-except LookupError:
-    nltk.download('punkt_tab')
+# Download required NLTK data
+nltk.download('punkt')
 
-SENTENCE_TRANSFORMER = SentenceTransformer(
-    'all-MiniLM-L6-v2',
-    device=DEVICE
-)
+# Initialize SentenceTransformer model
+MODEL = SentenceTransformer('all-MiniLM-L6-v2', device=DEVICE)
 
 
-def get_text_fields(json_obj, schema):
-    """Extract text fields with semantic content from the JSON object.
+@dataclass
+class ComparisonResult:
+    """Result of a comparison operation.
     
-    Args:
-        json_obj: The JSON object to extract fields from
-        schema: Schema to derive field types from.
-        
-    Returns:
-        Dictionary with field types as keys and lists of values as values.
-        
-    Raises:
-        ValueError: If schema is missing or invalid.
+    Attributes:
+        score: Float between 0 and 1 indicating the match quality
+        element_scores: Dictionary of scores for each element in the comparison
+        field_scores: Dictionary of scores for each field in the comparison aggregated over the elements
+        std_score: Standard deviation of scores (for lists and objects)
+        true_positive: Number of matches with score >= threshold (for lists)
+        false_positive: Number of extra elements in prediction (for lists)
+        false_negative: Number of missing elements (for lists)
+        precision: Precision score (for lists)
+        recall: Recall score (for lists)
+        f1_score: F1 score (for lists)
+        element_scores: Dictionary with average and std scores per field (for lists)
     """
-    if isinstance(json_obj, str):
-        json_obj = json.loads(json_obj)
+    score: float = 0.0
+    element_scores: Dict[str, Any] = field(default_factory=dict)
+    field_scores: Dict[str, Any] = field(default_factory=dict)
+    std_score: float = 0.0
+    true_positive: bool = False
+    false_positive: bool = False
+    false_negative: bool = False
+    precision: float = 0.0
+    recall: float = 0.0
+    f1_score: float = 0.0
+
+    def __init__(
+        self,
+        score: float,
+        element_scores: Dict[str, Any] = {},
+        field_scores: Dict[str, Any] = {},
+        std_score: float = 0.0,
+        true_positive: bool = False,
+        false_positive: bool = False,
+        false_negative: bool = False,
+        precision: float = 0.0,
+        recall: float = 0.0,
+        f1_score: float = 0.0,
+    ):
+        self.score = max(0.0, min(1.0, score))
+        self.element_scores = element_scores
+        self.field_scores = field_scores
+        self.std_score = std_score
+        self.true_positive = true_positive
+        self.false_positive = false_positive
+        self.false_negative = false_negative
+        self.precision = precision
+        self.recall = recall
+        self.f1_score = f1_score
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert the ComparisonResult to a dictionary.
         
-    if not schema or not isinstance(schema, dict):
-        raise ValueError("Schema must be provided and must be a dictionary")
-
-    # Initialize field types from schema
-    field_types = {}
-
-    # Extract required fields from schema
-    try:
-        required_fields = schema.get("format", {}).get("schema", {}).get(
-            "properties", {}).get("outputs", {}).get("items", {}).get(
-            "required", [])
-
-        if not required_fields:
-            raise ValueError("Schema does not contain required fields")
-            
-        # Initialize empty lists for each required field
-        for field in required_fields:
-            field_types[field] = []
-    except (KeyError, AttributeError) as e:
-        raise ValueError(f"Invalid schema format: {str(e)}")
-
-    # Process panels
-    if "outputs" in json_obj:
-        for output in json_obj["outputs"]:
-            # Add caption text which contains semantic content
-            for field in field_types:
-                if field in output:
-                    field_types[field].append(output[field])
-    
-    return field_types
-
-
-def exact_match_score(predicted, expected, schema):
-    """Calculate exact match score between predicted and expected outputs."""
-    # Get text fields with semantic content
-    pred_fields = get_text_fields(predicted, schema)
-    exp_fields = get_text_fields(expected, schema)
-
-    # Calculate exact match score for each field type
-    results = {}
-    overall_score = 0.0
-    total_fields = 0
-
-    for field_type in pred_fields:
-        pred_texts = pred_fields[field_type]
-        exp_texts = exp_fields[field_type]
-        
-        # Skip if no fields of this type
-        if not pred_texts or not exp_texts:
-            results[field_type] = 0.0
-            continue
-            
-        # Calculate score for this field type
-        field_score = 0.0
-        field_count = 0
-        
-        for pred_text, exp_text in zip(pred_texts, exp_texts):
-            field_score += int(pred_text == exp_text)
-            field_count += 1
-            
-        field_result = field_score / field_count if field_count > 0 else 0.0
-        results[field_type] = field_result
-        
-        # Add to overall score
-        overall_score += field_score
-        total_fields += field_count
-    
-    # Add overall score
-    results["overall"] = (overall_score / total_fields
-                          if total_fields > 0 else 0.0)
-    
-    return results
-
-
-def semantic_similarity_score(predicted, expected, model=SENTENCE_TRANSFORMER,
-                             schema=None):
-    """Calculate semantic similarity between predicted and expected outputs."""
-    try:
-        # Get text fields with semantic content
-        pred_fields = get_text_fields(predicted, schema)
-        exp_fields = get_text_fields(expected, schema)
-
-        # Calculate semantic similarity for each field type
-        results = {}
-        overall_score = 0.0
-        total_fields = 0
-
-        for field_type in pred_fields:
-            pred_texts = pred_fields[field_type]
-            exp_texts = exp_fields[field_type]
-
-            # Skip if no fields of this type
-            if not pred_texts or not exp_texts:
-                results[field_type] = 0.0
-                continue
-
-            # Calculate similarity for this field type
-            similarities = []
-
-            for pred_text, exp_text in zip(pred_texts, exp_texts):
-                if not pred_text or not exp_text:
-                    logging.warning(f"Empty text field: {field_type}")
-                    logging.warning(f"Pred: {pred_text}")
-                    logging.warning(f"Exp: {exp_text}")
-                    similarities.append(0.0)
-                    continue
-                pred_embedding = model.encode([pred_text])[0]
-                pred_embedding = np.array(pred_embedding).reshape(1, -1)
-                exp_embedding = model.encode([exp_text])[0]
-                exp_embedding = np.array(exp_embedding).reshape(1, -1)
-                similarity = cosine_similarity(
-                    pred_embedding, exp_embedding
-                )[0][0]
-                similarities.append(float(similarity))
-            
-            # Calculate average for this field type
-            field_result = (
-                float(sum(similarities) / len(similarities)) 
-                if similarities else 0.0
-            )
-            results[field_type] = field_result
-            
-            # Add to overall score
-            overall_score += sum(similarities)
-            total_fields += len(similarities)
-        
-        # Add overall score
-        results["overall"] = (
-            overall_score / total_fields if total_fields > 0 else 0.0
-        )
-        
-        return results
-
-    except (json.JSONDecodeError, TypeError, ImportError, ValueError) as e:
-        # Re-raise ValueError, but handle other errors
-        if isinstance(e, ValueError):
-            raise
-        # Return zeros for all field types in case of error
+        Returns:
+            Dictionary representation of the ComparisonResult
+        """
         return {
-            "overall": 0.0
+            "score": self.score,
+            "element_scores": {
+                k: v.to_dict() if isinstance(v, ComparisonResult) else v
+                for k, v in self.element_scores.items()
+            },
+            "field_scores": {
+                k: v.to_dict() if isinstance(v, ComparisonResult) else v
+                for k, v in self.field_scores.items()
+            },
+            "std_score": self.std_score,
+            "true_positive": self.true_positive,
+            "false_positive": self.false_positive,
+            "false_negative": self.false_negative,
+            "precision": self.precision,
+            "recall": self.recall,
+            "f1_score": self.f1_score,
         }
 
 
-def bleu_score(predicted, expected, schema):
-    """Calculate BLEU score between predicted and expected outputs."""
-    try:
-        # Get text fields with semantic content
-        pred_fields = get_text_fields(predicted, schema)
-        exp_fields = get_text_fields(expected, schema)
-
-        # Calculate BLEU score for each field type
-        results = {}
-        overall_score = 0.0
-        total_fields = 0
-
-        for field_type in pred_fields:
-            pred_texts = pred_fields[field_type]
-            exp_texts = exp_fields[field_type]
-
-            # Skip if no fields of this type
-            if not pred_texts or not exp_texts:
-                results[field_type] = 0.0
-                continue
-
-            # Calculate BLEU scores for this field type
-            bleu_scores = []
-
-            for pred_text, exp_text in zip(pred_texts, exp_texts):
-                # Case 1: Both empty - perfect match
-                if (not exp_text) and (not pred_text):
-                    score = 1.0
-                # Case 2: Expected empty but predicted has content - wrong
-                elif (not exp_text) and pred_text:
-                    score = 0.0
-                # Case 3: Expected has content and predicted contains it - good
-                elif exp_text and (exp_text in pred_text):
-                    score = 1.0
-                # Case 4: Expected has content but predicted doesn't contain it
-                # - use BLEU
-                else:
-                    # Standard BLEU calculation
-                    pred_tokens = nltk.word_tokenize(pred_text.lower())
-                    exp_tokens = nltk.word_tokenize(exp_text.lower())
-                    score = sentence_bleu([pred_tokens], exp_tokens)
-                
-                bleu_scores.append(score)
-            
-            # Calculate average for this field type
-            field_result = (
-                sum(bleu_scores) / len(bleu_scores) if bleu_scores else 0.0
-            )
-            results[field_type] = field_result
-            
-            # Add to overall score
-            overall_score += sum(bleu_scores)
-            total_fields += len(bleu_scores)
+class JSONEvaluator:
+    def __init__(
+        self, 
+        schema: Dict[str, Any],
+        string_metric: str = "perfect_match",
+        match_threshold: float = 0.5
+    ):
+        """Initialize the evaluator with a schema file.
         
-        # Add overall score
-        results["overall"] = (
-            overall_score / total_fields if total_fields > 0 else 0.0
-        )
-        
-        return results
+        Args:
+            schema: JSON schema
+            string_metric: String comparison metric to use. One of:
+                - "perfect_match": Exact string matching
+                - "bleu": BLEU score
+                - "semantic_similarity": Using SentenceTransformer
+            match_threshold: Threshold for considering a match (0-1)
+        """
+        self.schema = schema
+        self.match_threshold = max(0.0, min(1.0, match_threshold))
 
-    except (json.JSONDecodeError, TypeError, ValueError) as e:
-        # Re-raise ValueError, but handle other errors
-        if isinstance(e, ValueError):
-            raise
-        # Return zeros for all field types in case of error
-        return {
-            "overall": 0.0
-        }
-
-
-def evaluate_response(model_output, expected_output, metrics, schema):
-    """Evaluate model output against expected output using specified metrics."""
-    results = {}
-
-    for metric in metrics:
-        if metric == "exact_match":
-            results[metric] = exact_match_score(model_output, expected_output,
-                                               schema)
-        elif metric == "semantic_similarity":
-            results[metric] = semantic_similarity_score(
-                model_output, expected_output, schema=schema
-            )
-        elif metric == "BLEU":
-            results[metric] = bleu_score(model_output, expected_output, schema)
+        # Set string comparison function based on metric
+        if string_metric in ["perfect_match", "exact_match"]:
+            self.string_comparator = self._exact_string_match
+        elif string_metric.lower() == "bleu":
+            self.string_comparator = self._bleu_score
+        elif string_metric == "semantic_similarity":
+            self.string_comparator = self._semantic_similarity
         else:
-            # For unknown metrics, return zeros for all field types
-            results[metric] = {
-                "overall": 0.0
-            }
+            raise ValueError(
+                f"Invalid string_metric: {string_metric}. Must be one of: "
+                "'perfect_match', 'exact_match', 'bleu', 'semantic_similarity'"
+            )
 
-    return results
+    def _get_schema_for_path(self, path: List[str]) -> Dict[str, Any]:
+        """Get the schema definition for a specific path in the structure.
+        
+        Args:
+            path: List of keys representing the path to the schema definition
+            
+        Returns:
+            Schema definition for the given path
+        """
+        current = self.schema["format"]["schema"]
+        for key in path:
+            if key == "items":
+                current = current.get("items", {})
+            elif key == "properties":
+                current = current.get("properties", {})
+            else:
+                current = current.get("properties", {}).get(key, {})
+        return current
+
+    def _semantic_similarity(self, pred: str, exp: str) -> float:
+        """Calculate semantic similarity between two strings using 
+        SentenceTransformer.
+        
+        Args:
+            pred: Prediction string
+            exp: Expected string
+            
+        Returns:
+            Score between 0 and 1 indicating semantic similarity
+        """
+        # Encode the sentences
+        embeddings = MODEL.encode([pred, exp], convert_to_tensor=True)
+
+        # Calculate cosine similarity
+        similarity = torch.nn.functional.cosine_similarity(
+            embeddings[0].unsqueeze(0),
+            embeddings[1].unsqueeze(0)
+        )
+
+        # Convert to float and map from [-1, 1] to [0, 1]
+        score = float(similarity.item())
+        logger.debug(f"raw cos_sim({pred}, {exp}): {score}")
+        # neagtive scores are antonymic, so anything below 0 is essentially zero from a practical standpoint
+        # cap it to 1.0 just to be safe
+        return min(max(score, 0), 1.0)
+
+    def _exact_string_match(self, pred: str, exp: str) -> float:
+        """Calculate exact string match between two strings.
+        
+        Args:
+            pred: Prediction string
+            exp: Expected string
+        """
+        score = 1.0 if pred == exp else 0.0
+        logger.debug(f"exact_match({pred}, {exp}): {score}")
+        return score
+
+    def _bleu_score(self, pred: str, exp: str) -> float:
+        """Calculate BLEU score between two strings.
+        
+        Args:
+            pred: Prediction string
+            exp: Expected string
+            
+        Returns:
+            Score between 0 and 1 indicating BLEU score
+        """
+        # Tokenize the sentences
+        pred_tokens = word_tokenize(pred)
+        exp_tokens = word_tokenize(exp)
+
+        # Calculate BLEU score with smoothing
+        try:
+            score = float(sentence_bleu([exp_tokens], pred_tokens))
+        except (ZeroDivisionError, TypeError):
+            # Handle case where there are no matching n-grams
+            score = 0.0
+
+        return score
+
+    def evaluate(
+        self, 
+        prediction: Dict[str, Any], 
+        expected: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Compare prediction against expected output.
+        
+        Args:
+            prediction: The model's prediction as a JSON object
+            expected: The expected output as a JSON object
+            
+        Returns:
+            Dictionary containing:
+            - score: Overall average score between 0 and 1
+            - field_scores: Dictionary of scores for each field
+        """
+        # Get the schema structure
+        schema_structure = self.schema["format"]["schema"]
+        
+        # Compare the outputs array
+        if "outputs" in schema_structure["properties"]:
+            pred_outputs = prediction.get("outputs", [])
+            exp_outputs = expected.get("outputs", [])
+
+            # Get the outputs schema
+            outputs_schema = self._get_schema_for_path(["outputs"])
+
+            # Compare outputs using _compare_values_with_schema
+            outputs_result = self._compare_values_with_schema(
+                pred_outputs,
+                exp_outputs,
+                outputs_schema,
+                ["outputs"]
+            )
+
+            # Convert the entire ComparisonResult to a dictionary
+            return outputs_result.to_dict()
+
+        return {
+            "score": 0.0,
+            "field_scores": {},
+        }
+
+    def _compare_values_with_schema(
+        self,
+        pred_value: Any,
+        exp_value: Any,
+        schema: Dict[str, Any],
+        schema_path: List[str]
+    ) -> ComparisonResult:
+        """Compare values using schema information.
+        
+        Args:
+            pred_value: Prediction value
+            exp_value: Expected value
+            schema: Schema definition for this value
+            schema_path: Path to the schema definition
+            
+        Returns:
+            ComparisonResult with the comparison score
+        """
+        logger.debug(f"Comparing values with schema: {schema_path}")
+        value_type = schema.get("type")
+        logger.debug(f"Comparing values of type {value_type}")
+
+        if value_type == "string":
+            if "enum" in schema:
+                if pred_value not in schema["enum"]:
+                    return ComparisonResult(
+                        score=0.0,
+                        element_scores={},
+                        field_scores={},
+                        false_positive=True
+                    )
+            return self._compare_strings(pred_value, exp_value)
+
+        elif value_type == "array":
+            if not isinstance(pred_value, list) or not isinstance(exp_value, list):
+                return ComparisonResult(
+                    score=0.0,
+                    element_scores={},
+                    field_scores={},
+                    false_positive=True if pred_value is not None else False,
+                    false_negative=True if exp_value is not None else False
+                )
+            return self._compare_lists(pred_value, exp_value, schema_path)
+
+        elif value_type == "object":
+            if not isinstance(pred_value, dict) or not isinstance(exp_value, dict):
+                return ComparisonResult(
+                    score=0.0,
+                    element_scores={},
+                    field_scores={},
+                    false_positive=True if pred_value is not None else False,
+                    false_negative=True if exp_value is not None else False
+                )
+            return self._compare_objects(pred_value, exp_value, schema_path)
+
+        else:
+            # For other types (number, boolean), use exact match
+            score = 1.0 if pred_value == exp_value else 0.0
+            if score == 0.0:
+                return ComparisonResult(
+                    score=score,
+                    element_scores={},
+                    field_scores={},
+                    false_positive=True if pred_value is not None else False,
+                    false_negative=True if exp_value is not None else False
+                )
+            return ComparisonResult(score, [], {}, true_positive=True)
+
+    def _compare_objects(
+        self, 
+        pred: Dict[str, Any], 
+        exp: Dict[str, Any],
+        schema_path: List[str]
+    ) -> ComparisonResult:
+        """Compare two objects field by field using schema information.
+        
+        Args:
+            pred: Prediction object
+            exp: Expected object
+            schema_path: Path to the schema definition for this object
+            
+        Returns:
+            ComparisonResult with:
+            - score: Average score across matched fields
+            - std_score: Standard deviation of scores
+            - true_positive: True if all expected fields matched above threshold
+            - false_positive: True if there are any extra fields or mismatches
+            - false_negative: True if there are any missing fields or mismatches
+            - precision: Precision score
+            - recall: Recall score
+            - f1_score: F1 score
+            - field_scores: Dictionary of ComparisonResults for each field
+        """
+        logger.debug(f"Comparing objects:\n\texpected: {exp}\n\tprediction: {pred}")
+
+        field_scores = {}
+        field_scores_list = []
+
+        # Get schema for this object
+        schema = self._get_schema_for_path(schema_path)
+
+        # Get required fields from schema
+        required_fields = schema.get("required", [])
+        all_expected_fields = set(required_fields)
+        all_predicted_fields = set(pred.keys())
+
+        # Track field-level metrics
+        field_true_positives = 0
+        field_false_positives = 0
+        field_false_negatives = 0
+
+        # Compare all required fields
+        for field_key in required_fields:
+            logger.debug(f"Analyzing object field: {field_key}")
+            
+            if field_key not in pred:
+                # Missing field in prediction
+                field_scores[field_key] = ComparisonResult(
+                    score=0.0, 
+                    element_scores={}, 
+                    field_scores={}, 
+                    true_positive=False,
+                    false_positive=False,
+                    false_negative=True
+                )
+                field_false_negatives += 1
+                continue
+
+            if field_key not in exp:
+                # Unexpected field in prediction (shouldn't happen with required fields)
+                field_scores[field_key] = ComparisonResult(
+                    score=0.0, 
+                    element_scores={}, 
+                    field_scores={}, 
+                    true_positive=False,
+                    false_positive=True,
+                    false_negative=False
+                )
+                field_false_positives += 1
+                continue
+
+            # Both objects have this field, compare values
+            pred_value = pred[field_key]
+            exp_value = exp[field_key]
+
+            # Get field schema
+            field_schema = self._get_schema_for_path(schema_path + [field_key])
+
+            # Compare values based on schema type
+            field_result = self._compare_values_with_schema(
+                pred_value,
+                exp_value,
+                field_schema,
+                schema_path + [field_key]
+            )
+            field_scores[field_key] = field_result
+            field_scores_list.append(field_result.score)
+
+            # Track field-level metrics from the ComparisonResult
+            if field_result.true_positive:
+                field_true_positives += 1
+            if field_result.false_positive:
+                field_false_positives += 1
+            if field_result.false_negative:
+                field_false_negatives += 1
+
+        # Handle extra fields in prediction (not in required fields)
+        extra_fields = all_predicted_fields - all_expected_fields
+        for field_key in extra_fields:
+            field_scores[field_key] = ComparisonResult(
+                score=0.0,
+                element_scores={},
+                field_scores={},
+                true_positive=False,
+                false_positive=True,
+                false_negative=False
+            )
+            field_false_positives += 1
+
+        # Handle missing fields in prediction (not in predicted fields)
+        missing_fields = all_expected_fields - all_predicted_fields
+        for field_key in missing_fields:
+            if field_key not in field_scores:  # Avoid double counting
+                field_scores[field_key] = ComparisonResult(
+                    score=0.0,
+                    element_scores={},
+                    field_scores={},
+                    true_positive=False,
+                    false_positive=False,
+                    false_negative=True
+                )
+                field_false_negatives += 1
+
+        if not field_scores:
+            return ComparisonResult(0.0, {}, {})
+
+
+        # Object-level booleans: true_positive only if ALL expected fields matched above threshold
+        total_expected_fields = len(all_expected_fields)
+        
+        if total_expected_fields == 0:
+            # No required fields - empty objects
+            true_positive = len(all_predicted_fields) == 0  # True only if both are empty
+            false_positive = len(all_predicted_fields) > 0  # Any extra fields
+            false_negative = False  # No expected fields to miss
+        else:
+            # True positive: all expected fields matched above threshold AND no extra fields
+            true_positive = (field_true_positives == total_expected_fields and 
+                           field_false_positives == 0)
+            
+            # False positive: any extra fields or mismatches
+            false_positive = field_false_positives > 0
+            
+            # False negative: any missing fields or mismatches
+            false_negative = field_false_negatives > 0
+
+        # Calculate precision, recall, F1 using field counts
+        if total_expected_fields == 0:
+            # No required fields - empty objects
+            precision = 1.0 if len(all_predicted_fields) == 0 else 0.0
+            recall = 1.0  # No expected fields to recall
+            f1_score = 1.0 if len(all_predicted_fields) == 0 else 0.0
+        else:
+            precision = field_true_positives / (field_true_positives + field_false_positives) if (field_true_positives + field_false_positives) > 0 else 0
+            recall = field_true_positives / (field_true_positives + field_false_negatives) if (field_true_positives + field_false_negatives) > 0 else 0
+            f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+
+        # Calculate average score and standard deviation
+        # Include all expected fields in the score calculation (missing fields count as 0)
+        total_expected_fields = len(all_expected_fields)
+        if total_expected_fields == 0:
+            # No required fields - empty objects
+            avg_score = 1.0 if len(all_predicted_fields) == 0 else 0.0
+            std_score = 0.0
+        else:
+            # Build complete score list including missing fields as 0
+            complete_scores = []
+            for field_key in all_expected_fields:
+                if field_key in field_scores:
+                    complete_scores.append(field_scores[field_key].score)
+                else:
+                    complete_scores.append(0.0)  # Missing field = 0 score
+            
+            avg_score = sum(complete_scores) / len(complete_scores)
+            std_score = statistics.stdev(complete_scores) if len(complete_scores) > 1 else 0
+
+        return ComparisonResult(
+            score=avg_score,
+            element_scores={},
+            field_scores=field_scores,
+            std_score=std_score,
+            true_positive=true_positive,
+            false_positive=false_positive,
+            false_negative=false_negative,
+            precision=precision,
+            recall=recall,
+            f1_score=f1_score,
+        )
+
+    def _compare_lists(
+        self,
+        pred: List[Any],
+        exp: List[Any],
+        schema_path: List[str]
+    ) -> ComparisonResult:
+        """Compare two list values using schema information.
+        
+        Args:
+            pred: Predicted results list
+            exp: Expected results list
+            schema_path: Path to the schema definition
+            
+        Returns:
+            ComparisonResult with:
+            - score: Average score across matched elements
+            - std_score: Standard deviation of scores
+            - true_positive: Number of matches with score >= threshold
+            - false_positive: Number of extra elements
+            - false_negative: Number of missing elements
+            - precision: Precision score
+            - recall: Recall score
+            - f1_score: F1 score
+            - field_scores: Dictionary of ComparisonResults for each element
+            - element_scores: Dictionary with average and std scores per fieldtest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_lists
+        """
+        logger.debug(f"Comparing lists:\n\texpected: {exp}\n\tprediction: {pred}")
+        # Get item schema for field-level tracking
+        item_schema = self._get_schema_for_path(schema_path + ["items"])
+        
+        if not exp:
+            if not pred:
+                logger.debug("Comparing 2 empty lists")
+                two_empty_lists_result = ComparisonResult(
+                    score=1.0,
+                    element_scores={},
+                    field_scores={},
+                    true_positive=True, false_positive=False, false_negative=False,
+                    precision=1.0, recall=1.0, f1_score=1.0,
+                )
+                
+                # For empty lists, field_scores should be empty or perfect scores
+                field_scores = {}
+                if item_schema.get("type") == "object":
+                    for field_key in item_schema.get("required", []):
+                        field_scores[field_key] = ComparisonResult(
+                            score=1.0,
+                            element_scores={},
+                            field_scores={},
+                            true_positive=True,
+                            false_positive=False,
+                            false_negative=False,
+                            precision=1.0,
+                            recall=1.0,
+                            f1_score=1.0
+                        )
+                
+                return ComparisonResult(
+                    score=1.0,
+                    element_scores={
+                        "two_empty_lists": two_empty_lists_result
+                    },
+                    field_scores=field_scores,
+                    true_positive=True, false_positive=False, false_negative=False,
+                    precision=1.0, recall=1.0, f1_score=1.0,
+                )
+            else:
+                logger.debug(f"Comparing empty exp with {pred}")
+                element_results = {
+                    f"unexpected_predicted_element_{i}": ComparisonResult(
+                        score=0.0,
+                        element_scores={},
+                        field_scores={},
+                        true_positive=False, false_positive=True, false_negative=False,
+                        precision=0.0, recall=0.0, f1_score=0.0,
+                    )
+                    for i in range(len(pred))
+                }
+                
+                # Initialize field-level tracking for extra predicted elements
+                field_scores = {}
+                if item_schema.get("type") == "object":
+                    for field_key in item_schema.get("required", []):
+                        field_scores[field_key] = ComparisonResult(
+                            score=0.0,
+                            element_scores={},
+                            field_scores={},
+                            true_positive=False,
+                            false_positive=True,
+                            false_negative=False,
+                            precision=0.0,
+                            recall=0.0,
+                            f1_score=0.0
+                        )
+                
+                return ComparisonResult(
+                    score=0.0,
+                    element_scores=element_results,
+                    field_scores=field_scores,
+                    true_positive=False, false_positive=True, false_negative=False,
+                    precision=0.0, recall=0.0, f1_score=0.0,
+                )
+        elif not pred:
+            logger.debug(f"Comparing {exp} with empty pred")
+            element_results = {
+                f"missing_element_{i}": ComparisonResult(
+                    score=0.0,
+                    element_scores={},
+                    field_scores={},
+                    true_positive=False, false_positive=False, false_negative=True
+                )
+                for i in range(len(exp))
+            }
+            
+            # Initialize field-level tracking for missing expected elements
+            field_scores = {}
+            if item_schema.get("type") == "object":
+                for field_key in item_schema.get("required", []):
+                    # Each missing expected element contributes a false negative for each field
+                    field_scores[field_key] = ComparisonResult(
+                        score=0.0,
+                        element_scores={},
+                        field_scores={},
+                        true_positive=False,
+                        false_positive=False,
+                        false_negative=True,
+                        precision=0.0,
+                        recall=0.0,
+                        f1_score=0.0
+                    )
+
+            return ComparisonResult(
+                score=0.0,
+                element_scores=element_results,
+                field_scores=field_scores,
+                true_positive=False, false_positive=False, false_negative=True,
+                precision=0.0, recall=0.0, f1_score=0.0,
+            )
+        else:
+            # Get item schema
+            item_schema = self._get_schema_for_path(schema_path + ["items"])
+
+            # Use optimal assignment (Hungarian algorithm) to find best matches
+            element_results = {}  # these are elementwise scores
+            field_scores = {}  # these are fieldwise scores aggregated over the elements
+            
+            # Initialize field-level tracking if list items are objects
+            field_data = {}  # temporary storage for field aggregation
+            if item_schema.get("type") == "object":
+                # Only track required fields from the schema
+                required_fields = item_schema.get("required", [])
+                for field_key in required_fields:
+                    field_data[field_key] = {
+                        'cum_score': 0.0,       # Cumulative score from all elements
+                        'false_positives': 0,   # Count of FP contributions
+                        'false_negatives': 0,   # Count of FN contributions
+                        'true_positives': 0     # Count of TP contributions
+                    }
+            # Create similarity matrix between all predicted and expected elements
+            n_pred = len(pred)
+            n_exp = len(exp)
+            # first we have to match the lements of the exppected and predicted lists
+            # to chat nasty bugs, we first assert that the lists are not empty
+            assert n_pred > 0 and n_exp > 0, "Lists must not be empty at this point!"
+            # Calculate similarity matrix
+            similarity_matrix = np.zeros((n_pred, n_exp))
+            # create a matrix to store the ComparisonResults objects
+            # we do not want to run thsese expensive comparisons twice
+            comparison_results_matrix = np.zeros((n_pred, n_exp), dtype=object)
+            for i, pred_item in enumerate(pred):
+                for j, exp_item in enumerate(exp):
+                    item_result = self._compare_values_with_schema(
+                        pred_item,
+                        exp_item,
+                        item_schema,
+                        schema_path + ["items"]
+                    )
+                    similarity_matrix[i, j] = item_result.score
+                    comparison_results_matrix[i, j] = item_result
+            # Find optimal assignment using similarity matrix
+            assigned_pred_indices, assigned_exp_indices = linear_sum_assignment(-similarity_matrix)
+            # Now:
+            # - assigned_pred_indices/assigned_exp_indices contain the optimal assignment
+            # - We need to check if each assignment meets the threshold to determine if it's TP or mismatch
+            # - Unmatched predicted elements are FP
+            # - Unmatched expected elements are FN
+            # Track which assigned elements are true positives vs mismatches
+            true_positive_pred_indices = set()
+            true_positive_exp_indices = set()
+
+            # Process assigned pairs to keep only the true positives that are above the threshold
+            # mistmatches are ignored, they will automatically appear as false positives and false negatives
+            
+            assert len(assigned_pred_indices) == len(assigned_exp_indices), "Assigned indices count mismatch"
+            for pred_idx, exp_idx in zip(assigned_pred_indices, assigned_exp_indices):
+                comparison_result = comparison_results_matrix[pred_idx, exp_idx]
+                original_score = similarity_matrix[pred_idx, exp_idx]
+                
+                # Only treat as match if the original score meets the threshold
+                if original_score >= self.match_threshold:
+                    element_results[f"match_{pred_idx}_{exp_idx}"] = comparison_result
+                    true_positive_pred_indices.add(pred_idx)
+                    true_positive_exp_indices.add(exp_idx)
+                    
+                    # Aggregate field scores from this match
+                    for field_key, field_result in comparison_result.field_scores.items():
+                        if field_key in field_data:
+                            field_data[field_key]['cum_score'] += field_result.score
+                            field_data[field_key]['true_positives'] += 1
+            num_mismatches = len(assigned_pred_indices) - len(true_positive_pred_indices)
+            # Handle unmatched predicted elements (extra elements)
+            # These are elements that weren't assigned either becaucse
+            # hungarian algo did not assign them or
+            # becuabecause they are sub-threshold
+            false_positive_pred_indices = set(range(n_pred)) - set(true_positive_pred_indices)
+            for pred_idx in false_positive_pred_indices:
+                element_results[f"unexpected_element_{pred_idx}"] = ComparisonResult(
+                    score=0.0,
+                    element_scores={},
+                    field_scores={},
+                    true_positive=False,
+                    false_positive=True,
+                    false_negative=False
+                )
+                
+                # For field aggregation: extra objects contribute to false positives
+                if item_schema.get("type") == "object":
+                    # Extra objects contribute false positives for all required fields
+                    for field_key in field_data.keys():
+                        # field_data[field_key]['cum_score'] += 0.0  # False positive = 0 score
+                        field_data[field_key]['false_positives'] += 1
+
+            # Handle unmatched expected elements (missing elements)
+            false_negative_exp_indices = set(range(n_exp)) - set(true_positive_exp_indices)
+            for exp_idx in false_negative_exp_indices:
+                element_results[f"missing_element_{exp_idx}"] = ComparisonResult(
+                    score=0.0,
+                    element_scores={},
+                    field_scores={},
+                    true_positive=False,
+                    false_positive=False,
+                    false_negative=True
+                )
+                
+                # For field aggregation: missing objects contribute to false negatives
+                if item_schema.get("type") == "object":
+                    # Missing objects contribute false negatives for all required fields
+                    for field_key in field_data.keys():
+                        #field_data[field_key]['cum_score'] += 0.0  # False negative = 0 score
+                        field_data[field_key]['false_negatives'] += 1
+            
+            # NOTE: an indice can correspond to both a missing element and an unexpected element
+            # there was a prediction, but it could not be matched to an expected element
+            # There will be two comparison results for these; not sure is it so good
+            
+            # Aggregate metrics from all element comparisons
+            # Sum up TP/FP/FN
+            true_positive_count = len(true_positive_pred_indices)
+            false_positive_count = len(false_positive_pred_indices)
+            false_negative_count = len(false_negative_exp_indices)
+            
+            # List-level booleans: true_positive only if ALL elements matched above threshold
+            # false_positive/false_negative if there are any issues
+
+            # True positive: all expected elements matched above threshold AND no extra elements
+            true_positive = (
+                true_positive_count == n_exp and
+                false_positive_count == 0
+            )
+            
+            # False positive: any extra elements or mismatches
+            false_positive = false_positive_count > 0
+            
+            # False negative: any missing elements or mismatches  
+            false_negative = false_negative_count > 0
+            # if we sum true positive, false positive and false negative, the mimatched elements are counted twice!
+            n_all = max(n_pred, n_exp)
+            
+            assert n_all == true_positive_count + false_positive_count + false_negative_count - num_mismatches, "Mistake with calculating the number of elements"
+            # note that scores of mismatches are zero
+            all_scores = [
+                result.score
+                for result in element_results.values()
+            ]
+            assert len(all_scores) >= n_all, "Mistake with calculating the number of elements"
+
+            # Calculate list-level average, stad, precision, recall, F1
+            avg_score = sum(all_scores) / n_all if all_scores else 0
+            std_score = statistics.stdev(all_scores) if len(all_scores) > 1 else 0
+            precision = true_positive_count / (true_positive_count + false_positive_count) if (true_positive_count + false_positive_count) > 0 else 0
+            recall = true_positive_count / (true_positive_count + false_negative_count) if (true_positive_count + false_negative_count) > 0 else 0
+            f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+
+            # Aggregate field-level statistics if list items are objects
+            if item_schema.get("type") == "object":
+                for field_key, data in field_data.items():
+                    # Calculate aggregated metrics - be consistent with list-level aggregation
+                    field_avg_score = data['cum_score'] / n_all if n_all > 0 else 0
+                    
+                    field_precision = data['true_positives'] / (data['true_positives'] + data['false_positives']) if (data['true_positives'] + data['false_positives']) > 0 else 0
+                    field_recall = data['true_positives'] / n_all if n_all > 0 else 0
+                    field_f1 = 2 * (field_precision * field_recall) / (field_precision + field_recall) if (field_precision + field_recall) > 0 else 0
+                    
+                    field_scores[field_key] = ComparisonResult(
+                        score=field_avg_score,
+                        element_scores={},
+                        field_scores={},
+                        std_score=0.0,  # We don't track individual scores anymore
+                        true_positive=field_precision == 1.0 and field_recall == 1.0,
+                        false_positive=data['false_positives'] > 0,
+                        false_negative=data['false_negatives'] > 0,
+                        precision=field_precision,
+                        recall=field_recall,
+                        f1_score=field_f1
+                    )
+
+            return ComparisonResult(
+                score=avg_score,
+                element_scores=element_results,
+                field_scores=field_scores,
+                std_score=std_score,
+                true_positive=true_positive,
+                false_positive=false_positive,
+                false_negative=false_negative,
+                precision=precision,
+                recall=recall,
+                f1_score=f1_score,
+            )
+
+    def _compare_strings(self, pred: Optional[str], exp: Optional[str]) -> ComparisonResult:
+        """Compare two strings using the configured string comparator.
+
+        Args:
+            pred: Prediction string
+            exp: Expected string    
+        """
+        logger.debug(f"Comparing strings:\n\texpected: {exp}\n\tprediction: {pred}")
+
+        # Handle None cases first
+        if pred is None and exp is None:
+            return ComparisonResult(
+                score=1.0,
+                element_scores={},
+                field_scores={},
+                true_positive=True, false_positive=False, false_negative=False,
+                precision=1.0, recall=1.0, f1_score=1.0,
+            )
+        if pred is None and exp is not None:
+            return ComparisonResult(
+                score=0.0,
+                element_scores={},
+                field_scores={},
+                true_positive=False, false_positive=False, false_negative=True,
+                precision=0.0, recall=0.0, f1_score=0.0,
+            )
+        if pred is not None and exp is None:
+            return ComparisonResult(
+                score=0.0,
+                element_scores={},
+                field_scores={},
+                true_positive=False, false_positive=True, false_negative=False,
+                precision=0.0, recall=0.0, f1_score=0.0,
+            )
+
+        # Both are strings, compare them
+        # We know pred and exp are not None here due to the checks above
+        score = self.string_comparator(str(pred), str(exp))
+        if score >= self.match_threshold:
+            return ComparisonResult(
+                score=score,
+                element_scores={},
+                field_scores={},
+                true_positive=True, false_positive=False, false_negative=False,
+                precision=1.0, recall=1.0, f1_score=1.0,
+            )
+        else:
+            return ComparisonResult(
+                score=score,
+                element_scores={},
+                field_scores={},
+                true_positive=False, false_positive=True, false_negative=False,
+                precision=0.0, recall=0.0, f1_score=0.0,
+            )
