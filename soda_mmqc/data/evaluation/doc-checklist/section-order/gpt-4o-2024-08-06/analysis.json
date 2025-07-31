@@ -89,6 +89,9 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-10T18:34:39.441714"
+            },
             "analysis": {
                 "score": 0.5754790703455608,
                 "element_scores": {
@@ -649,6 +652,9 @@
                         ]
                     }
                 ]
+            },
+            "metadata": {
+                "cached_at": "2025-07-10T18:34:44.024187"
             },
             "analysis": {
                 "score": 0.7306191176176071,
@@ -1302,6 +1308,9 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-10T18:34:52.211103"
+            },
             "analysis": {
                 "score": 0.0,
                 "element_scores": {
@@ -1479,6 +1488,9 @@
                         ]
                     }
                 ]
+            },
+            "metadata": {
+                "cached_at": "2025-07-10T18:34:59.446902"
             },
             "analysis": {
                 "score": 0.6,
@@ -1992,6 +2004,9 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-10T18:35:05.677357"
+            },
             "analysis": {
                 "score": 0.0,
                 "element_scores": {
@@ -2166,11 +2181,14 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-11T14:04:02.832421"
+            },
             "analysis": {
-                "score": 0.55,
+                "score": 0.5818654067814351,
                 "element_scores": {
                     "match_0_0": {
-                        "score": 0.55,
+                        "score": 0.5818654067814351,
                         "element_scores": {},
                         "field_scores": {
                             "sections_as_in_manuscript": {
@@ -2357,19 +2375,44 @@
                                 "f1_score": 1.0
                             },
                             "sections_to_rename": {
-                                "score": 0.0,
+                                "score": 0.15932703390717506,
                                 "element_scores": {
-                                    "unexpected_element_0": {
-                                        "score": 0.0,
+                                    "match_0_0": {
+                                        "score": 0.31865406781435013,
                                         "element_scores": {},
-                                        "field_scores": {},
-                                        "std_score": 0.0,
+                                        "field_scores": {
+                                            "original": {
+                                                "score": 0.24605347216129303,
+                                                "element_scores": {},
+                                                "field_scores": {},
+                                                "std_score": 0.0,
+                                                "true_positive": false,
+                                                "false_positive": true,
+                                                "false_negative": false,
+                                                "precision": 0.0,
+                                                "recall": 0.0,
+                                                "f1_score": 0.0
+                                            },
+                                            "renamed": {
+                                                "score": 0.3912546634674072,
+                                                "element_scores": {},
+                                                "field_scores": {},
+                                                "std_score": 0.0,
+                                                "true_positive": true,
+                                                "false_positive": false,
+                                                "false_negative": false,
+                                                "precision": 1.0,
+                                                "recall": 1.0,
+                                                "f1_score": 1.0
+                                            }
+                                        },
+                                        "std_score": 0.10267274700891851,
                                         "true_positive": false,
                                         "false_positive": true,
                                         "false_negative": false,
-                                        "precision": 0.0,
-                                        "recall": 0.0,
-                                        "f1_score": 0.0
+                                        "precision": 0.5,
+                                        "recall": 1.0,
+                                        "f1_score": 0.6666666666666666
                                     },
                                     "unexpected_element_1": {
                                         "score": 0.0,
@@ -2382,53 +2425,41 @@
                                         "precision": 0.0,
                                         "recall": 0.0,
                                         "f1_score": 0.0
-                                    },
-                                    "missing_element_0": {
-                                        "score": 0.0,
-                                        "element_scores": {},
-                                        "field_scores": {},
-                                        "std_score": 0.0,
-                                        "true_positive": false,
-                                        "false_positive": false,
-                                        "false_negative": true,
-                                        "precision": 0.0,
-                                        "recall": 0.0,
-                                        "f1_score": 0.0
                                     }
                                 },
                                 "field_scores": {
                                     "original": {
-                                        "score": 0.0,
+                                        "score": 0.12302673608064651,
                                         "element_scores": {},
                                         "field_scores": {},
                                         "std_score": 0.0,
                                         "true_positive": false,
                                         "false_positive": true,
-                                        "false_negative": true,
-                                        "precision": 0.0,
-                                        "recall": 0.0,
-                                        "f1_score": 0
+                                        "false_negative": false,
+                                        "precision": 0.5,
+                                        "recall": 0.5,
+                                        "f1_score": 0.5
                                     },
                                     "renamed": {
-                                        "score": 0.0,
+                                        "score": 0.1956273317337036,
                                         "element_scores": {},
                                         "field_scores": {},
                                         "std_score": 0.0,
                                         "true_positive": false,
                                         "false_positive": true,
-                                        "false_negative": true,
-                                        "precision": 0.0,
-                                        "recall": 0.0,
-                                        "f1_score": 0
+                                        "false_negative": false,
+                                        "precision": 0.5,
+                                        "recall": 0.5,
+                                        "f1_score": 0.5
                                     }
                                 },
-                                "std_score": 0.0,
+                                "std_score": 0.22532245220420496,
                                 "true_positive": false,
                                 "false_positive": true,
-                                "false_negative": true,
-                                "precision": 0.0,
-                                "recall": 0.0,
-                                "f1_score": 0
+                                "false_negative": false,
+                                "precision": 0.5,
+                                "recall": 1.0,
+                                "f1_score": 0.6666666666666666
                             },
                             "sections_to_move": {
                                 "score": 0.0,
@@ -2493,13 +2524,13 @@
                                 "f1_score": 0.0
                             }
                         },
-                        "std_score": 0.51234753829798,
+                        "std_score": 0.4730349737833964,
                         "true_positive": false,
                         "false_positive": true,
-                        "false_negative": true,
+                        "false_negative": false,
                         "precision": 0.4,
-                        "recall": 0.6666666666666666,
-                        "f1_score": 0.5
+                        "recall": 1.0,
+                        "f1_score": 0.5714285714285715
                     }
                 },
                 "field_scores": {
@@ -2540,7 +2571,7 @@
                         "f1_score": 1.0
                     },
                     "sections_to_rename": {
-                        "score": 0.0,
+                        "score": 0.15932703390717506,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
@@ -2660,6 +2691,9 @@
                         ]
                     }
                 ]
+            },
+            "metadata": {
+                "cached_at": "2025-07-11T14:04:10.230871"
             },
             "analysis": {
                 "score": 0.6233020156621933,
@@ -3251,6 +3285,9 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-11T14:04:14.843929"
+            },
             "analysis": {
                 "score": 0.6194411118825276,
                 "element_scores": {
@@ -3814,103 +3851,523 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-11T14:04:22.503563"
+            },
             "analysis": {
-                "score": 0.0,
+                "score": 0.4305748844146729,
                 "element_scores": {
-                    "unexpected_element_0": {
-                        "score": 0.0,
+                    "match_0_0": {
+                        "score": 0.4305748844146729,
                         "element_scores": {},
-                        "field_scores": {},
-                        "std_score": 0.0,
+                        "field_scores": {
+                            "sections_as_in_manuscript": {
+                                "score": 1.0,
+                                "element_scores": {
+                                    "match_0_0": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_1_1": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_2_2": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_3_3": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_4_4": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_5_5": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_6_6": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_7_7": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_8_8": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_9_9": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_10_10": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_11_11": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_12_12": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    }
+                                },
+                                "field_scores": {},
+                                "std_score": 0.0,
+                                "true_positive": true,
+                                "false_positive": false,
+                                "false_negative": false,
+                                "precision": 1.0,
+                                "recall": 1.0,
+                                "f1_score": 1.0
+                            },
+                            "missing_sections": {
+                                "score": 0.0,
+                                "element_scores": {
+                                    "unexpected_predicted_element_0": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_predicted_element_1": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_predicted_element_2": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {},
+                                "std_score": 0.0,
+                                "true_positive": false,
+                                "false_positive": true,
+                                "false_negative": false,
+                                "precision": 0.0,
+                                "recall": 0.0,
+                                "f1_score": 0.0
+                            },
+                            "sections_to_remove": {
+                                "score": 1.0,
+                                "element_scores": {
+                                    "match_0_0": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    }
+                                },
+                                "field_scores": {},
+                                "std_score": 0,
+                                "true_positive": true,
+                                "false_positive": false,
+                                "false_negative": false,
+                                "precision": 1.0,
+                                "recall": 1.0,
+                                "f1_score": 1.0
+                            },
+                            "sections_to_rename": {
+                                "score": 0.15287442207336427,
+                                "element_scores": {
+                                    "match_0_0": {
+                                        "score": 0.7643721103668213,
+                                        "element_scores": {},
+                                        "field_scores": {
+                                            "original": {
+                                                "score": 1.0,
+                                                "element_scores": {},
+                                                "field_scores": {},
+                                                "std_score": 0.0,
+                                                "true_positive": true,
+                                                "false_positive": false,
+                                                "false_negative": false,
+                                                "precision": 1.0,
+                                                "recall": 1.0,
+                                                "f1_score": 1.0
+                                            },
+                                            "renamed": {
+                                                "score": 0.5287442207336426,
+                                                "element_scores": {},
+                                                "field_scores": {},
+                                                "std_score": 0.0,
+                                                "true_positive": true,
+                                                "false_positive": false,
+                                                "false_negative": false,
+                                                "precision": 1.0,
+                                                "recall": 1.0,
+                                                "f1_score": 1.0
+                                            }
+                                        },
+                                        "std_score": 0.33322815719259213,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "unexpected_element_1": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_element_2": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_element_3": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_element_4": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {
+                                    "original": {
+                                        "score": 0.2,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.2,
+                                        "recall": 0.2,
+                                        "f1_score": 0.20000000000000004
+                                    },
+                                    "renamed": {
+                                        "score": 0.10574884414672851,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.2,
+                                        "recall": 0.2,
+                                        "f1_score": 0.20000000000000004
+                                    }
+                                },
+                                "std_score": 0.3418375997770368,
+                                "true_positive": false,
+                                "false_positive": true,
+                                "false_negative": false,
+                                "precision": 0.2,
+                                "recall": 1.0,
+                                "f1_score": 0.33333333333333337
+                            },
+                            "sections_to_move": {
+                                "score": 0.0,
+                                "element_scores": {
+                                    "unexpected_predicted_element_0": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_predicted_element_1": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {
+                                    "section_in_manuscript": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "move_before": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "std_score": 0.0,
+                                "true_positive": false,
+                                "false_positive": true,
+                                "false_negative": false,
+                                "precision": 0.0,
+                                "recall": 0.0,
+                                "f1_score": 0.0
+                            }
+                        },
+                        "std_score": 0.5235448723559234,
                         "true_positive": false,
                         "false_positive": true,
                         "false_negative": false,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0.0
-                    },
-                    "missing_element_0": {
-                        "score": 0.0,
-                        "element_scores": {},
-                        "field_scores": {},
-                        "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": false,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0.0
+                        "precision": 0.4,
+                        "recall": 1.0,
+                        "f1_score": 0.5714285714285715
                     }
                 },
                 "field_scores": {
                     "sections_as_in_manuscript": {
-                        "score": 0.0,
+                        "score": 1.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "missing_sections": {
                         "score": 0.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "sections_to_remove": {
-                        "score": 0.0,
+                        "score": 1.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "sections_to_rename": {
-                        "score": 0.0,
+                        "score": 0.15287442207336427,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "sections_to_move": {
                         "score": 0.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     }
                 },
-                "std_score": 0.0,
-                "true_positive": false,
-                "false_positive": true,
-                "false_negative": true,
-                "precision": 0.0,
-                "recall": 0.0,
-                "f1_score": 0
+                "std_score": 0,
+                "true_positive": true,
+                "false_positive": false,
+                "false_negative": false,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0
             }
         },
         {
@@ -3976,103 +4433,414 @@
                     }
                 ]
             },
+            "metadata": {
+                "cached_at": "2025-07-11T14:04:29.651128"
+            },
             "analysis": {
-                "score": 0.0,
+                "score": 0.4818181818181818,
                 "element_scores": {
-                    "unexpected_element_0": {
-                        "score": 0.0,
+                    "match_0_0": {
+                        "score": 0.4818181818181818,
                         "element_scores": {},
-                        "field_scores": {},
-                        "std_score": 0.0,
+                        "field_scores": {
+                            "sections_as_in_manuscript": {
+                                "score": 0.9090909090909091,
+                                "element_scores": {
+                                    "match_0_0": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_1_1": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_2_2": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_3_3": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_4_4": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_5_5": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_6_6": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_7_7": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_8_8": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "match_9_9": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "missing_element_10": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": false,
+                                        "false_negative": true,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {},
+                                "std_score": 0.30151134457776363,
+                                "true_positive": false,
+                                "false_positive": false,
+                                "false_negative": true,
+                                "precision": 1.0,
+                                "recall": 0.9090909090909091,
+                                "f1_score": 0.9523809523809523
+                            },
+                            "missing_sections": {
+                                "score": 0.5,
+                                "element_scores": {
+                                    "match_0_0": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "unexpected_element_1": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {},
+                                "std_score": 0.7071067811865476,
+                                "true_positive": false,
+                                "false_positive": true,
+                                "false_negative": false,
+                                "precision": 0.5,
+                                "recall": 1.0,
+                                "f1_score": 0.6666666666666666
+                            },
+                            "sections_to_remove": {
+                                "score": 0.0,
+                                "element_scores": {
+                                    "missing_element_0": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": false,
+                                        "false_negative": true,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {},
+                                "std_score": 0.0,
+                                "true_positive": false,
+                                "false_positive": false,
+                                "false_negative": true,
+                                "precision": 0.0,
+                                "recall": 0.0,
+                                "f1_score": 0.0
+                            },
+                            "sections_to_rename": {
+                                "score": 1.0,
+                                "element_scores": {
+                                    "two_empty_lists": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    }
+                                },
+                                "field_scores": {
+                                    "original": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    },
+                                    "renamed": {
+                                        "score": 1.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": true,
+                                        "false_positive": false,
+                                        "false_negative": false,
+                                        "precision": 1.0,
+                                        "recall": 1.0,
+                                        "f1_score": 1.0
+                                    }
+                                },
+                                "std_score": 0.0,
+                                "true_positive": true,
+                                "false_positive": false,
+                                "false_negative": false,
+                                "precision": 1.0,
+                                "recall": 1.0,
+                                "f1_score": 1.0
+                            },
+                            "sections_to_move": {
+                                "score": 0.0,
+                                "element_scores": {
+                                    "unexpected_predicted_element_0": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "unexpected_predicted_element_1": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "field_scores": {
+                                    "section_in_manuscript": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    },
+                                    "move_before": {
+                                        "score": 0.0,
+                                        "element_scores": {},
+                                        "field_scores": {},
+                                        "std_score": 0.0,
+                                        "true_positive": false,
+                                        "false_positive": true,
+                                        "false_negative": false,
+                                        "precision": 0.0,
+                                        "recall": 0.0,
+                                        "f1_score": 0.0
+                                    }
+                                },
+                                "std_score": 0.0,
+                                "true_positive": false,
+                                "false_positive": true,
+                                "false_negative": false,
+                                "precision": 0.0,
+                                "recall": 0.0,
+                                "f1_score": 0.0
+                            }
+                        },
+                        "std_score": 0.4784617224342097,
                         "true_positive": false,
                         "false_positive": true,
-                        "false_negative": false,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0.0
-                    },
-                    "missing_element_0": {
-                        "score": 0.0,
-                        "element_scores": {},
-                        "field_scores": {},
-                        "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": false,
                         "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0.0
+                        "precision": 0.3333333333333333,
+                        "recall": 0.3333333333333333,
+                        "f1_score": 0.3333333333333333
                     }
                 },
                 "field_scores": {
                     "sections_as_in_manuscript": {
-                        "score": 0.0,
+                        "score": 0.9090909090909091,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "missing_sections": {
-                        "score": 0.0,
+                        "score": 0.5,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "sections_to_remove": {
                         "score": 0.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "sections_to_rename": {
-                        "score": 0.0,
+                        "score": 1.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     },
                     "sections_to_move": {
                         "score": 0.0,
                         "element_scores": {},
                         "field_scores": {},
                         "std_score": 0.0,
-                        "true_positive": false,
-                        "false_positive": true,
-                        "false_negative": true,
-                        "precision": 0.0,
-                        "recall": 0.0,
-                        "f1_score": 0
+                        "true_positive": true,
+                        "false_positive": false,
+                        "false_negative": false,
+                        "precision": 1.0,
+                        "recall": 1.0,
+                        "f1_score": 1.0
                     }
                 },
-                "std_score": 0.0,
-                "true_positive": false,
-                "false_positive": true,
-                "false_negative": true,
-                "precision": 0.0,
-                "recall": 0.0,
-                "f1_score": 0
+                "std_score": 0,
+                "true_positive": true,
+                "false_positive": false,
+                "false_negative": false,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0
             }
         }
     ]
