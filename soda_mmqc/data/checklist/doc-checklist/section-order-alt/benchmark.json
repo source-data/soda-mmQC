@@ -1,0 +1,12 @@
+{
+  "name": "section-order-alt",
+  "description": "Checks whether the sections of the paper are in the correct order.",
+  "example_class": "word",
+  "examples": [
+    "10.1038_embor.2009.217",
+    "EMBOJ-2024-119734R",
+    "EMBOR-2025-61250V2",
+    "EMM-2025-21341",
+    "EMM-2025-21532"
+  ]
+}

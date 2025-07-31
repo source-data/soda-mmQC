@@ -26,7 +26,9 @@ class Example(ABC):
     3. Prepare its content for model input
     """
     
-    def __init__(self, source_path: str):
+    _example_type: Optional[str] = None
+    
+    def __init__(self, relative_source_path: str):
         """Initialize an example from a dictionary.
         
         Args:
@@ -35,7 +37,8 @@ class Example(ABC):
         Raises:
             ValueError: If required data is missing
         """
-        self.source_path = EXAMPLES_DIR / Path(source_path)
+        self.relative_source_path = relative_source_path
+        self.source_path = EXAMPLES_DIR / Path(self.relative_source_path)
         self.doc_id: Optional[str] = None
         self._content_hash: Optional[str] = None
         self.expected_output = None
@@ -49,6 +52,24 @@ class Example(ABC):
             ValueError: If required data is missing
         """
         pass
+
+    @property
+    def example_class_name(self) -> str:
+        """Get the example type identifier (read-only)."""
+        if self._example_type is None:
+            raise ValueError(
+                "Example type not set. This should be set by the factory."
+            )
+        return self._example_type
+    
+    @example_class_name.setter
+    def example_class_name(self, value: str) -> None:
+        """Set the example type identifier (factory use only)."""
+        if not isinstance(value, str):
+            raise ValueError("Example type must be a string")
+        if not value.strip():
+            raise ValueError("Example type cannot be empty")
+        self._example_type = value.strip()
     
     def get_expected_output(self, check_name: str) -> Dict[str, Any]:
         """Set the expected output for this example.
@@ -153,9 +174,9 @@ class Example(ABC):
 
 class FigureExample(Example):
     """Example containing a figure with caption."""
-
-    def __init__(self, source_path: str):
-        super().__init__(source_path)
+    
+    def __init__(self, relative_source_path: str):
+        super().__init__(relative_source_path)
         self.caption: Optional[str] = None
         self.image_path: Optional[Path] = None
         self.figure_id: Optional[str] = None
@@ -266,11 +287,7 @@ class FigureExample(Example):
                         f"{self._encode_image()}"
                     )
                 }
-            ],
-            "metadata": {
-                "doc_id": self.doc_id,
-                "figure_id": self.figure_id
-            }
+            ]
         }
 
     def to_dict(self) -> Dict[str, Any]:
@@ -286,9 +303,9 @@ class FigureExample(Example):
 
 class WordExample(Example):
     """Example containing only text content."""
-
-    def __init__(self, source_path: str, destination_format: str = "markdown"):
-        super().__init__(source_path)
+    
+    def __init__(self, relative_source_path: str, destination_format: str = "markdown"):
+        super().__init__(relative_source_path)
         self.content: Optional[str] = None
         self.destination_format = destination_format
 
@@ -384,10 +401,7 @@ class WordExample(Example):
                     "type": "input_text",
                     "text": f"{prompt}\n\nContent:\n{self.content}"
                 }
-            ],
-            "metadata": {
-                "doc_id": self.doc_id
-            }
+            ]
         }
 
 
@@ -405,7 +419,7 @@ class ExampleFactory:
     def __init__(self):
         self._example_types = EXAMPLE_TYPES.copy()
 
-    def create(self, source_path: str, example_type: str, **kwargs) -> Example:
+    def create(self, relative_source_path: str, example_type: str, **kwargs) -> Example:
         """Create an example from a source path.
         
         Args:
@@ -425,14 +439,17 @@ class ExampleFactory:
             )
 
         example_class = self._example_types[example_type]
-        example = example_class(source_path, **kwargs)
+        example = example_class(relative_source_path, **kwargs)
+        
+        # Set the example type identifier
+        example.example_class_name = example_type
         
         # Explicitly load the content after initialization
         example.load_from_source()
         
         if example.doc_id is None:
             raise ValueError(
-                f"Example at {source_path} has no doc_id!"
+                f"Example at {relative_source_path} has no doc_id!"
             )
         return example
 

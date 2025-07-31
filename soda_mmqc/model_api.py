@@ -42,7 +42,7 @@ def generate_response_openai(
         metadata: Additional metadata for the API call
         
     Returns:
-        Tuple of (parsed response, raw response)
+        Tuple of (parsed response, response metadata with response_id and model)
     """
     # Initialize OpenAI client
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -66,7 +66,7 @@ def generate_response_openai(
             }
         ],
         text=schema,
-        metadata={**metadata}
+        metadata=metadata
     )
 
     # Parse response
@@ -75,8 +75,23 @@ def generate_response_openai(
     except json.JSONDecodeError as e:
         logger.error(f"Error parsing response: {str(e)}")
         raise
-
-    return response, raw_response
+    
+    # Extract response metadata, ID, and model
+    try:
+        response_metadata = raw_response.metadata or {}
+        response_id = raw_response.id or ""
+        response_model = raw_response.model or ""
+        
+        # Add response_id and model to metadata
+        response_metadata.update({
+            "response_id": response_id,
+            "model": response_model
+        })
+    except AttributeError:
+        logger.error(f"Error getting metadata, ID, or model: {raw_response}")
+        response_metadata = {}
+    
+    return response, response_metadata
 
 
 def generate_response(
@@ -95,7 +110,7 @@ def generate_response(
         metadata: Additional metadata for the API call
         
     Returns:
-        Tuple of (parsed response, raw response)
+        Tuple of (parsed response, response metadata with response_id and model)
     """
 
     # Extract inputs from ModelInput object

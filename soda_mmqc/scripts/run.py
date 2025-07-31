@@ -68,6 +68,7 @@ class ModelResult:
     """
     doc_id: str | None
     model_output: Dict[str, Any]
+    metadata: Dict[str, Any]
 
 
 def load_json(file_path):
@@ -118,6 +119,11 @@ def run_model(
                 prompt=prompt,
                 schema=schema
             )
+            input_metadata = {
+                "doc_id": example.doc_id,
+                "source": example.relative_source_path,
+                "example_type": example.example_class_name
+            }
             # Check cache first if enabled
             if use_cache:
                 cache_key = model_cache.generate_cache_key(
@@ -130,11 +136,13 @@ def run_model(
                         f"{example.doc_id}"
                     )
                     model_output = cached_result["data"]
+                    response_metadata = cached_result["metadata"]
                 else:
                     try:
-                        model_output, raw_response = generate_response(
+                        model_output, response_metadata = generate_response(
                             model_input,
                             model=model,
+                            metadata=input_metadata
                         )
                     except Exception as e:
                         logger.error(
@@ -146,12 +154,14 @@ def run_model(
                     model_cache.cache_output(
                         cache_key,
                         data=model_output,
+                        metadata=response_metadata
                     )
             else:
                 try:
-                    model_output, raw_response = generate_response(
+                    model_output, response_metadata = generate_response(
                         model_input,
                         model=model,
+                        metadata=input_metadata
                     )
                 except Exception as e:
                     logger.error(
@@ -164,6 +174,7 @@ def run_model(
             results.append(ModelResult(
                 doc_id=example.doc_id,
                 model_output=model_output,
+                metadata=response_metadata
             ))
 
         except Exception as e:
@@ -179,7 +190,9 @@ def run_model(
 def analyze_results(
     results: List[ModelResult],
     schema: Dict[str, Any],
-    expected_outputs: List[Dict[str, Any]]
+    expected_outputs: List[Dict[str, Any]],
+    string_metric: str = "semantic_similarity",
+    match_threshold: float = 0.1
 ) -> List[Dict[str, Any]]:
     """Analyze model outputs against expected outputs using the evaluator.
     
@@ -192,7 +205,7 @@ def analyze_results(
     logger.info("Analyzing all results")
 
     analyzed_results = []
-    evaluator = JSONEvaluator(schema, string_metric="semantic_similarity")
+    evaluator = JSONEvaluator(schema, string_metric=string_metric, match_threshold=match_threshold)
     for result, expected_output in tqdm(
         zip(results, expected_outputs), 
         desc="Analyzing results", 
@@ -210,6 +223,7 @@ def analyze_results(
             "doc_id": result.doc_id,
             "expected_output": expected_output,
             "model_output": result.model_output,
+            "metadata": result.metadata,
             "analysis": analysis
         })
 
@@ -441,6 +455,11 @@ def process_check(
                 ModelResult(
                     doc_id=example.doc_id,
                     model_output=expected_output,
+                    metadata={
+                        "doc_id": example.doc_id,
+                        "source": example.relative_source_path,
+                        "example_type": example.example_class_name
+                    }
                 )
                 for example, expected_output in zip(
                     check_data.examples, check_data.expected_outputs
@@ -456,7 +475,11 @@ def process_check(
 
         # Analyze results
         analyzed_results = analyze_results(
-            results, check_data.schema, check_data.expected_outputs
+            results,
+            check_data.schema,
+            check_data.expected_outputs,
+            string_metric="semantic_similarity",
+            match_threshold=0.3
         )
 
         # Store results for this prompt

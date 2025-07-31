@@ -343,6 +343,5 @@ class TestCompareObjects(unittest.TestCase):
         self.assertIsInstance(result.std_score, float)
         self.assertGreaterEqual(result.std_score, 0.0)
 
-
 if __name__ == "__main__":
     unittest.main() 

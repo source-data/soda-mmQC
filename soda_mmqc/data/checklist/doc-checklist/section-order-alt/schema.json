@@ -1,0 +1,71 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "section-order-alt",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "sections_as_in_manuscript": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Section name as it appears in the manuscript"
+                                        },
+                                        "correct_name": {
+                                            "type": "string",
+                                            "description": "Correct standardized name for the section (empty string if should be removed)"
+                                        },
+                                        "correct_position": {
+                                            "type": "string",
+                                            "enum": ["yes", "no"],
+                                            "description": "Whether the section is in the correct position"
+                                        },
+                                        "to_remove": {
+                                            "type": "string",
+                                            "enum": ["yes", "no"],
+                                            "description": "Whether the section should be removed"
+                                        }
+                                    },
+                                    "required": ["name", "correct_name", "correct_position", "to_remove"],
+                                    "additionalProperties": false
+                                },
+                                "description": "List of sections as they appear in the manuscript with analysis"
+                            },
+                            "missing_sections": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Name of the missing section"
+                                        }
+                                    },
+                                    "required": ["name"],
+                                    "additionalProperties": false
+                                },
+                                "description": "List of sections that are missing from the manuscript"
+                            }
+                        },
+                        "required": [
+                            "sections_as_in_manuscript",
+                            "missing_sections"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}
