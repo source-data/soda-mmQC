@@ -18,7 +18,7 @@ def main():
     
     # Get the path to the benchmark_curation.py file
     workspace_root = Path(__file__).resolve().parent.parent
-    curation_script = workspace_root / "tools" / "curation.py"
+    curation_script = workspace_root / "curation.py"
     
     # Parse command line arguments
     parser = argparse.ArgumentParser()

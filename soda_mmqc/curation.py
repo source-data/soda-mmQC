@@ -7,7 +7,7 @@ import pandas as pd
 import argparse
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 from soda_mmqc import logger
-from soda_mmqc.examples import FigureExample
+from soda_mmqc.examples import EXAMPLE_FACTORY
 
 # Set page config for wider layout
 st.set_page_config(
@@ -38,41 +38,54 @@ def load_example_data(doc_id, fig, checklist=None):
     
     Args:
         doc_id: The document ID of the example
-        fig: Path object pointing to the figure directory
+        fig: Path object pointing to the figure directory (can be relative or absolute)
         checklist: Optional dictionary of valid checks
         
     Returns:
         Dictionary containing example data or None if loading fails
     """
     try:
-        # Create FigureExample object with the correct dictionary structure
-        example_dict = {
-            "doc_id": doc_id,
-            "figure_id": fig.name  # Use the directory name as figure_id
-        }
-        example = FigureExample(example_dict)
+        # Create FigureExample object using the factory
+        # fig is now a relative path like "doc_id/content/figure_id"
+        if isinstance(fig, Path):
+            # Convert to string for the factory
+            relative_path = str(fig)
+        else:
+            relative_path = fig
+        example = EXAMPLE_FACTORY.create(relative_path, "figure")
         
         # Convert to dict to maintain compatibility with existing code
         data = example.to_dict()
         
-        # Load check outputs if available
-        checks_dir = fig / "checks"
-        if checks_dir.exists():
-            for check_dir in checks_dir.glob("*"):
-                if check_dir.is_dir():
-                    # Only load check outputs for checks that exist in the checklist
-                    if checklist is None or check_dir.name in checklist:
-                        try:
-                            data["check_outputs"][check_dir.name] = example.get_expected_output(check_dir.name)
-                        except FileNotFoundError:
-                            st.warning(
-                                f"Expected output not found for {check_dir.name}"
-                            )
-                    else:
-                        st.warning(
-                            f"Check {check_dir.name} not found in checklist, "
-                            "skipping its output"
-                        )
+        # Add the fields expected by the curation interface
+        data["doc_id"] = example.doc_id
+        data["figure_id"] = example.figure_id
+        data["caption"] = example.caption
+        data["image_path"] = (
+            str(example.image_path) if example.image_path else None
+        )
+        
+        # Initialize expected_outputs dictionary (not check_outputs)
+        data["check_outputs"] = {}
+        
+        # Load expected outputs if available
+        # Let the FigureExample handle finding checks through its own source path
+        if checklist is not None:
+            # Only load expected outputs for checks that exist in the checklist
+            for check_name in checklist.keys():
+                try:
+                    data["check_outputs"][check_name] = (
+                        example.get_expected_output(check_name)
+                    )
+                except FileNotFoundError:
+                    st.warning(
+                        f"Expected output not found for {check_name}"
+                    )
+        else:
+            # If no checklist provided, try to find all available checks
+            # This is a fallback - we don't know what checks exist
+            # so we can't enumerate them easily
+            pass
         
         return data
     except Exception as e:
@@ -80,11 +93,11 @@ def load_example_data(doc_id, fig, checklist=None):
         return None
 
 
-def save_check_output(example_path, check_name, output_data):
+def save_check_output(selected_fig, check_name, output_data):
     """Save the updated check output.
     
     Args:
-        example_path: Path object pointing to the figure directory
+        selected_fig: Path object pointing to the figure directory (can be relative or absolute)
         check_name: Name of the check
         output_data: Dictionary containing the output data
         
@@ -92,15 +105,17 @@ def save_check_output(example_path, check_name, output_data):
         bool: True if save was successful, False otherwise
     """
     try:
-        # Create FigureExample object with the correct dictionary structure
-        example_dict = {
-            "doc_id": example_path.parent.name,  # Parent directory is the doc_id
-            "figure_id": example_path.name    # Directory name is the figure_id
-        }
-        example = FigureExample(example_dict)
+        # Create FigureExample object using the factory
+        # selected_fig is now a relative path like "doc_id/content/figure_id"
+        if isinstance(selected_fig, Path):
+            # Convert to string for the factory
+            relative_path = str(selected_fig)
+        else:
+            relative_path = selected_fig
+        example = EXAMPLE_FACTORY.create(relative_path, "figure")
         
-        # Save using Example class method
-        example.save_expected_output(output_data, check_name)
+        # Save using Example class method with overwrite=True for curation
+        example.save_expected_output(output_data, check_name, overwrite=True)
         return True
     except Exception as e:
         st.error(f"Error saving output: {e}")
@@ -108,14 +123,27 @@ def save_check_output(example_path, check_name, output_data):
 
 
 def get_example_hierarchy(examples_dir):
-    """Get the hierarchical structure of examples."""
+    """Get the hierarchical structure of examples.
+    
+    Returns:
+        Dictionary mapping doc_id to list of relative paths to figure directories.
+        Example: {"doc_id": ["doc_id/content/1", "doc_id/content/2"]}
+    """
     hierarchy = {}
     for doc_id_dir in examples_dir.glob("*"):
         if doc_id_dir.is_dir():
             hierarchy[doc_id_dir.name] = []
-            for fig_dir in doc_id_dir.glob("*"):
-                if fig_dir.is_dir():
-                    hierarchy[doc_id_dir.name].append(fig_dir)
+            # Look for content directory within each doc_id directory
+            content_dir = doc_id_dir / "content"
+            if content_dir.exists():
+                # Find figure directories within content directory
+                for fig_dir in content_dir.glob("*"):
+                    if fig_dir.is_dir():
+                        # Only include numeric figure directories (typical figure IDs)
+                        if fig_dir.name.isdigit():
+                            # Return relative path instead of absolute
+                            relative_path = fig_dir.relative_to(examples_dir)
+                            hierarchy[doc_id_dir.name].append(relative_path)
     return hierarchy
 
 
@@ -137,8 +165,16 @@ def load_checklist(checklist_dir):
                 with open(schema_path, "r") as f:
                     checklist[check_dir.name]["schema"] = json.load(f)
             # verify that the check_dir.name is the same as the name of the schema
-            if checklist[check_dir.name]["schema"]["format"]["name"] != check_dir.name:
-                st.error(f"The name of the schema {checklist[check_dir.name]['schema']['format']['name']} does not match the name of the check {check_dir.name}")
+            schema = checklist[check_dir.name]["schema"]
+            if (schema and 
+                "format" in schema and 
+                "name" in schema["format"] and
+                schema["format"]["name"] != check_dir.name):
+                schema_name = schema["format"]["name"]
+                st.error(
+                    f"The name of the schema {schema_name} does not match "
+                    f"the name of the check {check_dir.name}"
+                )
             # load the benchmark.json file
             benchmark_path = check_dir / "benchmark.json"
             checklist[check_dir.name]["benchmark"] = {}
@@ -297,12 +333,13 @@ def main(checklist_name):
             selected_fig = st.selectbox(
                 "Select Figure",
                 example_hierarchy[selected_doc_id],
-                format_func=lambda x: x.name,
+                format_func=lambda x: x.name if hasattr(x, 'name') else x.split('/')[-1],
                 help="Select the figure to curate"
             )
         
         if selected_fig:
             # Load example data with checklist for validation
+            # selected_fig is now a relative path, so we need to pass it directly
             example_data = load_example_data(selected_doc_id, selected_fig, checklist)
             
             # Create three columns for the layout with adjusted widths
@@ -338,14 +375,19 @@ def main(checklist_name):
                     
                     if selected_check:
                         
-                        first_prompt = list(checklist[selected_check]["prompts"].values())[0]
-                        # show prompt as collapsible section
-                        with st.expander("Prompt"):
-                            st.code(
-                                first_prompt,
-                                language="text",
-                                wrap_lines=True
-                            )
+                        # Check if there are any prompts available
+                        prompts = checklist[selected_check]["prompts"]
+                        if prompts:
+                            first_prompt = list(prompts.values())[0]
+                            # show prompt as collapsible section
+                            with st.expander("Prompt"):
+                                st.code(
+                                    first_prompt,
+                                    language="text",
+                                    wrap_lines=True
+                                )
+                        else:
+                            st.warning(f"No prompts available for check '{selected_check}'")
                         
                         output_data = example_data["check_outputs"][selected_check]
                         if "outputs" in output_data:
@@ -417,6 +459,10 @@ def main(checklist_name):
                                     processed_records.append(processed_record)
                                 
                                 output_data["outputs"] = processed_records
+                                # Update the timestamp
+                                from datetime import datetime
+                                output_data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                                
                                 if save_check_output(selected_fig, selected_check, output_data):
                                     # Mark this file as saved in the session state
                                     st.session_state.saved_files[file_key] = True

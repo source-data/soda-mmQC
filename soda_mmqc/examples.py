@@ -139,13 +139,15 @@ class Example(ABC):
     def save_expected_output(
         self,
         output: Dict[str, Any],
-        check_name: str
+        check_name: str,
+        overwrite: bool = False
     ) -> Path:
         """Save an expected output for this example.
 
         Args:
             output: The output to save
             check_name: Name of the check
+            overwrite: Whether to overwrite existing files (default: False)
             
         Returns:
             Path to the saved expected output file
@@ -156,9 +158,10 @@ class Example(ABC):
         expected_output_path = expected_output_dir / "expected_output.json"
 
         # Check if expected output already exists
-        if expected_output_path.exists():
+        if expected_output_path.exists() and not overwrite:
             logger.info(
-                f"Expected output already exists: {expected_output_path}"
+                f"Expected output already exists and overwrite=False: "
+                f"{expected_output_path}"
             )
             return expected_output_path
 
@@ -167,7 +170,7 @@ class Example(ABC):
             json.dump(output, f, indent=4, ensure_ascii=False)
 
         logger.info(
-            f"Created expected output: {expected_output_path}"
+            f"Saved expected output: {expected_output_path}"
         )
         return expected_output_path
 
