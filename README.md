@@ -28,6 +28,26 @@ cd soda-mmqc
 pip install -e .
 ```
 
+## Testing
+
+The project uses pytest for testing. You can run tests using:
+
+```bash
+# Run all tests
+pytest
+
+# Run tests with verbose output
+pytest -v
+
+# Run specific test files
+pytest tests/test_specific_file.py
+
+# Run tests matching a pattern
+pytest -k "test_name_pattern"
+```
+
+The test configuration is defined in `pyproject.toml` with test paths set to the `tests/` directory.
+
 ## Usage
 
 After installation, you can use the following commands:
