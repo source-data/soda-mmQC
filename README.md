@@ -33,35 +33,25 @@ pip install -e .
 After installation, you can use the following commands:
 
 ```bash
-# Run all checklists
-soda-mmqc run [--model MODEL_NAME] [--mock] [--no-cache]
+# Run all checks in a checklist
+evaluate CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache]
 
-# Run a specific checklist
-soda-mmqc run --checklist CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache]
+# Run a specific check in a checklist
+evaluate CHECKLIST_NAME --check CHECK_NAME [--model MODEL_NAME] [--mock] [--no-cache]
 
-# Initialize the project (first time setup)
-soda-mmqc init
+# Initialize expected output files for a checklist
+init CHECKLIST_NAME [--no-cache]
 
 # Curate and manage checklists
-soda-mmqc curate CHECKLIST_NAME
-
-# Visualize results
-soda-mmqc viz
-
-# Set logging level
-soda-mmqc run --log-level DEBUG
-
-# Specify custom results directory
-soda-mmqc run --results-dir path/to/results
+curate CHECKLIST_NAME
 ```
 
 Command line options:
 - `--model`: Specify the model to use (default: "gpt-4o-2024-08-06")
 - `--mock`: Use expected outputs as model outputs (no API calls)
 - `--no-cache`: Disable caching of model outputs
-- `--checklist`: Specify a particular checklist to run
-- `--log-level`: Set logging level (DEBUG, INFO, WARNING, ERROR)
-- `--results-dir`: Specify custom directory for results
+- `--check`: Specify a particular check to run within a checklist
+- `--initialize`: Initialize expected output files (alternative to `init` command)
 
 
 ## Dependencies
@@ -85,55 +75,28 @@ This is an open library of multimodal prompts dedicated to the verification of t
 
 Example of checks:
 
-- Check if the experimental method, platform or assay used in the depicted experiment is indicated in the caption.
-- Check if the object of the observations or measurements are indicated in the caption.
-- Check if the source data files associated with this figure panel corresponda to the results displayed in the image.
-- Should the number of replicates be mentioned in the caption given the results depicted in the figure?
-- If the number of replicates is mentioned, is it clear what is the nature of these replicates (experimental, technical) and what source of variability they are supposed to account for?
-- In fluorescence microscopy, are the channels identified are the clearly linked to specific biological objects or features or interest?
-- For ligh microscopy, are the staining or labeling methods indicated?
-- Are there annotations (arrows, arrow heads, marking, symbols, stars, etc) on the images all explained and referred to in the caption?
-- For overlay images that superpose multiple channels, are the respective grey scale images provided for each separate channel?
-- For images showing a phenotype, microscopic or macroscopic, are there multiple images illustrating the range of variability of the phenotype?
-- In a figure displaying plots that include error bars, are the error bars explained in the figure caption?
-- In bar charts, are the individual points also displayed?
-- If statistical significance or testing is mentioned in the caption or displayed on the image, is the statistical test specified?
+- Check whether error bars are defined in the figure caption.
+- Check whether statistical tests used to assess significance are mentioned in the caption.
+- Check whether scale bars are defined in micrograph figure captions.
+- Check whether individual data points are shown in bar charts.
 
 
 ## Checks:
 
-For each of these checks we design a prompt that can be optmized based on a test set assembling examples covering the expected outcomes.
-
-Each check is defined by a JSON file in the `data/checks/` directory.
-
-```json
-{
-  "name": "error-bars-defined",
-  "description": "Checks whether the error bars are defined in the figure caption.",
-  "prompt_path": "prompts/error-bars-defined.txt",
-  "metrics": ["exact_match", "semantic_similarity", "BLEU"],
-  "examples": [
-    {
-      "figure_path": "data/figure/10.1038_emboj.2009.312/1/",
-      "expected_output_path": "data/figure/10.1038_emboj.2009.312/1/error-bars-defined/expected_output.txt"
-    },
-    {
-      "figure_path": "data/figure/10.1038_emboj.2009.340/3/",
-      "expected_output_path": "data/figure/10.1038_emboj.2009.340/3/error-bars-defined/expected_output.txt"
-    }
-  ]
-}
-```
+A check is characterized by the following components:
+- **Prompts**: Multiple prompt templates that can be compared and optimized for the specific check
+- **Output Schema**: A `schema.json` file that defines the structure of the model output given the prompts
+- **Benchmarking Dataset**: A `benchmark.json` file containing test examples and expected outputs to measure prompt performance
 
 ## Checklists:
 
-A checklist is a collection of related checks, organized in a directory structure. The project currently supports four main checklist types:
+A checklist is a collection of loosely related checks, organized for conveniencein a directory structure. The project currently supports two main checklists:
 
 ### 1. Document Checklists (`doc-checklist/`)
 Checks that analyze entire documents or manuscript structure:
-- **extract-figures**: Extracts and identifies figures from documents
+- **extract-figures**: Extracts and identifies figures from documents [not implemented]
 - **section-order**: Validates the order and structure of document sections
-- **species-identified**: Checks if species are properly identified in the document
+- **species-identified**: Checks if species are properly identified in the document [not implemented]
 
 ### 2. Figure Checklists (`fig-checklist/`)
 Checks that analyze individual figures and their captions:
@@ -146,13 +109,7 @@ Checks that analyze individual figures and their captions:
 - **replicates-defined**: Verifies if replicates are properly defined
 - **stat-significance-level**: Checks statistical significance reporting
 - **stat-test**: Validates statistical test specifications
-- **structure-identified**: Ensures structures are properly identified
-
-### 3. Document Consistency Checklists (`docconsistency-checklist/`)
-Checks for consistency across document sections (currently empty)
-
-### 4. Figure Clarity Checklists (`figclarity-checklist/`)
-Checks for figure clarity and readability (currently empty)
+- **structure-identified**: Ensures structures are properly identified [not implemented]
 
 Each check directory contains:
 ```
@@ -169,67 +126,59 @@ checklist/
 │   │   ├── benchmark.json
 │   │   └── schema.json
 │   └── ...
-├── docconsistency-checklist/         # Document consistency checks
-└── figclarity-checklist/             # Figure clarity checks
-```
 
-Each check directory contains:
-- `prompts/`: Directory containing the prompt templates used for the check
-- `benchmark.json`: Contains the test examples and their expected outputs
-- `schema.json`: Defines the structure of the expected output for the check
+
+```
 
 ## Benchmarking data:
 
 The structure of the repository keeps each example as human readable directories, grouping the content files as well as the expected output for each of the checks:
 
-### Examples Structure:
+### Structure of the examples used for benchmarking:
 
     data/examples/
-      ├── 10.1038_emboj.2009.312/           # Figure-based example
-      │   ├── content/
-      │   │   └── 1/                        # Figure 
-      │   │       ├── content/
-      │   │       │   ├── embj2009312-fig-0001-m.jpg
-      │   │       │   ├── 10.1038-emboj.2009.312Figure20093120001.pptx
-      │   │       │   └── caption.txt
-      │   │       └── checks/
-      │   │           ├── error-bars-defined/
-      │   │           ├── individual-data-points/
-      │   │           ├── micrograph-scale-bar/
-      │   │           ├── micrograph-symbols-defined/
-      │   │           ├── plot-axis-units/
-      │   │           ├── plot-gap-labeling/
-      │   │           ├── replicates-defined/
-      │   │           ├── stat-significance-level/
-      │   │           └── stat-test/
-      │   └── checks/                       # Document-level checks
-      │
-      ├── EMBOJ-2024-119734R/               # Document-based example
-      │   ├── content/
-      │   │   └── EMBOJ-2024-119734R-Manuscript_Text-mstxt.docx
-      │   └── checks/
-      │       └── section-order/
-      │           └── expected_output.json
-      │
-      ├── 10.1038_embor.2009.217/           # Another example
-      │   ├── content/
-      │   │   └── 4/                        # Figure 
-      │   │       ├── content/
-      │   │       │   ├── figure.jpg
-      │   │       │   ├── figure.pptx
-      │   │       │   └── caption.txt
-      │   │       └── checks/
-      │   └── checks/
-      │       └── section-order/
-      │           └── expected_output.json
-      └── ...
+      └── 10.1038_emboj.2009.312/           # Example document
+          ├── content/
+          │   ├── manuscirpt.docx
+          │   └── 1/                        # Figure 
+          │       ├── content/
+          │       │   ├── embj2009312-fig-0001-m.jpg
+          │       │   ├── 10.1038-emboj.2009.312Figure20093120001.pptx
+          │       │   └── caption.txt
+          │       └── checks/                # Figure-level checks
+          │           ├── error-bars-defined/
+          │           │   └── expected_output.json
+          │           ├── individual-data-points/
+          │           │   └── expected_output.json
+          │           ├── micrograph-scale-bar/
+          │           │   └── expected_output.json
+          │           ├── micrograph-symbols-defined/
+          │           │   └── expected_output.json
+          │           ├── plot-axis-units/
+          │           │   └── expected_output.json
+          │           ├── plot-gap-labeling/
+          │           │   └── expected_output.json
+          │           ├── replicates-defined/
+          │           │   └── expected_output.json
+          │           ├── stat-significance-level/
+          │           │   └── expected_output.json
+          │           └── stat-test/
+          │               └── expected_output.json
+          └── checks/                        # Document-level checks
+              ├── section-order/
+              │   └── expected_output.json
+              └── section-order-alt/
+                  └── expected_output.json
 
-### Checklist Structure:
+### Structure of the checklists:
 
     data/checklist/
       ├── doc-checklist/                    # A series of checks
       │   ├── extract-figures/
       │   │   ├── prompts/
+      │   │   │   ├── prompt.1.txt
+      │   │   │   ├── prompt.2.txt
+      │   │   │   └── ...
       │   │   ├── schema.json
       │   │   └── benchmark.json
       │   ├── section-order/
@@ -258,7 +207,7 @@ The structure of the repository keeps each example as human readable directories
       │
       ├── ...
 
-### Evaluation Structure:
+### Structure of the evaluation:
 
     data/evaluation/
       ├── doc-checklist/
@@ -281,9 +230,130 @@ The structure of the repository keeps each example as human readable directories
           └── stat-test/
 
 
-## Exepected output:
+## Example
 
-The expected output is a JSON file that contains the expected output for each of the checks.
+### Prompt:
+
+```text
+You are a scientific figure quality control expert. Your task is to analyze a scientific figure and its caption to check for the presence of error bars and whether they are properly defined.
+
+For each panel in the figure:
+
+1. Look for error bars (lines extending from data points indicating variability).
+2. Check if the caption explains what these error bars represent.
+3. Report your findings in a structured format.
+
+Provide your analysis in the following JSON format for EACH panel:
+
+{
+    "outputs": [
+        {
+            "panel_label": "[panel letter]",
+            "error_bar_on_figure": "[yes/no]",
+            "error_bar_defined_in_caption": "[yes/no/not needed]",
+            "error_bar_definition": "[exact text describing what the error bars represent, or an empty string]"
+        }
+    ]
+}
+
+
+Be concise and focus only on the presence and definition of error bars.
+```
+T
+#### Output Schema:
+
+The output schema is based on the OpenAI JSON Schema format for the `client.responses.create` method.
+
+
+```json
+{
+    "format": {
+        "type": "json_schema",
+        "name": "error-bars-defined",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "panel_label": {
+                                "type": "string",
+                                "description": "Label of the panel (e.g., A, B, C)"
+                            },
+                            "error_bar_on_figure": {
+                                "type": "string",
+                                "enum": ["yes", "no"],
+                                "description": "Whether error bars are present"
+                            },
+                            "error_bar_defined_in_caption": {
+                                "type": "string",
+                                "enum": ["yes", "no", "not needed"],
+                                "description": "Whether error bars are defined in caption"
+                            },
+                            "from_the_caption": {
+                                "type": "string",
+                                "description": "Text from caption describing error bars, when error bars are present"
+                            }
+                        },
+                        "required": [
+                            "panel_label",
+                            "error_bar_on_figure",
+                            "error_bar_defined_in_caption",
+                            "from_the_caption"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}
+```
+
+#### Benchmarking Dataset:
+
+A benchmark dataset is a JSON file that contains the relative path to the examples to be used for benchmarking.
+The example directory is specified as `EXAMPLE_DIR` in `soda_mmqc/config.py` and is set to `data/examples/` by default.
+The benchmark JSON file includes the field "example_class" that specifies the type of example to be used for benchmarking.
+The field "examples" is an array of relative paths to the examples to be used for benchmarking.
+
+The benchmark dataset is used to evaluate the performance of the prompts and the output schema.
+
+
+```json
+{
+  "name": "error-bars-defined",
+  "description": "Checks whether the error bars are defined in the figure caption.",
+  "example_class": "figure",
+  "examples": [
+    "10.1038_emboj.2009.312/content/1",
+    "10.1038_s44319-025-00432-6/content/7",
+    "10.1038_emboj.2009.340/content/3",
+    "10.1038_s44319-025-00438-0/content/1",
+    "10.1038_embor.2009.217/content/4",
+    "10.1038_s44320-025-00092-7/content/1",
+    "10.1038_s44320-025-00092-7/content/2",
+    "10.1038_embor.2009.233/content/2",
+    "10.1038_s44320-025-00094-5/content/2",
+    "10.1038_s44318-025-00409-0/content/1",
+    "10.1038_s44320-025-00096-3/content/9",
+    "10.1038_s44318-025-00412-5/content/1",
+    "10.1038_s44321-025-00219-1/content/1",
+    "10.1038_s44318-025-00416-1/content/8",
+    "10.1038_s44319-025-00415-7/content/2",
+    "10.1038_s44321-025-00224-4/content/1"
+  ]
+}
+```
+
+### Expected output:
+
+The expected output is a JSON file that contains the expected output for each of the checks. It has to follow the output schema.
 
 ```json
 {

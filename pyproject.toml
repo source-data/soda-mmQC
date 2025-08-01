@@ -39,7 +39,6 @@ dependencies = [
 evaluate = "soda_mmqc.scripts.run:main"
 curate = "soda_mmqc.scripts.curate:main"
 init = "soda_mmqc.scripts.run:initialize_main"
-viz = "soda_mmqc.scripts.visualize:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["soda_mmqc"]
