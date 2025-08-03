@@ -1,12 +1,6 @@
-import os
-import sys
 import unittest
-from unittest.mock import patch
 
-# Add the project root to the path
-sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
-
-from soda_mmqc.evaluation import JSONEvaluator
+from soda_mmqc.core.evaluation import JSONEvaluator
 
 
 class TestCompareLists(unittest.TestCase):
@@ -127,8 +121,8 @@ class TestCompareLists(unittest.TestCase):
         # Third element: mismatch (score < threshold) = 1 FP, 1 FN
         # num_all = 3
         # true_positive should be False because not all elements matched perfectly
-        self.assertEqual(result.score, 1/3)  # Average of element scores (1.0 + 0 + 0) / 3
-        self.assertEqual(result.true_positive, False)  # Not all elements matched perfectly
+        self.assertEqual(result.score, 1/3)  # Average of element scores
+        self.assertEqual(result.true_positive, False)  # Not all elements matched
         self.assertEqual(result.false_positive, True)
         self.assertEqual(result.false_negative, True)  # 1 mismatch
         self.assertEqual(result.precision, 1/3)
@@ -136,7 +130,7 @@ class TestCompareLists(unittest.TestCase):
         self.assertEqual(result.f1_score, 1/3)  # 2 * (1/3 * 1/3) / (1/3 + 1/3)
 
     def test_prediction_shorter_than_expected(self):
-        """Test when prediction list is shorter than expected (missing elements)."""
+        """Test when prediction list is shorter than expected."""
         pred = [{"name": "item1", "value": "data1"}]
         exp = [
             {"name": "item1", "value": "data1"},
@@ -158,7 +152,7 @@ class TestCompareLists(unittest.TestCase):
         self.assertIn("missing_element_2", result.element_scores)
 
     def test_prediction_longer_than_expected(self):
-        """Test when prediction list is longer than expected (extra elements)."""
+        """Test when prediction list is longer than expected."""
         pred = [
             {"name": "item1", "value": "data1"},
             {"name": "item2", "value": "data2"},
@@ -172,8 +166,9 @@ class TestCompareLists(unittest.TestCase):
         
         # Two elements match (2 TP), one extra element (1 FP)
         # true_positive should be False because there's an extra element
-        self.assertEqual(result.score, 2/3)  # 2 matches out of 3 total elements
-        self.assertEqual(result.true_positive, False)  # Extra element means not perfect
+        self.assertEqual(result.score, 2/3)  # 2 matches out of 3 total
+        # Extra element means not perfect
+        self.assertEqual(result.true_positive, False)
         self.assertEqual(result.false_positive, True)
         self.assertEqual(result.false_negative, False)
         self.assertEqual(result.precision, 2/3)
@@ -201,14 +196,17 @@ class TestCompareLists(unittest.TestCase):
                 }
             }
         }
-        string_evaluator = JSONEvaluator(string_schema, string_metric="perfect_match")
+        string_evaluator = JSONEvaluator(
+            string_schema, string_metric="perfect_match"
+        )
         
         result = string_evaluator._compare_lists(pred, exp, ["outputs"])
         
         # 2 matches (2 TP), 1 mismatch (1 FP and FN)
         # num element = 3 (we don't count mismatches twice)
         # true_positive should be False because not all elements matched
-        self.assertEqual(result.score, 0.6666666666666666)  # Average of element scores (1.0 + 1.0 + 0.0 + 0.0) / 3
+        expected_score = 0.6666666666666666  # Average of element scores
+        self.assertEqual(result.score, expected_score)
         self.assertEqual(result.true_positive, False)  # Not all elements matched
         self.assertEqual(result.false_positive, True)
         self.assertEqual(result.false_negative, True)  # 1 mismatch
@@ -233,14 +231,16 @@ class TestCompareLists(unittest.TestCase):
                 }
             }
         }
-        number_evaluator = JSONEvaluator(number_schema, string_metric="perfect_match")
+        number_evaluator = JSONEvaluator(
+            number_schema, string_metric="perfect_match"
+        )
         
         result = number_evaluator._compare_lists(pred, exp, ["outputs"])
         
         # 2 matches (2 TP), 1 mismatch (1 FP), 1 extra (1 FP), 1 missing (1 FN)
         # true_positive should be False because not all elements matched perfectly
-        self.assertEqual(result.score, 0.5)  # Average of element scores (1.0 + 1.0 + 0.0 + 0.0) / 4
-        self.assertEqual(result.true_positive, False)  # Not all elements matched perfectly
+        self.assertEqual(result.score, 0.5)  # Average of element scores
+        self.assertEqual(result.true_positive, False)  # Not all elements matched
         self.assertEqual(result.false_positive, True)
         self.assertEqual(result.false_negative, True)  # 1 mismatch
 
@@ -262,7 +262,7 @@ class TestCompareLists(unittest.TestCase):
         # If there are field scores, check their structure
         if result.field_scores:
             for field, field_result in result.field_scores.items():
-                self.assertIsInstance(field_result, type(result))  # ComparisonResult type
+                self.assertIsInstance(field_result, type(result))
                 # Check that the ComparisonResult has the expected attributes
                 self.assertIsInstance(field_result.score, float)
                 self.assertIsInstance(field_result.precision, float)
@@ -287,16 +287,6 @@ class TestCompareLists(unittest.TestCase):
         # Standard deviation should be calculated from these scores
         self.assertIsInstance(result.std_score, float)
         self.assertGreaterEqual(result.std_score, 0.0)
-
-    def test_error_messages(self):
-        """Test that appropriate error messages are generated."""
-        pred = [{"name": "item1", "value": "data1"}]
-        exp = [
-            {"name": "item1", "value": "data1"},
-            {"name": "item2", "value": "data2"}
-        ]
-        result = self.evaluator._compare_lists(pred, exp, ["outputs"])
-        
 
     def test_element_scores_structure(self):
         """Test that field_scores contains the expected structure."""
@@ -326,7 +316,7 @@ class TestCompareLists(unittest.TestCase):
         # field_scores should contain ComparisonResult objects
         if result.field_scores:
             for field, field_result in result.field_scores.items():
-                self.assertIsInstance(field_result, type(result))  # ComparisonResult type
+                self.assertIsInstance(field_result, type(result))
 
 
 if __name__ == "__main__":

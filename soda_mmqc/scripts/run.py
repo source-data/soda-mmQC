@@ -5,16 +5,16 @@ from pathlib import Path
 from typing import List, Dict, Any, Tuple
 from dataclasses import dataclass
 from tqdm import tqdm
-from soda_mmqc.model_api import generate_response
-from soda_mmqc.model_cache import ModelCache
+from soda_mmqc.lib.api import generate_response
+from soda_mmqc.lib.cache import ModelCache
 from soda_mmqc.config import (
     CHECKLIST_DIR,
     CACHE_DIR,
     EVALUATION_DIR,
 )
-from soda_mmqc.evaluation import JSONEvaluator
+from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
-from soda_mmqc.examples import EXAMPLE_FACTORY, Example
+from soda_mmqc.core.examples import EXAMPLE_FACTORY, Example
 
 
 @dataclass

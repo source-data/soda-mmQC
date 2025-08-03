@@ -7,7 +7,7 @@ import pandas as pd
 import argparse
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 from soda_mmqc import logger
-from soda_mmqc.examples import EXAMPLE_FACTORY
+from soda_mmqc.core.examples import EXAMPLE_FACTORY
 
 # Set page config for wider layout
 st.set_page_config(

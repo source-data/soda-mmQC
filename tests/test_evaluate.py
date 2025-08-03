@@ -2,7 +2,7 @@
 
 import unittest
 
-from soda_mmqc.evaluation import JSONEvaluator
+from soda_mmqc.core.evaluation import JSONEvaluator
 
 
 class TestEvaluate(unittest.TestCase):

@@ -7,13 +7,10 @@ from pathlib import Path
 from soda_mmqc.config import (
     CHECKLIST_DIR,
     EVALUATION_DIR,
-    EXAMPLES_DIR,
 )
-from soda_mmqc.examples import EXAMPLE_TYPES
+from soda_mmqc.core.examples import EXAMPLE_TYPES
 from soda_mmqc import logger
 from typing import Dict, Any
-from IPython.display import display, HTML
-import base64
 
 
 def load_schema(checklist_name, check_name):

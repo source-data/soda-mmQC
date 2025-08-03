@@ -15,6 +15,26 @@
 
 A resource to develop, evaluate and distributeAI-generated quality checks of scientific manuscritps.
 
+## Package Structure
+
+The `soda_mmqc` package is organized as follows:
+
+```
+soda_mmqc/
+├── __init__.py          # Package initialization and logging
+├── config.py            # Configuration constants and paths
+├── core/                # Core business logic
+│   ├── examples.py      # Example data classes and factory
+│   ├── evaluation.py    # Model evaluation tools
+│   └── curation.py      # Streamlit curation interface
+├── lib/                 # Model-related functionality
+│   ├── api.py           # API client for model calls
+│   └── cache.py         # Caching functionality
+├── scripts/             # CLI scripts
+├── utils/               # Utility functions
+└── data/                # Static data files (checklists, examples, evaluations)
+```
+
 ## Installation
 
 You can install the package in development mode using pip:

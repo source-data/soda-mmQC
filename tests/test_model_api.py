@@ -1,18 +1,12 @@
 import os
 import json
-import sys
 import unittest
 import tempfile
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-# Add the project root to the path
-sys.path.insert(0, os.path.abspath(
-    os.path.dirname(os.path.dirname(__file__))
-))
-
-from soda_mmqc.model_api import generate_response_openai, generate_response
-from soda_mmqc.examples import FigureExample
+from soda_mmqc.lib.api import generate_response_openai, generate_response
+from soda_mmqc.core.examples import FigureExample
 from soda_mmqc.scripts.run import ModelInput
 
 
@@ -90,8 +84,8 @@ class TestModelApi(unittest.TestCase):
         import shutil
         shutil.rmtree(self.test_dir)
 
-    @patch('soda_mmqc.model_api.OpenAI')
-    @patch('soda_mmqc.model_api.os.getenv')
+    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_success(self, mock_getenv, mock_openai):
         """Test successful response generation with OpenAI API."""
         # Mock environment variables
@@ -136,8 +130,8 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(call_args[1]["text"], self.test_schema)
         self.assertEqual(call_args[1]["metadata"], self.test_metadata)
 
-    @patch('soda_mmqc.model_api.OpenAI')
-    @patch('soda_mmqc.model_api.os.getenv')
+    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_json_error(self, mock_getenv, mock_openai):
         """Test handling of JSON parsing errors."""
         # Mock environment variables
@@ -166,8 +160,8 @@ class TestModelApi(unittest.TestCase):
                 metadata=self.test_metadata
             )
 
-    @patch('soda_mmqc.model_api.OpenAI')
-    @patch('soda_mmqc.model_api.os.getenv')
+    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_missing_metadata(self, mock_getenv, mock_openai):
         """Test handling of missing metadata in response."""
         # Mock environment variables
@@ -204,7 +198,7 @@ class TestModelApi(unittest.TestCase):
         # Should have empty strings for response_id and model when attributes are None
         self.assertEqual(metadata, {"response_id": "", "model": ""})
 
-    @patch('soda_mmqc.model_api.generate_response_openai')
+    @patch('soda_mmqc.lib.api.generate_response_openai')
     def test_generate_response_wrapper(self, mock_generate_openai):
         """Test the generate_response wrapper function."""
         # Mock the underlying function
@@ -241,8 +235,8 @@ class TestModelApi(unittest.TestCase):
             metadata=self.test_metadata
         )
 
-    @patch('soda_mmqc.model_api.OpenAI')
-    @patch('soda_mmqc.model_api.os.getenv')
+    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_with_retry(self, mock_getenv, mock_openai):
         """Test that the function retries on JSON errors."""
         # Mock environment variables

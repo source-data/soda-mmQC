@@ -1,16 +1,10 @@
 import os
 import json
-import sys
 import unittest
 import tempfile
 from pathlib import Path
 
-# Add the project root to the path
-sys.path.insert(0, os.path.abspath(
-    os.path.dirname(os.path.dirname(__file__))
-))
-
-from soda_mmqc.curation import (
+from soda_mmqc.core.curation import (
     load_checklist, load_example_data, get_example_hierarchy, save_check_output
 )
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR

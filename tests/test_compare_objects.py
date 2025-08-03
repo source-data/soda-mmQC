@@ -1,12 +1,7 @@
-import os
-import sys
 import unittest
 from unittest.mock import patch
 
-# Add the project root to the path
-sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
-
-from soda_mmqc.evaluation import JSONEvaluator
+from soda_mmqc.core.evaluation import JSONEvaluator
 
 
 class TestCompareObjects(unittest.TestCase):
