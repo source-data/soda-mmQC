@@ -13,6 +13,7 @@ from soda_mmqc.config import (
     EVALUATION_DIR,
     STRING_METRICS,
     DEFAULT_MATCH_THRESHOLD,
+    DEFAULT_SENTENCE_TRANSFORMER_MODEL,
 )
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
@@ -193,7 +194,10 @@ def analyze_results(
     results: List[ModelResult],
     schema: Dict[str, Any],
     expected_outputs: List[Dict[str, Any]],
-    match_threshold: float = DEFAULT_MATCH_THRESHOLD
+    match_threshold: float = DEFAULT_MATCH_THRESHOLD,
+    sentence_transformer_model: str = (
+        DEFAULT_SENTENCE_TRANSFORMER_MODEL
+    )
 ) -> Dict[str, List[Dict[str, Any]]]:
     """Analyze model outputs against expected outputs using all string metrics.
     
@@ -218,7 +222,8 @@ def analyze_results(
         evaluator = JSONEvaluator(
             schema, 
             string_metric=string_metric, 
-            match_threshold=match_threshold
+            match_threshold=match_threshold,
+            sentence_transformer_model=sentence_transformer_model
         )
         
         for result, expected_output in tqdm(
@@ -446,7 +451,10 @@ def process_check(
     mock: bool = False,
     use_cache: bool = True,
     model: str = "gpt-4o-2024-08-06",
-    match_threshold: float = DEFAULT_MATCH_THRESHOLD
+    match_threshold: float = DEFAULT_MATCH_THRESHOLD,
+    sentence_transformer_model: str = (
+        DEFAULT_SENTENCE_TRANSFORMER_MODEL
+    )
 ) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
     """Process a single check.
     
@@ -500,7 +508,8 @@ def process_check(
             results,
             check_data.schema,
             check_data.expected_outputs,
-            match_threshold=match_threshold
+            match_threshold=match_threshold,
+            sentence_transformer_model=sentence_transformer_model
         )
 
         # Store results for this prompt
@@ -596,7 +605,10 @@ def process_checklist(
     mock: bool = False,
     use_cache: bool = True,
     model: str = "gpt-4o-2024-08-06",
-    match_threshold: float = DEFAULT_MATCH_THRESHOLD
+    match_threshold: float = DEFAULT_MATCH_THRESHOLD,
+    sentence_transformer_model: str = (
+        DEFAULT_SENTENCE_TRANSFORMER_MODEL
+    )
 ):
     """Process an entire checklist.
     
@@ -626,7 +638,8 @@ def process_checklist(
                 mock=mock,
                 use_cache=use_cache,
                 model=model,
-                match_threshold=match_threshold
+                match_threshold=match_threshold,
+                sentence_transformer_model=sentence_transformer_model
             )
         except Exception as e:
             logger.error(
@@ -666,6 +679,11 @@ def main():
         "--match-threshold", type=float, default=DEFAULT_MATCH_THRESHOLD,
         help="Threshold for considering a match (0-1)"
     )
+    parser.add_argument(
+        "--sentence-transformer-model", type=str, 
+        default=DEFAULT_SENTENCE_TRANSFORMER_MODEL,
+        help="SentenceTransformer model for semantic similarity"
+    )
     args = parser.parse_args()
 
     # Get the checklist directory using the config function
@@ -687,7 +705,8 @@ def main():
             process_check(
                 check_dir, args.checklist, args.mock, not args.no_cache, 
                 model=args.model,
-                match_threshold=args.match_threshold
+                match_threshold=args.match_threshold,
+                sentence_transformer_model=args.sentence_transformer_model
             )
         else:
             logger.error(f"Check not found: {args.check}")
@@ -696,7 +715,8 @@ def main():
         process_checklist(
             checklist_dir, args.checklist, args.mock, not args.no_cache, 
             model=args.model,
-            match_threshold=args.match_threshold
+            match_threshold=args.match_threshold,
+            sentence_transformer_model=args.sentence_transformer_model
         )
 
 

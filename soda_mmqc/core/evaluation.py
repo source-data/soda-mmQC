@@ -4,7 +4,10 @@ from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 import torch
 from sentence_transformers import SentenceTransformer
-from soda_mmqc.config import DEVICE
+from soda_mmqc.config import (
+    DEVICE, 
+    DEFAULT_SENTENCE_TRANSFORMER_MODEL
+)
 import logging
 from soda_mmqc import logger
 import statistics
@@ -13,9 +16,6 @@ import numpy as np
 
 # Suppress progress bars from SentenceTransformer
 logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
-
-# Initialize SentenceTransformer model
-MODEL = SentenceTransformer('all-MiniLM-L6-v2', device=DEVICE)
 
 
 def lcs_length(s1: str, s2: str) -> int:
@@ -152,7 +152,8 @@ class JSONEvaluator:
         self, 
         schema: Dict[str, Any],
         string_metric: str = "perfect_match",
-        match_threshold: float = 0.5
+        match_threshold: float = 0.5,
+        sentence_transformer_model: str = DEFAULT_SENTENCE_TRANSFORMER_MODEL
     ):
         """Initialize the evaluator with a schema file.
         
@@ -163,9 +164,12 @@ class JSONEvaluator:
                 - "semantic_similarity": Using SentenceTransformer
                 - "longest_common_subsequence": LCS-based similarity
             match_threshold: Threshold for considering a match (0-1)
+            sentence_transformer_model: Name of the SentenceTransformer model
         """
         self.schema = schema
         self.match_threshold = max(0.0, min(1.0, match_threshold))
+        self.sentence_transformer_model = sentence_transformer_model
+        self._sentence_transformer = None  # Lazy initialization
 
         # Set string comparison function based on metric
         if string_metric in ["perfect_match", "exact_match"]:
@@ -180,6 +184,25 @@ class JSONEvaluator:
                 "'perfect_match', 'exact_match', 'semantic_similarity', "
                 "'longest_common_subsequence'"
             )
+
+    @property
+    def sentence_transformer(self) -> SentenceTransformer:
+        """Lazy-load the SentenceTransformer model."""
+        if self._sentence_transformer is None:
+            logger.info(
+                f"🤖 Loading SentenceTransformer model "
+                f"'{self.sentence_transformer_model}' on device '{DEVICE}'"
+            )
+            self._sentence_transformer = SentenceTransformer(
+                self.sentence_transformer_model, 
+                device=DEVICE
+            )
+            # Log actual device being used
+            actual_device = self._sentence_transformer.device
+            logger.info(
+                f"✅ SentenceTransformer loaded on device: {actual_device}"
+            )
+        return self._sentence_transformer
 
     def _get_schema_for_path(self, path: List[str]) -> Dict[str, Any]:
         """Get the schema definition for a specific path in the structure.
@@ -212,7 +235,9 @@ class JSONEvaluator:
             Score between 0 and 1 indicating semantic similarity
         """
         # Encode the sentences
-        embeddings = MODEL.encode([pred, exp], convert_to_tensor=True)
+        embeddings = self.sentence_transformer.encode(
+            [pred, exp], convert_to_tensor=True
+        )
 
         # Calculate cosine similarity
         similarity = torch.nn.functional.cosine_similarity(
