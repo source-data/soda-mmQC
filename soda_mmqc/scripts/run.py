@@ -11,6 +11,8 @@ from soda_mmqc.config import (
     CHECKLIST_DIR,
     CACHE_DIR,
     EVALUATION_DIR,
+    STRING_METRICS,
+    DEFAULT_MATCH_THRESHOLD,
 )
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
@@ -191,47 +193,64 @@ def analyze_results(
     results: List[ModelResult],
     schema: Dict[str, Any],
     expected_outputs: List[Dict[str, Any]],
-    string_metric: str = "semantic_similarity",
-    match_threshold: float = 0.1
-) -> List[Dict[str, Any]]:
-    """Analyze model outputs against expected outputs using the evaluator.
+    match_threshold: float = DEFAULT_MATCH_THRESHOLD
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Analyze model outputs against expected outputs using all string metrics.
     
     Args:
         results: List of ModelResult objects containing model outputs
         schema: Dict[str, Any] for the check
+        expected_outputs: List of expected outputs
+        match_threshold: Threshold for considering a match (0-1)
     Returns:
-        List of dictionaries containing analysis results
+        Dictionary mapping string metric names to analysis results
     """
-    logger.info("Analyzing all results")
+    logger.info("Analyzing all results with all string metrics")
 
-    analyzed_results = []
-    evaluator = JSONEvaluator(schema, string_metric=string_metric, match_threshold=match_threshold)
-    for result, expected_output in tqdm(
-        zip(results, expected_outputs), 
-        desc="Analyzing results", 
-        unit=" example"
-    ):
-        logger.debug(
-            f"\n\n\n========= Analyzing: {result.doc_id}\n\n\n"
+    # Dictionary to store results for each string metric
+    all_metric_results = {}
+    
+    # Run evaluation for each string metric
+    for string_metric in STRING_METRICS:
+        logger.info(f"Running analysis with metric: {string_metric}")
+        
+        analyzed_results = []
+        evaluator = JSONEvaluator(
+            schema, 
+            string_metric=string_metric, 
+            match_threshold=match_threshold
         )
-        # Analyze response (metrics are set inside the evaluator)
-        analysis = evaluator.evaluate(
-            result.model_output,
-            expected_output,
-        )
-        analyzed_results.append({
-            "doc_id": result.doc_id,
-            "expected_output": expected_output,
-            "model_output": result.model_output,
-            "metadata": result.metadata,
-            "analysis": analysis
-        })
+        
+        for result, expected_output in tqdm(
+            zip(results, expected_outputs), 
+            desc=f"Analyzing with {string_metric}", 
+            unit=" example"
+        ):
+            logger.debug(
+                f"\n\n\n========= Analyzing: {result.doc_id} "
+                f"with {string_metric}\n\n\n"
+            )
+            # Analyze response (metrics are set inside the evaluator)
+            analysis = evaluator.evaluate(
+                result.model_output,
+                expected_output,
+            )
+            analyzed_results.append({
+                "doc_id": result.doc_id,
+                "expected_output": expected_output,
+                "model_output": result.model_output,
+                "metadata": result.metadata,
+                "analysis": analysis
+            })
+        
+        # Store results for this metric
+        all_metric_results[string_metric] = analyzed_results
 
-    return analyzed_results
+    return all_metric_results
 
 
 def save_analysis(
-    analyzed_results: Dict[str, List[Dict[str, Any]]],
+    analyzed_results: Dict[str, Dict[str, List[Dict[str, Any]]]],
     checklist_name: str,
     check_name: str,
     model: str
@@ -239,10 +258,11 @@ def save_analysis(
     """Save the analysis results to a file.
     
     Args:
-        analyzed_results: Dictionary mapping prompt names to their analysis 
-            results
+        analyzed_results: Dictionary mapping prompt names to their results,
+            where each result contains string metric results
         checklist_name: Name of the checklist
         check_name: Name of the check
+        model: Model name
     """
     
     # Save analysis results
@@ -250,7 +270,7 @@ def save_analysis(
         analysis_path = EVALUATION_DIR / checklist_name / check_name / model
         os.makedirs(analysis_path, exist_ok=True)
         
-        # Also save a summary file with all prompts
+        # Save a comprehensive file with all prompts and all string metrics
         analysis_file = analysis_path / "analysis.json"
         with open(analysis_file, "w", encoding="utf-8") as f:
             json.dump(analyzed_results, f, indent=4, ensure_ascii=False)
@@ -425,8 +445,9 @@ def process_check(
     checklist_name: str,
     mock: bool = False,
     use_cache: bool = True,
-    model: str = "gpt-4o-2024-08-06"
-) -> Dict[str, List[Dict[str, Any]]]:
+    model: str = "gpt-4o-2024-08-06",
+    match_threshold: float = DEFAULT_MATCH_THRESHOLD
+) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
     """Process a single check.
     
     Args:
@@ -435,8 +456,9 @@ def process_check(
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
         model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
+        match_threshold: Threshold for considering a match (0-1)
     Returns:
-        Dictionary containing analyzed results
+        Dictionary containing analyzed results for all string metrics
     """
     
     # Prepare check data
@@ -473,13 +495,12 @@ def process_check(
                 model=model
             )
 
-        # Analyze results
+        # Analyze results with all string metrics
         analyzed_results = analyze_results(
             results,
             check_data.schema,
             check_data.expected_outputs,
-            string_metric="semantic_similarity",
-            match_threshold=0.3
+            match_threshold=match_threshold
         )
 
         # Store results for this prompt
@@ -574,7 +595,8 @@ def process_checklist(
     checklist_name: str,
     mock: bool = False,
     use_cache: bool = True,
-    model: str = "gpt-4o-2024-08-06"
+    model: str = "gpt-4o-2024-08-06",
+    match_threshold: float = DEFAULT_MATCH_THRESHOLD
 ):
     """Process an entire checklist.
     
@@ -584,6 +606,7 @@ def process_checklist(
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
         model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
+        match_threshold: Threshold for considering a match (0-1)
     """
 
     # Get all checks frmo the checklist
@@ -602,7 +625,8 @@ def process_checklist(
                 checklist_name,
                 mock=mock,
                 use_cache=use_cache,
-                model=model
+                model=model,
+                match_threshold=match_threshold
             )
         except Exception as e:
             logger.error(
@@ -638,6 +662,10 @@ def main():
         "--model", type=str, default="gpt-4o-2024-08-06", 
         help="The model to use for generation"
     )
+    parser.add_argument(
+        "--match-threshold", type=float, default=DEFAULT_MATCH_THRESHOLD,
+        help="Threshold for considering a match (0-1)"
+    )
     args = parser.parse_args()
 
     # Get the checklist directory using the config function
@@ -658,7 +686,8 @@ def main():
         if check_dir.exists():
             process_check(
                 check_dir, args.checklist, args.mock, not args.no_cache, 
-                model=args.model
+                model=args.model,
+                match_threshold=args.match_threshold
             )
         else:
             logger.error(f"Check not found: {args.check}")
@@ -666,7 +695,8 @@ def main():
         # Process the entire checklist
         process_checklist(
             checklist_dir, args.checklist, args.mock, not args.no_cache, 
-            model=args.model
+            model=args.model,
+            match_threshold=args.match_threshold
         )
 
 

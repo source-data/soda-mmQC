@@ -8,7 +8,6 @@ from soda_mmqc.config import (
     CHECKLIST_DIR,
     EVALUATION_DIR,
 )
-from soda_mmqc.core.examples import EXAMPLE_TYPES
 from soda_mmqc import logger
 from typing import Dict, Any
 
@@ -93,7 +92,8 @@ def data_to_tabular(analysis, doc_id, item_id, aggregation_level, metric, prompt
             data_points.append(field_data_point)
     # the scores for each element, recursively
     try:
-        for subitem_id, subitem_analysis in analysis['element_scores'].items():
+        element_scores = analysis.get('element_scores', {})
+        for subitem_id, subitem_analysis in element_scores.items():
             subitem_data_points = data_to_tabular(
                 analysis=subitem_analysis,
                 doc_id=doc_id,
@@ -105,18 +105,18 @@ def data_to_tabular(analysis, doc_id, item_id, aggregation_level, metric, prompt
             if subitem_data_points is not None:
                 data_points.extend(subitem_data_points)
     except Exception as e:
-        logger.error(f"Error processing subitem scores for document to tabular data {item_id}/{subitem_id}: {e}")
+        logger.error(f"Error processing subitem scores for document to tabular data {item_id}: {e}")
     return data_points
 
 
 def prepare_data_for_plotting(
-    results_by_prompt: Dict[str, Any],
-    metric: str = "semantic_similarity"
+    results_by_prompt: Dict[str, Any]
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Convert the results into a pandas DataFrame for plotting.
     
     Args:
-        results_by_prompt: Dictionary mapping prompt names to their analysis results
+        results_by_prompt: Dictionary mapping prompt names to their analysis results.
+            Format: {prompt_name: {metric_name: [results]}}
         
     Returns:
         DataFrame with columns: feature, metric, prompt, mean, std, precision, recall, f1_score
@@ -126,21 +126,30 @@ def prepare_data_for_plotting(
     tabular_data = []
     tabular_metadata = []
 
-    for prompt_name, results in results_by_prompt.items():
+    for prompt_name, prompt_results in results_by_prompt.items():
         logger.debug(f"Processing prompt: {prompt_name}")
-        for document in results:
-            analysis = document['analysis']
-            metadata = document['metadata']
-            new_rows = data_to_tabular(
-                analysis,
-                doc_id=document['doc_id'],
-                item_id=document['doc_id'],
-                aggregation_level=0,
-                metric=metric,
-                prompt_name=prompt_name
-            )
-            tabular_data.extend(new_rows)
-            tabular_metadata.append(metadata)
+        
+        # Expect nested structure: {metric_name: [results]}
+        if not isinstance(prompt_results, dict):
+            logger.error(f"Expected dict for prompt '{prompt_name}', got {type(prompt_results)}")
+            continue
+            
+        # Process each metric
+        for metric_name, results in prompt_results.items():
+            for document in results:
+                analysis = document['analysis']
+                metadata = document['metadata']
+                new_rows = data_to_tabular(
+                    analysis,
+                    doc_id=document['doc_id'],
+                    item_id=document['doc_id'],
+                    aggregation_level=0,
+                    metric=metric_name,
+                    prompt_name=prompt_name
+                )
+                tabular_data.extend(new_rows)
+                tabular_metadata.append(metadata)
+            
     # Convert to DataFrame
     try:
         df_data = pd.DataFrame(tabular_data)
@@ -251,7 +260,7 @@ def checklist_visualization(
     
     # Check that chosen metrics is available
     if metric not in df_data['metric'].unique():
-        logger.warning(f"Metric {metric} not found in data")
+        logger.warning(f"Metric {metric} not found in data. Available metrics: {df_data['metric'].unique()}")
         return
 
     prompts = list(df_data['prompt'].unique())

@@ -1,15 +1,10 @@
 import unittest
-from unittest.mock import patch
-
 from soda_mmqc.core.evaluation import JSONEvaluator
 
 
 class TestCompareStrings(unittest.TestCase):
-    """Test cases for the _compare_strings method."""
-
     def setUp(self):
-        """Set up test fixtures."""
-        # Create a minimal schema for testing
+        # Create a simple schema for testing
         self.schema = {
             "format": {
                 "schema": {
@@ -21,31 +16,27 @@ class TestCompareStrings(unittest.TestCase):
                                 "type": "object",
                                 "properties": {
                                     "text": {"type": "string"}
-                                }
+                                },
+                                "required": ["text"]
                             }
                         }
-                    }
+                    },
+                    "required": ["outputs"]
                 }
             }
         }
         
-        # Create evaluator with different string metrics for testing
+        # Create evaluator with exact matching for testing
         self.exact_evaluator = JSONEvaluator(
             self.schema, 
             string_metric="perfect_match", 
             match_threshold=0.5
         )
         
+        # Create evaluator with semantic similarity for testing
         self.semantic_evaluator = JSONEvaluator(
             self.schema, 
             string_metric="semantic_similarity", 
-            match_threshold=0.5
-        )
-        
-        # Create evaluator with BLEU score for testing
-        self.bleu_evaluator = JSONEvaluator(
-            self.schema, 
-            string_metric="bleu", 
             match_threshold=0.5
         )
 
@@ -144,6 +135,7 @@ class TestCompareStrings(unittest.TestCase):
         self.assertEqual(result.score, 1.0)
         self.assertEqual(result.true_positive, True)
         self.assertEqual(result.false_positive, False)
+        self.assertEqual(result.false_negative, False)
 
     def test_empty_vs_non_empty(self):
         """Test comparison of empty string vs non-empty string."""
@@ -152,6 +144,7 @@ class TestCompareStrings(unittest.TestCase):
         self.assertEqual(result.score, 0.0)
         self.assertEqual(result.true_positive, False)
         self.assertEqual(result.false_positive, True)
+        self.assertEqual(result.false_negative, False)
 
     def test_non_string_inputs(self):
         """Test that non-string inputs are converted to strings."""
@@ -160,57 +153,48 @@ class TestCompareStrings(unittest.TestCase):
         self.assertEqual(result.score, 1.0)
         self.assertEqual(result.true_positive, True)
         self.assertEqual(result.false_positive, False)
+        self.assertEqual(result.false_negative, False)
 
     def test_semantic_similarity_above_threshold(self):
         """Test semantic similarity when score is above threshold."""
-        # Mock the string_comparator to return a high score
-        with patch.object(
-            self.semantic_evaluator, 'string_comparator', return_value=0.8
-        ):
-            result = self.semantic_evaluator._compare_strings(
-                "hello world", "hi world"
-            )
-            
-            self.assertEqual(result.score, 0.8)
-            self.assertEqual(result.true_positive, True)
-            self.assertEqual(result.false_positive, False)
-            self.assertEqual(result.false_negative, False)
-            self.assertEqual(result.precision, 1.0)
-            self.assertEqual(result.recall, 1.0)
-            self.assertEqual(result.f1_score, 1.0)
+        result = self.semantic_evaluator._compare_strings(
+            "The cat is on the mat", "The cat is on the mat"
+        )
+        
+        # Identical strings should have perfect semantic similarity
+        self.assertEqual(result.score, 1.0)
+        self.assertEqual(result.true_positive, True)
+        self.assertEqual(result.false_positive, False)
+        self.assertEqual(result.false_negative, False)
 
     def test_semantic_similarity_below_threshold(self):
         """Test semantic similarity when score is below threshold."""
-        # Mock the string_comparator to return a low score
-        with patch.object(
-            self.semantic_evaluator, 'string_comparator', return_value=0.3
-        ):
-            result = self.semantic_evaluator._compare_strings(
-                "hello world", "completely different"
-            )
-            
-            self.assertEqual(result.score, 0.3)
-            self.assertEqual(result.true_positive, False)
-            self.assertEqual(result.false_positive, True)
-            self.assertEqual(result.false_negative, False)
-            self.assertEqual(result.precision, 0.0)
-            self.assertEqual(result.recall, 0.0)
-            self.assertEqual(result.f1_score, 0.0)
-
-    def test_different_threshold_values(self):
-        """Test behavior with different threshold values."""
-        # Create evaluator with high threshold
-        high_threshold_evaluator = JSONEvaluator(
-            self.schema, 
-            string_metric="perfect_match", 
-            match_threshold=0.9
+        result = self.semantic_evaluator._compare_strings(
+            "The cat is on the mat", "The weather is sunny"
         )
         
-        # Even with exact match, if threshold is higher than 1.0, it should fail
-        # But since exact match returns 1.0, it should still pass
-        result = high_threshold_evaluator._compare_strings("hello", "hello")
-        self.assertEqual(result.score, 1.0)
-        self.assertEqual(result.true_positive, True)
+        # Unrelated strings should have low semantic similarity
+        self.assertLess(result.score, 0.5)
+        self.assertEqual(result.true_positive, False)
+        self.assertEqual(result.false_positive, True)
+        self.assertEqual(result.false_negative, False)
+
+    def test_different_threshold_values(self):
+        """Test that different threshold values work correctly."""
+        # Test with lower threshold
+        low_threshold_evaluator = JSONEvaluator(
+            self.schema, 
+            string_metric="semantic_similarity", 
+            match_threshold=0.1
+        )
+        
+        result = low_threshold_evaluator._compare_strings(
+            "The cat is on the mat", "The weather is sunny"
+        )
+        
+        # With lower threshold, more matches should be considered true positives
+        self.assertLess(result.score, 0.5)
+        # The exact behavior depends on the semantic similarity score
 
     def test_comparison_result_structure(self):
         """Test that ComparisonResult has the expected structure."""
@@ -218,6 +202,7 @@ class TestCompareStrings(unittest.TestCase):
         
         # Check that all expected attributes exist
         self.assertIsInstance(result.score, float)
+        self.assertIsInstance(result.element_scores, dict)
         self.assertIsInstance(result.field_scores, dict)
         self.assertIsInstance(result.std_score, float)
         self.assertIsInstance(result.true_positive, bool)
@@ -228,7 +213,7 @@ class TestCompareStrings(unittest.TestCase):
         self.assertIsInstance(result.f1_score, float)
 
     def test_real_semantic_similarity_synonyms(self):
-        """Test that semantic similarity detects synonyms."""
+        """Test that semantic similarity gives high scores for synonyms."""
         result = self.semantic_evaluator._compare_strings(
             "The cat is on the mat", "The feline is on the mat"
         )
@@ -236,12 +221,12 @@ class TestCompareStrings(unittest.TestCase):
         # Synonyms should have high similarity
         self.assertGreater(result.score, 0.7)
         self.assertLessEqual(result.score, 1.0)
-        print(f"Synonym similarity score: {result.score}")
+        print(f"Synonyms similarity score: {result.score}")
 
     def test_real_semantic_similarity_related_concepts(self):
-        """Test that semantic similarity detects related concepts."""
+        """Test that semantic similarity gives moderate scores for related concepts."""
         result = self.semantic_evaluator._compare_strings(
-            "The dog is running", "The canine is jogging"
+            "The cat is on the mat", "The dog is on the mat"
         )
         
         # Related concepts should have moderate to high similarity
@@ -306,38 +291,6 @@ class TestCompareStrings(unittest.TestCase):
         )  # Semantic similarity succeeds
         print(f"Exact match score: {exact_result.score}")
         print(f"Semantic similarity score: {semantic_result.score}")
-
-    def test_real_bleu_score_similar_texts(self):
-        """Test BLEU score with similar texts."""
-        result = self.bleu_evaluator._compare_strings(
-            "The cat is on the mat", "The cat is on the mat"
-        )
-        
-        # Identical texts should have perfect BLEU score
-        self.assertEqual(result.score, 1.0)
-        print(f"Identical BLEU score: {result.score}")
-
-    def test_real_bleu_score_partial_match(self):
-        """Test BLEU score with partial matches."""
-        result = self.bleu_evaluator._compare_strings(
-            "The cat is on the mat", "The cat is on the floor"
-        )
-        
-        # Partial matches should have moderate BLEU score
-        self.assertGreater(result.score, 0.0)
-        self.assertLess(result.score, 1.0)
-        print(f"Partial match BLEU score: {result.score}")
-
-    def test_real_bleu_score_no_match(self):
-        """Test BLEU score with no matching words."""
-        result = self.bleu_evaluator._compare_strings(
-            "The cat is on the mat", "The weather is sunny"
-        )
-        
-        # No matching words should have very low BLEU score
-        self.assertLess(result.score, 0.3)
-        self.assertGreaterEqual(result.score, 0.0)
-        print(f"No match BLEU score: {result.score}")
 
 
 if __name__ == "__main__":

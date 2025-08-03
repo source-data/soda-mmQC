@@ -36,6 +36,7 @@
 - Don't forget to update requirements.txt when adding dependencies
 - Don't create circular imports
 - Don't forget to validate JSON schemas before using them
+- Don't create verbose summaries using `echo` or Python `print` statements when the work already speaks for itself through code changes and test results
 
 ## Testing Guidelines
 - Write unit tests for all new functions

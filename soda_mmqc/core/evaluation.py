@@ -1,12 +1,9 @@
 """Tools for evaluating model predictions against expected outputs."""
 
-from typing import Dict, Any, List, Callable, Optional, Union
+from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 import torch
 from sentence_transformers import SentenceTransformer
-from nltk.translate.bleu_score import sentence_bleu
-from nltk.tokenize import word_tokenize
-import nltk
 from soda_mmqc.config import DEVICE
 import logging
 from soda_mmqc import logger
@@ -17,11 +14,57 @@ import numpy as np
 # Suppress progress bars from SentenceTransformer
 logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
 
-# Download required NLTK data
-nltk.download('punkt')
-
 # Initialize SentenceTransformer model
 MODEL = SentenceTransformer('all-MiniLM-L6-v2', device=DEVICE)
+
+
+def lcs_length(s1: str, s2: str) -> int:
+    """Calculate the length of the Longest Common Subsequence between two strings.
+    
+    Args:
+        s1: First string
+        s2: Second string
+        
+    Returns:
+        Length of the longest common subsequence
+    """
+    m, n = len(s1), len(s2)
+    
+    # Create a 2D array to store lengths of common subsequence
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    
+    # Build the LCS table in bottom-up manner
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    
+    return dp[m][n]
+
+
+def lcs_ratio(s1: str, s2: str) -> float:
+    """Calculate LCS ratio between two strings.
+    
+    The LCS ratio is: (2 * LCS_length) / (len(s1) + len(s2))
+    This gives a value between 0 and 1, where 1 means the strings are identical.
+    
+    Args:
+        s1: First string
+        s2: Second string
+        
+    Returns:
+        LCS ratio between 0 and 1
+    """
+    if not s1 and not s2:
+        return 1.0
+    
+    if not s1 or not s2:
+        return 0.0
+    
+    lcs_len = lcs_length(s1, s2)
+    return (2.0 * lcs_len) / (len(s1) + len(s2))
 
 
 @dataclass
@@ -31,7 +74,8 @@ class ComparisonResult:
     Attributes:
         score: Float between 0 and 1 indicating the match quality
         element_scores: Dictionary of scores for each element in the comparison
-        field_scores: Dictionary of scores for each field in the comparison aggregated over the elements
+        field_scores: Dictionary of scores for each field in the comparison 
+            aggregated over the elements
         std_score: Standard deviation of scores (for lists and objects)
         true_positive: Number of matches with score >= threshold (for lists)
         false_positive: Number of extra elements in prediction (for lists)
@@ -39,7 +83,8 @@ class ComparisonResult:
         precision: Precision score (for lists)
         recall: Recall score (for lists)
         f1_score: F1 score (for lists)
-        element_scores: Dictionary with average and std scores per field (for lists)
+        element_scores: Dictionary with average and std scores per field 
+            (for lists)
     """
     score: float = 0.0
     element_scores: Dict[str, Any] = field(default_factory=dict)
@@ -115,8 +160,8 @@ class JSONEvaluator:
             schema: JSON schema
             string_metric: String comparison metric to use. One of:
                 - "perfect_match": Exact string matching
-                - "bleu": BLEU score
                 - "semantic_similarity": Using SentenceTransformer
+                - "longest_common_subsequence": LCS-based similarity
             match_threshold: Threshold for considering a match (0-1)
         """
         self.schema = schema
@@ -125,14 +170,15 @@ class JSONEvaluator:
         # Set string comparison function based on metric
         if string_metric in ["perfect_match", "exact_match"]:
             self.string_comparator = self._exact_string_match
-        elif string_metric.lower() == "bleu":
-            self.string_comparator = self._bleu_score
         elif string_metric == "semantic_similarity":
             self.string_comparator = self._semantic_similarity
+        elif string_metric in ["longest_common_subsequence", "fuzzy_match"]:
+            self.string_comparator = self._fuzzy_string_match
         else:
             raise ValueError(
                 f"Invalid string_metric: {string_metric}. Must be one of: "
-                "'perfect_match', 'exact_match', 'bleu', 'semantic_similarity'"
+                "'perfect_match', 'exact_match', 'semantic_similarity', "
+                "'longest_common_subsequence'"
             )
 
     def _get_schema_for_path(self, path: List[str]) -> Dict[str, Any]:
@@ -177,7 +223,8 @@ class JSONEvaluator:
         # Convert to float and map from [-1, 1] to [0, 1]
         score = float(similarity.item())
         logger.debug(f"raw cos_sim({pred}, {exp}): {score}")
-        # neagtive scores are antonymic, so anything below 0 is essentially zero from a practical standpoint
+        # negative scores are antonymic, so anything below 0 is essentially 
+        # zero from a practical standpoint
         # cap it to 1.0 just to be safe
         return min(max(score, 0), 1.0)
 
@@ -192,27 +239,28 @@ class JSONEvaluator:
         logger.debug(f"exact_match({pred}, {exp}): {score}")
         return score
 
-    def _bleu_score(self, pred: str, exp: str) -> float:
-        """Calculate BLEU score between two strings.
+    def _fuzzy_string_match(self, pred: str, exp: str) -> float:
+        """Calculate fuzzy string match using LCS (Longest Common Subsequence) ratio.
+        
+        This method is good for both short words/keywords and longer text segments.
+        It finds the longest common subsequence and normalizes by average length.
         
         Args:
             pred: Prediction string
             exp: Expected string
             
         Returns:
-            Score between 0 and 1 indicating BLEU score
+            Score between 0 and 1 indicating LCS-based similarity
         """
-        # Tokenize the sentences
-        pred_tokens = word_tokenize(pred)
-        exp_tokens = word_tokenize(exp)
-
-        # Calculate BLEU score with smoothing
-        try:
-            score = float(sentence_bleu([exp_tokens], pred_tokens))
-        except (ZeroDivisionError, TypeError):
-            # Handle case where there are no matching n-grams
-            score = 0.0
-
+        # Normalize strings: lowercase and strip whitespace
+        pred_norm = pred.lower().strip()
+        exp_norm = exp.lower().strip()
+        
+        # Calculate LCS ratio
+        score = lcs_ratio(pred_norm, exp_norm)
+        
+        logger.debug(f"fuzzy_match LCS({pred}, {exp}): {score:.3f}")
+        
         return score
 
     def evaluate(
@@ -324,7 +372,12 @@ class JSONEvaluator:
                     false_positive=True if pred_value is not None else False,
                     false_negative=True if exp_value is not None else False
                 )
-            return ComparisonResult(score, [], {}, true_positive=True)
+            return ComparisonResult(
+                score=score, 
+                element_scores={}, 
+                field_scores={}, 
+                true_positive=True
+            )
 
     def _compare_objects(
         self, 
@@ -454,8 +507,8 @@ class JSONEvaluator:
         if not field_scores:
             return ComparisonResult(0.0, {}, {})
 
-
-        # Object-level booleans: true_positive only if ALL expected fields matched above threshold
+        # Object-level booleans: true_positive only if ALL expected fields 
+        # matched above threshold
         total_expected_fields = len(all_expected_fields)
         
         if total_expected_fields == 0:
@@ -465,7 +518,7 @@ class JSONEvaluator:
             false_negative = False  # No expected fields to miss
         else:
             # True positive: all expected fields matched above threshold AND no extra fields
-            true_positive = (field_true_positives == total_expected_fields and 
+            true_positive = (field_true_positives == total_expected_fields and
                            field_false_positives == 0)
             
             # False positive: any extra fields or mismatches
@@ -481,9 +534,12 @@ class JSONEvaluator:
             recall = 1.0  # No expected fields to recall
             f1_score = 1.0 if len(all_predicted_fields) == 0 else 0.0
         else:
-            precision = field_true_positives / (field_true_positives + field_false_positives) if (field_true_positives + field_false_positives) > 0 else 0
-            recall = field_true_positives / (field_true_positives + field_false_negatives) if (field_true_positives + field_false_negatives) > 0 else 0
-            f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+            precision = (field_true_positives / (field_true_positives + field_false_positives) 
+                        if (field_true_positives + field_false_positives) > 0 else 0)
+            recall = (field_true_positives / (field_true_positives + field_false_negatives) 
+                     if (field_true_positives + field_false_negatives) > 0 else 0)
+            f1_score = (2 * (precision * recall) / (precision + recall) 
+                       if (precision + recall) > 0 else 0)
 
         # Calculate average score and standard deviation
         # Include all expected fields in the score calculation (missing fields count as 0)
@@ -502,7 +558,8 @@ class JSONEvaluator:
                     complete_scores.append(0.0)  # Missing field = 0 score
             
             avg_score = sum(complete_scores) / len(complete_scores)
-            std_score = statistics.stdev(complete_scores) if len(complete_scores) > 1 else 0
+            std_score = (statistics.stdev(complete_scores) 
+                        if len(complete_scores) > 1 else 0)
 
         return ComparisonResult(
             score=avg_score,
@@ -541,7 +598,7 @@ class JSONEvaluator:
             - recall: Recall score
             - f1_score: F1 score
             - field_scores: Dictionary of ComparisonResults for each element
-            - element_scores: Dictionary with average and std scores per fieldtest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_liststest_both_empty_lists
+            - element_scores: Dictionary with average and std scores per field
         """
         logger.debug(f"Comparing lists:\n\texpected: {exp}\n\tprediction: {pred}")
         # Get item schema for field-level tracking
@@ -554,7 +611,8 @@ class JSONEvaluator:
                     score=1.0,
                     element_scores={},
                     field_scores={},
-                    true_positive=True, false_positive=False, false_negative=False,
+                    true_positive=True, false_positive=False, 
+                    false_negative=False,
                     precision=1.0, recall=1.0, f1_score=1.0,
                 )
                 
@@ -580,7 +638,8 @@ class JSONEvaluator:
                         "two_empty_lists": two_empty_lists_result
                     },
                     field_scores=field_scores,
-                    true_positive=True, false_positive=False, false_negative=False,
+                    true_positive=True, false_positive=False, 
+                    false_negative=False,
                     precision=1.0, recall=1.0, f1_score=1.0,
                 )
             else:
@@ -590,7 +649,8 @@ class JSONEvaluator:
                         score=0.0,
                         element_scores={},
                         field_scores={},
-                        true_positive=False, false_positive=True, false_negative=False,
+                        true_positive=False, false_positive=True, 
+                        false_negative=False,
                         precision=0.0, recall=0.0, f1_score=0.0,
                     )
                     for i in range(len(pred))
@@ -616,7 +676,8 @@ class JSONEvaluator:
                     score=0.0,
                     element_scores=element_results,
                     field_scores=field_scores,
-                    true_positive=False, false_positive=True, false_negative=False,
+                    true_positive=False, false_positive=True, 
+                    false_negative=False,
                     precision=0.0, recall=0.0, f1_score=0.0,
                 )
         elif not pred:
@@ -626,7 +687,8 @@ class JSONEvaluator:
                     score=0.0,
                     element_scores={},
                     field_scores={},
-                    true_positive=False, false_positive=False, false_negative=True
+                    true_positive=False, false_positive=False, 
+                    false_negative=True
                 )
                 for i in range(len(exp))
             }
@@ -652,7 +714,8 @@ class JSONEvaluator:
                 score=0.0,
                 element_scores=element_results,
                 field_scores=field_scores,
-                true_positive=False, false_positive=False, false_negative=True,
+                true_positive=False, false_positive=False, 
+                false_negative=True,
                 precision=0.0, recall=0.0, f1_score=0.0,
             )
         else:
@@ -678,13 +741,13 @@ class JSONEvaluator:
             # Create similarity matrix between all predicted and expected elements
             n_pred = len(pred)
             n_exp = len(exp)
-            # first we have to match the lements of the exppected and predicted lists
-            # to chat nasty bugs, we first assert that the lists are not empty
+            # first we have to match the elements of the expected and predicted lists
+            # to catch nasty bugs, we first assert that the lists are not empty
             assert n_pred > 0 and n_exp > 0, "Lists must not be empty at this point!"
             # Calculate similarity matrix
             similarity_matrix = np.zeros((n_pred, n_exp))
             # create a matrix to store the ComparisonResults objects
-            # we do not want to run thsese expensive comparisons twice
+            # we do not want to run these expensive comparisons twice
             comparison_results_matrix = np.zeros((n_pred, n_exp), dtype=object)
             for i, pred_item in enumerate(pred):
                 for j, exp_item in enumerate(exp):
@@ -708,7 +771,7 @@ class JSONEvaluator:
             true_positive_exp_indices = set()
 
             # Process assigned pairs to keep only the true positives that are above the threshold
-            # mistmatches are ignored, they will automatically appear as false positives and false negatives
+            # mismatches are ignored, they will automatically appear as false positives and false negatives
             
             assert len(assigned_pred_indices) == len(assigned_exp_indices), "Assigned indices count mismatch"
             for pred_idx, exp_idx in zip(assigned_pred_indices, assigned_exp_indices):
@@ -728,9 +791,9 @@ class JSONEvaluator:
                             field_data[field_key]['true_positives'] += 1
             num_mismatches = len(assigned_pred_indices) - len(true_positive_pred_indices)
             # Handle unmatched predicted elements (extra elements)
-            # These are elements that weren't assigned either becaucse
+            # These are elements that weren't assigned either because
             # hungarian algo did not assign them or
-            # becuabecause they are sub-threshold
+            # because they are sub-threshold
             false_positive_pred_indices = set(range(n_pred)) - set(true_positive_pred_indices)
             for pred_idx in false_positive_pred_indices:
                 element_results[f"unexpected_element_{pred_idx}"] = ComparisonResult(
@@ -765,12 +828,12 @@ class JSONEvaluator:
                 if item_schema.get("type") == "object":
                     # Missing objects contribute false negatives for all required fields
                     for field_key in field_data.keys():
-                        #field_data[field_key]['cum_score'] += 0.0  # False negative = 0 score
+                        # field_data[field_key]['cum_score'] += 0.0  # False negative = 0 score
                         field_data[field_key]['false_negatives'] += 1
             
-            # NOTE: an indice can correspond to both a missing element and an unexpected element
+            # NOTE: an index can correspond to both a missing element and an unexpected element
             # there was a prediction, but it could not be matched to an expected element
-            # There will be two comparison results for these; not sure is it so good
+            # There will be two comparison results for these; not sure if it's so good
             
             # Aggregate metrics from all element comparisons
             # Sum up TP/FP/FN
@@ -792,7 +855,7 @@ class JSONEvaluator:
             
             # False negative: any missing elements or mismatches  
             false_negative = false_negative_count > 0
-            # if we sum true positive, false positive and false negative, the mimatched elements are counted twice!
+            # if we sum true positive, false positive and false negative, the mismatched elements are counted twice!
             n_all = max(n_pred, n_exp)
             
             assert n_all == true_positive_count + false_positive_count + false_negative_count - num_mismatches, "Mistake with calculating the number of elements"
@@ -803,12 +866,15 @@ class JSONEvaluator:
             ]
             assert len(all_scores) >= n_all, "Mistake with calculating the number of elements"
 
-            # Calculate list-level average, stad, precision, recall, F1
+            # Calculate list-level average, std, precision, recall, F1
             avg_score = sum(all_scores) / n_all if all_scores else 0
             std_score = statistics.stdev(all_scores) if len(all_scores) > 1 else 0
-            precision = true_positive_count / (true_positive_count + false_positive_count) if (true_positive_count + false_positive_count) > 0 else 0
-            recall = true_positive_count / (true_positive_count + false_negative_count) if (true_positive_count + false_negative_count) > 0 else 0
-            f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+            precision = (true_positive_count / (true_positive_count + false_positive_count) 
+                        if (true_positive_count + false_positive_count) > 0 else 0)
+            recall = (true_positive_count / (true_positive_count + false_negative_count) 
+                     if (true_positive_count + false_negative_count) > 0 else 0)
+            f1_score = (2 * (precision * recall) / (precision + recall) 
+                       if (precision + recall) > 0 else 0)
 
             # Aggregate field-level statistics if list items are objects
             if item_schema.get("type") == "object":
@@ -816,9 +882,11 @@ class JSONEvaluator:
                     # Calculate aggregated metrics - be consistent with list-level aggregation
                     field_avg_score = data['cum_score'] / n_all if n_all > 0 else 0
                     
-                    field_precision = data['true_positives'] / (data['true_positives'] + data['false_positives']) if (data['true_positives'] + data['false_positives']) > 0 else 0
+                    field_precision = (data['true_positives'] / (data['true_positives'] + data['false_positives']) 
+                                     if (data['true_positives'] + data['false_positives']) > 0 else 0)
                     field_recall = data['true_positives'] / n_all if n_all > 0 else 0
-                    field_f1 = 2 * (field_precision * field_recall) / (field_precision + field_recall) if (field_precision + field_recall) > 0 else 0
+                    field_f1 = (2 * (field_precision * field_recall) / (field_precision + field_recall) 
+                               if (field_precision + field_recall) > 0 else 0)
                     
                     field_scores[field_key] = ComparisonResult(
                         score=field_avg_score,

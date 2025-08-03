@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from typing import Dict, Any, Optional
 
 from dotenv import load_dotenv
 
@@ -20,3 +19,13 @@ CHECKLIST_DIR = DATA_DIR / "checklist"
 EXAMPLES_DIR = DATA_DIR / "examples"
 EVALUATION_DIR = DATA_DIR / "evaluation"
 PLOTS_DIR = DATA_DIR / "plots"
+
+# String comparison metrics configuration
+STRING_METRICS = [
+    "perfect_match",
+    "semantic_similarity", 
+    "longest_common_subsequence"
+]
+
+# Default match threshold for string comparisons
+DEFAULT_MATCH_THRESHOLD = 0.3

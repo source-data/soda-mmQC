@@ -74,10 +74,10 @@ After installation, you can use the following commands:
 
 ```bash
 # Run all checks in a checklist
-evaluate CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache]
+evaluate CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache] [--match-threshold THRESHOLD]
 
 # Run a specific check in a checklist
-evaluate CHECKLIST_NAME --check CHECK_NAME [--model MODEL_NAME] [--mock] [--no-cache]
+evaluate CHECKLIST_NAME --check CHECK_NAME [--model MODEL_NAME] [--mock] [--no-cache] [--match-threshold THRESHOLD]
 
 # Initialize expected output files for a checklist
 init CHECKLIST_NAME [--no-cache]
@@ -92,7 +92,50 @@ Command line options:
 - `--no-cache`: Disable caching of model outputs
 - `--check`: Specify a particular check to run within a checklist
 - `--initialize`: Initialize expected output files (alternative to `init` command)
+- `--match-threshold`: Set threshold for string matching across all metrics (default: 0.3)
 
+## String Comparison Metrics
+
+When evaluating model outputs against expected results, SODA MMQC automatically uses three different string comparison methods to provide comprehensive scoring:
+
+### 1. Perfect Match
+- **Method**: Exact string matching (case-sensitive)
+- **Use Case**: Identifies when model outputs match expectations exactly
+- **Score**: 1.0 for exact matches, 0.0 otherwise
+- **Example**: "yes" vs "yes" → 1.0, "yes" vs "Yes" → 0.0
+
+### 2. Semantic Similarity
+- **Method**: SentenceTransformer embeddings with cosine similarity
+- **Use Case**: Captures semantic relationships between different phrasings
+- **Score**: 0.0 to 1.0 based on semantic closeness
+- **Example**: "cat" vs "feline" → ~0.8, "cat" vs "dog" → ~0.6
+
+### 3. Longest Common Subsequence (LCS)
+- **Method**: Character-level similarity using longest common subsequence
+- **Use Case**: Handles partial text overlaps and extracted segments
+- **Score**: 0.0 to 1.0 based on shared character sequences
+- **Example**: "statistical significance" vs "significance was tested" → ~0.6
+
+### Evaluation Output Structure
+
+Results are organized by prompt and metric for comprehensive analysis:
+
+```json
+{
+  "prompt.1": {
+    "perfect_match": [{"doc_id": "...", "analysis": {"score": 1.0, ...}}],
+    "semantic_similarity": [{"doc_id": "...", "analysis": {"score": 0.85, ...}}],
+    "longest_common_subsequence": [{"doc_id": "...", "analysis": {"score": 0.72, ...}}]
+  },
+  "prompt.2": { ... }
+}
+```
+
+This multi-metric approach allows researchers to:
+- **Compare methodologies**: See how different similarity measures perform on their specific tasks
+- **Understand failure modes**: Identify whether issues are exact matching vs semantic understanding
+- **Optimize thresholds**: Choose appropriate match thresholds for each metric type
+- **Validate robustness**: Ensure results are consistent across different evaluation approaches
 
 ## Dependencies
 
