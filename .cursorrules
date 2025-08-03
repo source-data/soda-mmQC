@@ -14,6 +14,7 @@
 - When working with JSON schemas, ensure they follow the established format
 - For checklist development, follow the existing directory structure in `data/checklist/`
 - For checklist development, respect the structure of `data/examples` and maintain consistency with existing example organization
+- Remember to install dependencies in the virtual environment and through requirements.txt
 
 ## Code Quality
 - Write tests for new functionality

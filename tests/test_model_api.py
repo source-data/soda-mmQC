@@ -5,7 +5,12 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-from soda_mmqc.lib.api import generate_response_openai, generate_response
+from soda_mmqc.lib.api import (
+    generate_response_openai, 
+    generate_response_anthropic,
+    generate_response,
+    _create_tool_from_schema
+)
 from soda_mmqc.core.examples import FigureExample
 from soda_mmqc.scripts.run import ModelInput
 
@@ -84,7 +89,7 @@ class TestModelApi(unittest.TestCase):
         import shutil
         shutil.rmtree(self.test_dir)
 
-    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('openai.OpenAI')
     @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_success(self, mock_getenv, mock_openai):
         """Test successful response generation with OpenAI API."""
@@ -95,13 +100,25 @@ class TestModelApi(unittest.TestCase):
         mock_client = MagicMock()
         mock_openai.return_value = mock_client
         
-        # Mock the response object
+        # Mock the response object for chat completions
         mock_response = MagicMock()
-        mock_response.output_text = '{"name": "test", "panels": []}'
-        mock_response.metadata = {"test": "metadata"}
+        mock_choice = MagicMock()
+        mock_message = MagicMock()
+        mock_message.content = '{"name": "test", "panels": []}'
+        mock_choice.message = mock_message
+        mock_choice.finish_reason = "stop"
+        mock_response.choices = [mock_choice]
         mock_response.id = "test-response-id"
         mock_response.model = "gpt-4o-2024-08-06"
-        mock_client.responses.create.return_value = mock_response
+        
+        # Mock usage data
+        mock_usage = MagicMock()
+        mock_usage.prompt_tokens = 100
+        mock_usage.completion_tokens = 50
+        mock_usage.total_tokens = 150
+        mock_response.usage = mock_usage
+        
+        mock_client.chat.completions.create.return_value = mock_response
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -120,17 +137,19 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(result, {"name": "test", "panels": []})
         self.assertIn("response_id", metadata)
         self.assertIn("model", metadata)
+        self.assertIn("usage", metadata)
         self.assertEqual(metadata["response_id"], "test-response-id")
         self.assertEqual(metadata["model"], "gpt-4o-2024-08-06")
+        self.assertEqual(metadata["usage"]["total_tokens"], 150)
         
         # Verify the API was called correctly
-        mock_client.responses.create.assert_called_once()
-        call_args = mock_client.responses.create.call_args
+        mock_client.chat.completions.create.assert_called_once()
+        call_args = mock_client.chat.completions.create.call_args
         self.assertEqual(call_args[1]["model"], self.test_model)
-        self.assertEqual(call_args[1]["text"], self.test_schema)
-        self.assertEqual(call_args[1]["metadata"], self.test_metadata)
+        self.assertIn("response_format", call_args[1])
+        self.assertEqual(call_args[1]["response_format"]["type"], "json_schema")
 
-    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('openai.OpenAI')
     @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_json_error(self, mock_getenv, mock_openai):
         """Test handling of JSON parsing errors."""
@@ -143,8 +162,12 @@ class TestModelApi(unittest.TestCase):
         
         # Mock the response object with invalid JSON
         mock_response = MagicMock()
-        mock_response.output_text = '{"invalid": json}'
-        mock_client.responses.create.return_value = mock_response
+        mock_choice = MagicMock()
+        mock_message = MagicMock()
+        mock_message.content = '{"invalid": json}'
+        mock_choice.message = mock_message
+        mock_response.choices = [mock_choice]
+        mock_client.chat.completions.create.return_value = mock_response
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -160,10 +183,10 @@ class TestModelApi(unittest.TestCase):
                 metadata=self.test_metadata
             )
 
-    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('openai.OpenAI')
     @patch('soda_mmqc.lib.api.os.getenv')
-    def test_generate_response_openai_missing_metadata(self, mock_getenv, mock_openai):
-        """Test handling of missing metadata in response."""
+    def test_generate_response_openai_missing_content(self, mock_getenv, mock_openai):
+        """Test handling of missing content in response."""
         # Mock environment variables
         mock_getenv.return_value = "test-api-key"
         
@@ -171,33 +194,30 @@ class TestModelApi(unittest.TestCase):
         mock_client = MagicMock()
         mock_openai.return_value = mock_client
         
-        # Mock the response object with missing metadata attributes
+        # Mock the response object with None content
         mock_response = MagicMock()
-        mock_response.output_text = '{"name": "test", "panels": []}'
-        # Explicitly set metadata to None to simulate missing attributes
-        mock_response.metadata = None
-        mock_response.id = None
-        mock_response.model = None
-        mock_client.responses.create.return_value = mock_response
+        mock_choice = MagicMock()
+        mock_message = MagicMock()
+        mock_message.content = None
+        mock_choice.message = mock_message
+        mock_response.choices = [mock_choice]
+        mock_client.chat.completions.create.return_value = mock_response
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
         example.load_from_source()
         
-        # Call the function
-        result, metadata = generate_response_openai(
-            example=example,
-            prompt=self.test_prompt,
-            schema=self.test_schema,
-            model=self.test_model,
-            metadata=self.test_metadata
-        )
-        
-        # Verify the result
-        self.assertEqual(result, {"name": "test", "panels": []})
-        # Should have empty strings for response_id and model when attributes are None
-        self.assertEqual(metadata, {"response_id": "", "model": ""})
+        # Call the function and expect it to raise an exception
+        with self.assertRaises(ValueError):
+            generate_response_openai(
+                example=example,
+                prompt=self.test_prompt,
+                schema=self.test_schema,
+                model=self.test_model,
+                metadata=self.test_metadata
+            )
 
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'openai')
     @patch('soda_mmqc.lib.api.generate_response_openai')
     def test_generate_response_wrapper(self, mock_generate_openai):
         """Test the generate_response wrapper function."""
@@ -235,7 +255,7 @@ class TestModelApi(unittest.TestCase):
             metadata=self.test_metadata
         )
 
-    @patch('soda_mmqc.lib.api.OpenAI')
+    @patch('openai.OpenAI')
     @patch('soda_mmqc.lib.api.os.getenv')
     def test_generate_response_openai_with_retry(self, mock_getenv, mock_openai):
         """Test that the function retries on JSON errors."""
@@ -246,21 +266,26 @@ class TestModelApi(unittest.TestCase):
         mock_client = MagicMock()
         mock_openai.return_value = mock_client
         
-        # Mock the response object to fail twice then succeed
-        mock_response1 = MagicMock()
-        mock_response1.output_text = '{"invalid": json}'  # Invalid JSON
+        # Mock the response objects to fail twice then succeed
+        def create_mock_response(content):
+            mock_response = MagicMock()
+            mock_choice = MagicMock()
+            mock_message = MagicMock()
+            mock_message.content = content
+            mock_choice.message = mock_message
+            mock_choice.finish_reason = "stop"
+            mock_response.choices = [mock_choice]
+            mock_response.id = "test-response-id"
+            mock_response.model = "gpt-4o-2024-08-06"
+            mock_response.usage = None
+            return mock_response
         
-        mock_response2 = MagicMock()
-        mock_response2.output_text = '{"invalid": json}'  # Invalid JSON again
-        
-        mock_response3 = MagicMock()
-        mock_response3.output_text = '{"name": "test", "panels": []}'  # Valid JSON
-        mock_response3.metadata = {"test": "metadata"}
-        mock_response3.id = "test-response-id"
-        mock_response3.model = "gpt-4o-2024-08-06"
+        mock_response1 = create_mock_response('{"invalid": json}')  # Invalid JSON
+        mock_response2 = create_mock_response('{"invalid": json}')  # Invalid JSON again
+        mock_response3 = create_mock_response('{"name": "test", "panels": []}')  # Valid JSON
         
         # Set up the mock to return different responses on subsequent calls
-        mock_client.responses.create.side_effect = [mock_response1, mock_response2, mock_response3]
+        mock_client.chat.completions.create.side_effect = [mock_response1, mock_response2, mock_response3]
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -280,7 +305,391 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(metadata["response_id"], "test-response-id")
         
         # Verify the API was called 3 times (2 failures + 1 success)
-        self.assertEqual(mock_client.responses.create.call_count, 3)
+        self.assertEqual(mock_client.chat.completions.create.call_count, 3)
+
+    # Tests for Anthropic API
+    def test_create_tool_from_schema(self):
+        """Test the helper function that creates Anthropic tools from JSON schema."""
+        schema = {
+            "type": "object",
+            "properties": {
+                "result": {"type": "string"}
+            },
+            "required": ["result"]
+        }
+        
+        tool = _create_tool_from_schema(schema)
+        
+        self.assertEqual(tool["name"], "structured_output")
+        self.assertEqual(tool["description"], "Provide structured output according to the schema")
+        self.assertEqual(tool["input_schema"], schema)
+
+    def test_create_tool_from_schema_nested(self):
+        """Test _create_tool_from_schema with nested schema format."""
+        from soda_mmqc.lib.api import _create_tool_from_schema
+        
+        # Test with nested schema (like our actual schemas)
+        nested_schema = {
+            "format": {
+                "type": "json_schema",
+                "name": "test",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "test": {"type": "string"}
+                    }
+                }
+            }
+        }
+        
+        result = _create_tool_from_schema(nested_schema)
+        
+        self.assertEqual(result["name"], "structured_output")
+        self.assertEqual(
+            result["description"], 
+            "Provide structured output according to the schema"
+        )
+        self.assertEqual(
+            result["input_schema"], 
+            nested_schema["format"]["schema"]
+        )
+    
+    def test_create_tool_from_schema_direct(self):
+        """Test _create_tool_from_schema with direct schema."""
+        from soda_mmqc.lib.api import _create_tool_from_schema
+        
+        # Test with direct schema
+        direct_schema = {
+            "type": "object",
+            "properties": {
+                "test": {"type": "string"}
+            }
+        }
+        
+        result = _create_tool_from_schema(direct_schema)
+        
+        self.assertEqual(result["name"], "structured_output")
+        self.assertEqual(
+            result["description"], 
+            "Provide structured output according to the schema"
+        )
+        self.assertEqual(result["input_schema"], direct_schema)
+
+    @patch.dict(os.environ, {'API_PROVIDER': 'anthropic'})
+    @patch('anthropic.Anthropic')
+    def test_generate_response_anthropic_success(self, mock_anthropic):
+        """Test successful response generation with Anthropic API."""
+        # Mock Anthropic client and response
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        
+        # Mock the response object for Anthropic messages API
+        mock_response = MagicMock()
+        mock_response.id = "test-response-id"
+        mock_response.model = "claude-3-5-sonnet-20241022"
+        mock_response.stop_reason = "tool_use"
+        
+        # Mock usage data
+        mock_usage = MagicMock()
+        mock_usage.input_tokens = 100
+        mock_usage.output_tokens = 50
+        mock_response.usage = mock_usage
+        
+        # Mock content with tool use
+        mock_tool_use = MagicMock()
+        mock_tool_use.type = "tool_use"
+        mock_tool_use.input = {"name": "test", "panels": []}
+        mock_response.content = [mock_tool_use]
+        
+        mock_client.messages.create.return_value = mock_response
+        
+        # Create a test example
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        
+        # Call the function
+        result, metadata = generate_response_anthropic(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model="claude-3-5-sonnet-20241022",
+            metadata=self.test_metadata
+        )
+        
+        # Verify the result
+        self.assertEqual(result, {"name": "test", "panels": []})
+        self.assertIn("response_id", metadata)
+        self.assertIn("model", metadata)
+        self.assertIn("usage", metadata)
+        self.assertEqual(metadata["response_id"], "test-response-id")
+        self.assertEqual(metadata["model"], "claude-3-5-sonnet-20241022")
+        self.assertEqual(metadata["usage"]["input_tokens"], 100)
+        
+        # Verify the API was called correctly
+        mock_client.messages.create.assert_called_once()
+        call_args = mock_client.messages.create.call_args
+        self.assertEqual(call_args[1]["model"], "claude-3-5-sonnet-20241022")
+        self.assertIn("tools", call_args[1])
+        self.assertIn("tool_choice", call_args[1])
+
+    @patch.dict(os.environ, {'API_PROVIDER': 'anthropic'})
+    @patch('anthropic.Anthropic')
+    def test_generate_response_anthropic_no_content(self, mock_anthropic):
+        """Test handling of response with no content."""
+        # Mock Anthropic client and response
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        
+        # Mock response with no content
+        mock_response = MagicMock()
+        mock_response.content = []
+        mock_client.messages.create.return_value = mock_response
+        
+        # Create a test example
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        
+        # Call the function and expect it to raise an exception
+        with self.assertRaises(ValueError):
+            generate_response_anthropic(
+                example=example,
+                prompt=self.test_prompt,
+                schema=self.test_schema,
+                model="claude-3-5-sonnet-20241022",
+                metadata=self.test_metadata
+            )
+
+    @patch.dict(os.environ, {'API_PROVIDER': 'anthropic'})
+    @patch('anthropic.Anthropic')
+    def test_generate_response_anthropic_no_tool_use(self, mock_anthropic):
+        """Test handling of response with no tool use block."""
+        # Mock Anthropic client and response
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        
+        # Mock response with content but no tool use
+        mock_response = MagicMock()
+        mock_text_block = MagicMock()
+        mock_text_block.type = "text"
+        mock_response.content = [mock_text_block]
+        mock_client.messages.create.return_value = mock_response
+        
+        # Create a test example
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        
+        # Call the function and expect it to raise an exception
+        with self.assertRaises(ValueError):
+            generate_response_anthropic(
+                example=example,
+                prompt=self.test_prompt,
+                schema=self.test_schema,
+                model="claude-3-5-sonnet-20241022",
+                metadata=self.test_metadata
+            )
+
+    # Tests for provider switching
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'openai')
+    @patch('soda_mmqc.lib.api.generate_response_openai')
+    def test_generate_response_routes_to_openai(self, mock_generate_openai):
+        """Test that generate_response routes to OpenAI when API_PROVIDER is 'openai'."""
+        # Mock the underlying function
+        mock_generate_openai.return_value = ({"test": "result"}, {"test": "metadata"})
+        
+        # Create a test example and ModelInput
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        
+        # Call the function
+        result, metadata = generate_response(
+            model_input=model_input,
+            model="gpt-4o-2024-08-06",
+            metadata=self.test_metadata
+        )
+        
+        # Verify routing
+        self.assertEqual(result, {"test": "result"})
+        self.assertEqual(metadata, {"test": "metadata"})
+        mock_generate_openai.assert_called_once_with(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model="gpt-4o-2024-08-06",
+            metadata=self.test_metadata
+        )
+
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'anthropic')
+    @patch('soda_mmqc.lib.api.generate_response_anthropic')
+    def test_generate_response_routes_to_anthropic(self, mock_generate_anthropic):
+        """Test that generate_response routes to Anthropic when API_PROVIDER is 'anthropic'."""
+        # Mock the underlying function
+        mock_generate_anthropic.return_value = ({"test": "result"}, {"test": "metadata"})
+        
+        # Create a test example and ModelInput
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        
+        # Call the function
+        result, metadata = generate_response(
+            model_input=model_input,
+            model="claude-3-5-sonnet-20241022",
+            metadata=self.test_metadata
+        )
+        
+        # Verify routing
+        self.assertEqual(result, {"test": "result"})
+        self.assertEqual(metadata, {"test": "metadata"})
+        mock_generate_anthropic.assert_called_once_with(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model="claude-3-5-sonnet-20241022",
+            metadata=self.test_metadata
+        )
+
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'openai')
+    @patch('soda_mmqc.lib.api.DEFAULT_MODEL', 'gpt-4o-2024-08-06')
+    @patch('soda_mmqc.lib.api.generate_response_openai')
+    def test_generate_response_default_model_openai(self, mock_generate_openai):
+        """Test default model selection for OpenAI."""
+        # Mock the underlying function
+        mock_generate_openai.return_value = ({"test": "result"}, {"test": "metadata"})
+        
+        # Create a test example and ModelInput
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        
+        # Call the function without specifying a model
+        result, metadata = generate_response(
+            model_input=model_input,
+            metadata=self.test_metadata
+        )
+        
+        # Verify default model was used
+        mock_generate_openai.assert_called_once()
+        call_args = mock_generate_openai.call_args
+        self.assertEqual(call_args[1]["model"], "gpt-4o-2024-08-06")
+
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'anthropic')
+    @patch('soda_mmqc.lib.api.DEFAULT_MODEL', 'claude-3-5-sonnet-20241022')
+    @patch('soda_mmqc.lib.api.generate_response_anthropic')
+    def test_generate_response_default_model_anthropic(self, mock_generate_anthropic):
+        """Test default model selection for Anthropic."""
+        # Mock the underlying function
+        mock_generate_anthropic.return_value = ({"test": "result"}, {"test": "metadata"})
+        
+        # Create a test example and ModelInput
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        
+        # Call the function without specifying a model
+        result, metadata = generate_response(
+            model_input=model_input,
+            metadata=self.test_metadata
+        )
+        
+        # Verify default model was used
+        mock_generate_anthropic.assert_called_once()
+        call_args = mock_generate_anthropic.call_args
+        self.assertEqual(call_args[1]["model"], "claude-3-5-sonnet-20241022")
+
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'openai')
+    @patch('soda_mmqc.lib.api.generate_response_openai')
+    def test_generate_response_none_metadata(self, mock_generate_openai):
+        """Test handling of None metadata parameter."""
+        # Mock the underlying function
+        mock_generate_openai.return_value = ({"test": "result"}, {"test": "metadata"})
+        
+        # Create a test example and ModelInput
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        
+        # Call the function with None metadata
+        result, metadata = generate_response(
+            model_input=model_input,
+            model="gpt-4o-2024-08-06",
+            metadata=None  # type: ignore
+        )
+        
+        # Verify it was converted to empty dict
+        mock_generate_openai.assert_called_once()
+        call_args = mock_generate_openai.call_args
+        self.assertEqual(call_args[1]["metadata"], {})
+
+    @patch.dict(os.environ, {'API_PROVIDER': 'anthropic'})
+    @patch('anthropic.Anthropic')
+    def test_generate_response_anthropic_with_retry(self, mock_anthropic):
+        """Test that the Anthropic function retries on errors."""
+        # Mock Anthropic client
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        
+        # First two calls raise ValueError, third succeeds
+        def create_success_response():
+            mock_response = MagicMock()
+            mock_response.id = "test-response-id"
+            mock_response.model = "claude-3-5-sonnet-20241022"
+            mock_response.stop_reason = "tool_use"
+            mock_response.usage = MagicMock()
+            mock_response.usage.input_tokens = 100
+            mock_response.usage.output_tokens = 50
+            mock_tool_use = MagicMock()
+            mock_tool_use.type = "tool_use"
+            mock_tool_use.input = {"name": "test", "panels": []}
+            mock_response.content = [mock_tool_use]
+            return mock_response
+        
+        # Mock to fail twice then succeed
+        mock_client.messages.create.side_effect = [
+            ValueError("First error"),
+            ValueError("Second error"),
+            create_success_response()
+        ]
+        
+        # Create a test example
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        
+        # Call the function - it should retry and eventually succeed
+        result, metadata = generate_response_anthropic(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model="claude-3-5-sonnet-20241022",
+            metadata=self.test_metadata
+        )
+        
+        # Verify the result
+        self.assertEqual(result, {"name": "test", "panels": []})
+        self.assertEqual(metadata["response_id"], "test-response-id")
+        
+        # Verify the API was called 3 times (2 failures + 1 success)
+        self.assertEqual(mock_client.messages.create.call_count, 3)
 
 
 if __name__ == "__main__":

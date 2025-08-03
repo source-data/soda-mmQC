@@ -14,6 +14,7 @@ from soda_mmqc.config import (
     STRING_METRICS,
     DEFAULT_MATCH_THRESHOLD,
     DEFAULT_SENTENCE_TRANSFORMER_MODEL,
+    DEFAULT_MODEL,
 )
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
@@ -84,7 +85,7 @@ def run_model(
     check_data: CheckData,
     prompt: str,
     use_cache: bool = True,
-    model: str = "gpt-4o-2024-08-06"
+    model: str = DEFAULT_MODEL
 ) -> List[ModelResult]:
     """Step 2: Run the model on all inputs.
     
@@ -450,7 +451,7 @@ def process_check(
     checklist_name: str,
     mock: bool = False,
     use_cache: bool = True,
-    model: str = "gpt-4o-2024-08-06",
+    model: str = DEFAULT_MODEL,
     match_threshold: float = DEFAULT_MATCH_THRESHOLD,
     sentence_transformer_model: str = (
         DEFAULT_SENTENCE_TRANSFORMER_MODEL
@@ -604,7 +605,7 @@ def process_checklist(
     checklist_name: str,
     mock: bool = False,
     use_cache: bool = True,
-    model: str = "gpt-4o-2024-08-06",
+    model: str = DEFAULT_MODEL,
     match_threshold: float = DEFAULT_MATCH_THRESHOLD,
     sentence_transformer_model: str = (
         DEFAULT_SENTENCE_TRANSFORMER_MODEL
@@ -672,7 +673,7 @@ def main():
         "--check", type=str, help="Name of the check to process"
     )
     parser.add_argument(
-        "--model", type=str, default="gpt-4o-2024-08-06", 
+        "--model", type=str, default=DEFAULT_MODEL, 
         help="The model to use for generation"
     )
     parser.add_argument(

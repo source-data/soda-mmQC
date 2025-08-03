@@ -44,9 +44,76 @@ You can install the package in development mode using pip:
 git clone https://github.com/yourusername/soda-mmqc.git
 cd soda-mmqc
 
+# Create virtual environment and install dependencies
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
 # Install in development mode
 pip install -e .
 ```
+
+## Configuration
+
+### API Provider Setup
+
+SODA MMQC supports both OpenAI and Anthropic APIs with structured output capabilities. You need to configure your API provider before using the system.
+
+#### Method 1: Environment File (Recommended)
+
+Create a `.env` file in the project root:
+
+```bash
+# API Provider Configuration
+API_PROVIDER=openai  # Choose: 'openai' or 'anthropic'
+
+# OpenAI Configuration (required if API_PROVIDER=openai)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Anthropic Configuration (required if API_PROVIDER=anthropic)  
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+# Optional: Device configuration for ML operations
+DEVICE=cpu  # Options: 'cpu', 'cuda', 'mps' (Apple Silicon)
+```
+
+#### Method 2: Environment Variables
+
+Alternatively, export environment variables directly:
+
+```bash
+# For OpenAI (default)
+export API_PROVIDER=openai
+export OPENAI_API_KEY=your_openai_api_key
+
+# For Anthropic
+export API_PROVIDER=anthropic
+export ANTHROPIC_API_KEY=your_anthropic_api_key
+```
+
+#### Supported Models
+
+The system automatically selects appropriate default models for each provider:
+
+**OpenAI Models:**
+- `gpt-4o-2024-08-06` (default)
+- `gpt-4o-mini`
+- Other GPT-4 variants with structured output support
+
+**Anthropic Models:**
+- `claude-3-5-sonnet-20241022` (default)
+- `claude-3-7-sonnet-20250219`
+- `claude-4-sonnet` and `claude-4-opus` (when available)
+
+#### Configuration Validation
+
+The system validates your configuration on startup and provides helpful feedback:
+
+- ✅ **Valid setup**: "OpenAI API provider configured"
+- ⚠️ **Missing API key**: "OpenAI selected but OPENAI_API_KEY not found"
+- ⚠️ **Invalid provider**: "Unknown API provider 'xyz', falling back to OpenAI"
+
+For detailed configuration options, see the [API Provider Documentation](soda_mmqc/docs/api_providers.md).
 
 ## Testing
 
@@ -87,12 +154,14 @@ curate CHECKLIST_NAME
 ```
 
 Command line options:
-- `--model`: Specify the model to use (default: "gpt-4o-2024-08-06")
+- `--model`: Specify the model to use. Supports both OpenAI and Anthropic models (auto-selected based on API_PROVIDER configuration)
 - `--mock`: Use expected outputs as model outputs (no API calls)
 - `--no-cache`: Disable caching of model outputs
 - `--check`: Specify a particular check to run within a checklist
 - `--initialize`: Initialize expected output files (alternative to `init` command)
 - `--match-threshold`: Set threshold for string matching across all metrics (default: 0.3)
+
+**Note**: If no model is specified, the system automatically uses the default model for your configured API provider (see [Configuration](#configuration)).
 
 ## String Comparison Metrics
 
@@ -141,15 +210,17 @@ This multi-metric approach allows researchers to:
 
 The project requires Python 3.8 or higher and includes the following main dependencies:
 
-- python-dotenv: Environment variable management
-- openai & anthropic: LLM API integration
-- Pillow: Image processing
-- nltk & sentence-transformers: Text processing and embeddings
-- scikit-learn & numpy: Data processing and analysis
-- plotly & matplotlib: Data visualization
-- streamlit: Web interface
-- jupyter & jupyterlab: Interactive development
-- pytest: Testing framework
+- **python-dotenv**: Environment variable management
+- **openai & anthropic**: LLM API integration with structured output support (see [Configuration](#configuration))
+- **Pillow**: Image processing
+- **nltk & sentence-transformers**: Text processing and embeddings
+- **scikit-learn & numpy**: Data processing and analysis
+- **plotly & matplotlib**: Data visualization
+- **streamlit**: Web interface
+- **jupyter & jupyterlab**: Interactive development
+- **pytest**: Testing framework
+
+**Note**: You must configure at least one API provider (OpenAI or Anthropic) before using the system. See the [Configuration](#configuration) section for setup instructions.
 
 The Open Library of Multimodal Data Checklists (mmQC)
 ===============================================================
@@ -342,10 +413,10 @@ Provide your analysis in the following JSON format for EACH panel:
 
 Be concise and focus only on the presence and definition of error bars.
 ```
-T
+
 #### Output Schema:
 
-The output schema is based on the OpenAI JSON Schema format for the `client.responses.create` method.
+The output schema defines the structured format for model responses. SODA MMQC automatically enforces this schema for both OpenAI (using structured output) and Anthropic (using tool calling) APIs.
 
 
 ```json

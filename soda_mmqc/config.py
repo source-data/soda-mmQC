@@ -82,3 +82,55 @@ DEFAULT_MATCH_THRESHOLD = 0.3
 
 # SentenceTransformer model for semantic similarity
 DEFAULT_SENTENCE_TRANSFORMER_MODEL = "all-MiniLM-L6-v2"
+
+
+# API Provider validation and setup
+def _validate_and_setup_api_provider() -> str:
+    """Validate the requested API provider and return the provider name.
+    
+    Returns:
+        str: The API provider to use ('openai' or 'anthropic')
+    """
+    requested_provider = os.getenv("API_PROVIDER", "openai").lower()
+    
+    # Setup logging for API provider validation
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    
+    if requested_provider == "openai":
+        openai_key = os.getenv("OPENAI_API_KEY")
+        if openai_key:
+            logger.info("✅ OpenAI API provider configured")
+        else:
+            logger.warning(
+                "⚠️  OpenAI selected but OPENAI_API_KEY not found in environment"
+            )
+        return "openai"
+    elif requested_provider == "anthropic":
+        anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+        if anthropic_key:
+            logger.info("✅ Anthropic API provider configured")
+        else:
+            logger.warning(
+                "⚠️  Anthropic selected but ANTHROPIC_API_KEY not found in environment"
+            )
+        return "anthropic"
+    else:
+        logger.warning(
+            f"⚠️  Unknown API provider '{requested_provider}' requested, "
+            "falling back to OpenAI"
+        )
+        return "openai"
+
+
+# API Provider configuration
+API_PROVIDER = _validate_and_setup_api_provider()
+
+# Default models for each provider
+DEFAULT_MODELS = {
+    "openai": "gpt-4o-2024-08-06",
+    "anthropic": "claude-3-5-sonnet-20241022"
+}
+
+# Get the default model for the current provider
+DEFAULT_MODEL = DEFAULT_MODELS.get(API_PROVIDER, DEFAULT_MODELS["openai"])
