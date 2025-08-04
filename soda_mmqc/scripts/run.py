@@ -315,7 +315,7 @@ def prepare_check_data(
     # Load check data
     check_benchmark_file = check_dir / "benchmark.json"
     if not check_benchmark_file.exists():
-        logger.error(
+        logger.warning(
             f"Check data file not found: {check_benchmark_file}"
         )
         return (None, {})
