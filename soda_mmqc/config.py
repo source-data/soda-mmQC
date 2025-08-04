@@ -134,3 +134,6 @@ DEFAULT_MODELS = {
 
 # Get the default model for the current provider
 DEFAULT_MODEL = DEFAULT_MODELS.get(API_PROVIDER, DEFAULT_MODELS["openai"])
+
+
+

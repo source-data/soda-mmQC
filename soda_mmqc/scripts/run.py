@@ -15,7 +15,9 @@ from soda_mmqc.config import (
     DEFAULT_MATCH_THRESHOLD,
     DEFAULT_SENTENCE_TRANSFORMER_MODEL,
     DEFAULT_MODEL,
+    API_PROVIDER,
 )
+from soda_mmqc.lib.api import validate_model_for_provider, get_compatible_models
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY, Example
@@ -464,11 +466,21 @@ def process_check(
         checklist_name: Name of the checklist
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
-        model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
+        model: The model to use for generation
         match_threshold: Threshold for considering a match (0-1)
+        sentence_transformer_model: SentenceTransformer model for semantic similarity
+        
     Returns:
-        Dictionary containing analyzed results for all string metrics
+        Dictionary mapping string metric names to analysis results
     """
+    # Validate model compatibility
+    if not validate_model_for_provider(model):
+        compatible_models = get_compatible_models()
+        raise ValueError(
+            f"Model '{model}' is not compatible with provider '{API_PROVIDER}'. "
+            f"Compatible models: {', '.join(compatible_models)}"
+        )
+
     
     # Prepare check data
     check_data, prompts = prepare_check_data(check_dir)
@@ -533,7 +545,7 @@ def list_checks(checklist_dir: Path) -> Dict[str, Path]:
     return checks
 
 
-def initialize(checklist_dir: Path, use_cache: bool = True):
+def initialize(checklist_dir: Path, use_cache: bool = True, model: str = DEFAULT_MODEL):
     """Initialize expected_output.json files for all examples in a checklist.
     
     This function iterates through the checks of a checklist. For each check,
@@ -576,7 +588,8 @@ def initialize(checklist_dir: Path, use_cache: bool = True):
             results = run_model(
                 prepared_data,
                 first_prompt,
-                use_cache=use_cache
+                use_cache=use_cache,
+                model=model
             )
 
             # Write expected outputs
@@ -618,9 +631,18 @@ def process_checklist(
         checklist_name: Name of the checklist
         mock: If True, use expected outputs as model outputs (no API calls)
         use_cache: If True, use cached outputs when available
-        model: The model to use for generation. Defaults to "gpt-4o-2024-08-06"
+        model: The model to use for generation
         match_threshold: Threshold for considering a match (0-1)
+        sentence_transformer_model: SentenceTransformer model for semantic similarity
     """
+    # Validate model compatibility
+    if not validate_model_for_provider(model):
+        compatible_models = get_compatible_models()
+        raise ValueError(
+            f"Model '{model}' is not compatible with provider '{API_PROVIDER}'. "
+            f"Compatible models: {', '.join(compatible_models)}"
+        )
+
 
     # Get all checks frmo the checklist
     checks = list_checks(checklist_dir)
@@ -694,9 +716,18 @@ def main():
         logger.error(f"Checklist directory not found: {checklist_dir}")
         return
 
+    # Validate model compatibility with current provider
+    if not validate_model_for_provider(args.model):
+        compatible_models = get_compatible_models()
+        logger.error(
+            f"Model '{args.model}' is not compatible with provider '{API_PROVIDER}'. "
+            f"Compatible models: {', '.join(compatible_models)}"
+        )
+        return
+    
     # Initialize if requested
     if args.initialize:
-        initialize(checklist_dir, not args.no_cache)
+        initialize(checklist_dir, not args.no_cache, args.model)
         return
 
     if args.check:

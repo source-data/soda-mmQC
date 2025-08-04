@@ -1,33 +1,21 @@
 # Cursor Rules for SODA MMQC Project
 
-## General Guidelines
-- Always follow Python best practices and PEP 8 style guidelines
-- Use type hints where appropriate
-- Write clear, descriptive function and variable names
-- Include docstrings for functions and classes
-- Prefer explicit imports over wildcard imports
 
 ## Project-Specific Rules
 - Follow the existing project structure and naming conventions
 - Use the established configuration patterns from `soda_mmqc/config.py`
 - Maintain consistency with existing test patterns in `tests/`
-- When working with JSON schemas, ensure they follow the established format
 - For checklist development, follow the existing directory structure in `data/checklist/`
 - For checklist development, respect the structure of `data/examples` and maintain consistency with existing example organization
-- Remember to install dependencies in the virtual environment and through requirements.txt
+- Always install new dependencise by updating `requirements.txt` and then installing in the virtual environment.
 
 ## Code Quality
 - Write tests for new functionality
-- Use meaningful commit messages
 - Avoid hardcoding values - use configuration files
-- Handle errors gracefully with appropriate logging
 - Use environment variables for sensitive data
 
 ## Documentation
 - Update README.md when adding new features
-- Include examples in docstrings
-- Document any new configuration options
-- Keep the project structure documentation current
 
 ## Common Mistakes to Avoid
 - Don't forget to activate the virtual environment (`.venv`) before running commands, experiments, or unit tests

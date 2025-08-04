@@ -244,13 +244,17 @@ A check is characterized by the following components:
 
 ## Checklists:
 
-A checklist is a collection of loosely related checks, organized for conveniencein a directory structure. The project currently supports two main checklists:
+A checklist is a collection of loosely related checks, organized for conveniencein a directory structure. 
+
+There is no need to group checks by format or by type of content. A checklist is simply a collection of checks that can be run together in an evaluation through the evalution command `evaluate name_of_checklist`.
+
+The project currently has two demonstration checklists:
 
 ### 1. Document Checklists (`doc-checklist/`)
 Checks that analyze entire documents or manuscript structure:
-- **extract-figures**: Extracts and identifies figures from documents [not implemented]
+- **extract-figures**: Extracts and identifies figures from documents [not yet implemented]
 - **section-order**: Validates the order and structure of document sections
-- **species-identified**: Checks if species are properly identified in the document [not implemented]
+- **species-identified**: Checks if species are properly identified in the document [not yet implemented]
 
 ### 2. Figure Checklists (`fig-checklist/`)
 Checks that analyze individual figures and their captions:
@@ -263,7 +267,7 @@ Checks that analyze individual figures and their captions:
 - **replicates-defined**: Verifies if replicates are properly defined
 - **stat-significance-level**: Checks statistical significance reporting
 - **stat-test**: Validates statistical test specifications
-- **structure-identified**: Ensures structures are properly identified [not implemented]
+- **structure-identified**: Ensures structures are properly identified [not yet implemented]
 
 Each check directory contains:
 ```
