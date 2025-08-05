@@ -100,25 +100,14 @@ class TestModelApi(unittest.TestCase):
         mock_client = MagicMock()
         mock_openai.return_value = mock_client
         
-        # Mock the response object for chat completions
+        # Mock the response object for responses API
         mock_response = MagicMock()
-        mock_choice = MagicMock()
-        mock_message = MagicMock()
-        mock_message.content = '{"name": "test", "panels": []}'
-        mock_choice.message = mock_message
-        mock_choice.finish_reason = "stop"
-        mock_response.choices = [mock_choice]
+        mock_response.output_text = '{"name": "test", "panels": []}'
         mock_response.id = "test-response-id"
         mock_response.model = "gpt-4o-2024-08-06"
+        mock_response.metadata = {}
         
-        # Mock usage data
-        mock_usage = MagicMock()
-        mock_usage.prompt_tokens = 100
-        mock_usage.completion_tokens = 50
-        mock_usage.total_tokens = 150
-        mock_response.usage = mock_usage
-        
-        mock_client.chat.completions.create.return_value = mock_response
+        mock_client.responses.create.return_value = mock_response
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -137,17 +126,18 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(result, {"name": "test", "panels": []})
         self.assertIn("response_id", metadata)
         self.assertIn("model", metadata)
-        self.assertIn("usage", metadata)
         self.assertEqual(metadata["response_id"], "test-response-id")
         self.assertEqual(metadata["model"], "gpt-4o-2024-08-06")
-        self.assertEqual(metadata["usage"]["total_tokens"], 150)
         
         # Verify the API was called correctly
-        mock_client.chat.completions.create.assert_called_once()
-        call_args = mock_client.chat.completions.create.call_args
+        mock_client.responses.create.assert_called_once()
+        call_args = mock_client.responses.create.call_args
         self.assertEqual(call_args[1]["model"], self.test_model)
-        self.assertIn("response_format", call_args[1])
-        self.assertEqual(call_args[1]["response_format"]["type"], "json_schema")
+        self.assertIn("text", call_args[1])
+        self.assertEqual(
+            call_args[1]["text"], 
+            self.test_schema
+        )
 
     @patch('openai.OpenAI')
     @patch('soda_mmqc.lib.api.os.getenv')
@@ -162,12 +152,11 @@ class TestModelApi(unittest.TestCase):
         
         # Mock the response object with invalid JSON
         mock_response = MagicMock()
-        mock_choice = MagicMock()
-        mock_message = MagicMock()
-        mock_message.content = '{"invalid": json}'
-        mock_choice.message = mock_message
-        mock_response.choices = [mock_choice]
-        mock_client.chat.completions.create.return_value = mock_response
+        mock_response.output_text = '{"invalid": json}'
+        mock_response.id = "test-response-id"
+        mock_response.model = "gpt-4o-2024-08-06"
+        mock_response.metadata = {}
+        mock_client.responses.create.return_value = mock_response
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -196,12 +185,11 @@ class TestModelApi(unittest.TestCase):
         
         # Mock the response object with None content
         mock_response = MagicMock()
-        mock_choice = MagicMock()
-        mock_message = MagicMock()
-        mock_message.content = None
-        mock_choice.message = mock_message
-        mock_response.choices = [mock_choice]
-        mock_client.chat.completions.create.return_value = mock_response
+        mock_response.output_text = ""
+        mock_response.id = "test-response-id"
+        mock_response.model = "gpt-4o-2024-08-06"
+        mock_response.metadata = {}
+        mock_client.responses.create.return_value = mock_response
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -269,23 +257,22 @@ class TestModelApi(unittest.TestCase):
         # Mock the response objects to fail twice then succeed
         def create_mock_response(content):
             mock_response = MagicMock()
-            mock_choice = MagicMock()
-            mock_message = MagicMock()
-            mock_message.content = content
-            mock_choice.message = mock_message
-            mock_choice.finish_reason = "stop"
-            mock_response.choices = [mock_choice]
+            mock_response.output_text = content
             mock_response.id = "test-response-id"
             mock_response.model = "gpt-4o-2024-08-06"
-            mock_response.usage = None
+            mock_response.metadata = {}
             return mock_response
         
         mock_response1 = create_mock_response('{"invalid": json}')  # Invalid JSON
         mock_response2 = create_mock_response('{"invalid": json}')  # Invalid JSON again
-        mock_response3 = create_mock_response('{"name": "test", "panels": []}')  # Valid JSON
+        mock_response3 = create_mock_response(
+            '{"name": "test", "panels": []}'
+        )  # Valid JSON
         
         # Set up the mock to return different responses on subsequent calls
-        mock_client.chat.completions.create.side_effect = [mock_response1, mock_response2, mock_response3]
+        mock_client.responses.create.side_effect = [
+            mock_response1, mock_response2, mock_response3
+        ]
         
         # Create a test example
         example = FigureExample(str(self.test_dir))
@@ -305,7 +292,9 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(metadata["response_id"], "test-response-id")
         
         # Verify the API was called 3 times (2 failures + 1 success)
-        self.assertEqual(mock_client.chat.completions.create.call_count, 3)
+        self.assertEqual(
+            mock_client.responses.create.call_count, 3
+        )
 
     # Tests for Anthropic API
     def test_create_tool_from_schema(self):
@@ -321,7 +310,10 @@ class TestModelApi(unittest.TestCase):
         tool = _create_tool_from_schema(schema)
         
         self.assertEqual(tool["name"], "structured_output")
-        self.assertEqual(tool["description"], "Provide structured output according to the schema")
+        self.assertEqual(
+            tool["description"], 
+            "Provide structured output according to the schema"
+        )
         self.assertEqual(tool["input_schema"], schema)
 
     def test_create_tool_from_schema_nested(self):
