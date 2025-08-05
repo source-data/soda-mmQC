@@ -355,7 +355,6 @@ def generate_response_openai(
         text=schema,
         metadata=metadata
     )
-    # I AM MODIFYING THIS FILE HERE, GIT SHOULD SEE THIS, NO????
     # Parse response
     try:
         response = json.loads(raw_response.output_text)
