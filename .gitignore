@@ -128,8 +128,12 @@ node_modules
 # Models
 /hf_cache
 /.models
+
+# Local testing dirs/files etc.
 uv.lock
 yeet_loader.py
 validate_cacert.py
 /soda_mmqc/data/evaluation_new
 /soda_mmqc/data/examples_new
+prompt_reader.py
+prompt_checks_tree.txt
