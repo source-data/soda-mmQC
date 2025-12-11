@@ -133,7 +133,7 @@ node_modules
 uv.lock
 yeet_loader.py
 validate_cacert.py
-/soda_mmqc/data/evaluation_new
-/soda_mmqc/data/examples_new
+/soda_mmqc/data/evaluation_new/*
+/soda_mmqc/data/examples_new/*
 prompt_reader.py
 prompt_checks_tree.txt
