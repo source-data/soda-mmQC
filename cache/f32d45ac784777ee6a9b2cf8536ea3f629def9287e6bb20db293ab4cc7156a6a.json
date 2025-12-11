@@ -1,0 +1,144 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Axis label on plot: \"Total polyp number per mouse\" (counts per mouse shown on y-axis)"
+          },
+          {
+            "axis": "z",
+            "definition": "Axis label on plot: \"Polyp diameter (mm)\" (diameter explicitly given in mm)"
+          },
+          {
+            "axis": "x",
+            "definition": "(n=8–18 per genotype)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Axis label on plot: \"Time after birth (months)\""
+          },
+          {
+            "axis": "y",
+            "definition": "Axis label on plot: \"Percentage of mice alive (%)\""
+          },
+          {
+            "axis": "x",
+            "definition": "(n=24–27 per genotype)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Bar graph shows relative amount of GTP-bound Rac1/Cdc42 (normalized values, scale 0–1 shown) but no explicit unit (e.g. 'relative', 'arbitrary units' or normalization reference) is provided on the axis or in the caption. No replicates (n=...) are given in the figure caption for this panel."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The small bar graph labeled 'Relative expression' uses numeric scale (e.g. 0–8) but does not state units (e.g. fold change, arbitrary units or normalization reference) on the axis or in the caption. No per-panel replicate information (n=...) is provided in the figure caption for this panel."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_04568ae9f49065ee00693ada6ed0fc81a18d74d9a3ba5e7073",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3211,
+      "output_tokens": 2933
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:52:14.247706"
+  }
+}

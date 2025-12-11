@@ -1,0 +1,46 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Quantitative data is presented without mention of a statistical test, despite reporting mean and standard deviation.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Quantitative data is presented without mention of a statistical test, despite reporting mean and standard deviation.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Quantitative data is presented without mention of a statistical test, despite reporting mean and standard deviation.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Quantitative data is presented without mention of a statistical test, despite reporting mean and standard deviation.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_688cd0f70e24819e9f07dc4cb90cdb580a02d4e0da7ebf2a",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:36:49.763629"
+  }
+}

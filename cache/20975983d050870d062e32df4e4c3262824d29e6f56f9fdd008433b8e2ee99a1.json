@@ -1,0 +1,30 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel contains quantitative comparisons between euchromatin and heterochromatin intensities. A statistical test is needed to validate the significance of these differences.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_688cd248ac1c81a0a935250a9961cdf50d916b59e3675c16",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:42:22.336664"
+  }
+}

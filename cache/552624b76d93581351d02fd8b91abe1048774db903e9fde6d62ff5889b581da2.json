@@ -1,0 +1,103 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [
+          "dashed line"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Dashed line at period = 24 h."
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [
+          "shaded area"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Shaded area covers unattainable range."
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [
+          "red horizontal lines",
+          "red crosses"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Median values are marked by red horizontal lines.",
+          "Outliers by red crosses."
+        ]
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [
+          "dark red amplitude decay trace"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Dark red amplitude decay trace is sketched for illustration purposes."
+        ]
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "symbols": [
+          "L-shaped line"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "The L-shaped line represents the simulated coupling strength (κ)."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_688d1c2d60b8819d82883ea7faf09c62058cce8d3a6f1ec3",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T21:57:48.988513"
+  }
+}

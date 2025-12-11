@@ -1,0 +1,97 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "141"
+        ],
+        "type_of_replicates": [
+          "samples"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "6",
+          "2",
+          "3",
+          "5"
+        ],
+        "type_of_replicates": [
+          "samples per reporter",
+          "biological replicates",
+          "MCF10A and MDAMB468-Per2-Luc"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "1-4",
+          "3-6"
+        ],
+        "type_of_replicates": [
+          "cell line models per subtype",
+          "replicates per cell model"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "4-12"
+        ],
+        "type_of_replicates": [
+          "samples per cell line"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "indicated next to the cell line name"
+        ],
+        "type_of_replicates": [
+          "Bmal1-Per2-combinations per cell line"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "1-4"
+        ],
+        "type_of_replicates": [
+          "cell line models"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "117"
+        ],
+        "type_of_replicates": [
+          "samples"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_688d20158a488191b9a20ab0264d397d0c5a9f6666eb02db",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:14:23.994137"
+  }
+}

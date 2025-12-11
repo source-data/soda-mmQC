@@ -1,0 +1,98 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The Body Weight panel has regular spacing, but the LW/BW and FW/BW panels show large value jumps without visual gap indicators."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "No clear indicators for gaps in the data visualization."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Protein bands may imply density differences, but without visible markers."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688cc948459081a3b6000b3f7ebb70d609d88b4701fb1114",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:04:04.840666"
+  }
+}

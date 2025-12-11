@@ -1,0 +1,49 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_019vzNLemVUow1PEmLfEpyyB",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3217,
+      "output_tokens": 297
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:32:18.229622"
+  }
+}

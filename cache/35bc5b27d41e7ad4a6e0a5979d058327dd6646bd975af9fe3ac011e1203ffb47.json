@@ -1,0 +1,44 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "ABSTRACT",
+          "INTRODUCTION",
+          "RESULTS AND DISCUSSION",
+          "MATERIALS AND METHODS",
+          "ACKNOWLEDGEMENTS",
+          "REFERENCES",
+          "FIGURE LEGENDS"
+        ],
+        "missing_sections": [
+          "Data Availability",
+          "Author contributions",
+          "Disclosure and competing interests statement",
+          "Expanded View legends"
+        ],
+        "sections_to_remove": [],
+        "sections_to_rename": [
+          {
+            "original": "RESULTS AND DISCUSSION",
+            "renamed": "Results and Discussion"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "MATERIALS AND METHODS",
+            "move_before": "REFERENCES"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_688d264c2ce481a3b8255b512de2a3c903ef2810e9fe3418",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:40:48.416261"
+  }
+}

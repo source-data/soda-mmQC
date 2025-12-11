@@ -1,0 +1,72 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Abstract",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials and methods",
+          "Acknowledgments",
+          "Author contributions",
+          "Disclosure and competing interests statement",
+          "Data Availability",
+          "The paper explained",
+          "References",
+          "Figure legends",
+          "Expanded View legends"
+        ],
+        "missing_sections": [],
+        "sections_to_remove": [
+          "The paper explained"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "Materials and methods",
+            "renamed": "Materials and Methods"
+          },
+          {
+            "original": "Acknowledgments",
+            "renamed": "Acknowledgements"
+          },
+          {
+            "original": "Disclosure and competing interests statement",
+            "renamed": "Disclosure and competing interest statement"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Materials and methods",
+            "move_before": "Data Availability"
+          },
+          {
+            "section_in_manuscript": "Acknowledgments",
+            "move_before": "Author contributions"
+          },
+          {
+            "section_in_manuscript": "Disclosure and competing interests statement",
+            "move_before": "References"
+          },
+          {
+            "section_in_manuscript": "Data Availability",
+            "move_before": "Acknowledgments"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01CFE77L2Qy9BQPJrZt3jHEM",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 29810,
+      "output_tokens": 377
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "EMM-2025-21341",
+    "source": "EMM-2025-21341",
+    "example_type": "word",
+    "cached_at": "2025-08-04T10:33:37.163159"
+  }
+}

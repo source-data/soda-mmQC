@@ -1,0 +1,49 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A-C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D-F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "15",
+          "25"
+        ],
+        "type_of_replicates": [
+          "independent samples"
+        ]
+      },
+      {
+        "panel_label": "G-I",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "J-L",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "11",
+          "9"
+        ],
+        "type_of_replicates": [
+          "independent samples"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d1ed9071881a2a9a0bb676c191d5f0ab8d18470aaf320",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:09:03.744828"
+  }
+}

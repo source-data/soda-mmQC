@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "not needed",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "no",
+        "average_values": "not needed",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "F",
+        "plot": "no",
+        "average_values": "not needed",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "G",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "H",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "I",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "J",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "yes"
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01XQ43XGmYXTVyag4AmPAR9y",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3523,
+      "output_tokens": 482
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44320-025-00096-3",
+    "source": "10.1038_s44320-025-00096-3/content/9",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T10:57:53.443068"
+  }
+}

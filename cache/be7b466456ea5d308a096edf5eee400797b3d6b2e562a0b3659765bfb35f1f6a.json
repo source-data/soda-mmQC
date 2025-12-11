@@ -1,0 +1,26 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_688ccec12e30819297929595c0b37ca40ba5e229fdb4c1d5",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:27:16.120332"
+  }
+}

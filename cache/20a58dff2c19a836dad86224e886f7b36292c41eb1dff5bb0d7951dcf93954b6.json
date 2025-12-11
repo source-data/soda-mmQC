@@ -1,0 +1,45 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A (i and ii)",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrows"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrows"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "White arrows indicate cell regions experiencing membrane bulging."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d1b95b4b481a082969ef8c6b037f306f9a897e069f90c",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T21:55:06.199159"
+  }
+}

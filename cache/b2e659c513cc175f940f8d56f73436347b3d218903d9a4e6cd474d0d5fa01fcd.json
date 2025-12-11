@@ -1,0 +1,198 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "X-axis labeled as 'Day' on the plot (units = days implied by the label on the axis)."
+          },
+          {
+            "axis": "y",
+            "definition": "Y-axis labeled as 'Relative expression (A.U.)' on the plot; A.U. = arbitrary units (label visible on the plot)."
+          },
+          {
+            "axis": "y",
+            "definition": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Flow cytometry dot plots show fluorescence intensity for markers (e.g., SOX17-Tom, NKX2-5-GFP, PDGFRα, CD235) on the x-axis but do not indicate units; fluorescence is typically in arbitrary fluorescence units but this is not labeled."
+          },
+          {
+            "axis": "y",
+            "justification": "Flow cytometry dot plots show fluorescence intensity on the y-axis (e.g., PDGFRα-BV421, CD235-APC) with no explicit units; percentages for gated populations are shown but axis values lack unit specification."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Y-axis shows 'Positive cells (%)' on the plot (percent sign present on axis)."
+          },
+          {
+            "axis": "y",
+            "definition": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Y-axis shows 'Positive cells (%)' on the plot (percent sign present on axis)."
+          },
+          {
+            "axis": "y",
+            "definition": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Y-axis labeled as 'Normalized read counts' (continuous RNA-seq measurement) but no further unit definition is provided (e.g., TPM, CPM, or other normalization method not specified on axis or in the caption)."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Boxplots follow standard Tukey representation with n = 3 independent biological experiments (replicate information from caption: 'The boxplots follow standard Tukey representations (n = 3 independent biological experiments)')."
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Expression values encoded in the heatmaps are described in the caption as 'Z-score normalized log2 FC differences' (color scale represents Z-score normalized log2 fold change)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0dda9d8314a42e0b00693adb0cc5c8819f94d62b49f41c7ae3",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3297,
+      "output_tokens": 4661
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:55:33.331966"
+  }
+}

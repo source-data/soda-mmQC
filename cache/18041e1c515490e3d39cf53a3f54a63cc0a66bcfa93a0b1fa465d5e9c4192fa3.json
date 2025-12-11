@@ -1,0 +1,139 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          },
+          {
+            "axis": "y",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          },
+          {
+            "axis": "y",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          },
+          {
+            "axis": "y",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          },
+          {
+            "axis": "y",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          },
+          {
+            "axis": "y",
+            "justification": "Numerical sequences and tick mark spacing do not suggest any major gaps."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_688cc9c7548881a1b651c25494bc2e52094a3154a0d2b497",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:06:15.450183"
+  }
+}

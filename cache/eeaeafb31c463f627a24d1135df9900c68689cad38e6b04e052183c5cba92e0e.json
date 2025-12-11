@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three"
+        ],
+        "type_of_replicates": [
+          "experiments"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_018jwusmZeY8yqKVMA2pBwWh",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2791,
+      "output_tokens": 254
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:32:34.407990"
+  }
+}

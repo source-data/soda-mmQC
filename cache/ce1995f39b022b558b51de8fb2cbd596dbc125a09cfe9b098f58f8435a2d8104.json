@@ -1,0 +1,90 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Summary",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials and Methods",
+          "Data availability",
+          "Acknowledgements",
+          "Author contributions",
+          "Conflict of interest",
+          "References",
+          "Figure legends",
+          "Supplementary figure legends"
+        ],
+        "missing_sections": [
+          "Abstract",
+          "Author Contributions",
+          "Disclosure and Competing Interests Statement",
+          "Expanded View Legends"
+        ],
+        "sections_to_remove": [],
+        "sections_to_rename": [
+          {
+            "original": "Summary",
+            "renamed": "Abstract"
+          },
+          {
+            "original": "Data availability",
+            "renamed": "Data Availability"
+          },
+          {
+            "original": "Acknowledgements",
+            "renamed": "Acknowledgments"
+          },
+          {
+            "original": "Author contributions",
+            "renamed": "Author Contributions"
+          },
+          {
+            "original": "Conflict of interest",
+            "renamed": "Disclosure and Competing Interests Statement"
+          },
+          {
+            "original": "Supplementary figure legends",
+            "renamed": "Expanded View Legends"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Materials and Methods",
+            "move_before": "Data availability"
+          },
+          {
+            "section_in_manuscript": "Data availability",
+            "move_before": "Acknowledgements"
+          },
+          {
+            "section_in_manuscript": "Acknowledgements",
+            "move_before": "Author contributions"
+          },
+          {
+            "section_in_manuscript": "Author contributions",
+            "move_before": "Conflict of interest"
+          },
+          {
+            "section_in_manuscript": "Conflict of interest",
+            "move_before": "References"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01FSxLe5A8vyEevJsKRTevTL",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 33040,
+      "output_tokens": 526
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "cached_at": "2025-08-04T10:34:04.465297"
+  }
+}

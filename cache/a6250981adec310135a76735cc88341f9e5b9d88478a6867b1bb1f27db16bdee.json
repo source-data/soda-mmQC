@@ -1,0 +1,110 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "There is no indication of irregular spacing or skipped values on the x-axis. Tick marks are not visible in detail."
+          },
+          {
+            "axis": "y",
+            "justification": "The data presentation appears continuous without obvious demarcation for breaks, though visual inspection for breaks is limited due to lack of detail in tick spacing and labeling."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "There is no indication of irregular spacing or skipped values on the x-axis. Tick marks are not visible in detail."
+          },
+          {
+            "axis": "y",
+            "justification": "The data presentation appears continuous without obvious demarcation for breaks, though visual inspection for breaks is limited due to lack of detail in tick spacing and labeling."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_688cc8dc86f08191911cf99500c3313a01120e31c2c45310",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:02:17.039733"
+  }
+}

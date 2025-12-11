@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Abstract",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Methods",
+          "Data availability",
+          "Acknowledgments",
+          "Disclosure and competing interests statement",
+          "References",
+          "Figure legends",
+          "Table 1: Serum data of mice administered AMOs at a dose of 20 mg/kg bw"
+        ],
+        "missing_sections": [
+          "Author Contributions",
+          "Expanded View Legends"
+        ],
+        "sections_to_remove": [
+          "Table 1: Serum data of mice administered AMOs at a dose of 20 mg/kg bw"
+        ],
+        "sections_to_rename": [],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Methods",
+            "move_before": "Data availability"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_688d2690e28c819c81abd0cafb2690fb058584f05dcebc5c",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:41:58.288215"
+  }
+}

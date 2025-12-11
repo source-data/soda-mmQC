@@ -1,0 +1,144 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "X-axes are labeled with cytometry parameters (e.g., FSC-A, Viability, CD19, IgD) that represent continuous measurements (light scatter or fluorescence intensity) but no measurement units are shown (e.g., channels, arbitrary units, or volts)."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axes are labeled with cytometry parameters (e.g., FSC-H, SSC-A, CD4, Fas, IgM) representing continuous signals but likewise lack explicit units on the axis labels or tick marks."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "X-axes show cytometry parameters (e.g., CD19, IgD) that are continuous fluorescence/size measurements but no units are indicated on the axes."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axes show cytometry parameters (e.g., CD98, FSC-A) that are continuous measurements but do not include units (no AU, channels, or other unit labels)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "X-axes (e.g., IgD, NP, CD138, CD138/CD38 scales) display continuous cytometry intensity scales but lack explicit units (log-scale numeric ticks are present but no unit label such as AU or channel number)."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axes (e.g., IgM, Fas, CD38) are continuous cytometry measurements and do not show units on the axis labels or in the plot area."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "X-axes (e.g., CD44, PD-L2) show numeric log-scale values typical of fluorescence intensity but provide no unit label (no AU, channels, or instrument-specific unit)."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axes (e.g., CD62L, CD80) are continuous fluorescence measurements; units are not indicated on the axes or elsewhere in the panel."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "X-axes (CD44, PD-L2) are continuous cytometry intensity scales (with numeric ticks) but do not include explicit units such as arbitrary units (AU) or channel numbers."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axes (CD62L, CD80) represent continuous fluorescence/marker intensity without any unit labeling on the axes or in the figure caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_09cbc7099902967300693ad94ac0fc81a388fbba59c8a194e1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2931,
+      "output_tokens": 1981
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:47:08.314138"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "Aii",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d0e4386ac81a39d6877e891257e4206e73074347ed778",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T20:58:17.608021"
+  }
+}

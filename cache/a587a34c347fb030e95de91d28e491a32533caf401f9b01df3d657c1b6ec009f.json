@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows quantitative comparisons (bar graph with mean±s.d. across conditions) but the caption only reports 'Mean±s.d. of three independent experiments' and does not state which statistical test was used to assess differences between groups.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows quantitative comparisons (bar graph with mean±s.d. across conditions) but the caption only reports 'Mean±s.d. of three independent experiments' and does not state which statistical test was used to assess differences between groups.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel presents quantitative time-course comparisons (bar graph with mean±s.d. of three experiments) yet the caption does not specify any statistical test used to evaluate differences between conditions or time points.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel displays quantitative comparisons (bar graph with mean±s.d.) but the caption only indicates 'Mean±s.d. of three experiments' without identifying the statistical test used to determine significance between groups.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_06165d05e2bc3cda00693ad384fe24819088679306e63249f9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1937,
+      "output_tokens": 1199
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:22:16.825311"
+  }
+}

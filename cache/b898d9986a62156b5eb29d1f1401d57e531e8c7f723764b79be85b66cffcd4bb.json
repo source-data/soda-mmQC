@@ -1,0 +1,69 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "green",
+          "orange"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "blue",
+          "red",
+          "white"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no",
+          "no"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_04acb16df73f9aa000693ae93edf588191a12d5c783961be72",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2842,
+      "output_tokens": 2433
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T16:55:17.636417"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Mean±s.d. of three independent experiments is reported"
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Mean±s.d. of three experiments is reported"
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "no",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01SP6ZutxmHm9ucRBmraBEXy",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2493,
+      "output_tokens": 284
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T10:46:33.509259"
+  }
+}

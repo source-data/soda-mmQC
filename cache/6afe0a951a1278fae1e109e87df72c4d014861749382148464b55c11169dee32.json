@@ -1,0 +1,74 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*",
+          "***"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "*",
+          "***"
+        ],
+        "from_the_caption": "*P<0.05; ***P<0.001"
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_016PSvbd9KH5utRMYFG4Mujk",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3703,
+      "output_tokens": 534
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T10:53:51.847997"
+  }
+}

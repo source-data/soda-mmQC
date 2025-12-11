@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "Panel A is a schematic diagram showing the experimental protocol, not a quantitative plot requiring statistical analysis",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "Panel B shows Western blots which are qualitative protein expression data, not quantitative measurements requiring statistical testing",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel C shows RT-qPCR time-course data with error bars (SEM) from n=3-4 independent experiments. Statistical tests should be provided to determine significance of differences between treatments and time points",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "Panel D shows representative live imaging images, which are qualitative and do not require statistical analysis",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "Panel E shows representative flow cytometric plots, which are qualitative displays of data distributions",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel F shows quantitative data of positive cell proportions with error bars (SEM) from n=3-4 independent experiments. Statistical tests should be provided to determine significance of differences between treatments",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel G shows quantitative data of positive cell proportions with error bars (SEM) from n=3-4 independent experiments. Statistical tests should be provided to determine significance of differences between treatments",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "Panel H shows representative immunostaining images, which are qualitative and do not require statistical analysis",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel I shows boxplots of RNA-seq quantifications from n=3 independent experiments. While the caption describes the boxplot format, no statistical tests are mentioned to compare differences between the 8 sorted populations",
+        "from_the_caption": "The boxplots follow standard Tukey representations (n = 3 independent biological experiments)"
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "Panel J shows hierarchical clustering which is a visualization method for grouping similar expression patterns. Statistical significance testing is not typically required for clustering analyses",
+        "from_the_caption": "Hierarchical clustering of cell type and lineage markers based on RNA-seq data from the 8 populations"
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_013uUrLKHxMj3d7RAhfo7Gpk",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3031,
+      "output_tokens": 1149
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:00:07.300280"
+  }
+}

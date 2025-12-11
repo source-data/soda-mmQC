@@ -1,0 +1,88 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          {
+            "name": "Abstract",
+            "correct_name": "Abstract",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Introduction",
+            "correct_name": "Introduction",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Results",
+            "correct_name": "Results",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Discussion",
+            "correct_name": "Discussion",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Methods",
+            "correct_name": "Methods",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Data availability",
+            "correct_name": "Data Availability",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Acknowledgments",
+            "correct_name": "Acknowledgements",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Disclosure and competing interests statement",
+            "correct_name": "Disclosure and competing interests statement",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "References",
+            "correct_name": "References",
+            "correct_position": "yes",
+            "to_remove": "no"
+          },
+          {
+            "name": "Figure legends",
+            "correct_name": "Figure legends",
+            "correct_position": "yes",
+            "to_remove": "no"
+          }
+        ],
+        "missing_sections": [
+          {
+            "name": "Author contributions"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01E2hv6gDEv1Noh1LxuQKzXN",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 34257,
+      "output_tokens": 415
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "cached_at": "2025-08-04T10:32:47.597255"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+      },
+      {
+        "panel_label": "G",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+      },
+      {
+        "panel_label": "H",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "The boxplots follow standard Tukey representations (n = 3 independent biological experiments) and are coloured by the lineage markers. The top and bottom edges of the boxplots represent the upper (75th percentile) and lower (25th percentile) quartiles. Horizontal lines within each box represent the median. Whiskers extend to 1.5 times the interquartile range."
+      },
+      {
+        "panel_label": "J",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_04b04f99d42b748a00693ab98909cc81a1a04d6e7dbed13df2",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2621,
+      "output_tokens": 1500
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T13:31:26.930713"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "***"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "***"
+        ],
+        "from_the_caption": "***P < 0.001"
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "****"
+        ],
+        "from_the_caption": "****P < 0.0001"
+      },
+      {
+        "panel_label": "K",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "L",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "***"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "***"
+        ],
+        "from_the_caption": "***P < 0.001"
+      },
+      {
+        "panel_label": "M",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "N",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "O",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "P",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "Q",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "R",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "*"
+        ],
+        "from_the_caption": "*P < 0.05"
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_014tTXokWUGFfwrFZoA5oecf",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3317,
+      "output_tokens": 1307
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44319-025-00438-0",
+    "source": "10.1038_s44319-025-00438-0/content/1",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:06:39.854867"
+  }
+}

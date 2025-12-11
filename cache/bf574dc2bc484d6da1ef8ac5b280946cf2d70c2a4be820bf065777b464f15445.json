@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a structural illustration showing cellular architecture and does not present quantitative data requiring statistical analysis",
+        "from_the_caption": "Apical end of showing a single actin filament being nucleated at the pre-conoidal rings (grey)"
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a structural illustration of the basal end of a sporozoite and does not present quantitative data requiring statistical analysis",
+        "from_the_caption": "Basal end of a sporozoite, showing cytoplasmic actin bundles as well as a build-up of pellicular actin"
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a tomographic slice showing structural features and does not present quantitative data requiring statistical analysis",
+        "from_the_caption": "A slice along the surface of the outer leaflet of the outer IMC membrane. Some filaments have been highlighted in green"
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a lateral section showing structural components and does not present quantitative data requiring statistical analysis",
+        "from_the_caption": "A lateral section showing nuclear, cytosolic and pellicular F-actin. Dark lines on the outer surface of the IMC represent thin pellicular filaments (TPFs)"
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a tomographic slice showing structural positioning and does not present quantitative data requiring statistical analysis",
+        "from_the_caption": "A slice through the average volume of TPFs showing their position relative to the IMC membranes"
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a tomographic slice showing structural connections and does not present quantitative data requiring statistical analysis",
+        "from_the_caption": "A slice through the tomogram (position shown in D) showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations)"
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01YBi2Q1mYg7vS4JjhTvYuA8",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2796,
+      "output_tokens": 816
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:43:54.228674"
+  }
+}

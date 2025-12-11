@@ -1,0 +1,80 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Pooled data are mean ± SEM of four independent experiments"
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Pooled data are mean ± SEM of three independent experiments"
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Pooled data are mean ± SEM of three independent experiments"
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are mean ± SD of technical duplicates"
+      },
+      {
+        "panel_label": "H",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are mean ± SD of technical duplicates"
+      },
+      {
+        "panel_label": "I",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are mean ± SD of technical triplicates"
+      },
+      {
+        "panel_label": "J",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "K",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are mean ± SD of technical triplicates"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00412-5",
+    "source": "10.1038_s44318-025-00412-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688cd039172081a0b67d66441f83be79013571d86372b1b7",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:33:42.336566"
+  }
+}

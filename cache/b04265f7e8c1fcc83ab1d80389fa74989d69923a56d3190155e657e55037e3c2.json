@@ -1,0 +1,65 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "6",
+          "7"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d1f92827881a2872464f18db29f1b09ddb57a949b4ea3",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:12:17.602264"
+  }
+}

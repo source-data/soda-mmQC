@@ -1,0 +1,42 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "the x-axis ticks labels show irregular time points without clear indicators such as zigzag marks or other standard symbols to denote breaks in the axis despite significant differences between main plot and insets."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_688cc9d7a90881a0b8199d9a49d6d182022f307d57b2241c",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:06:21.047210"
+  }
+}

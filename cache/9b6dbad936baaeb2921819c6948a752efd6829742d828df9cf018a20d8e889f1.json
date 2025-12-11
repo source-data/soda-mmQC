@@ -1,0 +1,65 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Abstract",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials & Methods",
+          "Acknowledgments",
+          "Author Contributions",
+          "Competing Interest Statement",
+          "References",
+          "Figures legends",
+          "Expanded View Figure Legends"
+        ],
+        "missing_sections": [
+          "Data Availability"
+        ],
+        "sections_to_remove": [],
+        "sections_to_rename": [
+          {
+            "original": "Materials & Methods",
+            "renamed": "Materials and methods"
+          },
+          {
+            "original": "Acknowledgments",
+            "renamed": "Acknowledgements"
+          },
+          {
+            "original": "Author Contributions",
+            "renamed": "Author contributions"
+          },
+          {
+            "original": "Competing Interest Statement",
+            "renamed": "Disclosure and competing interests statement"
+          },
+          {
+            "original": "Figures legends",
+            "renamed": "Figure legends"
+          },
+          {
+            "original": "Expanded View Figure Legends",
+            "renamed": "Expanded View legends"
+          }
+        ],
+        "sections_to_move": []
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01UzhyWX3pfEs9AHd4f1xAjC",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 33211,
+      "output_tokens": 342
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "EMBOR-2025-61250V2",
+    "source": "EMBOR-2025-61250V2",
+    "example_type": "word",
+    "cached_at": "2025-08-04T10:33:28.826664"
+  }
+}

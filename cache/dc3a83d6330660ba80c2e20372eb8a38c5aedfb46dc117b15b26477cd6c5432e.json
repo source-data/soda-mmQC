@@ -1,0 +1,42 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "Aii",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d0d3bd70481928880f5b8fdd9041e09c35602d6faf885",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T20:53:52.596565"
+  }
+}

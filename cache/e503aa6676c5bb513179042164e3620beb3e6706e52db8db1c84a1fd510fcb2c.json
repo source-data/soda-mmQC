@@ -1,0 +1,219 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "categorical x-axis with group labels (siNC, siPPA2, siELOVL6, siDLAT); no numerical discontinuity or omitted range."
+          },
+          {
+            "axis": "y",
+            "definition": "continuous numeric axis from 0.0 to ~1.5 with regularly spaced tick marks (no skipped ranges or abrupt jumps)."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "categorical x-axis labeling experimental groups under the bar chart; no numerical gap or omission."
+          },
+          {
+            "axis": "y",
+            "definition": "continuous numeric axis from 0.0 to ~2.0 with evenly spaced ticks; no axis break or omitted range visible."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "categorical comparison (stage I/II vs III/IV); no numeric discontinuity on x-axis."
+          },
+          {
+            "axis": "y",
+            "definition": "violin plot y-axis (PPA2 expression) with continuous scale from 0 to ~80 and regularly spaced tick marks; no skipped ranges or visual breaks."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "categorical x-axis (stage groups); no discontinuity present."
+          },
+          {
+            "axis": "y",
+            "definition": "violin plot y-axis (PPA2 expression) continuous from 0 to ~50 with regular tick spacing; no axis break indicated or necessary."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "Kaplan–Meier time axis (Overall survival in years) from 0 to 12 with regular tick marks (0, 3, 6, 9, 12); no omitted interval."
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival axis 0–100 with regular ticks; continuous and no breaks."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "Kaplan–Meier time axis from 0 to 12 years with regular spacing; no discontinuity or omitted segments."
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival axis 0–100 with no breaks and regular tick spacing."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "Kaplan–Meier time axis (0–12 years) displayed continuously with regular ticks."
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival 0–100 shown continuously without any axis break markings."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "Kaplan–Meier time axis from 0 to 12 years with evenly spaced ticks; no omitted intervals."
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival axis 0–100 continuous; no axis breaks indicated or necessary despite near-flat high survival curves."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_0f85bbd8d9f1de9600693ad2b86fdc81928011b44fd87ac89c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3202,
+      "output_tokens": 2759
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:19:13.718592"
+  }
+}

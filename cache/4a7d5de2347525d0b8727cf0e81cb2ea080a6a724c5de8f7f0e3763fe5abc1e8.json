@@ -1,0 +1,128 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Left subpanel (body weight): y-axis units are present (g). Middle subpanel (LW/BW): the y-axis shows numeric ratio values (0.00–0.08) but no explicit unit label is given on the plot (this is a weight/weight ratio)."
+          },
+          {
+            "axis": "y",
+            "justification": "Right subpanel (FW/BW): the y-axis shows numeric ratio values but no explicit unit label is given on the plot (this is a weight/weight ratio)."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Body weight (g) — unit 'g' is present on the body weight plot."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "5mC/Methyl Blue (ratio) — the y-axis label on the quantification bar graph indicates the measurement is reported as a ratio."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Ratio (TETs/GAPDH) — the y-axis label on the bar/scatter plot indicates values are reported as a ratio of TET protein to GAPDH."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0ad77b52ddd45f1700693adc468898819ea3bf75fd600f8f63",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3120,
+      "output_tokens": 3832
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T16:00:13.724754"
+  }
+}

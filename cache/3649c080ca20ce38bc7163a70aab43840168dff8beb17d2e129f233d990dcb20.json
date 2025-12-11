@@ -1,0 +1,32 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai–ii",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688cd046ccec81a09f6b8186445690010671872d12e321c1",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:33:49.484505"
+  }
+}

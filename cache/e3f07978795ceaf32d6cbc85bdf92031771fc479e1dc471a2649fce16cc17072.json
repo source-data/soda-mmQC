@@ -1,0 +1,55 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are presented as mean ± S.D. in (A, E), and (F)"
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are presented as mean ± S.D. in (A, E), and (F)"
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are presented as mean ± S.D. in (A, E), and (F)"
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01WwyPbDn6rQMhhQt2CrJL4K",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2727,
+      "output_tokens": 439
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T11:57:00.722796"
+  }
+}

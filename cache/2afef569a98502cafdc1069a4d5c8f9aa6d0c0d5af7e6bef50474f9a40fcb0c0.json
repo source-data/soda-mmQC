@@ -1,0 +1,86 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "6",
+          "7"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d20825b10819eadbc7fb97bf80dcb022185133ad56757",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:16:12.252909"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "2",
+          "3",
+          "5",
+          "3"
+        ],
+        "type_of_replicates": [
+          "biological replicates",
+          "technical triplicates or duplicates",
+          "HCC1806 Per2-Luc samples",
+          "MCF10A and MDAMB468-Per2-Luc samples"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "1-4",
+          "3-6"
+        ],
+        "type_of_replicates": [
+          "cell lines models per subtype",
+          "replicates per cell model"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "4-12"
+        ],
+        "type_of_replicates": [
+          "samples per cell line"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "multiple"
+        ],
+        "type_of_replicates": [
+          "replicates"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "1-4"
+        ],
+        "type_of_replicates": [
+          "cell line models"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01TFPcypXFptKbt4ajUiJ21F",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3099,
+      "output_tokens": 559
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:30:44.976307"
+  }
+}

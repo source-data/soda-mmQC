@@ -1,0 +1,38 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Mean±s.d. of three independent experiments"
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Mean±s.d. of three experiments"
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_688cced58c5881a29c8f2692ee6c380a0d349346183c5e2c",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T16:27:40.624743"
+  }
+}

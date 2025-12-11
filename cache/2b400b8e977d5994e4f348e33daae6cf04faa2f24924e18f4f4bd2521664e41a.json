@@ -1,0 +1,107 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [
+          "orange circle"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Enrichment ratio of HTT bait is indicated by orange circle."
+        ]
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [
+          "red circles",
+          "orange circles",
+          "light blue circles"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Bait HTT and selected positive control interactions are denoted in red and orange circles, respectively.",
+          "Bait HTT and selected positive control interactions are denoted in red and orange circles, respectively.",
+          "HTT interactions that were annotated in at least 2/3 of the previously reported HTT IP-MS studies from mouse brain are indicated in light blue circles."
+        ]
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "I",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "J",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01SQeGXN8Tzwi5ZnQA8XEUsk",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3368,
+      "output_tokens": 625
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44320-025-00096-3",
+    "source": "10.1038_s44320-025-00096-3/content/9",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:25:12.697366"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a representative flow cytometric plot showing gating strategy for B cell identification, not comparing groups or showing significance levels",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a representative flow cytometric plot showing gating strategy for plasma cell identification, not comparing groups or showing significance levels",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This shows MBC gating strategy plots without any statistical comparisons or significance statements",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This is a color-coded overlay showing expression patterns of cell surface molecules, not making statistical comparisons",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "This shows MBC subset gating without any statistical comparisons or significance testing",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_011fKnYM9gJSFCv4vXLNAZqz",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3064,
+      "output_tokens": 528
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T10:48:23.248159"
+  }
+}

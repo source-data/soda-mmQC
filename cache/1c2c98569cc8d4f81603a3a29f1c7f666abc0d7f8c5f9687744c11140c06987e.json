@@ -1,0 +1,70 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "p<0.001",
+          "p=0.002",
+          "p=0.047"
+        ],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": "P values were determined using unpaired two-tailed Student's T test. Exact p values were as indicated."
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "p=0.002"
+        ],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": "P values were determined using unpaired two-tailed Student's T test. Exact p values were as indicated."
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "p<0.001",
+          "p=0.031"
+        ],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": "P values were determined using unpaired two-tailed Student's T test. Exact p values were as indicated."
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01Mhu1tQaFGuSamZvEsGSMGW",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3211,
+      "output_tokens": 556
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:06:00.176537"
+  }
+}

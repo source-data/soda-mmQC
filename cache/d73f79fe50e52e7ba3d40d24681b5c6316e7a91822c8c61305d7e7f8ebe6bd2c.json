@@ -1,0 +1,65 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Summary",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials and Methods",
+          "Data availability",
+          "Acknowledgements",
+          "Author contributions",
+          "Conflict of interest",
+          "References",
+          "Figure legends",
+          "Supplementary figure legends"
+        ],
+        "missing_sections": [
+          "Disclosure and competing interests statement"
+        ],
+        "sections_to_remove": [
+          "Supplementary figure legends"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "Summary",
+            "renamed": "Abstract"
+          },
+          {
+            "original": "Data availability",
+            "renamed": "Data Availability"
+          },
+          {
+            "original": "Conflict of interest",
+            "renamed": "Disclosure and competing interests statement"
+          },
+          {
+            "original": "Supplementary figure legends",
+            "renamed": "Expanded View legends"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Materials and Methods",
+            "move_before": "Data availability"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01QC8XPnLNWqaEStDnHTzEPT",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 33043,
+      "output_tokens": 337
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "cached_at": "2025-08-04T10:33:20.655484"
+  }
+}

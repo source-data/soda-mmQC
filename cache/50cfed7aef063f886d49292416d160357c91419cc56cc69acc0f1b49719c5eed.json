@@ -1,0 +1,46 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (s) is indicated on the x-axis."
+          },
+          {
+            "axis": "y",
+            "definition": "Normalized intensity (a.u.) is indicated on the y-axis."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_688d18209aec81a39f0dea0b53f0b68701c713a5286a2885",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T21:40:22.792790"
+  }
+}

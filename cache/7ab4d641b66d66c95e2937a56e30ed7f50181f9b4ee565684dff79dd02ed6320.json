@@ -1,0 +1,35 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01V96cEqX2zxgBxj6fwSLNQu",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2449,
+      "output_tokens": 191
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T10:48:26.686203"
+  }
+}

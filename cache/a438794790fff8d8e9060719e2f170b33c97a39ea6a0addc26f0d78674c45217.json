@@ -1,0 +1,57 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Summary",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials and Methods",
+          "Data availability",
+          "Acknowledgements",
+          "Author contributions",
+          "Conflict of interest",
+          "References",
+          "Figure legends"
+        ],
+        "missing_sections": [
+          "Abstract",
+          "Disclosure and competing interests statement",
+          "Expanded View legends"
+        ],
+        "sections_to_remove": [
+          "Summary"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "Conflict of interest",
+            "renamed": "Disclosure and competing interests statement"
+          },
+          {
+            "original": "Data availability",
+            "renamed": "Data Availability"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Materials and Methods",
+            "move_before": "Acknowledgements"
+          },
+          {
+            "section_in_manuscript": "Data availability",
+            "move_before": "Acknowledgements"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_688d2650b2cc819eab32781f3609ea21042e7c21bafd9a97",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:40:53.739512"
+  }
+}

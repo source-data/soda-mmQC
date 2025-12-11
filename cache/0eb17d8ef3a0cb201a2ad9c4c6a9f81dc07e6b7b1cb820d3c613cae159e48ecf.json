@@ -1,0 +1,56 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "NP-specific germinal center (GC) and MBC"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "NP-specific germinal center (GC) and MBC"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "NP-specific germinal center (GC) and MBC"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_688d1fe3ada8819c953b73fd022e58bc0e689e68c3334407",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:13:33.774303"
+  }
+}

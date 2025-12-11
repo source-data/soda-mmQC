@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "5"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "6",
+          "7"
+        ],
+        "type_of_replicates": [
+          "NC",
+          "HFD"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01DLGd2tuUR81CpbvhRMQmQd",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3219,
+      "output_tokens": 383
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:29:28.222619"
+  }
+}

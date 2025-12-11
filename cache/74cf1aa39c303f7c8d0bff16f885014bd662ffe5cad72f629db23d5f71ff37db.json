@@ -1,0 +1,127 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrowhead",
+          "brown arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "White arrowhead indicates an actin filament going through a basal pore",
+          ""
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "green highlighted filaments",
+          "green arrowheads"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "Some filaments have been highlighted in green",
+          ""
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "yes",
+        "symbols": [
+          "green arrowheads",
+          "blue arrowheads",
+          "brown arrowheads",
+          "red arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "symbols": [
+          "yellow arrowhead",
+          "green arrowhead",
+          "orange arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrows",
+          "red densities",
+          "blue pellicular actin filament",
+          "yellow arrowhead",
+          "green arrowheads",
+          "white arrowheads"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "red, white arrows consistent with myosin dimensions",
+          "two densities (red, white arrows) consistent with myosin dimensions",
+          "pellicular actin filament (blue)",
+          "",
+          "",
+          ""
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01L3jxstkP1nxfgF9YcKgf3V",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2815,
+      "output_tokens": 590
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:54:28.585431"
+  }
+}

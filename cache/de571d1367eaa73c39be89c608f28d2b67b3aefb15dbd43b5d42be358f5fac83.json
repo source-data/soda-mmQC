@@ -1,0 +1,97 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n\u0000\u000f=\u0000\u000f141 samples represented as individual measurements"
+        ],
+        "type_of_replicates": [
+          "samples represented as individual measurements"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "Data represents the mean\u0000\u000f\u0000\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u000f of 6 samples per reporter (n\u0000\u000f=\u0000\u000f6)"
+        ],
+        "type_of_replicates": [
+          "samples per reporter"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n\u0000\u000f=\u0000\u000f1\u0000\u000f\u0000\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u0000\u000f\u000f\u000f4 cell lines models per subtype",
+          "Before calculating subtype averages, all available replicates per cell model were averaged (n\u0000\u000f=\u0000\u000f3\u0000\u000f\u0000\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u0000\u000f\u000f\u000f6)"
+        ],
+        "type_of_replicates": [
+          "cell lines models per subtype",
+          "available replicates per cell model"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n\u0000\u000f=\u0000\u000f4\u0000\u000f\u0000\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u0000\u000f\u000f\u000f12 samples per cell line (see (B) for exact numbers)"
+        ],
+        "type_of_replicates": [
+          "samples per cell line"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "The number n of Bmal1-Per2-combinations per cell line is indicated next to the cell line name."
+        ],
+        "type_of_replicates": [
+          "Bmal1-Per2-combinations per cell line"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n\u0000\u000f=\u0000\u000f1\u0000\u000f\u0000\u000f\u000f\u000f\u000f\u000f\u000f\u000f\u0000\u000f\u000f\u000f4 cell line models, see (E) for exact numbers"
+        ],
+        "type_of_replicates": [
+          "cell line models"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n\u0000\u000f=\u0000\u000f117 samples"
+        ],
+        "type_of_replicates": [
+          "samples"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0c3a95b6d707b90300693adee0e7c48195b3f9ed9caff80465",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3203,
+      "output_tokens": 3478
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T16:11:15.514892"
+  }
+}

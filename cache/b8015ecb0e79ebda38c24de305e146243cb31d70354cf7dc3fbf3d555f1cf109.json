@@ -1,0 +1,42 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "red circles",
+          "green circles"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "circles in euchromatin (red)",
+          "circles in heterochromatin (green)"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01J8J9DeV56qWeHSDtLCNyYq",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2575,
+      "output_tokens": 200
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:26:16.474750"
+  }
+}

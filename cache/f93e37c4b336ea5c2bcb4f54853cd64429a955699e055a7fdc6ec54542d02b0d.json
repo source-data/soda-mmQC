@@ -1,0 +1,203 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "y-axis is a continuous variable labelled 'Rel. mRNA level' (relative expression) but no units or definition (e.g., fold-change, % of control, or arbitrary units) are provided on the plot or in the figure caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "y-axis is a continuous variable labelled 'Rel. invaded cells' but no units or definition (e.g., cell count, fold-change, or normalization method) are provided on the plot or in the figure caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "PPA2 Expression (count) (label shown on the y-axis of the violin plot)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "PPA2 Expression (count) (label shown on the y-axis of the violin plot)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years) (label shown on the x-axis of the Kaplan–Meier plot)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%) (label shown on the y-axis of the Kaplan–Meier plot)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years) (label shown on the x-axis of the Kaplan–Meier plot)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%) (label shown on the y-axis of the Kaplan–Meier plot)"
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years) (label shown on the x-axis of the Kaplan–Meier plot)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%) (label shown on the y-axis of the Kaplan–Meier plot)"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years) (label shown on the x-axis of the Kaplan–Meier plot)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%) (label shown on the y-axis of the Kaplan–Meier plot)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_0b877a409eb0448400693adbf9c2348193a764a139e88c0aec",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3028,
+      "output_tokens": 2642
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:58:51.729063"
+  }
+}

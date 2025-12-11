@@ -1,0 +1,28 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "average early time points responses"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_688d1ee865e08191b5366d21cce1cf7207bc823609f7b6ba",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:09:16.066027"
+  }
+}

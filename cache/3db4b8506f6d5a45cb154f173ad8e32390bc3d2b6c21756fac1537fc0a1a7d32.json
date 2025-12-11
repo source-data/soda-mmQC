@@ -1,0 +1,33 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "yes",
+        "from_the_caption": "Scale bar 10 μm"
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_0127YpPmbdFnL7KS6nCbScSd",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 2366,
+      "output_tokens": 173
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T10:55:37.323381"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "Aii",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_688d15ffcf68819c80a5b68728baa4a20120f82a09cd335d",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T21:31:16.006736"
+  }
+}

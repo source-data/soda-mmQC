@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "Aii",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrow"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": [
+          ""
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrow"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "White arrows indicate cell regions experiencing membrane bulging."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "response_id": "msg_01T9UWVAftG4DRhCuUNLoMu7",
+    "model": "claude-sonnet-4-20250514",
+    "usage": {
+      "input_tokens": 3407,
+      "output_tokens": 311
+    },
+    "stop_reason": "tool_use",
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "cached_at": "2025-08-04T12:27:20.291598"
+  }
+}

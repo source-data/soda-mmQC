@@ -1,0 +1,168 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The plotted traces show circadian signal amplitude over time but the y-axis is not labeled with units (e.g., relative luminescence units, counts, or normalized amplitude); the figure image does not indicate what unit the signal amplitude is reported in, and the caption does not provide replicate-specific unit definitions."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled as 'Cell number' (a quantitative continuous variable) but no explicit unit is given (e.g., number of cells, cells per well); the image does not show units such as 'cells' or 'cells ×10^3', and the caption contains no replicate-specific unit definition."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled 'Growth inh.' (growth inhibition) but no units or scale descriptor are provided (e.g., % inhibition or fraction of control); the image and caption do not define the units for the growth inhibition metric."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "z",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "PC1 is a continuous principal component score but the axis lacks units or a percent-variance-explained annotation (i.e., no indication of scale or variance %); principal component scores are dimensionless but it is common to indicate % variance — this is not provided in the image or caption."
+          },
+          {
+            "axis": "y",
+            "justification": "PC2 is a continuous principal component score but the axis lacks units or percent-variance-explained annotation; no unit/scale is provided in the image or caption."
+          },
+          {
+            "axis": "z",
+            "justification": "The 3D inset shows three continuous component/parameter axes (Parameter #1/#2/#3 or PC3) with no units or percent-variance-explained annotations; no units are given in the image or caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_026c3dc3a77a7a0e00693ada0066e08197bd06926e68e1b6b0",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3057,
+      "output_tokens": 2756
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:50:10.820117"
+  }
+}

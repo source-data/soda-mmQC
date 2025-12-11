@@ -1,0 +1,225 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "% HTT FT Depletion vs mIgG (y-axis label shows %)"
+          },
+          {
+            "axis": "y",
+            "definition": "Log2 HTT Elution Abundance vs mIgG (y-axis label shows Log2 scale)"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "z",
+            "definition": "Color scale = Log2 normalized abundance (Raw MS protein abundances normalized ... and expressed as the log2 average of two biological replicates)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "log2 enrichment ratio (HTT IP vs mIgG IP) — y-axis shown on Log2 scale"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "MS abundance (tryptic peptide normalized) — numeric axis in raw MS intensity units shown (e.g., 6.5×10^11). Caption replicate text: (n = 4, mean ± SD)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Log2 fold-change (Log2 FC) of enrichment (e.g., Q140 2B7-4C9 vs IgG shown on Log2 scale)"
+          },
+          {
+            "axis": "y",
+            "definition": "Log2 fold-change (Log2 FC) of enrichment (e.g., Q20 2B7-4C9 vs IgG shown on Log2 scale)"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "HTT abundance (Log10) — axis labeled as Log10 abundance"
+          },
+          {
+            "axis": "y",
+            "definition": "Hap40 abundance (Log10) — axis labeled as Log10 abundance"
+          }
+        ]
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "PC1 shown with percent variance explained (e.g., PC1 (19.5%)) — principal component axis (unitless, percent variance indicated)"
+          },
+          {
+            "axis": "y",
+            "definition": "PC2 shown with percent variance explained (e.g., PC2 (17.7%)) — principal component axis (unitless, percent variance indicated)"
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "PC1 (percent variance explained shown for each subplot, e.g., PC1 (23.2%)) — principal component axis (unitless, percent variance indicated)"
+          },
+          {
+            "axis": "y",
+            "definition": "PC2 (percent variance explained shown for each subplot, e.g., PC2 (11.6%)) — principal component axis (unitless, percent variance indicated)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00096-3",
+    "source": "10.1038_s44320-025-00096-3/content/9",
+    "example_type": "figure",
+    "response_id": "resp_0163bb00d3b3d91700693adb66fa2c8191a8902a3c8157f5c8",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3590,
+      "output_tokens": 4731
+    },
+    "status": "completed",
+    "cached_at": "2025-12-11T15:56:48.053237"
+  }
+}

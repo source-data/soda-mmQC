@@ -1,0 +1,86 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5912"
+        ],
+        "type_of_replicates": [
+          "Drosophila promoters"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "unknown"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "6122"
+        ],
+        "type_of_replicates": [
+          "mouse promoters"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "unknown"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "572",
+          "64",
+          "422",
+          "71"
+        ],
+        "type_of_replicates": [
+          "mouse TATA-less promoters",
+          "mouse TATA-containing promoters",
+          "Drosophila TATA-less promoters",
+          "Drosophila TATA-containing promoters"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "572",
+          "64",
+          "422",
+          "71"
+        ],
+        "type_of_replicates": [
+          "mouse TATA-less promoters",
+          "mouse TATA-containing promoters",
+          "Drosophila TATA-less promoters",
+          "Drosophila TATA-containing promoters"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_688d202ad840819eac863e3e829fad3406fb50372d6619a8",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:14:42.995403"
+  }
+}

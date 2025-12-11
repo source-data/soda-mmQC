@@ -1,0 +1,50 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Abstract",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials & Methods",
+          "Data availability",
+          "Acknowledgments",
+          "Author Contributions",
+          "Competing Interest Statement",
+          "References",
+          "Figures legends",
+          "Expanded View Figure Legends"
+        ],
+        "missing_sections": [
+          "Disclosure and Competing Interests Statement"
+        ],
+        "sections_to_remove": [],
+        "sections_to_rename": [
+          {
+            "original": "Competing Interest Statement",
+            "renamed": "Disclosure and Competing Interests Statement"
+          },
+          {
+            "original": "Figures legends",
+            "renamed": "Figure Legends"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Disclosure and Competing Interests Statement",
+            "move_before": "References"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-61250V2",
+    "source": "EMBOR-2025-61250V2",
+    "example_type": "word",
+    "response_id": "resp_688d267d05cc81a0a23eaded158cdd200d2ce0a7c2d44527",
+    "model": "gpt-4o-2024-08-06",
+    "cached_at": "2025-08-01T22:41:41.749578"
+  }
+}
