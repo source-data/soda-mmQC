@@ -1,0 +1,26 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "multicolored_overlay_micrograph": "yes",
+            "colors_displayed": [
+                "red",
+                "green",
+                "blue/purple (background)",
+                "yellow/orange (high intensity)"
+            ],
+            "gray_scale_single_channel_images": [
+                "no",
+                "no",
+                "no",
+                "no"
+            ]
+        },
+        {
+            "panel_label": "B",
+            "multicolored_overlay_micrograph": "no",
+            "colors_displayed": [],
+            "gray_scale_single_channel_images": []
+        }
+    ]
+}

@@ -65,7 +65,7 @@
             ],
             "type_of_replicates": [
                 "images",
-                "ndependent experiments"
+                "independent experiments"
             ]
         },
         {
@@ -77,7 +77,7 @@
             ],
             "type_of_replicates": [
                 "images",
-                "ndependent experiments"
+                "independent experiments"
             ]
         },
         {
@@ -153,5 +153,5 @@
             ]
         }
     ],
-    "updated_at": "2025-05-15 16:34:57"
+    "updated_at": "2025-09-08 14:03:48"
 }

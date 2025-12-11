@@ -1,0 +1,54 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "multicolored_overlay_micrograph": "no",
+            "colors_displayed": [],
+            "gray_scale_single_channel_images": []
+        },
+        {
+            "panel_label": "B",
+            "multicolored_overlay_micrograph": "no",
+            "colors_displayed": [],
+            "gray_scale_single_channel_images": []
+        },
+        {
+            "panel_label": "C",
+            "multicolored_overlay_micrograph": "yes",
+            "colors_displayed": [
+                "green",
+                "orange"
+            ],
+            "gray_scale_single_channel_images": [
+                "no",
+                "no"
+            ]
+        },
+        {
+            "panel_label": "D",
+            "multicolored_overlay_micrograph": "no",
+            "colors_displayed": [],
+            "gray_scale_single_channel_images": []
+        },
+        {
+            "panel_label": "E",
+            "multicolored_overlay_micrograph": "no",
+            "colors_displayed": [],
+            "gray_scale_single_channel_images": []
+        },
+        {
+            "panel_label": "F",
+            "multicolored_overlay_micrograph": "yes",
+            "colors_displayed": [
+                "blue",
+                "red",
+                "white"
+            ],
+            "gray_scale_single_channel_images": [
+                "no",
+                "no",
+                "no"
+            ]
+        }
+    ]
+}
