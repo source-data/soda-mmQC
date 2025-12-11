@@ -1,0 +1,54 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "single-channel-for-overlay",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "panel_label": {
+                                "type": "string",
+                                "description": "Label of the panel (e.g., A, B, C)"
+                            },
+                            "multicolored_overlay_micrograph": {
+                                "type": "string",
+                                "enum": ["yes", "no"],
+                                "description": "Whether the panel shows a multicolored overlay microscopy image"
+                            },
+                            "colors_displayed": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "Color displayed in the multicolored overlay microscopy image"
+                                },
+                                "description": "Colors displayed in the multicolored overlay microscopy image"
+                            },
+                            "gray_scale_single_channel_images": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "Whether the gray scale single-channel image is provided for the color"
+                                },
+                                "description": "List of types of replicates"
+                            } 
+                        },
+                        "required": [
+                            "panel_label",
+                            "multicolored_overlay_micrograph",
+                            "colors_displayed",
+                            "gray_scale_single_channel_images"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}
