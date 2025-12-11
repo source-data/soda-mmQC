@@ -68,8 +68,8 @@ CACHE_DIR = Path(os.getenv("SODA_MMQC_CACHE_DIR", DATA_DIR / "cache"))
 CHECKLIST_DIR = DATA_DIR / "checklist"
 EXAMPLES_DIR = DATA_DIR / "examples"
 # EXAMPLES_DIR = DATA_DIR / "examples_new"
-# EVALUATION_DIR = DATA_DIR / "evaluation"
-EVALUATION_DIR = DATA_DIR / "evaluation_new"
+EVALUATION_DIR = DATA_DIR / "evaluation"
+# EVALUATION_DIR = DATA_DIR / "evaluation_new"
 PLOTS_DIR = DATA_DIR / "plots"
 
 # String comparison metrics configuration
@@ -131,7 +131,6 @@ API_PROVIDER = _validate_and_setup_api_provider()
 # Default models for each provider
 DEFAULT_MODELS = {
     "openai": "gpt-4o-2024-08-06",
-    # "openai": "gpt-4.1-nano",
     "anthropic": "claude-3-5-sonnet-20241022"
 }
 
