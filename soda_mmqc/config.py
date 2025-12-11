@@ -131,7 +131,6 @@ API_PROVIDER = _validate_and_setup_api_provider()
 # Default models for each provider
 DEFAULT_MODELS = {
     "openai": "gpt-4o-2024-08-06",
-    # "openai": "gpt-4.1-nano",
     "anthropic": "claude-3-5-sonnet-20241022"
 }
 
