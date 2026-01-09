@@ -568,9 +568,8 @@ def check_report(
             id_match = item_data['item_id'].str.contains(search_id)
             item_data = item_data[id_match]
 
-        logger.debug(f"Item data: {
-            item_data[['item_id', 'score']].head(6)
-        }")
+        item_data_preview = item_data[['item_id', 'score']].head(6)
+        logger.info(f"Item data: {item_data_preview}")
         # check worse items with general score < 1.0
         not_perfect = item_data.loc[
             item_data[score] < 0.99
