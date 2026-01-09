@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "image cropping, rotation and resizing"
+      },
+      {
+        "panel_label": "b",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "image spacing in the figure"
+      },
+      {
+        "panel_label": "c",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "presenting several magnifications (zoom, inset) of images"
+      },
+      {
+        "panel_label": "d",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Adjust brightness and/or contrast to achieve good visibility of the imaging signal."
+      },
+      {
+        "panel_label": "e",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Channel information should be annotated and visible to audiences (high contrast to background color, visible to color-blind audiences)."
+      },
+      {
+        "panel_label": "f",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Image details are most unbiased in grayscale."
+      },
+      {
+        "panel_label": "g",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "publish legends for color intensities (intensity and/or calibration scales)"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0492d17d1dbbd2da0069455d81c8388193b3d00b7cb1bd98ad",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2809,
+      "output_tokens": 2037
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T15:13:51.263406"
+  }
+}

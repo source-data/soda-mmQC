@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "long-term luciferase (Luc) recordings"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "stationary and non-stationary analysis approaches"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "correlation analysis"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Long-term live imaging"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "growth rate inhibition metrics"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "genomic circadian profiles"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "PCA cluster"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0afb451c689051ee0069455affbe3481a2844d85ea4840649b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2942,
+      "output_tokens": 2172
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T15:03:16.747521"
+  }
+}

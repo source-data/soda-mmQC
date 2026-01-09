@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Macroscopic comparison of the small intestine"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Haematoxylin and eosin staining of intestinal ‘Swiss roll’ sections"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "The mean numbers and sizes of intestinal polyps"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Kaplan–Meier survival curves"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "GTP‐bound GTPases were precipitated using GST–PAK CRIB coupled to glutathione–Sepharose beads and detected by immunoblotting"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunohistochemical analysis of pJNK, MMP9 and Asef/Asef2 in intestinal sections"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting analysis and zymography of the normal intestinal mucosa (N) and polyps (P)"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0e1387eeb04488700069455b5a717881919457c00d269bf263",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3096,
+      "output_tokens": 2640
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T15:04:50.418189"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "H",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "blue",
+          "red",
+          "green"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_056191aa8688e04d00693c07478a1481a28ff1803d63f5933a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3156,
+      "output_tokens": 941
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T13:15:18.754471"
+  }
+}

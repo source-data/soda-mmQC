@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "H",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_09471fa34d4f2b6700695e6747e4348192890a19925c620734",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3205,
+      "output_tokens": 597
+    },
+    "status": "completed",
+    "cached_at": "2026-01-07T15:02:12.994054"
+  }
+}

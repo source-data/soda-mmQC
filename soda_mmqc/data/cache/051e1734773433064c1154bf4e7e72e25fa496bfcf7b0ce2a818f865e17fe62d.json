@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows RT-qPCR time-course data with mean ± SEM across treatments and timepoints but no statistical comparisons or p-values are reported. To support claims of differences over time or between treatments the authors should state which statistical test was used (e.g., two-way repeated-measures ANOVA or mixed-effects model for time × treatment, or pairwise tests with appropriate multiple-comparisons correction) and report p-values or adjusted p-values.",
+        "from_the_caption": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel F reports proportions of positive cells (day 4) with mean ± SEM but does not report any statistical test or p-values. Proportion data require appropriate statistical comparisons (e.g., chi-square/Fisher's exact test for counts, or a generalized linear model/binomial test, or ANOVA on transformed percentages) and correction for multiple comparisons across conditions/doses. The specific test and multiple-comparison method should be stated so readers can assess significance.",
+        "from_the_caption": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel G reports proportions of positive cells (day 7.5) with mean ± SEM but no statistical test or p-values are provided. As for (F), an appropriate test for comparing proportions across groups (and addressing repeated measures or biological replicates) and multiple-comparisons correction should be reported.",
+        "from_the_caption": "Data are represented as mean ± SEM (n = 3–4) independent biological experiments for (C, F, G)."
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel I shows RNA-seq quantifications as boxplots (n = 3). The caption describes the boxplot format but does not state what statistical method was used to test differential expression or compare groups. For RNA-seq data the authors should report the differential-expression pipeline (e.g., DESeq2/edgeR), the statistical test, normalization method, and multiple-testing correction (FDR) used to call significance.",
+        "from_the_caption": "The boxplots follow standard Tukey representations (n\u0000=\u00003 independent biological experiments) and are coloured by the lineage markers."
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_047877d9dd2440bf006960ea62a9d08191811765d4ba90a521",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2703,
+      "output_tokens": 3491
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:46:25.005812"
+  }
+}

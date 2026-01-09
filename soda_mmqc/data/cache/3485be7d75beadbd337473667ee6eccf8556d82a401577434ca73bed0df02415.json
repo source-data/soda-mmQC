@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "hematoxylin (blue)",
+          "eosin (pink)"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "DAB (brown)",
+          "hematoxylin (blue)"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0d0b2999d0b5374900695e6766fda08193a7ed0818a3e69f08",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2982,
+      "output_tokens": 1579
+    },
+    "status": "completed",
+    "cached_at": "2026-01-07T15:02:47.940152"
+  }
+}

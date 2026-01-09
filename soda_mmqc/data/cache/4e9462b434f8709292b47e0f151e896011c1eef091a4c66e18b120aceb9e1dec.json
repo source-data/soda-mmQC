@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "The expression of exogenous HMGB1‐FLAG (detected with an anti‐FLAG antibody) and endogenous+exogenous HMGB1 (detected with an anti‐HMGB1 antibody) was tested by immunohistochemical analysis."
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Aggregate formation was tested by immunohistochemical analysis of cerebellar tissues of background C57BL/6 mice, mutant Atxn1‐KI mice and double‐transgenic mice."
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot analysis with anti‐ubiquitin antibody confirmed that aggregate formation was similar in mutant Atxn1‐KI mice and double‐transgenic mice."
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "The rotarod performance test revealed improvement in the motor activity of double‐transgenic mice over that of mutant Atxn1‐KI mice."
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Details of the rotarod performance of the three genotypes of mice (WT, Atxn1‐KI and double‐transgenic) from day 1 to day 3 at 5, 9 and 21 weeks."
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "The effect of HMGB1 on the lifespan was assessed by Kaplan–Meier analysis, and the end‐point postponement was significant in the log‐rank test (P = 0.0025)."
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Histological evaluation of the double‐transgenic mice."
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantitative analysis of histological parameters in the three groups of mice showed that reduction in the molecular layer thickness was reversed in double‐transgenic mice (upper graph; Student's t‐test, P < 0.05)."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0d29321d09e34f8800694531eb75988193a32f8d386e6d37fe",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3252,
+      "output_tokens": 1947
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T12:07:53.799316"
+  }
+}

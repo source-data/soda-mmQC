@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Autocorrelation analysis"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "multiresolution analysis"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Continuous Wavelet Transform"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "CWT"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "polar histograms"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Polar histogram"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "exponentially decaying sinusoidal model"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Inference of cell-to-cell circadian coupling strength"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_06bfbb9c05c2b9a00069455b2621b8819c82b06114495091d4",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3319,
+      "output_tokens": 3164
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T15:04:09.221844"
+  }
+}

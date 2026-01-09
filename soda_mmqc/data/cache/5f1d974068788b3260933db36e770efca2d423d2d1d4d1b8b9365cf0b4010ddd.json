@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel E shows a correlation heatmap of circadian parameters. To support any claims about relationships between parameters, the authors should report which correlation metric was used (e.g., Pearson or Spearman), the sample size, significance values (p-values) for each correlation, and how multiple comparisons were controlled (e.g., FDR correction). Without this, it is unclear which correlations are statistically robust versus nominal.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel F contains growth curves and derived exponential growth rates across models. Statistical tests (e.g., comparisons of growth rates between cell lines using t-tests/ANOVA or nonparametric equivalents) and reporting of replicate number, variability (SD/SEM), exact p-values, and whether assumptions were checked are needed to support claims of different growth dynamics.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel G shows dose–response/growth inhibition curves. The caption should state how dose–response metrics were fitted (model used), how IC50/GR50 or other parameters were calculated, and what statistical tests were applied to compare drug sensitivity between conditions (including replicate counts, confidence intervals, p-values, and multiple-testing correction if many comparisons were made).",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel H presents genomic analyses (expression heatmap and mutation grid). Statistical details are required: how differential expression was tested (test used), thresholds for calling high/low, multiple-testing correction (e.g., adjusted p-values), and how mutation enrichment was assessed. These are necessary to judge significance and reproducibility.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel I shows PCA and defined clusters. The caption should report the number of samples, how clustering was performed (method and parameters), cluster validation/statistical support (e.g., silhouette scores, bootstrapping, PERMANOVA), and whether differences between clusters were tested statistically. Without these details, cluster assignments and claimed subtypes lack formal support.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_08db6e0243f5ce2d006960e9f07d5481a29d8ae9ddf6ea5ab3",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2463,
+      "output_tokens": 2059
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:44:15.569265"
+  }
+}

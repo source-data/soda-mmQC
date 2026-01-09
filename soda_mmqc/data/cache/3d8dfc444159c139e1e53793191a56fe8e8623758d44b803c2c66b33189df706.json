@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Percentage contribution of IO for different input camera exposure times when using a USB for light source activation (AOTF crystal)."
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Photobleaching decay curves of CHO-K1 cells expressing paxillin–EGFP in response to different light power regiments. Images were acquired with 20×0.8 NA objective lens on a widefield microscope."
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Paxillin–EGFP was photobleached with different light power regiments in the presence of CellROX™."
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Live-cell migration tracks of CHO-K1 cells expressing paxillin–EGFP in response to different light power regiments."
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Migration speed (mean\u0000\u0000\u0000\u0000\u0000\u0000s.e.m.)"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Migrating cells were stained with MitoTracker\u00153 Red and fixed with 4% PFA to visualize mitochondrial morphology."
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "CHO-K1 cells were stained with MitoTracker\u00153 Red and imaged with DLD (0.0093\u0000mW\u0000\u0000\u0000\u0000\u0000\u0000\u0000x\u0000\u000060,000\u0000ms) or CLD (21.3\u0000mW\u0000x\u0000\u000024\u0000ms) using a 63\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 NA oil objective."
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "CHO-K1 cells were stained with MitoTracker\u00153 Red and imaged with DLD (0.0093\u0000mW\u0000x\u000060,000\u0000ms) or CLD (21.3\u0000mW\u0000x\u000024\u0000ms) using a 63\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 NA oil objective."
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Cell morphology (Normalized area vs Time) / y-axis: Normalized area"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Mitochondrial morphology (Normalized area vs Time) / y-axis: Normalized area"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0041057759eef393006945336387c8819f9a9ec68d8507637c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3414,
+      "output_tokens": 4032
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T12:14:39.404076"
+  }
+}

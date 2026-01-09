@@ -1,0 +1,115 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis is categorical (NC, HFD) for group comparison; there is no numeric axis continuity that would require a break marker."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis tick marks and labels are evenly spaced (linear numeric scale for weight/ratios) with no abrupt jumps or skipped ranges and no visual break symbol; therefore no axis break is required."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis shows two categorical groups (NC, HFD); categorical axes do not require numeric axis breaks."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis (5mC/Methylene Blue ratio) displays a continuous numeric range with regularly spaced tick marks up to ~2.5 and no skipped ranges or abrupt spacing changes, so no axis break indicator is needed."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis is categorical (TET1, TET2, TET3 with group markers NC/HFD) and does not represent a continuous numeric scale that would need a break."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis (ratio TETs/GAPDH) shows a continuous linear numeric scale with evenly spaced tick marks (no skipped values or sudden jumps); no visual discontinuity or break symbol is present or required."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_00b171cd5d0eacf7006960e50b4d148191a7a7f63c33a8b34c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3328,
+      "output_tokens": 1695
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:23:21.177867"
+  }
+}

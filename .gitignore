@@ -124,6 +124,3 @@ runs/
 # MAC
 .DS_Store
 node_modules
-
-#cached jsons
-soda_mmqc/data/cache/

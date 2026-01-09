@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows quantitative bar graphs (cell death % with error bars) but no statistical significance indicators or p-values are shown. The caption only states \"Mean±s.d. of three independent experiments is reported.\" A statistical test (and p-values or significance indicators) should be reported so readers can judge whether the observed differences (e.g., Flag-MeCP2 + EGFP-HIPK2 vs controls or EGFP-K221R) are statistically significant. It is also important to state which test was used (e.g., unpaired t test, ANOVA with post-hoc correction, or non-parametric alternative) and how multiple comparisons were handled given multiple conditions, and to confirm the sample size (n=3) used for the test.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "This panel includes quantitative bar graphs with error bars but no statistical test, p-values, or significance markers are provided. The caption does not describe any statistical test for these data. A test should be reported to support claims about differences between conditions (e.g., Flag-MeCP2 + EGFP-HIPK2 vs controls in P19 differentiated cells). Also specify sample size, the exact test used, and any multiple-comparison corrections.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Although the caption states \"Mean±s.d. of three experiments is reported,\" no statistical test or significance markers are provided. This panel compares multiple groups across timepoints and genotypes (EGFP, EGFP-HIPK2, EGFP-K221R; Mecp2-wt vs Mecp2-null at 24, 48, 72 h). Statistical analyses (e.g., repeated measures or two-way ANOVA with post-hoc tests, or appropriate pairwise tests with correction) are needed to support statements about differences over time and between genotypes. With n=3, the authors should also justify test choice and report exact p-values or indicate non-significance.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel displays quantitative bars (cell death %) across several conditions (different proteins, wt vs null) with error bars but no statistical test or p-values are reported. The caption does not specify which statistical test was used. A statistical test is required to determine whether differences (e.g., between EGFP-HIPK2 and controls, or effects of EGFP-MeCP2 / EGFP-R106W in wt vs null) are significant. The authors should state the test used, report p-values or significance markers, describe handling of multiple comparisons, and confirm sample size and whether error bars represent SD (caption states SD for some panels).",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0013e38e1330fec9006960e9cedfa08191b86ba4ead567e776",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1531,
+      "output_tokens": 1848
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:43:43.660986"
+  }
+}

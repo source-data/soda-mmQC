@@ -1,0 +1,63 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "hematoxylin (blue/purple)",
+          "eosin (pink)",
+          "Oil Red O (red/orange)"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no",
+          "no"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_047e8922d9607c2900693c06d77fe481938076e1bfea791c54",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2883,
+      "output_tokens": 1164
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T13:13:35.266930"
+  }
+}

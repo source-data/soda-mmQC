@@ -1,0 +1,83 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel shows a quantitative relationship between rhythmicity index and period across groups. To support any claims of association or differences between subtypes, an inferential test (e.g., correlation test such as Pearson or Spearman, or group-comparison tests) and p-value or confidence interval should be reported.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel presents mean ± s.d. values and compares noise vs circadian components across cell models/subtypes. Statistical tests (e.g., regression significance, group comparisons or multiple-comparison corrections) are needed to support statements about differences or relationships and to assess whether observed differences are statistically significant.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Density plots of subtype-averaged periods and amplitudes imply comparisons between subtypes. Tests comparing distributions (e.g., ANOVA/Kruskal–Wallis for linear measures) or appropriate summary statistics with significance should be reported to substantiate claims of differences.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Boxplots of ridge lengths across cell models/subtypes imply group comparisons. Appropriate statistical tests (e.g., Mann–Whitney, Kruskal–Wallis, or pairwise comparisons with correction) and reported p-values are needed to support any claims about differences between boxes/groups.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Polar histograms show circular phase distributions by cell line. Circular statistics (e.g., Rayleigh test for non-uniformity, Watson–Williams or Mardia–Watson–Wheeler tests for group differences) should be reported to justify any statements about phase concentration or differences between cell lines.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Subtype-averaged circular histograms compare phase distributions across subtypes. Circular hypothesis tests (as in E) or reported summary statistics with tests are needed to support claims about subtype-specific phase differences.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Scatter of initial amplitudes versus decay rates implies a relationship; to support claims about association or differences across subtypes, inferential statistics (e.g., correlation or regression analysis with p-values/confidence intervals) should be reported. Although error bars of fitted parameters are shown, a formal test of association is not described in the caption.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_005fde8dd19aeb1e006960ea11131881959abbaf0120cdc931",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2840,
+      "output_tokens": 1805
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:44:44.952007"
+  }
+}

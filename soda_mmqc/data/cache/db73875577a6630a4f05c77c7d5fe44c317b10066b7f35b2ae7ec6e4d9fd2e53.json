@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (s)"
+          },
+          {
+            "axis": "y",
+            "definition": "Normalized intensity (a.u.)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_04050a48be62395100693be81f24c88191b90e5495fc011f28",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1982,
+      "output_tokens": 1158
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T11:02:21.166347"
+  }
+}

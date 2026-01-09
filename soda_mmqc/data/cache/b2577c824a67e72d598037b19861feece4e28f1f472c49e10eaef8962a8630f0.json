@@ -1,0 +1,63 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "observed in three cells"
+        ],
+        "type_of_replicates": [
+          "cells"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "observed in two different locations"
+        ],
+        "type_of_replicates": [
+          "different locations"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0689a61cdf9a731400693bed6dc2908197ba76cd01e8e84111",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2848,
+      "output_tokens": 1483
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T11:25:22.556345"
+  }
+}

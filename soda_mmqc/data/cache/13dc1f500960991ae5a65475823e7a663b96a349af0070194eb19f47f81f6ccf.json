@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "TCGA RNA-seq patient samples (COAD)"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "TCGA RNA-seq patient samples (READ)"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "TCGA-COAD patient samples (advanced stages)"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "TCGA-READ patient samples (advanced stages)"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "TCGA-COAD patient samples (early stages)"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "TCGA-READ patient samples (early stages)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_0980e65061d87fbf0069610ecc3e38819c9cfe926d19fa145b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2978,
+      "output_tokens": 1918
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T15:21:31.635653"
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes represent flow cytometry parameters (e.g., FSC‑A, Viability, CD19, IgD) shown as signal intensities but no units (e.g., channel number or arbitrary fluorescence units) are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes represent flow cytometry parameters (e.g., FSC‑H, SSC‑A, CD4, Fas, IgM) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes represent flow cytometry parameters (e.g., FSC‑A, Viability, CD19, IgD) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes represent flow cytometry parameters (e.g., FSC‑H, SSC‑A, CD4, Fas, IgM) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes represent flow cytometry parameters (e.g., FSC‑A, Viability, CD19, IgD) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes represent flow cytometry parameters (e.g., FSC‑H, SSC‑A, CD4, Fas, IgM) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes represent flow cytometry parameters (e.g., FSC‑A, Viability, CD19, IgD) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes represent flow cytometry parameters (e.g., FSC‑H, SSC‑A, CD4, Fas, IgM) shown as signal intensities but no units are indicated on the axes or in the panel labels."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., CD19, IgD) are fluorescence/flow parameters shown as intensity values but no units (channel number, arbitrary units, MFI) are indicated on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., CD98, FSC‑A) are flow cytometry intensity measures but no units are provided on the axes or in the caption."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., CD19, IgD) are fluorescence/flow parameters shown as intensity values but no units (channel number, arbitrary units, MFI) are indicated on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., CD98, FSC‑A) are flow cytometry intensity measures but no units are provided on the axes or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., IgD, NP, CD138) display fluorescence/marker intensity but lack unit labels (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., IgM, Fas, CD38) display fluorescence/marker intensity but lack unit labels (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., IgD, NP, CD138) display fluorescence/marker intensity but lack unit labels (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., IgM, Fas, CD38) display fluorescence/marker intensity but lack unit labels (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., IgD, NP, CD138) display fluorescence/marker intensity but lack unit labels (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., IgM, Fas, CD38) display fluorescence/marker intensity but lack unit labels (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., CD44, PD‑L2) are plotted as fluorescence/marker intensity values but no units (e.g., arbitrary fluorescence units, channel numbers) are given on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., CD62L, CD80) are plotted as fluorescence/marker intensity values but no units (e.g., arbitrary fluorescence units, channel numbers) are given on the axes or in the caption."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., CD44, PD‑L2) are plotted as fluorescence/marker intensity values but no units (e.g., arbitrary fluorescence units, channel numbers) are given on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., CD62L, CD80) are plotted as fluorescence/marker intensity values but no units (e.g., arbitrary fluorescence units, channel numbers) are given on the axes or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., CD44, PD‑L2) show marker intensity but do not include units (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., CD62L, CD80) show marker intensity but do not include units (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "x",
+            "justification": "x-axes (e.g., CD44, PD‑L2) show marker intensity but do not include units (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes (e.g., CD62L, CD80) show marker intensity but do not include units (arbitrary fluorescence units or channel numbers) on the axes or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_0681bc8627675339006960f9ce9560819d82996107552ee77f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2730,
+      "output_tokens": 3383
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T13:52:33.042226"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Live images of ddaC dendrites visualized by the pickpocket‐EGFP (ppk‐EGFP) reporter"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Live images of ddaC dendrites visualized by the pickpocket‐EGFP (ppk‐EGFP) reporter"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Live images of ddaC dendrites visualized by the pickpocket‐EGFP (ppk‐EGFP) reporter"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification of the total branch length (D)"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "the branch number (E)"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "the crossing points (F) of WT and mutant ddaC dendrites"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MARCM clones of WT (G), sin1 (H), and rictor (J) are shown."
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MARCM clones of WT (G), sin1 (H), and rictor (J) are shown."
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MARCM clones of WT (G), sin1 (H), and rictor (J) are shown."
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification of the branch length (J)"
+      },
+      {
+        "panel_label": "K",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "the branch points (K)"
+      },
+      {
+        "panel_label": "L",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "the crossing points (L) of MARCM clones"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0f07a359e2b72e180069452f292a408197ba74958a6bb45523",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2500,
+      "output_tokens": 3347
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T11:56:31.445009"
+  }
+}

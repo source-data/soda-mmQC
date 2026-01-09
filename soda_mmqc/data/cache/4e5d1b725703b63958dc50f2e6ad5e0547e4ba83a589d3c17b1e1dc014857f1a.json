@@ -1,0 +1,55 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Distribution of SMF-derived promoter state frequencies as a function of Pol II ChIP-seq level in Drosophila promoters (n\u0000=\u00005912 promoters)."
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Single-locus example showing single-molecule sorting of a highly active, TATA-box containing Drosophila promoter (Svil, 94th percentile by Pol II ChIP-seq). Each row in the single-molecule stack denotes a single DNA molecule and the methylation status of each cytosine in that molecule (methylated, accessible\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000)"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Distribution of SMF-derived state frequencies as a function of Pol II ChIP-seq level in mouse promoters (n\u0000=\u00006122 promoters)."
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Single-locus example of a single-molecule sorting of a highly active, TATA-box containing mouse promoter (Skp1, 97th percentile by Pol II ChIP-seq)."
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_082e87b7ee043bda006945307a001c81958f070c1c7403362e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3409,
+      "output_tokens": 4412
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T12:02:13.138012"
+  }
+}

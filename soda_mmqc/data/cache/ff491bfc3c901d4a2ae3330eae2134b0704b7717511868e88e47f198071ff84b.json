@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Cellular circadian rhythms are measured by long-term luciferase (Luc) recordings of clock gene reporter cell lines."
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Circadian signals are quantified by stationary and non-stationary analysis approaches."
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Circadian parameters are related to each other by correlation analysis to define a set of representative circadian metrics."
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Long-term live imaging is employed to capture growth dynamics across various cell line models."
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Characterization of drug sensitivities across various cell line models, followed by the parametrization of growth rate inhibition metrics."
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Characterization of genomic circadian profiles of the cell models tested, utilizing publicly available datasets."
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Definition of circadian-based cellular subtypes through the integration of multiple cellular parameters."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0168d8d13a912f77006945300a273481a289b7e7c9b99fca3a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2935,
+      "output_tokens": 1641
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T11:59:46.599052"
+  }
+}

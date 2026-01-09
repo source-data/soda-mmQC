@@ -1,0 +1,60 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "Main plots show continuous time axes with regularly spaced ticks (e.g., 0, 5, 10, 15, 20, 25 or similar depending on subplot) and no abrupt numerical jumps; the small inset panels are separate, zoomed plots (early time points), not continuations of the main x-axis."
+          },
+          {
+            "axis": "y",
+            "definition": "Y-axis is normalized intensity (0–1) with continuous labeling; there is no skipped range or sudden jump in tick labels."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis tick spacing and numeric sequence are regular and continuous in each main plot. The inset is an independent, separate axis (zoom of early times) rather than a compressed continuation of the main axis, so no axis-break marker is required."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis values are shown on a continuous normalized scale (0–1) with no skipped values or spacing anomalies that would indicate a hidden gap."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0a6f5bc262abe569006960e0f9762881a2b8e5f6b0436ac7cb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2227,
+      "output_tokens": 1160
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:05:46.845728"
+  }
+}

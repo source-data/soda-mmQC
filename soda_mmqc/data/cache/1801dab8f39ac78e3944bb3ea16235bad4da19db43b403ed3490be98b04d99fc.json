@@ -1,0 +1,127 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Schematic illustration of the corneal epithelium (Ep), stroma (St), and endothelium (En)."
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "The mRNA microarray dataset GSE241715 from the GEO database was used in the comparison."
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining images of corneas from healthy and BK (P. aeruginosa) mice."
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting (F) and quantification (G, n = 3 independent experiments) showing the level of HDAC6 in corneas from healthy and BK (P. aeruginosa) mice."
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting (F) and quantification (G, n = 3 independent experiments) showing the level of HDAC6 in corneas from healthy and BK (P. aeruginosa) mice."
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblot analysis of GFP and GAPDH in corneas from control GFP or GFP-HDAC6 adenovirus-injected mice."
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining images (I)"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "quantification of the thickness of the epithelium (J, n = 30 images from three independent experiments)"
+      },
+      {
+        "panel_label": "K",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunofluorescence images (K) ... stained with antibodies against β-catenin and ZO-1 and DAPI."
+      },
+      {
+        "panel_label": "L",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "quantification of the ZO-1 junctional signals (L, n = 60 cells from three independent experiments)"
+      },
+      {
+        "panel_label": "M",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Transmission electron microscopy images of the longitudinal sections of corneal epithelial cells (M)"
+      },
+      {
+        "panel_label": "N",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Transmission electron microscopy images ... cell junctions at the base of the corneal epithelium (N) in control and HDAC6 adenovirus-injected mice."
+      },
+      {
+        "panel_label": "O",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Schematic illustration of basal cell junctions in the corneal epithelium from control or HDAC6 adenovirus-injected mice."
+      },
+      {
+        "panel_label": "P",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining images of the corneal epithelium from control or HDAC6 adenovirus-injected mice."
+      },
+      {
+        "panel_label": "Q",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Schematic illustration (Q)"
+      },
+      {
+        "panel_label": "R",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "quantification (R, n = 15 mitotic cells from three independent experiments) of normal and misoriented cell division in the corneal epithelium from control or HDAC6 adenovirus-injected mice."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00438-0",
+    "source": "10.1038_s44319-025-00438-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0a0fb3fff994cb430069452f97e9d481949d3630fa83519176",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3372,
+      "output_tokens": 5818
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T11:58:46.339958"
+  }
+}

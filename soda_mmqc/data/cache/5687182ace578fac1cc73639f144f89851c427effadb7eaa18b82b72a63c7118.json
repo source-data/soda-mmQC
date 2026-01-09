@@ -1,0 +1,54 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "red circle",
+          "green circle",
+          "red outlined inset box",
+          "green outlined inset box",
+          "white scale bar",
+          "lookup tables (color bars)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "photoactivated region represented by circles in euchromatin (red) or in heterochromatin (green) on the pre‐activation image.",
+          "photoactivated region represented by circles in euchromatin (red) or in heterochromatin (green) on the pre‐activation image.",
+          "The inserts outlined in red and green correspond to two higher magnifications of photoactivated areas in euchromatin and heterochromatin, respectively.",
+          "The inserts outlined in red and green correspond to two higher magnifications of photoactivated areas in euchromatin and heterochromatin, respectively.",
+          "Scale bar 10 μm.",
+          "Two lookup tables associated to heterochromatin PA and nuclei, or to euchromatin PA are defined in the middle and lower panel, respectively."
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0255ea9a0cb0deee00696105b6ce208191abd282d980b9d84d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1910,
+      "output_tokens": 1615
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T14:42:45.484059"
+  }
+}

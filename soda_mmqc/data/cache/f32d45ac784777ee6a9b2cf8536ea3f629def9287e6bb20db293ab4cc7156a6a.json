@@ -1,0 +1,136 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Plot label reads 'Total polyp number per mouse' (counts per mouse). Caption replicate info: n=8–18 per genotype."
+          },
+          {
+            "axis": "z",
+            "definition": "3D chart axis labeled 'Polyp diameter (mm)' (units = mm)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "X-axis labeled 'Time after birth (months)'. Caption replicate info: n=24–27 per genotype."
+          },
+          {
+            "axis": "y",
+            "definition": "Y-axis labeled 'Percentage of mice alive (%)'."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Y-axis (bar graph quantifying GTP-bound Rac1/Cdc42) is shown as relative amount/'GTP-bound form' but no units (e.g., arbitrary units, fold-change, or normalization method) are provided on the plot or in the figure caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Bar graph labeled 'Relative expression' uses a numeric scale but gives no units or indication that values are arbitrary units, fold-change, or normalized values; no replicate counts or unit definitions are provided in the caption for this panel."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_054467d6f227015600693be9074dac8193b5a2931a239a30af",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3211,
+      "output_tokens": 3689
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T11:06:48.073057"
+  }
+}

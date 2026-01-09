@@ -1,0 +1,119 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "4"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "2",
+          "3"
+        ],
+        "type_of_replicates": [
+          "technical duplicates",
+          "independent experiments (representative of three)"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "2",
+          "3"
+        ],
+        "type_of_replicates": [
+          "technical duplicates",
+          "independent experiments (representative of three)"
+        ]
+      },
+      {
+        "panel_label": "I",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "technical triplicates",
+          "independent experiments (representative of three)"
+        ]
+      },
+      {
+        "panel_label": "J",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "K",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "technical triplicates",
+          "independent experiments (representative of three)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00412-5",
+    "source": "10.1038_s44318-025-00412-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0a17686c7145ebfe0069610bf436ec819193441a7e9cf26756",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2655,
+      "output_tokens": 2267
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T15:09:25.776665"
+  }
+}

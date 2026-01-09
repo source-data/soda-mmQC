@@ -1,0 +1,83 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n = 5912 promoters"
+        ],
+        "type_of_replicates": [
+          "promoters"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n = 6122 promoters"
+        ],
+        "type_of_replicates": [
+          "promoters"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "mouse (TATA-less n = 572 promoters)",
+          "mouse (TATA-containing n = 64 promoters)",
+          "Drosophila (TATA-less n = 422 promoters)",
+          "Drosophila (TATA-containing n = 71 promoters)"
+        ],
+        "type_of_replicates": [
+          "mouse TATA-less promoters",
+          "mouse TATA-containing promoters",
+          "Drosophila TATA-less promoters",
+          "Drosophila TATA-containing promoters"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "mouse (TATA-less n = 572 promoters)",
+          "mouse (TATA-containing n = 64 promoters)",
+          "Drosophila (TATA-less n = 422 promoters)",
+          "Drosophila (TATA-containing n = 71 promoters)"
+        ],
+        "type_of_replicates": [
+          "mouse TATA-less promoters",
+          "mouse TATA-containing promoters",
+          "Drosophila TATA-less promoters",
+          "Drosophila TATA-containing promoters"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0eceb2a5dc2c20ac00693beccc5fc881a1acddcfb9772871a1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3300,
+      "output_tokens": 2111
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T11:22:30.706636"
+  }
+}

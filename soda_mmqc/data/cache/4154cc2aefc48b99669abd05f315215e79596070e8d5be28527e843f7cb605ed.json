@@ -1,0 +1,136 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "orange triangle",
+          "cyan arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrowhead",
+          "cyan arrowhead",
+          "yellow triangle"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "White arrowhead indicates an actin filament going through a basal pore.",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "green highlighted filaments",
+          "green arrowheads"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Some filaments have been highlighted in green.",
+          "Some filaments have been highlighted in green."
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "yes",
+        "symbols": [
+          "dark lines on outer IMC (thin pellicular filaments - TPFs)",
+          "cyan arrowheads (pellicular/cytosolic actin)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "Dark lines on the outer surface of the IMC represent thin pellicular filaments (TPFs).",
+          ""
+        ]
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "symbols": [
+          "green triangle",
+          "yellow triangle",
+          "orange triangle",
+          "rotation arrow (90°)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "blue highlighted pellicular actin filament",
+          "red arrow",
+          "white arrows",
+          "yellow triangle",
+          "cyan triangle",
+          "orange triangle"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations).",
+          "showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations).",
+          "showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations).",
+          "",
+          "",
+          ""
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_042dd5d28a4d4038006961094acae4819499a8cdef9d10967f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3007,
+      "output_tokens": 5394
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T14:58:47.164953"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time is labeled on the x-axis in seconds (s)"
+          },
+          {
+            "axis": "y",
+            "definition": "Intensity is given as normalized intensity in arbitrary units (a.u.)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_00f2860eeffaf36b006960fdeb3620819ead6685e7e6a47075",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2413,
+      "output_tokens": 981
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T14:09:20.984270"
+  }
+}

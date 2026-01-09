@@ -1,0 +1,35 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "unknown"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_07f1d2292ab8393b0069610d384064819c8c9084c3e6db09c4",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1932,
+      "output_tokens": 1269
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T15:14:38.277439"
+  }
+}

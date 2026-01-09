@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "(Ai–ii) Phase contrast images of a time lapse of E. coli MG1655 cells mock-treated (i) and treated with 1.4% saccharin (ii)."
+      },
+      {
+        "panel_label": "Aii",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "(Ai–ii) Phase contrast images of a time lapse of E. coli MG1655 cells mock-treated (i) and treated with 1.4% saccharin (ii)."
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "(B) Phase contrast and fluorescent images of E. coli cells following treatment with saccharin. The membrane was visualised by staining with 10-nonyl acridine orange (NAO) for 5 min before visualisation (see “Methods” for details). Z-ring formation was visualised by expressing a FtsZ allele fused to CFP (see “Methods” for details)."
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "(C) Time lapse of 1.4% saccharin-induced cell envelope bulging, with NAO staining the bulge."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_075432052a61671f006945314bf60c8194829a77662f2eb9ec",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2966,
+      "output_tokens": 2399
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T12:05:17.158986"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "cyan",
+          "magenta"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no"
+        ]
+      },
+      {
+        "panel_label": "b",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "c",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "cyan",
+          "magenta",
+          "green"
+        ],
+        "gray_scale_single_channel_images": [
+          "no",
+          "no",
+          "no"
+        ]
+      },
+      {
+        "panel_label": "d",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "e",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "green",
+          "magenta"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "panel_label": "f",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "green",
+          "magenta"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "panel_label": "g",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "pseudocolor (rainbow LUT)"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0e54a1c5d6660f030069452eff93c08192aae9c4409398e747",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2687,
+      "output_tokens": 1756
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T11:55:17.812540"
+  }
+}

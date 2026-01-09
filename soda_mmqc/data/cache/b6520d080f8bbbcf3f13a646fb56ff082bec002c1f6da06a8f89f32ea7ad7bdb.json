@@ -1,0 +1,100 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "green arrowheads"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Some filaments have been highlighted in green."
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "symbols": [
+          "green arrowhead",
+          "yellow arrowhead",
+          "orange arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrows",
+          "red arrows",
+          "blue filament (highlight)",
+          "yellow corner arrowhead",
+          "cyan/blue corner arrowhead",
+          "orange corner arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "A slice through the tomogram (position shown in D) showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations).",
+          "A slice through the tomogram (position shown in D) showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations).",
+          "A slice through the tomogram (position shown in D) showing a pellicular actin filament (blue) connected to a TPF by two densities (red, white arrows) consistent with myosin dimensions (observed in two different locations).",
+          "",
+          "",
+          ""
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_051075916a559a5a00696104d1498481a2bfb155a449d04f28",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2502,
+      "output_tokens": 3894
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T14:39:24.040195"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis (Lag, hours) shows a continuous range around the circadian period (≈24–48 h) with regularly spaced tick marks and no sudden numeric jumps that would require an axis break."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis (Rhythmicity index) displays a continuous numeric range (≈0–0.9) with regular tick spacing; no omitted interval or discontinuity is evident."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis (Circadian component) runs continuously from 0 to 1 with even tick spacing — no omitted ranges or jumps requiring a break."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled log10(Noise component) and is presented on a logarithmic scale (consistent tick spacing for log scale). A log scale is appropriate for the large dynamic range and no axis-break symbol is necessary."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Top subpanel x-axis (Period, hours) is continuous over ~21–33 h with regular tick spacing; bottom subpanel x-axis is explicitly labeled as log(amplitude), indicating a log-transformed axis appropriate for the wide range — no axis break required."
+          },
+          {
+            "axis": "y",
+            "justification": "Density axes are continuous probability/density scales without omitted intervals; no discontinuities observed that would need marking."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis is categorical (cell lines) and shows each category explicitly; axis breaks are not applicable or needed for categorical axes."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis (Ridge length, hours) shows a continuous numeric range with regular tick intervals (e.g., 24, 48, 72, …); there are no omitted ranges requiring a break."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Polar/angular axes are shown continuously (phase in radians) with regular angular ticks; axis breaks are not applicable to circular polar plots."
+          },
+          {
+            "axis": "y",
+            "justification": "Radial (probability/normalized count) scales are continuous and displayed appropriately for polar histograms; no omitted intervals or breaks are present."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Panel F is a polar histogram of phase differences; angular axis is continuous and appropriately labeled — no axis break needed."
+          },
+          {
+            "axis": "y",
+            "justification": "Radial normalization/probability scale is continuous and no discontinuity or omitted interval is apparent."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Time axis spans ~0–100 hours with regular tick spacing; no sections are omitted or compressed that would require a break marker."
+          },
+          {
+            "axis": "y",
+            "justification": "Signal (arb. units) axis is continuous with symmetric range about zero; no abrupt numeric jumps or omitted ranges are visible."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis (amplitude exponential decay rate, γ) shows a continuous numeric range with appropriately spaced tick marks; no omitted interval or jump is evident."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis (Amplitude, A0) spans orders of magnitude but is presented using a scale appropriate for the range (tick spacing indicates orders of magnitude). No truncated or skipped region is apparent that would require a visual axis break."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0140151bd668a01f006960e3d843bc81a39ef63b8c9144a056",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3642,
+      "output_tokens": 3301
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:18:39.495357"
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "y",
+            "definition": "y-axis shows a continuous numeric scale from 0 up to ~400 with evenly spaced tick marks; no sudden jumps or omitted ranges are apparent."
+          },
+          {
+            "axis": "x",
+            "definition": "x-axis is categorical (genotype labels) and does not imply a continuous numeric scale requiring a break."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Tick marks and numeric labels progress linearly and consistently; no evidence of an omitted range or discontinuity that would require an axis break."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "y",
+            "definition": "y-axis shows a continuous numeric scale (0 to ~200) with evenly spaced tick marks and no apparent skipped ranges."
+          },
+          {
+            "axis": "x",
+            "definition": "x-axis is categorical (genotype labels) and does not require an axis break."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Numbers and tick spacing are regular; there are no abrupt jumps or visual discontinuities indicating omitted intervals."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "y",
+            "definition": "y-axis scale appears continuous (ticks likely at regular intervals e.g., 0, 5, 10, 15); although some bars have much larger values than others, there is no visual axis break marker (zigzag or slashed gap). The panel also contains dual labels stacked (e.g., 'Crossing points' and 'Total branch length') but these do not indicate a discontinuity."
+          },
+          {
+            "axis": "x",
+            "definition": "x-axis is categorical (genotypes) and does not require a numeric axis break."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Despite large differences in bar heights, the numeric tick marks are continuous and evenly spaced with no skipped ranges or break symbols; therefore no axis break is indicated or required."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "y",
+            "definition": "y-axis (total branch length, μm) shows a continuous numeric scale up to ~15,000 with even tick spacing; no break indicators are present."
+          },
+          {
+            "axis": "x",
+            "definition": "x-axis is categorical (genotype groups) and does not require an axis break."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Tick labels and spacing are consistent without abrupt jumps or skipped ranges; no axis discontinuity is evident or indicated."
+          }
+        ]
+      },
+      {
+        "panel_label": "K",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "y",
+            "definition": "y-axis (total branch points) shows a continuous numeric scale (up to ~600) with regular tick spacing and no marked breaks."
+          },
+          {
+            "axis": "x",
+            "definition": "x-axis is categorical and does not require a break indication."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "No skipped tick labels or irregular spacing that would indicate an omitted interval; axis is continuous and appropriately scaled."
+          }
+        ]
+      },
+      {
+        "panel_label": "L",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "y",
+            "definition": "y-axis (crossing points, x10^4 μm) shows a continuous numeric scale with evenly spaced ticks up to ~6; no axis break markers are present."
+          },
+          {
+            "axis": "x",
+            "definition": "x-axis is categorical (genotype groups) and does not require a break."
+          }
+        ],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The numeric progression and tick spacing are consistent and there are no abrupt jumps or missing ranges that would necessitate an indicated axis break."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0671cbb861094a01006960e3248ec0819eb357577e31976796",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2830,
+      "output_tokens": 2685
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:15:14.713912"
+  }
+}

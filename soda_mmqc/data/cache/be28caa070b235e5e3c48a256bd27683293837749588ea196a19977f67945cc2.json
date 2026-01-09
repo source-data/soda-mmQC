@@ -1,0 +1,222 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Categorical x-axis (treatment groups). No continuous numeric scale that would require a break."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis spans 0–100 with regularly spaced tick marks; no abrupt numeric jumps or compressed regions indicating an omitted range."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "X-axis shows discrete time points with even spacing; categorical/time points do not require a break marker."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis covers 0–100 with regular tick spacing; no skipped numeric ranges or visual compression that would indicate an omitted segment."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Categorical x-axis (genotypes/conditions); no continuous numeric axis requiring a break."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis displays 0–100 with evenly spaced ticks and no omitted ranges."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Time axis is continuous from 0–10 h with regular tick spacing; no discontinuity visible or numeric jumps."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis (SYTOX Green uptake %) increases smoothly without abrupt jumps or skipped numeric ranges; tick spacing appears consistent."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Continuous time axis (0–10 h) with regular ticks; no evidence of an omitted interval."
+          },
+          {
+            "axis": "y",
+            "justification": "Caspase-3/7 activity axis shows a continuous scale with no skipped numeric ranges or sudden compression."
+          }
+        ]
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Time axis plotted continuously from 0–10 h with even tick spacing."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis range (caspase activity) is continuous and scaled to show data without omitted ranges; tick marks are regularly spaced."
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "K",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Time is shown continuously (0–10 h) with uniform tick spacing; no discontinuity present."
+          },
+          {
+            "axis": "y",
+            "justification": "Y-axis (caspase activity) increases smoothly without numerical skips or compressed regions that would indicate a missing axis segment."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00412-5",
+    "source": "10.1038_s44318-025-00412-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_06bfeedc15c69e77006960e49e3d6481a29ecb252bfc580b2b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3525,
+      "output_tokens": 2050
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:21:30.286922"
+  }
+}

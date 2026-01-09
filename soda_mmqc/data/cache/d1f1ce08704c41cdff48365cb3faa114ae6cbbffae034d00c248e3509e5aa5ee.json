@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "unknown"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "3"
+        ],
+        "type_of_replicates": [
+          "cells (observed in three cells)"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "unknown"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "unknown"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "unknown"
+        ],
+        "type_of_replicates": [
+          "average volume of TPFs"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "2"
+        ],
+        "type_of_replicates": [
+          "different locations (observed in two different locations)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0e23bef77e6e427a0069610ef238cc81978508ec67abd570a9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3029,
+      "output_tokens": 2470
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T15:22:14.931459"
+  }
+}

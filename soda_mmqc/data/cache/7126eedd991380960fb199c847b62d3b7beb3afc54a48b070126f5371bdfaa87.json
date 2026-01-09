@@ -1,0 +1,89 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "green",
+          "red",
+          "blue"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "green",
+          "red",
+          "blue"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes",
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "yes",
+        "colors_displayed": [
+          "green",
+          "blue"
+        ],
+        "gray_scale_single_channel_images": [
+          "yes",
+          "yes"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "multicolored_overlay_micrograph": "no",
+        "colors_displayed": [],
+        "gray_scale_single_channel_images": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_093ada7156961d2f00695e6839633881a2b412a7b8d1958b9c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3145,
+      "output_tokens": 833
+    },
+    "status": "completed",
+    "cached_at": "2026-01-07T15:05:58.355121"
+  }
+}

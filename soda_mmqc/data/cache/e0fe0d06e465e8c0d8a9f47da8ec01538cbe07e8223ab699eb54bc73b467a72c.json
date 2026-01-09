@@ -1,0 +1,184 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled 'Rhythmicity index' with numeric scale but no unit is given. This is a continuous metric (dimensionless index) — the axis should explicitly state that it is unitless or provide units (e.g., 'arb. units' or 'index (unitless)')."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis is labeled 'Circadian component' and is a continuous quantity (0–1 range) but no units or indication that this is a normalized/fractional (unitless) measure are provided."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled 'Log10 (Noise component)' (log scale) but provides no units or indication that this is a normalized or relative (unitless) measure. The axis lacks an explicit unit statement."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "z",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Radial axis of the polar histogram is normalized by probability (unitless); as a normalized/probability measure it does not require physical units but that should be stated (the figure notes normalization)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Radial axis is a normalized probability (unitless); no physical units are required but the plot should state normalization (which it does visually)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axis is labeled with the amplitude exponential decay rate (γ) but no units are given. Decay rate is a continuous quantity with units of inverse time (e.g., h⁻¹); the axis should specify the unit or indicate it is reported in a scaled unit (e.g., 10⁻3 h⁻1) if appropriate."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled 'Amplitude (A0)' but no units are provided. Amplitude appears to be reported in arbitrary units; the axis should state 'arb. units' or otherwise clarify the unit."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_054e100e0f418ce400693be8a9232c8195a3aba0f1e5cffbfb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3434,
+      "output_tokens": 5536
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T11:05:57.876690"
+  }
+}

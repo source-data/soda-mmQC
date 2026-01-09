@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel B presents quantitative comparisons (percent HTT depletion and log2 HTT elution abundance) between antibody IPs and mIgG control. To support claims of differences between antibodies and control, the authors should report the statistical test(s) used, sample size (n), and any multiple-comparison corrections or confidence intervals. Without this information it is unclear whether observed differences are statistically significant or due to variability.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel D shows violin plots of enrichment ratio distributions for proteins co-isolated with HTT across conditions/antibodies. If the authors intend to claim differences between distributions (e.g., between Q20 and Q140 or between antibodies), they must provide the statistical test(s) used (for example t-test, Mann–Whitney U, Kolmogorov–Smirnov, or permutation test), report sample sizes/number of proteins, and indicate any multiple-testing control. This information is missing from the caption.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel E presents bar/point comparisons of protein abundances (n = 4, mean ± SD) across different antibodies. When reporting group comparisons even with small n, the authors should state which statistical test was used (e.g., paired/unpaired t-test, ANOVA with post-hoc test, or nonparametric alternative), whether assumptions were checked, and any correction for multiple comparisons. The caption only gives n and mean±SD but no test description.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel G contains scatterplots comparing log2 enrichment ratios (Q20 vs Q140) and highlights subsets of proteins (colored points). The criteria for highlighting (e.g., statistical significance thresholds, fold-change cutoffs) and any statistical test used to define differentially enriched proteins are not described. The caption should specify the statistical method, thresholds, and multiple-testing correction used to classify/annotate points.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel H shows a correlation (R^2 = 0.78) between HTT and HAP40 abundance. Although an R^2 value is shown on the figure, the caption does not state the method (e.g., linear regression, Spearman/Pearson correlation), whether the correlation is significant (p-value), or how the fit was computed. The caption should report the statistical test/method used to generate R^2 and the associated significance.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00096-3",
+    "source": "10.1038_s44320-025-00096-3/content/9",
+    "example_type": "figure",
+    "response_id": "resp_0712307ab6359898006960ea928f648192b89fe3aa1625d123",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2996,
+      "output_tokens": 2410
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T12:46:58.508724"
+  }
+}

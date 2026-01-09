@@ -1,0 +1,31 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "PA time lapse"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "Method not identifiable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0b1a8118910321620069455a8cc1e481a2a51b4455b7eaf7ba",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1867,
+      "output_tokens": 1828
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T15:01:12.654578"
+  }
+}

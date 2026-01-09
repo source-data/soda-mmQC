@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "Aii",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "a minimum of three"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0a87c48a550404c900693bed3bf21081a29cb3d947d8c5e856",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2857,
+      "output_tokens": 972
+    },
+    "status": "completed",
+    "cached_at": "2025-12-12T11:24:10.903711"
+  }
+}

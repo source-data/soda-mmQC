@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "b",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "c",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "d",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "e",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "f",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      },
+      {
+        "panel_label": "g",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": "Method not identifiable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0c5084a99b4ab2ea006945334a3a1481948363a96161ef9118",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2802,
+      "output_tokens": 1542
+    },
+    "status": "completed",
+    "cached_at": "2025-12-19T12:13:36.409292"
+  }
+}

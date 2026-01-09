@@ -1,0 +1,33 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "average early time points responses measured in euchromatin and heterochromatin"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_09a34c88797f79010069610ad6f20481918c731746bf9cefca",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1320,
+      "output_tokens": 985
+    },
+    "status": "completed",
+    "cached_at": "2026-01-09T15:04:24.308217"
+  }
+}
