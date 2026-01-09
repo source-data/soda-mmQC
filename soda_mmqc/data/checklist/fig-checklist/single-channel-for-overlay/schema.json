@@ -19,28 +19,26 @@
                                 "enum": ["yes", "no"],
                                 "description": "Whether the panel shows a multicolored overlay microscopy image"
                             },
-                            "colors_displayed": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string",
-                                    "description": "Color displayed in the multicolored overlay microscopy image"
-                                },
-                                "description": "Colors displayed in the multicolored overlay microscopy image"
+                            "number_of_channels_in_overlay": {
+                                "type": "integer",
+                                "description": "Number of distinct channels merged in the overlay image"
                             },
-                            "gray_scale_single_channel_images": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string",
-                                    "description": "Whether the gray scale single-channel image is provided for the color"
-                                },
-                                "description": "List of types of replicates"
-                            } 
+                            "number_of_single_channel_images_shown": {
+                                "type": "integer",
+                                "description": "Number of single-channel images shown for this panel"
+                             },
+                           "all_channels_shown_separately": {
+                                "type": "string",
+                                "enum": ["yes", "no", "not_applicable"],
+                                "description": "Whether all channels in the overlay are shown as separate single-channel images"
+                            }
                         },
                         "required": [
                             "panel_label",
                             "multicolored_overlay_micrograph",
-                            "colors_displayed",
-                            "gray_scale_single_channel_images"
+                            "number_of_channels_in_overlay",
+                            "number_of_single_channel_images_shown",
+                            "all_channels_shown_separately"
                         ],
                         "additionalProperties": false
                     }

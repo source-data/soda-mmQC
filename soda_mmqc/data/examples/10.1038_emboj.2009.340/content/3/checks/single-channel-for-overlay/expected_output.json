@@ -3,24 +3,17 @@
         {
             "panel_label": "A",
             "multicolored_overlay_micrograph": "yes",
-            "colors_displayed": [
-                "red",
-                "green",
-                "blue/purple (background)",
-                "yellow/orange (high intensity)"
-            ],
-            "gray_scale_single_channel_images": [
-                "no",
-                "no",
-                "no",
-                "no"
-            ]
+            "number_of_channels_in_overlay": 2,
+            "number_of_single_channel_images_shown": 0,
+            "all_channels_shown_separately": "no"
         },
         {
             "panel_label": "B",
             "multicolored_overlay_micrograph": "no",
-            "colors_displayed": [],
-            "gray_scale_single_channel_images": []
+            "number_of_channels_in_overlay": 0,
+            "number_of_single_channel_images_shown": 0,
+            "all_channels_shown_separately": "not_applicable"
         }
-    ]
+    ],
+    "updated_at": "2026-01-08 11:26:35"
 }
