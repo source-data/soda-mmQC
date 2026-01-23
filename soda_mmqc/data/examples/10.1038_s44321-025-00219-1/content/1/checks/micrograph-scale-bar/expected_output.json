@@ -1,33 +1,41 @@
 {
     "outputs": [
         {
-            "panel_label": "Ai",
+            "panel_label": "A i",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
-            "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "2 \u03bcm"
+            "scale_bar_defined_in_caption": "no",
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "yes",
+            "from_the_image": "2 μm"
         },
         {
-            "panel_label": "Aii",
+            "panel_label": "A ii",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
-            "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "2 \u03bcm"
+            "scale_bar_defined_in_caption": "no",
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "yes",
+            "from_the_image": "2 μm"
         },
         {
             "panel_label": "B",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "no",
-            "from_the_caption": "4 \u03bcm"
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "yes",
+            "from_the_image": "4 μm"
         },
         {
             "panel_label": "C",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "no",
-            "from_the_caption": "2 \u03bcm"
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "yes",
+            "from_the_image": "2 μm"
         }
     ],
-    "updated_at": "2025-05-08 13:53:35"
+    "updated_at": "2026-01-23 16:54:11"
 }

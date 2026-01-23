@@ -1,0 +1,54 @@
+{
+    "outputs": [
+        {
+            "panel_label": "a",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        },
+        {
+            "panel_label": "b",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        },
+        {
+            "panel_label": "c",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        },
+        {
+            "panel_label": "d",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        },
+        {
+            "panel_label": "e",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        },
+        {
+            "panel_label": "f",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        },
+        {
+            "panel_label": "g",
+            "is_numerical_plot": "no",
+            "has_error_bars": "not_applicable",
+            "n_value": "not_applicable",
+            "n_inappropriate_for_error_bars": "not_applicable"
+        }
+    ],
+    "updated_at": "2026-01-23 17:32:44"
+}

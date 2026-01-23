@@ -1,0 +1,144 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axes display continuous flow-cytometry parameters (e.g., FSC-A, Viability, CD19, IgD) with numeric tick marks but no unit label (e.g., 'arbitrary units', 'a.u.' or other). These are continuous measurements and require units."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axes display continuous flow-cytometry parameters (e.g., FSC-H, SSC-A, CD4, Fas, IgM) with numeric tick marks but no unit label (e.g., 'arbitrary units', 'a.u.' or other). These are continuous measurements and require units."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axes show continuous fluorescence/scatter parameters (e.g., CD19, IgD, NP) with numeric scales but no unit annotation (such as 'AU' or 'a.u.'). Units for fluorescence/intensity are therefore missing."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axes show continuous fluorescence/scatter parameters (e.g., CD98, FSC-A, CD138) with numeric scales but no unit annotation (such as 'AU' or 'a.u.'). Units for these measurements are therefore missing."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axes present continuous flow-cytometry intensities (e.g., IgD, NP, CD138) with numeric tick marks but do not specify units (e.g., 'AU' or 'a.u.'), which are needed for intensity measurements."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axes present continuous flow-cytometry intensities (e.g., IgM, Fas, CD38) with numeric tick marks but do not specify units (e.g., 'AU' or 'a.u.'), which are needed for intensity measurements."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axes show continuous marker intensities (e.g., CD44, PD-L2) with numeric scales but lack unit labels (such as 'AU' or 'a.u.'). These fluorescence/intensity measurements require unit annotation."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axes show continuous marker intensities (e.g., CD62L, CD80) with numeric scales but lack unit labels (such as 'AU' or 'a.u.'). These fluorescence/intensity measurements require unit annotation."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The x-axes present continuous marker intensities (e.g., CD44, PD-L2) with numeric scales but do not indicate units (e.g., 'AU' or 'a.u.'). Units for these intensity measurements are therefore missing."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axes present continuous marker intensities (e.g., CD62L, CD80) with numeric scales but do not indicate units (e.g., 'AU' or 'a.u.'). Units for these intensity measurements are therefore missing."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_0990f5c7068be59c0069738ce91df881939581bac0b77097e2",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3481,
+      "output_tokens": 2300
+    },
+    "status": "completed",
+    "cached_at": "2026-01-23T16:00:34.228263"
+  }
+}

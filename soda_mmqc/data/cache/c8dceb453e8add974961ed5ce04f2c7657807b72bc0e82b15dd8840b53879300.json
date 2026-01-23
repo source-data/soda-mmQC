@@ -1,0 +1,161 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis is binned by log2 Pol II ChIP-seq signal (binning described in caption)."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labelled 'State frequency (%)' — state frequency reported as percent."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labelled 'Position relative to TSS (bp)' — units are base pairs (bp)."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis indicates number of molecules (left label shows '2952 molecules')."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis is binned by log2 Pol II ChIP-seq signal (binning described in caption)."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labelled 'State frequency (%)' — state frequency reported as percent."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labelled 'Position relative to TSS (bp)' — units are base pairs (bp)."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis indicates number of molecules (left label shows '2871 molecules')."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labelled 'PIC occupancy (%)' — occupancy reported as percent. Replicates (from caption): mouse (TATA-less n = 572; TATA-containing n = 64); Drosophila (TATA-less n = 422; TATA-containing n = 71)."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labelled 'Pol II occupancy (%)' — occupancy reported as percent. Replicates (from caption): mouse (TATA-less n = 572; TATA-containing n = 64); Drosophila (TATA-less n = 422; TATA-containing n = 71)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_09f0a237ea072d3100696fb328b7a481968d634d3400113220",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3612,
+      "output_tokens": 3474
+    },
+    "status": "completed",
+    "cached_at": "2026-01-20T17:54:48.344797"
+  }
+}

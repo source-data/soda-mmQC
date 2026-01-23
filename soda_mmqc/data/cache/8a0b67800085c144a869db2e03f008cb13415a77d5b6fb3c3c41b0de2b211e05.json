@@ -1,0 +1,80 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Running title:",
+          "Total character count:",
+          "Subject Category:",
+          "ABSTRACT",
+          "Keywords:",
+          "INTRODUCTION",
+          "RESULTS AND DISCUSSION",
+          "MATERIALS AND METHODS",
+          "ACKNOWLEDGEMENTS",
+          "REFERENCES",
+          "FIGURE LEGENDS"
+        ],
+        "missing_sections": [
+          "Data Availability",
+          "Author contributions",
+          "Expanded View legends"
+        ],
+        "sections_to_remove": [
+          "Running title:",
+          "Total character count:",
+          "Subject Category:",
+          "Keywords:"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "ABSTRACT",
+            "renamed": "Abstract"
+          },
+          {
+            "original": "INTRODUCTION",
+            "renamed": "Introduction"
+          },
+          {
+            "original": "RESULTS AND DISCUSSION",
+            "renamed": "Results and Discussion"
+          },
+          {
+            "original": "MATERIALS AND METHODS",
+            "renamed": "Materials and methods"
+          },
+          {
+            "original": "ACKNOWLEDGEMENTS",
+            "renamed": "Acknowledgments"
+          },
+          {
+            "original": "REFERENCES",
+            "renamed": "References"
+          },
+          {
+            "original": "FIGURE LEGENDS",
+            "renamed": "Figure legends"
+          },
+          {
+            "original": "The authors declare that they have no conflict of interest.",
+            "renamed": "Disclosure and competing interests statement"
+          }
+        ],
+        "sections_to_move": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_0ed0f4d20460fd1b006968b8c2846881a19a780203e5e9fdc8",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 9952,
+      "output_tokens": 4264
+    },
+    "status": "completed",
+    "cached_at": "2026-01-15T10:52:51.098122"
+  }
+}

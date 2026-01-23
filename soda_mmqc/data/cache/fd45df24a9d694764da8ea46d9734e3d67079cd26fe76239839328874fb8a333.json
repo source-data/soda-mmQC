@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "4",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "4",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "7",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "7",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "not_applicable",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "H",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "9",
+        "n_inappropriate_for_error_bars": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0e42cf8a4bbba7b5006973a06b02a4819e80d675d781b85583",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3926,
+      "output_tokens": 1749
+    },
+    "status": "completed",
+    "cached_at": "2026-01-23T17:23:29.490708"
+  }
+}

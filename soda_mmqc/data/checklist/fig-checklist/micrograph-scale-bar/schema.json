@@ -32,6 +32,15 @@
                             "from_the_caption": {
                                 "type": "string",
                                 "description": "The exact text from the caption that defines the scale bar"
+                            },
+                            "scale_bar_defined_in_image": {
+                                "type": "string",
+                                "enum": ["yes", "no", ""],
+                                "description": "Whether the scale bar is defined in the image"
+                            },
+                            "from_the_image": {
+                                "type": "string",
+                                "description": "The exact text from the image that defines the scale bar"
                             }
                         },
                         "required": [
@@ -39,7 +48,9 @@
                             "micrograph",
                             "scale_bar_on_image",
                             "scale_bar_defined_in_caption",
-                            "from_the_caption"
+                            "from_the_caption",
+                            "scale_bar_defined_in_image",
+                            "from_the_image"
                         ],
                         "additionalProperties": false
                     }

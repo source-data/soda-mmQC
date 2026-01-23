@@ -1,0 +1,214 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"% LDH\". Caption (replicates): (A) Pooled data are mean ± SEM of four independent experiments (P ≤ 0.0001 for both conditions)."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled \"Time (h)\" (hours). Caption (replicates): (C) Pooled data are mean ± SEM of three independent experiments (P = 0.0010)."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"% LDH\"."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"% LDH\". Caption (replicates): (E) Pooled data are mean ± SEM of three independent experiments (P = 0.0257 for Tnfr1−/− and P = 0.0094 for TrifLps2)."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled \"Time (h)\" (hours). Caption (replicates): Data are mean ± SD of technical (G, H) duplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"SYTOX Green uptake (normalised to 100%)\" (normalized percent)."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled \"Time (h)\" (hours). Caption (replicates): Data are mean ± SD of technical (G, H) duplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"Caspase-3/7 activity (DEVD+, ×10^5)\" (activity in units of 10^5 DEVD-positive events)."
+          }
+        ]
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled \"Time (h)\" (hours). Caption (replicates): Data are mean ± SD of technical (I, K) triplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"Caspase-3/7 activity (DEVD+, ×10^5)\" (activity in units of 10^5 DEVD-positive events)."
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "K",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled \"Time (h)\" (hours). Caption (replicates): Data are mean ± SD of technical (I, K) triplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled \"Caspase-3/7 activity (DEVD+, ×10^5)\" (activity in units of 10^5 DEVD-positive events)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00412-5",
+    "source": "10.1038_s44318-025-00412-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0e77d7724e38fe8300696fb3e4b84081a1a9ab2eea4bfe8058",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3398,
+      "output_tokens": 3326
+    },
+    "status": "completed",
+    "cached_at": "2026-01-20T17:57:54.156947"
+  }
+}

@@ -5,127 +5,163 @@
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "B",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "C",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "D",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "E",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 70\u2009\u00b5m.\n"
+            "from_the_caption": "Scale bar, 70 µm",
+            "scale_bar_defined_in_image": "no",
+            "from_the_image": ""
         },
         {
             "panel_label": "F",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "G",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "H",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "I",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 15\u2009\u00b5m.\n"
+            "from_the_caption": "Scale bar, 15\u000205\u00182m.",
+            "scale_bar_defined_in_image": "no",
+            "from_the_image": ""
         },
         {
             "panel_label": "J",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "K",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 30\u2009\u00b5m.\n"
+            "from_the_caption": "Scale bar, 30\u000205\u00182m.",
+            "scale_bar_defined_in_image": "no",
+            "from_the_image": ""
         },
         {
             "panel_label": "L",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "M",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bars, 15\u2009\u03bcm\n"
+            "from_the_caption": "Scale bars, 15\u000205\u0018\u0003m (M) and 500\u000205nm (N).",
+            "scale_bar_defined_in_image": "no",
+            "from_the_image": ""
         },
         {
             "panel_label": "N",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bars, 500\u2009nm"
+            "from_the_caption": "Scale bars, 15\u000205\u0018\u0003m (M) and 500\u000205nm (N).",
+            "scale_bar_defined_in_image": "no",
+            "from_the_image": ""
         },
         {
             "panel_label": "O",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "P",
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 4\u2009\u00b5m.\n"
+            "from_the_caption": "Scale bar, 4\u000205\u00182m.",
+            "scale_bar_defined_in_image": "no",
+            "from_the_image": ""
         },
         {
             "panel_label": "Q",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "R",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         }
     ],
-    "updated_at": "2025-05-08 13:53:51"
+    "updated_at": "2026-01-23 16:57:19"
 }

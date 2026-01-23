@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (s) — x-axis labeled with time in seconds as shown on the plots and insets"
+          },
+          {
+            "axis": "y",
+            "definition": "Normalized intensity (a.u.) — y-axis labeled in arbitrary units as shown on the plots; insets labeled Intensity (a.u.)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0a230b9d236d5ecd006970f97ca42c8194900ca445465579d5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2069,
+      "output_tokens": 1183
+    },
+    "status": "completed",
+    "cached_at": "2026-01-21T17:06:39.759414"
+  }
+}

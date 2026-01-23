@@ -1,0 +1,208 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled 'Rhythmicity index' (a continuous index) but no units or unit description (e.g., arbitrary units) are given on the axis or in the plot margins."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled in the figure as 'Lag (hours)'."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis labeled 'Circadian component' with numeric range 0–1 but no units or unit explanation are provided on the axis or in the panel."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axis labeled as a log scale 'Log10 (Noise component)' showing numeric ticks but no units or description of what the noise component is measured in are provided."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Top density plot x-axis labeled 'Period (hours)'."
+          },
+          {
+            "axis": "x",
+            "definition": "Bottom density plot x-axis labeled 'log(amplitude) (arb. u.)' (amplitude in arbitrary units)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labeled 'Ridge length (hours)'."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Angular axis labeled in radians (tick labels such as 0, π/6, π/3, etc. are shown around the polar plot)."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Angular axis labeled in radians (polar ticks show fractions of π)."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled 'Time (hours)'."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled 'Signal (arb. u.)' (arbitrary units)."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis labeled 'Amplitude exponential decay rate (γ)' but no time unit (e.g., per hour) or other unit is specified on the axis or in the panel."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axis labeled 'Amplitude (A0)' and shows numeric (log) scale but no unit (for example 'arb. u.') is given on the axis."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_03ae769da4e78447006971e65a154c819d826b37b6fc666716",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3532,
+      "output_tokens": 5149
+    },
+    "status": "completed",
+    "cached_at": "2026-01-22T09:58:12.527724"
+  }
+}

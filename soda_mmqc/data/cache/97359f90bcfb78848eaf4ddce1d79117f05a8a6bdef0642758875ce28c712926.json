@@ -1,0 +1,234 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled 'Rhythmicity index' with no units given; rhythmicity index appears to be a dimensionless metric but no explicit units or definition are provided on the plot or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled 'Lag (hours)'. (Shown on the plot margins/histogram.)"
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis labeled 'Circadian component' with numeric values (0–1) but no explicit unit; this is a continuous (normalized/unitless) quantity and the axis does not state units."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axis labeled 'Log10 (Noise component)' but no units are provided for the noise component (the axis shows a log scale of a component but no physical unit is given)."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis text on the image: 'Circadian component'."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis text on the image: 'Log10 (Noise component)'."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Top subplot x-axis labeled 'Period (hours)'. (Top density plot.)"
+          },
+          {
+            "axis": "x",
+            "definition": "Bottom subplot x-axis labeled 'log(amplitude) (arb. u.)'."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labeled 'Ridge length (hours)'."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Angular axis labeled with multiples of π (tick labels show π/6, π/3, π/2, etc.), indicating radians as angular units."
+          },
+          {
+            "axis": "y",
+            "definition": "Radial axis shows numeric probability/density tick values (e.g. 0.2, 0.4) but has no explicit unit label on the plot; the radial scale represents normalized probability (visual evidence: numeric radial ticks on the polar histogram)."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Angular axis labeled with multiples of π (tick labels visible), indicating radians as angular units."
+          },
+          {
+            "axis": "y",
+            "definition": "Radial axis shows numeric tick values (probability/density scale) though no explicit unit label is printed on the plot; radial values correspond to normalized histogram magnitude."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis labeled 'Time (hours)'."
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis labeled 'Signal (arb. u.)' (arbitrary units)."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis labeled 'Amplitude exponential decay rate (γ)' but no units (e.g., per hours) are indicated on the plot or in the caption; decay rate is a continuous parameter and its physical unit is not specified."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axis labeled 'Amplitude (A0)' without units; amplitude appears to be in arbitrary units but no unit (e.g., 'arb. u.') is given on the axis or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x-axis text on the image: 'Amplitude exponential decay rate (γ)'. (No unit specified.)"
+          },
+          {
+            "axis": "y",
+            "definition": "y-axis text on the image: 'Amplitude (A0)'. (No unit specified.)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0fa0ba993306b340006970fa4064ec8195954edca42627cad1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3521,
+      "output_tokens": 4185
+    },
+    "status": "completed",
+    "cached_at": "2026-01-21T17:10:34.631739"
+  }
+}

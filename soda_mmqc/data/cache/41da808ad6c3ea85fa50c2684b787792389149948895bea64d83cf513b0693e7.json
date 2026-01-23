@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Trypan blue exclusion"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "western blot"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Trypan blue exclusion"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "western blot"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0af076ddf9fe976c00696fb584a4508196b60fa02bb8d26436",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2075,
+      "output_tokens": 2480
+    },
+    "status": "completed",
+    "cached_at": "2026-01-20T18:04:36.221630"
+  }
+}

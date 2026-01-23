@@ -1,0 +1,55 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "tomogram"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "slice"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "average volume"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "tomogram"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_05cf252997d086cb00696fb71976f4819e998932586601263e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3029,
+      "output_tokens": 3451
+    },
+    "status": "completed",
+    "cached_at": "2026-01-20T18:11:46.106356"
+  }
+}

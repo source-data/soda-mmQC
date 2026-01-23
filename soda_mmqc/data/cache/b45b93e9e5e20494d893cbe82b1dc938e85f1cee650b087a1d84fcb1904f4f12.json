@@ -1,0 +1,214 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "% LDH (percent lactate dehydrogenase release), as labeled on the y-axis. Caption (replicates): (A) Pooled data are mean ± SEM of four independent experiments (P ≤ 0.0001 for both conditions)."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (h) — hours, as labeled on the x-axis. Caption (replicates): (C) Pooled data are mean ± SEM of three independent experiments (P = 0.0010)."
+          },
+          {
+            "axis": "y",
+            "definition": "% LDH (percent lactate dehydrogenase release), as labeled on the y-axis."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "% LDH (percent lactate dehydrogenase release), as labeled on the y-axis. Caption (replicates): (E) Pooled data are mean ± SEM of three independent experiments (P = 0.0257 for Tnfr1−/− and P = 0.0094 for TrifLps2)."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (h) — hours, as labeled on the x-axis. Caption (replicates): Data are mean ± SD of technical (G, H) duplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "SYTOX Green uptake (normalized to 100%), expressed as percent/normalized units as labeled on the y-axis."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (h) — hours, as labeled on the x-axis. Caption (replicates): Data are mean ± SD of technical (G, H) duplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "Caspase-3/7 activity (DEVD-positive), plotted as DEVD+ ×10^5 as labeled on the y-axis."
+          }
+        ]
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (h) — hours, as labeled on the x-axis. Caption (replicates): Data are mean ± SD of technical (I, K) triplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "Caspase-3/7 activity (DEVD-positive), plotted as DEVD+ ×10^5 as labeled on the y-axis."
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "K",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (h) — hours, as labeled on the x-axis. Caption (replicates): Data are mean ± SD of technical (I, K) triplicates representative of three independent experiments."
+          },
+          {
+            "axis": "y",
+            "definition": "Caspase-3/7 activity (DEVD-positive), plotted as DEVD+ ×10^5 as labeled on the y-axis."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00412-5",
+    "source": "10.1038_s44318-025-00412-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0d6ba16eaa7cfbfa006970fb824d8c8196a42d39b00de4c9d6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3404,
+      "output_tokens": 4029
+    },
+    "status": "completed",
+    "cached_at": "2026-01-21T17:15:59.247540"
+  }
+}

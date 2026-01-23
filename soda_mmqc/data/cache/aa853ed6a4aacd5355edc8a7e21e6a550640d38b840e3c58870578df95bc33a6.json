@@ -1,0 +1,127 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Schematic illustration"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "mRNA microarray"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "mRNA microarray"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Representative images"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining"
+      },
+      {
+        "panel_label": "K",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunofluorescence"
+      },
+      {
+        "panel_label": "L",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunofluorescence"
+      },
+      {
+        "panel_label": "M",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Transmission electron microscopy"
+      },
+      {
+        "panel_label": "N",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Transmission electron microscopy"
+      },
+      {
+        "panel_label": "O",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Schematic illustration"
+      },
+      {
+        "panel_label": "P",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining"
+      },
+      {
+        "panel_label": "Q",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Schematic illustration"
+      },
+      {
+        "panel_label": "R",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00438-0",
+    "source": "10.1038_s44319-025-00438-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_08ecfdcdea99296500696fb556d45881908a611d846a1cc352",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3444,
+      "output_tokens": 3597
+    },
+    "status": "completed",
+    "cached_at": "2026-01-20T18:04:03.052344"
+  }
+}

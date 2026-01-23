@@ -1,0 +1,66 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "external-data-url-validation",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "url",
+              "repository",
+              "identifier",
+              "status",
+              "reason"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The URL provided in the manuscript."
+              },
+              "repository": {
+                "type": "string",
+                "description": "Name of the repository inferred from the URL or context."
+              },
+              "identifier": {
+                "type": ["string", "null"],
+                "description": "Extracted dataset identifier (e.g., DOI, accession), or null if not identifiable."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "valid",
+                  "invalid",
+                  "cannot_be_determined"
+                ],
+                "description": "Overall validity assessment of the URL."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Brief justification for the assigned status."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scoring": {
+    "type": "field_based",
+    "fields": {
+      "status": {
+        "weight": 0.6
+      },
+      "identifier": {
+        "weight": 0.2
+      },
+      "reason": {
+        "weight": 0.2
+      }
+    }
+  },
+  "strict": true
+}

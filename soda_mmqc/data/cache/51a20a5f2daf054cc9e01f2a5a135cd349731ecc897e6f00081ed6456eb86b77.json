@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [
+          "black polygon gate",
+          "black rectangular gate/box",
+          "black diagonal gate/line"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [
+          "black polygon gate",
+          "black rectangular gate/box"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [
+          "black rectangular gate/box",
+          "black polygon gate",
+          "black circular gate/outline",
+          "black arrow (gate connector)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [
+          "black rectangular gate/box",
+          "black rectangular gate/box"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          ""
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_06d87ccd8304972b00696fb8b7832c81908bad9e81173266de",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2843,
+      "output_tokens": 1418
+    },
+    "status": "completed",
+    "cached_at": "2026-01-20T18:18:02.793447"
+  }
+}

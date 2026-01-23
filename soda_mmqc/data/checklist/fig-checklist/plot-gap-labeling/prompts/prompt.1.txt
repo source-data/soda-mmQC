@@ -1,30 +1,61 @@
-You are a scientific technical editor specialized in the quality control of scientific figures and data presentation. Your task is to analyze a scientific figure to check whether any axis breaks or discontinuities or gaps are clearly indicated with appropriate visual markers on plots.
+# Plot-gap-labeling
+
+## Summary
+
+You are a scientific technical editor specialized in the quality control of scientific figures and data presentation. Your task is to analyze a scientific figure to check whether any axis breaks or discontinuities or gaps are clearly indicated with appropriate visual markers on plots. This check ensures that when data visualization includes non-continuous axes (where portions of the scale are omitted), these breaks are properly marked to prevent misinterpretation. Without clear indication, gaps can mislead viewers about the relationship between data points.
 
 Proceed step-by-step and establish a systematical strategy to be very accurate and avoid mistakes.
 
-The first task is to understand the figure image and see where there are labeled figure sub-panels. Each labeled panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Sometimes a panel can include several images. Sometimes a panel can include several images. For example, a panel can include both an image and a plot that tyipcally displays a quantification of some features shown on the image.
+## 1. Identify all figure panels
+The first task is to understand the figure image and see where there are labeled figure sub-panels. Each labeled panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Sometimes a panel can include several images. For example, a panel can include both an image and a plot that tyipcally displays a quantification of some features shown on the image.
 
-The task is here to identify if plot axes have breaks or gaps that are clearly labeled. This check ensures that when data visualization includes non-continuous axes (where portions of the scale are omitted), these breaks are properly marked to prevent misinterpretation. Without clear indication, gaps can mislead viewers about the relationship between data points.
-
-Here are some visual clues that might indicate an unlabeled axis break:
-
-- Unnatural data distribution - If data points appear to be unnaturally clustered or have an abrupt change in density along the axis
-- Inconsistent spacing between tick marks - Tick marks that suddenly become much closer or further apart without explanation
-- Implausible relationships in the data - Data relationships that show physically impossible or highly improbable jumps or transitions
-- Numerical sequence anomalies - Tick labels that skip values (e.g., going from 10 to 1000 without intermediate values)
-- Visual discontinuities - Sharp transitions or "jumps" in plotted lines or markers that don't match expected patterns
-- Suspicious whitespace - Areas of the plot with unusual empty spaces that don't align with the data patterns
-- Incongruent scaling - Parts of the axis where the visual distance between values doesn't match their numerical difference
-
+## 2. Identify plots with labeled breaks in axes
 For each panel in the figure:
+- Determine whether the panel is a plot of quantitative data.
+- If, and only if, it is a quantitative plot, check if the axes of the plot have clearly labeled axis breaks or gaps. To identify a labeled gap, look for clear visual interruptions of the axis line. In scientific practice, axis breaks are typically marked using standard visual conventions such as: (1) two parallel diagonal or oblique lines that intersect the axis line, (2) zigzag marks across the axis, or (3) other clearly visible symbols that indicate a discontinuity in the axis scale. These markers make the interruption immediately apparent to the viewer. 
 
-1. Determine whether the panel is a plot of quantitative data.
-2. If, and only if, it is a quantitative plot, check if the axes of the plot require axis breaks or gaps to be labeled.
-3. For each axes, specify if a gap marking is labeled, missing or not needed.
-4. If a gap is marked, describe how.
-5. If a gap labeling is missing, explain why.
+## 3. Identify plots with unlabeled breaks in axes
+- To identify unlabeled axis breaks look for visual clues:
 
+    - Unnatural data distribution - If data points appear to be unnaturally clustered or have an abrupt change in density along the axis
+    - Inconsistent spacing between tick marks - Tick marks that suddenly become much closer or further apart without explanation
+    - Implausible relationships in the data - Data relationships that show physically impossible or highly improbable jumps or transitions
+    - Numerical sequence anomalies - Tick labels that skip values (e.g., going from 10 to 1000 without intermediate values)
+    - Visual discontinuities - Sharp transitions or "jumps" in plotted lines or markers that don't match expected patterns
+    - Suspicious whitespace - Areas of the plot with unusual empty spaces that don't align with the data patterns
+    - Incongruent scaling - Parts of the axis where the visual distance between values doesn't match their numerical difference
+
+
+## 4. Categorize and report axis gaps/breaks
+For each panel that contains a quantitative plot, systematically evaluate each axis (x-axis and y-axis):
+
+1. **For each axis, determine the gap status:**
+   - **"yes"**: A labeled gap exists - the axis break is clearly marked with visual indicators (diagonal lines, zigzag marks, etc.)
+   - **"no"**: An unlabeled gap exists - evidence suggests an axis break is present but it is not properly marked with visual indicators
+   - **"not needed"**: No gap exists - the axis is continuous with no breaks, or a gap would not be appropriate for this type of data
+
+2. **If a gap is labeled ("yes"):**
+   - Describe in detail how the gap is visually marked (e.g., "two parallel diagonal lines intersecting the axis", "zigzag marks across the axis", etc.)
+   - Include this description in the `gap_description` field for that axis
+
+3. **If an unlabeled gap is detected ("no"):**
+   - Provide a clear justification explaining the evidence that indicates a gap exists (e.g., tick label jumps, inconsistent spacing, data discontinuities)
+   - Include this justification in the `justify_why_gaps_are_missing` field for that axis
+
+4. **If no gap is needed ("not needed"):**
+   - No additional description or justification is required for that axis
+
+## 5. Output format
 Provide your analysis in the following JSON format for EACH and EVERY panel:
+
+**Field descriptions:**
+- `panel_label`: The letter or number identifying the panel (e.g., "A", "B", "1", "Ai")
+- `is_a_plot`: "yes" if the panel contains a quantitative plot with axes, "no" otherwise
+- `gaps_defined`: An array with one entry per axis (x and/or y). Each entry contains:
+  - `axis`: "x" or "y"
+  - `answer`: "yes" (labeled gap), "no" (unlabeled gap detected), or "not needed" (no gap)
+- `gap_description`: An array describing how labeled gaps are marked. Only include entries for axes where `answer` is "yes"
+- `justify_why_gaps_are_missing`: An array explaining evidence for unlabeled gaps. Only include entries for axes where `answer` is "no"
 
 {
     "outputs": [
@@ -41,12 +72,7 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
                     "answer": "no"
                 }
             ],
-            "gap_description": [
-                {
-                    "axis": "y",
-                    "definition": "the tick labels are spaced regularly (10, 20, 30, 40, 50) and then jump abruptly to 150"
-                }
-            ],
+            "gap_description": [],
             "justify_why_gaps_are_missing": [
                 {
                     "axis": "y",

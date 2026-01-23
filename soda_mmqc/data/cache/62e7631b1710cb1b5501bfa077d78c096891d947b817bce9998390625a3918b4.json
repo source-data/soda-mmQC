@@ -1,0 +1,131 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Left subplot y-axis label shown on the image: \"Body weight (g)\""
+          },
+          {
+            "axis": "y",
+            "definition": "Middle subplot y-axis label shown on the image: \"LW/BW\" (liver weight over body weight, a ratio)"
+          },
+          {
+            "axis": "y",
+            "definition": "Right subplot y-axis label shown on the image: \"FW/BW\" (visceral fat weight over body weight, a ratio)"
+          },
+          {
+            "axis": "y",
+            "definition": "Replicates (from caption): \"n\u0000=\u00005 in NC; n\u0000=\u00005 in HFD.\""
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Y-axis label shown on the image: \"5mC/Methyl Blue (ratio)\""
+          },
+          {
+            "axis": "y",
+            "definition": "Replicates (from caption): \"n\u0000=\u00005 in NC; n\u0000=\u00005 in HFD.\""
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Y-axis label shown on the image: \"Ratio (TETs/GAPDH)\""
+          },
+          {
+            "axis": "y",
+            "definition": "Replicates (from caption): \"n\u0000=\u00006 in NC; n\u0000=\u00007 in HFD.\""
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0339654d819c8648006970fc345be4819fbebbbaec490e0f6c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3207,
+      "output_tokens": 3040
+    },
+    "status": "completed",
+    "cached_at": "2026-01-21T17:18:37.331491"
+  }
+}

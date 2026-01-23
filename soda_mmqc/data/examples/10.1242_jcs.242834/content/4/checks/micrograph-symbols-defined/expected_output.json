@@ -1,0 +1,107 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "yes",
+            "symbols": [
+                "white box (ROI indicator)",
+                "white scale bar"
+            ],
+            "symbols_defined_in_caption": [
+                "no",
+                "yes"
+            ],
+            "from_the_caption": [
+                "",
+                "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+            ]
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "yes",
+            "symbols": [
+                "white box (ROI indicator)",
+                "white scale bar"
+            ],
+            "symbols_defined_in_caption": [
+                "no",
+                "yes"
+            ],
+            "from_the_caption": [
+                "",
+                "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+            ]
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "yes",
+            "symbols": [
+                "white box (ROI indicator)",
+                "white scale bar"
+            ],
+            "symbols_defined_in_caption": [
+                "no",
+                "yes"
+            ],
+            "from_the_caption": [
+                "",
+                "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+            ]
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "G",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "H",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "I",
+            "micrograph": "yes",
+            "symbols": [
+                "white scale bar"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "Scale bar: 5 µm."
+            ]
+        },
+        {
+            "panel_label": "J",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ]
+}
