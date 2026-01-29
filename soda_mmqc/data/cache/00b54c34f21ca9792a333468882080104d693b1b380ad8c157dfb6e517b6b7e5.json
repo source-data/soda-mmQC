@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "yes"
+      },
+      {
+        "panel_label": "B",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "yes"
+      },
+      {
+        "panel_label": "C",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "D",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "yes"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_09dc0b67419a0ddd0069775822d9f8819cb42fe50a670498bb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1557,
+      "output_tokens": 682
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T13:03:58.535891"
+  }
+}

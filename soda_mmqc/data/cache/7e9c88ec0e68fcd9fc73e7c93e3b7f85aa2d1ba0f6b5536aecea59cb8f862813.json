@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_02b89f819fd491d00069775d1845f881a0be3b0d0b530e5bd5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2992,
+      "output_tokens": 865
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T13:25:12.745426"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "H",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "I",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "J",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_06dd66c0f2d5f86c006979fe3622f081a1a3c3dd30a2d68b75",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3774,
+      "output_tokens": 1169
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T13:17:12.184566"
+  }
+}

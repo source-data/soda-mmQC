@@ -1,0 +1,36 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "Statistical analysis involved Student's t‐test and one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test."
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        }
+    ]
+}

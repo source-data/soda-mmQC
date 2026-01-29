@@ -1,0 +1,129 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_009fd9f7fc0ed29d006979f62a4378819485315ecc85872cd1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4054,
+      "output_tokens": 1241
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T12:42:53.827400"
+  }
+}

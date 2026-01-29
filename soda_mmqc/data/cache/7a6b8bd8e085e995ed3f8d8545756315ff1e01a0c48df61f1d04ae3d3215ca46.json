@@ -1,0 +1,39 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_06f6c5c11d28d969006977648b4c9c81a3bab9b3d5a96cee87",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1513,
+      "output_tokens": 778
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T13:56:59.317232"
+  }
+}

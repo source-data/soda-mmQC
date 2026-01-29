@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are presented as mean\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 (n\u0000=\u00003)."
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are presented as mean\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 SD (n\u0000=\u00003)."
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data are presented as mean\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 SEM (n\u0000=\u00003)."
+      },
+      {
+        "panel_label": "H",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0b99d463bc2fb04e006979f730b340819d9a7fd110adf5820d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3185,
+      "output_tokens": 2435
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T12:47:27.827611"
+  }
+}

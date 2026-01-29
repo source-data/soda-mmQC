@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_06b6a3a0111fb8400069777528ca48819e872d4a2caddfc4c5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2816,
+      "output_tokens": 918
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T15:07:52.892326"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunocytochemistry"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_09442a6789f6974900697772ac9be88193a58469487f353165",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2622,
+      "output_tokens": 708
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:57:13.689891"
+  }
+}

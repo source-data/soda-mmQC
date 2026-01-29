@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Shaded areas represent mean±s.e.m."
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Data represent the mean±s.e.m. of three independent experiments."
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Migration speed (mean±s.e.m.) of each cell depicted in D."
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Results represent mean±s.e.m."
+      },
+      {
+        "panel_label": "J",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Results represent mean±s.e.m."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0de3ad6c4446fbbf006979f75a6a108194b304b2fcd640ddf5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3328,
+      "output_tokens": 1816
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T12:48:02.090712"
+  }
+}

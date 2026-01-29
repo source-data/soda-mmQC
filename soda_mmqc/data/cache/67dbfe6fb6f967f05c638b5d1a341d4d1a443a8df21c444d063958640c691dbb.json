@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "141",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "Generally 6 per reporter (2 biological replicates × technical triplicates/duplicates); HCC1806 Per2‑Luc n=5; MCF10A and MDAMB468‑Per2‑Luc n=3",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "1–4 cell line models per subtype (underlying replicates per cell model averaged: n=3–6)",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "4–12 samples per cell line",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "Varies by cell line (n indicated next to each cell line in the figure; examples shown in legend e.g., n=36, n=30, n=16, n=18, n=15, n=27, n=8, n=15, n=6, n=25, n=36, n=9)",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "1–4 cell line models per subtype",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "not_mentioned",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "H",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "117 samples",
+        "n_inappropriate_for_error_bars": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_01d8f15ea53af67800697768bfc9e48196987383f8894578c5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3118,
+      "output_tokens": 2640
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:15:27.011713"
+  }
+}

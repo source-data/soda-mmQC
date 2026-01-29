@@ -1,0 +1,89 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "H",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "I",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "J",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_03290949a340626f00697a180805788190bb2eee3549db1548",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4059,
+      "output_tokens": 1439
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T15:07:34.945536"
+  }
+}

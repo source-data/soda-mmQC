@@ -1,0 +1,68 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "The lower bar graph shows significance markers (**, p<0.01) but the caption for panel A does not specify which statistical test was used for these comparisons.",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "The caption states that the ratio of aggregate-positive Purkinje cells 'did not differ' between groups (a comparative claim) but does not report which statistical test or p-value supports this claim.",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "Statistical analysis was performed with the Bonferroni–Dunn test and Student's t‐test."
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "Statistical analysis was performed with the Bonferroni–Dunn test and Student's t‐test."
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "The effect of HMGB1 on the lifespan was assessed by Kaplan–Meier analysis, and the end‐point postponement was significant in the log‐rank test (P = 0.0025)."
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "(upper graph; Student's t‐test, P < 0.05). *P < 0.05 in Student's t‐test, #P < 0.05 in one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test."
+        }
+    ]
+}

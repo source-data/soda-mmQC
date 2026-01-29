@@ -1,0 +1,68 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "The unpaired two-tailed student’s t-test was used for statistical analysis in (C, D, G)."
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "The unpaired two-tailed student’s t-test was used for statistical analysis in (C, D, G)."
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "The unpaired two-tailed student’s t-test was used for statistical analysis in (C, D, G)."
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        }
+    ]
+}

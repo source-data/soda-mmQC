@@ -1,0 +1,49 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MitoTracker Deep Red"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "JC-1 staining"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "SDH/COX staining"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "TMRM FACS"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_06c5213bf4c53fb30069777291c5f0819ea8a8d6827c4ed053",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2517,
+      "output_tokens": 1187
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:56:55.459174"
+  }
+}

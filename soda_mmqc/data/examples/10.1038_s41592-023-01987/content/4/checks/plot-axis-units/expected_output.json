@@ -1,0 +1,54 @@
+{
+    "outputs": [
+        {
+            "panel_label": "a",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "b",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "c",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "d",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "e",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "f",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "g",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        }
+    ],
+    "updated_at": "2026-01-28 15:49:19"
+}

@@ -1,0 +1,55 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_02aa92a8628f899e0069775cd064d8819f9e5607e2bf812ae1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1586,
+      "output_tokens": 669
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T13:23:54.420593"
+  }
+}

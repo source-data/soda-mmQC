@@ -1,0 +1,49 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "no",
+        "discrepancies": "Panel shows body weight, LW/BW and FW/BW plots as described, but the number of individual data points displayed appears inconsistent with the caption (caption states n=5 per group; several subplots—particularly LW/BW and FW/BW—appear to show fewer than 5 points per group)."
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "no",
+        "discrepancies": "Quantification bar graph is present and shows increased 5mC/methylene blue ratio in HFD as described, but the plotted individual points for the NC group appear fewer than the n=5 reported in the caption (NC bar appears to show ~4 points), suggesting a possible mismatch in shown sample number."
+      },
+      {
+        "panel_label": "F",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_090125ec84377b6300697765a5dc1881a1ae70e163eb240c4a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2508,
+      "output_tokens": 1601
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:02:14.435477"
+  }
+}

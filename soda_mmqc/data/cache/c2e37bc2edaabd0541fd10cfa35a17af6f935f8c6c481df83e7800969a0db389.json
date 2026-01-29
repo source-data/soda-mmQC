@@ -1,0 +1,44 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_06d3a50058b26cc3006977660acdbc81908252e08ff16b4ff0",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2498,
+      "output_tokens": 1191
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:03:25.116506"
+  }
+}

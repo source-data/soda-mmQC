@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Macroscopic imaging"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E staining"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Polyp counting"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Kaplan–Meier"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "GTP pull-down"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunohistochemistry"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoblotting"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0ff232fcdbb1a20f006977716792e081a2908f98e2894bd993",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2618,
+      "output_tokens": 1011
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:51:54.024502"
+  }
+}

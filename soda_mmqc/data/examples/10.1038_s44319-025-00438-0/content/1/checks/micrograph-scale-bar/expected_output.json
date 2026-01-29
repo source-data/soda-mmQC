@@ -77,7 +77,7 @@
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 15\u000205\u00182m.",
+            "from_the_caption": "Scale bar, 15 µm",
             "scale_bar_defined_in_image": "no",
             "from_the_image": ""
         },
@@ -95,7 +95,7 @@
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 30\u000205\u00182m.",
+            "from_the_caption": "Scale bar, 30 µm",
             "scale_bar_defined_in_image": "no",
             "from_the_image": ""
         },
@@ -113,7 +113,7 @@
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bars, 15\u000205\u0018\u0003m (M) and 500\u000205nm (N).",
+            "from_the_caption": "Scale bars, 15 μm",
             "scale_bar_defined_in_image": "no",
             "from_the_image": ""
         },
@@ -122,7 +122,7 @@
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bars, 15\u000205\u0018\u0003m (M) and 500\u000205nm (N).",
+            "from_the_caption": " 500 nm",
             "scale_bar_defined_in_image": "no",
             "from_the_image": ""
         },
@@ -140,7 +140,7 @@
             "micrograph": "yes",
             "scale_bar_on_image": "yes",
             "scale_bar_defined_in_caption": "yes",
-            "from_the_caption": "Scale bar, 4\u000205\u00182m.",
+            "from_the_caption": "Scale bar, 4 µm",
             "scale_bar_defined_in_image": "no",
             "from_the_image": ""
         },
@@ -163,5 +163,5 @@
             "from_the_image": ""
         }
     ],
-    "updated_at": "2026-01-23 16:57:19"
+    "updated_at": "2026-01-29 10:20:04"
 }

@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunohistochemistry"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunohistochemistry"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Rotarod test"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Rotarod test"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Kaplan–Meier analysis"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Histology"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Histological quantification"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_09b25adfab99201c0069777270882c8190aa128e379636fa02",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2781,
+      "output_tokens": 982
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:56:15.723145"
+  }
+}

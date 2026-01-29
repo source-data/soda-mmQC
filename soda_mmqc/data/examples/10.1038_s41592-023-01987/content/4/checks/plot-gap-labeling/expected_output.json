@@ -1,0 +1,54 @@
+{
+    "outputs": [
+        {
+            "panel_label": "a",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "b",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "c",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "d",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "e",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "f",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "g",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        }
+    ],
+    "updated_at": "2026-01-28 15:48:23"
+}

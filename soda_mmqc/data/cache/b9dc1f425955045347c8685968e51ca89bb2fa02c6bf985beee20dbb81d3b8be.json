@@ -1,0 +1,89 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "H",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 3,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "no"
+      },
+      {
+        "panel_label": "I",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "J",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_06ba6a671171101e0069776daa28ac8190a559d0d3d3f9cd37",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2833,
+      "output_tokens": 1479
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:36:00.746184"
+  }
+}

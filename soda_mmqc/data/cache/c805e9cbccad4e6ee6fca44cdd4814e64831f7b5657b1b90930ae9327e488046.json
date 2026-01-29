@@ -1,0 +1,104 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "red curved arrow (indicating cropped/zoomed region)",
+          "scissors icon (crop symbol)",
+          "white dashed box (inset origin)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "blue double-headed arrow (indicating separation/orientation)"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": [
+          ""
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "white dashed box (inset origin)",
+          "white arrowheads (pointing to features in inset)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "yes",
+        "symbols": [
+          "grayscale vertical colorbar (intensity/calibration scale)",
+          "pseudocolor vertical colorbar (intensity/calibration scale)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "It is best practice to publish legends for color intensities (intensity and/or calibration scales) with images, and this is recommended for pseudocolor scales.",
+          "It is best practice to publish legends for color intensities (intensity and/or calibration scales) with images, and this is recommended for pseudocolor scales."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_07a568009dc5e5a70069777539f4a881a1a028166d73e2e8d5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2347,
+      "output_tokens": 3161
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T15:08:53.982460"
+  }
+}

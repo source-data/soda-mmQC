@@ -1,0 +1,113 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Intensity (AU)"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "SDH signal intensity (continuous measurement) is plotted but no units are specified; intensity should indicate units (e.g., arbitrary units [AU] or optical density)."
+          },
+          {
+            "axis": "y",
+            "justification": "COX signal intensity (continuous measurement) is plotted but no units are specified; intensity should indicate units (e.g., arbitrary units [AU] or optical density)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "TMRM fluorescence intensity is displayed as channel 'FL2-H' with tick values (10^1–10^4) but no defined unit is given; fluorescence intensity should be labeled (e.g., arbitrary units [AU] or clarified as instrument channel units)."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Counts"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0fbbbc11d4d58cd2006979fb9eabb081a29a7674149caa84cf",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3660,
+      "output_tokens": 2192
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T13:06:25.271639"
+  }
+}

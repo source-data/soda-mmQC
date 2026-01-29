@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Phase contrast"
+      },
+      {
+        "panel_label": "Aii",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Phase contrast"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "NAO staining"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "NAO staining"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0afc9ddf0bded39d00697771f788c88192a2bc83e32447836b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2495,
+      "output_tokens": 1327
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:54:19.266803"
+  }
+}

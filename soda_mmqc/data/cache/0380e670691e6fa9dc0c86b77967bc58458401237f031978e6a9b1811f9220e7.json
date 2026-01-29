@@ -1,0 +1,107 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "*P<0.05 from 0.0167 mW (two-tailed Student's t-test)"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0e38d3b3b3f97963006979fadaa10c81968466acdbf5fad43a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3470,
+      "output_tokens": 1536
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T13:02:57.978455"
+  }
+}

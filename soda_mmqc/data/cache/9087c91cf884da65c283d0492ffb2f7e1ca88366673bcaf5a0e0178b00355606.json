@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0764fba39619ce93006979f81c216c819db54107dd7d1a60de",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2777,
+      "output_tokens": 696
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T12:51:02.198821"
+  }
+}

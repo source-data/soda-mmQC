@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "3",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "3",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "n=240, n=187",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "n=73, n=65",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "Low n=93, High n=94",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "Low n=32, High n=33",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "Low n=120, High n=120",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "H",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "no",
+        "n_value": "Low n=36, High n=37",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_05bdb799629310730069776a29e1d081a2b9a2515b70d73097",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2712,
+      "output_tokens": 1377
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:21:02.283997"
+  }
+}

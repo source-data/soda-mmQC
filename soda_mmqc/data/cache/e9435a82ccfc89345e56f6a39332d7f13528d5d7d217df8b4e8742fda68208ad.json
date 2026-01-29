@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 3,
+        "number_of_single_channel_images_shown": 3,
+        "all_channels_shown_separately": "yes"
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 3,
+        "number_of_single_channel_images_shown": 3,
+        "all_channels_shown_separately": "yes"
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 2,
+        "number_of_single_channel_images_shown": 2,
+        "all_channels_shown_separately": "yes"
+      },
+      {
+        "panel_label": "H",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_05ca02b103d713f00069776e6bbb10819db9ec5f523da4af40",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2910,
+      "output_tokens": 939
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:39:08.344381"
+  }
+}

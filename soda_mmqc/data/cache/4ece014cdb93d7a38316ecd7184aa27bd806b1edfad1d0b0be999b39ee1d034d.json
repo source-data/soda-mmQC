@@ -1,0 +1,68 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "b",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "c",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "d",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "e",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "f",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "g",
+        "is_numerical_plot": "no",
+        "has_error_bars": "not_applicable",
+        "n_value": "not_applicable",
+        "n_appropriate_for_error_bars": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0ee9b49d0d4c4e4d006979fe60ffd88196a7ef0c06c7c5234b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3483,
+      "output_tokens": 857
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T13:17:51.478861"
+  }
+}

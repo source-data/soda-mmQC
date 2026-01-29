@@ -1,0 +1,28 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "no"
+        },
+        {
+            "panel_label": "B",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "C",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "D",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        }
+    ]
+}

@@ -1,0 +1,128 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (zoom region)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (zoom region)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (zoom region)",
+          "white scale bar",
+          "false-colored overlays (colored segmentation/highlighting of EB3 signals in the bottom row)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images.",
+          ""
+        ]
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "I",
+        "micrograph": "yes",
+        "symbols": [
+          "white scale bar",
+          "dual-color channels (EB3 and H2B shown in separate/merged channels)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Scale bar: 5 µm.",
+          "Dual-color imaging of EB3–mEmerald and H2B–mCherry."
+        ]
+      },
+      {
+        "panel_label": "J",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/4",
+    "example_type": "figure",
+    "response_id": "resp_09b40a5139ab83b100697775adf79881938269487eea7fd5e3",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2665,
+      "output_tokens": 2794
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T15:10:41.943032"
+  }
+}

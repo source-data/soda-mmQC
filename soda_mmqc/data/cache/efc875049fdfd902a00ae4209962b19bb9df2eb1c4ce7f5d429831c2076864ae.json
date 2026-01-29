@@ -1,0 +1,101 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "I",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "J",
+        "micrograph": "yes",
+        "symbols": [
+          "TO-PRO3 (blue)",
+          "FoxO3 (green)",
+          "scale bar (white)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "TO‐PRO3 (blue) was used to label nuclei.",
+          "",
+          "Scale bar = 50 μm."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_05362f778594744c00697775089210819daa46d5cbab296056",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2638,
+      "output_tokens": 1899
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T15:07:32.428909"
+  }
+}

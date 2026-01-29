@@ -1,0 +1,54 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0f4dd0a4153a4ea000697774f462b08190a56d6fe422e1084b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2533,
+      "output_tokens": 862
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T15:07:00.037731"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_004400ffc96529310069775d9d8638819cb035ff004d4f67d8",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2489,
+      "output_tokens": 891
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T13:27:30.486251"
+  }
+}

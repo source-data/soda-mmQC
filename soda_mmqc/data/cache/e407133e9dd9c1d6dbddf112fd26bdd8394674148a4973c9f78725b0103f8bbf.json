@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Phase contrast"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Flow cytometry"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Flow cytometry"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "RNA-seq"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "RT-qPCR"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunofluorescence"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_03c39f3ec7550e5200697772beb40481969b61333851aa4d6a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2800,
+      "output_tokens": 1172
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:57:42.246378"
+  }
+}

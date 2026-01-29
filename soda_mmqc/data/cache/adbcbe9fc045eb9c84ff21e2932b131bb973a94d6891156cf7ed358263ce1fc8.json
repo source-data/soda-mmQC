@@ -1,0 +1,182 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Normalized Fluorescence Intensity (A.U.)"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Change in ROS (ΔROS) is plotted as a continuous measured quantity but no units are indicated on the axis; ROS signal change should have units (e.g., fluorescence arbitrary units) or be labeled as normalized/AU."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Exposure time (ms)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "X position (μm)"
+          },
+          {
+            "axis": "y",
+            "definition": "Y position (μm)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Migration speed (μm h−1)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (min)"
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (min)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0233958d8e68895c006979fc2014f081a3b479d610e15b0747",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4086,
+      "output_tokens": 2662
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T13:08:43.962111"
+  }
+}

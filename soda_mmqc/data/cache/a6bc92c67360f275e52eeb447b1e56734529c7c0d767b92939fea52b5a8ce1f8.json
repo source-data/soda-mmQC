@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "I",
+        "image_matches_caption": "no",
+        "discrepancies": "Caption text contains a numbering error: it states 'G–I) MARCM clones of WT (G), sin1 (H), and rictor (J)' which mislabels rictor as panel J instead of I. The image in panel I shows the rictor MARCM clone as expected, but the caption's parenthetical numbering is inconsistent and may mislead readers."
+      },
+      {
+        "panel_label": "J",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "K",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "L",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_02da1cc78034e36400697764247000819eb9470d19d83a98f6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2010,
+      "output_tokens": 2688
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T13:55:40.523019"
+  }
+}

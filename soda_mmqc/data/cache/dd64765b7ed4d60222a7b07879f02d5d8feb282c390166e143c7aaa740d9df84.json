@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "3",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "3",
+        "n_inappropriate_for_error_bars": "no"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "has_error_bars": "yes",
+        "n_value": "not_mentioned",
+        "n_inappropriate_for_error_bars": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_061d6f12b616bdde0069776897247c81a2907c86e49cbff491",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1809,
+      "output_tokens": 741
+    },
+    "status": "completed",
+    "cached_at": "2026-01-26T14:14:12.930257"
+  }
+}

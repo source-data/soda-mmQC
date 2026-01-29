@@ -6,7 +6,7 @@ For each panel in the figure:
 2. If it's a plot, check for significance indicators like:
    - Stars or asterisks (*, **, ***)
    - Direct p-values (e.g., "p<0.001")
-3. If significance indicators are present, verify if they're defined in the caption
+3. If significance indicators are present, verify if they're defined in the caption or the panel image
 4. If defined, extract the exact text describing the significance levels
 
 Provide your analysis in this JSON format for each panel:
@@ -21,10 +21,15 @@ Provide your analysis in this JSON format for each panel:
                 "***",
                 "****"
             ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no",
+                "yes"
+            ],
             "significance_level_symbols_defined_in_caption": [
                 "yes",
                 "yes",
-                "yes"
+                "not_needed"
             ],
             "from_the_caption": [
                 "*P < 0.05",

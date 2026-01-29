@@ -597,6 +597,8 @@ def check_report(
         html = ""
         for index, row in worst_items.iterrows():
             field_data_for_doc = field_data[field_data['item_id'] == row['item_id']]
+            # Deduplicate by field to avoid showing the same field multiple times
+            field_data_for_doc = field_data_for_doc.drop_duplicates(subset=['field'], keep='first')
         
             # make a first table that lists the elements and the fields that are problematic
             problematic_fields_table_rows = ""

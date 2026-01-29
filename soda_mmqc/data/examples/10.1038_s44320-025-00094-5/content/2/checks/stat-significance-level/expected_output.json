@@ -4,53 +4,89 @@
             "panel_label": "A",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "from_the_caption": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "p < 2.22e-16",
+                "p<2.22e-16",
                 "0.97",
-                "0.75"
+                "0.75",
+                "p<2.22e-16"
             ],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ],
+            "from_the_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ]
         },
         {
             "panel_label": "F",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
                 "5.6e-05",
-                "p < 2.22e-16",
+                "p<2.22e-16",
                 "6.5e-13",
                 "9.2e-14"
             ],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": null
+            "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ],
+            "from_the_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ]
         }
-    ],
-    "updated_at": "2025-05-02 16:51:43"
+    ]
 }

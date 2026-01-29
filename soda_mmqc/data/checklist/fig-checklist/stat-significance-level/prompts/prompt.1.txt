@@ -13,15 +13,24 @@ For each panel in the figure check if it is a plot of quantitative data that sho
 
 
 ## 3. Check for indication of statistical significance in panel image
-For all panels identified in step 2. check for symbols on the plot that could indicate a level of statistical significance. These are typically, but not always, stars or asterisks aligned with the respective experimental groups or group comparisons. Sometimes the level of significance is indicated directly on the image, for example "p<0.001".
+For all panels identified in step 2. check for symbols on the plot that could indicate a level of statistical significance. These are typically, but not always, stars or asterisks aligned with the respective experimental groups or group comparisons. Sometimes the level of significance is indicated directly on the image, for example "p<0.001" or "p=0.05" written next to the symbol.
 
-## 4.Check for indication of statistical significance in figure caption
- If there are symbols likely to indicate a statistical level of significance, check the text of the figure caption whether they are clearly defined.
- 
+For each symbol found:
+- Determine if the significance level is defined directly on the image (e.g., p-value shown next to the symbol, or explicit text like "p<0.001" on the plot).
+- If the significance level is defined on the image, set "significance_level_symbols_defined_in_image" to "yes" for that symbol.
+- If the significance level is not defined on the image, set "significance_level_symbols_defined_in_image" to "no" for that symbol.
+
+## 4. Check for indication of statistical significance in figure caption
+For symbols where "significance_level_symbols_defined_in_image" is "no", check the text of the figure caption to see if they are clearly defined there.
+- If a symbol is defined in the caption, set "significance_level_symbols_defined_in_caption" to "yes" for that symbol.
+- If a symbol is not defined in the caption, set "significance_level_symbols_defined_in_caption" to "no" for that symbol.
+- If a symbol is defined in the image (significance_level_symbols_defined_in_image = "yes"), set "significance_level_symbols_defined_in_caption" to "not_needed" for that symbol.
 
 ## 5. Extract levels of significance information 
-If the levels of significance are defined in the caption, extract the exact text from the caption that defines the levels of significance pertinant for the panel under consideration.
-If there is no statement about significance in the caption, indicate that the symbols are not defined (use "no" in the `significance_level_symbols_defined_in_caption` array) and leave the `from_the_caption` field empty for those symbols.
+For each symbol:
+- If the symbol is defined in the image (significance_level_symbols_defined_in_image = "yes"), set "from_the_caption" to "not_needed" for that symbol.
+- If the symbol is defined in the caption (significance_level_symbols_defined_in_caption = "yes"), extract the exact text from the caption that defines the significance level for that symbol.
+- If the symbol is not defined in either the image or caption, leave "from_the_caption" as an empty string "" for that symbol.
 
 *IMPORTANT:* When extracting the text from the caption, ONLY include the specific text that describes the levels of significance. Do NOT include general descriptions of the figure or panel content. If there is no relevant text, do not extract anything for this panel.
 
@@ -37,11 +46,15 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
                 "***",
                 "****"
             ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no",
+                "yes"
+            ],
             "significance_level_symbols_defined_in_caption": [
                 "yes",
                 "yes",
-                "yes"
-
+                "not_needed"
             ],
             "from_the_caption": [
                 "*P < 0.05",
@@ -53,6 +66,7 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
             "panel_label": "B",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
             "from_the_caption": []
         }

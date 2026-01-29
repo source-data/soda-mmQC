@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0e9883fd43495b11006979f9d0f16c819495e49e4d8f3b5c80",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3307,
+      "output_tokens": 691
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T12:58:23.548872"
+  }
+}

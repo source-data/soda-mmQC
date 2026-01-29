@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel includes bar graphs with significance markers (*, **) indicating statistical comparisons, but the caption/figure legend does not specify which statistical test was used.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "##: p<0.01, Tukey's test follows One-way ANOVA"
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0a177d01d92f364b006979f7cbf2f881a38e52eea2c5b8d839",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2963,
+      "output_tokens": 2114
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T12:50:03.890913"
+  }
+}

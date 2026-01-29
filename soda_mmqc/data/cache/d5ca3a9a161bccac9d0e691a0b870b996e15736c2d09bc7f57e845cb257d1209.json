@@ -1,0 +1,158 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The lower graph plots HMGB1 signal intensity (continuous fluorescent signal) for nuclear and cytoplasmic compartments, but no units are given on the y-axis or in the caption. A unit such as 'arbitrary units (AU)' or similar fluorescence intensity units should be specified."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Age is indicated in weeks (e.g., 5w, 7w, 9w shown on the x-axis)."
+          },
+          {
+            "axis": "y",
+            "definition": "Time on Rotarod (sec)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Time on Rotarod (sec)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time axis labeled in weeks"
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Thickness of molecular layer (µm)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0c9b53b64675a247006979fb7186fc8192b9c43d54632b44ea",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3924,
+      "output_tokens": 4139
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T13:05:38.366127"
+  }
+}

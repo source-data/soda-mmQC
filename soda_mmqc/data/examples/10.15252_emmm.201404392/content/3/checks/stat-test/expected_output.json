@@ -1,0 +1,44 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "The panel includes bar graphs with significance markers (*, **) indicating statistical comparisons, but the caption/figure legend does not specify which statistical test was used.",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "##: p<0.01, Tukey's test follows One-way ANOVA"
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        }
+    ]
+}

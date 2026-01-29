@@ -1,0 +1,68 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "8",
+        "n_larger_than_two": "yes"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "24",
+        "n_larger_than_two": "yes"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_068c3eef2dff09f600697a1dfb909c81a0858fda8499b1bb3e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4055,
+      "output_tokens": 1269
+    },
+    "status": "completed",
+    "cached_at": "2026-01-28T15:32:45.872314"
+  }
+}
