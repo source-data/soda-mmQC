@@ -1,0 +1,37 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "yes",
+        "from_the_caption": "Scale bar 10 μm.",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0187d9d9cccc553c00697c6d4490a481939e3799b7b95f9e36",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2105,
+      "output_tokens": 579
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T09:35:27.687337"
+  }
+}

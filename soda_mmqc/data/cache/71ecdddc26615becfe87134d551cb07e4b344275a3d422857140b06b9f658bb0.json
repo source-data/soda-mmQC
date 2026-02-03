@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The lower panels show quantified band intensity (bar graphs) with numeric tick marks but no unit label. The caption states 'The band intensity was quantified' and 'data are presented as mean ± SD' but does not define the units or whether values are arbitrary units or normalized/relative units."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/2",
+    "example_type": "figure",
+    "response_id": "resp_09f3e11caa90e43500697c8387be2881979f7b121c58c50c27",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3266,
+      "output_tokens": 1311
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T11:10:35.768123"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three"
+        ],
+        "type_of_replicates": [
+          "Data represents the average of three independent experiments."
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three"
+        ],
+        "type_of_replicates": [
+          "Data represent the mean±s.e.m. of three independent experiments."
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "31",
+          "33",
+          "31",
+          "34",
+          "31"
+        ],
+        "type_of_replicates": [
+          "(n=31 for 61.6 mW×24 ms; n=33 for 31.3 mW×48 ms; n=31 for 4.21 mW×350 ms; n=34 for 1.34 mW×1060 ms; n=31 for 0.0245 mW×60,000 ms)"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "31",
+          "33",
+          "31",
+          "34",
+          "31"
+        ],
+        "type_of_replicates": [
+          "Number of cells analyzed is indicated in parentheses."
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "I",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "three"
+        ],
+        "type_of_replicates": [
+          "(n=5 cells from three independent experiments)"
+        ]
+      },
+      {
+        "panel_label": "J",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "5",
+          "three"
+        ],
+        "type_of_replicates": [
+          "(n=5 cells from three independent experiments)"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0f1990fd2242b57d00697ca0faf0c08197a4ffe0092592fb85",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2874,
+      "output_tokens": 2909
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:16:25.645260"
+  }
+}

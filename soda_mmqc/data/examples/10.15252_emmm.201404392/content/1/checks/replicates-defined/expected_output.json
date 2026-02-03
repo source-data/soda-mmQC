@@ -13,10 +13,7 @@
                 "four",
                 "four"
             ],
-            "type_of_replicates": [
-                "mutant Atxn1‐KI mice",
-                "double‐transgenic mice"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "C",
@@ -51,14 +48,9 @@
         {
             "panel_label": "H",
             "involves_replicates": "yes",
-            "number_of_replicates": [
-                "more than 10 visual fields per mouse",
-                "nine mice in each group"
-            ],
-            "type_of_replicates": [
-                "visual fields per mouse",
-                "mice in each group"
-            ]
+            "number_of_replicates": "-nine",
+            "type_of_replicates": []
         }
-    ]
+    ],
+    "updated_at": "2026-01-30 15:49:10"
 }

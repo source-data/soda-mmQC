@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows a correlation heatmap of circadian parameters; the caption mentions correlation analysis but does not state which correlation metric (e.g., Pearson or Spearman), whether significance was assessed, or how multiple comparisons were handled — information needed to interpret the results.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel includes growth curves and reported growth rates across models; statistical comparisons (e.g., tests comparing growth rates or model fits, replicate counts, and significance) are required but not specified in the caption.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Dose–response/growth inhibition curves are shown and drug sensitivity is compared across models; the caption does not state which statistical tests or methods were used to compare IC50/GI metrics or to derive significance.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows gene expression and mutation heatmaps from public datasets; differential expression or mutation-enrichment analyses normally require statistical testing (tests, p-values, multiple-testing correction) which are not described in the caption.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "PCA and clustering plots are presented to define subtypes; the caption does not report statistical validation of clusters or tests comparing cluster separation (e.g., permutation tests, silhouette scores, or tests on cluster-specific differences).",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_09b954aa215b39ce00697bc4d21d4081a2a84f09d667035416",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3031,
+      "output_tokens": 2118
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:37:09.945190"
+  }
+}

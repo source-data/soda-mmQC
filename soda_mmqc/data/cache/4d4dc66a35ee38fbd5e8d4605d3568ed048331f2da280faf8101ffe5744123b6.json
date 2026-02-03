@@ -1,0 +1,95 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*",
+          "***"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no",
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "*P<0.05",
+          "***P<0.001"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": [
+          ""
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_05d0a5d819d32c1200697bd1d8814c819781db0260fa5f1492",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3554,
+      "output_tokens": 2030
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T22:32:44.307390"
+  }
+}

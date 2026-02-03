@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Densitometry"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "ICC"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_0e16cde8be4b6c4a00697c990b0ed4819cbf13492413042876",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3249,
+      "output_tokens": 1165
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T12:42:18.526559"
+  }
+}

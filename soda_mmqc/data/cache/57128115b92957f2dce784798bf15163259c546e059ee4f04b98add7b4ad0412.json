@@ -1,0 +1,200 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Input camera exposure times are shown directly on the panel (e.g., 24 ms, 48 ms, 350 ms, 1,060 ms, 60,000 ms)."
+          },
+          {
+            "axis": "y",
+            "definition": "Percentage contribution of IO is indicated as percentages (\"%\") in the panel; caption: 'Percentage contribution of IO...'."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Normalized fluorescence intensity is reported in arbitrary units (A.U.); caption notes 'Curves were normalized to the maximum fluorescence intensity...'."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The y-axis shows ΔROS (numeric values up to ~8000) but no unit or indication that these are arbitrary fluorescence units or a normalized value is provided in the panel or caption."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Exposure time is plotted on the x-axis in milliseconds (ms)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "X position is labeled in micrometres (μm) on the plot."
+          },
+          {
+            "axis": "y",
+            "definition": "Y position is labeled in micrometres (μm) on the plot."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Migration speed is reported in μm h−1 (caption: 'cell speed ...: <15 μm h−1, 15-25 μm h−1, >25 μm h−1'; panel title: 'Migration speed (mean±s.e.m.)')."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time is plotted in minutes (min); caption: 'Changes in cell area over time... Measurements were normalized to initial cell area at time zero.'"
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time is plotted in minutes (min); caption: 'Changes in ... mitochondrial area over time.'"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0537f0e9183dd94500697c842ff0888193a7ebce37f7845fc5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3463,
+      "output_tokens": 3312
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T11:13:47.678943"
+  }
+}

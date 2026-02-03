@@ -1,0 +1,84 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "micrograph": "yes",
+        "symbols": [
+          "red arrow",
+          "black scissors"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "b",
+        "micrograph": "yes",
+        "symbols": [
+          "blue arrow"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "c",
+        "micrograph": "yes",
+        "symbols": [
+          "white dashed box",
+          "white arrowhead"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "d",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "e",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "f",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "g",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_03210f28349a71f9006980be6c1614819c974c74b2aca531a5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3506,
+      "output_tokens": 2245
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T16:11:20.096640"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "yes",
+        "from_the_image": "100 μm"
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00224-4",
+    "source": "10.1038_s44321-025-00224-4/content/1",
+    "example_type": "figure",
+    "response_id": "resp_06b47db94e86ae4200697c6e78102c8194a34ed8335eb4f1cb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3243,
+      "output_tokens": 1518
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T09:40:55.991094"
+  }
+}

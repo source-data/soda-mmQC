@@ -1,0 +1,101 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "white box"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "yes",
+        "symbols": [
+          "white box"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "yes",
+        "symbols": [
+          "white box"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "I",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "J",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0eaea75766edb408006980be9c86948192ab45b0ba8f072ce8",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4118,
+      "output_tokens": 1616
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T16:11:55.077046"
+  }
+}

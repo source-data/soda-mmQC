@@ -6,9 +6,7 @@
             "number_of_replicates": [
                 "3"
             ],
-            "type_of_replicates": [
-                "experiments"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "B",
@@ -24,9 +22,7 @@
             "number_of_replicates": [
                 "3"
             ],
-            "type_of_replicates": [
-                "experiments"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "D",
@@ -37,5 +33,5 @@
             "type_of_replicates": []
         }
     ],
-    "updated_at": "2025-05-16 10:27:44"
+    "updated_at": "2026-01-30 14:43:22"
 }

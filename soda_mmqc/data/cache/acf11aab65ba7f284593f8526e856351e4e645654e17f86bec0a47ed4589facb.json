@@ -1,0 +1,185 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Day (x-axis labeled as 'Day')"
+          },
+          {
+            "axis": "y",
+            "definition": "Relative expression (A.U.) — A.U. defined in caption as 'arbitrary units'"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Fluorescence intensity (marker signal) is shown on the axis (e.g., SOX17‑Tom, NKX2‑5‑GFP, PDGFRα) which is a continuous measurement but no units (e.g., arbitrary fluorescence units or channel scale) are indicated on the axis or in the caption specifically for these plots."
+          },
+          {
+            "axis": "y",
+            "justification": "Fluorescence intensity (marker signal) is shown on the axis (e.g., PDGFRα‑BV421, CD235‑APC) which is a continuous measurement but no units (e.g., arbitrary fluorescence units or channel scale) are indicated on the axis or in the caption specifically for these plots."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Positive cells (%) — y-axis labeled as percent positive cells (\"%\")"
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Positive cells (%) — y-axis labeled as percent positive cells (\"%\")"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Y-axis shows 'Normalized read counts' (RNA‑seq quantification) which is a continuous measurement; the exact unit/normalization (e.g., counts per million, TPM, or other normalized count units) is not specified in the panel or caption, so the scale's units are unclear."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "z",
+            "definition": "Expression values shown in heatmaps are 'Z-score normalized log2 FC differences' (as stated in the caption)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_03dc8e370c24094900697c7d3d0764819cb4462e82c43cbb03",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3894,
+      "output_tokens": 3736
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:44:18.614616"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "b",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "c",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "d",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "e",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "f",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "g",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_01a2f775648088040069809a01c6a0819f82ad7ae136bfc6f6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3938,
+      "output_tokens": 787
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T13:35:26.558572"
+  }
+}

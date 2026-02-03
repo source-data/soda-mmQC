@@ -1,0 +1,83 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Lower graph shows significance markers (** p < 0.01) but the caption does not specify which statistical test was used for panel A.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The caption states that the ratio 'did not differ' and reports mean ± SD for the lower graph, implying a comparison was made, but it does not specify which statistical test was used.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Statistical analysis was performed with the Bonferroni–Dunn test and Student's t‐test."
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Statistical analysis was performed with the Bonferroni–Dunn test and Student's t‐test."
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "The effect of HMGB1 on the lifespan was assessed by Kaplan–Meier analysis, and the end‐point postponement was significant in the log‐rank test (P = 0.0025)."
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "*P < 0.05 in Student's t‐test, #P < 0.05 in one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0e6bfa39beb08af600697bc64bf54081a09b4ef277f8947663",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3348,
+      "output_tokens": 2572
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:43:28.532088"
+  }
+}

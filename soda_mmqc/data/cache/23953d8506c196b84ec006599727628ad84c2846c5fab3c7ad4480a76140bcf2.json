@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Immunoelectron microscopy"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Western blot"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Proteinase K treatment"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/2",
+    "example_type": "figure",
+    "response_id": "resp_04767157adcb69bf00697c98e14d6c8192925b1d2722517f91",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3373,
+      "output_tokens": 1024
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T12:41:37.287124"
+  }
+}

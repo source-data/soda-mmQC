@@ -11,32 +11,26 @@
             "panel_label": "B",
             "micrograph": "yes",
             "symbols": [
-                "white box (ROI indicator)",
-                "white scale bar"
+                "white box (ROI indicator)"
             ],
             "symbols_defined_in_caption": [
-                "no",
                 "yes"
             ],
             "from_the_caption": [
-                "",
-                "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+                " magnified images."
             ]
         },
         {
             "panel_label": "C",
             "micrograph": "yes",
             "symbols": [
-                "white box (ROI indicator)",
-                "white scale bar"
+                "white box (ROI indicator)"
             ],
             "symbols_defined_in_caption": [
-                "no",
                 "yes"
             ],
             "from_the_caption": [
-                "",
-                "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+                "magnified images."
             ]
         },
         {
@@ -50,16 +44,13 @@
             "panel_label": "E",
             "micrograph": "yes",
             "symbols": [
-                "white box (ROI indicator)",
-                "white scale bar"
+                "white box (ROI indicator)"
             ],
             "symbols_defined_in_caption": [
-                "no",
                 "yes"
             ],
             "from_the_caption": [
-                "",
-                "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+                "magnified images."
             ]
         },
         {
@@ -86,15 +77,9 @@
         {
             "panel_label": "I",
             "micrograph": "yes",
-            "symbols": [
-                "white scale bar"
-            ],
-            "symbols_defined_in_caption": [
-                "yes"
-            ],
-            "from_the_caption": [
-                "Scale bar: 5 µm."
-            ]
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "J",
@@ -103,5 +88,6 @@
             "symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2026-02-02 11:40:50"
 }

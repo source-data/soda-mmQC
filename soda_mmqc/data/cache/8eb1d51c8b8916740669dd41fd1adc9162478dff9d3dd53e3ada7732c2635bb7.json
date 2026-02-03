@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "b",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "c",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "d",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "e",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "f",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "g",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0d940577906ef11600697bbe82d8b0819399c94659c8ada731",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2716,
+      "output_tokens": 484
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:09:46.860394"
+  }
+}

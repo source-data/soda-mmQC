@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "Aii",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0aa9a042bbc39e3b00697b65832d20819f9a970fa6f00d90d3",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2867,
+      "output_tokens": 713
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T14:50:07.773603"
+  }
+}

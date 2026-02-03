@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "n=20 * p<0.05 ** p<0.01; ##: p<0.01, Tukey's test follows One-way ANOVA; N: indicated in the bars"
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "##: p<0.01, Tukey's test follows One-way ANOVA; N: indicated in the bars"
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel E presents quantitative FACS histograms comparing conditions (NC, HMGB1_A, HMGB1_B). The caption/figure does not report statistical tests, p-values, or summary statistics for these comparisons. A statistical test (including test type, one/two‑tailed, correction for multiple comparisons if applicable), number of biological replicates, and reporting of p‑values or significance markers should be provided so readers can assess whether observed differences are statistically supported.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0ff6445a5e97191e00697bc1b45f8c8195ab26e3363c9dac41",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2516,
+      "output_tokens": 2241
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:23:53.117177"
+  }
+}

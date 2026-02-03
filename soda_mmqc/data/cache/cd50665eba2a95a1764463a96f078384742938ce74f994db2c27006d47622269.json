@@ -1,0 +1,105 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Relative intensity (Green/Red) (label on left-hand bar graph)"
+          },
+          {
+            "axis": "y",
+            "definition": "Intensity [AU] (label on right-hand bar graph)"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Signal intensity is plotted (bar graphs at right) but no units or indication (e.g., arbitrary units [AU]) are provided on the y-axis."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "TMRM fluorescence intensity is shown (FL2-H channel / numeric fluorescence scale) but no explicit units (for example, arbitrary fluorescence units or scale definition) are given for the x-axis."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Counts (y-axis labeled 'Counts' on the FACS histograms; represents cell counts)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_08546b6d09fa296b00697c83a0a0ac8195a846618fa981bb9f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3037,
+      "output_tokens": 2487
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T11:11:17.869182"
+  }
+}

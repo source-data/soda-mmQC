@@ -1,0 +1,86 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "b",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "c",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "d",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "e",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "f",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "g",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The image spatial axes have no numeric tick labels; although a small scale bar is shown on the image, no numeric length or unit is given in the panel or caption."
+          },
+          {
+            "axis": "y",
+            "justification": "The color/intensity scale shows numeric values (e.g., 165, 832, 1,499, 2,165, 2,832) but no units or unit descriptor (for example 'a.u.', 'counts', or 'photons') are provided in the panel or in the figure caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_02a88d77114fc48500697c7a09b5a881949236f109d7e26201",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2723,
+      "output_tokens": 1578
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:30:08.796148"
+  }
+}

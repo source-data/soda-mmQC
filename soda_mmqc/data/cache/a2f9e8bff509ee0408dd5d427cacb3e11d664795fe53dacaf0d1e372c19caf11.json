@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "spinning disk confocal"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "imaging"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "imaging"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "photobleaching"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "spinning disk confocal"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "image analysis"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "image analysis"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "image analysis"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "dual-color imaging"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "photobleaching"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0b07c3279d40af1a00697c99782fe481938275557997244d88",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3276,
+      "output_tokens": 2878
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T12:44:34.830428"
+  }
+}

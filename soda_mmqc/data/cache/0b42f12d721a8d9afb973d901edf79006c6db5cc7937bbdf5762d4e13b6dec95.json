@@ -1,0 +1,55 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "D",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "E",
+        "plot": "no",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "F",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00415-7",
+    "source": "10.1038_s44319-025-00415-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_00052b191feeac6e00697c73e3dc7c8197b22ff5a105690b8f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2664,
+      "output_tokens": 1139
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:03:50.619603"
+  }
+}

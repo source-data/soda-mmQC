@@ -1,0 +1,128 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [
+          "red track",
+          "orange track",
+          "green track"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Tracks are color-coded based on cell speed calculated for every 10-min interval: <15 μm h−1 (red), 15-25 μm h−1 (orange), >25 μm h−1 (green).",
+          "Tracks are color-coded based on cell speed calculated for every 10-min interval: <15 μm h−1 (red), 15-25 μm h−1 (orange), >25 μm h−1 (green).",
+          "Tracks are color-coded based on cell speed calculated for every 10-min interval: <15 μm h−1 (red), 15-25 μm h−1 (orange), >25 μm h−1 (green)."
+        ]
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (inset indicator)",
+          "scale bar (white)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+        ]
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (inset indicator)",
+          "scale bar (white)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+        ]
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (inset indicator)",
+          "scale bar (white)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "Scale bars: 10 μm for whole-cell images and 2 μm for magnified images."
+        ]
+      },
+      {
+        "panel_label": "I",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "J",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0f70782bcce71cd300697c9ea11ff481a0b131775f4d9efca7",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3448,
+      "output_tokens": 3643
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:06:53.280811"
+  }
+}

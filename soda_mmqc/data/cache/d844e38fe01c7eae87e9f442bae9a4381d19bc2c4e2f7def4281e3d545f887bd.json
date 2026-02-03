@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "ppk-EGFP reporter"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "ppk-EGFP reporter"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "ppk-EGFP reporter"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MARCM clones"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MARCM clones"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "MARCM clones"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification"
+      },
+      {
+        "panel_label": "K",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification"
+      },
+      {
+        "panel_label": "L",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Quantification"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_09e40fd802a5310d00697c968094ec819d8e15fb21fe66fc92",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2656,
+      "output_tokens": 1724
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T12:31:37.258076"
+  }
+}

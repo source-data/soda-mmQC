@@ -1,0 +1,144 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes show scatter or fluorescence channel labels (e.g., FSC-A, FSC-H, IgD, Viability) with numeric tick marks but no explicit units (e.g., channel units, 'AU' or similar) in the axis labels or caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes show scatter or fluorescence channel labels (e.g., SSC-A, CD4, Fas, IgM) with numeric tick marks but no explicit units (e.g., channel units, 'AU' or similar) in the axis labels or caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes are marker or scatter measures (e.g., CD19, IgD, FSC-A) presented with numeric scales but lack explicit units such as fluorescence intensity units or channel counts in the axis labels or caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes are marker or scatter measures (e.g., CD98, FSC-A) presented with numeric scales but lack explicit units such as fluorescence intensity units or channel counts in the axis labels or caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes show immunophenotyping or binding signals (e.g., IgD, NP, CD138) with log-scale numeric ticks up to 10^6 but no units (e.g., fluorescence intensity in arbitrary units) are specified on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes show immunophenotyping or binding signals (e.g., IgM, Fas, CD38) with numeric/log ticks but no explicit units (e.g., channel counts or 'AU') are provided."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes are marker fluorescence intensities (e.g., CD44, PD-L2) plotted with numeric/log scales but no unit designation (such as 'AU', MFI, or channel units) is given on the axes or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes are marker fluorescence intensities (e.g., CD62L, CD80) plotted with numeric/log scales but no unit designation (such as 'AU', MFI, or channel units) is given on the axes or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axes are marker fluorescence intensities (e.g., CD44, PD-L2) with numeric/log scales but lack explicit units (e.g., arbitrary fluorescence units or channel counts) on the axis labels or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y-axes are marker fluorescence intensities (e.g., CD62L, CD80) with numeric/log scales but lack explicit units (e.g., arbitrary fluorescence units or channel counts) on the axis labels or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_0d40b4399cef34e400697c809e65888197ad5fea548e0d0e47",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2858,
+      "output_tokens": 2372
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:58:29.613117"
+  }
+}

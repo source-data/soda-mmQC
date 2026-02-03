@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The lower panels show quantified band intensity (bar graphs, mean ± SD) but the y-axis displays numeric values without any unit label (e.g., 0.5, 1.0, 1.5). The figure caption states 'The band intensity was quantified ... The data are presented as mean ± SD' but does not define units (e.g., arbitrary units or relative intensity)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0910ae93a6caa33400697c7974965c8195ad2c97137f0e5565",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3138,
+      "output_tokens": 1351
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:27:37.794259"
+  }
+}

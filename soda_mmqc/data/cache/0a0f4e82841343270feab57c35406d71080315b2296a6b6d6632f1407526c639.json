@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*",
+          "**"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes",
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed",
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed",
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "##"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0639f7abc49b4df200697bd33f1ab0819c9b14a82ac290ecde",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3453,
+      "output_tokens": 1781
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T22:38:34.202209"
+  }
+}

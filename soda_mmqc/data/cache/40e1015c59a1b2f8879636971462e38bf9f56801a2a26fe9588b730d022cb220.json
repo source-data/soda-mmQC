@@ -1,0 +1,57 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "Ai",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "Aii",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrow"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrow"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "White arrows indicate cell regions experiencing membrane bulging."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0fdb319b92178463006980bcffe8a4819197d42d0ee175b6c1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3670,
+      "output_tokens": 1603
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T16:05:06.486781"
+  }
+}

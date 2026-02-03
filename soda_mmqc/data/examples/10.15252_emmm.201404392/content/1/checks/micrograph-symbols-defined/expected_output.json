@@ -57,18 +57,9 @@
         {
             "panel_label": "G",
             "micrograph": "yes",
-            "symbols": [
-                "white dashed/ dotted vertical lines (overlay)",
-                "white bracket/marker at left of panels"
-            ],
-            "symbols_defined_in_caption": [
-                "no",
-                "no"
-            ],
-            "from_the_caption": [
-                "",
-                ""
-            ]
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
         },
         {
             "panel_label": "H",
@@ -77,5 +68,6 @@
             "symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2026-01-30 15:47:40"
 }

@@ -1,0 +1,193 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Day (time in days) — x-axis labeled with Day and integer day values"
+          },
+          {
+            "axis": "y",
+            "definition": "Relative expression (A.U.) — y-axis labeled as relative expression in arbitrary units; caption defines A.U. = arbitrary units"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Flow cytometry x-axes show marker/fluorophore names (e.g., PDGFRα-BV421, SOX17-Tom) representing fluorescence intensity but do not indicate units or scale (e.g., arbitrary fluorescence units or whether axis is on a log scale)."
+          },
+          {
+            "axis": "y",
+            "justification": "Flow cytometry y-axes show marker/fluorophore names (e.g., CD235-APC, NKX2-5-GFP) representing fluorescence intensity but do not indicate units or scale (e.g., arbitrary fluorescence units or whether axis is on a log scale)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Treatment conditions with indicated concentrations (labels include concentration values such as 5 μM SB, 0.6 μM SB, 0.06 μM DMH1) — concentration units shown as μM in panel labels."
+          },
+          {
+            "axis": "y",
+            "definition": "Positive cells (%) — y-axis shows percent of positive cells (percentage)"
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Treatment conditions with indicated concentrations (labels include concentration values such as 5 μM SB, 0.6 μM SB, 0.06 μM DMH1) — concentration units shown as μM in panel labels."
+          },
+          {
+            "axis": "y",
+            "definition": "Positive cells (%) — y-axis shows percent of positive cells (percentage)"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Normalized read counts — y-axis labeled as normalized read counts (RNA-seq quantification)"
+          }
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "z",
+            "definition": "Z-score normalized log2 fold-change (log2 FC) — color scale represents Z-score normalized log2 FC differences as stated in the caption."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0fcddb4c0c41f2bd00697c81efe004819f93e6ffdc66b7873c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3224,
+      "output_tokens": 2954
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T11:04:08.668684"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=3"
+        ],
+        "type_of_replicates": [
+          "three independent experiments"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=3"
+        ],
+        "type_of_replicates": [
+          "three independent experiments"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=3"
+        ],
+        "type_of_replicates": [
+          "Three biological replicates were used for each condition"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=3"
+        ],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0c169c436d1b3a5f00697ca0d9261c819da0ad4778adbb028a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2731,
+      "output_tokens": 2107
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:15:40.379030"
+  }
+}

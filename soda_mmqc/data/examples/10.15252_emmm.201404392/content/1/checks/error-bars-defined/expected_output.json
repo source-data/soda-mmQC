@@ -46,7 +46,8 @@
             "panel_label": "H",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "the mean ± SD was calculated for nine mice in each group. The data are presented as mean ± SD."
+            "from_the_caption": "The data are presented as mean ± SD."
         }
-    ]
+    ],
+    "updated_at": "2026-01-30 15:33:37"
 }

@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "4",
+          "4"
+        ],
+        "type_of_replicates": [
+          "mutant Atxn1-KI mice",
+          "double-transgenic mice"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "more than 10",
+          "9"
+        ],
+        "type_of_replicates": [
+          "visual fields per mouse",
+          "mice in each group"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0ef2dd099816535f00697ca076d71c81a3a9e2283b652ee2ca",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2712,
+      "output_tokens": 2801
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:14:29.668324"
+  }
+}

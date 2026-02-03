@@ -1,0 +1,48 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "red circle",
+          "green circle",
+          "red box",
+          "green box"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Images are selected frames of PA time lapse with the photoactivated region represented by circles in euchromatin (red) or in heterochromatin (green) on the pre‐activation image.",
+          "Images are selected frames of PA time lapse with the photoactivated region represented by circles in euchromatin (red) or in heterochromatin (green) on the pre‐activation image.",
+          "The inserts outlined in red and green correspond to two higher magnifications of photoactivated areas in euchromatin and heterochromatin, respectively.",
+          "The inserts outlined in red and green correspond to two higher magnifications of photoactivated areas in euchromatin and heterochromatin, respectively."
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_04fbda25930d5a18006980bb7958b88191b6b0fec5c307c835",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2564,
+      "output_tokens": 2117
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T15:58:44.276868"
+  }
+}

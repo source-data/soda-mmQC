@@ -1,0 +1,143 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "micrograph": "yes",
+        "symbols": [
+          "red curved arrow (indicating crop/zoom)",
+          "scissors icon (crop)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "a–c, Image formatting may include image cropping, rotation and resizing (a), image spacing in the figure (b) and presenting several magnifications (zoom, inset) of images (c).",
+          "a–c, Image formatting may include image cropping, rotation and resizing (a), image spacing in the figure (b) and presenting several magnifications (zoom, inset) of images (c).",
+          ""
+        ]
+      },
+      {
+        "panel_label": "b",
+        "micrograph": "yes",
+        "symbols": [
+          "double-headed horizontal arrow (blue, indicating spacing)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "a–c, Image formatting may include image cropping, rotation and resizing (a), image spacing in the figure (b) and presenting several magnifications (zoom, inset) of images (c).",
+          ""
+        ]
+      },
+      {
+        "panel_label": "c",
+        "micrograph": "yes",
+        "symbols": [
+          "dashed box (shows origin of inset)",
+          "white arrowheads (pointing to features in the inset)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "a–c, Image formatting may include image cropping, rotation and resizing (a), image spacing in the figure (b) and presenting several magnifications (zoom, inset) of images (c).",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "d",
+        "micrograph": "yes",
+        "symbols": [
+          "brightness/contrast slider schematic (Min–Max bar)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "d, Adjust brightness and/or contrast to achieve good visibility of the imaging signal.",
+          ""
+        ]
+      },
+      {
+        "panel_label": "e",
+        "micrograph": "yes",
+        "symbols": [
+          "colored channel annotations/text (e.g., 'Marker 1' green, 'Marker 2' magenta)",
+          "white scale bar",
+          "histology/staining image (example image)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "e, Channel information should be annotated and visible to audiences (high contrast to background color, visible to color-blind audiences).",
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "f",
+        "micrograph": "yes",
+        "symbols": [
+          "colored overlay (green/magenta) showing markers (composite)",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no"
+        ],
+        "from_the_caption": [
+          "",
+          ""
+        ]
+      },
+      {
+        "panel_label": "g",
+        "micrograph": "yes",
+        "symbols": [
+          "color calibration scales / colorbars (grayscale and pseudocolor)",
+          "numeric intensity tick labels beside colorbars",
+          "white scale bar"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "g, It is best practice to publish legends for color intensities (intensity and/or calibration scales) with images, and this is recommended for pseudocolor scales.",
+          "g, It is best practice to publish legends for color intensities (intensity and/or calibration scales) with images, and this is recommended for pseudocolor scales.",
+          ""
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_08433446bf3f8d8300697c9e415c1c81a2bb8c18e87e773412",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2836,
+      "output_tokens": 4536
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:05:49.037304"
+  }
+}

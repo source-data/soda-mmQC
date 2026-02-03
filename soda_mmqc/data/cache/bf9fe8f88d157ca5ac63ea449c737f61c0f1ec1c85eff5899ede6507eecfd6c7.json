@@ -1,0 +1,148 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Polyp diameter (mm)"
+          },
+          {
+            "axis": "z",
+            "definition": "Polyp number per mouse"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "z",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time after birth (months)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percentage of mice alive (%)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "z",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Bar graph shows amount of GTP-bound form (relative levels) but no units or indication of normalization (e.g., arbitrary units or fold change) are provided."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "z",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The bar graph labeled 'Relative expression' presents numeric values (relative/normalized expression) but no units or clear indication of scale (e.g., fold change or arbitrary units) are provided."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_06bb3e1575ac5b7b00697c817f818c81919acb29e9faed1f55",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3138,
+      "output_tokens": 3202
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T11:02:24.824696"
+  }
+}

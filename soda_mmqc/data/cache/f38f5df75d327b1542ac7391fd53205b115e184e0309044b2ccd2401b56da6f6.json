@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (inset, top-right)"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "white arrowhead (top-right)",
+          "white arrowhead (center)",
+          "white arrowhead (center-right)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "yes",
+        "symbols": [
+          "white box (vertical bracket, left)"
+        ],
+        "symbols_defined_in_caption": [
+          "no"
+        ],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_095e15d6ef4a2a8c006980bdcdfedc819099ff3246542e5e3b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3956,
+      "output_tokens": 2665
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T16:08:47.395227"
+  }
+}

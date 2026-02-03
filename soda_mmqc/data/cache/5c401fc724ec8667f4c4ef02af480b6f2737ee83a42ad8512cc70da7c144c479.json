@@ -1,0 +1,118 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "I",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "J",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "K",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00412-5",
+    "source": "10.1038_s44318-025-00412-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_000e2a704a11b5af00697c6e0e8e9081938864bc71001ed5dd",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3440,
+      "output_tokens": 825
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T09:38:54.914549"
+  }
+}

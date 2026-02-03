@@ -1,0 +1,49 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "flow cytometric plots"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "flow cytometric plots"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "flow cytometry"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "flow cytometry"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "flow cytometry"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00432-6",
+    "source": "10.1038_s44319-025-00432-6/content/7",
+    "example_type": "figure",
+    "response_id": "resp_0198c89812cb462f00697c969c66b8819086c8ae9a30ddee09",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2965,
+      "output_tokens": 1672
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T12:32:04.147757"
+  }
+}

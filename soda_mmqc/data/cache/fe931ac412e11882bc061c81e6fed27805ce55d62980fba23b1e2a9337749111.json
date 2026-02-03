@@ -1,0 +1,131 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "**"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*",
+          "**"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes",
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed",
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed",
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "*P < 0.05 in Student's t‐test"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "P = 0.0025"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "*",
+          "#"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no",
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "*P < 0.05 in Student's t‐test",
+          "#P < 0.05 in one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0b0ba046620c58fc00697bd3028d9c819d835fe992d9f35b52",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3717,
+      "output_tokens": 3011
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T22:37:46.202962"
+  }
+}

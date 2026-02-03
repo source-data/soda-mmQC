@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "F",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "G",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "H",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "I",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "yes"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0937cdc7bacb978f00697c7309d0fc81a38027a3e138d996b4",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2642,
+      "output_tokens": 1371
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:00:13.320490"
+  }
+}

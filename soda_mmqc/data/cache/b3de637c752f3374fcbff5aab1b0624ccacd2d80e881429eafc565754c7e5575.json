@@ -1,0 +1,35 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel shows averaged responses with error bars comparing euchromatin and heterochromatin and makes a claim of different dynamics (longer residence in heterochromatin) but the caption does not specify any statistical test or report significance values to support that comparison.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0063bc71434e63a100697bc46aba348195a23265896d2e0c85",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1956,
+      "output_tokens": 1035
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:35:09.560526"
+  }
+}

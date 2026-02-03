@@ -1,0 +1,155 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Top scatter/dot plots use Annexin V FITC fluorescence on the x-axis (a continuous fluorescence intensity), but no units (e.g., arbitrary fluorescence units) are indicated on the axis or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "Top scatter/dot plots use PI (PE) fluorescence on the y-axis (a continuous fluorescence intensity), but no units (e.g., arbitrary fluorescence units) are indicated on the axis or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Top scatter/dot plots use Annexin V FITC fluorescence on the x-axis (a continuous fluorescence intensity), but no units (e.g., arbitrary fluorescence units) are indicated on the axis or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "Top scatter/dot plots use PI (PE) fluorescence on the y-axis (a continuous fluorescence intensity), but no units (e.g., arbitrary fluorescence units) are indicated on the axis or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "z",
+            "definition": "The color represents Z-Scores."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Y-axis shows 'relative mRNA levels' (continuous, normalized/relative values) but no explicit unit or definition (e.g., fold change, arbitrary units, normalized expression) is provided in the plot or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0c3ecc1f64319f9b00697c79d3ef408195ade5cb27cb08d0ef",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3192,
+      "output_tokens": 3406
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:29:44.503361"
+  }
+}

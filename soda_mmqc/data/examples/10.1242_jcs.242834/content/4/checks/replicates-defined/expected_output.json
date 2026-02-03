@@ -24,9 +24,7 @@
             "number_of_replicates": [
                 "n=5"
             ],
-            "type_of_replicates": [
-                "from three independent experiments"
-            ]
+            "type_of_replicates": "'three independent experiments'"
         },
         {
             "panel_label": "E",
@@ -40,9 +38,7 @@
             "number_of_replicates": [
                 "n=5"
             ],
-            "type_of_replicates": [
-                "Individual data points are color-coded by cell (n=5)"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "G",
@@ -50,9 +46,7 @@
             "number_of_replicates": [
                 "n=5"
             ],
-            "type_of_replicates": [
-                "Individual data points are color-coded by cell (n=5)"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "H",
@@ -60,9 +54,7 @@
             "number_of_replicates": [
                 "n=5"
             ],
-            "type_of_replicates": [
-                "Individual data points are color-coded by cell (n=5)"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "I",
@@ -80,5 +72,6 @@
                 "independent experiments"
             ]
         }
-    ]
+    ],
+    "updated_at": "2026-02-02 11:13:27"
 }

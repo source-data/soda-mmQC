@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Statistical analysis involved Student's t‐test and one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test."
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0bf7ca788fb5f02a00697bc1a103248195a95306fa0b3bd75d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2745,
+      "output_tokens": 1144
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:23:12.811212"
+  }
+}

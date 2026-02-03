@@ -36,9 +36,7 @@
                 "n=34 for 1.34 mW×1060 ms",
                 "n=31 for 0.0245 mW×60,000 ms"
             ],
-            "type_of_replicates": [
-                "cells"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "E",
@@ -50,9 +48,7 @@
                 "n=34 for 1.34 mW×1060 ms",
                 "n=31 for 0.0245 mW×60,000 ms"
             ],
-            "type_of_replicates": [
-                "cells"
-            ]
+            "type_of_replicates": []
         },
         {
             "panel_label": "F",
@@ -80,7 +76,6 @@
                 "three independent experiments"
             ],
             "type_of_replicates": [
-                "cells",
                 "independent experiments"
             ]
         },
@@ -92,9 +87,9 @@
                 "three independent experiments"
             ],
             "type_of_replicates": [
-                "cells",
                 "independent experiments"
             ]
         }
-    ]
+    ],
+    "updated_at": "2026-02-02 12:39:22"
 }

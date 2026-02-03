@@ -30,7 +30,7 @@
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
             "justify_why_test_is_missing": "",
-            "from_the_caption": "*P<0.05 from 0.0167\u0000mW (two-tailed Student's t-test)."
+            "from_the_caption": "two-tailed Student's t-test"
         },
         {
             "panel_label": "E",
@@ -80,5 +80,6 @@
             "justify_why_test_is_missing": "",
             "from_the_caption": ""
         }
-    ]
+    ],
+    "updated_at": "2026-02-02 11:19:02"
 }

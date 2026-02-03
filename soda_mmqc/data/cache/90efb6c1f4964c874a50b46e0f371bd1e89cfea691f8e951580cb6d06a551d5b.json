@@ -1,0 +1,154 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis spans multiple orders of magnitude and uses log spacing (tick labels 1, 10, 100, 1000, 10000); spacing is non-linear by design, not a missing axis break."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis uses log-scale tick marks across orders of magnitude (1–10000 ms); non-linear tick spacing is appropriate and not an unlabeled break."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis uses log-scale ticking similar to panels F and G; spacing matches log-scale labelling rather than an omitted axis segment."
+          }
+        ]
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x-axis is continuous (frame number 0–600) with regular ticking; no indication of omitted segments or required axis break."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/4",
+    "example_type": "figure",
+    "response_id": "resp_06593a37e15718ff00697b750b4e2c8191b8450a398c34513d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3450,
+      "output_tokens": 2030
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T15:56:41.326435"
+  }
+}

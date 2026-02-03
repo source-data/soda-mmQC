@@ -1,0 +1,90 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "scale bar (200 μm, black)",
+          "scale bar (100 μm, black)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Scale bars, 200\u0000\u00181\u0000\u0004m (4×), 100\u0000\u00181\u0000\u0004m (10×).",
+          "Scale bars, 200\u0000\u00181\u0000\u0004m (4×), 100\u0000\u00181\u0000\u0004m (10×)."
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "yes",
+        "symbols": [
+          "scale bar (25 μm, white)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Scale bar, 25\u0000\u00181\u0000\u0004m."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00629-9",
+    "source": "10.1038_s44319-025-00629-9/content/1",
+    "example_type": "figure",
+    "response_id": "resp_09411809955ceb9300697c9e23566881a09089e68c4de29084",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3305,
+      "output_tokens": 1721
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:04:16.429320"
+  }
+}

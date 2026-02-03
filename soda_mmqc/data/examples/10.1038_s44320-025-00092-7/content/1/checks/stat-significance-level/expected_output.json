@@ -26,7 +26,7 @@
         },
         {
             "panel_label": "D",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -34,7 +34,7 @@
         },
         {
             "panel_label": "E",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -42,7 +42,7 @@
         },
         {
             "panel_label": "F",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -50,7 +50,7 @@
         },
         {
             "panel_label": "G",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -58,7 +58,7 @@
         },
         {
             "panel_label": "H",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -66,11 +66,12 @@
         },
         {
             "panel_label": "I",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2026-02-02 12:47:18"
 }

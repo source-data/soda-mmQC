@@ -1,0 +1,43 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "The data are presented as mean ± SD."
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/2",
+    "example_type": "figure",
+    "response_id": "resp_016f41d9a3c0b6c200697bb9b8d5a0819187906b85ac77b846",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2663,
+      "output_tokens": 896
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T20:49:29.832172"
+  }
+}

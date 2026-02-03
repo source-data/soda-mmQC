@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=5"
+        ],
+        "type_of_replicates": [
+          "from three independent experiments"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=5"
+        ],
+        "type_of_replicates": [
+          "by cell"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=5"
+        ],
+        "type_of_replicates": [
+          "by cell"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n=5"
+        ],
+        "type_of_replicates": [
+          "by cell"
+        ]
+      },
+      {
+        "panel_label": "I",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "J",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three independent experiments"
+        ],
+        "type_of_replicates": [
+          "independent experiments"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0280ac374f40325000697ca412c71c81909fd98f6e68593565",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3015,
+      "output_tokens": 2229
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T13:29:33.413268"
+  }
+}

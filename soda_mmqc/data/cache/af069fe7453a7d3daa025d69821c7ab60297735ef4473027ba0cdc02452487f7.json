@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "3",
+        "n_larger_than_two": "yes"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "3",
+        "n_larger_than_two": "yes"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0c635994a8c9bbf9006980913c21a881928c754e902f6c78ca",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1904,
+      "output_tokens": 776
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T12:58:03.358501"
+  }
+}

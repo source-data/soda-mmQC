@@ -1,0 +1,110 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "black arrowhead top-left",
+          "black arrowhead center-left",
+          "black arrowhead bottom-left",
+          "black arrow center-right",
+          "black arrow bottom-right"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Arrowheads and arrows indicate large and small adenomatous polyps, respectively.",
+          "Arrowheads and arrows indicate large and small adenomatous polyps, respectively.",
+          "Arrowheads and arrows indicate large and small adenomatous polyps, respectively.",
+          "Arrowheads and arrows indicate large and small adenomatous polyps, respectively.",
+          "Arrowheads and arrows indicate large and small adenomatous polyps, respectively."
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "black box top-left",
+          "black box top-right",
+          "black dashed line bottom-left",
+          "black dashed line bottom-right"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "The regions in boxes are magnified and shown in the lower panels.",
+          "The regions in boxes are magnified and shown in the lower panels.",
+          "The dashed lines depict the boundary between normal and adenoma tissues.",
+          "The dashed lines depict the boundary between normal and adenoma tissues."
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "black arrowhead center-right",
+          "black arrowhead bottom-right"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Arrowheads indicate pJNK staining in intestinal crypts (also see supplementary Fig S12 online).",
+          "Arrowheads indicate pJNK staining in intestinal crypts (also see supplementary Fig S12 online)."
+        ]
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_06f37a5eaa011507006980bc3079e4819eba82aa96f78d8831",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3793,
+      "output_tokens": 2317
+    },
+    "status": "completed",
+    "cached_at": "2026-02-02T16:01:49.795055"
+  }
+}

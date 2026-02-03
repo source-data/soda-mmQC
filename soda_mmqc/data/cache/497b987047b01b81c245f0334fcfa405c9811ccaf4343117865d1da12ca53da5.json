@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Data are expressed as mean ± SEM and were analyzed using repeated‐measures one‐way ANOVA, *P < 0.05, **P < 0.01, ***P < 0.001 versus vehicle‐treated cells."
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Data are expressed as mean ± SEM and were analyzed using repeated‐measures one‐way ANOVA, *P < 0.05, **P < 0.01, ***P < 0.001 versus vehicle‐treated cells."
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Data are expressed as mean ± SEM and were analyzed using repeated‐measures one‐way ANOVA, *P < 0.05, **P < 0.01, ***P < 0.001 versus vehicle‐treated cells."
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Data are expressed as mean ± SEM and were analyzed using repeated‐measures one‐way ANOVA, *P < 0.05, **P < 0.01, ***P < 0.001 versus vehicle‐treated cells."
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Data are expressed as mean ± SEM and were analyzed using repeated‐measures one‐way ANOVA, *P < 0.05, **P < 0.01, ***P < 0.001 versus vehicle‐treated cells."
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Data are expressed as mean ± SEM and were analyzed using repeated‐measures one‐way ANOVA, *P < 0.05, **P < 0.01, ***P < 0.001 versus vehicle‐treated cells."
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_09b266338da5b58b00697bc6abe670819289693111e985d59f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3189,
+      "output_tokens": 1689
+    },
+    "status": "completed",
+    "cached_at": "2026-01-29T21:44:57.121120"
+  }
+}

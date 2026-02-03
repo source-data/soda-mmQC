@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "not needed",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "no",
+        "average_values": "not needed",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "F",
+        "plot": "no",
+        "average_values": "not needed",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "G",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0cc5a7f85bb38ab300697c75cd86f8819283294c6a73eddcc1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2981,
+      "output_tokens": 841
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:11:55.478550"
+  }
+}

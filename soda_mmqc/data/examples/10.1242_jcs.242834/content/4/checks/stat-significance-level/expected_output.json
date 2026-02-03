@@ -37,7 +37,7 @@
                 "yes"
             ],
             "from_the_caption": [
-                "*P<0.05 from 0.0167 mW (two-tailed Student's t-test)"
+                "*P<0.05 from 0.0167 mW"
             ]
         },
         {
@@ -88,5 +88,6 @@
             "significance_level_symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2026-02-02 11:20:00"
 }

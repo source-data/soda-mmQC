@@ -1,0 +1,109 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The JC-1 graph plots 'Relative intensity (Green/Red)' but no units are indicated on the axis or in the caption; this appears to be a unitless ratio but the unit (or normalization method) is not defined in the caption."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Intensity [AU]"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Bar graphs show 'Signal intensity' (SDH and COX) but no units or indication (e.g., AU, optical density, % control) are provided on the axes or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "The FACS histograms use fluorescence channel labeling (e.g., 'FL2-H' or 'TMRM intensity') but no calibrated units (e.g., arbitrary fluorescence units or voltage) are provided in the plot or caption."
+          },
+          {
+            "axis": "y",
+            "justification": "The y-axis is labeled as 'Counts' (cell number) but no unit definition or sample-normalization is provided in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0e4e30f65bd69a8f00697c798bed3c8195912a3f6cd5eb6869",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2909,
+      "output_tokens": 2574
+    },
+    "status": "completed",
+    "cached_at": "2026-01-30T10:28:13.261084"
+  }
+}
