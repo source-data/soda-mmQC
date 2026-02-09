@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE273732",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE273732",
+        "status": "valid",
+        "reason": "Accession is given in the Data availability section as a GEO Series (GSE) identifier. Format (GSE + digits) and expected GEO resolver URL structure are consistent; no obvious typos. Existence cannot be confirmed without accessing the site."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94136",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE94136",
+        "status": "valid",
+        "reason": "Accession is reported as a GEO Series (GSE) identifier used for data integration. Format and GEO URL structure are correct and there are no obvious mismatches; live existence not checked."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE168222",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE168222",
+        "status": "valid",
+        "reason": "Accession is reported as a GEO Series (GSE) identifier. Identifier format and implied GEO URL structure are consistent and free of obvious typos; cannot verify actual resolution without web access."
+      },
+      {
+        "url": "https://doi.org/10.5281/zenodo.15754236",
+        "repository": "Zenodo (via DOI)",
+        "identifier": "10.5281/zenodo.15754236",
+        "status": "valid",
+        "reason": "Manuscript provides a DOI resolver link to Zenodo in the Data availability section. DOI prefix (10.5281/zenodo.) and overall DOI URL structure are correct and consistent; actual landing page cannot be confirmed here."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_0cf9fee053a3134d006989ba8cee188190b414c12dbc815c23",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 26961,
+      "output_tokens": 2313
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T11:45:10.209541"
+  }
+}

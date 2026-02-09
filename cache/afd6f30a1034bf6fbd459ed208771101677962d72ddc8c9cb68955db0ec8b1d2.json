@@ -1,0 +1,69 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Abstract",
+          "Keywords",
+          "Graphic abstract",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials & Methods",
+          "Data availability",
+          "Acknowledgments",
+          "Author Contributions",
+          "Competing Interest Statement",
+          "References",
+          "Figures legends",
+          "Expanded View Figure Legends"
+        ],
+        "missing_sections": [],
+        "sections_to_remove": [
+          "Keywords",
+          "Graphic abstract"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "Materials & Methods",
+            "renamed": "Materials and methods"
+          },
+          {
+            "original": "Data availability",
+            "renamed": "Data Availability"
+          },
+          {
+            "original": "Author Contributions",
+            "renamed": "Author contributions"
+          },
+          {
+            "original": "Competing Interest Statement",
+            "renamed": "Disclosure and competing interests statement"
+          },
+          {
+            "original": "Figures legends",
+            "renamed": "Figure legends"
+          },
+          {
+            "original": "Expanded View Figure Legends",
+            "renamed": "Expanded View legends"
+          }
+        ],
+        "sections_to_move": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-61250V2",
+    "source": "EMBOR-2025-61250V2",
+    "example_type": "word",
+    "response_id": "resp_007bacf72e52fca0006989b92b72508193bc2d29df6dd47e02",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27993,
+      "output_tokens": 3229
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T11:39:22.862750"
+  }
+}
