@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Running title:",
+          "ABSTRACT",
+          "INTRODUCTION",
+          "RESULTS AND DISCUSSION",
+          "MATERIALS AND METHODS",
+          "ACKNOWLEDGEMENTS",
+          "The authors declare that they have no conflict of interest.",
+          "REFERENCES",
+          "FIGURE LEGENDS"
+        ],
+        "missing_sections": [
+          "Data Availability",
+          "Author contributions"
+        ],
+        "sections_to_remove": [
+          "Running title:",
+          "Total character count:",
+          "Subject Category:"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "ACKNOWLEDGEMENTS",
+            "renamed": "Acknowledgments"
+          },
+          {
+            "original": "REFERENCES",
+            "renamed": "References"
+          },
+          {
+            "original": "FIGURE LEGENDS",
+            "renamed": "Figure legends"
+          }
+        ],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "The authors declare that they have no conflict of interest.",
+            "move_before": "REFERENCES"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_00d84023a87e4ef000698c6d0860c881909a7083a1fb762362",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 10068,
+      "output_tokens": 3874
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:51:24.842609"
+  }
+}

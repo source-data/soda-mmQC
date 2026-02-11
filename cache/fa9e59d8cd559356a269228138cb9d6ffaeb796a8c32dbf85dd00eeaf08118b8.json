@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://github.com/horiatodor/pooled-af3",
+        "repository": "GitHub",
+        "identifier": "horiatodor/pooled-af3",
+        "status": "valid",
+        "reason": "Well-formed GitHub repository URL (domain github.com, <user>/<repo> path). Matches the manuscript claim that analysis/code is available at this repo. Identifier format and path structure are consistent with GitHub conventions. Cannot verify repository contents without browsing, but the URL is plausibly correct."
+      },
+      {
+        "url": "https://alphafoldserver.com/",
+        "repository": "AlphaFold3 web server (alphafoldserver.com)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Domain alphafoldserver.com is the expected domain referenced for the AlphaFold3 web interface in the manuscript. No dataset identifier is expected for a web service landing page. URL structure is consistent and contains no obvious typos. Content resolution cannot be confirmed without browsing."
+      },
+      {
+        "url": "http://alphafoldserver.com",
+        "repository": "AlphaFold3 web server (alphafoldserver.com)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "HTTP variant of alphafoldserver.com appears in the manuscript Data Availability. Domain/path are consistent with the claimed AlphaFold3 web interface. No dataset identifier expected. Use of http vs https is noted but not intrinsically invalid."
+      },
+      {
+        "url": "https://doi.org/10.5281/zenodo.15499631",
+        "repository": "Zenodo (via DOI)",
+        "identifier": "10.5281/zenodo.15499631",
+        "status": "valid",
+        "reason": "The DOI follows the standard DOI syntax and uses the 10.5281 prefix associated with Zenodo. This is consistent with the manuscript statement that data derived from the AlphaFold3 server were deposited in Zenodo under that DOI. Without resolving the DOI I cannot confirm the record contents, but the DOI format and prefix are appropriate and plausible."
+      },
+      {
+        "url": "https://zenodo.org/records/16920556",
+        "repository": "Zenodo",
+        "identifier": "16920556",
+        "status": "valid",
+        "reason": "URL follows Zenodo's canonical record pattern (/records/<numeric_id>) and the numeric identifier is syntactically valid. This matches the manuscript statement that locally generated AlphaFold3 data were deposited in Zenodo at this record. Content cannot be confirmed without access, but the URL is plausibly correct."
+      },
+      {
+        "url": "https://string-db.org/",
+        "repository": "STRING database",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Domain string-db.org is the expected domain for the STRING database referenced in Methods. No specific record identifier is provided (manuscript says STRING data for taxid:243273 were downloaded from this site), and the base URL is correctly formed. Cannot confirm the exact downloaded file without web access, but the link is plausible and consistent."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13376",
+    "source": "MSB-2025-13376",
+    "example_type": "word",
+    "response_id": "resp_06c136a268f0675c00698c5f6adb9881a1b784f9eb8417924a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 20864,
+      "output_tokens": 2461
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:53:13.046599"
+  }
+}

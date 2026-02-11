@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE273732",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "accession_number_or_identifier": "GSE273732",
+        "resolves_to_data_page": "no",
+        "justification": "A GEO Series record for GSE273732 exists (authors list this accession) but the record is not publicly accessible: the GEO entry is private and requires an access token to view/download files (the manuscript/university page provides token 'mnkbwgwevvwdzod'). Therefore the URL does not currently resolve to a publicly accessible data page."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94136",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "accession_number_or_identifier": "GSE94136",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE168222",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "accession_number_or_identifier": "GSE168222",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://doi.org/10.5281/zenodo.15754236",
+        "repository": "Zenodo (DOI: 10.5281/zenodo.15754236)",
+        "accession_number_or_identifier": "10.5281/zenodo.15754236",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_016892e73e55bfab00698c867aea148192a6142ba66b6afba4",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 57042,
+      "output_tokens": 3258
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T14:40:09.666513"
+  }
+}

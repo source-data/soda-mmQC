@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.targetscan.org/vert_80/",
+        "repository": "TargetScan",
+        "identifier": "vert_80",
+        "status": "valid",
+        "reason": "Domain targetscan.org is the correct site for TargetScan; path includes 'vert_80' (version 8.0) which matches how TargetScan versions are referenced — well-formed and consistent with the claimed TargetScan database reference."
+      },
+      {
+        "url": "https://smart.servier.com/smart_image/smart-muscle/",
+        "repository": "Servier Medical Art (image repository)",
+        "identifier": "smart-muscle",
+        "status": "valid",
+        "reason": "Domain smart.servier.com is Servier Medical Art and path points to a named image page ('smart-muscle'); format is consistent with the cited image source and CC BY attribution."
+      },
+      {
+        "url": "https://bioart.niaid.nih.gov/bioart/000598",
+        "repository": "NIAID NIH BioArtSource (image repository)",
+        "identifier": "000598",
+        "status": "valid",
+        "reason": "Domain bioart.niaid.nih.gov corresponds to NIAID BioArtSource and the path contains an image identifier (000598); structure is consistent with an image resource cited in the manuscript."
+      },
+      {
+        "url": "https://bioart.niaid.nih.gov/bioart/000372",
+        "repository": "NIAID NIH BioArtSource (image repository)",
+        "identifier": "000372",
+        "status": "valid",
+        "reason": "As above: domain and path structure match NIAID BioArtSource image URLs; identifier format (numeric) is plausible for an image record."
+      },
+      {
+        "url": "https://bioart.niaid.nih.gov/bioart/000505",
+        "repository": "NIAID NIH BioArtSource (image repository)",
+        "identifier": "000505",
+        "status": "valid",
+        "reason": "As above: domain and path structure match NIAID BioArtSource image URLs; identifier format (numeric) is plausible for an image record."
+      },
+      {
+        "url": "https://togotv.dbcls.jp/togopic.2014.60.html",
+        "repository": "TogoTV / DBCLS (image/video resource)",
+        "identifier": "togopic.2014.60",
+        "status": "valid",
+        "reason": "Domain togotv.dbcls.jp is the DBCLS TogoTV site and the path points to a specific 'togopic' page (with year and id), consistent with how TogoTV pages are structured."
+      },
+      {
+        "url": "https://togotv.dbcls.jp/togopic.2024.008.html",
+        "repository": "TogoTV / DBCLS (image/video resource)",
+        "identifier": "togopic.2024.008",
+        "status": "valid",
+        "reason": "Domain and path structure match TogoTV page naming conventions (year and id in filename), consistent with the cited image/video resource."
+      },
+      {
+        "url": "BioStudies accession S-BSST2081 (no URL provided in manuscript)",
+        "repository": "BioStudies (EBI)",
+        "identifier": "S-BSST2081",
+        "status": "cannot_be_determined",
+        "reason": "Manuscript states RNA-seq data were deposited in BioStudies under accession S-BSST2081 but no explicit URL was provided. The accession is extractable, but without resolving the record the exact accession format/availability cannot be confirmed; thus plausibility cannot be fully determined without accessing the repository."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_012b11d4c280d6be00698c5f3e984081a08f414663cda28c24",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 28810,
+      "output_tokens": 3277
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:52:26.671939"
+  }
+}

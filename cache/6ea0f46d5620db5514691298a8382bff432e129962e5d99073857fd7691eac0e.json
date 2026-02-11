@@ -1,0 +1,49 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Abstract",
+          "Keywords:",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials and methods",
+          "Acknowledgments",
+          "Author contributions",
+          "Disclosure and competing interests statement",
+          "Data Availability",
+          "The paper explained",
+          "References",
+          "Figure legends",
+          "Expanded View legends"
+        ],
+        "missing_sections": [],
+        "sections_to_remove": [
+          "Keywords:",
+          "The paper explained"
+        ],
+        "sections_to_rename": [],
+        "sections_to_move": [
+          {
+            "section_in_manuscript": "Data Availability",
+            "move_before": "Acknowledgments"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21341",
+    "source": "EMM-2025-21341",
+    "example_type": "word",
+    "response_id": "resp_056c0904ab5dc01800698c6d9d2278819e9a237dbd6a73962e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 25685,
+      "output_tokens": 1883
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:53:28.612938"
+  }
+}

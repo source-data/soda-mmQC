@@ -1,0 +1,54 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE240635",
+        "repository": "NCBI GEO (SuperSeries)",
+        "accession_number_or_identifier": "GSE240635",
+        "resolves_to_data_page": "yes",
+        "justification": "GSE240635 is cited in the paper's Data availability statement as the GEO SuperSeries for the study; the accession is listed in public indexes (EMBO Journal data-availability text and OmicsDI entries) and resolves to the GEO series record (standard NCBI GEO accession URL)."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE240633",
+        "repository": "NCBI GEO (RNA‑seq Series)",
+        "accession_number_or_identifier": "GSE240633",
+        "resolves_to_data_page": "yes",
+        "justification": "GSE240633 is explicitly given in the manuscript as the RNA‑seq series and is reported in public dataset indexes (EMBO Journal data-availability and OmicsDI); the standard GEO accession URL resolves to the dataset/series page where files and sample metadata are provided."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE240632",
+        "repository": "NCBI GEO (ATAC‑seq Series)",
+        "accession_number_or_identifier": "GSE240632",
+        "resolves_to_data_page": "yes",
+        "justification": "GSE240632 is listed in the manuscript as the ATAC‑seq series; it appears in public indexes (EMBO Journal data-availability and OmicsDI) and the standard GEO accession URL points to the series record with associated files and metadata."
+      },
+      {
+        "url": "https://www.omicsmart.com",
+        "repository": "OmicSmart (bioinformatics platform)",
+        "accession_number_or_identifier": "omicsmart.com (platform)",
+        "resolves_to_data_page": "no",
+        "justification": "The URL opens the OmicSmart analysis platform (manuscript cites it as the analysis platform). It is an online analysis/visualization service, not the deposit location for the raw sequencing data; it does not directly host the GEO study files referenced by the manuscript."
+      },
+      {
+        "url": "https://www.ebi.ac.uk/biostudies/studies/S-SCDT-10_1038-S44318-026-00695-2",
+        "repository": "EBI BioStudies (source-data record)",
+        "accession_number_or_identifier": "S-SCDT-10_1038-S44318-026-00695-2",
+        "resolves_to_data_page": "yes",
+        "justification": "The manuscript names this BioStudies record as the source‑data container for the paper. Public indexes (EMBO Journal data-availability text and dataset aggregators such as OmicsDI) reference this BioStudies identifier; the EBI BioStudies record is the expected landing page for the paper's source data files."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2025-122531",
+    "source": "EMBOJ-2025-122531",
+    "example_type": "word",
+    "response_id": "resp_0104c23b50d0a68e00698c6baa472881969b3ecefe36ca2281",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 64564,
+      "output_tokens": 3599
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:45:54.386988"
+  }
+}

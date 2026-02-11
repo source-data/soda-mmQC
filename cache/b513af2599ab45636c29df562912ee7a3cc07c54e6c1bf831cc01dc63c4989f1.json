@@ -1,0 +1,54 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://github.com/horiatodor/pooled-af3",
+        "repository": "GitHub",
+        "accession_number_or_identifier": "horiatodor/pooled-af3 (repository)",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://alphafoldserver.com/",
+        "repository": "AlphaFold Server (web service)",
+        "accession_number_or_identifier": null,
+        "resolves_to_data_page": "no",
+        "justification": "alphafoldserver.com is the AlphaFold web service (server) used to run predictions, not an archive for the manuscript’s deposited output. Automated fetch in this check returned an error; additionally the manuscript states the AlphaFold Server–derived outputs were deposited in Zenodo (DOI listed), so the data themselves are not served from alphafoldserver.com."
+      },
+      {
+        "url": "https://doi.org/10.5281/zenodo.15499631",
+        "repository": "Zenodo",
+        "accession_number_or_identifier": "10.5281/zenodo.15499631",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://zenodo.org/records/16920556",
+        "repository": "Zenodo",
+        "accession_number_or_identifier": "10.5281/zenodo.16920556",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://string-db.org/",
+        "repository": "STRING database",
+        "accession_number_or_identifier": "(manuscript: STRING taxid:243273 referenced)",
+        "resolves_to_data_page": "yes",
+        "justification": "The URL resolves to the STRING database homepage which provides access to organism pages and data downloads; the manuscript additionally specifies the specific taxonomy (taxid:243273) and download date (Mar 18, 2025)."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13376",
+    "source": "MSB-2025-13376",
+    "example_type": "word",
+    "response_id": "resp_0ac4a6f04db2c3e500698c6af8ea948192ac4971e34450a786",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 51215,
+      "output_tokens": 3524
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:42:57.026571"
+  }
+}

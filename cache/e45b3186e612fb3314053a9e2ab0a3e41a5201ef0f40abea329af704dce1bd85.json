@@ -1,0 +1,33 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.targetscan.org/vert_80/",
+        "repository": "TargetScan (miRNA target prediction database)",
+        "accession_number_or_identifier": null,
+        "resolves_to_data_page": "yes",
+        "justification": "The URL is valid and resolves to the TargetScan release 8.0 site (miRNA target prediction resource) which provides searchable/publishable target prediction data and tools for retrieving predicted miRNA targets. ([targetscan.org](https://www.targetscan.org/vert_80/?utm_source=openai))"
+      },
+      {
+        "url": "https://www.ebi.ac.uk/biostudies/studies/S-BSST2081",
+        "repository": "BioStudies (EMBL-EBI)",
+        "accession_number_or_identifier": "S-BSST2081",
+        "resolves_to_data_page": "no",
+        "justification": "The manuscript states the RNA‑seq data were deposited in BioStudies under accession S-BSST2081 (see article Data Availability). However, as of Feb 11, 2026 the accession S-BSST2081 does not resolve to a publicly accessible BioStudies record / could not be found in public BioStudies indexes. Possible explanations: the record is still under embargo/private, the accession contains a typographical error, or the record has not been released by the submitter. The article’s Data Availability statement referencing S-BSST2081 is documented in the published record. ([embopress.org](https://www.embopress.org/doi/10.1038/s44321-025-00273-9?utm_source=openai))"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_03816334a9731e7200698c6a9c99988195bda34aaa123fb7ea",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 63610,
+      "output_tokens": 4803
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:41:44.709125"
+  }
+}
