@@ -81,7 +81,7 @@ Uses tool calling to enforce structured output:
 
 Checks can include a `model_config.json` to enable tools (e.g. web search). The file is passed through to `client.responses.create()` as `tools`, `tool_choice`, etc.
 
-**Valid tool types** (OpenAI Responses API): `web_search_preview`, `web_search_preview_2025_03_11`, `file_search`, `code_interpreter`, `function`, `mcp`, `image_generation`, `shell`, `computer_use_preview`, `apply_patch`, `custom`. Do **not** use `web_search` or `web_fetch` (unsupported; will return 400).
+**Valid tool types** (OpenAI Responses API): `web_search_preview`, `web_search_preview_2025_03_11`, `file_search`, `code_interpreter`, `function`, `mcp`, `image_generation`, `shell`, `computer_use_preview`, `apply_patch`, `custom`. Do **not** use `web_fetch` (unsupported; will return 400).
 
 Example for a check that may use web search:
 ```json
