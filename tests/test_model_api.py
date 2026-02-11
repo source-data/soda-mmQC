@@ -6,11 +6,12 @@ from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 from soda_mmqc.lib.api import (
-    generate_response_openai, 
+    generate_response_openai,
     generate_response_anthropic,
     generate_response,
     _create_tool_from_schema
 )
+from soda_mmqc.lib.cache import ModelCache
 from soda_mmqc.core.examples import FigureExample
 from soda_mmqc.scripts.run import ModelInput
 
@@ -138,6 +139,79 @@ class TestModelApi(unittest.TestCase):
             call_args[1]["text"], 
             self.test_schema
         )
+        self.assertNotIn("tools", call_args[1])
+
+    @patch('openai.OpenAI')
+    @patch('soda_mmqc.lib.api.os.getenv')
+    def test_generate_response_openai_with_tools_config(self, mock_getenv, mock_openai):
+        """Test that model_config with tools is passed to responses.create.
+        Uses web_search_preview (valid Responses API type; web_search is not).
+        """
+        mock_getenv.return_value = "test-api-key"
+        mock_client = MagicMock()
+        mock_openai.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.output_text = '{"name": "test", "panels": []}'
+        mock_response.id = "test-response-id"
+        mock_response.model = "gpt-4o-2024-08-06"
+        mock_response.metadata = {}
+        mock_client.responses.create.return_value = mock_response
+
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_config = {
+            "tools": [{"type": "web_search_preview"}],
+            "tool_choice": "auto",
+        }
+
+        result, _ = generate_response_openai(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model=self.test_model,
+            metadata=self.test_metadata,
+            model_config=model_config
+        )
+
+        self.assertEqual(result, {"name": "test", "panels": []})
+        call_args = mock_client.responses.create.call_args
+        self.assertEqual(call_args[1]["tools"], [{"type": "web_search_preview"}])
+        self.assertEqual(call_args[1]["tool_choice"], "auto")
+
+    @patch('openai.OpenAI')
+    @patch('soda_mmqc.lib.api.os.getenv')
+    def test_generate_response_openai_reasoning_and_max_output_tokens(self, mock_getenv, mock_openai):
+        """Test that model_config reasoning and max_output_tokens are passed to responses.create."""
+        mock_getenv.return_value = "test-api-key"
+        mock_client = MagicMock()
+        mock_openai.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.output_text = '{"name": "test", "panels": []}'
+        mock_response.id = "test-response-id"
+        mock_response.model = "gpt-5"
+        mock_response.metadata = {}
+        mock_client.responses.create.return_value = mock_response
+
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_config = {
+            "reasoning": {"effort": "medium"},
+            "max_output_tokens": 16384,
+        }
+
+        result, _ = generate_response_openai(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model="gpt-5",
+            metadata=self.test_metadata,
+            model_config=model_config
+        )
+
+        self.assertEqual(result, {"name": "test", "panels": []})
+        call_args = mock_client.responses.create.call_args
+        self.assertEqual(call_args[1]["reasoning"], {"effort": "medium"})
+        self.assertEqual(call_args[1]["max_output_tokens"], 16384)
 
     @patch('openai.OpenAI')
     @patch('soda_mmqc.lib.api.os.getenv')
@@ -240,7 +314,8 @@ class TestModelApi(unittest.TestCase):
             prompt=self.test_prompt,
             schema=self.test_schema,
             model=self.test_model,
-            metadata=self.test_metadata
+            metadata=self.test_metadata,
+            model_config=None
         )
 
     @patch('openai.OpenAI')
@@ -512,7 +587,8 @@ class TestModelApi(unittest.TestCase):
             prompt=self.test_prompt,
             schema=self.test_schema,
             model="gpt-4o-2024-08-06",
-            metadata=self.test_metadata
+            metadata=self.test_metadata,
+            model_config=None
         )
 
     @patch('soda_mmqc.lib.api.API_PROVIDER', 'anthropic')
@@ -632,6 +708,59 @@ class TestModelApi(unittest.TestCase):
         mock_generate_openai.assert_called_once()
         call_args = mock_generate_openai.call_args
         self.assertEqual(call_args[1]["metadata"], {})
+
+    @patch('soda_mmqc.lib.api.API_PROVIDER', 'openai')
+    @patch('soda_mmqc.lib.api.generate_response_openai')
+    def test_generate_response_passes_model_config(self, mock_generate_openai):
+        """Test that generate_response passes model_config to OpenAI."""
+        mock_generate_openai.return_value = ({"x": 1}, {})
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        model_config = {"tools": [{"type": "web_search_preview"}], "tool_choice": "auto"}
+
+        generate_response(
+            model_input=model_input,
+            model="gpt-4o",
+            metadata=self.test_metadata,
+            model_config=model_config
+        )
+
+        mock_generate_openai.assert_called_once_with(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema,
+            model="gpt-4o",
+            metadata=self.test_metadata,
+            model_config=model_config
+        )
+
+    def test_cache_key_includes_model_config(self):
+        """Test that cache key changes when model_config differs."""
+        example = FigureExample(str(self.test_dir))
+        example.load_from_source()
+        model_input = ModelInput(
+            example=example,
+            prompt=self.test_prompt,
+            schema=self.test_schema
+        )
+        cache = ModelCache(Path(self.test_dir) / "cache")
+        key_no_config = cache.generate_cache_key(
+            model_input, "check1", "gpt-4o", model_config=None
+        )
+        key_with_tools = cache.generate_cache_key(
+            model_input, "check1", "gpt-4o",
+            model_config={"tools": [{"type": "web_search_preview"}], "tool_choice": "auto"}
+        )
+        key_no_config_2 = cache.generate_cache_key(
+            model_input, "check1", "gpt-4o", model_config=None
+        )
+        self.assertEqual(key_no_config, key_no_config_2)
+        self.assertNotEqual(key_no_config, key_with_tools)
 
     @patch.dict(os.environ, {'API_PROVIDER': 'anthropic'})
     @patch('anthropic.Anthropic')

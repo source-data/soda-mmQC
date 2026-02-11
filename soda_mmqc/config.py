@@ -1,20 +1,26 @@
 import os
 from pathlib import Path
-import torch
 import logging
+from typing import Optional
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Lazy device cache so torch is not imported at config load time (avoids
+# abort in some environments when running tests that don't need torch).
+_device_cache: Optional[str] = None
 
-# Device validation and setup
+
+# Device validation and setup (torch imported lazily inside)
 def _validate_and_setup_device() -> str:
     """Validate the requested device and return the best available device.
     
     Returns:
         str: The device string to use ('cuda', 'mps', or 'cpu')
     """
+    import torch
+
     requested_device = os.getenv("DEVICE", "cpu").lower()
     
     # Setup logging for device validation
@@ -55,7 +61,19 @@ def _validate_and_setup_device() -> str:
         return "cpu"
 
 
-DEVICE = _validate_and_setup_device()
+def get_device() -> str:
+    """Return the validated device string, initializing once (lazy)."""
+    global _device_cache, DEVICE
+    if _device_cache is None:
+        _device_cache = _validate_and_setup_device()
+        DEVICE = _device_cache
+    return _device_cache
+
+
+# Set on first get_device() call so code that imports DEVICE after device
+# is used still sees the value. Prefer get_device() to avoid importing torch
+# until device is actually needed.
+DEVICE = None  # type: ignore[assignment]
 
 # Get the package root directory
 PACKAGE_ROOT = Path(__file__).parent
@@ -69,6 +87,9 @@ CHECKLIST_DIR = DATA_DIR / "checklist"
 EXAMPLES_DIR = DATA_DIR / "examples"
 EVALUATION_DIR = DATA_DIR / "evaluation"
 PLOTS_DIR = DATA_DIR / "plots"
+
+# Default model/API options when a check has no model_config.json
+DEFAULT_MODEL_CONFIG_PATH = DATA_DIR / "model_config.json"
 
 # String comparison metrics configuration
 STRING_METRICS = [

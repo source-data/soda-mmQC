@@ -18,7 +18,7 @@
 - Update README.md when adding new features
 
 ## Common Mistakes to Avoid
-- Don't forget to activate the virtual environment (`.venv`) before running commands, experiments, or unit tests
+- Don't forget to activate the virtual environment (`.venv`) before running commands, experiments, or unit tests. Use `source .venv/bin/activate` then run the command (e.g. `python -m pytest ...`).
 - Don't forget to update requirements.txt when adding dependencies
 - Don't create verbose summaries using `echo` or Python `print` statements when the work already speaks for itself through code changes and test results
 

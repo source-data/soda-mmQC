@@ -2,7 +2,7 @@ import os
 import json
 import argparse
 from pathlib import Path
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 from tqdm import tqdm
 from soda_mmqc.lib.api import generate_response
@@ -16,6 +16,7 @@ from soda_mmqc.config import (
     DEFAULT_SENTENCE_TRANSFORMER_MODEL,
     DEFAULT_MODEL,
     API_PROVIDER,
+    DEFAULT_MODEL_CONFIG_PATH,
 )
 from soda_mmqc.lib.api import validate_model_for_provider, get_compatible_models
 from soda_mmqc.core.evaluation import JSONEvaluator
@@ -38,12 +39,15 @@ class CheckData:
         schema: JSON schema defining the expected output structure
         examples: List of Example instances
         expected_outputs: List of expected outputs for each example
+        model_config: API options (e.g. tools, tool_choice). From check's
+            model_config.json if present, else default model_config.json.
     """
     check_dir_name: str
     check_name: str
     schema: Dict[str, Any]
     examples: List[Example]
     expected_outputs: List[Dict[str, Any]]
+    model_config: Dict[str, Any]
 
 
 @dataclass
@@ -83,6 +87,68 @@ def load_json(file_path):
         return json.load(f)
 
 
+# In-code fallback when no default model_config.json file exists
+_DEFAULT_MODEL_CONFIG = {"tools": [], "tool_choice": "none"}
+
+
+def load_model_config(check_dir: Path) -> Dict[str, Any]:
+    """Load model/API config for a check, with fallback to default.
+    
+    Uses check_dir / "model_config.json" if present; otherwise
+    DEFAULT_MODEL_CONFIG_PATH; otherwise an in-code default (no tools).
+    
+    Args:
+        check_dir: Path to the check directory.
+    Returns:
+        Model config dict (e.g. tools, tool_choice).
+    """
+    per_check = check_dir / "model_config.json"
+    if per_check.exists():
+        try:
+            return load_json(per_check)
+        except Exception as e:
+            logger.warning(
+                f"Failed to load {per_check}, using default model config: {e}"
+            )
+    if DEFAULT_MODEL_CONFIG_PATH.exists():
+        try:
+            return load_json(DEFAULT_MODEL_CONFIG_PATH)
+        except Exception as e:
+            logger.warning(
+                f"Failed to load default model config "
+                f"{DEFAULT_MODEL_CONFIG_PATH}, using in-code default: {e}"
+            )
+    return dict(_DEFAULT_MODEL_CONFIG)
+
+
+def _log_model_config_summary(check_name: str, model_config: Dict[str, Any]) -> None:
+    """Log a short summary of model config (tools, permissions) for a check."""
+    tools = model_config.get("tools") or []
+    tool_choice = model_config.get("tool_choice", "none")
+    if not tools:
+        logger.info(
+            f"[{check_name}] Model config: no tools (tool_choice=%s)",
+            tool_choice,
+        )
+        return
+    tool_types = [t.get("type", "?") if isinstance(t, dict) else "?" for t in tools]
+    extra = []
+    if model_config.get("max_tool_calls") is not None:
+        extra.append(f"max_tool_calls={model_config['max_tool_calls']}")
+    if model_config.get("include"):
+        extra.append("include=" + str(model_config["include"]))
+    if model_config.get("reasoning"):
+        extra.append("reasoning=" + str(model_config["reasoning"]))
+    if model_config.get("max_output_tokens") is not None:
+        extra.append(f"max_output_tokens={model_config['max_output_tokens']}")
+    msg = (
+        f"[{check_name}] Model config: tools={tool_types}, tool_choice={tool_choice}"
+    )
+    if extra:
+        msg += " (" + ", ".join(extra) + ")"
+    logger.info(msg)
+
+
 def run_model(
     check_data: CheckData,
     prompt: str,
@@ -105,7 +171,8 @@ def run_model(
     Returns:
         List of dictionaries containing model outputs
     """
-    logger.info(f"Running model on {len(check_data.examples)} inputs")
+    logger.info(f"Running model on {len(check_data.examples)} inputs (model=%s)", model)
+    _log_model_config_summary(check_data.check_name, check_data.model_config)
 
     # Initialize model cache
     cache_dir = CACHE_DIR
@@ -133,7 +200,8 @@ def run_model(
             # Check cache first if enabled
             if use_cache:
                 cache_key = model_cache.generate_cache_key(
-                    model_input, check_name, model
+                    model_input, check_name, model,
+                    model_config=check_data.model_config
                 )
                 cached_result = model_cache.get_cached_output(cache_key)
                 if cached_result:
@@ -148,7 +216,8 @@ def run_model(
                         model_output, response_metadata = generate_response(
                             model_input,
                             model=model,
-                            metadata=input_metadata
+                            metadata=input_metadata,
+                            model_config=check_data.model_config
                         )
                     except Exception as e:
                         logger.error(
@@ -167,7 +236,8 @@ def run_model(
                     model_output, response_metadata = generate_response(
                         model_input,
                         model=model,
-                        metadata=input_metadata
+                        metadata=input_metadata,
+                        model_config=check_data.model_config
                     )
                 except Exception as e:
                     logger.error(
@@ -437,12 +507,15 @@ def prepare_check_data(
         )
         return (None, {})
 
+    model_config = load_model_config(check_dir)
+
     check_data = CheckData(
         check_dir_name=check_dir.name,
         check_name=check_name,
         schema=schema,
         examples=examples,
-        expected_outputs=expected_outputs
+        expected_outputs=expected_outputs,
+        model_config=model_config,
     )
 
     return check_data, prompts

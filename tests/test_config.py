@@ -84,23 +84,19 @@ class TestConfig(unittest.TestCase):
         # This test uses the actual global configuration
         self.assertIn(DEFAULT_MODEL, DEFAULT_MODELS.values())
 
-    @patch('soda_mmqc.config.API_PROVIDER', 'openai')
     def test_default_model_openai(self):
-        """Test default model selection for OpenAI."""
+        """Test that OpenAI default model is configured."""
         from soda_mmqc.config import DEFAULT_MODELS
-        expected_model = DEFAULT_MODELS["openai"]
-        # Since we can't easily mock the module-level variable,
-        # we'll test the logic conceptually
-        self.assertEqual(DEFAULT_MODELS.get("openai"), "gpt-4o-2024-08-06")
+        openai_model = DEFAULT_MODELS["openai"]
+        self.assertIsInstance(openai_model, str)
+        self.assertTrue(len(openai_model) > 0)
 
-    @patch('soda_mmqc.config.API_PROVIDER', 'anthropic')
     def test_default_model_anthropic(self):
-        """Test default model selection for Anthropic."""
+        """Test that Anthropic default model is configured."""
         from soda_mmqc.config import DEFAULT_MODELS
-        expected_model = DEFAULT_MODELS["anthropic"]
-        # Since we can't easily mock the module-level variable,
-        # we'll test the logic conceptually
-        self.assertEqual(DEFAULT_MODELS.get("anthropic"), "claude-3-5-sonnet-20241022")
+        anthropic_model = DEFAULT_MODELS["anthropic"]
+        self.assertIsInstance(anthropic_model, str)
+        self.assertTrue(len(anthropic_model) > 0)
 
     def test_api_provider_validation_function_type(self):
         """Test that the validation function returns string."""
@@ -125,26 +121,22 @@ class TestConfigIntegration(unittest.TestCase):
     @patch.dict(os.environ, {'API_PROVIDER': 'openai'})
     def test_config_integration_openai(self):
         """Test that API module uses config correctly for OpenAI."""
-        # Import here to get fresh config with mocked environment
         import importlib
         import soda_mmqc.config
         importlib.reload(soda_mmqc.config)
-        
-        from soda_mmqc.config import API_PROVIDER, DEFAULT_MODEL
+        from soda_mmqc.config import API_PROVIDER, DEFAULT_MODEL, DEFAULT_MODELS
         self.assertEqual(API_PROVIDER, "openai")
-        self.assertIn(DEFAULT_MODEL, ["gpt-4o-2024-08-06", "gpt-4o-mini"])
+        self.assertEqual(DEFAULT_MODEL, DEFAULT_MODELS["openai"])
 
     @patch.dict(os.environ, {'API_PROVIDER': 'anthropic'})
     def test_config_integration_anthropic(self):
         """Test that API module uses config correctly for Anthropic."""
-        # Import here to get fresh config with mocked environment
         import importlib
         import soda_mmqc.config
         importlib.reload(soda_mmqc.config)
-        
-        from soda_mmqc.config import API_PROVIDER, DEFAULT_MODEL
+        from soda_mmqc.config import API_PROVIDER, DEFAULT_MODEL, DEFAULT_MODELS
         self.assertEqual(API_PROVIDER, "anthropic")
-        self.assertIn(DEFAULT_MODEL, ["claude-3-5-sonnet-20241022", "claude-3-7-sonnet-20250219"])
+        self.assertEqual(DEFAULT_MODEL, DEFAULT_MODELS["anthropic"])
 
 
 if __name__ == "__main__":

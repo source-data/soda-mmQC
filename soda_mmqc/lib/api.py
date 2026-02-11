@@ -8,7 +8,7 @@ from tenacity import (
     wait_exponential,
     retry_if_exception_type
 )
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, Optional
 from soda_mmqc import logger
 from soda_mmqc.config import API_PROVIDER, DEFAULT_MODEL, DEFAULT_MODELS
 
@@ -303,12 +303,35 @@ def validate_model_for_provider(model: str, provider: str = "") -> bool:
     retry=retry_if_exception_type((json.JSONDecodeError, ValueError)),
     reraise=True
 )
+def _extract_output_text_from_response(raw_response) -> str:
+    """Get the final assistant text from a Responses API response.
+    
+    When tools are used, output may contain multiple items (e.g. web_search_call
+    then message). Prefer output_text; if empty, take the last message's
+    output_text from output items.
+    """
+    if getattr(raw_response, "output_text", None):
+        return raw_response.output_text
+    output = getattr(raw_response, "output", None) or []
+    for item in reversed(output):
+        if getattr(item, "type", None) != "message":
+            continue
+        content = getattr(item, "content", None) or []
+        for block in content:
+            if getattr(block, "type", None) == "output_text":
+                text = getattr(block, "text", None)
+                if text:
+                    return text
+    return ""
+
+
 def generate_response_openai(
     example,
     prompt: str,
     schema: dict,
     model: str,
-    metadata: dict
+    metadata: dict,
+    model_config: Optional[Dict[str, Any]] = None
 ) -> Tuple[dict, dict]:
     """Generate response using OpenAI API with structured output.
 
@@ -318,6 +341,9 @@ def generate_response_openai(
         schema: The schema for structured output
         model: The model to use
         metadata: Additional metadata for the API call
+        model_config: Optional API options (e.g. tools, tool_choice,
+            max_tool_calls, include). When tools is empty or absent, no
+            tools are passed.
 
     Returns:
         Tuple of (parsed response, response metadata with response_id and
@@ -337,10 +363,10 @@ def generate_response_openai(
     # Prepare model input (supports multimodal content)
     model_input = example.prepare_model_input(prompt)
 
-    # Call API with structured output
-    raw_response = client.responses.create(
-        model=model,
-        input=[
+    # Build request kwargs
+    create_kwargs = {
+        "model": model,
+        "input": [
             {
                 "role": "system",
                 "content": (
@@ -352,12 +378,41 @@ def generate_response_openai(
                 "content": model_input["content"]
             }
         ],
-        text=schema,
-        metadata=metadata
-    )
-    # Parse response
+        "text": schema,
+        "metadata": metadata
+    }
+
+    # Add optional tool/config from model_config. Valid tool types (OpenAI
+    # Responses API) include: web_search_preview, web_search_preview_2025_03_11,
+    # file_search, code_interpreter, function, mcp, image_generation, shell,
+    # computer_use_preview, apply_patch, custom. Do not use web_search or
+    # web_fetch (unsupported).
+    if model_config:
+        tools = model_config.get("tools")
+        if tools and len(tools) > 0:
+            create_kwargs["tools"] = tools
+            if "tool_choice" in model_config:
+                create_kwargs["tool_choice"] = model_config["tool_choice"]
+            if "max_tool_calls" in model_config:
+                create_kwargs["max_tool_calls"] = model_config["max_tool_calls"]
+        if "include" in model_config and model_config["include"]:
+            create_kwargs["include"] = model_config["include"]
+        # Reasoning (gpt-5, o-series): effort "low"|"medium"|"high", optional summary
+        if "reasoning" in model_config and model_config["reasoning"]:
+            create_kwargs["reasoning"] = model_config["reasoning"]
+        if "max_output_tokens" in model_config and model_config["max_output_tokens"] is not None:
+            create_kwargs["max_output_tokens"] = model_config["max_output_tokens"]
+
+    raw_response = client.responses.create(**create_kwargs)
+
+    # Parse response (support both direct output_text and tool-augmented)
+    output_text = _extract_output_text_from_response(raw_response)
+    if not output_text:
+        raise ValueError(
+            "No output text in response (empty or missing output_text)"
+        )
     try:
-        response = json.loads(raw_response.output_text)
+        response = json.loads(output_text)
     except json.JSONDecodeError as e:
         logger.error(f"Error parsing response: {str(e)}")
         raise
@@ -496,7 +551,8 @@ def generate_response_anthropic(
 def generate_response(
     model_input,
     model: str = "",
-    metadata: Dict[str, Any] = None  # type: ignore
+    metadata: Dict[str, Any] = None,  # type: ignore
+    model_config: Optional[Dict[str, Any]] = None
 ) -> Tuple[dict, dict]:
     """Generate response using the configured API provider.
 
@@ -509,6 +565,8 @@ def generate_response(
             - schema: The schema for structured output
         model: The model to use (provider-specific)
         metadata: Additional metadata for the API call
+        model_config: Optional API options (e.g. tools for OpenAI). Used when
+            provider is OpenAI; ignored for Anthropic for now.
 
     Returns:
         Tuple of (parsed response, response metadata with response_id and
@@ -542,5 +600,6 @@ def generate_response(
             prompt=prompt,
             schema=schema,
             model=model,
-            metadata=metadata
+            metadata=metadata,
+            model_config=model_config
         )

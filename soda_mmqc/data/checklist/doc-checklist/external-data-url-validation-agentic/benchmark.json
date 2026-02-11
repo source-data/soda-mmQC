@@ -1,0 +1,16 @@
+{
+  "name": "external-data-url-validation-agentic",
+  "description": "Checks whether the URLs in the manuscript are resolved to the respective repository.",
+  "example_class": "word",
+  "examples": [
+    "10.1038_embor.2009.217",
+    "EMBOJ-2024-119734R",
+    "EMBOR-2025-61250V2",
+    "MSB-2025-13023",
+    "EMM-2025-21532",
+    "MSB-2025-13376",
+    "EMBOR-2025-62024",
+    "EMBOJ-2025-122531", 
+    "EMBOJ-2024-119572"
+  ]
+}
