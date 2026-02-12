@@ -1,0 +1,51 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "external-data-url-validation-agentic",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string",
+                                "description": "The URL extracted from the manuscript."
+                            },
+                            "repository": {
+                                "type": "string",
+                                "description": "Name of the repository inferred from the URL or context."
+                            },
+                            "accession_number_or_identifier": {
+                                "type": ["string", "null"],
+                                "description": "Accession number or identifier of the dataset."
+                            },
+                            "resolves_to_data_page": {
+                                "type": "string",
+                                "enum": ["yes", "no"],
+                                "description": "Whether the URL resolves to a page where the data can be accessed."
+                            },
+                            "justification": {
+                                "type": ["string", "null"],
+                                "description": "Brief justification for why it does not resolve to a page where the data can be accessed."
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "repository",
+                            "accession_number_or_identifier",
+                            "resolves_to_data_page",
+                            "justification"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}

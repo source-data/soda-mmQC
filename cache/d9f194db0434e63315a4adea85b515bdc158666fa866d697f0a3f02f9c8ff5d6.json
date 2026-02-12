@@ -1,0 +1,187 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "http://www.emboreports.org",
+        "repository": "EMBO Reports (journal website)",
+        "identifier": null,
+        "status": "invalid",
+        "reason": "Domain appears misspelled: official EMBO Reports site uses embo-reports.org (with a hyphen). Provided domain (emboreports.org) is likely incorrect and may not resolve to the journal's supplementary page."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16331274?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "16331274",
+        "status": "valid",
+        "reason": "URL uses the standard /pubmed/<PMID> path and the numeric identifier (PMID 16331274) matches PubMed formatting; query parameters are typical for PubMed result links."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16935860?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "16935860",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 16935860; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17245128?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "17245128",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 17245128; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17988628?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "17988628",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 17988628; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/18511691?ordinalpos=1&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "18511691",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 18511691; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/14593183?ordinalpos=13&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "14593183",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 14593183; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/16537918?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "16537918",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 16537918; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/15917271?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "15917271",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 15917271; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17713576?ordinalpos=1&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "17713576",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 17713576; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17159989?ordinalpos=3&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "17159989",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 17159989; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/17046689?ordinalpos=4&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "17046689",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 17046689; format and domain are consistent with PubMed."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Wiggins%20AK%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Uses NCBI Entrez search endpoint with a PubMed author query; well-formed search URL (no direct PMID but valid for author lookup)."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Wei%20G%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Doxakis%20E%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Wong%20C%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Tang%20AA%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Zang%20K%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Luo%20EJ%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Neve%20RL%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Reichardt%20LF%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=Search&Term=%22Huang%20EJ%22%5BAuthor%5D&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DiscoveryPanel.Pubmed_RVAbstractPlus",
+        "repository": "NCBI PubMed (author search)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Well-formed NCBI Entrez PubMed author search URL."
+      },
+      {
+        "url": "javascript:AL_get(this,%20'jour',%20'J%20Cell%20Biol.');",
+        "repository": "none (javascript bookmarklet/action)",
+        "identifier": null,
+        "status": "invalid",
+        "reason": "Not an HTTP(S) URL to an external repository; it's a JavaScript action likely intended for interactive webpage use and cannot be used as a stable external link."
+      },
+      {
+        "url": "http://www.ncbi.nlm.nih.gov/pubmed/11058114?ordinalpos=1&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum",
+        "repository": "NCBI PubMed",
+        "identifier": "11058114",
+        "status": "valid",
+        "reason": "Standard PubMed URL with numeric PMID 11058114; format and domain are consistent with PubMed."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_09148ebfb6eb5c3a00698c5dcbd830819c81204513938877a9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 9600,
+      "output_tokens": 5649
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:46:48.471266"
+  }
+}

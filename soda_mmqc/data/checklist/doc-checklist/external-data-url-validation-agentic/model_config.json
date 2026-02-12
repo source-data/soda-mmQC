@@ -1,0 +1,4 @@
+{
+  "tools": [{ "type": "web_search_preview" }],
+  "tool_choice": "auto"
+}

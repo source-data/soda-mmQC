@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "http://proteomecentral.proteomexchange.org",
+        "repository": "ProteomeXchange / ProteomeCentral",
+        "accession_number_or_identifier": null,
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://proteomecentral.proteomexchange.org/dataset/PXD054522",
+        "repository": "ProteomeXchange (claimed via jPOSTrepo)",
+        "accession_number_or_identifier": "PXD054522",
+        "resolves_to_data_page": "no",
+        "justification": "Manuscript states the MS proteomics data were deposited under PXD054522 via jPOSTrepo (see article). I attempted to locate a public ProteomeXchange/ProteomeCentral (PRIDE/jPOST) landing page for PXD054522 but could not find a public dataset page for that identifier at ProteomeCentral or the usual member repositories. This suggests the PXD entry is not publicly announced/accessible (may still be private or pending release). ([link.springer.com](https://link.springer.com/article/10.1038/s44319-026-00690-y?utm_source=openai))"
+      },
+      {
+        "url": "https://proteomecentral.proteomexchange.org/dataset/PXD054523",
+        "repository": "ProteomeXchange (claimed via jPOSTrepo)",
+        "accession_number_or_identifier": "PXD054523",
+        "resolves_to_data_page": "no",
+        "justification": "Manuscript states the MS proteomics data were deposited under PXD054523 via jPOSTrepo (see article). I attempted to locate a public ProteomeXchange/ProteomeCentral (PRIDE/jPOST) landing page for PXD054523 but could not find a public dataset page for that identifier at ProteomeCentral or the usual member repositories. This suggests the PXD entry is not publicly announced/accessible (may still be private or pending release). ([link.springer.com](https://link.springer.com/article/10.1038/s44319-026-00690-y?utm_source=openai))"
+      },
+      {
+        "url": "https://www.ebi.ac.uk/biostudies/studies/S-SCDT-10_1038-S44319-026-00690-y",
+        "repository": "EBI BioStudies (source data record)",
+        "accession_number_or_identifier": "S-SCDT-10_1038-S44319-026-00690-y",
+        "resolves_to_data_page": "no",
+        "justification": "The manuscript says the source data are collected in BioStudies record S-SCDT-10_1038-S44319-026-00690-y. I could not locate a public BioStudies landing page for that exact record during checking. Therefore the record does not resolve to an accessible data page (it may not yet be public or the exact record name/URL differs). See manuscript statement. ([link.springer.com](https://link.springer.com/article/10.1038/s44319-026-00690-y?utm_source=openai))"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-62024",
+    "source": "EMBOR-2025-62024",
+    "example_type": "word",
+    "response_id": "resp_0b670ab3a7f055a900698c6b41433481a3a4cba8a97bbc2f4b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 84471,
+      "output_tokens": 4730
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:44:42.042512"
+  }
+}

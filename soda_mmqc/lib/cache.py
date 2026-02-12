@@ -31,15 +31,21 @@ class ModelCache:
         return hashlib.sha256(sorted_data.encode()).hexdigest()
 
     def generate_cache_key(
-        self, model_input, check_name: str, model: str
+        self,
+        model_input,
+        check_name: str,
+        model: str,
+        model_config: Optional[Dict[str, Any]] = None
     ) -> str:
         """Generate a cache key for model input.
         
         Args:
-            model_input: The ModelInput object containing example, prompt, and 
+            model_input: The ModelInput object containing example, prompt, and
                 schema
             check_name: Name of the check being processed
             model: The model being used for generation
+            model_config: Optional API options (e.g. tools). Included so
+                cache differs when config differs.
             
         Returns:
             String hash of the cache key data
@@ -51,6 +57,8 @@ class ModelCache:
             "check_name": check_name,
             "model": model,
         }
+        if model_config is not None:
+            cache_key_data["model_config"] = model_config
         return self._generate_cache_key(cache_key_data)
 
     def get_cached_output(self, cache_key: str) -> Optional[Dict[str, Any]]:

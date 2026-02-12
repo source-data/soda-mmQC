@@ -1,0 +1,26 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "No external data repository URLs provided in manuscript",
+        "repository": "none",
+        "identifier": null,
+        "status": "cannot_be_determined",
+        "reason": "The manuscript's Data availability statement explicitly says: \"This study includes no data deposited in external repositories.\" No URLs pointing to data repositories (e.g., GEO, ArrayExpress, SRA, ENA, PRIDE, Zenodo, Figshare, GitHub dataset links) were found. Only journal DOIs and software/vendor URLs are present; therefore there are no external dataset URLs to validate."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-61250V2",
+    "source": "EMBOR-2025-61250V2",
+    "example_type": "word",
+    "response_id": "resp_029ff4ee3ed8576b00698c5f0b075081a2b92e5066ef085072",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27525,
+      "output_tokens": 1615
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:51:12.934293"
+  }
+}

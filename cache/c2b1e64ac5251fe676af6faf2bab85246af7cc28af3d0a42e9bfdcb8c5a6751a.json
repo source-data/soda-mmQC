@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.ebi.ac.uk/pride/archive/projects/PXD069095",
+        "repository": "PRIDE (Proteomics Identifications Database, EBI)",
+        "identifier": "PXD069095",
+        "status": "valid",
+        "reason": "Domain (ebi.ac.uk/pride) and path (/pride/archive/projects/PXD069095) match PRIDE project URL conventions; accession format 'PXD' + digits is correct for PRIDE."
+      },
+      {
+        "url": "https://www.uniprot.org",
+        "repository": "UniProt (Universal Protein Resource)",
+        "identifier": null,
+        "status": "cannot_be_determined",
+        "reason": "This is a generic link to the UniProt homepage (correct domain) but does not point to a specific record or release/version; no specific UniProt accession or dataset identifier is provided in the URL or immediate context."
+      },
+      {
+        "url": "https://git.bioconductor.org/packages/to>pGO",
+        "repository": "Bioconductor Git (topGO package)",
+        "identifier": "topGO (intended)",
+        "status": "invalid",
+        "reason": "URL is malformed: contains an unexpected '>' character and breaks the expected path (should be e.g. /packages/topGO). The repository/package identifier 'topGO' is implied but the provided URL is incorrect."
+      },
+      {
+        "url": "https://rnagranuledb.lunenfeld.ca/",
+        "repository": "RNAgranuleDB (RNAgranule database)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Domain and path correspond to the RNAgranuleDB resource referenced in the text; the URL is well-formed and matches the cited database (no specific dataset accession given)."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13023",
+    "source": "MSB-2025-13023",
+    "example_type": "word",
+    "response_id": "resp_0cc36314037efcb000698c5f2204608192a4f72158cedea3e9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27617,
+      "output_tokens": 2231
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:51:41.333621"
+  }
+}

@@ -77,6 +77,41 @@ Uses tool calling to enforce structured output:
 - Forces the model to use the structured output tool
 - Extracts the structured response from tool use
 
+### Per-check model config (OpenAI)
+
+Checks can include a `model_config.json` to enable tools (e.g. web search). The file is passed through to `client.responses.create()` as `tools`, `tool_choice`, etc.
+
+**Valid tool types** (OpenAI Responses API): `web_search_preview`, `web_search_preview_2025_03_11`, `file_search`, `code_interpreter`, `function`, `mcp`, `image_generation`, `shell`, `computer_use_preview`, `apply_patch`, `custom`. Do **not** use `web_fetch` (unsupported; will return 400).
+
+Example for a check that may use web search:
+```json
+{
+  "tools": [{ "type": "web_search_preview" }],
+  "tool_choice": "auto"
+}
+```
+
+**More agentic / coding (same endpoint):** You can enable multi-step thinking and code execution without changing the API:
+
+- **Reasoning** (gpt-5, o-series): Add `"reasoning": { "effort": "medium" }` (`low` / `medium` / `high`) so the model spends more tokens on chain-of-thought before answering. Optional: `"max_output_tokens": 16384` to cap total output (reasoning + reply).
+- **Code interpreter:** Add a tool `{ "type": "code_interpreter", "container": { "type": "auto", "memory_limit": "4g" } }` so the model can write and run Python in a sandbox (e.g. for data or image analysis). Use with a reasoning model for best results.
+- **Multi-turn:** The Responses API supports `conversation` and `previous_response_id` for multi-round chats; that would require run-loop changes (multiple API calls per example) and is not yet wired through `model_config`.
+
+Example agentic + coding config (reasoning model + web search + code interpreter):
+```json
+{
+  "tools": [
+    { "type": "web_search_preview" },
+    { "type": "code_interpreter", "container": { "type": "auto", "memory_limit": "4g" } }
+  ],
+  "tool_choice": "auto",
+  "max_tool_calls": 20,
+  "reasoning": { "effort": "medium" },
+  "max_output_tokens": 16384
+}
+```
+Use a reasoning-capable model (e.g. `gpt-5`, `gpt-5-mini`, or o-series) when setting `reasoning`.
+
 ## Usage
 
 The API automatically routes to the appropriate provider based on the `API_PROVIDER` environment variable. Both providers return the same response format:

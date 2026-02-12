@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://doi.org/10.5281/zenodo.15754236",
+        "repository": "Zenodo",
+        "identifier": "10.5281/zenodo.15754236",
+        "status": "valid",
+        "reason": "Explicit DOI link to doi.org. DOI prefix 10.5281 is Zenodo's DOI allocator and the DOI string follows the expected '10.5281/zenodo.<number>' pattern; URL structure is consistent with a Zenodo record. (Syntactically plausible; no live check performed.)"
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE273732",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE273732",
+        "status": "valid",
+        "reason": "Manuscript states 'Original RNA-seq data are deposited at NCBI GEO with accession number GSE273732'. The accession matches GEO convention (GSE + digits) and the standard GEO accession URL pattern. (Syntactically consistent; no live resolution performed.)"
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94136",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE94136",
+        "status": "valid",
+        "reason": "Manuscript lists GSE94136 as a GEO accession used for integration. The identifier format matches GEO conventions and is consistent with the expected GEO URL path. (Syntactic plausibility only; not web-checked.)"
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE168222",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE168222",
+        "status": "valid",
+        "reason": "Manuscript lists GSE168222 as a GEO accession used for integration. The identifier format (GSE + digits) and the implied GEO URL structure are consistent. (Syntactic plausibility only; not web-checked.)"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_049b6830bc320e5600698c5ee4258481a1aa49a7610b58cc92",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 26961,
+      "output_tokens": 2769
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:50:50.296961"
+  }
+}

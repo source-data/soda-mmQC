@@ -1,0 +1,51 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Running title:",
+          "Total character count:",
+          "Subject Category:",
+          "ABSTRACT",
+          "Keywords:",
+          "INTRODUCTION",
+          "RESULTS AND DISCUSSION",
+          "MATERIALS AND METHODS",
+          "ACKNOWLEDGEMENTS",
+          "REFERENCES",
+          "FIGURE LEGENDS"
+        ],
+        "missing_sections": [
+          "Data Availability",
+          "Author Contributions"
+        ],
+        "sections_to_remove": [
+          "Running title:",
+          "Total character count:",
+          "Subject Category:",
+          "Keywords:"
+        ],
+        "sections_to_rename": [
+          {
+            "original": "The authors declare that they have no conflict of interest.",
+            "renamed": "Disclosure and Competing Interests Statement"
+          }
+        ],
+        "sections_to_move": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_0d79f67e1aeb28ac00698c8399ec4c8190a05794944be5cca3",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 10065,
+      "output_tokens": 4281
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T14:27:44.915053"
+  }
+}

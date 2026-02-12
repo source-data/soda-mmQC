@@ -37,19 +37,32 @@ soda_mmqc/
 
 ## Installation
 
-You can install the package in development mode using pip:
+Dependencies are managed in `pyproject.toml`. Use **uv** (recommended) or pip.
+
+### With uv (recommended)
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/soda-mmqc.git
 cd soda-mmqc
 
-# Create virtual environment and install dependencies
+# Install uv if needed: https://docs.astral.sh/uv/
+# Then create venv and install dependencies (generates uv.lock)
+uv sync
+
+# Activate the environment for shell commands
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+### With pip
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/soda-mmqc.git
+cd soda-mmqc
+
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-# Install in development mode
 pip install -e .
 ```
 
@@ -74,7 +87,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
 # Optional: Device configuration for ML operations
-DEVICE=cpu  # Options: 'cpu', 'cuda', 'mps' (Apple Silicon)
+DEVICE=cpu  # Options: 'cpu', 'cuda', 'mps' (Apple Silicon). Use cpu if PyTorch crashes on import.
 ```
 
 #### Method 2: Environment Variables
@@ -117,9 +130,10 @@ For detailed configuration options, see the [API Provider Documentation](soda_mm
 
 ## Testing
 
-The project uses pytest for testing. You can run tests using:
+The project uses pytest for testing. Run tests with the virtual environment activated:
 
 ```bash
+source .venv/bin/activate
 # Run all tests
 pytest
 
@@ -131,9 +145,14 @@ pytest tests/test_specific_file.py
 
 # Run tests matching a pattern
 pytest -k "test_name_pattern"
+
+# Run integration tests (real OpenAI API calls; require OPENAI_API_KEY)
+pytest tests/test_model_api_integration.py -v
 ```
 
-The test configuration is defined in `pyproject.toml` with test paths set to the `tests/` directory.
+The test configuration is defined in `pyproject.toml` with test paths set to the `tests/` directory. Integration tests in `test_model_api_integration.py` are **skipped** unless `OPENAI_API_KEY` is set; they validate that tool types (e.g. `web_search_preview`) work and that invalid types (e.g. `web_fetch`, `web_search`) correctly return 400.
+
+If pytest aborts when loading PyTorch (e.g. "Fatal Python error: Aborted" during import), set `DEVICE=cpu` in your environment and ensure dependencies were installed with `uv sync` for a consistent, locked resolution.
 
 ## Usage
 
@@ -240,6 +259,7 @@ Example of checks:
 A check is characterized by the following components:
 - **Prompts**: Multiple prompt templates that can be compared and optimized for the specific check
 - **Output Schema**: A `schema.json` file that defines the structure of the model output given the prompts
+- **Model config (optional)**: A `model_config.json` file (OpenAI) to enable tools (e.g. web search, code interpreter), reasoning, and related options for that check
 - **Benchmarking Dataset**: A `benchmark.json` file containing test examples and expected outputs to measure prompt performance
 
 ## Checklists:
@@ -275,14 +295,16 @@ checklist/
 ├── doc-checklist/                    # Document-level checks
 │   ├── section-order/
 │   │   ├── prompts/                  # Directory containing prompt templates
-│   │   ├── benchmark.json           # Test examples and expected outputs
-│   │   └── schema.json              # JSON schema for check output
+│   │   ├── schema.json               # JSON schema for check output
+│   │   ├── model_config.json         # (optional) Tools, reasoning, etc. for this check
+│   │   └── benchmark.json            # Test examples and expected outputs
 │   └── ...
 ├── fig-checklist/                    # Figure-level checks
 │   ├── error-bars-defined/
 │   │   ├── prompts/
-│   │   ├── benchmark.json
-│   │   └── schema.json
+│   │   ├── schema.json
+│   │   ├── model_config.json         # (optional)
+│   │   └── benchmark.json
 │   └── ...
 
 
@@ -338,20 +360,24 @@ The structure of the repository keeps each example as human readable directories
       │   │   │   ├── prompt.2.txt
       │   │   │   └── ...
       │   │   ├── schema.json
+      │   │   ├── model_config.json        # optional
       │   │   └── benchmark.json
       │   ├── section-order/
       │   │   ├── prompts/
       │   │   ├── schema.json
+      │   │   ├── model_config.json        # optional
       │   │   └── benchmark.json
       │   └── species-identified/
       │       ├── prompts/
       │       ├── schema.json
+      │       ├── model_config.json        # optional
       │       └── benchmark.json
       │
       ├── fig-checklist/                    # Another series of checks
       │   ├── error-bars-defined/
       │   │   ├── prompts/
       │   │   ├── schema.json
+      │   │   ├── model_config.json        # optional
       │   │   └── benchmark.json
       │   ├── individual-data-points/
       │   ├── micrograph-scale-bar/
@@ -388,7 +414,6 @@ The structure of the repository keeps each example as human readable directories
           └── stat-test/
 
 
-## Example
 
 ### Prompt:
 
@@ -472,6 +497,25 @@ The output schema defines the structured format for model responses. SODA MMQC a
     }
 }
 ```
+
+#### Model config (OpenAI, optional):
+
+Per-check `model_config.json` enables tools (e.g. `web_search_preview`), reasoning (`reasoning: { "effort": "medium" }` for gpt-5/o-series), and the code interpreter for that check. Example for a more agentic check:
+
+```json
+{
+  "tools": [
+    { "type": "web_search_preview" },
+    { "type": "code_interpreter", "container": { "type": "auto", "memory_limit": "4g" } }
+  ],
+  "tool_choice": "auto",
+  "max_tool_calls": 20,
+  "reasoning": { "effort": "medium" },
+  "max_output_tokens": 16384
+}
+```
+
+Use a reasoning-capable model (e.g. `gpt-5`, `gpt-5-mini`) when setting `reasoning`. Full options: [API Provider Documentation](soda_mmqc/docs/api_providers.md#per-check-model-config-openai).
 
 #### Benchmarking Dataset:
 

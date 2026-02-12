@@ -1,0 +1,26 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "http://proteomecentral.proteomexchange.org",
+        "repository": "ProteomeXchange Consortium (via jPOSTrepo)",
+        "identifier": "PXD054522; PXD054523",
+        "status": "valid",
+        "reason": "Domain is the correct ProteomeXchange central domain. The manuscript cites two ProteomeXchange identifiers (PXD054522 and PXD054523) which match the standard 'PXD' accession format used by ProteomeXchange/PRIDE and are consistent with deposition via jPOSTrepo as stated. The authors did not provide a dataset-specific GetDataset URL, so resolution could not be checked here, but the domain, identifier format, and repository claim are internally consistent and plausible."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-62024",
+    "source": "EMBOR-2025-62024",
+    "example_type": "word",
+    "response_id": "resp_0abbc22ba397047500698c5f99c80c81959e924e73aefdc9ad",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33579,
+      "output_tokens": 1269
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T11:53:37.531512"
+  }
+}

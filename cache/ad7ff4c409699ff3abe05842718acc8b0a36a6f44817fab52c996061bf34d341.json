@@ -1,0 +1,40 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "https://www.ebi.ac.uk/pride/archive/projects/PXD069095",
+        "repository": "PRIDE (ProteomeXchange)",
+        "accession_number_or_identifier": "PXD069095",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://rnagranuledb.lunenfeld.ca/",
+        "repository": "RNAgranuleDB (RNA granule database)",
+        "accession_number_or_identifier": "RNAgranuleDB v2.0 (no individual accession)",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      },
+      {
+        "url": "https://www.uniprot.org/",
+        "repository": "UniProt",
+        "accession_number_or_identifier": "N/A",
+        "resolves_to_data_page": "yes",
+        "justification": null
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13023",
+    "source": "MSB-2025-13023",
+    "example_type": "word",
+    "response_id": "resp_0c8d705d18cd824900698c6a6341b081979d9417933a142d1c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 43188,
+      "output_tokens": 2542
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T12:40:12.360641"
+  }
+}

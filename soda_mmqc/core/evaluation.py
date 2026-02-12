@@ -1,13 +1,14 @@
 """Tools for evaluating model predictions against expected outputs."""
 
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, TYPE_CHECKING
 from dataclasses import dataclass, field
-import torch
-from sentence_transformers import SentenceTransformer
 from soda_mmqc.config import (
-    DEVICE, 
+    get_device,
     DEFAULT_SENTENCE_TRANSFORMER_MODEL
 )
+
+if TYPE_CHECKING:
+    from sentence_transformers import SentenceTransformer
 import logging
 from soda_mmqc import logger
 import statistics
@@ -186,16 +187,18 @@ class JSONEvaluator:
             )
 
     @property
-    def sentence_transformer(self) -> SentenceTransformer:
+    def sentence_transformer(self) -> "SentenceTransformer":
         """Lazy-load the SentenceTransformer model."""
         if self._sentence_transformer is None:
+            from sentence_transformers import SentenceTransformer
+            device = get_device()
             logger.info(
                 f"🤖 Loading SentenceTransformer model "
-                f"'{self.sentence_transformer_model}' on device '{DEVICE}'"
+                f"'{self.sentence_transformer_model}' on device '{device}'"
             )
             self._sentence_transformer = SentenceTransformer(
-                self.sentence_transformer_model, 
-                device=DEVICE
+                self.sentence_transformer_model,
+                device=device
             )
             # Log actual device being used
             actual_device = self._sentence_transformer.device
@@ -239,7 +242,9 @@ class JSONEvaluator:
             [pred, exp], convert_to_tensor=True
         )
 
-        # Calculate cosine similarity
+        # Calculate cosine similarity (import here to avoid loading torch at
+        # module import time, which can abort in some test environments)
+        import torch
         similarity = torch.nn.functional.cosine_similarity(
             embeddings[0].unsqueeze(0),
             embeddings[1].unsqueeze(0)
