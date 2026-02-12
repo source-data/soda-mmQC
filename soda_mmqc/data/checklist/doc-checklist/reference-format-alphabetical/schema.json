@@ -1,0 +1,36 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "reference-format-alphabetical",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alphabetical": {
+                "type": "boolean",
+                "description": "True if the reference list is in alphabetical order (by first author or by reference label); false otherwise."
+              },
+              "et_al_after_n_authors": {
+                "type": ["integer", "null"],
+                "description": "Number of author names listed before 'et al.' in the bibliography (e.g. 10 means et al. is used after 10 authors). Null if 'et al.' is not used in the bibliography."
+              },
+              "dois_in_bibliography": {
+                "type": "boolean",
+                "description": "True if at least one DOI appears in the bibliography; false otherwise."
+              }
+            },
+            "required": ["alphabetical", "et_al_after_n_authors", "dois_in_bibliography"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

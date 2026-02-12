@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "",
+        "statement_type": "not_applicable",
+        "excerpt": null
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2025-122531",
+    "source": "EMBOJ-2025-122531",
+    "example_type": "word",
+    "response_id": "resp_031cfb4b69e84a1400698cabf53b308191990de5406fea17cf",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33567,
+      "output_tokens": 306
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:19:25.012809"
+  }
+}

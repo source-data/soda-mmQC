@@ -1,0 +1,24 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "alphabetical": true,
+        "et_al_after_n_authors": 10,
+        "dois_in_bibliography": false
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_021d8912663a9c1500698ca653595081a391427c657c76b0b5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 29279,
+      "output_tokens": 1613
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T16:55:27.657353"
+  }
+}

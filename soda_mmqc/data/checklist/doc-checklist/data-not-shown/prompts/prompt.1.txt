@@ -1,0 +1,40 @@
+# Data-not-shown
+
+## Summary
+
+You are a technical editor checking whether the manuscript contains any statements where the authors indicate that they are not showing certain data.
+
+Your task is to find all instances of “data not shown”, “data not shown here”, or similar phrasing that conveys that the authors have data they choose not to display (e.g. “not shown”, “withheld”, “omitted for brevity” when referring to data/figures).
+
+Proceed step-by-step and do not skip steps.
+
+## 1. Search for candidate phrases
+
+Search the full manuscript for wording that indicates withheld or non-displayed data. Include:
+- “data not shown” / “data not shown here”
+- “results not shown” / “experiments not shown”
+- “not displayed” / “not presented” (when referring to data or figures)
+- Paraphrases with the same meaning (e.g. “we do not show …”, “omitted from the figure”)
+
+## 2. Record each occurrence
+
+For each occurrence, note:
+- **location** – section or position in the document
+- **phrase** – the exact or closest wording used
+- **excerpt** – a short excerpt of the sentence or clause
+
+## 3. Output
+
+Return one object per occurrence in `outputs`. If no such statements are found, return an empty array `[]`.
+
+Do not invent or paraphrase. Use only what is in the provided text.
+
+{
+  "outputs": [
+    {
+      "location": "<where in the document>",
+      "phrase": "<exact or approximate wording>",
+      "excerpt": "<short excerpt of the sentence or clause>"
+    }
+  ]
+}

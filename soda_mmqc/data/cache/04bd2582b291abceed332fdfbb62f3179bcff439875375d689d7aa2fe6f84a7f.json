@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Section titled \"Data availability\" (immediately after Statistical analysis / at the end of Methods)",
+        "formatted_correctly": false,
+        "issues": "The DAS is present but not in the required format. Problems: (1) Entries are sentences, not a bullet list with one dataset per bullet. (2) Only the RNA‑seq dataset has an accession (S‑BSST2081) but no repository URL or DOI/resolvable link is provided. (3) Other data are described vaguely (“source data are included in this published article” and “available from the corresponding authors upon reasonable request”) without per‑dataset repository/accession/link details. (4) Does not list data type + repository + accession + resolvable link for each dataset as required."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_031a5a328c6fae2700698caab4c3a481a2ae37e517df915b75",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 28978,
+      "output_tokens": 805
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:13:53.575141"
+  }
+}

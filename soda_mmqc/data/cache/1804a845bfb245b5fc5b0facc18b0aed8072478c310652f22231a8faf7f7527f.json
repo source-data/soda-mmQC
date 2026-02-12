@@ -1,0 +1,33 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "http://proteomecentral.proteomexchange.org",
+        "repository": "ProteomeXchange Consortium / ProteomeCentral (data deposited via jPOSTrepo)",
+        "identifier": "PXD054522",
+        "status": "valid",
+        "reason": "The manuscript states MS data were deposited to ProteomeXchange with accession PXD054522. The domain proteomecentral.proteomexchange.org is the correct ProteomeXchange/ProteomeCentral domain and the identifier follows the expected PXD###### format. The authors also indicate deposition via jPOSTrepo, which is a supported ProteomeXchange partner—no obvious typos or mismatches in domain/identifier format."
+      },
+      {
+        "url": "http://proteomecentral.proteomexchange.org",
+        "repository": "ProteomeXchange Consortium / ProteomeCentral (data deposited via jPOSTrepo)",
+        "identifier": "PXD054523",
+        "status": "valid",
+        "reason": "The manuscript states MS data were deposited to ProteomeXchange with accession PXD054523. The ProteomeCentral domain is appropriate and the PXD054523 identifier matches ProteomeXchange accession formatting. The deposition via jPOSTrepo is plausible and there are no obvious formatting errors."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-62024",
+    "source": "EMBOR-2025-62024",
+    "example_type": "word",
+    "response_id": "resp_0a83ece3a2f9c9e6006989e1970ea481959baec1d4f7b6a29d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33602,
+      "output_tokens": 1401
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T14:31:22.179203"
+  }
+}

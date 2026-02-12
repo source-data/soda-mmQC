@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Section titled 'Data availability' immediately following 'Statistical analysis' in the Materials and Methods (before Acknowledgments).",
+        "formatted_correctly": false,
+        "issues": "The DAS is present but not formatted according to the required guidelines: 1) Not provided as separate bullet points for each dataset (single paragraph). 2) For the sequencing datasets (RNA-seq, ATAC‑seq, SuperSeries) the repository (NCBI GEO) and accession numbers are given (GSE240633, GSE240632, GSE240635) but no resolvable URLs or identifiers.org links are supplied. 3) Measurement types are not explicitly listed per bullet (RNA‑Seq and ATAC‑Seq are implied but not presented as separate labeled entries). 4) External deposition for lysosomal proteomics / shRNA screening is only referenced as 'Dataset EV1' (no external repository such as PRIDE for proteomics is cited, and no accession/DOI or link provided). 5) The statement 'Source data of this paper are provided in the following database record:' appears to lack the referenced record or link. 6) Supplementary items (Table EV1/EV2, Dataset EV1) are cited but not described with repository/identifier or resolvable links. To be compliant, convert to separate bullets for each dataset with: measurement type; repository name/acronym; accession or DOI; and a resolvable link."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2025-122531",
+    "source": "EMBOJ-2025-122531",
+    "example_type": "word",
+    "response_id": "resp_0c9a5596d65d5e6e00698caa24765c81938398c2777be9c69a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33787,
+      "output_tokens": 1081
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:11:35.345221"
+  }
+}

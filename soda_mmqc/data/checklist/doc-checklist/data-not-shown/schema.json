@@ -1,0 +1,36 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "data-not-shown",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "Where in the document the statement was found (e.g. section name or position)."
+              },
+              "phrase": {
+                "type": "string",
+                "description": "The exact or approximate wording used (e.g. 'data not shown', 'data not shown here')."
+              },
+              "excerpt": {
+                "type": "string",
+                "description": "Short excerpt of the surrounding sentence or clause."
+              }
+            },
+            "required": ["location", "phrase", "excerpt"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

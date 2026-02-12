@@ -1,0 +1,40 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "DAS-present-and-correct",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "present": {
+                "type": "boolean",
+                "description": "Whether a Data Availability Section (DAS) was found in the manuscript."
+              },
+              "location": {
+                "type": "string",
+                "description": "Where in the document the DAS was found (e.g. section name or position). Empty string if not present."
+              },
+              "formatted_correctly": {
+                "type": "boolean",
+                "description": "Whether the DAS is formatted correctly according to the required criteria."
+              },
+              "issues": {
+                "type": "string",
+                "description": "Brief description of format issues if formatted_correctly is false; empty string if present and correct or if absent."
+              }
+            },
+            "required": ["present", "location", "formatted_correctly", "issues"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

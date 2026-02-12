@@ -1,0 +1,36 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "no-overclaim-in-abstract",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "overclaim_detected": {
+                "type": "boolean",
+                "description": "True if the abstract contains an overstatement (e.g. unwarranted clinical relevance); false if the abstract does not overstate."
+              },
+              "location": {
+                "type": "string",
+                "description": "Where in the abstract the overclaim appears (e.g. 'last sentence'). Empty string if no overclaim."
+              },
+              "excerpt": {
+                "type": "string",
+                "description": "The sentence or phrase that overstates; empty string if no overclaim."
+              }
+            },
+            "required": ["overclaim_detected", "location", "excerpt"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

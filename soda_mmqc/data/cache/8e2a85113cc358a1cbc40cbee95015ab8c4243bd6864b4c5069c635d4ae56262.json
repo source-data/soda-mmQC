@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "",
+        "formatted_correctly": false,
+        "issues": "No Data Availability Section (DAS) was found. The manuscript only contains a link to 'Supplementary information' but no DAS. According to requirements, a DAS must directly follow the Materials and Methods section. It should either: (a) list each deposited dataset as separate bullet points including measurement type, repository name/acronym, accession number/DOI, and a resolvable link (identifiers.org or full URL), or (b) if no datasets were deposited, include the statement: 'This study includes no data deposited in external repositories'. Please add a properly formatted DAS immediately after Materials and Methods."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_07c9ab95fb6cdb6200698ca99fea2c819db89932aa724fd81e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 9776,
+      "output_tokens": 649
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:09:15.066295"
+  }
+}

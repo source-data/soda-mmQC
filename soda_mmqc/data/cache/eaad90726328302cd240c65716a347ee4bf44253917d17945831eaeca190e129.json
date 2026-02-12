@@ -1,0 +1,18 @@
+{
+  "data": {
+    "outputs": []
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_017bc25831a7664b00698cad073a4881909454f689b33ec97e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 28848,
+      "output_tokens": 350
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:23:42.878161"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Author contributions section (near the end of the manuscript, before Conflict of interest)",
+        "statement_type": "free_text",
+        "excerpt": "RP and IC conceived the project. RP designed, performed and analysed somatic differentiation experiments with contributions from ET (immunofluorescence and RT-qPCR), TT (EpiLC differentiation) and DC (PGCLC and EB differentiation). EB, SGB and MZ performed and analysed PGCLC differentiation. SGB analysed RNA-seq. RP, EB, SGB and IC wrote the manuscript with editing by all authors."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_0ef85d883266993b00698cac201dbc819391074f348f71f93f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27069,
+      "output_tokens": 558
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:20:17.970954"
+  }
+}

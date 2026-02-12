@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Author information / footnotes under the author list (immediately after affiliations)",
+        "statement_type": "free_text",
+        "excerpt": "* These authors contributed equally to the work; † Cocorresponding last authors"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_00b70a6f08e32f4c00698cac1659fc819c9dbdddd6485143e0",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 9252,
+      "output_tokens": 445
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:19:43.426451"
+  }
+}

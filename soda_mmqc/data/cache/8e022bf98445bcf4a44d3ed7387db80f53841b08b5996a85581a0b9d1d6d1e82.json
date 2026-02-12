@@ -1,0 +1,26 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "Not found — searched Author contributions section, Acknowledgments, Disclosure/Competing interests, Author information, end of manuscript, and Methods",
+        "statement_type": "not_applicable",
+        "excerpt": null,
+        "reason": "No explicit author contribution statement is present in the manuscript. The document contains Acknowledgments and a Disclosure/Competing interests section, but no section or paragraph that clearly describes who did what (e.g., 'Author contributions' or CRediT roles)."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119572",
+    "source": "EMBOJ-2024-119572",
+    "example_type": "word",
+    "response_id": "resp_06137c527419766a006989e9615c0c81939088b92c9981980a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33580,
+      "output_tokens": 448
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T15:04:44.398673"
+  }
+}

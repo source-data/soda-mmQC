@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "not_applicable",
+        "statement_type": "not_applicable",
+        "excerpt": null
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13023",
+    "source": "MSB-2025-13023",
+    "example_type": "word",
+    "response_id": "resp_09d979c0ab5fd08700698cac4c3b9881a094a6a208df701f08",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27403,
+      "output_tokens": 263
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:20:32.718750"
+  }
+}

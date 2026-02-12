@@ -1,0 +1,40 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "author-contribution-in-ms",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "present": {
+                "type": "boolean",
+                "description": "Whether an author contribution statement was found in the manuscript."
+              },
+              "location": {
+                "type": "string",
+                "description": "Where in the document the statement was found (e.g. main text, methods, author information, end of manuscript)."
+              },
+              "statement_type": {
+                "type": "string",
+                "description": "Type of statement if present (e.g. free_text, CRediT, contribution_roles, not_applicable if absent)."
+              },
+              "excerpt": {
+                "type": ["string", "null"],
+                "description": "Short excerpt of the statement or null if absent."
+              }
+            },
+            "required": ["present", "location", "statement_type", "excerpt"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Data availability section titled 'Data availability' immediately after the Materials & Methods (following 'Quantification and statistical analysis')",
+        "formatted_correctly": true,
+        "issues": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-61250V2",
+    "source": "EMBOR-2025-61250V2",
+    "example_type": "word",
+    "response_id": "resp_0f37ac719744eed600698caa8602488190b6b7ef3c7ba61eda",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 29660,
+      "output_tokens": 425
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:13:04.788663"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "biorender-protocol.io-mentions",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "service": {
+                "type": "string",
+                "enum": ["biorender", "bioprotocol", "protocol.io"],
+                "description": "Which of the three services is mentioned (Biorender, BioProtocol, or protocol.io)."
+              },
+              "location": {
+                "type": "string",
+                "description": "Where in the document the mention was found (e.g. section name or position)."
+              },
+              "excerpt": {
+                "type": "string",
+                "description": "Short excerpt of the sentence or phrase containing the mention."
+              }
+            },
+            "required": ["service", "location", "excerpt"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

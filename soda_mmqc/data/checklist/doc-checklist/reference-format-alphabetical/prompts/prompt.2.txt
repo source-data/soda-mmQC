@@ -1,0 +1,19 @@
+# Reference-format-alphabetical
+
+Check whether the reference list (bibliography) in the manuscript is ordered alphabetically.
+
+1. **alphabetical** – true if the reference list is in alphabetical order (by first author or label), false otherwise.
+2. **et_al_after_n_authors** – after how many authors “et al.” is used in the bibliography (e.g. 10); null if not used.
+3. **dois_in_bibliography** – true if any DOI (10.xxxx/…) appears in the bibliography, false otherwise.
+
+Return one object in `outputs` with these three fields.
+
+{
+  "outputs": [
+    {
+      "alphabetical": true,
+      "et_al_after_n_authors": 10,
+      "dois_in_bibliography": false
+    }
+  ]
+}

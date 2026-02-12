@@ -1,0 +1,35 @@
+# No overclaim in abstract
+
+## Summary
+
+You are an editor at a scientific journal. Your task is to check that the abstract does not overstate the findings or implications of the study.
+
+A common problem is the **last sentence of the abstract**, where authors claim vague **clinical relevance** (e.g. implications for human disease, therapy, or patients) even though the manuscript is not clinical at all—for example it reports only on model organisms, cell lines, or in vitro work with no clinical data. Such claims overstate the scope of the work and should be flagged.
+
+Proceed step-by-step and do not skip steps.
+
+## 1. Read the abstract and the rest of the manuscript
+
+Identify what the study actually does: which systems, organisms, or assays are used, and whether any clinical data or human subjects are involved.
+
+## 2. Check the abstract for overclaim
+
+Focus especially on the **concluding sentence(s)** of the abstract. Ask:
+- Does the abstract claim clinical relevance, therapeutic implications, or importance for human disease when the manuscript does not support that (e.g. only model organisms, no patient data)?
+- Are other claims in the abstract overstated relative to what the manuscript shows?
+
+If such an overclaim is present, set `overclaim_detected` to true and record **location** (e.g. “last sentence of abstract”) and **excerpt** (the overclaiming sentence or phrase). If the abstract is appropriately cautious and does not overstate, set `overclaim_detected` to false and leave **location** and **excerpt** empty.
+
+## 3. Return your answers in the following format
+
+Return one object in `outputs` with: **overclaim_detected** (boolean), **location** (where in the abstract, or ""), **excerpt** (the overclaiming text, or "").
+
+{
+  "outputs": 0[
+    {
+      "overclaim_detected": false,
+      "location": "",
+      "excerpt": ""
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "outputs": []
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_048b39ce7ed9ef9c006989e9c6c018819ca5f0f84382f38b70",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27250,
+      "output_tokens": 1034
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T15:06:14.483888"
+  }
+}

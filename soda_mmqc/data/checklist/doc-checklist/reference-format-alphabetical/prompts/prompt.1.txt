@@ -1,0 +1,37 @@
+# Reference-format-alphabetical
+
+## Summary
+
+You are an editor of a life science journal. Your task is to check the reference format of a manuscript:
+
+1. **Harvard / Author–Date system** – In-text references should use author–date (name–year), e.g. (Smith et al., 2023). The reference list (bibliography) should be in **alphabetical order** (by first author).
+2. **"Et al." usage** – In-text: for multiple authors, use first author + "et al." (e.g. Smith et al., 2023). In the bibliography, "et al." should only be used when there are more than 10 authors; otherwise list authors in full.
+3. **DOIs** – DOIs should not be given for journal-published articles; they may be given for preprints from preprint servers.
+
+Proceed step-by-step.
+
+## 1. Determine whether the reference list is alphabetical
+
+- Determine how references are ordered in the bibliography: by first author surname, by citation label (e.g. author–year), or other.
+- If the list is alphabetically ordered (by first author or by the label used for ordering), set `alphabetical` to true.
+- If the list is not alphabetical (e.g. order of citation, chronological, or inconsistent), set `alphabetical` to false.
+
+## 2. Determine "et al." usage in the bibliography
+
+- In the bibliography, after how many author names does "et al." (or "et al") appear? Report that number (e.g. 10 means "et al." is used when there are more than 10 authors). If "et al." is not used in the bibliography, set `et_al_after_n_authors` to null.
+
+## 3. Check for DOIs in the bibliography
+
+- Check if any DOIs are present in the bibliography. DOIs follow the form 10.xxxx/suffix, often as https://doi.org/10.xxxx/suffix. Set `dois_in_bibliography` to true if at least one DOI appears, false otherwise.
+
+## 4. Return your answers in the following format
+
+{
+  "outputs": [
+    {
+      "alphabetical": true,
+      "et_al_after_n_authors": 10,
+      "dois_in_bibliography": false
+    }
+  ]
+}

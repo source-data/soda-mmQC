@@ -1,0 +1,24 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "overclaim_detected": true,
+        "location": "last sentence of abstract",
+        "excerpt": "These findings indicate that miR-33a/b are involved in muscle regeneration and their inhibition may represent a potential therapeutic strategy for muscular dystrophy."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_064ab039ab1030b000698ca581574081a18dcf0f2b2b53f910",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 29171,
+      "output_tokens": 739
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T16:51:41.721607"
+  }
+}

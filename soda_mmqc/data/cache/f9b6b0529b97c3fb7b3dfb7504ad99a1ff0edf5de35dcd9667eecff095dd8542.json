@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "",
+        "formatted_correctly": false,
+        "issues": "No dedicated Data Availability Section found. The manuscript lacks a DAS immediately following Materials and Methods. Add a DAS placed directly after Materials and Methods. If no data are deposited, include the exact statement: 'This study includes no data deposited in external repositories'. If data are deposited, list each dataset as a bullet giving data type, repository name, DOI/accession, and a resolvable link."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217",
+    "example_type": "word",
+    "response_id": "resp_05e12ac822c9530f00698caa4cf6f48190b807a44d74f21130",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 9328,
+      "output_tokens": 366
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:12:02.831493"
+  }
+}

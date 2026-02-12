@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Data availability section (immediately after the Methods section, before Acknowledgements)",
+        "formatted_correctly": true,
+        "issues": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13023",
+    "source": "MSB-2025-13023",
+    "example_type": "word",
+    "response_id": "resp_0248363437a9dc5600698ca9d6dfe481918418db504021bfff",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27927,
+      "output_tokens": 671
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:10:10.841064"
+  }
+}

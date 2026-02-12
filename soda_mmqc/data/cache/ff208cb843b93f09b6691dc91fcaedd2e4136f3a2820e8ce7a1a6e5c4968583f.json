@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Section titled 'Data availability' (immediately following the Methods / Statistical analysis section)",
+        "formatted_correctly": false,
+        "issues": "The DAS is not in the required bullet-point format. It only lists RNA-seq data deposited in BioStudies (S-BSST2081) but does not provide a resolvable link (identifiers.org or full URL) nor a DOI; the dataset entry lacks the exact formatted line: '[data type]: [repository] [accession/DOI] ([URL])'. Other data are described as 'available upon request' or 'source data included', which is acceptable but not broken out into clearly formatted bullet points. Please provide each deposited dataset as a separate bullet with measurement type (e.g., RNA-Seq), repository name and recommended acronym, accession/DOI, and a resolvable link."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_08b851d96785305200698ca9e46bf0819d9098a5b1021585b2",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 29426,
+      "output_tokens": 836
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:10:27.567097"
+  }
+}

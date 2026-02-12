@@ -1,0 +1,14 @@
+# Author-contribution-in-ms
+
+Does the manuscript contain an explicit author contribution statement? If yes, where and what type (free_text, CRediT, or contribution_roles)? If no, set present to false. Return one object in outputs with: present, location, statement_type, excerpt (or null).
+
+{
+  "outputs": [
+    {
+      "present": true | false,
+      "location": "<where in the document>",
+      "statement_type": "free_text | CRediT | contribution_roles | not_applicable",
+      "excerpt": "<short excerpt or null>"
+    }
+  ]
+}

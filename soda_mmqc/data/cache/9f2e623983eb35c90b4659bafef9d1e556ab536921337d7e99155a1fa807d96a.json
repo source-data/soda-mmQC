@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "url": "GSE240635",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE240635",
+        "status": "valid",
+        "reason": "Manuscript states a GEO SuperSeries accession. Format 'GSE' followed by digits matches GEO accession conventions and is consistent with GEO as the claimed repository (no obvious typos)."
+      },
+      {
+        "url": "GSE240633",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE240633",
+        "status": "valid",
+        "reason": "Manuscript lists this as the RNA-seq GEO accession. The 'GSE' prefix plus digits matches GEO accession format and is consistent with the repository claim."
+      },
+      {
+        "url": "GSE240632",
+        "repository": "NCBI Gene Expression Omnibus (GEO)",
+        "identifier": "GSE240632",
+        "status": "valid",
+        "reason": "Manuscript lists this as the ATAC-seq GEO accession. The identifier format is consistent with GEO conventions and shows no obvious mismatch."
+      },
+      {
+        "url": "https://www.omicsmart.com",
+        "repository": "OmicSmart (bioinformatics platform / web resource)",
+        "identifier": null,
+        "status": "valid",
+        "reason": "Manuscript cites OmicSmart with a full domain. The URL is well-formed and matches the named online bioinformatics platform referenced for enrichment/plotting; no obvious typo in domain."
+      },
+      {
+        "url": "Addgene #52961 (pLentiCRISPRv2)",
+        "repository": "Addgene plasmid repository",
+        "identifier": "52961",
+        "status": "valid",
+        "reason": "Manuscript cites pLentiCRISPRv2 with Addgene plasmid number #52961. Numeric Addgene IDs are the expected identifier format and the entry is consistent with Addgene notation."
+      },
+      {
+        "url": "Addgene #12260 (psPAX2)",
+        "repository": "Addgene plasmid repository",
+        "identifier": "12260",
+        "status": "valid",
+        "reason": "Manuscript cites psPAX2 with Addgene plasmid number #12260. Identifier format matches Addgene conventions and is consistent with the claim."
+      },
+      {
+        "url": "Addgene #12259 (pMD2.G)",
+        "repository": "Addgene plasmid repository",
+        "identifier": "12259",
+        "status": "valid",
+        "reason": "Manuscript cites pMD2.G with Addgene plasmid number #12259. Identifier format is consistent with Addgene plasmid IDs and shows no obvious mismatch."
+      },
+      {
+        "url": "PDB:6U62",
+        "repository": "Protein Data Bank (PDB)",
+        "identifier": "6U62",
+        "status": "valid",
+        "reason": "Manuscript references PDB:6U62 for structural information. PDB IDs are four-character alphanumeric codes; '6U62' matches the expected format and is consistent with a PDB entry citation."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2025-122531",
+    "source": "EMBOJ-2025-122531",
+    "example_type": "word",
+    "response_id": "resp_02402a8c00244f61006989e1ab79d4819c95053a6e876e15e4",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33495,
+      "output_tokens": 2882
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T14:31:59.237239"
+  }
+}

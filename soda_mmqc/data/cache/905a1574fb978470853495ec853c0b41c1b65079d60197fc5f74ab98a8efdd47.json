@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "",
+        "statement_type": "not_applicable",
+        "excerpt": null
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-62024",
+    "source": "EMBOR-2025-62024",
+    "example_type": "word",
+    "response_id": "resp_026ab2309363a0e600698cabeedd9081968de672b4aa6268c6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33674,
+      "output_tokens": 325
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:19:00.798517"
+  }
+}

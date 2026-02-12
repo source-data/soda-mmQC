@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Section titled \"Data availability\", directly after the Materials and Methods (after the \"RNA-seq analysis\" subsection)",
+        "formatted_correctly": false,
+        "issues": "DAS is present but not formatted to requirements: 1) Items are in a running paragraph rather than separate bullet points. 2) GEO entries (GSE273732, GSE94136, GSE168222) list accession numbers but do not include resolvable links (identifiers.org or full GEO URLs). 3) The second entry ('Data used for integration...') does not explicitly state the measurement/data type for each accession. 4) The Zenodo DOI is provided as a resolvable link but is not presented as a separate bullet with an explicit data type and repository name. Suggested fix: list each dataset on its own bullet with data type, repository name/acronym, accession/DOI and a resolvable URL."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_0780e518c56fc12100698ca9ab82588196b2c48a0345450aad",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27593,
+      "output_tokens": 1035
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:09:35.534409"
+  }
+}

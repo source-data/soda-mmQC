@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Data availability (immediately after the 'RNA-seq analysis' subsection in Materials and Methods)",
+        "formatted_correctly": false,
+        "issues": "The DAS is present but not in the required format: entries are written as running text rather than separate bullets; GEO accession numbers are listed but not provided as resolvable URLs; not every dataset is presented as an individual bullet that explicitly lists data type, repository and a resolvable link (the zenodo DOI is a resolvable link but the GEO entries lack direct links and the integration datasets lack an explicit data-type label)."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_0b7a163b09eee8c900698caa5337cc81a2959e00bea054eab6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27145,
+      "output_tokens": 1125
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:12:53.574567"
+  }
+}

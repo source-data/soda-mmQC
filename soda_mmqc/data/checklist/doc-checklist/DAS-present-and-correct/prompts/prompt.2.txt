@@ -1,0 +1,20 @@
+# DAS present and correct (short)
+
+Check whether the manuscript has a Data Availability Section (DAS) and whether it is correct.
+
+1. **Present** – Is there a dedicated section listing where primary data are deposited (or stating “This study includes no data deposited in external repositories”)?
+2. **Format** – Each dataset as a bullet with: data type, repository name, DOI/accession, resolvable link. No data → use the standard no-data statement ('This study includes no data deposited in external repositories’).
+3. **Position** – DAS must follow directly after Materials and Methods.
+
+Return one object in `outputs`: **present** (boolean), **location** (where found or ""), **formatted_correctly** (boolean), **issues** (what’s wrong, or "").
+
+{
+  "outputs": [
+    {
+      "present": true,
+      "location": "<where in the document>",
+      "formatted_correctly": true,
+      "issues": ""
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Section titled \"Data availability\" (immediately after \"Quantification and statistical analysis\" within Methods)",
+        "formatted_correctly": false,
+        "issues": "Not in the requested bullet format; only a single sentence listing data type, repository and accession codes but no per-dataset bullets. Missing resolvable links or DOIs/URLs for the PXD accessions (no direct links to ProteomeXchange/jPOSTrepo entries). Does not list each dataset on its own bullet with data type + repository + accession + resolvable link."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-62024",
+    "source": "EMBOR-2025-62024",
+    "example_type": "word",
+    "response_id": "resp_06074e065cdc4bfd00698caad2cc30819089b481d653bd0659",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33446,
+      "output_tokens": 1029
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:14:31.813507"
+  }
+}

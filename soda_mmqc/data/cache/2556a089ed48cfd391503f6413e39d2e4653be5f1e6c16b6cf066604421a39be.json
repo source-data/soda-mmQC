@@ -1,0 +1,18 @@
+{
+  "data": {
+    "outputs": []
+  },
+  "metadata": {
+    "doc_id": "MSB-2025-13376",
+    "source": "MSB-2025-13376",
+    "example_type": "word",
+    "response_id": "resp_0f02ff79348c9c9e00698cad0f484c819ea34af5867a47098c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 20727,
+      "output_tokens": 283
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:24:04.279317"
+  }
+}

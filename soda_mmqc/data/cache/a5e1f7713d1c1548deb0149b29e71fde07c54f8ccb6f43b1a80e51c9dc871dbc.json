@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": false,
+        "location": "not applicable (no author contribution statement found in manuscript; only acknowledgments and disclosure sections present)",
+        "statement_type": "not_applicable",
+        "excerpt": null
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMM-2025-21532",
+    "source": "EMM-2025-21532",
+    "example_type": "word",
+    "response_id": "resp_0ce27aa2458cc48500698cac5184a081a3b94dbcb8614151b7",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 28902,
+      "output_tokens": 251
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:20:38.449875"
+  }
+}

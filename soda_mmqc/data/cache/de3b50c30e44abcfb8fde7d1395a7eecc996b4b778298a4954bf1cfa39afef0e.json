@@ -1,0 +1,60 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "sections_as_in_manuscript": [
+          "Summary",
+          "Introduction",
+          "Results",
+          "Discussion",
+          "Materials and Methods",
+          "Data availability",
+          "Acknowledgements",
+          "Author contributions",
+          "Conflict of interest",
+          "References",
+          "Figure legends",
+          "Supplementary figure legends"
+        ],
+        "missing_sections": [],
+        "sections_to_remove": [],
+        "sections_to_rename": [
+          {
+            "original": "Summary",
+            "renamed": "Abstract"
+          },
+          {
+            "original": "Data availability",
+            "renamed": "Data Availability"
+          },
+          {
+            "original": "Acknowledgements",
+            "renamed": "Acknowledgments"
+          },
+          {
+            "original": "Conflict of interest",
+            "renamed": "Disclosure and Competing Interests Statement"
+          },
+          {
+            "original": "Supplementary figure legends",
+            "renamed": "Expanded View Legends"
+          }
+        ],
+        "sections_to_move": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2024-119734R",
+    "source": "EMBOJ-2024-119734R",
+    "example_type": "word",
+    "response_id": "resp_05e8a39b408c929400698cadf826cc81a09260397aeaa38096",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 27766,
+      "output_tokens": 2309
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:29:36.082654"
+  }
+}

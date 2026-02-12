@@ -1,0 +1,40 @@
+# Biorender-BioProtocol-protocol.io-mentions
+
+## Summary
+
+You are a technical editor at a life-science journal. Your task is to find every mention of any of these three in the manuscript:
+
+- **Biorender** (figure/schematic tool; may appear as "BioRender", "Biorender")
+- **BioProtocol** (protocol repository/journal)
+- **protocol.io** (protocol sharing platform; may appear as "Protocol.io", "protocol.io")
+
+It is important to record **where** each mention occurs. Return one object per mention (same service can appear in multiple objects if mentioned in different places).
+
+Proceed step-by-step and do not skip steps.
+
+## 1. Search the manuscript
+
+Search the full manuscript for any reference to Biorender, BioProtocol, or protocol.io. Include Methods, figure legends, acknowledgements, and supplementary text if provided.
+
+## 2. Record each occurrence
+
+For each mention, note:
+- **service** – which one: `biorender`, `bioprotocol`, or `protocol.io`
+- **location** – section or position in the document (e.g. "Methods", "Figure 2 legend")
+- **excerpt** – a **very short** excerpt of the sentence or phrase containing the mention
+
+## 3. Output
+
+Return one object per occurrence in `outputs`. If none of the three is mentioned, return an empty array `[]`.
+
+Do not invent mentions. Use only what is in the provided text.
+
+{
+  "outputs": [
+    {
+      "service": "biorender",
+      "location": "<where in the document>",
+      "excerpt": "<short excerpt>"
+    }
+  ]
+}

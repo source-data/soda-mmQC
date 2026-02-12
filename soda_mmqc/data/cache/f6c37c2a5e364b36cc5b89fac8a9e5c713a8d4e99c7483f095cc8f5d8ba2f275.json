@@ -1,0 +1,26 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Author Contributions section (near end of manuscript, immediately before Competing Interest Statement)",
+        "statement_type": "free_text",
+        "excerpt": "J.D., J.B. and W.L. designed research; J.D. performed imaging, behavioral, and electrophysiological experiments; J.D., W.Y., Y.L., Y.G. and W.L. wrote the paper.",
+        "reason": "This is an explicit author contribution statement assigning specific roles (design, experiments, writing) to named authors, so a clear author contribution statement is present."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOR-2025-61250V2",
+    "source": "EMBOR-2025-61250V2",
+    "example_type": "word",
+    "response_id": "resp_03062c462c7e478b006989e904ea88819d814383a37d483ae9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 29873,
+      "output_tokens": 515
+    },
+    "status": "completed",
+    "cached_at": "2026-02-09T15:02:55.327323"
+  }
+}

@@ -1,0 +1,13 @@
+# Data-not-shown 
+
+Find every place in the manuscript where the authors say they are not showing data (e.g. “data not shown”, “results not shown”, “omitted for brevity”). For each, return one object with: **location**, **phrase**, **excerpt**. If none, return `"outputs": []`.
+
+{
+  "outputs": [
+    {
+      "location": "<where in the document>",
+      "phrase": "<exact or approximate wording>",
+      "excerpt": "<short excerpt>"
+    }
+  ]
+}

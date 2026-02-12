@@ -1,0 +1,25 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "present": true,
+        "location": "Data availability section (immediately after Materials and Methods)",
+        "formatted_correctly": false,
+        "issues": "The section exists and gives repository accession numbers (GSE240635 SuperSeries; GSE240633 RNA‑seq; GSE240632 ATAC‑seq) and refers to Dataset EV1 / Table EV1 / Table EV2, but it does not follow the required bullet format. Problems: (1) items are not listed as individual bullets with data type, repository name, DOI/accession, and a resolvable link; (2) several resources (Dataset EV1, Table EV1, Table EV2, and \"source data\") lack a repository accession or DOI and no resolvable URL is provided; (3) no explicit clickable/resolvable links are given for the GEO accessions or other datasets. Please reformat into bullets and include data type, repository, accession/DOI and a resolvable link for each dataset."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "EMBOJ-2025-122531",
+    "source": "EMBOJ-2025-122531",
+    "example_type": "word",
+    "response_id": "resp_07bd2eb6c1eb7cc400698caae84364819c81c3e2b85c6d9f49",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 33339,
+      "output_tokens": 904
+    },
+    "status": "completed",
+    "cached_at": "2026-02-11T17:14:50.834338"
+  }
+}
