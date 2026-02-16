@@ -64,6 +64,73 @@ def load_example_data(doc_id, fig, checklist=None):
         data["image_path"] = (
             str(example.image_path) if example.image_path else None
         )
+        # Discover tabular data in subfolders named like "Fig1B", "Fig2C", etc.
+        # For each subfolder starting with "Fig" (case-insensitive) look for
+        # common tabular file types and produce a small preview.
+        tables_by_panel = {}
+        try:
+            fig_root = example.source_path
+            if fig_root and fig_root.exists():
+                for sub in fig_root.iterdir():
+                    if not sub.is_dir():
+                        continue
+                    # Match panels like "Fig1B" (case-insensitive prefix "fig")
+                    if not sub.name.lower().startswith("fig"):
+                        continue
+                    panel_name = sub.name
+                    panel_tables = []
+                    # Search directly inside the panel folder (not recursive by default)
+                    for f in sub.glob("*"):
+                        if not f.is_file():
+                            continue
+                        suffix = f.suffix.lower()
+                        try:
+                            # Tabular file types
+                            if suffix in [".csv", ".tsv"]:
+                                sep = "\t" if suffix == ".tsv" else ","
+                                df = pd.read_csv(f, sep=sep)
+                            elif suffix in [".xlsx", ".xls"]:
+                                df = pd.read_excel(f)
+                            elif suffix == ".json":
+                                # try to read JSON into a table
+                                df = pd.read_json(f)
+                            # Image file types: record as image entries
+                            elif suffix in [".png", ".jpg", ".jpeg", ".tif", ".tiff"]:
+                                file_entry = {"file": str(f), "type": "image"}
+                                panel_tables.append(file_entry)
+                                continue
+                            else:
+                                # Not a supported tabular or image format
+                                continue
+
+                            # Create a small preview and replace NaN/Inf with None
+                            preview_df = df.head(5)
+                            try:
+                                preview_df = preview_df.where(pd.notnull(preview_df), None)
+                            except Exception:
+                                preview_df = preview_df
+                            preview = preview_df.to_dict(orient="records")
+                            file_entry = {
+                                "file": str(f),
+                                "columns": df.columns.tolist(),
+                                "num_rows": int(len(df)),
+                                "preview": preview,
+                                "type": "table",
+                            }
+                        except Exception as e:
+                            logger.warning(f"Failed to load table {f}: {e}")
+                            file_entry = {"file": str(f), "error": str(e)}
+
+                        panel_tables.append(file_entry)
+
+                    if panel_tables:
+                        tables_by_panel[panel_name] = panel_tables
+        except Exception as e:
+            logger.warning(f"Error discovering tabular data for {relative_path}: {e}")
+
+        # Attach tables info (may be empty dict)
+        data["tables"] = tables_by_panel
+        print(f"Discovered tables for {relative_path}: {tables_by_panel}")
         
         # Initialize expected_outputs dictionary (not check_outputs)
         data["check_outputs"] = {}

@@ -2,6 +2,9 @@ import os
 import json
 import base64
 import io
+import math
+import numbers
+from pathlib import Path
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -325,6 +328,87 @@ def _extract_output_text_from_response(raw_response) -> str:
     return ""
 
 
+def _sanitize_metadata_for_model(obj: Any, *, max_preview_rows: int = 3, max_string_len: int = 200) -> Any:
+    """Recursively sanitize metadata so it's JSON-safe and compact for model input.
+
+    - Converts NaN to None
+    - Truncates previews to `max_preview_rows`
+    - Shortens long strings
+    - Replaces full file paths with basenames for brevity
+    - Converts non-serializable objects to strings as a last resort
+    """
+    # Primitive types
+    try:
+        if obj is None:
+            return None
+        if isinstance(obj, bool):
+            return obj
+        if isinstance(obj, (int, float)):
+            # Convert NaN/Inf to None and convert numpy scalars to python native
+            try:
+                # If it's a numpy scalar, get python value
+                if isinstance(obj, numbers.Number) and not isinstance(obj, bool):
+                    try:
+                        val = obj.item()
+                    except Exception:
+                        val = obj
+                else:
+                    val = obj
+            except Exception:
+                val = obj
+
+            # If float-like, ensure it's finite (not NaN/inf)
+            if isinstance(val, float):
+                if not math.isfinite(val):
+                    return None
+            return val
+        if isinstance(obj, str):
+            if len(obj) > max_string_len:
+                return obj[: max_string_len - 3] + "..."
+            return obj
+
+        # Lists
+        if isinstance(obj, list):
+            sanitized_list = [_sanitize_metadata_for_model(v, max_preview_rows=max_preview_rows, max_string_len=max_string_len) for v in obj]
+            return sanitized_list
+
+        # Dictionaries
+        if isinstance(obj, dict):
+            new = {}
+            for k, v in obj.items():
+                # If a preview, truncate rows
+                if k == "preview" and isinstance(v, list):
+                    truncated = v[:max_preview_rows]
+                    new[k] = [_sanitize_metadata_for_model(r, max_preview_rows=max_preview_rows, max_string_len=max_string_len) for r in truncated]
+                    continue
+
+                # If the key looks like a file path, shorten it
+                if isinstance(v, str) and (k == "file" or "path" in k or "file" in k):
+                    try:
+                        new[k] = Path(v).name
+                        continue
+                    except Exception:
+                        pass
+
+                new[k] = _sanitize_metadata_for_model(v, max_preview_rows=max_preview_rows, max_string_len=max_string_len)
+            return new
+
+        # Fallback for other types: try to convert to native python or string
+        # numpy types, pandas types, etc. often have .tolist() or .item()
+        try:
+            if hasattr(obj, "tolist"):
+                return _sanitize_metadata_for_model(obj.tolist(), max_preview_rows=max_preview_rows, max_string_len=max_string_len)
+            if hasattr(obj, "item"):
+                return _sanitize_metadata_for_model(obj.item(), max_preview_rows=max_preview_rows, max_string_len=max_string_len)
+        except Exception:
+            pass
+
+        # As a last resort, stringize
+        return str(obj)
+    except Exception:
+        return str(obj)
+
+
 def generate_response_openai(
     example,
     prompt: str,
@@ -379,8 +463,155 @@ def generate_response_openai(
             }
         ],
         "text": schema,
-        "metadata": metadata
+        # We'll set metadata after coercing to API-safe strings below
     }
+    # Convert metadata to API-safe format: the Responses API may expect
+    # metadata values to be primitive/string values. Stringify complex
+    # objects (lists/dicts) so the request doesn't fail with
+    # "expected a string, but got an object" errors.
+    metadata_for_api = {}
+    if metadata:
+        for k, v in metadata.items():
+            # Keep strings as-is
+            if isinstance(v, str):
+                metadata_for_api[k] = v
+                continue
+            # Special-case large 'tables' metadata: produce a short summary
+            if k == "tables":
+                try:
+                    parts = []
+                    if isinstance(v, dict):
+                        for panel, files in v.items():
+                            # files is expected to be a list of file entries
+                            if isinstance(files, list):
+                                for fe in files:
+                                    try:
+                                        fname = Path(fe.get("file", "")).name if isinstance(fe, dict) else str(fe)
+                                    except Exception:
+                                        fname = str(fe)
+                                    # Only include panel and file basename (no rows/cols)
+                                    parts.append(f"{panel}:{fname}")
+                    summary = "; ".join(parts)
+                    # Truncate to API limit (keep margin)
+                    if len(summary) > 500:
+                        summary = summary[:497] + "..."
+                    metadata_for_api[k] = summary
+                    continue
+                except Exception:
+                    # Fallback to string conversion below
+                    pass
+            # For simple primitives, convert to string representation
+            if isinstance(v, (int, float, bool)) or v is None:
+                try:
+                    metadata_for_api[k] = json.dumps(v, ensure_ascii=False)
+                except Exception:
+                    metadata_for_api[k] = str(v)
+                continue
+            # For dicts/lists/complex objects, JSON-stringify
+            try:
+                s = json.dumps(v, ensure_ascii=False)
+                # Truncate long strings to comply with API limits (512 chars)
+                if isinstance(s, str) and len(s) > 512:
+                    s = s[:509] + "..."
+                metadata_for_api[k] = s
+            except Exception:
+                metadata_for_api[k] = str(v)
+    else:
+        metadata_for_api = {}
+
+    create_kwargs["metadata"] = metadata_for_api
+
+    # Embed sanitized metadata into the user messages so the model receives it textually.
+    # Some API clients may not surface request-level `metadata` into the token stream,
+    # so adding a user message with the JSON ensures the model can read and act on it.
+    if metadata:
+        try:
+            sanitized = _sanitize_metadata_for_model(metadata)
+            try:
+                metadata_json = json.dumps(sanitized, ensure_ascii=False, separators=(",", ":"))
+            except Exception as dump_exc:
+                # Diagnostic: walk the sanitized structure to find problematic values
+                def _find_problems(obj, path="root"):
+                    problems = []
+                    try:
+                        if obj is None or isinstance(obj, (str, bool, int)):
+                            return problems
+                        if isinstance(obj, float):
+                            if not math.isfinite(obj):
+                                problems.append((path, type(obj).__name__, obj))
+                            return problems
+                        # numpy scalars / objects
+                        try:
+                            if hasattr(obj, "item"):
+                                v = obj.item()
+                                return _find_problems(v, path)
+                            if hasattr(obj, "tolist") and not isinstance(obj, (str, bytes)):
+                                v = obj.tolist()
+                                return _find_problems(v, path)
+                        except Exception:
+                            pass
+
+                        if isinstance(obj, dict):
+                            for k, v in obj.items():
+                                problems.extend(_find_problems(v, f"{path}.{k}"))
+                            return problems
+                        if isinstance(obj, (list, tuple)):
+                            for i, v in enumerate(obj):
+                                problems.extend(_find_problems(v, f"{path}[{i}]"))
+                            return problems
+                        # If object isn't a basic serializable type, note it
+                        try:
+                            json.dumps(obj)
+                        except Exception:
+                            problems.append((path, type(obj).__name__, repr(obj)))
+                        return problems
+                    except Exception as _:
+                        return [(path, type(obj).__name__, "inspection-failed")]
+
+                problems = _find_problems(sanitized)
+                if problems:
+                    for p in problems[:10]:
+                        logger.error(f"Metadata serialization problem at {p[0]}: {p[1]} -> {p[2]}")
+                logger.warning(f"json.dumps failed for sanitized metadata: {dump_exc}")
+                # Best-effort fallback: coerce to JSON-safe representation
+                def _coerce_safe(obj):
+                    if obj is None or isinstance(obj, (str, bool, int)):
+                        return obj
+                    if isinstance(obj, float):
+                        if not math.isfinite(obj):
+                            return None
+                        return float(obj)
+                    try:
+                        if hasattr(obj, "item"):
+                            return _coerce_safe(obj.item())
+                        if hasattr(obj, "tolist") and not isinstance(obj, (str, bytes)):
+                            return _coerce_safe(obj.tolist())
+                    except Exception:
+                        pass
+                    if isinstance(obj, dict):
+                        return {k: _coerce_safe(v) for k, v in obj.items()}
+                    if isinstance(obj, (list, tuple)):
+                        return [_coerce_safe(v) for v in obj]
+                    # Fallback to string
+                    return str(obj)
+
+                safe_sanitized = _coerce_safe(sanitized)
+                try:
+                    metadata_json = json.dumps(safe_sanitized, ensure_ascii=False, separators=(",", ":"))
+                except Exception:
+                    # Last resort: stringify the whole metadata
+                    metadata_json = json.dumps(str(metadata), ensure_ascii=False)
+
+            metadata_message = {
+                "role": "user",
+                "content": (
+                    "Please consult the following METADATA_JSON block for table and file metadata. "
+                    "Use it when producing your structured output.\nMETADATA_JSON:\n" + metadata_json
+                )
+            }
+            create_kwargs["input"].append(metadata_message)
+        except Exception as e:
+            logger.warning(f"Failed to sanitize/attach metadata: {e}")
 
     # Add optional tool/config from model_config. Valid tool types (OpenAI
     # Responses API) include: web_search_preview, web_search_preview_2025_03_11,

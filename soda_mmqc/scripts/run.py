@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 from tqdm import tqdm
-from soda_mmqc.lib.api import generate_response
+from soda_mmqc.lib.api import generate_response, _sanitize_metadata_for_model
 from soda_mmqc.lib.cache import ModelCache
 from soda_mmqc.config import (
     CHECKLIST_DIR,
@@ -22,6 +22,7 @@ from soda_mmqc.lib.api import validate_model_for_provider, get_compatible_models
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY, Example
+import pandas as pd
 
 
 @dataclass
@@ -184,6 +185,68 @@ def run_model(
     examples = check_data.examples
     schema = check_data.schema
 
+    def _discover_tables_for_example(example: Example) -> Dict[str, Any]:
+        """Scan example.source_path for panel subfolders (Fig*) and load
+        lightweight previews of tabular files. Returns mapping panel->list(files).
+        """
+        tables_by_panel = {}
+        try:
+            # pandas already imported at module level
+            if pd is None:
+                return tables_by_panel
+        except NameError:
+            return tables_by_panel
+        try:
+            fig_root = example.source_path / "content"
+            if fig_root and fig_root.exists():
+                for sub in fig_root.iterdir():
+                    if not sub.is_dir():
+                        continue
+                    if not sub.name.lower().startswith("fig"):
+                        continue
+                    panel_tables = []
+                    for f in sub.glob("*"):
+                        if not f.is_file():
+                            continue
+                        suffix = f.suffix.lower()
+                        try:
+                            # Tabular file types
+                            if suffix == ".csv":
+                                df = pd.read_csv(f)
+                            elif suffix == ".tsv":
+                                df = pd.read_csv(f, sep="\t")
+                            elif suffix in [".xlsx", ".xls"]:
+                                df = pd.read_excel(f)
+                            elif suffix == ".json":
+                                df = pd.read_json(f)
+                            else:
+                                continue
+
+                            # For tabular files: create a small preview and replace NaN/Inf with None
+                            preview_df = df.head(5)
+                            try:
+                                preview_df = preview_df.where(pd.notnull(preview_df), None)
+                            except Exception:
+                                preview_df = preview_df
+                            preview = preview_df.to_dict(orient="records")
+                            file_entry = {
+                                "file": str(f),
+                                "columns": df.columns.tolist(),
+                                "num_rows": int(len(df)),
+                                "preview": preview,
+                                "type": "table",
+                            }
+                        except Exception as e:
+                            logger.warning(f"Failed to load table {f}: {e}")
+                            file_entry = {"file": str(f), "error": str(e)}
+                        panel_tables.append(file_entry)
+                    if panel_tables:
+                        tables_by_panel[sub.name] = panel_tables
+        except Exception as e:
+            logger.warning(f"Error discovering tables for {example.relative_source_path}: {e}")
+
+        return tables_by_panel
+
     for example in tqdm(examples, desc="Running model", unit="example"):
         try:
             # Generate new output without caching
@@ -192,11 +255,19 @@ def run_model(
                 prompt=prompt,
                 schema=schema
             )
+            # Discover any tabular data for this example and attach as metadata
+            tables_meta = _discover_tables_for_example(example)
             input_metadata = {
                 "doc_id": example.doc_id,
                 "source": example.relative_source_path,
-                "example_type": example.example_class_name
+                "example_type": example.example_class_name,
+                "tables": tables_meta,
             }
+            # Sanitize metadata to ensure JSON-safe values (NaN/Inf etc.)
+            try:
+                input_metadata = _sanitize_metadata_for_model(input_metadata)
+            except Exception as e:
+                logger.warning(f"Failed to sanitize input metadata for {example.doc_id}: {e}")
             # Check cache first if enabled
             if use_cache:
                 cache_key = model_cache.generate_cache_key(
