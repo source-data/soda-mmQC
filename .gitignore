@@ -129,3 +129,7 @@ node_modules
 
 # Cached data
 cache/*
+
+# FACS & other auxiliary files
+*.fcs
+*.mrc
