@@ -1,0 +1,24 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided with the prompt, so I cannot compare the uncropped/raw blots to the cropped figure. Unable to verify band identities, lane order, cropping, or any splicing."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_09ea828e61a2e930006992fc459b0c81978eeeeaeb1de3136e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3042,
+      "output_tokens": 456
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:15:24.529161"
+  }
+}

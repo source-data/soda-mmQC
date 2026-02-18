@@ -1,0 +1,24 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (uncropped/raw blot images or corresponding source data) were provided alongside the figure. Panel B of the figure shows western blots for pSMAD2/3, SMAD2, pSMAD1/5/8, and SMAD1; without the original source images or files I cannot verify that the bands, lanes, cropping, or any splicing/reordering in the figure match the source data."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00409-0",
+    "source": "10.1038_s44318-025-00409-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0b3a6e58a276903d00699329dbebc4819ebe4948968d722bc0",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3022,
+      "output_tokens": 388
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T15:29:53.506959"
+  }
+}

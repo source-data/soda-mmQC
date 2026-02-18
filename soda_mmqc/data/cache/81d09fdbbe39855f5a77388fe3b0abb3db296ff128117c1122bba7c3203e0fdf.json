@@ -1,0 +1,29 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "E",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided for comparison. Figure panel E shows pulldown/immunoblot results labeled GTP–Rac1, Total Rac1, GTP–Cdc42, Total Cdc42 and a small bar graph of GTP‑bound forms, but without the original uncropped/raw blot images I cannot verify that the bands, lane order, cropping or any splicing correspond to the figure."
+      },
+      {
+        "panel_label": "G",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided for comparison. Figure panel G shows multiple immunoblots and a gelatin zymography (normal (N) vs polyp (P) lanes for ApcMin/+ and Asef−/−ApcMin/+ and an additional panel with polyp diameter lanes), but without the original uncropped/raw gel/blot scans I cannot verify that the bands, lane identities, cropping, or any splicing/reordering are consistent with the figure."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0f665eaf090745d5006992fc3bdb2c819c89df90281415b183",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2956,
+      "output_tokens": 826
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:15:15.287955"
+  }
+}

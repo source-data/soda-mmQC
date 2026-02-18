@@ -1,0 +1,9 @@
+{
+    "outputs": [
+        {
+            "panel_label": "B",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files (uncropped/raw blot images or corresponding source data) were provided alongside the figure. Panel B of the figure shows western blots for pSMAD2/3, SMAD2, pSMAD1/5/8, and SMAD1; without the original source images or files I cannot verify that the bands, lanes, cropping, or any splicing/reordering in the figure match the source data."
+        }
+    ]
+}

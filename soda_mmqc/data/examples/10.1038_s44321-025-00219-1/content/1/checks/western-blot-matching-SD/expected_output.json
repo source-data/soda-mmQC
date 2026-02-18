@@ -1,0 +1,24 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A i",
+            "source_data_matches_figure": "not_applicable",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "A ii",
+            "source_data_matches_figure": "not_applicable",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "B",
+            "source_data_matches_figure": "not_applicable",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "C",
+            "source_data_matches_figure": "not_applicable",
+            "discrepancies": ""
+        }
+    ]
+}

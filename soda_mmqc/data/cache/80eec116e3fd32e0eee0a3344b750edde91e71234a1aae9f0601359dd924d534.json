@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Provided raw blots (anti‑Acet‑K, anti‑cGAS IP and input) show the same lane pattern as the figure panels. Differences are limited to expected cropping and contrast/brightness adjustments; markers at edges visible in raw images."
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source images for HA and MYC correspond to the figure IP and input lanes. Only standard cropping/contrast adjustments evident; boxed regions in source align with displayed bands."
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Flag IP / Flag input / HA IP source blots present and show the same lane/band patterns as in the figure. There is routine cropping of the full scan to focus on regions of interest; no mismatch in lane identity detected."
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source Flag and HA blots correspond to the figure panels. Differences are limited to cropping and image contrast/rotation applied for presentation; no inconsistent lanes or unexpected bands observed."
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Provided SIRT4 and cGAS IP/input source images match the figure. The raw scans are shown with boxed regions used in the figure (cropping); signal is faint in some input lanes but consistent with figure."
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source blots for SIRT4 and cGAS (and loading controls) show the same lane arrangement as the figure. Presentation reflects expected cropping and contrast adjustments; boxed areas in the source correspond to the figure panels."
+      },
+      {
+        "panel_label": "I",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "SIRT4 IP and input source images correspond to the figure bands (time course lanes). Only routine cropping and brightness/contrast changes are evident."
+      },
+      {
+        "panel_label": "J",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Flag IP and input and HA blots provided as source match the figure panels. The figure uses cropped regions from the full scans; no evidence of lane mis-assignment or non-matching source."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "C10.1038_s44319-026-00708-5",
+    "source": "C10.1038_s44319-026-00708-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0dfc7a8513e614030069948022e8008197b0224161ea2a2d2d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 17252,
+      "output_tokens": 1622
+    },
+    "status": "completed",
+    "cached_at": "2026-02-17T15:50:29.364633"
+  }
+}

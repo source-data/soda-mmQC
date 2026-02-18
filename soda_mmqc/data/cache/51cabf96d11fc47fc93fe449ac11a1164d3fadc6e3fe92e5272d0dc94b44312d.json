@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "I",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "J",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "B10.1038_s44319-026-00708-5",
+    "source": "B10.1038_s44319-026-00708-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_006939a4c9d105fe00699483f561d0819d8c1ce2d01d5c98a8",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 17533,
+      "output_tokens": 2214
+    },
+    "status": "completed",
+    "cached_at": "2026-02-17T16:06:56.928755"
+  }
+}

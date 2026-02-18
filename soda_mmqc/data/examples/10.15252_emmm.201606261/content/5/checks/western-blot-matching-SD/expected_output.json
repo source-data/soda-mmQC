@@ -1,0 +1,19 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files for the western blots in panel A were provided with the request, so I cannot compare the presented cropped blot to any original/uncropped image."
+        },
+        {
+            "panel_label": "D",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files for the western blots in panel D were provided with the request, so I cannot compare the presented cropped blot to any original/uncropped image."
+        },
+        {
+            "panel_label": "G",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files for the western blots in panel G were provided with the request, so I cannot compare the presented cropped blot to any original/uncropped image."
+        }
+    ]
+}

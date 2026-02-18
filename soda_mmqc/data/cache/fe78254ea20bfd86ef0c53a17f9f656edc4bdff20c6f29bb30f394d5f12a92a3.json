@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "luciferase recordings"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "stationary analysis"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "correlation analysis"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "live imaging"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "drug sensitivities"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "genomic analysis"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "no",
+        "method_source": "not_identifiable",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/1",
+    "example_type": "figure",
+    "response_id": "resp_05b547ada66f3fbf006992f1e0edf4819788b994405cc61a17",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3007,
+      "output_tokens": 2532
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:31:19.667223"
+  }
+}

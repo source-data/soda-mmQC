@@ -1,0 +1,24 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "G",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided alongside the figure for comparison. The figure shows a multi-row western blot (NANOG, OCT4, SOX2, TBX3, β-ACTIN) but without the original uncropped/scan source images it is not possible to verify bands, lanes, cropping, or splicing against the reported source data."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-026-00707-6-wbpos",
+    "source": "10.1038_s44319-026-00707-6-wbpos/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0e785c639e824761006992fa23a31c819dbb892baf905b335c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3357,
+      "output_tokens": 450
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:06:18.283238"
+  }
+}

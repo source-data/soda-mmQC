@@ -1,0 +1,11 @@
+{
+  "name": "western-blot-matching-SD",
+  "description": "Checks whether the provided source data files of western blots match what is shown in the figure.",
+  "example_class": "figure",
+  "examples": [
+    "A10.1038_s44319-026-00708-5/content/1",
+    "B10.1038_s44319-026-00708-5/content/1",
+    "C10.1038_s44319-026-00708-5/content/1",
+    "10.1038_s44319-026-00707-6-wbpos/content/1"
+  ]
+}

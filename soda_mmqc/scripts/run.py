@@ -564,29 +564,15 @@ def prepare_check_data(
     except Exception as e:
         logger.error(f"Error getting expected outputs: {str(e)}")
         return (None, {})
-    if not expected_outputs:
-        # this can happen when initializing
-        logger.warning(
-            f"No valid expected outputs gathered for check: {check_dir.name}"
-        )
-        return (None, {})
-    else:
-        # this should not happen and indicates some expected outputs are 
-        # missing
-        assert len(expected_outputs) == len(examples), (
-            f"Expected outputs not found for all examples in "
-            f"check: {check_dir.name}"
-        )
 
-    # Validate that we have the same number of examples with doc_ids as 
-    # expected outputs
-    # This ensures consistency between examples and expected_outputs
-    if len(examples) != len(expected_outputs):
+    # Require expected output for every example when we have at least one
+    # (partial expected outputs are not supported). Allow no expected outputs
+    # so the check can run and produce model outputs without evaluation.
+    if expected_outputs and len(expected_outputs) != len(examples):
         logger.error(
-            f"Mismatch between examples with doc_ids "
-            f"({len(examples)}) and expected outputs "
-            f"({len(expected_outputs)}) for check: {check_dir.name}. "
-            f"This may indicate examples with None doc_ids."
+            f"Expected outputs found for only {len(expected_outputs)} of "
+            f"{len(examples)} examples in check: {check_dir.name}. "
+            f"Either provide expected_output.json for all examples or for none."
         )
         return (None, {})
 
@@ -649,7 +635,8 @@ def process_check(
     # Process each prompt
     for prompt_name, prompt in prompts.items():
         logger.info(f"Processing prompt: {prompt_name}")
-        if mock:
+        use_mock = mock and len(check_data.expected_outputs) == len(check_data.examples)
+        if use_mock:
             results = [
                 ModelResult(
                     doc_id=example.doc_id,
