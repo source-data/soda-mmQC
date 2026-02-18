@@ -243,6 +243,10 @@ Do NOT report:
 - Pixel-level layout differences
 
 ---
+ 
+Important: ALWAYS populate the `discrepancies` field for every panel in the output JSON. The `discrepancies` value must contain an explicit, concise reasoning sentence describing why a discrepancy was recorded. If there are no substantive discrepancies, the agent must still set the field to a short justification string such as `"no discrepancies found: <brief reason>"` (for example, `"no discrepancies found: data and caption fully consistent; error bars can be computed from provided SEM column"`). Do not leave the `discrepancies` field empty, omit it, or set it to `null`.
+
+Special-case note for out of numerical reproducubility context plot types: When the panel's `plot_type` is not one of `bar_chart`, `scatter_plot`, `box_plot`, or `heatmap`, the agent must still populate the `discrepancies` field but should, in such cases, include a concise statement that the replicability assessment is out of context. Use the phrase `"replicability out of context: <brief reason>"` (for example, `"replicability out of context: original figure image unavailable; raw numeric reconstruction cannot be attempted"`). The agent should not leave the field blank or omit it for these plot types.
 
 # PART VIII — Output Format (MANDATORY JSON)
 

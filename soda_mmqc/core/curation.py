@@ -163,21 +163,21 @@ def load_example_data(doc_id, fig, checklist=None):
                             else:
                                 # Not a supported tabular or image format
                                 continue
-
                             # Create a small preview and replace NaN/Inf with None
-                            preview_df = df.head(5)
+                            # preview_df = df.head(5)
                             try:
-                                preview_df = preview_df.where(pd.notnull(preview_df), None)
+                                df = preview_dfdf.where(pd.notnull(df), None)
                             except Exception:
-                                preview_df = preview_df
-                            preview = preview_df.to_dict(orient="records")
+                                df = df
+                            df_dict = df.to_dict(orient="records")
                             file_entry = {
                                 "file": str(f),
                                 "columns": df.columns.tolist(),
                                 "num_rows": int(len(df)),
-                                "preview": preview,
+                                "preview": df_dict,
                                 "type": "table",
                             }
+                            print(f"Loaded table {f} with {len(df)} rows and columns: {df.columns.tolist()}")
                         except Exception as e:
                             logger.warning(f"Failed to load table {f}: {e}")
                             file_entry = {"file": str(f), "error": str(e)}

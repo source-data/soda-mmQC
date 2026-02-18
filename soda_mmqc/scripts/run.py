@@ -231,20 +231,20 @@ def run_model(
                         df = pd.read_feather(f)
                     else:
                         continue
-
-                    preview_df = df.head(5)
+                    # preview_df = df.copy() # instead of taking the first 5 rows, we can take all rows
                     try:
-                        preview_df = preview_df.where(pd.notnull(preview_df), None)
+                        df = df.where(pd.notnull(df), None)
                     except Exception:
                         pass
-                    preview = preview_df.to_dict(orient="records")
+                    df_dict = df.to_dict(orient="records")
                     file_entry = {
                         "file": str(f),
                         "columns": df.columns.tolist(),
                         "num_rows": int(len(df)),
-                        "preview": preview,
+                        "preview": df_dict,
                         "type": "table",
                     }
+                    print(f"Loaded table {f} with {len(df)} rows and columns: {df.columns.tolist()}")
                 except Exception as e:
                     logger.warning(f"Failed to load table {f}: {e}")
                     file_entry = {"file": str(f), "error": str(e)}
