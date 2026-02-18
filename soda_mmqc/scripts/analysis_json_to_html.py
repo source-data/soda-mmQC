@@ -123,7 +123,42 @@ def render_manuscript_entry(entry: dict, analysis_path: Path, prompt_key: str) -
     src = metadata.get("source")
     tables = metadata.get("tables")
     if src:
-        parts.append(f"  <div class=\"meta-row\">Source location: <a class=\"src-link\">{src}</a></div>")
+        # Try to construct a clickable href. If `src` already looks like a URL
+        # (http/https/file) use it directly. Otherwise resolve relative paths
+        # against the analysis file and convert to a file:// URI so clicking
+        # the link opens the file in the platform file explorer.
+        href = None
+        try:
+            s = str(src)
+            if s.startswith(("http://", "https://", "file://")):
+                href = s
+            else:
+                p = Path(s)
+                if not p.is_absolute():
+                    p = (analysis_path.parent / p).resolve()
+                # Try to create a relative path from the generated HTML file
+                # (which is written next to `analysis.json`) to the source file.
+                # This keeps links portable within the repo. If a relative path
+                # cannot be created (different drive on Windows, etc.), fall
+                # back to an absolute file:// URI.
+                try:
+                    import os
+
+                    rel = os.path.relpath(p, start=analysis_path.parent)
+                    # Use forward slashes for hrefs in HTML
+                    rel = rel.replace("\\", "/")
+                    href = rel
+                except Exception:
+                    href = p.as_uri()
+        except Exception:
+            href = None
+
+        # HTML-escape the displayed src string minimally
+        disp = str(src).replace("<", "&lt;").replace(">", "&gt;")
+        if href:
+            parts.append(f'  <div class="meta-row">Source location: <a class="src-link" href="{href}" target="_blank" rel="noopener noreferrer">{disp}</a></div>')
+        else:
+            parts.append(f'  <div class="meta-row">Source location: <a class="src-link">{disp}</a></div>')
     if tables:
         parts.append(f"  <div class=\"meta-row\">Referenced tables: <span class=\"small\">{tables}</span></div>")
 

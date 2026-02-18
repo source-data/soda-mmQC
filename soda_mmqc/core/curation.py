@@ -8,6 +8,7 @@ import argparse
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY
+import re
 
 # Set page config for wider layout
 st.set_page_config(
@@ -65,19 +66,79 @@ def load_example_data(doc_id, fig, checklist=None):
             str(example.image_path) if example.image_path else None
         )
         # Discover tabular data in subfolders named like "Fig1B", "Fig2C", etc.
-        # For each subfolder starting with "Fig" (case-insensitive) look for
-        # common tabular file types and produce a small preview.
+        # Flexible matching: folder names may be `Fig1B`, `1B`, `Fig1_B`, `Figure1B`,
+        # `Fig-1-B`, etc. We normalize names to `Fig{n}{Label}` (e.g. `Fig1B`) for
+        # downstream checks but keep the original folder name as an alias to
+        # preserve backwards compatibility.
+        def normalize_panel_name(name: str):
+            """Try to normalize a folder name to the canonical form `Fig{n}{L}`.
+
+            Returns normalized name (e.g. 'Fig1B') or None if it can't be parsed.
+            """
+            if not name or not isinstance(name, str):
+                return None
+            s = name.lower()
+            # remove common separators
+            s_clean = re.sub(r"[\s_\-]", "", s)
+            # common patterns: fig1b, figure1b, 1b
+            m = re.search(r'(?:fig(?:ure)?)?(\d+)([a-z])', s_clean)
+            if m:
+                fig_num = int(m.group(1))
+                panel_letter = m.group(2).upper()
+                return f"Fig{fig_num}{panel_letter}"
+            return None
+
+        # For each subfolder attempt flexible matching and build a map of discovered
+        # tabular/image files per panel. Keys will include the normalized name and
+        # the original folder name (if different) to avoid breaking existing code.
         tables_by_panel = {}
         try:
             fig_root = example.source_path
             if fig_root and fig_root.exists():
-                for sub in fig_root.iterdir():
-                    if not sub.is_dir():
-                        continue
-                    # Match panels like "Fig1B" (case-insensitive prefix "fig")
-                    if not sub.name.lower().startswith("fig"):
-                        continue
-                    panel_name = sub.name
+                # Helper to scan for candidate panel directories up to one level deep.
+                def scan_panel_dirs(root: Path):
+                    # Yield directories that are either direct children or one-level nested
+                    for child in root.iterdir():
+                        if not child.is_dir():
+                            continue
+                        yield child
+                        # iterate one level deeper (e.g., 'Figure 1/1A')
+                        try:
+                            for subchild in child.iterdir():
+                                if subchild.is_dir():
+                                    yield subchild
+                        except PermissionError:
+                            continue
+
+                for sub in scan_panel_dirs(fig_root):
+                    # sub may be a direct child or a nested child
+                    # Represent original name relative to fig_root to preserve nesting
+                    try:
+                        panel_name_original = str(sub.relative_to(fig_root))
+                    except Exception:
+                        panel_name_original = sub.name
+                    # Try to compute a normalized panel name from the folder name
+                    # Prefer the leaf folder name for normalization
+                    leaf_name = sub.name
+                    panel_name_normalized = normalize_panel_name(leaf_name)
+
+                    # Fallback heuristics: accept names that contain digits and a letter
+                    if not panel_name_normalized:
+                        m_fallback = re.match(r'^(\d+)([A-Za-z])$', leaf_name)
+                        if m_fallback:
+                            panel_name_normalized = f"Fig{int(m_fallback.group(1))}{m_fallback.group(2).upper()}"
+
+                    # If still not recognized, decide whether to keep this
+                    # directory as a candidate: if the original (relative)
+                    # name contains a digit, keep as-is; otherwise skip.
+                    if not panel_name_normalized:
+                        if any(ch.isdigit() for ch in panel_name_original):
+                            panel_name_normalized = panel_name_original
+                        else:
+                            # skip non-panel directories
+                            continue
+
+                    panel_name = panel_name_normalized
                     panel_tables = []
                     # Search directly inside the panel folder (not recursive by default)
                     for f in sub.glob("*"):
@@ -124,7 +185,11 @@ def load_example_data(doc_id, fig, checklist=None):
                         panel_tables.append(file_entry)
 
                     if panel_tables:
+                        # Store under normalized panel name
                         tables_by_panel[panel_name] = panel_tables
+                        # If the original folder name differs, also store as alias
+                        if panel_name != panel_name_original:
+                            tables_by_panel[panel_name_original] = panel_tables
         except Exception as e:
             logger.warning(f"Error discovering tabular data for {relative_path}: {e}")
 

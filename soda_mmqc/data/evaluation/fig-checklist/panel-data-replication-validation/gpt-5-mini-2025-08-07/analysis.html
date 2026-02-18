@@ -31,8 +31,65 @@
 
     <main>
         <div class="manuscript">
+  <div class="meta-row"><strong>10.1038_s44318-025-00412-5</strong> <span class="small">(prompt: prompt.1)</span></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00412-5/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00412-5/content/1</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 1:Fig1A.xlsx; Figure 1:Fig1C.xlsx; Figure 1:Fig1E.xlsx; Figure 1:Fig1G.xlsx; Figure 1:Fig1H.xlsx; Figure 1:Fig1I.xlsx; Figure 1:Fig1K.xlsx</span></div>
+  <div class="verdict good">Reproducible from provided data (where applicable)</div>
+  <div>
+    <div class="panel">
+      <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel B</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel C</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Fig1C.xlsx contains experiment columns (Exp165/380/376) consistent with the caption's three independent experiments, but the preview shows only the 'UT' row. The full time-course rows (0,1,3,5 h) are not visible in the provided preview, so the time-series values in the image cannot be fully confirmed from the preview alone.</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel D</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel E</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel F</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel G</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel H</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel I</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel J</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel K</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+  </div>
+  <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
+ &middot; response id: <code>resp_0ccbb0e4853db0a8006995a375e134819b889bd5e532cf57a6</code>
+  </div>
+</div>
+
+<div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44318-025-00409-0</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00409-0/content/1</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00409-0/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00409-0/content/1</a></div>
   <div class="meta-row">Referenced tables: <span class="small">Fig1C:qPCR_day_1-4_source_data.xlsx; Fig1E-G:FACS data and FCS file index.xlsx; Fig1I:Figure 1I_data.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
@@ -43,212 +100,151 @@
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Expected data folder/table for Fig1B (western blot source data) not found in provided METADATA_JSON. Western blots are non-tabular images and are not reproducible from the provided tables.</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Data folder Fig1C (qPCR_day_1-4_source_data.xlsx) is present and contains numeric values per day and condition, but column headers are ambiguous (many 'Unnamed' columns) and the mapping of replicate columns → conditions is not explicitly labeled in the file preview. Caption reports mean ± SEM (n=3–4); replicates appear present but their grouping and explicit SEM values are not labelled, so exact reproduction of plotted means/SEM is only partially supported without clarifying header/replicate mapping.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Table 'qPCR_day_1-4_source_data.xlsx' is provided under Fig1C and contains SOX2 values with multiple columns that appear to map to Vehicle, SB and DMH1 replicates. However several columns are named 'Unnamed', so mapping of specific columns to plotted conditions requires interpretation. Error-bar computation (mean ± SEM) appears feasible from replicate columns but the file layout/headers are ambiguous in the preview.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Live imaging panels are image data; no raw image files or a corresponding tabular summary for Fig1D are present in METADATA_JSON.</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1E shows representative flow cytometry scatter/dot plots (image panels). The provided spreadsheet (Fig1E-G: 'FACS data and FCS file index.xlsx') includes summary percentages and an index of FCS file codes, but reproducing the exact dot-plot images would require the raw FCS files. Summary percentages alone cannot recreate representative cytometry scatter plots.</div>
+      <div class="small">Reasoning: Panel shows representative FACS dot plots. METADATA_JSON includes a FACS index ('FACS data and FCS file index.xlsx') referencing FCS files (Fig1E-G), but raw FCS files or per-plot exported data for the displayed dot plots are not provided here; representative plots cannot be exactly regenerated from the provided spreadsheet alone.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1F (positive cell proportions) can be largely reconstructed from the Fig1E-G spreadsheet that contains per-sample columns (e.g., PDGFRA_1..4, CD235_1..4, Tom_1..4) and a 'Conc.' column. However, several replicate entries are missing/null in the preview and the exact mapping of Treatment codes to plotted x-axis labels/ordering and the precise n used for SEM at some concentrations is not fully explicit. Therefore means ± SEM and some points may be reproducible only partially without clarifying missing values and exact sample-to-condition assignments.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: The spreadsheet 'FACS data and FCS file index.xlsx' (Fig1E-G) contains per-replicate columns (e.g., Tom_1..4, PDGFRA_1..4, CD235_1..4) and a 'Conc.' column that maps treatment codes to concentrations, so mean ± SEM for day 4 can be computed. Previewed rows contain some null/missing replicate entries which would affect exact SEM calculation; column naming is partially generic (e.g., Tom_1..4) but is sufficient with mapping.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: As for (F): Fig1G (SOX17-Tom and NKX2-5-GFP positive proportions) has supporting replicate columns in the Fig1E-G spreadsheet, but the file preview shows some missing replicate entries and the mapping/labeling of replicates is not fully explicit. This limits exact reproduction of plotted means and SEM for every concentration/condition.</div>
+      <div class="small">Reasoning: The Fig1E-G spreadsheet includes per-replicate percentage columns and treatment/conc mapping, so reproducing day 7.5 summary plots is potentially possible if corresponding rows exist. However the preview shows 'D4_*' coded rows; rows explicitly labeled for day 7.5 (e.g., D7 or D7.5) are not visible in the preview. If day 7.5 entries are absent from the provided file, replication of Panel G is incomplete.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Immunostaining images are presented; no associated quantitative table or source image files for Fig1H are included in METADATA_JSON.</div>
     </div>
     <div class="panel">
       <span class="label">Panel I</span> <span class="small">(box_plot)</span>
       <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1I source file ('Figure 1I_data.xlsx') is present and contains NKX2-5 and FOXA2 values with sample names that appear to encode treatment and population (e.g., 'SB_g0_t0_rep1'), which supports reproduction of boxplots by population. However, the caption and figure show 'Normalized read counts' and state n=3; the preview does not fully document normalization or the mapping of all samples to the numbered populations used on the figure. Clarification of normalization steps and explicit population grouping in the file would be needed for a fully faithful replication.</div>
+      <div class="small">Reasoning: File 'Figure 1I_data.xlsx' (Fig1I) provides per-sample NKX2-5 and FOXA2 read counts (sample names like 'SB_g0_t0_rep1'), so boxplots can be constructed in principle. The figure displays boxplots for populations 1–8; mapping from the provided sample name syntax to the population numbers used in the figure is not explicit in the preview. It is also not explicit whether transformations (normalization, log2 FC, Z-scoring) were applied prior to plotting, so reproducing the exact plotted values/scale may require additional metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel J</span> <span class="small">(heatmap)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Caption describes hierarchical clustering and Z-score normalized log2 FC values; without the underlying tabular data (per-gene log2FC matrix or normalized expression matrix) the heatmap and clustering cannot be reproduced.</div>
+      <div class="small">Reasoning: Expected tabular RNA-seq matrix / processed table for the hierarchical clustering heatmaps (Fig1J) is not present in METADATA_JSON. The caption describes Z-score normalized log2 FC for the heatmaps, but the underlying matrix required to reproduce these panels is missing from the provided metadata.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_01f558744f71148e00699310bf78808198905727f1a780630a</code>
-  </div>
-</div>
-
-<div class="manuscript">
-  <div class="meta-row"><strong>10.1038_s44318-025-00412-5</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00412-5/content/1</a></div>
-  <div class="verdict bad">Not reproducible from provided data</div>
-  <div>
-    <div class="panel">
-      <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1A not found. Caption states data are pooled mean                                                                                                                                                                                                                                                                     of four independent experiments (mean          SEM) and reports statistical comparisons. No tabular or replicate-level data were provided in the expected folder to reproduce the bar heights, SEM error bars, or the reported P values. (Note: caption states "Source data are available online for this figure," but no Fig1A table was found in the provided metadata.)</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel B</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found. Panel is an immunoblot (qualitative/representative image) and is not expected to be regenerated from tabular data. If source quantification (e.g., band densitometry values) is claimed, those numeric files are not present in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel C</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found. Caption reports pooled mean                                               of three independent experiments (mean    SEM) and shows statistical annotation (**). No tabular or replicate-level data found to reproduce bar values, SEM, or statistical tests.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel D</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1D not found. Panel is an immunoblot; reproduction from tabular data not applicable. If densitometry or quantified values are reported elsewhere, those files were not found in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel E</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1E not found. Caption indicates pooled mean                  of three independent experiments (mean    SEM) with reported P values for genotypes; no replicate-level/tabular data present to reproduce means, SEM, or statistics.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel F</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1F not found. Panel is an immunoblot; reproduction from tabular data not expected. Quantitative source data (if any) are not present in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel G</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Caption states time-course traces (SYTOX Green uptake) are shown, with data reported as mean                                                                                         of technical duplicates (mean    SD) representative of three independent experiments. Timecourse replicate-level data needed to reproduce traces and error bars are not available in the expected folder.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel H</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1H not found. Caption states caspase-3/7 activity timecourses shown as mean    SD of technical duplicates representative of three independent experiments. No tabular timecourse or replicate-level data found to reproduce the plotted traces or error bars.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel I</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1I not found. Caption indicates caspase-3/7 activity shown for unprimed or primed cells with technical triplicates (mean    SD) representative of three independent experiments; replicate-level/tabular data required to reproduce these traces are not present.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel J</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Panel is an immunoblot (representative image); reproduction from tabular data is not applicable. If the authors provided densitometry or numeric source data, those files were not found in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel K</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1K not found. Caption shows caspase-3/7 activity timecourse (technical triplicates, mean    SD). No tabular/timecourse replicate data in the provided metadata to reproduce traces, error bars, or reported comparisons. (Caption also notes "Source data are available online," but such files were not included here.)</div>
-    </div>
-  </div>
-  <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_0e003ad677587f2e006993133e4d5481979cdd6c0cac7c1f44</code>
+ &middot; response id: <code>resp_038306ecf0e2c392006995a3ae0e508194b0742ece593d6376</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44318-025-00416-1</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00416-1/content/8</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00416-1/content/8" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00416-1/content/8</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 8:Rel. mRNA level-EV1A.xlsx; Figure 8:Rel. invaded cells.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
     <div class="panel">
       <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1A not found. Caption states data are mean ± SD from three biological replicates with p-values (unpaired two-tailed t-test), but no tabular data (replicate-level values, means, or SD/SE columns) are available to reproduce the bar plot or error bars.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Rel. mRNA level-EV1A.xlsx is present and contains three replicate rows for each condition (siNC, siPPA2, siELOVL6, siDLAT). Note: the file contains repeated control columns named siNC, siNC.1, siNC.2 (rather than a single unified control column) which appears to be the control replicates for different knockdowns and requires straightforward aggregation. No substantive contradictions between image and the provided replicate-level values were found in the metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found. Panel contains representative transwell micrographs plus a quantified bar chart (mean ± SD, n=3) analyzed by one-way ANOVA, but no tabular files with replicate-level counts or aggregated statistics are available to reproduce the quantification. The micrograph images themselves are non-reproducible from tabular data.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Rel. invaded cells.xlsx is present but formatted awkwardly: the first data row contains condition names (siNC, siPPA2, siELOVL6, siDLAT) while the sheet columns are labelled e.g. 'Rel. invaded cells', 'Unnamed: 1' etc. The numeric replicate values appear in subsequent rows and there are three biological replicates, but the file requires transposition/cleaning to map columns to conditions. The circular micrograph images themselves are not represented in any tabular file (micrographs are expectedly not tabular).</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found. Caption indicates TCGA RNA-seq PPA2 expression comparisons (counts) and reports a p-value (t-test), but no TCGA expression table or any tabular data are present to reproduce the violin/summary shown.</div>
+      <div class="small">Reasoning: Panel C (TCGA-COAD violin comparison) is described in the caption but no TCGA RNA-seq tabular data for Fig8C was provided in the metadata. Expected per-panel data for Fig8C not found in the provided files (only two tables for Figure 8 were present: Rel. mRNA level-EV1A.xlsx and Rel. invaded cells.xlsx). Cannot reproduce violin plot or p-value without the underlying TCGA count/expression table.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1D not found. Caption indicates TCGA RNA-seq PPA2 expression comparisons (counts) and reports a p-value (t-test), but no corresponding tabular data are available to reproduce the violin/summary shown.</div>
+      <div class="small">Reasoning: Panel D (TCGA-READ violin comparison) is described in the caption but no TCGA RNA-seq tabular data for Fig8D was provided in the metadata. Expected per-panel data for Fig8D not found in the provided files; cannot reproduce the violin plot or reported p-value.</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1E not found. Panel shows a Kaplan–Meier survival curve (TCGA-COAD stage III/IV) with log-rank p-value; however, no survival/time-to-event table or patient grouping data are present to reproduce the analysis.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-COAD stage III/IV (panel E) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1F not found. Panel shows a Kaplan–Meier survival curve (TCGA-READ stage III/IV) with log-rank p-value; no survival/time-to-event or grouping data are available to reproduce it.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-READ stage III/IV (panel F) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Panel shows a Kaplan–Meier survival curve (TCGA-COAD stage I/II) with log-rank p-value; no corresponding survival or group assignment tables are available to reproduce the plot.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-COAD stage I/II (panel G) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1H not found. Panel shows a Kaplan–Meier survival curve (TCGA-READ stage I/II) with log-rank p-value; no survival/time-to-event or group data are present to reproduce the analysis.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-READ stage I/II (panel H) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_0c6636afd0a9e9b8006993136d22c481989c5e26ec5ea5e328</code>
+ &middot; response id: <code>resp_0f17f674f1a361a7006995a3df353c81998b2454babba39bd2</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44319-025-00415-7</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44319-025-00415-7/content/2</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44319-025-00415-7/content/2" target="_blank" rel="noopener noreferrer">10.1038_s44319-025-00415-7/content/2</a></div>
   <div class="verdict good">Reproducible from provided data (where applicable)</div>
   <div>
     <div class="panel">
       <span class="label">Panel A</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2A not found.</div>
+      <div class="small">Reasoning: Panel A is a 3D rendering/cartoon of tomographic segmentation as described in the caption. No tabular data or folder-level source tables are present in the provided METADATA_JSON (tables empty). Raw tomograms/segmentations referenced as 'source data' are not available as tabular files, so numerical replication is not possible (expected for an imaging/schematic panel).</div>
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2B not found.</div>
+      <div class="small">Reasoning: Panel B is a rendered view of the basal end/tomogram (cartoon/segmentation) matching the caption text. No corresponding tabular data or folder entries are provided in METADATA_JSON; raw tomograms/segmentations cited in the caption are not available as tables, so quantitative reproduction is not possible (imaging panel).</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2C not found.</div>
+      <div class="small">Reasoning: Panel C is an electron tomogram slice showing thin pellicular filaments as described. METADATA_JSON contains no tabular datasets or folder with per-panel data; the underlying tomogram slices/segmentations are not provided in tabular form, preventing any numeric replication of features or counts from the supplied metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2D not found.</div>
+      <div class="small">Reasoning: Panel D is a schematic/segmentation lateral section consistent with the caption. No tabular data are available in METADATA_JSON; source tomograms/segmentations referenced are not present as tables, so quantitative reproduction from provided files is not possible (expected for schematic).</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2E not found.</div>
+      <div class="small">Reasoning: Panel E is a rotated tomogram slice (25 nm scale bar shown) matching the caption description. The provided METADATA_JSON contains no tabular files or per-panel data folders; the raw image/tomogram data needed for replication are not available in tabular form, so numeric reproduction cannot be performed.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2F not found.</div>
+      <div class="small">Reasoning: Panel F is a tomogram slice (caption notes N = 2) consistent with the image. METADATA_JSON contains no tabular datasets or source files to confirm the stated sample size or to reproduce the image quantitatively. The claim of N = 2 cannot be verified from the provided metadata.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_06e9784ce7546da2006993138b6f008199946aeb82cdcaee13</code>
+ &middot; response id: <code>resp_05659210fb3fea07006995a410ab9c81999aa3030575f82b91</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44319-025-00438-0</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44319-025-00438-0/content/1</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44319-025-00438-0/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44319-025-00438-0/content/1</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 1:Fig. 1C.xlsx; Figure 1:Fig. 1G.xlsx; Figure 1:Fig. 1J.xlsx; Figure 1:Fig. 1L.xlsx; Figure 1:Fig. 1R.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
     <div class="panel">
@@ -257,13 +253,13 @@
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(other)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found.</div>
+      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Expected tabular data for Fig1B (Venn diagram counts) not found in provided tables (no Fig.1B/1_B file). Cannot verify the numbers reported in the Venn diagram.</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(heatmap)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1C table (Fig. 1C.xlsx) contains gene-by-sample expression values (e.g., HDAC6 row) but metadata does not indicate whether values are log2 fold-changes or raw intensities, nor documents the filtering (P &lt; 0.05, log2FC &gt; +1) or normalization/scaling used to create the heatmap. Selection and transformation steps required to reproduce the displayed heatmap are not described.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(micrograph)</span>
@@ -276,15 +272,17 @@
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Panel F is an immunoblot image; quantification is reported in Panel G (data available), but raw blot quantification values or uncropped images are not provided in the listed tables.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Caption reports quantification (n=3, mean ± SEM, P value) but no tabular/replicate-level data provided in metadata.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1G table (Fig. 1G.xlsx) provides group-level values (Healthy = 1, BK = 6.154553445) but lacks replicate-level measurements or explicit SEM/SD columns. Caption states (n = 3 independent experiments) and the panel shows error bars and individual points; those cannot be reproduced from the provided file alone.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Panel H is an immunoblot image; no associated tabular raw/quantified blot data for this panel was provided in the metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel I</span> <span class="small">(micrograph)</span>
@@ -292,8 +290,7 @@
     </div>
     <div class="panel">
       <span class="label">Panel J</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Caption reports quantitative measurements (n=30 images from three experiments, mean ± SEM) but no tabular/replicate-level data available.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
     </div>
     <div class="panel">
       <span class="label">Panel K</span> <span class="small">(micrograph)</span>
@@ -301,8 +298,7 @@
     </div>
     <div class="panel">
       <span class="label">Panel L</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1L not found. Caption reports quantification (n=60 cells, mean ± SEM) but no tabular/replicate-level data provided.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
     </div>
     <div class="panel">
       <span class="label">Panel M</span> <span class="small">(micrograph)</span>
@@ -326,18 +322,75 @@
     </div>
     <div class="panel">
       <span class="label">Panel R</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1R not found. Caption reports quantification (n=15 mitotic cells from three experiments, mean ± SEM, statistical test) but no tabular/replicate-level data available.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1R table (Fig. 1R.xlsx) appears to contain aggregated counts (columns labelled 'total images' and 'misoriented images') rather than raw per-cell or per-replicate measurements. Caption reports 'n = 15 mitotic cells from three independent experiments' and mean ± SEM; the provided table allows computation of percentages but does not clearly contain replicate-level values needed to reproduce mean±SEM and the statistical test.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_03cd9fad07fce98300699313a01c708196bba6bf7e04ebbe96</code>
+ &middot; response id: <code>resp_057b9a531b47074e006995a431798c8195bb4dab57bb5d1b64</code>
+  </div>
+</div>
+
+<div class="manuscript">
+  <div class="meta-row"><strong>10.1038_s44318-025-00412-5</strong> <span class="small">(prompt: prompt.1)</span></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00412-5/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00412-5/content/1</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 1:Fig1A.xlsx; Figure 1:Fig1C.xlsx; Figure 1:Fig1E.xlsx; Figure 1:Fig1G.xlsx; Figure 1:Fig1H.xlsx; Figure 1:Fig1I.xlsx; Figure 1:Fig1K.xlsx</span></div>
+  <div class="verdict good">Reproducible from provided data (where applicable)</div>
+  <div>
+    <div class="panel">
+      <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel B</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel C</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Fig1C.xlsx contains experiment columns (Exp165/380/376) consistent with the caption's three independent experiments, but the preview shows only the 'UT' row. The full time-course rows (0,1,3,5 h) are not visible in the provided preview, so the time-series values in the image cannot be fully confirmed from the preview alone.</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel D</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel E</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel F</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel G</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel H</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel I</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel J</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel K</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+  </div>
+  <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
+ &middot; response id: <code>resp_0ccbb0e4853db0a8006995a375e134819b889bd5e532cf57a6</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44318-025-00409-0</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00409-0/content/1</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00409-0/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00409-0/content/1</a></div>
   <div class="meta-row">Referenced tables: <span class="small">Fig1C:qPCR_day_1-4_source_data.xlsx; Fig1E-G:FACS data and FCS file index.xlsx; Fig1I:Figure 1I_data.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
@@ -348,212 +401,151 @@
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Expected data folder/table for Fig1B (western blot source data) not found in provided METADATA_JSON. Western blots are non-tabular images and are not reproducible from the provided tables.</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Data folder Fig1C (qPCR_day_1-4_source_data.xlsx) is present and contains numeric values per day and condition, but column headers are ambiguous (many 'Unnamed' columns) and the mapping of replicate columns → conditions is not explicitly labeled in the file preview. Caption reports mean ± SEM (n=3–4); replicates appear present but their grouping and explicit SEM values are not labelled, so exact reproduction of plotted means/SEM is only partially supported without clarifying header/replicate mapping.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Table 'qPCR_day_1-4_source_data.xlsx' is provided under Fig1C and contains SOX2 values with multiple columns that appear to map to Vehicle, SB and DMH1 replicates. However several columns are named 'Unnamed', so mapping of specific columns to plotted conditions requires interpretation. Error-bar computation (mean ± SEM) appears feasible from replicate columns but the file layout/headers are ambiguous in the preview.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Live imaging panels are image data; no raw image files or a corresponding tabular summary for Fig1D are present in METADATA_JSON.</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1E shows representative flow cytometry scatter/dot plots (image panels). The provided spreadsheet (Fig1E-G: 'FACS data and FCS file index.xlsx') includes summary percentages and an index of FCS file codes, but reproducing the exact dot-plot images would require the raw FCS files. Summary percentages alone cannot recreate representative cytometry scatter plots.</div>
+      <div class="small">Reasoning: Panel shows representative FACS dot plots. METADATA_JSON includes a FACS index ('FACS data and FCS file index.xlsx') referencing FCS files (Fig1E-G), but raw FCS files or per-plot exported data for the displayed dot plots are not provided here; representative plots cannot be exactly regenerated from the provided spreadsheet alone.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1F (positive cell proportions) can be largely reconstructed from the Fig1E-G spreadsheet that contains per-sample columns (e.g., PDGFRA_1..4, CD235_1..4, Tom_1..4) and a 'Conc.' column. However, several replicate entries are missing/null in the preview and the exact mapping of Treatment codes to plotted x-axis labels/ordering and the precise n used for SEM at some concentrations is not fully explicit. Therefore means ± SEM and some points may be reproducible only partially without clarifying missing values and exact sample-to-condition assignments.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: The spreadsheet 'FACS data and FCS file index.xlsx' (Fig1E-G) contains per-replicate columns (e.g., Tom_1..4, PDGFRA_1..4, CD235_1..4) and a 'Conc.' column that maps treatment codes to concentrations, so mean ± SEM for day 4 can be computed. Previewed rows contain some null/missing replicate entries which would affect exact SEM calculation; column naming is partially generic (e.g., Tom_1..4) but is sufficient with mapping.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: As for (F): Fig1G (SOX17-Tom and NKX2-5-GFP positive proportions) has supporting replicate columns in the Fig1E-G spreadsheet, but the file preview shows some missing replicate entries and the mapping/labeling of replicates is not fully explicit. This limits exact reproduction of plotted means and SEM for every concentration/condition.</div>
+      <div class="small">Reasoning: The Fig1E-G spreadsheet includes per-replicate percentage columns and treatment/conc mapping, so reproducing day 7.5 summary plots is potentially possible if corresponding rows exist. However the preview shows 'D4_*' coded rows; rows explicitly labeled for day 7.5 (e.g., D7 or D7.5) are not visible in the preview. If day 7.5 entries are absent from the provided file, replication of Panel G is incomplete.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Immunostaining images are presented; no associated quantitative table or source image files for Fig1H are included in METADATA_JSON.</div>
     </div>
     <div class="panel">
       <span class="label">Panel I</span> <span class="small">(box_plot)</span>
       <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1I source file ('Figure 1I_data.xlsx') is present and contains NKX2-5 and FOXA2 values with sample names that appear to encode treatment and population (e.g., 'SB_g0_t0_rep1'), which supports reproduction of boxplots by population. However, the caption and figure show 'Normalized read counts' and state n=3; the preview does not fully document normalization or the mapping of all samples to the numbered populations used on the figure. Clarification of normalization steps and explicit population grouping in the file would be needed for a fully faithful replication.</div>
+      <div class="small">Reasoning: File 'Figure 1I_data.xlsx' (Fig1I) provides per-sample NKX2-5 and FOXA2 read counts (sample names like 'SB_g0_t0_rep1'), so boxplots can be constructed in principle. The figure displays boxplots for populations 1–8; mapping from the provided sample name syntax to the population numbers used in the figure is not explicit in the preview. It is also not explicit whether transformations (normalization, log2 FC, Z-scoring) were applied prior to plotting, so reproducing the exact plotted values/scale may require additional metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel J</span> <span class="small">(heatmap)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Caption describes hierarchical clustering and Z-score normalized log2 FC values; without the underlying tabular data (per-gene log2FC matrix or normalized expression matrix) the heatmap and clustering cannot be reproduced.</div>
+      <div class="small">Reasoning: Expected tabular RNA-seq matrix / processed table for the hierarchical clustering heatmaps (Fig1J) is not present in METADATA_JSON. The caption describes Z-score normalized log2 FC for the heatmaps, but the underlying matrix required to reproduce these panels is missing from the provided metadata.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_01f558744f71148e00699310bf78808198905727f1a780630a</code>
-  </div>
-</div>
-
-<div class="manuscript">
-  <div class="meta-row"><strong>10.1038_s44318-025-00412-5</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00412-5/content/1</a></div>
-  <div class="verdict bad">Not reproducible from provided data</div>
-  <div>
-    <div class="panel">
-      <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1A not found. Caption states data are pooled mean                                                                                                                                                                                                                                                                     of four independent experiments (mean          SEM) and reports statistical comparisons. No tabular or replicate-level data were provided in the expected folder to reproduce the bar heights, SEM error bars, or the reported P values. (Note: caption states "Source data are available online for this figure," but no Fig1A table was found in the provided metadata.)</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel B</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found. Panel is an immunoblot (qualitative/representative image) and is not expected to be regenerated from tabular data. If source quantification (e.g., band densitometry values) is claimed, those numeric files are not present in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel C</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found. Caption reports pooled mean                                               of three independent experiments (mean    SEM) and shows statistical annotation (**). No tabular or replicate-level data found to reproduce bar values, SEM, or statistical tests.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel D</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1D not found. Panel is an immunoblot; reproduction from tabular data not applicable. If densitometry or quantified values are reported elsewhere, those files were not found in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel E</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1E not found. Caption indicates pooled mean                  of three independent experiments (mean    SEM) with reported P values for genotypes; no replicate-level/tabular data present to reproduce means, SEM, or statistics.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel F</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1F not found. Panel is an immunoblot; reproduction from tabular data not expected. Quantitative source data (if any) are not present in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel G</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Caption states time-course traces (SYTOX Green uptake) are shown, with data reported as mean                                                                                         of technical duplicates (mean    SD) representative of three independent experiments. Timecourse replicate-level data needed to reproduce traces and error bars are not available in the expected folder.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel H</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1H not found. Caption states caspase-3/7 activity timecourses shown as mean    SD of technical duplicates representative of three independent experiments. No tabular timecourse or replicate-level data found to reproduce the plotted traces or error bars.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel I</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1I not found. Caption indicates caspase-3/7 activity shown for unprimed or primed cells with technical triplicates (mean    SD) representative of three independent experiments; replicate-level/tabular data required to reproduce these traces are not present.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel J</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Panel is an immunoblot (representative image); reproduction from tabular data is not applicable. If the authors provided densitometry or numeric source data, those files were not found in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel K</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1K not found. Caption shows caspase-3/7 activity timecourse (technical triplicates, mean    SD). No tabular/timecourse replicate data in the provided metadata to reproduce traces, error bars, or reported comparisons. (Caption also notes "Source data are available online," but such files were not included here.)</div>
-    </div>
-  </div>
-  <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_0e003ad677587f2e006993133e4d5481979cdd6c0cac7c1f44</code>
+ &middot; response id: <code>resp_038306ecf0e2c392006995a3ae0e508194b0742ece593d6376</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44318-025-00416-1</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00416-1/content/8</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00416-1/content/8" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00416-1/content/8</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 8:Rel. mRNA level-EV1A.xlsx; Figure 8:Rel. invaded cells.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
     <div class="panel">
       <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1A not found. Caption states data are mean ± SD from three biological replicates with p-values (unpaired two-tailed t-test), but no tabular data (replicate-level values, means, or SD/SE columns) are available to reproduce the bar plot or error bars.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Rel. mRNA level-EV1A.xlsx is present and contains three replicate rows for each condition (siNC, siPPA2, siELOVL6, siDLAT). Note: the file contains repeated control columns named siNC, siNC.1, siNC.2 (rather than a single unified control column) which appears to be the control replicates for different knockdowns and requires straightforward aggregation. No substantive contradictions between image and the provided replicate-level values were found in the metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found. Panel contains representative transwell micrographs plus a quantified bar chart (mean ± SD, n=3) analyzed by one-way ANOVA, but no tabular files with replicate-level counts or aggregated statistics are available to reproduce the quantification. The micrograph images themselves are non-reproducible from tabular data.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Rel. invaded cells.xlsx is present but formatted awkwardly: the first data row contains condition names (siNC, siPPA2, siELOVL6, siDLAT) while the sheet columns are labelled e.g. 'Rel. invaded cells', 'Unnamed: 1' etc. The numeric replicate values appear in subsequent rows and there are three biological replicates, but the file requires transposition/cleaning to map columns to conditions. The circular micrograph images themselves are not represented in any tabular file (micrographs are expectedly not tabular).</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found. Caption indicates TCGA RNA-seq PPA2 expression comparisons (counts) and reports a p-value (t-test), but no TCGA expression table or any tabular data are present to reproduce the violin/summary shown.</div>
+      <div class="small">Reasoning: Panel C (TCGA-COAD violin comparison) is described in the caption but no TCGA RNA-seq tabular data for Fig8C was provided in the metadata. Expected per-panel data for Fig8C not found in the provided files (only two tables for Figure 8 were present: Rel. mRNA level-EV1A.xlsx and Rel. invaded cells.xlsx). Cannot reproduce violin plot or p-value without the underlying TCGA count/expression table.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1D not found. Caption indicates TCGA RNA-seq PPA2 expression comparisons (counts) and reports a p-value (t-test), but no corresponding tabular data are available to reproduce the violin/summary shown.</div>
+      <div class="small">Reasoning: Panel D (TCGA-READ violin comparison) is described in the caption but no TCGA RNA-seq tabular data for Fig8D was provided in the metadata. Expected per-panel data for Fig8D not found in the provided files; cannot reproduce the violin plot or reported p-value.</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1E not found. Panel shows a Kaplan–Meier survival curve (TCGA-COAD stage III/IV) with log-rank p-value; however, no survival/time-to-event table or patient grouping data are present to reproduce the analysis.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-COAD stage III/IV (panel E) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1F not found. Panel shows a Kaplan–Meier survival curve (TCGA-READ stage III/IV) with log-rank p-value; no survival/time-to-event or grouping data are available to reproduce it.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-READ stage III/IV (panel F) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Panel shows a Kaplan–Meier survival curve (TCGA-COAD stage I/II) with log-rank p-value; no corresponding survival or group assignment tables are available to reproduce the plot.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-COAD stage I/II (panel G) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1H not found. Panel shows a Kaplan–Meier survival curve (TCGA-READ stage I/II) with log-rank p-value; no survival/time-to-event or group data are present to reproduce the analysis.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-READ stage I/II (panel H) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_0c6636afd0a9e9b8006993136d22c481989c5e26ec5ea5e328</code>
+ &middot; response id: <code>resp_0f17f674f1a361a7006995a3df353c81998b2454babba39bd2</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44319-025-00415-7</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44319-025-00415-7/content/2</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44319-025-00415-7/content/2" target="_blank" rel="noopener noreferrer">10.1038_s44319-025-00415-7/content/2</a></div>
   <div class="verdict good">Reproducible from provided data (where applicable)</div>
   <div>
     <div class="panel">
       <span class="label">Panel A</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2A not found.</div>
+      <div class="small">Reasoning: Panel A is a 3D rendering/cartoon of tomographic segmentation as described in the caption. No tabular data or folder-level source tables are present in the provided METADATA_JSON (tables empty). Raw tomograms/segmentations referenced as 'source data' are not available as tabular files, so numerical replication is not possible (expected for an imaging/schematic panel).</div>
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2B not found.</div>
+      <div class="small">Reasoning: Panel B is a rendered view of the basal end/tomogram (cartoon/segmentation) matching the caption text. No corresponding tabular data or folder entries are provided in METADATA_JSON; raw tomograms/segmentations cited in the caption are not available as tables, so quantitative reproduction is not possible (imaging panel).</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2C not found.</div>
+      <div class="small">Reasoning: Panel C is an electron tomogram slice showing thin pellicular filaments as described. METADATA_JSON contains no tabular datasets or folder with per-panel data; the underlying tomogram slices/segmentations are not provided in tabular form, preventing any numeric replication of features or counts from the supplied metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2D not found.</div>
+      <div class="small">Reasoning: Panel D is a schematic/segmentation lateral section consistent with the caption. No tabular data are available in METADATA_JSON; source tomograms/segmentations referenced are not present as tables, so quantitative reproduction from provided files is not possible (expected for schematic).</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2E not found.</div>
+      <div class="small">Reasoning: Panel E is a rotated tomogram slice (25 nm scale bar shown) matching the caption description. The provided METADATA_JSON contains no tabular files or per-panel data folders; the raw image/tomogram data needed for replication are not available in tabular form, so numeric reproduction cannot be performed.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2F not found.</div>
+      <div class="small">Reasoning: Panel F is a tomogram slice (caption notes N = 2) consistent with the image. METADATA_JSON contains no tabular datasets or source files to confirm the stated sample size or to reproduce the image quantitatively. The claim of N = 2 cannot be verified from the provided metadata.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_06e9784ce7546da2006993138b6f008199946aeb82cdcaee13</code>
+ &middot; response id: <code>resp_05659210fb3fea07006995a410ab9c81999aa3030575f82b91</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44319-025-00438-0</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44319-025-00438-0/content/1</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44319-025-00438-0/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44319-025-00438-0/content/1</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 1:Fig. 1C.xlsx; Figure 1:Fig. 1G.xlsx; Figure 1:Fig. 1J.xlsx; Figure 1:Fig. 1L.xlsx; Figure 1:Fig. 1R.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
     <div class="panel">
@@ -562,13 +554,13 @@
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(other)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found.</div>
+      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Expected tabular data for Fig1B (Venn diagram counts) not found in provided tables (no Fig.1B/1_B file). Cannot verify the numbers reported in the Venn diagram.</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(heatmap)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1C table (Fig. 1C.xlsx) contains gene-by-sample expression values (e.g., HDAC6 row) but metadata does not indicate whether values are log2 fold-changes or raw intensities, nor documents the filtering (P &lt; 0.05, log2FC &gt; +1) or normalization/scaling used to create the heatmap. Selection and transformation steps required to reproduce the displayed heatmap are not described.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(micrograph)</span>
@@ -581,15 +573,17 @@
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Panel F is an immunoblot image; quantification is reported in Panel G (data available), but raw blot quantification values or uncropped images are not provided in the listed tables.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Caption reports quantification (n=3, mean ± SEM, P value) but no tabular/replicate-level data provided in metadata.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1G table (Fig. 1G.xlsx) provides group-level values (Healthy = 1, BK = 6.154553445) but lacks replicate-level measurements or explicit SEM/SD columns. Caption states (n = 3 independent experiments) and the panel shows error bars and individual points; those cannot be reproduced from the provided file alone.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Panel H is an immunoblot image; no associated tabular raw/quantified blot data for this panel was provided in the metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel I</span> <span class="small">(micrograph)</span>
@@ -597,8 +591,7 @@
     </div>
     <div class="panel">
       <span class="label">Panel J</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Caption reports quantitative measurements (n=30 images from three experiments, mean ± SEM) but no tabular/replicate-level data available.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
     </div>
     <div class="panel">
       <span class="label">Panel K</span> <span class="small">(micrograph)</span>
@@ -606,8 +599,7 @@
     </div>
     <div class="panel">
       <span class="label">Panel L</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1L not found. Caption reports quantification (n=60 cells, mean ± SEM) but no tabular/replicate-level data provided.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
     </div>
     <div class="panel">
       <span class="label">Panel M</span> <span class="small">(micrograph)</span>
@@ -631,18 +623,75 @@
     </div>
     <div class="panel">
       <span class="label">Panel R</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1R not found. Caption reports quantification (n=15 mitotic cells from three experiments, mean ± SEM, statistical test) but no tabular/replicate-level data available.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1R table (Fig. 1R.xlsx) appears to contain aggregated counts (columns labelled 'total images' and 'misoriented images') rather than raw per-cell or per-replicate measurements. Caption reports 'n = 15 mitotic cells from three independent experiments' and mean ± SEM; the provided table allows computation of percentages but does not clearly contain replicate-level values needed to reproduce mean±SEM and the statistical test.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_03cd9fad07fce98300699313a01c708196bba6bf7e04ebbe96</code>
+ &middot; response id: <code>resp_057b9a531b47074e006995a431798c8195bb4dab57bb5d1b64</code>
+  </div>
+</div>
+
+<div class="manuscript">
+  <div class="meta-row"><strong>10.1038_s44318-025-00412-5</strong> <span class="small">(prompt: prompt.1)</span></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00412-5/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00412-5/content/1</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 1:Fig1A.xlsx; Figure 1:Fig1C.xlsx; Figure 1:Fig1E.xlsx; Figure 1:Fig1G.xlsx; Figure 1:Fig1H.xlsx; Figure 1:Fig1I.xlsx; Figure 1:Fig1K.xlsx</span></div>
+  <div class="verdict good">Reproducible from provided data (where applicable)</div>
+  <div>
+    <div class="panel">
+      <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel B</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel C</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Fig1C.xlsx contains experiment columns (Exp165/380/376) consistent with the caption's three independent experiments, but the preview shows only the 'UT' row. The full time-course rows (0,1,3,5 h) are not visible in the provided preview, so the time-series values in the image cannot be fully confirmed from the preview alone.</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel D</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel E</span> <span class="small">(bar_chart)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel F</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel G</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel H</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel I</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel J</span> <span class="small">(micrograph)</span>
+      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+    <div class="panel">
+      <span class="label">Panel K</span> <span class="small">(line_plot)</span>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+    </div>
+  </div>
+  <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
+ &middot; response id: <code>resp_0ccbb0e4853db0a8006995a375e134819b889bd5e532cf57a6</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44318-025-00409-0</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00409-0/content/1</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00409-0/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00409-0/content/1</a></div>
   <div class="meta-row">Referenced tables: <span class="small">Fig1C:qPCR_day_1-4_source_data.xlsx; Fig1E-G:FACS data and FCS file index.xlsx; Fig1I:Figure 1I_data.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
@@ -653,212 +702,151 @@
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Expected data folder/table for Fig1B (western blot source data) not found in provided METADATA_JSON. Western blots are non-tabular images and are not reproducible from the provided tables.</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Data folder Fig1C (qPCR_day_1-4_source_data.xlsx) is present and contains numeric values per day and condition, but column headers are ambiguous (many 'Unnamed' columns) and the mapping of replicate columns → conditions is not explicitly labeled in the file preview. Caption reports mean ± SEM (n=3–4); replicates appear present but their grouping and explicit SEM values are not labelled, so exact reproduction of plotted means/SEM is only partially supported without clarifying header/replicate mapping.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Table 'qPCR_day_1-4_source_data.xlsx' is provided under Fig1C and contains SOX2 values with multiple columns that appear to map to Vehicle, SB and DMH1 replicates. However several columns are named 'Unnamed', so mapping of specific columns to plotted conditions requires interpretation. Error-bar computation (mean ± SEM) appears feasible from replicate columns but the file layout/headers are ambiguous in the preview.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Live imaging panels are image data; no raw image files or a corresponding tabular summary for Fig1D are present in METADATA_JSON.</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1E shows representative flow cytometry scatter/dot plots (image panels). The provided spreadsheet (Fig1E-G: 'FACS data and FCS file index.xlsx') includes summary percentages and an index of FCS file codes, but reproducing the exact dot-plot images would require the raw FCS files. Summary percentages alone cannot recreate representative cytometry scatter plots.</div>
+      <div class="small">Reasoning: Panel shows representative FACS dot plots. METADATA_JSON includes a FACS index ('FACS data and FCS file index.xlsx') referencing FCS files (Fig1E-G), but raw FCS files or per-plot exported data for the displayed dot plots are not provided here; representative plots cannot be exactly regenerated from the provided spreadsheet alone.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1F (positive cell proportions) can be largely reconstructed from the Fig1E-G spreadsheet that contains per-sample columns (e.g., PDGFRA_1..4, CD235_1..4, Tom_1..4) and a 'Conc.' column. However, several replicate entries are missing/null in the preview and the exact mapping of Treatment codes to plotted x-axis labels/ordering and the precise n used for SEM at some concentrations is not fully explicit. Therefore means ± SEM and some points may be reproducible only partially without clarifying missing values and exact sample-to-condition assignments.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: The spreadsheet 'FACS data and FCS file index.xlsx' (Fig1E-G) contains per-replicate columns (e.g., Tom_1..4, PDGFRA_1..4, CD235_1..4) and a 'Conc.' column that maps treatment codes to concentrations, so mean ± SEM for day 4 can be computed. Previewed rows contain some null/missing replicate entries which would affect exact SEM calculation; column naming is partially generic (e.g., Tom_1..4) but is sufficient with mapping.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: As for (F): Fig1G (SOX17-Tom and NKX2-5-GFP positive proportions) has supporting replicate columns in the Fig1E-G spreadsheet, but the file preview shows some missing replicate entries and the mapping/labeling of replicates is not fully explicit. This limits exact reproduction of plotted means and SEM for every concentration/condition.</div>
+      <div class="small">Reasoning: The Fig1E-G spreadsheet includes per-replicate percentage columns and treatment/conc mapping, so reproducing day 7.5 summary plots is potentially possible if corresponding rows exist. However the preview shows 'D4_*' coded rows; rows explicitly labeled for day 7.5 (e.g., D7 or D7.5) are not visible in the preview. If day 7.5 entries are absent from the provided file, replication of Panel G is incomplete.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Immunostaining images are presented; no associated quantitative table or source image files for Fig1H are included in METADATA_JSON.</div>
     </div>
     <div class="panel">
       <span class="label">Panel I</span> <span class="small">(box_plot)</span>
       <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Fig1I source file ('Figure 1I_data.xlsx') is present and contains NKX2-5 and FOXA2 values with sample names that appear to encode treatment and population (e.g., 'SB_g0_t0_rep1'), which supports reproduction of boxplots by population. However, the caption and figure show 'Normalized read counts' and state n=3; the preview does not fully document normalization or the mapping of all samples to the numbered populations used on the figure. Clarification of normalization steps and explicit population grouping in the file would be needed for a fully faithful replication.</div>
+      <div class="small">Reasoning: File 'Figure 1I_data.xlsx' (Fig1I) provides per-sample NKX2-5 and FOXA2 read counts (sample names like 'SB_g0_t0_rep1'), so boxplots can be constructed in principle. The figure displays boxplots for populations 1–8; mapping from the provided sample name syntax to the population numbers used in the figure is not explicit in the preview. It is also not explicit whether transformations (normalization, log2 FC, Z-scoring) were applied prior to plotting, so reproducing the exact plotted values/scale may require additional metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel J</span> <span class="small">(heatmap)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Caption describes hierarchical clustering and Z-score normalized log2 FC values; without the underlying tabular data (per-gene log2FC matrix or normalized expression matrix) the heatmap and clustering cannot be reproduced.</div>
+      <div class="small">Reasoning: Expected tabular RNA-seq matrix / processed table for the hierarchical clustering heatmaps (Fig1J) is not present in METADATA_JSON. The caption describes Z-score normalized log2 FC for the heatmaps, but the underlying matrix required to reproduce these panels is missing from the provided metadata.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_01f558744f71148e00699310bf78808198905727f1a780630a</code>
-  </div>
-</div>
-
-<div class="manuscript">
-  <div class="meta-row"><strong>10.1038_s44318-025-00412-5</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00412-5/content/1</a></div>
-  <div class="verdict bad">Not reproducible from provided data</div>
-  <div>
-    <div class="panel">
-      <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1A not found. Caption states data are pooled mean                                                                                                                                                                                                                                                                     of four independent experiments (mean          SEM) and reports statistical comparisons. No tabular or replicate-level data were provided in the expected folder to reproduce the bar heights, SEM error bars, or the reported P values. (Note: caption states "Source data are available online for this figure," but no Fig1A table was found in the provided metadata.)</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel B</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found. Panel is an immunoblot (qualitative/representative image) and is not expected to be regenerated from tabular data. If source quantification (e.g., band densitometry values) is claimed, those numeric files are not present in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel C</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found. Caption reports pooled mean                                               of three independent experiments (mean    SEM) and shows statistical annotation (**). No tabular or replicate-level data found to reproduce bar values, SEM, or statistical tests.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel D</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1D not found. Panel is an immunoblot; reproduction from tabular data not applicable. If densitometry or quantified values are reported elsewhere, those files were not found in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel E</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1E not found. Caption indicates pooled mean                  of three independent experiments (mean    SEM) with reported P values for genotypes; no replicate-level/tabular data present to reproduce means, SEM, or statistics.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel F</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1F not found. Panel is an immunoblot; reproduction from tabular data not expected. Quantitative source data (if any) are not present in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel G</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Caption states time-course traces (SYTOX Green uptake) are shown, with data reported as mean                                                                                         of technical duplicates (mean    SD) representative of three independent experiments. Timecourse replicate-level data needed to reproduce traces and error bars are not available in the expected folder.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel H</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1H not found. Caption states caspase-3/7 activity timecourses shown as mean    SD of technical duplicates representative of three independent experiments. No tabular timecourse or replicate-level data found to reproduce the plotted traces or error bars.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel I</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1I not found. Caption indicates caspase-3/7 activity shown for unprimed or primed cells with technical triplicates (mean    SD) representative of three independent experiments; replicate-level/tabular data required to reproduce these traces are not present.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel J</span> <span class="small">(micrograph)</span>
-      <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Panel is an immunoblot (representative image); reproduction from tabular data is not applicable. If the authors provided densitometry or numeric source data, those files were not found in the provided metadata.</div>
-    </div>
-    <div class="panel">
-      <span class="label">Panel K</span> <span class="small">(line_plot)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1K not found. Caption shows caspase-3/7 activity timecourse (technical triplicates, mean    SD). No tabular/timecourse replicate data in the provided metadata to reproduce traces, error bars, or reported comparisons. (Caption also notes "Source data are available online," but such files were not included here.)</div>
-    </div>
-  </div>
-  <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_0e003ad677587f2e006993133e4d5481979cdd6c0cac7c1f44</code>
+ &middot; response id: <code>resp_038306ecf0e2c392006995a3ae0e508194b0742ece593d6376</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44318-025-00416-1</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44318-025-00416-1/content/8</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44318-025-00416-1/content/8" target="_blank" rel="noopener noreferrer">10.1038_s44318-025-00416-1/content/8</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 8:Rel. mRNA level-EV1A.xlsx; Figure 8:Rel. invaded cells.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
     <div class="panel">
       <span class="label">Panel A</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1A not found. Caption states data are mean ± SD from three biological replicates with p-values (unpaired two-tailed t-test), but no tabular data (replicate-level values, means, or SD/SE columns) are available to reproduce the bar plot or error bars.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Rel. mRNA level-EV1A.xlsx is present and contains three replicate rows for each condition (siNC, siPPA2, siELOVL6, siDLAT). Note: the file contains repeated control columns named siNC, siNC.1, siNC.2 (rather than a single unified control column) which appears to be the control replicates for different knockdowns and requires straightforward aggregation. No substantive contradictions between image and the provided replicate-level values were found in the metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found. Panel contains representative transwell micrographs plus a quantified bar chart (mean ± SD, n=3) analyzed by one-way ANOVA, but no tabular files with replicate-level counts or aggregated statistics are available to reproduce the quantification. The micrograph images themselves are non-reproducible from tabular data.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Rel. invaded cells.xlsx is present but formatted awkwardly: the first data row contains condition names (siNC, siPPA2, siELOVL6, siDLAT) while the sheet columns are labelled e.g. 'Rel. invaded cells', 'Unnamed: 1' etc. The numeric replicate values appear in subsequent rows and there are three biological replicates, but the file requires transposition/cleaning to map columns to conditions. The circular micrograph images themselves are not represented in any tabular file (micrographs are expectedly not tabular).</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found. Caption indicates TCGA RNA-seq PPA2 expression comparisons (counts) and reports a p-value (t-test), but no TCGA expression table or any tabular data are present to reproduce the violin/summary shown.</div>
+      <div class="small">Reasoning: Panel C (TCGA-COAD violin comparison) is described in the caption but no TCGA RNA-seq tabular data for Fig8C was provided in the metadata. Expected per-panel data for Fig8C not found in the provided files (only two tables for Figure 8 were present: Rel. mRNA level-EV1A.xlsx and Rel. invaded cells.xlsx). Cannot reproduce violin plot or p-value without the underlying TCGA count/expression table.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1D not found. Caption indicates TCGA RNA-seq PPA2 expression comparisons (counts) and reports a p-value (t-test), but no corresponding tabular data are available to reproduce the violin/summary shown.</div>
+      <div class="small">Reasoning: Panel D (TCGA-READ violin comparison) is described in the caption but no TCGA RNA-seq tabular data for Fig8D was provided in the metadata. Expected per-panel data for Fig8D not found in the provided files; cannot reproduce the violin plot or reported p-value.</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1E not found. Panel shows a Kaplan–Meier survival curve (TCGA-COAD stage III/IV) with log-rank p-value; however, no survival/time-to-event table or patient grouping data are present to reproduce the analysis.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-COAD stage III/IV (panel E) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1F not found. Panel shows a Kaplan–Meier survival curve (TCGA-READ stage III/IV) with log-rank p-value; no survival/time-to-event or grouping data are available to reproduce it.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-READ stage III/IV (panel F) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Panel shows a Kaplan–Meier survival curve (TCGA-COAD stage I/II) with log-rank p-value; no corresponding survival or group assignment tables are available to reproduce the plot.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-COAD stage I/II (panel G) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(line_plot)</span>
       <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1H not found. Panel shows a Kaplan–Meier survival curve (TCGA-READ stage I/II) with log-rank p-value; no survival/time-to-event or group data are present to reproduce the analysis.</div>
+      <div class="small">Reasoning: Kaplan–Meier survival data for TCGA-READ stage I/II (panel H) are not present in the provided metadata. Source survival times / event status required to reproduce the KM curve and log-rank p-value are missing.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_0c6636afd0a9e9b8006993136d22c481989c5e26ec5ea5e328</code>
+ &middot; response id: <code>resp_0f17f674f1a361a7006995a3df353c81998b2454babba39bd2</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44319-025-00415-7</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44319-025-00415-7/content/2</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44319-025-00415-7/content/2" target="_blank" rel="noopener noreferrer">10.1038_s44319-025-00415-7/content/2</a></div>
   <div class="verdict good">Reproducible from provided data (where applicable)</div>
   <div>
     <div class="panel">
       <span class="label">Panel A</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2A not found.</div>
+      <div class="small">Reasoning: Panel A is a 3D rendering/cartoon of tomographic segmentation as described in the caption. No tabular data or folder-level source tables are present in the provided METADATA_JSON (tables empty). Raw tomograms/segmentations referenced as 'source data' are not available as tabular files, so numerical replication is not possible (expected for an imaging/schematic panel).</div>
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2B not found.</div>
+      <div class="small">Reasoning: Panel B is a rendered view of the basal end/tomogram (cartoon/segmentation) matching the caption text. No corresponding tabular data or folder entries are provided in METADATA_JSON; raw tomograms/segmentations cited in the caption are not available as tables, so quantitative reproduction is not possible (imaging panel).</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2C not found.</div>
+      <div class="small">Reasoning: Panel C is an electron tomogram slice showing thin pellicular filaments as described. METADATA_JSON contains no tabular datasets or folder with per-panel data; the underlying tomogram slices/segmentations are not provided in tabular form, preventing any numeric replication of features or counts from the supplied metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(schematic)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2D not found.</div>
+      <div class="small">Reasoning: Panel D is a schematic/segmentation lateral section consistent with the caption. No tabular data are available in METADATA_JSON; source tomograms/segmentations referenced are not present as tables, so quantitative reproduction from provided files is not possible (expected for schematic).</div>
     </div>
     <div class="panel">
       <span class="label">Panel E</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2E not found.</div>
+      <div class="small">Reasoning: Panel E is a rotated tomogram slice (25 nm scale bar shown) matching the caption description. The provided METADATA_JSON contains no tabular files or per-panel data folders; the raw image/tomogram data needed for replication are not available in tabular form, so numeric reproduction cannot be performed.</div>
     </div>
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(micrograph)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig2F not found.</div>
+      <div class="small">Reasoning: Panel F is a tomogram slice (caption notes N = 2) consistent with the image. METADATA_JSON contains no tabular datasets or source files to confirm the stated sample size or to reproduce the image quantitatively. The claim of N = 2 cannot be verified from the provided metadata.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_06e9784ce7546da2006993138b6f008199946aeb82cdcaee13</code>
+ &middot; response id: <code>resp_05659210fb3fea07006995a410ab9c81999aa3030575f82b91</code>
   </div>
 </div>
 
 <div class="manuscript">
   <div class="meta-row"><strong>10.1038_s44319-025-00438-0</strong> <span class="small">(prompt: prompt.1)</span></div>
-  <div class="meta-row">Source location: <a class="src-link">10.1038_s44319-025-00438-0/content/1</a></div>
+  <div class="meta-row">Source location: <a class="src-link" href="10.1038_s44319-025-00438-0/content/1" target="_blank" rel="noopener noreferrer">10.1038_s44319-025-00438-0/content/1</a></div>
+  <div class="meta-row">Referenced tables: <span class="small">Figure 1:Fig. 1C.xlsx; Figure 1:Fig. 1G.xlsx; Figure 1:Fig. 1J.xlsx; Figure 1:Fig. 1L.xlsx; Figure 1:Fig. 1R.xlsx</span></div>
   <div class="verdict bad">Not reproducible from provided data</div>
   <div>
     <div class="panel">
@@ -867,13 +855,13 @@
     </div>
     <div class="panel">
       <span class="label">Panel B</span> <span class="small">(other)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1B not found.</div>
+      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Expected tabular data for Fig1B (Venn diagram counts) not found in provided tables (no Fig.1B/1_B file). Cannot verify the numbers reported in the Venn diagram.</div>
     </div>
     <div class="panel">
       <span class="label">Panel C</span> <span class="small">(heatmap)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1C not found.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1C table (Fig. 1C.xlsx) contains gene-by-sample expression values (e.g., HDAC6 row) but metadata does not indicate whether values are log2 fold-changes or raw intensities, nor documents the filtering (P &lt; 0.05, log2FC &gt; +1) or normalization/scaling used to create the heatmap. Selection and transformation steps required to reproduce the displayed heatmap are not described.</div>
     </div>
     <div class="panel">
       <span class="label">Panel D</span> <span class="small">(micrograph)</span>
@@ -886,15 +874,17 @@
     <div class="panel">
       <span class="label">Panel F</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Panel F is an immunoblot image; quantification is reported in Panel G (data available), but raw blot quantification values or uncropped images are not provided in the listed tables.</div>
     </div>
     <div class="panel">
       <span class="label">Panel G</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1G not found. Caption reports quantification (n=3, mean ± SEM, P value) but no tabular/replicate-level data provided in metadata.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1G table (Fig. 1G.xlsx) provides group-level values (Healthy = 1, BK = 6.154553445) but lacks replicate-level measurements or explicit SEM/SD columns. Caption states (n = 3 independent experiments) and the panel shows error bars and individual points; those cannot be reproduced from the provided file alone.</div>
     </div>
     <div class="panel">
       <span class="label">Panel H</span> <span class="small">(other)</span>
       <div><strong>Replicable:</strong> not_applicable &nbsp; <strong>Image vs caption:</strong> yes</div>
+      <div class="small">Reasoning: Panel H is an immunoblot image; no associated tabular raw/quantified blot data for this panel was provided in the metadata.</div>
     </div>
     <div class="panel">
       <span class="label">Panel I</span> <span class="small">(micrograph)</span>
@@ -902,8 +892,7 @@
     </div>
     <div class="panel">
       <span class="label">Panel J</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1J not found. Caption reports quantitative measurements (n=30 images from three experiments, mean ± SEM) but no tabular/replicate-level data available.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
     </div>
     <div class="panel">
       <span class="label">Panel K</span> <span class="small">(micrograph)</span>
@@ -911,8 +900,7 @@
     </div>
     <div class="panel">
       <span class="label">Panel L</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1L not found. Caption reports quantification (n=60 cells, mean ± SEM) but no tabular/replicate-level data provided.</div>
+      <div><strong>Replicable:</strong> yes &nbsp; <strong>Image vs caption:</strong> yes</div>
     </div>
     <div class="panel">
       <span class="label">Panel M</span> <span class="small">(micrograph)</span>
@@ -936,12 +924,12 @@
     </div>
     <div class="panel">
       <span class="label">Panel R</span> <span class="small">(bar_chart)</span>
-      <div><strong>Replicable:</strong> no &nbsp; <strong>Image vs caption:</strong> yes</div>
-      <div class="small">Reasoning: Expected data folder Fig1R not found. Caption reports quantification (n=15 mitotic cells from three experiments, mean ± SEM, statistical test) but no tabular/replicate-level data available.</div>
+      <div><strong>Replicable:</strong> partial &nbsp; <strong>Image vs caption:</strong> no</div>
+      <div class="small">Reasoning: Fig. 1R table (Fig. 1R.xlsx) appears to contain aggregated counts (columns labelled 'total images' and 'misoriented images') rather than raw per-cell or per-replicate measurements. Caption reports 'n = 15 mitotic cells from three independent experiments' and mean ± SEM; the provided table allows computation of percentages but does not clearly contain replicate-level values needed to reproduce mean±SEM and the statistical test.</div>
     </div>
   </div>
   <div class="small">Analysis JSON: <code>/mnt/c/Users/cgw1040/Documents/GitHub/soda-mmQC/soda_mmqc/data/evaluation/fig-checklist/panel-data-replication-validation/gpt-5-mini-2025-08-07/analysis.json</code>
- &middot; response id: <code>resp_03cd9fad07fce98300699313a01c708196bba6bf7e04ebbe96</code>
+ &middot; response id: <code>resp_057b9a531b47074e006995a431798c8195bb4dab57bb5d1b64</code>
   </div>
 </div>
     </main>

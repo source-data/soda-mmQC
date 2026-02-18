@@ -14,10 +14,15 @@ Your task is to analyze a scientific figure panel-by-panel and determine:
    - Figure caption
    - Tabular data
 
-**Important directory rule:** Tabular data is organized in folders named by panel, e.g.
-- `Fig1B` = Figure 1, Panel B
-- `Fig2C` = Figure 2, Panel C
-- etc.
+**Important directory rule (flexible matching):** Tabular data is organized in folders named by panel, but there is no single strict naming convention. The agent must infer panel-to-folder mapping robustly. Common folder name variants include (but are not limited to):
+- `Fig1B`, `Fig1_B`, `Fig1-B`, `Fig_1_B`
+- `1B`, `2C`, `Fig2C`, `Figure2C`
+When looking for data for a given panel (e.g., Figure 1 Panel B), the agent should attempt flexible matching strategies (case-insensitive):
+- Exact matches like `Fig1B` or `Fig1_B`.
+- Numeric-first names like `1B` or `2C`.
+- Prefixed names like `Fig1-B` or `Figure1B`.
+- Underscore or hyphen separators and optional `Fig`/`Figure` prefixes.
+If multiple candidate folders match, prefer the folder whose name or contained filenames best match axis labels, group names, or caption keywords (see selection logic in PART II — Step 4).
 
 You must proceed step-by-step with a systematic and conservative strategy to avoid mistakes and false positives.
 
@@ -69,15 +74,16 @@ For each panel, compute the expected folder name:
   - Example: Figure 1, Panel B → `Fig1B`
   - Example: Figure 2, Panel C → `Fig2C`
 
-### Folder validation steps
-- Check whether the folder exists.
-- If the folder does not exist:
+### Folder validation steps (with flexible matching)
+- Use the flexible matching rules above to locate candidate folder(s) for `Figure {n} Panel {label}`.
+- If no candidate folders are found:
   - Set `"replicable_from_data": "no"` (unless the panel is non-data like schematic/micrograph, then use `"not_applicable"`).
-  - Record a discrepancy: `"Expected data folder Fig{n}{label} not found."`
-- If the folder exists:
-  - Enumerate tabular files inside it (CSV, TSV, XLSX, TXT, etc.).
-  - If no tabular files exist:
-    - Same as folder-missing, but discrepancy should state `"No tabular files found in Fig{n}{label}."`
+  - Record a discrepancy: `"Expected data folder for Fig{n}{label} not found (tried variants like Fig{n}{label}, {n}{label}, Figure{n}{label})."`
+- If one or more candidate folders are found:
+  - Prefer the folder whose name or contained filenames best match axis labels, group names, or caption keywords (see PART II — Step 4 for selection logic).
+  - Enumerate tabular files inside the selected folder (CSV, TSV, XLSX, TXT, etc.).
+  - If no tabular files exist in the selected folder(s):
+    - Set `"replicable_from_data": "no"` and record discrepancy: `"No tabular files found in candidate folder(s) for Fig{n}{label}."`
 
 ---
 

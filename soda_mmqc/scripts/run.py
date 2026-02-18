@@ -190,60 +190,72 @@ def run_model(
         lightweight previews of tabular files. Returns mapping panel->list(files).
         """
         tables_by_panel = {}
-        try:
-            # pandas already imported at module level
-            if pd is None:
-                return tables_by_panel
-        except NameError:
-            return tables_by_panel
+        logger.debug(
+            "Discovering tables for example %s at %s",
+            getattr(example, "doc_id", "?"),
+            getattr(example, "source_path", "?")
+        )
         try:
             fig_root = example.source_path / "content"
-            if fig_root and fig_root.exists():
-                for sub in fig_root.iterdir():
-                    if not sub.is_dir():
-                        continue
-                    if not sub.name.lower().startswith("fig"):
-                        continue
-                    panel_tables = []
-                    for f in sub.glob("*"):
-                        if not f.is_file():
-                            continue
-                        suffix = f.suffix.lower()
-                        try:
-                            # Tabular file types
-                            if suffix == ".csv":
-                                df = pd.read_csv(f)
-                            elif suffix == ".tsv":
-                                df = pd.read_csv(f, sep="\t")
-                            elif suffix in [".xlsx", ".xls"]:
-                                df = pd.read_excel(f)
-                            elif suffix == ".json":
-                                df = pd.read_json(f)
-                            else:
-                                continue
+            if not fig_root or not fig_root.exists():
+                return tables_by_panel
+            # Walk recursively under the content directory and collect tabular files.
+            # Map files to the top-level "panel" (first directory under content).
+            for f in fig_root.rglob("*"):
+                if not f.is_file():
+                    continue
+                # Determine the top-level panel for grouping
+                try:
+                    rel = f.relative_to(fig_root)
+                    parts = rel.parts
+                    panel = parts[0] if len(parts) > 1 else "content"
+                except Exception:
+                    panel = "content"
 
-                            # For tabular files: create a small preview and replace NaN/Inf with None
-                            preview_df = df.head(5)
-                            try:
-                                preview_df = preview_df.where(pd.notnull(preview_df), None)
-                            except Exception:
-                                preview_df = preview_df
-                            preview = preview_df.to_dict(orient="records")
-                            file_entry = {
-                                "file": str(f),
-                                "columns": df.columns.tolist(),
-                                "num_rows": int(len(df)),
-                                "preview": preview,
-                                "type": "table",
-                            }
-                        except Exception as e:
-                            logger.warning(f"Failed to load table {f}: {e}")
-                            file_entry = {"file": str(f), "error": str(e)}
-                        panel_tables.append(file_entry)
-                    if panel_tables:
-                        tables_by_panel[sub.name] = panel_tables
+                suffix = f.suffix.lower()
+                file_entry = None
+                try:
+                    if suffix == ".csv":
+                        df = pd.read_csv(f)
+                    elif suffix == ".tsv":
+                        df = pd.read_csv(f, sep="\t")
+                    elif suffix in [".xlsx", ".xls"]:
+                        df = pd.read_excel(f)
+                    elif suffix == ".json":
+                        # JSON can be many shapes; try to read as table
+                        df = pd.read_json(f)
+                    elif suffix in [".parquet", ".pq"]:
+                        # parquet may require pyarrow or fastparquet; try and catch
+                        df = pd.read_parquet(f)
+                    elif suffix == ".feather":
+                        df = pd.read_feather(f)
+                    else:
+                        continue
+
+                    preview_df = df.head(5)
+                    try:
+                        preview_df = preview_df.where(pd.notnull(preview_df), None)
+                    except Exception:
+                        pass
+                    preview = preview_df.to_dict(orient="records")
+                    file_entry = {
+                        "file": str(f),
+                        "columns": df.columns.tolist(),
+                        "num_rows": int(len(df)),
+                        "preview": preview,
+                        "type": "table",
+                    }
+                except Exception as e:
+                    logger.warning(f"Failed to load table {f}: {e}")
+                    file_entry = {"file": str(f), "error": str(e)}
+
+                if file_entry is not None:
+                    tables_by_panel.setdefault(panel, []).append(file_entry)
+
         except Exception as e:
-            logger.warning(f"Error discovering tables for {example.relative_source_path}: {e}")
+            logger.warning(
+                f"Error discovering tables for {getattr(example, 'relative_source_path', getattr(example, 'source_path', 'unknown'))}: {e}"
+            )
 
         return tables_by_panel
 
