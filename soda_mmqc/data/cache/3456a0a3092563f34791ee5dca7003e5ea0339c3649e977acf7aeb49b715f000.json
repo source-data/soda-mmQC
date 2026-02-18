@@ -1,0 +1,55 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A i",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "yes",
+        "from_the_image": "2 μm"
+      },
+      {
+        "panel_label": "A ii",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "yes",
+        "from_the_image": "2 μm"
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "yes",
+        "from_the_image": "4 μm"
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "yes",
+        "from_the_image": "2 μm"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44321-025-00219-1",
+    "source": "10.1038_s44321-025-00219-1/content/1",
+    "example_type": "figure",
+    "response_id": "resp_004453d95698711c006992eabd6a6c8196ac480ba560215368",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3159,
+      "output_tokens": 1153
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:00:45.612971"
+  }
+}

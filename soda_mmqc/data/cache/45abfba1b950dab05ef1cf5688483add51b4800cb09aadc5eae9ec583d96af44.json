@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel B shows quantitative bar plots comparing HTT depletion/elution across antibodies versus control but no statistical test, test name, or p-values are reported to assess significance of differences.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Violin plots in panel D compare distributions of enrichment ratios across conditions/antibody sets but no statistical test or p-values are reported to evaluate whether observed differences are significant.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "Panel E presents bar graphs with n = 4 and mean ± SD comparing protein abundances across antibodies, but no statistical test or p-values are provided to support any comparisons.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00096-3",
+    "source": "10.1038_s44320-025-00096-3/content/9",
+    "example_type": "figure",
+    "response_id": "resp_079919a4431b1d26006992e610a4088190bfe9cd915365d0ef",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3443,
+      "output_tokens": 3156
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:41:05.013709"
+  }
+}

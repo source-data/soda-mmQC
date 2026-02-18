@@ -1,0 +1,148 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [
+          {
+            "axis": "x",
+            "definition": "A short jagged/zigzag break marker is visible interrupting the x-axis near the origin (between frame 0 and the first plotted frames), indicating an axis discontinuity."
+          }
+        ],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_002485b3909875af006992e313d5cc819e9d0291eb2d37c893",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4216,
+      "output_tokens": 2196
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:28:07.457725"
+  }
+}

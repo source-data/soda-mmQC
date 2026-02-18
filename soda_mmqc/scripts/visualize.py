@@ -11,6 +11,15 @@ from soda_mmqc.config import (
 from soda_mmqc import logger
 from typing import Dict, Any
 
+# Color palette for prompt series (used in checklist and check visualizations).
+# Paul Tol "Muted" – harmonious, colourblind-friendly, works on dark and light (see https://personal.sron.nl/~pault/).
+# Alternatives: px.colors.qualitative.Plotly, Dark2, Set2, Antique, Vivid, Set1.
+TOL_MUTED = [
+    "#332288", "#88CCEE", "#44AA99", "#117733", "#999933",
+    "#DDCC77", "#CC6677", "#882255", "#AA4499",
+]
+PROMPT_PALETTE = TOL_MUTED
+
 
 def load_schema(checklist_name, check_name):
     """Load the schema for a check from the checklist directory.
@@ -225,7 +234,8 @@ def checklist_visualization(
     output_dir=None,
     metric="semantic_similarity",
     score="score",
-    aggregation_level=0
+    aggregation_level=0,
+    checks=None
 ):
     """Create a comprehensive visualization of all checks in a checklist.
     
@@ -233,10 +243,14 @@ def checklist_visualization(
         checklist_name: Name of the checklist (e.g., 'mini')
         output_dir: Directory to save the output file
         metric: Metric to visualize
+        checks: Optional list of check names to include, in desired order. If None, all checks are used.
     """
-    # Get all checks for this checklist
- 
-    checks = get_checks_for_checklist(checklist_name)
+    # Get checks for this checklist (all, or the requested subset in order)
+    all_checks = get_checks_for_checklist(checklist_name)
+    if checks is not None:
+        checks = [c for c in checks if c in all_checks]
+    else:
+        checks = all_checks
 
     if not checks:
         logger.warning(f"No checks found for checklist: {checklist_name}")
@@ -264,13 +278,15 @@ def checklist_visualization(
         return
 
     prompts = list(df_data['prompt'].unique())
-    checks = list(df_data['check'].unique())
+    # Preserve order: use requested checks list restricted to those present in data
+    checks_in_data = df_data['check'].unique()
+    checks = [c for c in checks if c in checks_in_data]
     
     # Create a global mapping from check names to positions
     global_check_to_num = {check: j for j, check in enumerate(checks)}
     
     color_map = {
-        p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)]
+        p: PROMPT_PALETTE[i % len(PROMPT_PALETTE)]
         for i, p in enumerate(prompts)
     }
     
@@ -337,10 +353,10 @@ def checklist_visualization(
             mode='markers',
             name=prompt,
             marker=dict(
-                color="white",  #color_map[prompt],
-                size=10,
-                opacity=0.4,
-                line=dict(width=0, color='white')
+                color="white",
+                size=4,
+                opacity=0.6,
+                line=dict(width=0, color='white'),
             ),
             showlegend=True,
             hovertext=plotting_item_data['item_id']
@@ -414,7 +430,7 @@ def check_visualization(
         return
     
     prompts = list(df_data['prompt'].unique())
-    color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
+    color_map = {p: PROMPT_PALETTE[i % len(PROMPT_PALETTE)] for i, p in enumerate(prompts)}
     
     plot = go.Figure()
     
@@ -448,7 +464,7 @@ def check_visualization(
             mode='markers',
             marker=dict(
                 color="white",
-                size=5,
+                size=3,
                 opacity=0.4,
                 line=dict(width=0, color='white')
             ),

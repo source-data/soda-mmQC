@@ -1,0 +1,128 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [
+          "red curved arrow (indicating cropping)",
+          "white inset border / boxed inset"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "image cropping, rotation and resizing (a)",
+          ""
+        ]
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "yes",
+        "symbols": [
+          "blue double-headed arrow (indicating spacing)",
+          "white frame/box around paired images"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "image spacing in the figure (b)",
+          ""
+        ]
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "white dashed box (showing origin of inset)",
+          "white arrowheads (pointing to small punctate features)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "no"
+        ],
+        "from_the_caption": [
+          "presenting several magnifications (zoom, inset) of images (c)",
+          ""
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "yes",
+        "symbols": [
+          "Min–Max slider graphic (brightness/contrast indicator)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "Adjust brightness and/or contrast to achieve good visibility of the imaging signal."
+        ]
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "symbols": [
+          "channel annotation label boxes (e.g., 'Marker 1', 'Marker 2')",
+          "colored channel labels overlaid on merged image (green, magenta)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Channel information should be annotated and visible to audiences (high contrast to background color, visible to color-blind audiences).",
+          "Channel information should be annotated and visible to audiences (high contrast to background color, visible to color-blind audiences)."
+        ]
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "colored overlays in merged image (green / magenta)",
+          "grayscale channel panels"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Image details are most unbiased in grayscale.",
+          "Image details are most unbiased in grayscale."
+        ]
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "yes",
+        "symbols": [
+          "grayscale calibration scale / legend with Min/Max labels",
+          "pseudocolor calibration colorbar with numeric tick labels (intensity scale)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "It is best practice to publish legends for color intensities (intensity and/or calibration scales) with images, and this is recommended for pseudocolor scales.",
+          "It is best practice to publish legends for color intensities (intensity and/or calibration scales) with images, and this is recommended for pseudocolor scales."
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_061eabb609e536ed006992f4e506e4819f818a080899973f53",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2836,
+      "output_tokens": 4668
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:44:26.288748"
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files (uncropped/raw blots or scans) were provided for panel A, so I cannot compare the figure blots (Anti-HIPK2, Anti-MeCP2, Anti-S80P, Anti-actin) to their source data."
+        },
+        {
+            "panel_label": "B",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files (uncropped/raw blots or scans) were provided for panel B, so I cannot compare the figure blots (Anti-HIPK2, Anti-MeCP2, Anti-S80P, Anti-actin) to their source data."
+        },
+        {
+            "panel_label": "D",
+            "source_data_matches_figure": "cannot_determine",
+            "discrepancies": "No source data files (uncropped/raw blots or scans) were provided for panel D, so I cannot compare the figure blots (Anti-HIPK2, Anti-MeCP2, Anti-actin) to their source data."
+        }
+    ]
+}

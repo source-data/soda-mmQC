@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-026-00707-6-wbpos",
+    "source": "10.1038_s44319-026-00707-6-wbpos/content/1",
+    "example_type": "figure",
+    "response_id": "resp_061306ff79eda363006994842927dc81928ac5ffb168c1811d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5493,
+      "output_tokens": 1346
+    },
+    "status": "completed",
+    "cached_at": "2026-02-17T16:07:38.991462"
+  }
+}

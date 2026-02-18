@@ -1,0 +1,86 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "a",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "b",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "c",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "d",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "e",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "f",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "g",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "z",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "The panel displays numeric calibration/colorbar tick labels for image intensity (e.g., 165, 832, 1,499, 2,165, 2,832) but no units are provided on the color/intensity scale in the image or in the caption. Intensity is a continuous measurement and should have units (for example 'arbitrary units (AU)', photon counts, or other calibrated units)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s41592-023-01987",
+    "source": "10.1038_s41592-023-01987/content/4",
+    "example_type": "figure",
+    "response_id": "resp_0cc1d99d167ae1cb006992ee8d0d6c81a08cfd9bae3eecd6ac",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3474,
+      "output_tokens": 2081
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:17:04.405157"
+  }
+}

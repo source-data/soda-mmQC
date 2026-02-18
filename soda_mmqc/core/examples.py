@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Dict, Any, Optional, Type
+from typing import Dict, Any, Optional, Type, List, Tuple
 import hashlib
 import json
 import logging
@@ -111,11 +111,14 @@ class Example(ABC):
             self.load_from_source()
     
     @abstractmethod
-    def prepare_model_input(self, prompt: str) -> Dict[str, Any]:
+    def prepare_model_input(
+        self, prompt: str, model_config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """Prepare the example's content for model input.
         
         Args:
             prompt: The prompt to use for the model
+            model_config: Optional check-level config (e.g. source_data_files.enabled)
             
         Returns:
             Dictionary containing:
@@ -230,17 +233,19 @@ class FigureExample(Example):
     def get_content_hash(self) -> str:
         """Get a hash of the example's content for caching.
         
-        Returns:
-            A string hash of the content
+        Includes caption, main figure image, and any images in content/source_data/
+        so cache invalidates when source data is added or changed.
         """
         self._ensure_loaded()
         if self._content_hash is None:
-            # Hash both caption and image
             hasher = hashlib.sha256()
             if self.caption is not None:
                 hasher.update(self.caption.encode('utf-8'))
             if self.image_path and self.image_path.exists():
                 with open(self.image_path, "rb") as f:
+                    hasher.update(f.read())
+            for path in self._get_all_source_data_paths():
+                with open(path, "rb") as f:
                     hasher.update(f.read())
             self._content_hash = hasher.hexdigest()
         return self._content_hash
@@ -265,33 +270,106 @@ class FigureExample(Example):
         with open(self.image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
 
-    def prepare_model_input(self, prompt: str) -> Dict[str, Any]:
+    def _encode_image_from_path(self, image_path: Path) -> tuple[str, str]:
+        """Encode an image file to base64 and return (mime_type, base64_string)."""
+        if not image_path.exists():
+            raise ValueError(f"Image file not found: {image_path}")
+        mime_type, _ = mimetypes.guess_type(str(image_path))
+        if not mime_type or not mime_type.startswith("image/"):
+            raise ValueError(f"Not an image: {image_path}")
+        with open(image_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode("utf-8")
+        return mime_type, b64
+
+    _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
+
+    def _get_source_data_items(
+        self,
+    ) -> List[Tuple[Optional[str], List[Path]]]:
+        """Return source data as (panel_label, image_paths) items.
+        
+        If content/source_data/ has subdirectories, each subfolder name is
+        treated as a panel label (e.g. A, B, 1G) and images inside are
+        grouped under that panel. If there are no subdirectories, all images
+        in source_data/ are returned as one item with panel_label None.
+        """
+        source_data_dir = self.source_path / "content" / "source_data"
+        if not source_data_dir.is_dir():
+            return []
+        exts = list(self._SOURCE_DATA_IMAGE_EXTS)
+        subdirs = [d for d in source_data_dir.iterdir() if d.is_dir()]
+        if subdirs:
+            items: List[Tuple[Optional[str], List[Path]]] = []
+            for d in sorted(subdirs):
+                paths = []
+                for ext in exts:
+                    paths.extend(d.glob(f"*{ext}"))
+                paths = sorted(paths)
+                if paths:
+                    items.append((d.name, paths))
+            return items
+        paths = []
+        for ext in exts:
+            paths.extend(source_data_dir.glob(f"*{ext}"))
+        paths = sorted(paths)
+        return [(None, paths)] if paths else []
+
+    def _get_all_source_data_paths(self) -> List[Path]:
+        """Flat list of all source data image paths (for hashing)."""
+        out: List[Path] = []
+        for _panel, paths in self._get_source_data_items():
+            out.extend(paths)
+        return sorted(out)
+
+    def prepare_model_input(
+        self, prompt: str, model_config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """Prepare the example's content for model input.
         
-        Args:
-            prompt: The prompt to use for the model
-            
-        Returns:
-            Dictionary containing:
-            - content: List of content items for the model
-            - metadata: Dictionary with tracing information
+        When model_config has source_data_files.enabled, also includes any
+        images from content/source_data/ so the model can compare them to the figure.
         """
         self._ensure_loaded()
-        return {
-            "content": [
-                {
-                    "type": "input_text",
-                    "text": f"{prompt}\n\nFigure Caption:\n{self.caption}"
-                },
-                {
-                    "type": "input_image",
-                    "image_url": (
-                        f"data:{self._get_image_mime_type()};base64,"
-                        f"{self._encode_image()}"
+        content: List[Dict[str, Any]] = [
+            {
+                "type": "input_text",
+                "text": f"{prompt}\n\nFigure Caption:\n{self.caption}"
+            },
+            {
+                "type": "input_image",
+                "image_url": (
+                    f"data:{self._get_image_mime_type()};base64,"
+                    f"{self._encode_image()}"
+                )
+            }
+        ]
+        # Include source data files if this check requests them
+        if model_config:
+            source_config = model_config.get("source_data_files") or {}
+            if source_config.get("enabled"):
+                for panel_label, paths in self._get_source_data_items():
+                    group_header = (
+                        f"Source data for panel {panel_label}:"
+                        if panel_label is not None
+                        else "Source data files:"
                     )
-                }
-            ]
-        }
+                    for path in paths:
+                        try:
+                            mime_type, b64 = self._encode_image_from_path(path)
+                            content.append({
+                                "type": "input_text",
+                                "text": f"{group_header} {path.name}".strip()
+                            })
+                            content.append({
+                                "type": "input_image",
+                                "image_url": f"data:{mime_type};base64,{b64}"
+                            })
+                            group_header = ""  # subsequent images: filename only in next text
+                        except Exception as e:
+                            logger.warning(
+                                "Skipping source data file %s: %s", path, e
+                            )
+        return {"content": content}
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert the example to a dictionary.
@@ -386,17 +464,10 @@ class WordExample(Example):
             self._content_hash = hasher.hexdigest()
         return self._content_hash
 
-    def prepare_model_input(self, prompt: str) -> Dict[str, Any]:
-        """Prepare the example's content for model input.
-        
-        Args:
-            prompt: The prompt to use for the model
-            
-        Returns:
-            Dictionary containing:
-            - content: List of content items for the model
-            - metadata: Dictionary with tracing information
-        """
+    def prepare_model_input(
+        self, prompt: str, model_config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Prepare the example's content for model input."""
         self._ensure_loaded()
         return {
             "content": [

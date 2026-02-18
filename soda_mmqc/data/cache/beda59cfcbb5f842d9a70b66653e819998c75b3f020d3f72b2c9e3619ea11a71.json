@@ -1,0 +1,193 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "PPA2 Expression (count)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "PPA2 Expression (count)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%)"
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%)"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Overall survival (years)"
+          },
+          {
+            "axis": "y",
+            "definition": "Percent survival (%)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_0d0ef4ee0cf5c468006992edd99a9c819ca64f05f29fad3bbe",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3578,
+      "output_tokens": 1562
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:14:01.454386"
+  }
+}

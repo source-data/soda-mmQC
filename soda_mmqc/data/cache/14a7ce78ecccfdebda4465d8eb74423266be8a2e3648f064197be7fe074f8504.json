@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel A was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel B was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "C",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel C was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "D",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel D was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "E",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel E was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "F",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel F was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "I",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel I was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      },
+      {
+        "panel_label": "J",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data file for panel J was provided alongside the figure image, so I cannot compare the published blot to any original/uncropped scan."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "A10.1038_s44319-026-00708-5",
+    "source": "A10.1038_s44319-026-00708-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_001e638912671d93006992fc7ab9808195bd0d214cb0a754e3",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2203,
+      "output_tokens": 873
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:16:19.668605"
+  }
+}

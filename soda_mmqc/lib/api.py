@@ -360,8 +360,8 @@ def generate_response_openai(
 
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-    # Prepare model input (supports multimodal content)
-    model_input = example.prepare_model_input(prompt)
+    # Prepare model input (supports multimodal content; model_config can enable source_data)
+    model_input = example.prepare_model_input(prompt, model_config=model_config)
 
     # Build request kwargs
     create_kwargs = {
@@ -458,7 +458,8 @@ def generate_response_anthropic(
     prompt: str,
     schema: dict,
     model: str,
-    metadata: dict
+    metadata: dict,
+    model_config: Optional[Dict[str, Any]] = None
 ) -> Tuple[dict, dict]:
     """Generate response using Anthropic API with structured output via tools.
 
@@ -468,6 +469,7 @@ def generate_response_anthropic(
         schema: The schema for structured output
         model: The model to use (e.g., 'claude-3-5-sonnet-20241022')
         metadata: Additional metadata for the API call
+        model_config: Optional check-level config (e.g. source_data_files.enabled)
 
     Returns:
         Tuple of (parsed response, response metadata with response_id and
@@ -484,8 +486,8 @@ def generate_response_anthropic(
 
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-    # Prepare model input (supports multimodal content)
-    model_input_content = example.prepare_model_input(prompt)
+    # Prepare model input (supports multimodal content; model_config can enable source_data)
+    model_input_content = example.prepare_model_input(prompt, model_config=model_config)
 
     # Convert content from OpenAI format to Anthropic format
     converted_content = _convert_content_for_anthropic(model_input_content["content"])
@@ -592,7 +594,8 @@ def generate_response(
             prompt=prompt,
             schema=schema,
             model=model,
-            metadata=metadata
+            metadata=metadata,
+            model_config=model_config
         )
     else:
         return generate_response_openai(

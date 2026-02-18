@@ -1,0 +1,34 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided for panel A. Cannot verify that the bands, lanes, cropping, orientation, or any splicing shown in the figure match the original uncropped/raw data."
+      },
+      {
+        "panel_label": "D",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided for panel D. Cannot verify that the bands, lanes, cropping, orientation, or any splicing shown in the figure match the original uncropped/raw data."
+      },
+      {
+        "panel_label": "G",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files were provided for panel G. Cannot verify that the bands, lanes, cropping, orientation, or any splicing shown in the figure match the original uncropped/raw data."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_074a228c5449c733006992fc62c0d08191b0f92c9d5137f244",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2960,
+      "output_tokens": 664
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:15:55.007576"
+  }
+}

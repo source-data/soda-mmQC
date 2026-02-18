@@ -1,0 +1,113 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "anti-HMGB1 graph y-axis labeled as \"Intensity (AU)\" (arbitrary units)"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "SDH signal intensity is plotted (continuous measurement of histochemical staining) but no units are specified; an explicit unit (e.g., arbitrary units, optical density, or staining score) is required."
+          },
+          {
+            "axis": "y",
+            "justification": "COX signal intensity is plotted (continuous measurement of histochemical staining) but no units are specified; an explicit unit (e.g., arbitrary units, optical density, or staining score) is required."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "TMRM fluorescence intensity (flow cytometry, shown as channel \"FL2-H\") is a continuous measurement but the plot does not provide measurement units (e.g., arbitrary fluorescence units [AU]); only the instrument channel name is shown."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "y-axis labeled as \"Counts\" (number of events/cells)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_093668ab67e92df5006992ee384c948190864c0bde5cc0fc5d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3660,
+      "output_tokens": 2937
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:15:49.557234"
+  }
+}

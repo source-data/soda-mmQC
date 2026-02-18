@@ -1,0 +1,64 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "FALSE",
+            "source_data_matches_figure": "not_applicable",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "FALSE",
+            "source_data_matches_figure": "not_applicable",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "I",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "J",
+            "is_western_blot": "TRUE",
+            "source_data_matches_figure": "yes",
+            "discrepancies": ""
+        }
+    ]
+}

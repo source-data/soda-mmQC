@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. The figure contains multiple distinct western/gel panels (A, B–D, E, F, I, J). No mapping between this source image and panel A is supplied, so I cannot confirm that the lanes, band pattern, cropping, or any splicing/orientation match panel A."
+      },
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. No explicit correspondence between this source image and panel B is provided, so I cannot verify that the bands/lanes in the source match panel B or assess cropping/splicing."
+      },
+      {
+        "panel_label": "C",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. No mapping to panel C is available; cannot determine whether the source data match the figure's presentation (lanes, band intensities, cropping, splices)."
+      },
+      {
+        "panel_label": "D",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. There is no information linking this file to panel D, so matching cannot be assessed."
+      },
+      {
+        "panel_label": "E",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. No correspondence to panel E is provided; cannot verify consistency."
+      },
+      {
+        "panel_label": "F",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. The figure includes separate top/bottom blots for F; without labeled uncropped source blots for those, match cannot be determined."
+      },
+      {
+        "panel_label": "I",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. No mapping to panel I (mitochondrial IP/IB) is available; cannot assess whether the source matches the figure."
+      },
+      {
+        "panel_label": "J",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Only a single unlabeled blot image was provided as source data. No mapping to panel J is available; cannot determine if the source corresponds to the displayed blot or if any cropping/splicing occurred."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "A10.1038_s44319-026-00708-5",
+    "source": "A10.1038_s44319-026-00708-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_01177d6ffb776fa4006992fa2a7e2881a0ab8a2e94c581e520",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1982,
+      "output_tokens": 1224
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:06:31.326136"
+  }
+}

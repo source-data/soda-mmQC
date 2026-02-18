@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Provided source images (cGAS IP, Input, Acet-K) correspond to the bands and lane number/layout in panel A. Minor cropping and contrast/brightness adjustments are evident but the band positions and relative intensities match the figure."
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Provided HA and MYC source images match the IP/Input blots shown in panel B. Some cropping around lane edges and contrast changes are present but lane order and band patterns are consistent."
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source files for Flag(IP), Flag(Input) and HA(IP)/Input are provided and show the same lanes and band patterns as panel C. Evidence of cropping/splicing to focus on the IP region and adjustments to contrast; overall correspondence is consistent."
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Flag and HA source blots provided. Bands and lane arrangement match the figure; minor cropping/contrast adjustments visible but no clear inconsistencies in lane identity or band pattern."
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source images for SIRT4(IP), SIRT4(Input) and cGAS(IP)/Input are present and correspond to the bands shown in panel E. Some cropping and low image quality in places, but band positions/intensities are consistent with the figure."
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source blots for SIRT4 and cGAS (THP1/HeLa) are provided and match the panel F presentation. Cropping to the region of interest and contrast adjustments are evident; lanes and bands are consistent."
+      },
+      {
+        "panel_label": "I",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Source images for SIRT4(IP), SIRT4(Input), cGAS(IP)/Input, TOM20 and actin are supplied. The bands and lane layout correspond to panel I. Minor cropping and contrast/brightness adjustments are present."
+      },
+      {
+        "panel_label": "J",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Flag(IP) and Input and HA blots provided as source data match the bands and lane arrangement shown in panel J. Some cropping and image adjustments are evident but no mismatch in lanes/bands detected."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "B10.1038_s44319-026-00708-5",
+    "source": "B10.1038_s44319-026-00708-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0eef4058aee560ca006994800d23288192a8a5806936363044",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 17252,
+      "output_tokens": 1693
+    },
+    "status": "completed",
+    "cached_at": "2026-02-17T15:50:06.961771"
+  }
+}

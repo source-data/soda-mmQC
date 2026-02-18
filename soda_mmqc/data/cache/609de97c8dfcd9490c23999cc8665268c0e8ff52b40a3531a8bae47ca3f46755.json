@@ -1,0 +1,29 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "E",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (uncropped/raw blot images or pulldown inputs) were provided for panel E. The figure shows GTP‑bound Rac1 and Cdc42 pulldown blots and corresponding total lysates, but without the original scans it is not possible to verify lane identities, cropping, splicing, or that the bands in the figure derive from the provided source. To assess match, uncropped autorads or original image files for the pulldown and input lanes (with molecular weight markers and exposure details) are required."
+      },
+      {
+        "panel_label": "G",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (original western blots and zymography scans) were provided for panel G. This panel contains multiple immunoblots (Asef, MMP9 zymogram, c‑Myc, Actin, pc‑Jun, c‑Jun, pJNK1, JNK1, pp38, p38, pERK1/2, ERK1/2) and a separate polyp‑diameter lane series; without the uncropped/raw images it is not possible to confirm that the bands, lane order, cropping or any splicing are consistent with source data. Raw scans for each blot and the gelatin zymogram (with lane annotations and markers) are needed for verification."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.233",
+    "source": "10.1038_embor.2009.233/content/2",
+    "example_type": "figure",
+    "response_id": "resp_04d69e9ab80d3735006992e36bd6c481a0a2fdfc0750cfe0e6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2934,
+      "output_tokens": 800
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:29:22.685252"
+  }
+}
