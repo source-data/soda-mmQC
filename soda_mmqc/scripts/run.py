@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 from tqdm import tqdm
-from soda_mmqc.lib.api import generate_response
+from soda_mmqc.lib.api import generate_response, _sanitize_metadata_for_model
 from soda_mmqc.lib.cache import ModelCache
 from soda_mmqc.config import (
     CHECKLIST_DIR,
@@ -22,6 +22,7 @@ from soda_mmqc.lib.api import validate_model_for_provider, get_compatible_models
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY, Example
+import pandas as pd
 
 
 @dataclass
@@ -184,6 +185,80 @@ def run_model(
     examples = check_data.examples
     schema = check_data.schema
 
+    def _discover_tables_for_example(example: Example) -> Dict[str, Any]:
+        """Scan example.source_path for panel subfolders (Fig*) and load
+        lightweight previews of tabular files. Returns mapping panel->list(files).
+        """
+        tables_by_panel = {}
+        logger.debug(
+            "Discovering tables for example %s at %s",
+            getattr(example, "doc_id", "?"),
+            getattr(example, "source_path", "?")
+        )
+        try:
+            fig_root = example.source_path / "content"
+            if not fig_root or not fig_root.exists():
+                return tables_by_panel
+            # Walk recursively under the content directory and collect tabular files.
+            # Map files to the top-level "panel" (first directory under content).
+            for f in fig_root.rglob("*"):
+                if not f.is_file():
+                    continue
+                # Determine the top-level panel for grouping
+                try:
+                    rel = f.relative_to(fig_root)
+                    parts = rel.parts
+                    panel = parts[0] if len(parts) > 1 else "content"
+                except Exception:
+                    panel = "content"
+
+                suffix = f.suffix.lower()
+                file_entry = None
+                try:
+                    if suffix == ".csv":
+                        df = pd.read_csv(f)
+                    elif suffix == ".tsv":
+                        df = pd.read_csv(f, sep="\t")
+                    elif suffix in [".xlsx", ".xls"]:
+                        df = pd.read_excel(f)
+                    elif suffix == ".json":
+                        # JSON can be many shapes; try to read as table
+                        df = pd.read_json(f)
+                    elif suffix in [".parquet", ".pq"]:
+                        # parquet may require pyarrow or fastparquet; try and catch
+                        df = pd.read_parquet(f)
+                    elif suffix == ".feather":
+                        df = pd.read_feather(f)
+                    else:
+                        continue
+                    # preview_df = df.copy() # instead of taking the first 5 rows, we can take all rows
+                    try:
+                        df = df.where(pd.notnull(df), None)
+                    except Exception:
+                        pass
+                    df_dict = df.to_dict(orient="records")
+                    file_entry = {
+                        "file": str(f),
+                        "columns": df.columns.tolist(),
+                        "num_rows": int(len(df)),
+                        "preview": df_dict,
+                        "type": "table",
+                    }
+                    print(f"Loaded table {f} with {len(df)} rows and columns: {df.columns.tolist()}")
+                except Exception as e:
+                    logger.warning(f"Failed to load table {f}: {e}")
+                    file_entry = {"file": str(f), "error": str(e)}
+
+                if file_entry is not None:
+                    tables_by_panel.setdefault(panel, []).append(file_entry)
+
+        except Exception as e:
+            logger.warning(
+                f"Error discovering tables for {getattr(example, 'relative_source_path', getattr(example, 'source_path', 'unknown'))}: {e}"
+            )
+
+        return tables_by_panel
+
     for example in tqdm(examples, desc="Running model", unit="example"):
         try:
             # Generate new output without caching
@@ -192,11 +267,19 @@ def run_model(
                 prompt=prompt,
                 schema=schema
             )
+            # Discover any tabular data for this example and attach as metadata
+            tables_meta = _discover_tables_for_example(example)
             input_metadata = {
                 "doc_id": example.doc_id,
                 "source": example.relative_source_path,
-                "example_type": example.example_class_name
+                "example_type": example.example_class_name,
+                "tables": tables_meta,
             }
+            # Sanitize metadata to ensure JSON-safe values (NaN/Inf etc.)
+            try:
+                input_metadata = _sanitize_metadata_for_model(input_metadata)
+            except Exception as e:
+                logger.warning(f"Failed to sanitize input metadata for {example.doc_id}: {e}")
             # Check cache first if enabled
             if use_cache:
                 cache_key = model_cache.generate_cache_key(
