@@ -1,0 +1,89 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "B",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "C",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "D",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "E",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "F",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "G",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "H",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "I",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "J",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "D4R_10.1038_s44319-026-00694-8",
+    "source": "D4R_10.1038_s44319-026-00694-8/content/3",
+    "example_type": "figure",
+    "response_id": "resp_08e4af58dccdd09e006995d2e75a548192afec3d7cc366f47d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1964,
+      "output_tokens": 938
+    },
+    "status": "completed",
+    "cached_at": "2026-02-18T15:55:51.440087"
+  }
+}
