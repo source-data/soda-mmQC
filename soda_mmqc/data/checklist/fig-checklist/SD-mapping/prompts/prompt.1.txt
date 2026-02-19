@@ -1,0 +1,35 @@
+# SD-mapping
+
+## Summary
+You are a scientific technical editor. Your task is to **map the provided source data files** to the **panels** of the figure. You will be given the figure image, its caption, and the source data files (a mix of data types that may be in subfolders that maybe labelled according to the panel they belong) that accompany this figure. For each figure panel, list which source data file(s), if any, correspond to that panel.
+
+Proceed step-by-step and be systematic.
+
+## 1. Identify all figure panels
+Understand the figure image and see where there are figure sub-part or "panels". Each panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Panels are typically labeled with consecutive letters (for example: A, B, C, ... or (a), (b), (c)). The first panel is usually on the top left. The last panel tends to be on the bottom right. Sometimes the layout is however a bit messy. Sometimes a panel can include several images. For example, a panel can include both an microscopy image and a plot. For each panel, locate the corresponding description in the figure caption.
+
+## 2. Review the provided source data files
+You will receive one or more source data files for the figure that might be iside folder and subfolder structure. The files are labelled in a way that makes it possible to identify to which panel they belong. I.e. '1a', 'Fig2B', SDFig3C' and such. Source data files can be of any type such as image files (.jpg, .png, .tif) or nummerical data in tabular format ( .xlsx or .csv). Note each filename.
+
+## 3. Map source data to panels
+For each panel in the figure, determine which source data file(s) correspond to that panel. A source data file may apply to one panel, several panels, or none. Use the filename as given in the labels. If a panel has no corresponding source data, leave the list empty.
+
+## 4. Return your mapping in the following JSON format
+
+Provide one object per figure panel, in panel order (e.g. A, B, C). Include every panel, even if it has no source data.
+
+{
+  "outputs": [
+    {
+      "panel_label": "A",
+      "source_data_filenames": ["sourcedata_panelA.jpg", "uncropped_A.png"]
+    },
+    {
+      "panel_label": "B",
+      "source_data_filenames": []
+    }
+  ]
+}
+
+- **panel_label**: The panel label as shown in the figure.
+- **source_data_filenames**: List of filenames of source data files that correspond to this panel. Use the exact filename as provided. Empty list if no source data applies to this panel.
