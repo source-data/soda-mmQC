@@ -79,16 +79,6 @@ def prettify_value(value) -> str:
         return str(value)
 
 
-def build_rows(top: dict) -> str:
-    rows = []
-    # Sort keys for deterministic output, but preserve original order if possible
-    for k in sorted(top.keys()):
-        v = top[k]
-        cell = prettify_value(v)
-        rows.append(f"<tr><td class=\"key\">{k}</td><td><code>{cell}</code></td></tr>")
-    return "\n".join(rows)
-
-
 def compute_verdict_from_panels(outputs: list) -> tuple[str, str]:
     """Compute a simple overall verdict and class from panel-level `replicable_from_data` values.
 
