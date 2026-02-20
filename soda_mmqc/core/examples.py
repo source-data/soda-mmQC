@@ -303,7 +303,8 @@ class FigureExample(Example):
         if not source_data_dir.is_dir():
             return []
         exts = list(self._SOURCE_DATA_IMAGE_EXTS)
-        subdirs = [d for d in source_data_dir.iterdir() if d.is_dir()]
+        # include nested subdirectories as panels as well
+        subdirs = [d for d in source_data_dir.rglob("*") if d.is_dir()]
         if subdirs:
             items: List[Tuple[Optional[str], List[Path]]] = []
             for d in sorted(subdirs):
@@ -329,11 +330,13 @@ class FigureExample(Example):
         """
         if not self.include_tables:
             return []
-        source_data_dir = self.source_path / "content" / "source_data"
+        # source_data_dir = self.source_path / "content" / "source_data"
+        source_data_dir = self.source_path / "content"
         if not source_data_dir.is_dir():
             return []
         exts = list(self._SOURCE_DATA_TABLE_EXTS)
-        subdirs = [d for d in source_data_dir.iterdir() if d.is_dir()]
+        # include nested subdirectories as panels as well
+        subdirs = [d for d in source_data_dir.rglob("*") if d.is_dir()]
         if subdirs:
             items: List[Tuple[Optional[str], List[Path]]] = []
             for d in sorted(subdirs):
