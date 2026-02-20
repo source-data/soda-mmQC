@@ -68,7 +68,29 @@ def hash_document_and_json(
             json_str = str(json_data)
     else:
         # Convert dictionary to sorted JSON string for consistent hashing
-        json_str = json.dumps(json_data, sort_keys=True)
+        # but sanitize numeric edge-cases (NaN/Inf) and numpy types first.
+        def _sanitize(obj):
+            import math, numbers
+            if obj is None or isinstance(obj, bool) or isinstance(obj, int):
+                return obj
+            if isinstance(obj, float):
+                if not math.isfinite(obj):
+                    return None
+                return obj
+            if isinstance(obj, (list, tuple)):
+                return [_sanitize(v) for v in obj]
+            if isinstance(obj, dict):
+                return {k: _sanitize(v) for k, v in obj.items()}
+            try:
+                if hasattr(obj, "item"):
+                    return _sanitize(obj.item())
+                if hasattr(obj, "tolist"):
+                    return _sanitize(obj.tolist())
+            except Exception:
+                pass
+            return str(obj)
+
+        json_str = json.dumps(_sanitize(json_data), sort_keys=True)
     
     # Hash the JSON data - ensure it's bytes before updating
     json_bytes = json_str.encode('utf-8')

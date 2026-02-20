@@ -1,0 +1,32 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "source_data_filenames": []
+        },
+        {
+            "panel_label": "B",
+            "source_data_filenames": []
+        },
+        {
+            "panel_label": "C",
+            "source_data_filenames": []
+        },
+        {
+            "panel_label": "D",
+            "source_data_filenames": []
+        },
+        {
+            "panel_label": "E",
+            "source_data_filenames": []
+        },
+        {
+            "panel_label": "F",
+            "source_data_filenames": []
+        },
+        {
+            "panel_label": "G",
+            "source_data_filenames": []
+        }
+    ]
+}
