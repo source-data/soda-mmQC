@@ -186,6 +186,11 @@ class FigureExample(Example):
         self.caption: Optional[str] = None
         self.image_path: Optional[Path] = None
         self.figure_id: Optional[str] = None
+        # Table handling: include CSV/TSV and spreadsheet files alongside images
+        # If enabled, these will be included in hashing and model input preview.
+        self.include_tables: bool = True
+        # How many lines of table text preview to include for text tables
+        self.table_preview_lines: int = 10
 
     def load_from_source(self) -> None:
         """Load the example's content from the provided path.
@@ -282,6 +287,7 @@ class FigureExample(Example):
         return mime_type, b64
 
     _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
+    _SOURCE_DATA_TABLE_EXTS = (".csv", ".tsv", ".xlsx", ".xls")
 
     def _get_source_data_items(
         self,
@@ -314,11 +320,44 @@ class FigureExample(Example):
         paths = sorted(paths)
         return [(None, paths)] if paths else []
 
+    def _get_source_table_items(self) -> List[Tuple[Optional[str], List[Path]]]:
+        """Return table files (csv/tsv/xlsx/xls) grouped the same way as images.
+
+        Subfolders of `content/source_data/` are treated as panels. If there are
+        no subfolders, any table files directly under `source_data/` are returned
+        as a single group with panel_label None.
+        """
+        if not self.include_tables:
+            return []
+        source_data_dir = self.source_path / "content" / "source_data"
+        if not source_data_dir.is_dir():
+            return []
+        exts = list(self._SOURCE_DATA_TABLE_EXTS)
+        subdirs = [d for d in source_data_dir.iterdir() if d.is_dir()]
+        if subdirs:
+            items: List[Tuple[Optional[str], List[Path]]] = []
+            for d in sorted(subdirs):
+                paths: List[Path] = []
+                for ext in exts:
+                    paths.extend(d.glob(f"*{ext}"))
+                paths = sorted(paths)
+                if paths:
+                    items.append((d.name, paths))
+            return items
+        paths: List[Path] = []
+        for ext in exts:
+            paths.extend(source_data_dir.glob(f"*{ext}"))
+        paths = sorted(paths)
+        return [(None, paths)] if paths else []
+
     def _get_all_source_data_paths(self) -> List[Path]:
         """Flat list of all source data image paths (for hashing)."""
         out: List[Path] = []
         for _panel, paths in self._get_source_data_items():
             out.extend(paths)
+        # include table files in the hash as well
+        for _panel, tpaths in self._get_source_table_items():
+            out.extend(tpaths)
         return sorted(out)
 
     def prepare_model_input(
@@ -347,6 +386,7 @@ class FigureExample(Example):
         if model_config:
             source_config = model_config.get("source_data_files") or {}
             if source_config.get("enabled"):
+                # First add image source data as before
                 for panel_label, paths in self._get_source_data_items():
                     group_header = (
                         f"Source data for panel {panel_label}:"
@@ -369,6 +409,68 @@ class FigureExample(Example):
                             logger.warning(
                                 "Skipping source data file %s: %s", path, e
                             )
+
+                # Then add any table-like source data
+                for panel_label, tpaths in self._get_source_table_items():
+                    table_header = (
+                        f"Source table for panel {panel_label}:"
+                        if panel_label is not None
+                        else "Source table files:"
+                    )
+                    for tpath in tpaths:
+                        try:
+                            suffix = tpath.suffix.lower()
+                            if suffix in (".csv", ".tsv"):
+                                # read a small preview of the text table
+                                try:
+                                    with open(tpath, "r", encoding="utf-8") as tf:
+                                        lines = []
+                                        for i, ln in enumerate(tf):
+                                            if i >= self.table_preview_lines:
+                                                break
+                                            lines.append(ln.rstrip("\n\r"))
+                                        preview = "\n".join(lines)
+                                except UnicodeDecodeError:
+                                    # fallback to binary+base64 if text read fails
+                                    with open(tpath, "rb") as bf:
+                                        b64 = base64.b64encode(bf.read()).decode("utf-8")
+                                    mime_type, _ = mimetypes.guess_type(str(tpath))
+                                    content.append({
+                                        "type": "input_text",
+                                        "text": f"{table_header} {tpath.name} (binary content encoded)"
+                                    })
+                                    content.append({
+                                        "type": "input_table",
+                                        "file_name": tpath.name,
+                                        "mime_type": mime_type or "application/octet-stream",
+                                        "content_b64": b64
+                                    })
+                                    table_header = ""
+                                    continue
+
+                                content.append({
+                                    "type": "input_text",
+                                    "text": f"{table_header} {tpath.name}\n{preview}".strip()
+                                })
+                                table_header = ""
+                            else:
+                                # For spreadsheets, include as base64 with mime type
+                                with open(tpath, "rb") as bf:
+                                    b64 = base64.b64encode(bf.read()).decode("utf-8")
+                                mime_type, _ = mimetypes.guess_type(str(tpath))
+                                content.append({
+                                    "type": "input_text",
+                                    "text": f"{table_header} {tpath.name} (binary spreadsheet)"
+                                })
+                                content.append({
+                                    "type": "input_table",
+                                    "file_name": tpath.name,
+                                    "mime_type": mime_type or "application/octet-stream",
+                                    "content_b64": b64
+                                })
+                                table_header = ""
+                        except Exception as e:
+                            logger.warning("Skipping source table file %s: %s", tpath, e)
         return {"content": content}
 
     def to_dict(self) -> Dict[str, Any]:
