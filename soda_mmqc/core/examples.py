@@ -435,6 +435,7 @@ class FigureExample(Example):
                                     with open(tpath, "rb") as bf:
                                         b64 = base64.b64encode(bf.read()).decode("utf-8")
                                     mime_type, _ = mimetypes.guess_type(str(tpath))
+                                    print(f"Including source table (binary) in model input: {tpath}")
                                     content.append({
                                         "type": "input_text",
                                         "text": f"{table_header} {tpath.name} (binary content encoded)"
@@ -448,6 +449,7 @@ class FigureExample(Example):
                                     table_header = ""
                                     continue
 
+                                print(f"Including source table in model input: {tpath}")
                                 content.append({
                                     "type": "input_text",
                                     "text": f"{table_header} {tpath.name}\n{preview}".strip()
@@ -458,6 +460,7 @@ class FigureExample(Example):
                                 with open(tpath, "rb") as bf:
                                     b64 = base64.b64encode(bf.read()).decode("utf-8")
                                 mime_type, _ = mimetypes.guess_type(str(tpath))
+                                print(f"Including spreadsheet source table in model input: {tpath}")
                                 content.append({
                                     "type": "input_text",
                                     "text": f"{table_header} {tpath.name} (binary spreadsheet)"
