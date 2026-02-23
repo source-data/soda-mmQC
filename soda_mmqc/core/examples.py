@@ -6,6 +6,7 @@ import json
 import logging
 import base64
 import mimetypes
+import io
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
 
@@ -262,6 +263,8 @@ class FigureExample(Example):
         mime_type, _ = mimetypes.guess_type(str(self.image_path))
         if mime_type:
             if mime_type.startswith('image/'):
+                # If mime type isn't one of the allowed formats, we'll convert
+                # later when encoding. Return the guessed mime for now.
                 return mime_type
             else:
                 raise ValueError(f"Not an image: {self.image_path}")
@@ -272,8 +275,14 @@ class FigureExample(Example):
         """Encode image to base64 string."""
         if not self.image_path or not self.image_path.exists():
             raise ValueError("Image file not found")
-        with open(self.image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
+        # Try to encode in an allowed format; convert if necessary
+        mime_type, _ = mimetypes.guess_type(str(self.image_path))
+        allowed = ("image/jpeg", "image/png", "image/gif", "image/webp")
+        if mime_type in allowed:
+            with open(self.image_path, "rb") as image_file:
+                return base64.b64encode(image_file.read()).decode('utf-8')
+        # convert to PNG by default
+        return self._convert_image_to_allowed_format(self.image_path)[1]
 
     def _encode_image_from_path(self, image_path: Path) -> tuple[str, str]:
         """Encode an image file to base64 and return (mime_type, base64_string)."""
@@ -282,9 +291,42 @@ class FigureExample(Example):
         mime_type, _ = mimetypes.guess_type(str(image_path))
         if not mime_type or not mime_type.startswith("image/"):
             raise ValueError(f"Not an image: {image_path}")
-        with open(image_path, "rb") as f:
-            b64 = base64.b64encode(f.read()).decode("utf-8")
-        return mime_type, b64
+        allowed = ("image/jpeg", "image/png", "image/gif", "image/webp")
+        if mime_type in allowed:
+            with open(image_path, "rb") as f:
+                b64 = base64.b64encode(f.read()).decode("utf-8")
+            return mime_type, b64
+        # convert to allowed format (PNG) and return (mime, b64)
+        mime, b64 = self._convert_image_to_allowed_format(image_path)
+        return mime, b64
+
+    def _convert_image_to_allowed_format(self, image_path: Path, target_format: str = "PNG") -> tuple[str, str]:
+        """Convert image to an allowed format (default PNG) and return (mime_type, base64).
+
+        Requires Pillow (`PIL`). If Pillow is not installed, raises ValueError
+        instructing the user to install it.
+        """
+        try:
+            from PIL import Image
+        except Exception:
+            raise ValueError(
+                "Image format conversion requires Pillow. Install with: pip install Pillow"
+            )
+        try:
+            with Image.open(image_path) as img:
+                # Choose PNG when alpha is present or when target is PNG
+                out_buf = io.BytesIO()
+                save_kwargs = {}
+                if target_format.upper() == "JPEG":
+                    if img.mode in ("RGBA", "LA"):
+                        img = img.convert("RGB")
+                img.save(out_buf, format=target_format, **save_kwargs)
+                out_bytes = out_buf.getvalue()
+                b64 = base64.b64encode(out_bytes).decode("utf-8")
+                mime_type = "image/png" if target_format.upper() == "PNG" else f"image/{target_format.lower()}"
+                return mime_type, b64
+        except Exception as e:
+            raise ValueError(f"Error converting image {image_path}: {e}")
 
     _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
     _SOURCE_DATA_TABLE_EXTS = (".csv", ".tsv", ".xlsx", ".xls")
@@ -399,6 +441,7 @@ class FigureExample(Example):
                     for path in paths:
                         try:
                             mime_type, b64 = self._encode_image_from_path(path)
+                            print(f"Including source image in model input: {path}")
                             content.append({
                                 "type": "input_text",
                                 "text": f"{group_header} {path.name}".strip()
