@@ -22,6 +22,41 @@ from soda_mmqc.lib.api import validate_model_for_provider, get_compatible_models
 from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY, Example
+# Load env vars and initialize Langfuse client for prompt fetching
+try:
+    from dotenv import load_dotenv
+    try:
+        load_dotenv()
+    except Exception:
+        pass
+except Exception:
+    pass
+
+try:
+    from langfuse import Langfuse
+    # Initialize client using environment variables when available
+    try:
+        lf_public = os.getenv("LANGFUSE_PUBLIC_KEY")
+        lf_secret = os.getenv("LANGFUSE_SECRET_KEY")
+        lf_base = os.getenv("LANGFUSE_BASE_URL")
+        if lf_public or lf_secret or lf_base:
+            try:
+                langfuse_client = Langfuse(public_key=lf_public, secret_key=lf_secret, base_url=lf_base)
+            except TypeError:
+                try:
+                    langfuse_client = Langfuse()
+                except Exception:
+                    langfuse_client = None
+        else:
+            try:
+                langfuse_client = Langfuse()
+            except Exception:
+                langfuse_client = None
+    except Exception:
+        langfuse_client = None
+except Exception:
+    Langfuse = None
+    langfuse_client = None
 
 
 @dataclass
@@ -410,29 +445,25 @@ def prepare_check_data(
         logger.error(f"Error loading schema: {str(e)}")
         return (None, {})
 
-    # Get all prompts from the prompts directory
-    prompts_dir = check_dir / "prompts"
-    if not prompts_dir.exists():
-        logger.error(
-            f"Prompts directory not found: {prompts_dir}"
-        )
+    # STRICT: fetch prompts via Langfuse SDK only (no local fallback)
+    try:
+        if langfuse_client is None:
+            logger.error("Langfuse client not initialized; cannot fetch prompts")
+            return (None, {})
+
+        # Build prompt key: checklists/{checklist_name}/{check_name}
+        checklist_name = check_dir.parent.name
+        prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+        prompt_text = langfuse_client.get_prompt(prompt_key)
+        if not prompt_text:
+            logger.error(f"No prompt returned from Langfuse for key: {prompt_key}")
+            return (None, {})
+
+        # Use a single prompt named after the check
+        prompts = {check_dir.name: prompt_text}
+    except Exception as e:
+        logger.error(f"Error fetching prompt from Langfuse for {check_dir.name}: {e}")
         return (None, {})
-
-    # Get all prompt files
-    prompt_files = list(prompts_dir.glob("prompt*.txt"))
-    if not prompt_files:
-        logger.error(f"No prompt files found in {prompts_dir}")
-        return (None, {})
-
-    # Sort the prompt files by name in ascending order
-    prompt_files.sort()
-
-    # Load prompts
-    prompts = {}
-    for prompt_file in prompt_files:
-        prompt_name = prompt_file.stem
-        with open(prompt_file, "r", encoding="utf-8") as f:
-            prompts[prompt_name] = f.read()
 
     # Get list of paths to examples from benchmark.json
     example_paths = benchmark_data.get("examples", [])
