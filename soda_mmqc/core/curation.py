@@ -8,6 +8,46 @@ import argparse
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY
+# Load environment variables from .env when available
+import os
+try:
+    from dotenv import load_dotenv
+    try:
+        load_dotenv()
+    except Exception:
+        # ignore loading errors; env may already be set in the environment
+        pass
+except Exception:
+    # python-dotenv not installed, rely on os.environ
+    pass
+# Optional Langfuse SDK integration for fetching prompts
+try:
+    from langfuse import Langfuse
+    try:
+        # Try to initialize Langfuse with env vars if provided
+        lf_public = os.getenv("LANGFUSE_PUBLIC_KEY")
+        lf_secret = os.getenv("LANGFUSE_SECRET_KEY")
+        lf_base = os.getenv("LANGFUSE_BASE_URL")
+        # If any key or base_url is provided, prefer explicit construction
+        if lf_public or lf_secret or lf_base:
+            try:
+                langfuse_client = Langfuse(public_key=lf_public, secret_key=lf_secret, base_url=lf_base)
+            except TypeError:
+                # SDK may accept different parameter names; fall back to no-arg init
+                try:
+                    langfuse_client = Langfuse()
+                except Exception:
+                    langfuse_client = None
+        else:
+            try:
+                langfuse_client = Langfuse()
+            except Exception:
+                langfuse_client = None
+    except Exception:
+        langfuse_client = None
+except Exception:
+    Langfuse = None
+    langfuse_client = None
 
 # Set page config for wider layout
 st.set_page_config(
@@ -182,12 +222,37 @@ def load_checklist(checklist_dir):
                 with open(benchmark_path, "r") as f:
                     checklist[check_dir.name]["benchmark"] = json.load(f)
             # load the prompts
-            prompts_dir = check_dir / "prompts" 
+            prompts_dir = check_dir / "prompts"
             checklist[check_dir.name]["prompts"] = {}  # Initialize prompts dictionary
-            if prompts_dir.exists():
-                for prompt_file in prompts_dir.glob("*.txt"):
-                    with open(prompt_file, "r") as f:
-                        checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
+            # if prompts_dir.exists():
+            #     for prompt_file in prompts_dir.glob("*.txt"):
+            #         with open(prompt_file, "r", encoding="utf-8") as f:
+            #             checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
+            # else:
+            # Fetch prompt from Langfuse SDK.
+            # The Langfuse prompt key will be: "checklists/{checklist_name}/{check_name}"
+            # where checklist_name is the parent checklist directory name (e.g., 'doc-checklist')
+            try:
+                if langfuse_client is None:
+                    raise RuntimeError("Langfuse client not available or failed to initialize")
+
+                # Build the prompt key using the checklist directory name and the check name
+                checklist_name = checklist_dir.name if hasattr(checklist_dir, "name") else str(checklist_dir)
+                prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+                print(f"---------------------> Fetching prompt for key: {prompt_key}")
+
+                # `get_prompt` returns the production prompt (string) per user instructions
+                prompt_text = langfuse_client.get_prompt(prompt_key)
+                if prompt_text:
+                    # Use a filename derived from the check name as before
+                    prompt_filename = f"{check_dir.name}.txt"
+                    checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text
+            except Exception as e:
+                logger.info(f"Langfuse prompt fetch skipped or failed for {check_dir.name}: {e}")
+                try:
+                    st.warning(f"Could not load prompts from Langfuse for {check_dir.name}: {e}")
+                except Exception:
+                    pass
     return checklist
    
 
