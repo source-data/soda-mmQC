@@ -33,29 +33,13 @@ except Exception:
     pass
 
 try:
-    from langfuse import Langfuse
-    # Initialize client using environment variables when available
+    # Use the SDK helper the examples use: get_client()
+    from langfuse import get_client as _get_langfuse_client
     try:
-        lf_public = os.getenv("LANGFUSE_PUBLIC_KEY")
-        lf_secret = os.getenv("LANGFUSE_SECRET_KEY")
-        lf_base = os.getenv("LANGFUSE_BASE_URL")
-        if lf_public or lf_secret or lf_base:
-            try:
-                langfuse_client = Langfuse(public_key=lf_public, secret_key=lf_secret, base_url=lf_base)
-            except TypeError:
-                try:
-                    langfuse_client = Langfuse()
-                except Exception:
-                    langfuse_client = None
-        else:
-            try:
-                langfuse_client = Langfuse()
-            except Exception:
-                langfuse_client = None
+        langfuse_client = _get_langfuse_client()
     except Exception:
         langfuse_client = None
 except Exception:
-    Langfuse = None
     langfuse_client = None
 
 
@@ -461,6 +445,7 @@ def prepare_check_data(
 
         # Use a single prompt named after the check
         prompts = {check_dir.name: prompt_text}
+        print(f"Successfully fetched prompt for {check_dir.name} from Langfuse")
     except Exception as e:
         logger.error(f"Error fetching prompt from Langfuse for {check_dir.name}: {e}")
         return (None, {})

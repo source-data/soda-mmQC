@@ -22,31 +22,12 @@ except Exception:
     pass
 # Optional Langfuse SDK integration for fetching prompts
 try:
-    from langfuse import Langfuse
+    from langfuse import get_client as _get_langfuse_client
     try:
-        # Try to initialize Langfuse with env vars if provided
-        lf_public = os.getenv("LANGFUSE_PUBLIC_KEY")
-        lf_secret = os.getenv("LANGFUSE_SECRET_KEY")
-        lf_base = os.getenv("LANGFUSE_BASE_URL")
-        # If any key or base_url is provided, prefer explicit construction
-        if lf_public or lf_secret or lf_base:
-            try:
-                langfuse_client = Langfuse(public_key=lf_public, secret_key=lf_secret, base_url=lf_base)
-            except TypeError:
-                # SDK may accept different parameter names; fall back to no-arg init
-                try:
-                    langfuse_client = Langfuse()
-                except Exception:
-                    langfuse_client = None
-        else:
-            try:
-                langfuse_client = Langfuse()
-            except Exception:
-                langfuse_client = None
+        langfuse_client = _get_langfuse_client()
     except Exception:
         langfuse_client = None
 except Exception:
-    Langfuse = None
     langfuse_client = None
 
 # Set page config for wider layout

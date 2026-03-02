@@ -26,6 +26,129 @@ except ImportError:
 # API clients will be imported dynamically when needed
 
 
+# --- Langfuse helpers: simplified wrapper using langfuse.get_client() ---
+try:
+    # Prefer the documented entrypoint used by tests/examples
+    from langfuse import get_client as _lf_get_client  # type: ignore
+except Exception:
+    _lf_get_client = None
+
+
+def _get_langfuse_client() -> Optional[Any]:
+    """Return a Langfuse client instance, or None if unavailable.
+
+    This is intentionally minimal: it mirrors the example in
+    `test_langfuse.py` and prefers the `get_client()` helper the SDK
+    exposes. The calling code should treat a None return as "no tracing".
+    """
+    try:
+        if _lf_get_client is None:
+            from langfuse import get_client as _gc  # type: ignore
+            return _gc()
+        return _lf_get_client()
+    except Exception:
+        return None
+
+
+def _lf_start_trace(client: Any, name: str, metadata: Optional[Dict[str, Any]] = None) -> Optional[Any]:
+    """Start a top-level Langfuse span/trace and return it, or None.
+
+    The returned object is the SDK span/trace; callers can use the
+    helper `_lf_log_generation` below to record a generation and finish
+    the trace. All operations are best-effort and swallow exceptions so
+    tracing never breaks normal program flow.
+    """
+    if client is None:
+        return None
+    try:
+        return client.start_span(name=name, metadata=(metadata or {}))
+    except Exception:
+        # Try a couple of common alternate names the SDK might provide
+        try:
+            if hasattr(client, "start_trace"):
+                return client.start_trace(name=name, metadata=(metadata or {}))
+        except Exception:
+            pass
+    return None
+
+
+def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str) -> None:
+    """Best-effort: create a child span + generation observation and finish.
+
+    This mirrors the sequence used in `test_langfuse.py`:
+      - trace.start_span(...) -> child span
+      - span.update(input=...)
+      - span.start_observation(as_type="generation", ...)
+      - end observation, update span with output, end span, end trace
+      - flush client
+    All steps are wrapped in try/except and won't raise.
+    """
+    try:
+        if not (client and trace):
+            return
+        span = None
+        try:
+            if hasattr(trace, "start_span"):
+                span = trace.start_span(name=span_name)
+            elif hasattr(trace, "start_observation"):
+                span = trace.start_observation(name=span_name)
+        except Exception:
+            span = None
+
+        if span is None:
+            return
+
+        try:
+            if hasattr(span, "update"):
+                span.update(input={"prompt": input_text})
+        except Exception:
+            pass
+
+        try:
+            if hasattr(span, "start_observation"):
+                gen = span.start_observation(
+                    as_type="generation",
+                    name=gen_name,
+                    model=model,
+                    input=input_text,
+                    output=output_text,
+                )
+                try:
+                    gen.end()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        try:
+            if hasattr(span, "update"):
+                span.update(output=output_text)
+        except Exception:
+            pass
+
+        try:
+            if hasattr(span, "end"):
+                span.end()
+        except Exception:
+            pass
+
+        try:
+            if hasattr(trace, "end"):
+                trace.end()
+        except Exception:
+            pass
+
+        try:
+            if hasattr(client, "flush"):
+                client.flush()
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+# --- end Langfuse helpers ---
+
+
 def _create_tool_from_schema(schema: dict) -> dict:
     """Convert a JSON schema to an Anthropic tool definition.
 
@@ -433,6 +556,26 @@ def generate_response_openai(
         Tuple of (parsed response, response metadata with response_id and
         model)
     """
+    # Lazy-init Langfuse client and start per-call trace (best-effort)
+    _lf_client = _get_langfuse_client()
+    _lf_trace = None
+    try:
+        if _lf_client:
+            _lf_trace = _lf_start_trace(
+                _lf_client,
+                name="openai_generate_response",
+                metadata={"model": model, "doc_id": metadata.get("doc_id") if metadata else None},
+            )
+            if _lf_trace:
+                try:
+                    try:
+                        print("Langfuse: started trace 'openai_generate_response' for doc_id=", (metadata or {}).get("doc_id"))
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+    except Exception:
+        _lf_trace = None
     # Import and initialize OpenAI client
     try:
         from openai import OpenAI
@@ -446,6 +589,20 @@ def generate_response_openai(
 
     # Prepare model input (supports multimodal content; model_config can enable source_data)
     model_input = example.prepare_model_input(prompt, model_config=model_config)
+
+    # Attach a small preview to the trace if available
+    try:
+        if _lf_trace:
+            preview = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            if isinstance(preview, str):
+                preview = preview[:200]
+            try:
+                if hasattr(_lf_trace, "update"):
+                    _lf_trace.update(input={"prompt_preview": preview, "metadata": (metadata or {})})
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # Build request kwargs
     create_kwargs = {
@@ -674,6 +831,27 @@ def generate_response_openai(
     except AttributeError:
         logger.error(f"Error getting metadata, ID, model, or usage: {raw_response}")
         response_metadata = {}
+    # Log generation and finish trace (best-effort)
+    try:
+        if _lf_trace:
+            try:
+                input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            except Exception:
+                input_text = str(prompt)
+            try:
+                _lf_log_generation(
+                    _lf_client,
+                    _lf_trace,
+                    span_name="openai-generation-span",
+                    gen_name="openai-generation",
+                    model=response_model or model,
+                    input_text=input_text,
+                    output_text=output_text,
+                )
+            except Exception:
+                pass
+    except Exception:
+        pass
     
     return response, response_metadata
 
@@ -735,6 +913,33 @@ def generate_response_anthropic(
     ]
 
     # Call Anthropic API with tool use for structured output
+    # Lazy-init Langfuse client and start per-call trace (best-effort)
+    _lf_client = _get_langfuse_client()
+    _lf_trace = None
+    try:
+        if _lf_client:
+            _lf_trace = _lf_start_trace(
+                _lf_client,
+                name="anthropic_generate_response",
+                metadata={"model": model, "doc_id": metadata.get("doc_id") if metadata else None},
+            )
+            if _lf_trace:
+                try:
+                    # Try to attach a small request preview/update
+                    try:
+                        if hasattr(_lf_trace, "update"):
+                            _lf_trace.update(input={"messages_preview": str(messages)[:200]})
+                    except Exception:
+                        pass
+                    try:
+                        print("Langfuse: started trace 'anthropic_generate_response' for doc_id=", (metadata or {}).get("doc_id"))
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+    except Exception:
+        _lf_trace = None
+
     raw_response = client.messages.create(  # type: ignore
         model=model,
         max_tokens=4096,
@@ -777,6 +982,33 @@ def generate_response_anthropic(
 
     # Add custom metadata if provided
     response_metadata.update(metadata)
+
+    # Log response and finish trace if any
+    try:
+        if _lf_trace:
+            try:
+                # Serialize inputs/outputs conservatively for the trace
+                try:
+                    input_text = json.dumps(messages, ensure_ascii=False)
+                except Exception:
+                    input_text = str(messages)
+                try:
+                    output_text = json.dumps(response, ensure_ascii=False)
+                except Exception:
+                    output_text = str(response)
+                _lf_log_generation(
+                    _lf_client,
+                    _lf_trace,
+                    span_name="anthropic-generation-span",
+                    gen_name="anthropic-generation",
+                    model=model,
+                    input_text=input_text,
+                    output_text=output_text,
+                )
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     return response, response_metadata
 
