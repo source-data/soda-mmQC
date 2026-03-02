@@ -9,6 +9,10 @@ import mimetypes
 import io
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
 
 logger = logging.getLogger(__name__)
 
@@ -395,6 +399,40 @@ class FigureExample(Example):
         paths = sorted(paths)
         return [(None, paths)] if paths else []
 
+    def _upload_table_and_get_file_id(self, tpath: Path, purpose: str = "user_data") -> Optional[str]:
+        """Attempt to upload a table file to the OpenAI Files API and return the file id.
+
+        Args:
+            tpath: Path to the file to upload.
+            purpose: Purpose string for the Files API. Allowed values are:
+                'fine-tune', 'assistants', 'batch', 'user_data', 'vision', 'evals'.
+
+        Returns:
+            file id string on success, or None on failure.
+        """
+        allowed = ("fine-tune", "assistants", "batch", "user_data", "vision", "evals")
+        if purpose not in allowed:
+            logger.warning(
+                "Requested file purpose '%s' is not valid. Falling back to 'user_data'. Allowed: %s",
+                purpose,
+                allowed,
+            )
+            purpose = "user_data"
+
+        if OpenAI is None:
+            logger.debug("OpenAI client not available; skipping upload for %s", tpath)
+            return None
+        try:
+            client = OpenAI()
+            res = client.files.create(file=Path(tpath), purpose=purpose)
+            # SDK may return an object with attribute `id` or a dict with key 'id'
+            file_id = getattr(res, "id", None) or (res.get("id") if isinstance(res, dict) else None)
+            logger.info("Uploaded file %s to OpenAI with purpose '%s', id=%s", tpath, purpose, file_id)
+            return file_id
+        except Exception as e:
+            logger.warning("Failed to upload file %s to OpenAI (purpose=%s): %s", tpath, purpose, e)
+            return None
+
     def _get_all_source_data_paths(self) -> List[Path]:
         """Flat list of all source data image paths (for hashing)."""
         out: List[Path] = []
@@ -456,68 +494,32 @@ class FigureExample(Example):
                                 "Skipping source data file %s: %s", path, e
                             )
 
-                # Then add any table-like source data
+                # Then add any table-like source data — strictly upload files
+                # and reference them as `input_file`. If upload fails, log a
+                # warning and do not include any inline text preview or
+                # filename notes.
+                upload_purpose = None
+                if model_config:
+                    upload_purpose = model_config.get("openai_file_purpose")
+                # default to 'user_data' when not provided
+                if not upload_purpose:
+                    upload_purpose = "user_data"
+
                 for panel_label, tpaths in self._get_source_table_items():
-                    table_header = (
-                        f"Source table for panel {panel_label}:"
-                        if panel_label is not None
-                        else "Source table files:"
-                    )
                     for tpath in tpaths:
                         try:
-                            suffix = tpath.suffix.lower()
-                            if suffix in (".csv", ".tsv"):
-                                # read a small preview of the text table
-                                try:
-                                    with open(tpath, "r", encoding="utf-8") as tf:
-                                        lines = []
-                                        for i, ln in enumerate(tf):
-                                            if i >= self.table_preview_lines:
-                                                break
-                                            lines.append(ln.rstrip("\n\r"))
-                                        preview = "\n".join(lines)
-                                except UnicodeDecodeError:
-                                    # fallback to binary+base64 if text read fails
-                                    with open(tpath, "rb") as bf:
-                                        b64 = base64.b64encode(bf.read()).decode("utf-8")
-                                    mime_type, _ = mimetypes.guess_type(str(tpath))
-                                    print(f"Including source table (binary) in model input: {tpath}")
-                                    content.append({
-                                        "type": "input_text",
-                                        "text": f"{table_header} {tpath.name} (binary content encoded)"
-                                    })
-                                    content.append({
-                                        "type": "input_table",
-                                        "file_name": tpath.name,
-                                        "mime_type": mime_type or "application/octet-stream",
-                                        "content_b64": b64
-                                    })
-                                    table_header = ""
-                                    continue
-
-                                print(f"Including source table in model input: {tpath}")
+                            file_id = self._upload_table_and_get_file_id(tpath, purpose=upload_purpose)
+                            if file_id:
                                 content.append({
-                                    "type": "input_text",
-                                    "text": f"{table_header} {tpath.name}\n{preview}".strip()
+                                    "type": "input_file",
+                                    "file_id": file_id,
                                 })
-                                table_header = ""
                             else:
-                                # For spreadsheets, include as base64 with mime type
-                                with open(tpath, "rb") as bf:
-                                    b64 = base64.b64encode(bf.read()).decode("utf-8")
-                                mime_type, _ = mimetypes.guess_type(str(tpath))
-                                print(f"Including spreadsheet source table in model input: {tpath}")
-                                content.append({
-                                    "type": "input_text",
-                                    "text": f"{table_header} {tpath.name} (binary spreadsheet)"
-                                })
-                                content.append({
-                                    "type": "input_table",
-                                    "file_name": tpath.name,
-                                    "mime_type": mime_type or "application/octet-stream",
-                                    "content_b64": b64
-                                })
-                                table_header = ""
+                                logger.warning(
+                                    "Could not upload source table %s; skipping it."
+                                    " Ensure OpenAI client is configured and reachable.",
+                                    tpath,
+                                )
                         except Exception as e:
                             logger.warning("Skipping source table file %s: %s", tpath, e)
         return {"content": content}
