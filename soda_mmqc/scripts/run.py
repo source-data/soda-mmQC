@@ -84,6 +84,12 @@ class ModelInput:
     example: Example
     prompt: str
     schema: Dict[str, Any]
+    # Full prompt key/name used for tracing and disambiguation, e.g.
+    # "checklists/fig-checklist/panel-data-replication-validation".
+    prompt_name: Optional[str] = None
+    # Prompt object returned by Langfuse SDK (if available). Keep separate
+    # from `prompt_name` so we don't attempt to JSON-serialize it.
+    prompt_obj: Optional[object] = None
 
 
 @dataclass
@@ -172,7 +178,9 @@ def run_model(
     check_data: CheckData,
     prompt: str,
     use_cache: bool = True,
-    model: str = DEFAULT_MODEL
+    model: str = DEFAULT_MODEL,
+    prompt_name: Optional[str] = None,
+    prompt_obj: Optional[object] = None,
 ) -> List[ModelResult]:
     """Step 2: Run the model on all inputs.
     
@@ -209,12 +217,15 @@ def run_model(
             model_input = ModelInput(
                 example=example,
                 prompt=prompt,
-                schema=schema
+                schema=schema,
+                prompt_name=prompt_name,
+                prompt_obj=prompt_obj,
             )
             input_metadata = {
                 "doc_id": example.doc_id,
                 "source": example.relative_source_path,
-                "example_type": example.example_class_name
+                "example_type": example.example_class_name,
+                "prompt_name": prompt_name,
             }
             # Check cache first if enabled
             if use_cache:
@@ -438,13 +449,17 @@ def prepare_check_data(
         # Build prompt key: checklists/{checklist_name}/{check_name}
         checklist_name = check_dir.parent.name
         prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
-        prompt_text = langfuse_client.get_prompt(prompt_key)
-        if not prompt_text:
+        # Log the prompt key before fetching from Langfuse
+        logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
+        prompt_obj = langfuse_client.get_prompt(prompt_key)
+        if not prompt_obj:
             logger.error(f"No prompt returned from Langfuse for key: {prompt_key}")
             return (None, {})
 
-        # Use a single prompt named after the check
-        prompts = {check_dir.name: prompt_text}
+        # Use a single prompt named after the check. Keep both text and obj so
+        # the caller can pass the Langfuse prompt object to the tracing API
+        # while still sending a text prompt to the model.
+        prompts = {check_dir.name: {"text": prompt_obj, "obj": prompt_obj}}
         print(f"Successfully fetched prompt for {check_dir.name} from Langfuse")
     except Exception as e:
         logger.error(f"Error fetching prompt from Langfuse for {check_dir.name}: {e}")
@@ -582,6 +597,12 @@ def process_check(
     # Process each prompt
     for prompt_name, prompt in prompts.items():
         logger.info(f"Processing prompt: {prompt_name}")
+        # Build full prompt key/path so traces can be linked back to the
+        # prompt stored in Langfuse. Example: "checklists/fig-checklist/...".
+        prompt_key = f"checklists/{checklist_name}/{prompt_name}"
+        # prompt is a dict with 'text' and 'obj' keys (see prepare_check_data)
+        prompt_text = prompt["text"] if isinstance(prompt, dict) else prompt
+        prompt_obj = prompt.get("obj") if isinstance(prompt, dict) else None
         if mock:
             results = [
                 ModelResult(
@@ -600,9 +621,11 @@ def process_check(
         else:
             results = run_model(
                 check_data,
-                prompt,
+                prompt_text,
                 use_cache=use_cache,
-                model=model
+                model=model,
+                prompt_name=prompt_key,
+                prompt_obj=prompt_obj,
             )
 
         # Analyze results with all string metrics
@@ -673,12 +696,20 @@ def initialize(checklist_dir: Path, use_cache: bool = True, model: str = DEFAULT
         first_prompt_name = prompts_sorted[0]
         first_prompt = prompts[first_prompt_name]
 
+        # Handle structure where prompts map to dicts with text/obj
+        first_prompt_text = first_prompt["text"] if isinstance(first_prompt, dict) else first_prompt
+        first_prompt_obj = first_prompt.get("obj") if isinstance(first_prompt, dict) else None
+
         try:
+            # Build full prompt key/path like in process_check
+            prompt_key = f"checklists/{checklist_dir.name}/{first_prompt_name}"
             results = run_model(
                 prepared_data,
-                first_prompt,
+                first_prompt_text,
                 use_cache=use_cache,
-                model=model
+                model=model,
+                prompt_name=prompt_key,
+                prompt_obj=first_prompt_obj,
             )
 
             # Write expected outputs

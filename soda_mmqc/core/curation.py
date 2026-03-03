@@ -220,8 +220,7 @@ def load_checklist(checklist_dir):
                 # Build the prompt key using the checklist directory name and the check name
                 checklist_name = checklist_dir.name if hasattr(checklist_dir, "name") else str(checklist_dir)
                 prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
-                print(f"---------------------> Fetching prompt for key: {prompt_key}")
-
+                logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
                 # `get_prompt` returns the production prompt (string) per user instructions
                 prompt_text = langfuse_client.get_prompt(prompt_key)
                 if prompt_text:

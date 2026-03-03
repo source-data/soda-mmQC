@@ -72,7 +72,7 @@ def _lf_start_trace(client: Any, name: str, metadata: Optional[Dict[str, Any]] =
     return None
 
 
-def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str) -> None:
+def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str, prompt_obj: Optional[Any] = None) -> None:
     """Best-effort: create a child span + generation observation and finish.
 
     This mirrors the sequence used in `test_langfuse.py`:
@@ -106,13 +106,22 @@ def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, m
 
         try:
             if hasattr(span, "start_observation"):
-                gen = span.start_observation(
+                # If a Langfuse prompt object is provided, pass it so the
+                # observation is linked to the prompt in Langfuse UI.
+                kwargs = dict(
                     as_type="generation",
                     name=gen_name,
                     model=model,
                     input=input_text,
                     output=output_text,
                 )
+                if prompt_obj is not None:
+                    try:
+                        kwargs["prompt"] = prompt_obj
+                    except Exception:
+                        pass
+
+                gen = span.start_observation(**kwargs)
                 try:
                     gen.end()
                 except Exception:
@@ -538,7 +547,8 @@ def generate_response_openai(
     schema: dict,
     model: str,
     metadata: dict,
-    model_config: Optional[Dict[str, Any]] = None
+    model_config: Optional[Dict[str, Any]] = None,
+    prompt_obj: Optional[Any] = None,
 ) -> Tuple[dict, dict]:
     """Generate response using OpenAI API with structured output.
 
@@ -564,7 +574,11 @@ def generate_response_openai(
             _lf_trace = _lf_start_trace(
                 _lf_client,
                 name="openai_generate_response",
-                metadata={"model": model, "doc_id": metadata.get("doc_id") if metadata else None},
+                metadata={
+                    "model": model,
+                    "doc_id": metadata.get("doc_id") if metadata else None,
+                    "prompt_name": metadata.get("prompt_name") if metadata else None,
+                },
             )
             if _lf_trace:
                 try:
@@ -839,15 +853,19 @@ def generate_response_openai(
             except Exception:
                 input_text = str(prompt)
             try:
-                _lf_log_generation(
-                    _lf_client,
-                    _lf_trace,
-                    span_name="openai-generation-span",
-                    gen_name="openai-generation",
-                    model=response_model or model,
-                    input_text=input_text,
-                    output_text=output_text,
-                )
+                    try:
+                        _lf_log_generation(
+                            _lf_client,
+                            _lf_trace,
+                            span_name="openai-generation-span",
+                            gen_name="openai-generation",
+                            model=response_model or model,
+                            input_text=input_text,
+                            output_text=output_text,
+                            prompt_obj=prompt_obj,
+                        )
+                    except Exception:
+                        pass
             except Exception:
                 pass
     except Exception:
@@ -868,7 +886,8 @@ def generate_response_anthropic(
     schema: dict,
     model: str,
     metadata: dict,
-    model_config: Optional[Dict[str, Any]] = None
+    model_config: Optional[Dict[str, Any]] = None,
+    prompt_obj: Optional[Any] = None,
 ) -> Tuple[dict, dict]:
     """Generate response using Anthropic API with structured output via tools.
 
@@ -921,7 +940,11 @@ def generate_response_anthropic(
             _lf_trace = _lf_start_trace(
                 _lf_client,
                 name="anthropic_generate_response",
-                metadata={"model": model, "doc_id": metadata.get("doc_id") if metadata else None},
+                metadata={
+                    "model": model,
+                    "doc_id": metadata.get("doc_id") if metadata else None,
+                    "prompt_name": metadata.get("prompt_name") if metadata else None,
+                },
             )
             if _lf_trace:
                 try:
@@ -996,15 +1019,19 @@ def generate_response_anthropic(
                     output_text = json.dumps(response, ensure_ascii=False)
                 except Exception:
                     output_text = str(response)
-                _lf_log_generation(
-                    _lf_client,
-                    _lf_trace,
-                    span_name="anthropic-generation-span",
-                    gen_name="anthropic-generation",
-                    model=model,
-                    input_text=input_text,
-                    output_text=output_text,
-                )
+                try:
+                    _lf_log_generation(
+                        _lf_client,
+                        _lf_trace,
+                        span_name="anthropic-generation-span",
+                        gen_name="anthropic-generation",
+                        model=model,
+                        input_text=input_text,
+                        output_text=output_text,
+                        prompt_obj=prompt_obj,
+                    )
+                except Exception:
+                    pass
             except Exception:
                 pass
     except Exception:
@@ -1051,6 +1078,7 @@ def generate_response(
         model = DEFAULT_MODEL
 
     # Route to appropriate API
+    prompt_obj = getattr(model_input, "prompt_obj", None)
     if API_PROVIDER == "anthropic":
         return generate_response_anthropic(
             example=example,
@@ -1058,7 +1086,8 @@ def generate_response(
             schema=schema,
             model=model,
             metadata=metadata,
-            model_config=model_config
+            model_config=model_config,
+            prompt_obj=prompt_obj,
         )
     else:
         return generate_response_openai(
@@ -1067,5 +1096,6 @@ def generate_response(
             schema=schema,
             model=model,
             metadata=metadata,
-            model_config=model_config
+            model_config=model_config,
+            prompt_obj=prompt_obj,
         )

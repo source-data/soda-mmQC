@@ -15,7 +15,17 @@ def load_json(file_path):
 
 def get_check_data(check_dir: Path, remote: bool = True):
     if remote:
-        prompt_data = langfuse.get_prompt(str(check_dir))
+        # Use the canonical prompt key used elsewhere in the codebase:
+        # "checklists/{checklist_name}/{check_name}" so Langfuse prompt
+        # management returns the intended prompt rather than a file/path
+        # based name which can point to unrelated prompt entities.
+        try:
+            checklist_name = check_dir.parent.name
+        except Exception:
+            checklist_name = str(check_dir.parent)
+        prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+        logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
+        prompt_data = langfuse.get_prompt(prompt_key)
         prompt_text = prompt_data.prompt
         schema = prompt_data.config.get("output_schema", {})
         benchmark = prompt_data.config.get("benchmark", {})
@@ -32,11 +42,22 @@ def get_remote_prompts(check_dir: Path, versions = [1, 2, 3, 4]):
     schemas = {}
     benchmarks = {}
     
+    try:
+        checklist_name = check_dir.parent.name
+    except Exception:
+        checklist_name = str(check_dir.parent)
+    prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+    prompt_text = None
+    schema = {}
+    benchmark = {}
     for version in versions:
-        prompt_data = langfuse.get_prompt(str(check_dir), version=version)
-        prompt_text = prompt_data.prompt
-        schema = prompt_data.config.get("output_schema", {})
-        benchmark = prompt_data.config.get("benchmark", {})
+        logger.info(f"Langfuse: fetching prompt for key={prompt_key} version={version}")
+        prompt_data = langfuse.get_prompt(prompt_key, version=version)
+        if prompt_data:
+            prompt_text = prompt_data.prompt
+            schema = prompt_data.config.get("output_schema", {})
+            benchmark = prompt_data.config.get("benchmark", {})
+            break
     return prompt_text, schema, benchmark
 
 
