@@ -412,70 +412,54 @@ def prepare_check_data(
     """
     logger.info(f"Preparing data for check: {check_dir.name}")
 
-    # Load check data
-    check_benchmark_file = check_dir / "benchmark.json"
-    if not check_benchmark_file.exists():
-        logger.warning(
-            f"Check data file not found: {check_benchmark_file}"
-        )
-        return (None, {})
-
-    try:
-        benchmark_data = load_json(check_benchmark_file)
-    except Exception as e:
-        logger.error(f"Error loading check data: {str(e)}")
-        return (None, {})
-
-    check_name = benchmark_data["name"]
-
-    # Load schema
-    schema_file = check_dir / "schema.json"
-    if not schema_file.exists():
-        logger.error(f"Schema file not found: {schema_file}")
-        return (None, {})
-
-    try:
-        schema = load_json(schema_file)
-    except Exception as e:
-        logger.error(f"Error loading schema: {str(e)}")
-        return (None, {})
-
-    # STRICT: fetch prompts via Langfuse SDK only (no local fallback)
+    # Fetch check metadata and schema from Langfuse (no local JSON files)
     try:
         if langfuse_client is None:
-            logger.error("Langfuse client not initialized; cannot fetch prompts")
+            logger.error("Langfuse client not initialized; cannot fetch prompts/config")
             return (None, {})
 
-        # Build prompt key: checklists/{checklist_name}/{check_name}
         checklist_name = check_dir.parent.name
         prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
-        # Log the prompt key before fetching from Langfuse
         logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
         prompt_obj = langfuse_client.get_prompt(prompt_key)
         if not prompt_obj:
             logger.error(f"No prompt returned from Langfuse for key: {prompt_key}")
             return (None, {})
 
+        # Extract config and split into schema (output_schema) and benchmark_data
+        cfg = getattr(prompt_obj, "config", {}) or {}
+        schema = cfg.get("output_schema", {})
+        benchmark_data = {k: v for k, v in cfg.items() if k != "output_schema"}
+
+        # Ensure we have a check name
+        check_name = benchmark_data.get("name", check_dir.name)
+
         # Use a single prompt named after the check. Keep both text and obj so
         # the caller can pass the Langfuse prompt object to the tracing API
         # while still sending a text prompt to the model.
-        prompts = {check_dir.name: {"text": prompt_obj, "obj": prompt_obj}}
-        print(f"Successfully fetched prompt for {check_dir.name} from Langfuse")
+        prompts = {
+            check_dir.name: {
+                "text": getattr(prompt_obj, "prompt", str(prompt_obj)),
+                "obj": prompt_obj,
+            }
+        }
+        logger.info(f"Successfully fetched prompt and config for {check_dir.name} from Langfuse")
+
     except Exception as e:
-        logger.error(f"Error fetching prompt from Langfuse for {check_dir.name}: {e}")
+        logger.error(f"Error fetching prompt/config from Langfuse for {check_dir.name}: {e}")
         return (None, {})
 
-    # Get list of paths to examples from benchmark.json
+    # Get list of paths to examples from benchmark (from Langfuse config)
     example_paths = benchmark_data.get("examples", [])
     if not example_paths:
         logger.warning(f"No examples found in check: {check_dir.name}")
         return (None, {})
 
-    # Get example class from benchmark.json
+    # Get example class from benchmark (from Langfuse config)
     try:
         example_class_name = benchmark_data["example_class"]
     except KeyError:
-        logger.error(f"No example class found in {check_benchmark_file}")
+        logger.error(f"No example class found in Langfuse config for {prompt_key}")
         return (None, {})
 
     try:

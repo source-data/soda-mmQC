@@ -55,8 +55,13 @@ def get_remote_prompts(check_dir: Path, versions = [1, 2, 3, 4]):
         prompt_data = langfuse.get_prompt(prompt_key, version=version)
         if prompt_data:
             prompt_text = prompt_data.prompt
-            schema = prompt_data.config.get("output_schema", {})
-            benchmark = prompt_data.config.get("benchmark", {})
+            # schema = prompt_data.config.get("output_schema", {})
+            # benchmark = prompt_data.config.get("benchmark", {})
+            cfg = getattr(prompt_data, "config", {}) or {}
+            # Extract the output schema if present
+            schema = cfg.get("output_schema", {})
+            # Benchmark is the remaining config keys (everything except output_schema)
+            benchmark = {k: v for k, v in cfg.items() if k != "output_schema"}
             break
     return prompt_text, schema, benchmark
 

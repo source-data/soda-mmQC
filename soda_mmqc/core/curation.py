@@ -226,7 +226,7 @@ def load_checklist(checklist_dir):
                 if prompt_text:
                     # Use a filename derived from the check name as before
                     prompt_filename = f"{check_dir.name}.txt"
-                    checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text
+                    checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text.name
             except Exception as e:
                 logger.info(f"Langfuse prompt fetch skipped or failed for {check_dir.name}: {e}")
                 try:
