@@ -641,7 +641,7 @@ def list_checks(checklist_dir: Path) -> Dict[str, Path]:
     return checks
 
 
-def initialize(checklist_dir: Path, use_cache: bool = True, model: str = DEFAULT_MODEL):
+def initialize(checklist_dir: Path, check_names: list, use_cache: bool = True, model: str = DEFAULT_MODEL):
     """Initialize expected_output.json files for all examples in a checklist.
     
     This function iterates through the checks of a checklist. For each check,
@@ -663,7 +663,10 @@ def initialize(checklist_dir: Path, use_cache: bool = True, model: str = DEFAULT
     if not checks:
         logger.error(f"No checks found in checklist: {checklist_dir.name}")
         return
-    
+    # Use only the specified check names if provided
+    if check_names:
+        checks = {name: checks[name] for name in check_names if name in checks}
+
     # Process each check
     for check_dir_name, check_dir in checks.items():
         logger.info(f"Processing check: {check_dir_name}")
@@ -831,7 +834,7 @@ def main():
     
     # Initialize if requested
     if args.initialize:
-        initialize(checklist_dir, not args.no_cache, args.model)
+        initialize(checklist_dir, [args.check] if args.check else [], not args.no_cache, args.model)
         return
 
     if args.check:
