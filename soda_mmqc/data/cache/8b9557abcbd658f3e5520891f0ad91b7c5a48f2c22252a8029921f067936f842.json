@@ -1,0 +1,57 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The uncropped file 'Western blot - 1C.tif' contains the full Lysate and IP:Flag FAS blots; the band pattern, lane order and relative intensities (including the strong IP signal in the CMTM6-SF lane) match the cropped figure panels within normal cropping."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The Flag blots in the uncropped source file show the same lane arrangement and band shapes/intensities as the figure (both Lysate and IP:Flag panels), consistent with the cropped figure images."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The Actin loading control lanes are present in the uncropped file with the same band positions and relative intensities as shown in the figure (matches after expected cropping)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_native_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_native_10.1038_s44319-026-00694-8/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_01a01f6f3e3e50220069a6f7f7a87c81a39b946f736e81bab7",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4048,
+      "output_tokens": 1045
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T16:02:31.378714"
+  }
+}

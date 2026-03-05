@@ -1,0 +1,271 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "CMTM4",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "CMTM4",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "CMTM4",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6 (IP: Flag)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS (IP: Flag)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag (IP: Flag)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "CMTM6 (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6 (IP: Flag)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS (IP: Flag)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag (IP: Flag)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "CMTM6 (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "FAS (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Flag (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          },
+          {
+            "protein_or_band_label": "Actin (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data provided for this band."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_native_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_native_10.1038_s44319-026-00694-8/content/6",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0ded19aa0593cd730069a5862d51b0819db272b1289a19244c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2490,
+      "output_tokens": 2953
+    },
+    "status": "completed",
+    "cached_at": "2026-03-02T13:45:09.422813"
+  }
+}

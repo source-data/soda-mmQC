@@ -1,0 +1,54 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file 'Western blot - 1C.tif' contains a full FAS blot with the same lane pattern and band shapes as shown in the figure C (differences are consistent with cropping and contrast adjustments)."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file includes the Flag immunoblot with the same distinct bands and relative intensities across the GFP-SF and CMTM-SF lanes as in figure C; appearance differences are limited to expected cropping/contrast."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file shows the Actin loading control with consistent band positions and intensities across lanes that match the figure C panel (minor background variation only)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_074c9dce2f27f0930069a6e40200448197891976653c32da4b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2940,
+      "output_tokens": 752
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T14:37:19.404904"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "Cl. caspase-8",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for cleaved caspase-8 provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "Cl. caspase-3",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Quantitative source data for cleaved caspase-3 are provided in 5C.xlsx (band intensities and normalized values), but no raw blot image is included, so the visual band in the figure cannot be directly matched to a source image."
+          },
+          {
+            "protein_or_band_label": "caspase-8",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for full-length caspase-8 provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for CMTM6 provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for FAS provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for Actin loading control provided in the source_data files; unable to verify."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "Cl. caspase-8",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for cleaved caspase-8 provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "Cl. caspase-3",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Quantitative source data for cleaved caspase-3 are provided in 5F.xlsx (band intensities and normalized values), but raw blot images are not included, so the visual band in the figure cannot be directly matched to a source image."
+          },
+          {
+            "protein_or_band_label": "caspase-8",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for full-length caspase-8 provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for CMTM6 provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for FAS provided in the source_data files; unable to verify."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source image or data for Actin loading control provided in the source_data files; unable to verify."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "bands": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_native_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_native_10.1038_s44319-026-00694-8/content/5",
+    "example_type": "figure",
+    "tables": "source_data:5C.xlsx; source_data:5F.xlsx",
+    "response_id": "resp_03cf6d8075b7a2040069a5860cbc8481938219bef0a84fb6ef",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3080,
+      "output_tokens": 2322
+    },
+    "status": "completed",
+    "cached_at": "2026-03-02T13:44:28.774500"
+  }
+}

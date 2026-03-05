@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Dict, Any, Optional, Type, List, Tuple
 import hashlib
+import io
 import json
 import logging
 import base64
@@ -10,6 +11,11 @@ import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
 
 logger = logging.getLogger(__name__)
+
+# Image MIME types supported by OpenAI Responses API (TIFF is not supported)
+_API_SUPPORTED_IMAGE_TYPES = frozenset(
+    {"image/jpeg", "image/png", "image/gif", "image/webp"}
+)
 
 
 # Class mapping for factory pattern - will be populated after class definitions
@@ -172,6 +178,15 @@ class Example(ABC):
         with open(expected_output_path, "w", encoding="utf-8") as f:
             json.dump(output, f, indent=4, ensure_ascii=False)
 
+        # Write HTML version for easier viewing
+        try:
+            from soda_mmqc.lib.expected_output_html import output_to_html
+            html_path = expected_output_dir / "expected_output.html"
+            with open(html_path, "w", encoding="utf-8") as f:
+                f.write(output_to_html(output, title=f"Expected output — {check_name}"))
+        except Exception as e:
+            logger.debug("Could not write expected_output.html: %s", e)
+
         logger.info(
             f"Saved expected output: {expected_output_path}"
         )
@@ -279,7 +294,33 @@ class FigureExample(Example):
             raise ValueError(f"Not an image: {image_path}")
         with open(image_path, "rb") as f:
             b64 = base64.b64encode(f.read()).decode("utf-8")
-        return mime_type, b64
+        return self._ensure_api_supported_image(mime_type, b64)
+
+    def _ensure_api_supported_image(self, mime_type: str, b64: str) -> tuple[str, str]:
+        """Return (mime_type, b64) with a format the API accepts (jpeg, png, gif, webp).
+        Converts TIFF and other unsupported formats to PNG via PIL if available.
+        """
+        if mime_type in _API_SUPPORTED_IMAGE_TYPES:
+            return mime_type, b64
+        try:
+            from PIL import Image
+        except ImportError:
+            logger.warning(
+                "PIL not available; cannot convert %s to a supported format. "
+                "Install Pillow or use JPEG/PNG/GIF/WebP images.",
+                mime_type,
+            )
+            raise ValueError(
+                f"Image format {mime_type} is not supported by the API. "
+                "Use image/jpeg, image/png, image/gif, or image/webp, or install Pillow to convert TIFF."
+            )
+        raw = base64.b64decode(b64)
+        img = Image.open(io.BytesIO(raw))
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return "image/png", base64.b64encode(buf.getvalue()).decode("utf-8")
 
     _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
 
@@ -321,6 +362,24 @@ class FigureExample(Example):
             out.extend(paths)
         return sorted(out)
 
+    def _get_source_data_file_list(self) -> List[str]:
+        """List of all file names (and relative paths) in source_data folder.
+        Recursively includes every file so the model can see e.g. .xlsx, .csv
+        without opening them. Returns paths relative to source_data dir.
+        """
+        source_data_dir = self.source_path / "content" / "source_data"
+        if not source_data_dir.is_dir():
+            return []
+        out: List[str] = []
+        for f in sorted(source_data_dir.rglob("*")):
+            if f.is_file():
+                try:
+                    rel = f.relative_to(source_data_dir)
+                    out.append(rel.as_posix())
+                except ValueError:
+                    out.append(f.name)
+        return sorted(out)
+
     def prepare_model_input(
         self, prompt: str, model_config: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
@@ -330,6 +389,8 @@ class FigureExample(Example):
         images from content/source_data/ so the model can compare them to the figure.
         """
         self._ensure_loaded()
+        fig_mime, fig_b64 = self._get_image_mime_type(), self._encode_image()
+        fig_mime, fig_b64 = self._ensure_api_supported_image(fig_mime, fig_b64)
         content: List[Dict[str, Any]] = [
             {
                 "type": "input_text",
@@ -337,17 +398,42 @@ class FigureExample(Example):
             },
             {
                 "type": "input_image",
-                "image_url": (
-                    f"data:{self._get_image_mime_type()};base64,"
-                    f"{self._encode_image()}"
-                )
+                "image_url": f"data:{fig_mime};base64,{fig_b64}"
             }
         ]
         # Include source data files if this check requests them
         if model_config:
             source_config = model_config.get("source_data_files") or {}
             if source_config.get("enabled"):
-                for panel_label, paths in self._get_source_data_items():
+                source_data_dir = self.source_path / "content" / "source_data"
+                if source_data_dir.is_dir():
+                    file_list = self._get_source_data_file_list()
+                    if file_list:
+                        content.append({
+                            "type": "input_text",
+                            "text": (
+                                "---\n"
+                                "File names in the **source_data** folder (same path as the figure and caption):\n"
+                                + "\n".join(f"  - {name}" for name in file_list)
+                            )
+                        })
+                source_items = self._get_source_data_items()
+                num_source_images = sum(len(paths) for _, paths in source_items)
+                if source_items:
+                    logger.info(
+                        "Including %d source data image(s) for %s",
+                        num_source_images,
+                        getattr(self, "doc_id", self.source_path),
+                    )
+                    content.append({
+                        "type": "input_text",
+                        "text": (
+                            "Images from the **source_data** folder (same path as the figure and caption). "
+                            "Each image is labelled with its filename and optionally the panel (e.g. Source data for panel A: filename). "
+                            "Use these images to compare with the western blot panels in the figure above."
+                        )
+                    })
+                for panel_label, paths in source_items:
                     group_header = (
                         f"Source data for panel {panel_label}:"
                         if panel_label is not None

@@ -1,9 +1,0 @@
-{
-    "outputs": [
-        {
-            "panel_label": "C",
-            "source_data_matches_figure": "cannot_determine",
-            "discrepancies": "No source data files were provided for the western blot in panel C, so I cannot compare the published figure to the original/uncropped blot. Please provide the corresponding source data (uncropped blot scans or raw images labeled for panel C) to enable a proper comparison."
-        }
-    ]
-}

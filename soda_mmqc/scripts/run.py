@@ -688,7 +688,12 @@ def list_checks(checklist_dir: Path) -> Dict[str, Path]:
     return checks
 
 
-def initialize(checklist_dir: Path, use_cache: bool = True, model: str = DEFAULT_MODEL):
+def initialize(
+    checklist_dir: Path,
+    use_cache: bool = True,
+    model: str = DEFAULT_MODEL,
+    check_name: Optional[str] = None
+):
     """Initialize expected_output.json files for all examples in a checklist.
     
     This function iterates through the checks of a checklist. For each check,
@@ -700,20 +705,30 @@ def initialize(checklist_dir: Path, use_cache: bool = True, model: str = DEFAULT
     Args:
         checklist_dir: Path to the checklist directory
         use_cache: If True, use cached outputs when available
+        model: Model to use for generation
+        check_name: If set, only initialize this check (reduces output)
     """
-    logger.info(
-        f"Initializing expected outputs for checklist: {checklist_dir.name}"
-    )
-    
     # Get all checks from the checklist
     checks = list_checks(checklist_dir)
     if not checks:
         logger.error(f"No checks found in checklist: {checklist_dir.name}")
         return
+
+    if check_name:
+        if check_name not in checks:
+            logger.error(f"Check not found: {check_name}")
+            return
+        checks = {check_name: checks[check_name]}
+        logger.info(f"Initializing expected outputs for check: {check_name}")
+    else:
+        logger.info(
+            f"Initializing expected outputs for checklist: {checklist_dir.name}"
+        )
     
     # Process each check
     for check_dir_name, check_dir in checks.items():
-        logger.info(f"Processing check: {check_dir_name}")
+        if not check_name:
+            logger.info(f"Processing check: {check_dir_name}")
         
         # Prepare check data (use only the first prompt)
         prepared_data, prompts = prepare_check_data(check_dir)
@@ -870,7 +885,12 @@ def main():
     
     # Initialize if requested
     if args.initialize:
-        initialize(checklist_dir, not args.no_cache, args.model)
+        initialize(
+            checklist_dir,
+            not args.no_cache,
+            args.model,
+            check_name=args.check
+        )
         return
 
     if args.check:

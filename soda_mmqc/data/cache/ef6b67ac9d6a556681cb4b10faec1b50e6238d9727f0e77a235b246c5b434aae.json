@@ -1,0 +1,62 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "PD-L1",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The uncropped source file 'Western blot - 7C.tif' includes the PD-L1 band at ~40–60 kDa seen in the figure; lane pattern, band shapes and relative intensities match the figure crop."
+          },
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The same source file contains the CMTM6 band at ~15–25 kDa visible in both the uncropped image and the figure; band positions and lane-to-lane pattern are consistent."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Actin loading-control band (~40–45 kDa) is present in the provided tif and matches the cropped figure panel in position and intensity pattern."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "bands": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_missingLabels_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_missingLabels_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_02d8295bdb69f9630069a6fa623cbc819eade1988c7a2a2162",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4391,
+      "output_tokens": 1814
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T16:12:55.519511"
+  }
+}

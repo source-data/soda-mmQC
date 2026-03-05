@@ -1,0 +1,71 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6 (IP: anti-Alfa)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data image found for this IP band; the provided source_data folder contains only .DS_Store and a .docx file, so match cannot be verified."
+          },
+          {
+            "protein_or_band_label": "PD-L1 (IP: anti-Alfa)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source data image found for this IP band; unable to compare to figure due to missing original blot files."
+          },
+          {
+            "protein_or_band_label": "CMTM6 (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No lysate source data image provided for CMTM6; cannot confirm visual correspondence."
+          },
+          {
+            "protein_or_band_label": "PD-L1 (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No lysate source data image provided for PD-L1; cannot confirm visual correspondence."
+          },
+          {
+            "protein_or_band_label": "Actin (Lysate)",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No lysate source data image provided for Actin loading control; match cannot be assessed."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "bands": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_missingSD_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_missingSD_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0e09b36c4d369cf30069a6e3ee53408194b9edb812abac0099",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2205,
+      "output_tokens": 1228
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T14:37:04.221671"
+  }
+}
