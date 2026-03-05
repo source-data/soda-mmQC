@@ -614,10 +614,15 @@ def check_visualization_with_similarity_dict(
         (df_data['field'] != 'all_fields_aggregated'),
         'field'
     ].unique())
-
-    if not fields:
-        logger.warning("No sub-field level data found for plotting")
-        return
+    
+    if not fields or len(fields) == 0:
+        logger.warning("No sub-field level data found for plotting. Setting the aggregation level to 0 to plot overall scores instead.")
+        aggregation_level = 0
+        fields = list(df_data.loc[
+            (df_data['aggregation_level'] == aggregation_level) &
+            (df_data['field'] != 'all_fields_aggregated'),
+            'field'
+        ].unique())
 
     # Maintain order for ticks
     fields = list(fields)
@@ -665,7 +670,6 @@ def check_visualization_with_similarity_dict(
             # average and std for bar
             avg_val = item_data[score].mean()
             std_val = item_data[score].std() if len(item_data) > 1 else 0.0
-
             avg_x.append(field_to_num[field] + x_offset)
             avg_y.append(avg_val)
             avg_err.append(std_val)
