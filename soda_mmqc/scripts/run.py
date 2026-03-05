@@ -412,7 +412,7 @@ def prepare_check_data(
     """
     logger.info(f"Preparing data for check: {check_dir.name}")
 
-    # Fetch check metadata and schema from Langfuse (no local JSON files)
+    # Fetch check metadata and ALL prompt versions from Langfuse
     try:
         if langfuse_client is None:
             logger.error("Langfuse client not initialized; cannot fetch prompts/config")
@@ -420,30 +420,101 @@ def prepare_check_data(
 
         checklist_name = check_dir.parent.name
         prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
-        logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
-        prompt_obj = langfuse_client.get_prompt(prompt_key)
-        if not prompt_obj:
-            logger.error(f"No prompt returned from Langfuse for key: {prompt_key}")
-            return (None, {})
+        logger.info(f"Langfuse: listing prompts for key={prompt_key}")
 
-        # Extract config and split into schema (output_schema) and benchmark_data
-        cfg = getattr(prompt_obj, "config", {}) or {}
-        schema = cfg.get("output_schema", {})
-        benchmark_data = {k: v for k, v in cfg.items() if k != "output_schema"}
+        # Use the API listing endpoint to get versions per user's instruction
+        prompts_resp = None
+        try:
+            prompts_resp = langfuse_client.api.prompts.list(name=prompt_key)
+        except Exception as e:
+            # fallback to older helper if api.prompts not available
+            logger.debug(f"langfuse_client.api.prompts.list failed: {e}")
+            try:
+                # Try top-level list helper if present
+                prompts_resp = getattr(langfuse_client, "list_prompts", lambda **k: None)(name=prompt_key)
+            except Exception:
+                prompts_resp = None
 
-        # Ensure we have a check name
-        check_name = benchmark_data.get("name", check_dir.name)
+        if not prompts_resp or not getattr(prompts_resp, "data", None):
+            # As a last resort, try get_prompt and wrap as single-version
+            try:
+                prompt_obj = langfuse_client.get_prompt(prompt_key)
+            except Exception as e:
+                logger.error(f"No prompt returned from Langfuse for key: {prompt_key} and list failed: {e}")
+                return (None, {})
 
-        # Use a single prompt named after the check. Keep both text and obj so
-        # the caller can pass the Langfuse prompt object to the tracing API
-        # while still sending a text prompt to the model.
-        prompts = {
-            check_dir.name: {
-                "text": getattr(prompt_obj, "prompt", str(prompt_obj)),
-                "obj": prompt_obj,
+            cfg = getattr(prompt_obj, "config", {}) or {}
+            schema = cfg.get("output_schema", {})
+            benchmark_data = {k: v for k, v in cfg.items() if k != "output_schema"}
+            check_name = benchmark_data.get("name", check_dir.name)
+
+            prompts = {
+                f"{check_dir.name}::production": {
+                    "text": getattr(prompt_obj, "prompt", str(prompt_obj)),
+                    "obj": prompt_obj,
+                }
             }
-        }
-        logger.info(f"Successfully fetched prompt and config for {check_dir.name} from Langfuse")
+            logger.info(f"Fetched single Langfuse prompt for {check_dir.name}")
+        else:
+            # prompts_resp.data[0] is the prompt entry; its .versions attribute holds versions
+            prompt_entry = prompts_resp.data[0]
+            prompt_versions = getattr(prompt_entry, "versions", [])
+
+            # Extract config from the prompt entry (not from an individual version)
+            cfg = getattr(prompt_entry, "config", None)
+            # Some listing responses don't include the full config; fetch the
+            # production prompt via get_prompt to obtain config as a fallback.
+            if not cfg:
+                try:
+                    prod_prompt = langfuse_client.get_prompt(prompt_key)
+                    cfg = getattr(prod_prompt, "config", {}) or {}
+                except Exception:
+                    cfg = {}
+
+            schema = cfg.get("output_schema", {})
+            benchmark_data = {k: v for k, v in cfg.items() if k != "output_schema"}
+            check_name = benchmark_data.get("name", check_dir.name)
+
+            prompts = {}
+            # Normalize versions into separate prompt entries
+            for idx, v in enumerate(prompt_versions):
+                try:
+                    # Determine a version identifier we can pass to get_prompt
+                    ver_id = getattr(v, "id", None) or getattr(v, "version", None) or getattr(v, "name", None) or idx
+
+                    # Retrieve the full prompt object for this specific version
+                    full_prompt = None
+                    try:
+                        full_prompt = langfuse_client.get_prompt(prompt_key, version=v)
+                    except Exception:
+                        # Try passing the identifier instead
+                        try:
+                            full_prompt = langfuse_client.get_prompt(prompt_key, version=ver_id)
+                        except Exception as e:
+                            logger.warning(f"Failed to fetch prompt text for version {ver_id} of {prompt_key}: {e}")
+                            full_prompt = None
+
+                    if not full_prompt:
+                        # If we couldn't fetch the full prompt, attempt to extract any text available on the version object
+                        text = getattr(v, "prompt", None) or getattr(v, "text", None) or getattr(v, "content", None) or str(v)
+                        key = f"{check_dir.name}::version::{ver_id}"
+                        prompts[key] = {
+                            "text": text,
+                            "obj": v,
+                        }
+                        continue
+
+                    # Extract textual prompt from the returned full_prompt object
+                    text = getattr(full_prompt, "prompt", None) or getattr(full_prompt, "text", None) or getattr(full_prompt, "content", None) or str(full_prompt)
+                    key = f"{check_dir.name}::version::{ver_id}"
+                    prompts[key] = {
+                        "text": text,
+                        "obj": full_prompt,
+                    }
+                except Exception as e:
+                    logger.warning(f"Skipping malformed prompt version for {check_dir.name}: {e}")
+
+            logger.info(f"Fetched {len(prompts)} prompt versions for {check_dir.name} from Langfuse")
 
     except Exception as e:
         logger.error(f"Error fetching prompt/config from Langfuse for {check_dir.name}: {e}")
@@ -704,7 +775,8 @@ def initialize(checklist_dir: Path, check_names: list, use_cache: bool = True, m
                 try:
                     example.save_expected_output(
                         result.model_output,
-                        prepared_data.check_name
+                        prepared_data.check_name,
+                        True
                     )
                 except Exception as e:
                     logger.error(
