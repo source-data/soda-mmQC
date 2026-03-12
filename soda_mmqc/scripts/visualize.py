@@ -118,6 +118,41 @@ def data_to_tabular(analysis, doc_id, item_id, aggregation_level, metric, prompt
     return data_points
 
 
+def normalize_prompt_name(prompt_name: str) -> str:
+    """Normalize prompt names to the format 'prompt.1', 'prompt.2', etc.
+    
+    Converts formats like 'error-bars-defined::version::0' to 'prompt.1',
+    'error-bars-defined::version::1' to 'prompt.2', etc.
+    
+    Args:
+        prompt_name: Original prompt name from analysis file
+        
+    Returns:
+        Normalized prompt name in format 'prompt.N'
+    """
+    # If already in the correct format, return as-is
+    if prompt_name.startswith('prompt.'):
+        return prompt_name
+    
+    # Extract version number from patterns like 'check-name::version::N'
+    if '::version::' in prompt_name:
+        try:
+            version_num = int(prompt_name.split('::version::')[-1])
+            return f'prompt.{version_num + 1}'  # Convert 0-indexed to 1-indexed
+        except (ValueError, IndexError):
+            pass
+    
+    # If we can't parse it, try to extract any trailing number
+    import re
+    match = re.search(r'(\d+)$', prompt_name)
+    if match:
+        return f'prompt.{int(match.group(1)) + 1}'
+    
+    # Default fallback: use the original name
+    logger.warning(f"Could not normalize prompt name: {prompt_name}, using as-is")
+    return prompt_name
+
+
 def prepare_data_for_plotting(
     results_by_prompt: Dict[str, Any]
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -133,10 +168,18 @@ def prepare_data_for_plotting(
 
     # Create a list to store all data points
     tabular_data = []
+    
+    # If there's only one prompt, always assign it to 'prompt.1'
+    if len(results_by_prompt) == 1:
+        single_prompt_name = list(results_by_prompt.keys())[0]
+        if single_prompt_name != 'prompt.1':
+            results_by_prompt = {'prompt.1': results_by_prompt[single_prompt_name]}
     tabular_metadata = []
 
     for prompt_name, prompt_results in results_by_prompt.items():
-        logger.debug(f"Processing prompt: {prompt_name}")
+        # Normalize the prompt name to ensure consistent format
+        normalized_prompt_name = normalize_prompt_name(prompt_name)
+        logger.debug(f"Processing prompt: {prompt_name} -> {normalized_prompt_name}")
         
         # Expect nested structure: {metric_name: [results]}
         if not isinstance(prompt_results, dict):
@@ -154,7 +197,7 @@ def prepare_data_for_plotting(
                     item_id=document['doc_id'],
                     aggregation_level=0,
                     metric=metric_name,
-                    prompt_name=prompt_name
+                    prompt_name=normalized_prompt_name
                 )
                 tabular_data.extend(new_rows)
                 tabular_metadata.append(metadata)
@@ -304,7 +347,6 @@ def checklist_visualization(
 
     # Combine all data
     df_data = pd.concat(data, ignore_index=True)
-    print(df_data.head())
     
     # Check that chosen metrics is available
     if metric not in df_data['metric'].unique():
@@ -397,8 +439,8 @@ def checklist_visualization(
         ))
 
     plot.update_layout(
-        width=1000,
-        height=600,
+        width=2400,
+        height=1200,
         title=dict(
             text=f'Benchmarking of "{checklist_name.title()}"<br>'
             f'<span style="font-size: 0.5em; color: #888;">Comparing values with {metric.replace("_", " ")}</span><br>'
@@ -418,7 +460,8 @@ def checklist_visualization(
         ),
         yaxis=dict(
             title='Score',
-            range=[0, 1.1]  # Adjusted range since scores are typically between 0 and 1
+            range=[0, 1.1],  # Adjusted range since scores are typically between 0 and 1
+            dtick=0.1  # Set tick increment to 0.1
         ),
         barmode='group',
         # boxmode='group',  # This ensures boxes are grouped by check
