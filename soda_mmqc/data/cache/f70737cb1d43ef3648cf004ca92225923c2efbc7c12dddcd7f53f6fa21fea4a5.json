@@ -1,0 +1,76 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "not_mentioned",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      },
+      {
+        "panel_label": "G",
+        "is_numerical_plot": "yes",
+        "shows_averaged_data": "yes",
+        "n_value": "19",
+        "n_larger_than_two": "yes"
+      },
+      {
+        "panel_label": "H",
+        "is_numerical_plot": "no",
+        "shows_averaged_data": "not_applicable",
+        "n_value": "not_applicable",
+        "n_larger_than_two": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:Figure 3E.xlsx; source_data:Figure 3B.csv; source_data:Figure 3C.xlsx; source_data:Figure 3D.xlsx; source_data:Figure 3A.csv; source_data:Figure 3G.xlsx",
+    "response_id": "resp_0b0fdcac459b2a740069bc06618fdc819781be2b9de3c491e9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5687,
+      "output_tokens": 2139
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:21:56.914362"
+  }
+}

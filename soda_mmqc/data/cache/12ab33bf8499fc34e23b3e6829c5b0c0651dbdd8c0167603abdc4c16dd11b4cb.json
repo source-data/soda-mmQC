@@ -1,0 +1,76 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "PD-L1 (IP: Alfa)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The uncropped blot in the source file contains the PD-L1 IP lanes with the same band pattern and relative intensities as the cropped PD-L1 IP panel in the figure (same ladder at left and matching lane order)."
+          },
+          {
+            "protein_or_piece_label": "PD-L1 (Lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The source image shows the PD-L1 lysate lanes corresponding to the figure panel; band positions, relative intensities and lane arrangement match the cropped figure region."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (IP: Alfa)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The CMTM6 IP blot is present in the uncropped source image and shows the same band distribution and lane-to-lane variation as the cropped CMTM6 IP panel in the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (Lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The CMTM6 lysate bands in the source file align with the lysate panel in the figure; band intensities and positions correspond to the cropped image."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The Actin loading-control blot in the source image matches the lower-left Actin panel in the figure (consistent band positions across lanes and matching ladder at the left)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFail_label_switch_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFail_label_switch_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_00a44dfabdce9aa20069bbed602384819fab895db4fdc15c60",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4623,
+      "output_tokens": 1575
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:34:57.158622"
+  }
+}

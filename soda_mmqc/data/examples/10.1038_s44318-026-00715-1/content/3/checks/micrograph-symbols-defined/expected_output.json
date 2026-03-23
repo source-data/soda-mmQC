@@ -1,0 +1,92 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "yes",
+            "symbols": [
+                "colored cluster polygons (cyan, green, blue, purple)"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "cluster segmentation using the PoCA software."
+            ]
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "yes",
+            "symbols": [
+                "colored cluster polygons (cyan, green, blue, purple)"
+            ],
+            "symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "cluster segmentation using the PoCA software."
+            ]
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "yes",
+            "symbols": [
+                "red dashed outline (cell boundary)",
+                "overlay of slow (cyan) and fast (magenta) trajectories",
+                "trajectory color gradient by frame (rainbow colormap)"
+            ],
+            "symbols_defined_in_caption": [
+                "no",
+                "yes",
+                "no"
+            ],
+            "from_the_caption": [
+                "",
+                "overlay between slow (cyan) and fast (magenta) molecules, threshold = 0.03\u0000\u0000\u0003\u0002\u0000\u000b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            ]
+        },
+        {
+            "panel_label": "G",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "H",
+            "micrograph": "yes",
+            "symbols": [
+                "numbered trajectory labels (1\t67)",
+                "color-coded trajectories by diffusion coefficient (Log(D) colormap)"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "color-coded with their diffusion coefficients, examples of trajectories showing immobilized (1 and 4), freely diffusive (2, 3, and 6), and highly mobile molecules (5 and 7).",
+                "color-coded with their diffusion coefficients, examples of trajectories showing immobilized (1 and 4), freely diffusive (2, 3, and 6), and highly mobile molecules (5 and 7)."
+            ]
+        }
+    ]
+}

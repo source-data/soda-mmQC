@@ -1,0 +1,237 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x [nm] (from Figure 3A.csv column header)"
+          },
+          {
+            "axis": "y",
+            "definition": "y [nm] (from Figure 3A.csv column header)"
+          },
+          {
+            "axis": "z",
+            "definition": "z [nm] (from Figure 3A.csv column header)"
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "z",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "x [nm] (from Figure 3B.csv column header)"
+          },
+          {
+            "axis": "y",
+            "definition": "y [nm] (from Figure 3B.csv column header)"
+          },
+          {
+            "axis": "z",
+            "definition": "z [nm] (from Figure 3B.csv column header)"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Number of clusters/cell (from Figure 3C.xlsx header)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Clusters size (nm3) (from Figure 3D.xlsx header)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Mol. % into clusters (percent) (from Figure 3E.xlsx header)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Spatial x-coordinate (cell localizations/trajectories) is plotted but no units (e.g., nm or µm) are given on the image or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "Spatial y-coordinate (cell localizations/trajectories) is plotted but no units (e.g., nm or µm) are given on the image or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Mean square displacement (MSD) is plotted in the bottom panel but the units for MSD (e.g., µm^2) are not specified on the image or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Top (histogram): Log(D) (µm^2·s^-1) — diffusion coefficient (label visible on histogram x-axis)"
+          },
+          {
+            "axis": "y",
+            "definition": "Top (histogram): Counts (histogram y-axis label shown)"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "x' axis / horizontal axis used for spatial trajectories and for time (t) in the kymograph; neither spatial units (e.g., nm or µm) nor time units (e.g., s) are specified on the image or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "y' axis / vertical spatial axis (trajectories and kymograph) is shown but no spatial units (e.g., nm or µm) are specified on the image or in the caption."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:Figure 3E.xlsx; source_data:Figure 3B.csv; source_data:Figure 3C.xlsx; source_data:Figure 3D.xlsx; source_data:Figure 3A.csv; source_data:Figure 3G.xlsx",
+    "response_id": "resp_07a78a45b19a7c6b0069bce9f329c481959b13510bf639ee07",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5393,
+      "output_tokens": 5959
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T07:33:13.500878"
+  }
+}

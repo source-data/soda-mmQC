@@ -1,0 +1,76 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "H",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/5",
+    "example_type": "figure",
+    "tables": "source_data:Figure 5G.xlsx; source_data:Figure 5F.xlsx; source_data:Figure 5H.xlsx; source_data:Figure 5C.xlsx; source_data:Figure 5D.xlsx; source_data:Figure 5E.xlsx",
+    "response_id": "resp_0d2671229511913d0069bd043c97f88193a512da3533f7015e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5059,
+      "output_tokens": 892
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:24:37.472660"
+  }
+}

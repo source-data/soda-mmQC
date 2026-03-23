@@ -1,0 +1,69 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "no",
+        "is_a_scheme": "yes",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "B",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "C",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "D",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "E",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "F",
+        "is_a_micrograph": "yes",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "yes"
+      },
+      {
+        "panel_label": "G",
+        "is_a_micrograph": "yes",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "yes"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes .xlsx; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes_DBA:2.xlsx",
+    "response_id": "resp_0bef5c571d4eafbe0069bc0d5c9338819f82de9e8baac7e01b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 7585,
+      "output_tokens": 759
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:51:16.948146"
+  }
+}

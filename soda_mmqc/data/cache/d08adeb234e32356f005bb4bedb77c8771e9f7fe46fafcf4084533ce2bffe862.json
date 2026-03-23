@@ -1,0 +1,120 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "individual cells"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "individual cells"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "I",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "J",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "K",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "individual cells"
+        ]
+      },
+      {
+        "panel_label": "L",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "individual cells"
+        ]
+      },
+      {
+        "panel_label": "M",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "triplicates"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:Figure 4E.xlsx; source_data:Figure 4B.xlsx; source_data:Figure 4K.xlsx; source_data:Figure 4L.xlsx; source_data:Figure 4M.xlsx; source_data:Figure 4C.xlsx; source_data:Figure 4D.xlsx; source_data:Figure 4A.xlsx; source_data:Figure 4F.xlsx; source_data:Figure 4H.xlsx; source_data:Figure 4I.xlsx; source_data:Figure 4G.xlsx",
+    "response_id": "resp_0b7a470ce571608a0069bd057d062481a38a3f9702ee5c531b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6342,
+      "output_tokens": 1922
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:30:07.129810"
+  }
+}

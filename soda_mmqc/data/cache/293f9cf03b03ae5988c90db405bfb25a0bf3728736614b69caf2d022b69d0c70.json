@@ -1,0 +1,65 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "scale_bar_on_image": "no",
+        "scale_bar_defined_in_caption": "no",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "yes",
+        "from_the_caption": "Scale bar, 100 μm.",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/5",
+    "example_type": "figure",
+    "tables": "source_data:Marker genes used for immune cell deconvolution.csv; source_data:DGE_T11b-high LUSC vs LUAD.xls; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:gsea_report_for_na_neg_1723674399702.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS_WHITE_BLOOD_CELLS.tsv; source_data:ZHANG_UTERUS_C2_REGENERAT...",
+    "response_id": "resp_01f4c3ae5dc65e0e0069bc0e9eaa308196acc90ab387b40a30",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 15861,
+      "output_tokens": 1116
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:56:48.787766"
+  }
+}

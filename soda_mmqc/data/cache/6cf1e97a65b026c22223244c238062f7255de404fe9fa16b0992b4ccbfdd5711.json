@@ -1,0 +1,62 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "C",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "F",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "G",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes .xlsx; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes_DBA:2.xlsx",
+    "response_id": "resp_00e2dce85f9341ac0069bc0f6973f481a393afba455c04f381",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 7163,
+      "output_tokens": 990
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:00:11.838069"
+  }
+}

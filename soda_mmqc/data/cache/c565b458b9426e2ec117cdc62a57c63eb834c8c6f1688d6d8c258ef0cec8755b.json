@@ -1,0 +1,57 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The source file contains a blot labeled 'FAS' that matches the top FAS panel in the figure: lane order, band positions and relative intensities correspond to the cropped region shown in the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The source file contains the 'Flag' blot matching the middle panel in the figure; band pattern across lanes and relative intensities match the figure crop."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The source file contains the 'Actin' loading control that matches the bottom panel: bands are present in the same lanes with consistent intensity and alignment as in the figure."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_09caee4d695a087b0069bbf13ab244819ca482f31797285ae9",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4388,
+      "output_tokens": 1181
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:51:26.004757"
+  }
+}

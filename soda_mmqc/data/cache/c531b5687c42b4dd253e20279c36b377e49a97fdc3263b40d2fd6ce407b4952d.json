@@ -1,0 +1,44 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Plot represents median with 95% CI."
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Plot represents mean ± SD; n = 3 (technical replicates) per group"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:TMPRSS11B_Taqman_qpCR_Raw.xls; source_data:TMPRSS11B_Taqman_qpCR_Analysis.xlsx",
+    "response_id": "resp_0bbb499b5c9307640069bc09bef8d881a3b155a539bb141f3a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3736,
+      "output_tokens": 1114
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:35:55.693302"
+  }
+}

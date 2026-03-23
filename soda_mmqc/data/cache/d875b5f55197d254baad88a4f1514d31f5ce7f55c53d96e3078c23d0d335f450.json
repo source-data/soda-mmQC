@@ -1,0 +1,65 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      },
+      {
+        "panel_label": "D"
+      },
+      {
+        "panel_label": "E"
+      },
+      {
+        "panel_label": "F"
+      },
+      {
+        "panel_label": "G"
+      },
+      {
+        "panel_label": "H"
+      },
+      {
+        "panel_label": "I"
+      },
+      {
+        "panel_label": "J"
+      },
+      {
+        "panel_label": "K"
+      },
+      {
+        "panel_label": "L"
+      },
+      {
+        "panel_label": "M"
+      },
+      {
+        "panel_label": "N"
+      },
+      {
+        "panel_label": "O"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/2",
+    "example_type": "figure",
+    "tables": "source_data:Figure 2O.xlsx; source_data:Figure 2H.xlsx; source_data:Figure 2A.xlsx; source_data:Figure 2F bottom right.xlsx; source_data:Figure 2C.xlsx; source_data:Figure 2M.xlsx; source_data:Figure 2J.xlsx; source_data:Figure 2L.xlsx; source_data:Figure 2E.xlsx; source_data:Figure 2B.xlsx",
+    "response_id": "resp_0b88b81927029cab0069bc0fe4ffb08191b44cb96b43b56b1f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5950,
+      "output_tokens": 393
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:02:06.914107"
+  }
+}

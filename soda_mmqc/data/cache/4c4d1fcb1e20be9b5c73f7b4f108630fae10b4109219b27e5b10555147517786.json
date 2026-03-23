@@ -1,0 +1,69 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 2,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "no"
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 2,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "no"
+      },
+      {
+        "panel_label": "G",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/2",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_069c88d0cb9e199b0069bd0249aaf481968ea5d1ec3bce7afa",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3387,
+      "output_tokens": 1716
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:16:30.810221"
+  }
+}

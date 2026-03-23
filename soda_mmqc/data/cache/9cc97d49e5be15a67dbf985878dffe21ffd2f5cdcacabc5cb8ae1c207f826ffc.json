@@ -1,0 +1,50 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "spatial transcriptomics"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E and spatial"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "GSEA"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "DEG analysis"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:T11b high vs low squamous_Analysis.xlsx; source_data:T11b high vs low squamous_GSEA_Ranked.xlsx; source_data:HALLMARK_PROTEIN_SECRETION.tsv; source_data:HALLMARK_KRAS_SIGNALING_UP.tsv; source_data:gene_set_sizes.tsv; source_data:HALLMARK_MYOGENESIS.tsv; source_data:HALLMARK_ESTROGEN_RESPONSE_LATE.tsv; source_data:HALLMARK_MITOTIC_SPINDLE.tsv; source_data:gsea_report_for_na_neg_1723673606674.tsv; source_data:HALLMARK_ALLOGRAFT_REJECTION.tsv; source_data:HALLMARK_TNFA_SIGNALING_VIA_...",
+    "response_id": "resp_0572c5a2444195620069bd03593c4c81928359e83a3908b1a5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 12958,
+      "output_tokens": 1561
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:20:57.553810"
+  }
+}

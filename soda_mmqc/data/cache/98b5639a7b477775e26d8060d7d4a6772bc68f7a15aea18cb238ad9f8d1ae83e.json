@@ -1,0 +1,50 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:pH-low vs pH-high_Analysis.xlsx; source_data:pH-high vs pH-low_Ranked.xlsx; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SKIN_EPIDERMAL_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_BRAIN_MYELOID_MICROGLIAL_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS...",
+    "response_id": "resp_003984e9f97b18d10069bd0191bba48197afa77cc539839514",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 15514,
+      "output_tokens": 812
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:13:17.679210"
+  }
+}

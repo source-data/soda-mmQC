@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "RPR2 mice n = 5",
+          "RPM mice n = 15",
+          "SNL mice n = 4",
+          "LP mice n = 6",
+          "SL mice n = 9",
+          "KP mice n = 8"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n > 3"
+        ],
+        "type_of_replicates": [
+          "Biological replicates"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n > 3"
+        ],
+        "type_of_replicates": [
+          "Biological replicates"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three times",
+          "n = 4"
+        ],
+        "type_of_replicates": [
+          "technical replicates",
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three times",
+          "n = 4"
+        ],
+        "type_of_replicates": [
+          "technical replicates",
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/2",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0976ba78ad3e2aa80069bd05d7791881a284862b53cfd0b3cd",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3087,
+      "output_tokens": 2242
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:31:40.109456"
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 6A.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A file named \"Western blot - 6A.tif\" is present, but the image content is essentially blank (shows only an 'A' label/white page) and does not contain a raw blot or visible CMTM6 signal matching the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "Western blot - 6A.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source file exists but contains no raw blot image or CMTM4 label; it does not visually match the CMTM4 piece in the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 6A.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image for panel A is a blank/white image with only the letter A visible and contains no raw FAS blot to match the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 6A.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the filename corresponds to panel A, the image content does not show an Actin blot or any band pattern; it does not match the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 6B.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "File \"Western blot - 6B.tif\" is present but displays only a large blank area with a letter B; no raw blot or CMTM6 labeling is visible, so it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "Western blot - 6B.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image for panel B lacks any visible raw blot or CMTM4 label and therefore does not match the figure panel."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 6B.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the filename suggests it is source for panel B, the image content is blank and contains no FAS blot to compare; it does not match."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 6B.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source image is blank/empty aside from the panel letter; no Actin blot is visible and it does not match the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 6C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "File \"Western blot - 6C.tif\" exists but the image content is blank with only a 'C' label; it does not contain a raw CMTM6 blot and therefore does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "Western blot - 6C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image shows no raw blot lanes or labels for CMTM4 (just a blank page), so it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "Western blot - 6C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the filename corresponds to panel C, the image content contains no Flag blot or bands and cannot be matched to the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 6C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source file is blank/white with only the panel letter visible; it contains no Actin blot to compare with the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 6E.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A file named \"Western blot - 6E.tif\" is present but the image is effectively blank (letter E on white background) and contains no raw CMTM6 blot to match the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 6E.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image for panel E does not show any raw FAS bands or labels (only an empty page), so it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "Western blot - 6E.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the filename corresponds to panel E, the image content lacks a Flag blot and cannot be visually matched to the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 6E.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source image is blank and contains no Actin blot; it does not match the Actin panel in the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 6F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "File \"Western blot - 6F.tif\" exists but shows only a blank area with the letter F; there is no raw CMTM6 blot visible and thus no match."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 6F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image contains no visible FAS bands or labels (blank/white), so it does not match the figure's FAS piece."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "Western blot - 6F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the filename indicates it is panel F source data, the image is empty aside from the panel letter and contains no Flag blot to compare."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 6F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided file is essentially blank and does not contain the Actin blot shown in the figure, so it does not match."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6 (IP: Flag)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "\"Western blot - 6G.tif\" is present but the image is blank with only the letter G; no raw IP CMTM6 blot or band pattern is visible to match the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS (IP: Flag)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image does not contain the FAS IP blot or lanes shown in the figure (image is empty), so it does not match."
+          },
+          {
+            "protein_or_piece_label": "Flag (IP: Flag)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source image lacks the Flag blot lanes (blank page) and cannot be matched to the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (Lysate)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the file corresponds by name, the content contains no lysate CMTM6 blot or labels; it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS (Lysate)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image is empty and does not show the lysate FAS blot present in the figure, so it does not match."
+          },
+          {
+            "protein_or_piece_label": "Flag (Lysate)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "No Flag lysate blot is visible in the provided source image (only blank), therefore it does not match."
+          },
+          {
+            "protein_or_piece_label": "Actin (Lysate)",
+            "source_data_filename": "Western blot - 6G.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source file contains no Actin blot or band pattern (blank image), so it does not match the figure's Actin panel."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6 (IP: Flag)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "\"Western blot - 6H.tif\" is provided but the image is blank apart from the panel letter H; it contains no raw IP CMTM6 blot to match the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS (IP: Flag)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image does not show the FAS IP blot or lane patterns (image empty), so it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag (IP: Flag)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source file is blank and lacks the Flag blot bands seen in the figure; it does not match."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (Lysate)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the filename corresponds to panel H, the image content is empty and contains no lysate CMTM6 blot to compare, so it does not match."
+          },
+          {
+            "protein_or_piece_label": "FAS (Lysate)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image contains no visible lysate FAS lanes or bands (blank page), therefore it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag (Lysate)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "No Flag lysate blot is visible in the provided source image; it does not match the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin (Lysate)",
+            "source_data_filename": "Western blot - 6H.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source file is effectively blank and contains no Actin blot to match the figure, so it does not match."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDwhiteImage_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDwhiteImage_10.1038_s44319-026-00694-8/content/6",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0b6233086ab9b32c0069bbeb2d110c8197be9d1cb3270ed421",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 13130,
+      "output_tokens": 3766
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:26:01.923335"
+  }
+}

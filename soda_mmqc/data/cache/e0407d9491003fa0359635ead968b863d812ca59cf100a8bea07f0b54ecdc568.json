@@ -1,0 +1,76 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "IP: CMTM6",
+            "source_data_filename": "WesternBlot-7C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The provided file WesternBlot-7C.jpg corresponds to panel C and contains an uncropped blot showing the IP lanes; the lane pattern and band positions (left cluster vs right cluster) are consistent with the IP: CMTM6 panel after expected cropping/contrast adjustments. No protein label text is visible inside the source image, so the filename was used to assign this file to panel C."
+          },
+          {
+            "protein_or_piece_label": "IP: PD-L1",
+            "source_data_filename": "WesternBlot-7C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The same source image shows the upper discrete bands in the right-hand lanes that match the IP: PD-L1 bands in the figure (similar band positions and relative intensities), consistent with being the raw for this piece."
+          },
+          {
+            "protein_or_piece_label": "Lysate: CMTM6",
+            "source_data_filename": "WesternBlot-7C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The uncropped blot contains strong smeared/large signals in the left lanes and additional bands in the lysate region that align with the Lysate: CMTM6 panel in the figure; band shapes and lane arrangement are consistent with the figure."
+          },
+          {
+            "protein_or_piece_label": "Lysate: PD-L1",
+            "source_data_filename": "WesternBlot-7C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Bands in the middle-upper region of the source image correspond in position and relative intensity to the Lysate: PD-L1 shown in the figure, supporting that this file is the raw for that piece."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "WesternBlot-7C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "A strong low molecular weight banding pattern consistent with an actin loading control is visible at the bottom of the uncropped blot and matches the Actin band in the figure (similar lane-to-lane pattern), indicating the source image includes the Actin raw data."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_09a5530217a2c5b80069bbefabe3a881a089508b39f4aefd8e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3997,
+      "output_tokens": 2058
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:44:57.054350"
+  }
+}

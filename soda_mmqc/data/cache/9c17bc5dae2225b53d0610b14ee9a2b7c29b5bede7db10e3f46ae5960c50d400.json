@@ -1,0 +1,71 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "FAS (IP-Flag)",
+            "source_data_filename": "WesternBlot-1c.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The source file WesternBlot-1c.jpg contains a top-region blot with a single very strong band in the same central lane as in the figure IP-Flag FAS; band position and unique intensity pattern match the figure's IP-Flag FAS panel."
+          },
+          {
+            "protein_or_piece_label": "Flag (IP-Flag)",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No separate raw blot that can be unambiguously identified as the IP-Flag Flag blot was found in the provided source image; the file lacks labels and a clearly matching mid-panel corresponding to the figure's IP-Flag Flag."
+          },
+          {
+            "protein_or_piece_label": "FAS (Lysate)",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No clear raw blot in the provided source image could be identified as the Lysate FAS blot shown in the figure; the source image does not show the multiple-band pattern present in the figure's lysate FAS."
+          },
+          {
+            "protein_or_piece_label": "Flag (Lysate)",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No raw image was identified that clearly corresponds to the Lysate Flag blot from the figure; labels are absent and the expected band pattern for this piece is not unambiguously present."
+          },
+          {
+            "protein_or_piece_label": "Actin (Lysate)",
+            "source_data_filename": "WesternBlot-1c.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The source file shows a lower-region uniform band across all lanes consistent with a loading control; this pattern matches the Actin (lysate) panel in the figure (similar intensity and lane-to-lane uniformity)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_02cbca4fde30eec20069bbeeb734208197992ab52ae6721f57",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3380,
+      "output_tokens": 2581
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:40:56.391702"
+  }
+}

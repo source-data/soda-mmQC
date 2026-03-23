@@ -1,0 +1,60 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "The nominal P and FDR values were obtained from the \"GSEA Preranked\" tool (from Broad Institute) using a weighted scoring scheme. Gene sets were evaluated based on the default normalized enrichment score method, and statistical significance was determined by bootstrapping with 1000 permutations."
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Differential gene expression was calculated using Seurat’s FindAllMarkers function, and direct comparisons between two classes and corresponding P values were obtained using Seurat’s FindMarkers function with the Wilcoxon rank-sum test with Bonferroni P value correction."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:T11b high vs low squamous_Analysis.xlsx; source_data:T11b high vs low squamous_GSEA_Ranked.xlsx; source_data:HALLMARK_PROTEIN_SECRETION.tsv; source_data:HALLMARK_KRAS_SIGNALING_UP.tsv; source_data:gene_set_sizes.tsv; source_data:HALLMARK_MYOGENESIS.tsv; source_data:HALLMARK_ESTROGEN_RESPONSE_LATE.tsv; source_data:HALLMARK_MITOTIC_SPINDLE.tsv; source_data:gsea_report_for_na_neg_1723673606674.tsv; source_data:HALLMARK_ALLOGRAFT_REJECTION.tsv; source_data:HALLMARK_TNFA_SIGNALING_VIA_...",
+    "response_id": "resp_0fe46f7078ab83710069bc0b0034f08190b72118b1ac4183a6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 12861,
+      "output_tokens": 1687
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:41:24.987505"
+  }
+}

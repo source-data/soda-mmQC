@@ -1,0 +1,60 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "no",
+        "discrepancies": "Caption states PacL1Δ5 does not bind cadmium, but panel B shows small additional peaks (low-intensity species) consistent with minor Cd-bound adducts (+1/+2), so the image does not fully support an absolute 'no binding' statement."
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/5",
+    "example_type": "figure",
+    "tables": "source_data:Figure 5G.xlsx; source_data:Figure 5F.xlsx; source_data:Figure 5H.xlsx; source_data:Figure 5C.xlsx; source_data:Figure 5D.xlsx; source_data:Figure 5E.xlsx",
+    "response_id": "resp_0bde7074b910fcb50069bceb592e5c819c92cc0c793f5c0273",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5277,
+      "output_tokens": 1744
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T07:38:33.182886"
+  }
+}

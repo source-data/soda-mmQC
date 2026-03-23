@@ -1,0 +1,206 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "WesternBlot-2B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file WesternBlot-2B.jpg (panel 2B) contains multi-lane raw blots with a faint top row and a strong band in a single lane that corresponds to the strong IP band in the figure; visual features (lane positions and a prominent single-lane band) are consistent with the figure's CMTM6 panel. Note: protein labels are not visible on the raw image, filename used as fallback."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "WesternBlot-2B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The same source image includes a second row of bands below the top row that correspond in lane pattern and relative intensity to the CMTM4 panel in the figure; visual cropping is consistent with the presented image."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "WesternBlot-2B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The middle/lower band pattern in WesternBlot-2B.jpg matches the FAS band pattern shown in the figure (similar lane-to-lane intensities and distinctive strong band in the same lane), consistent with cropping of the raw blot."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "WesternBlot-2B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "A constitutive band row consistent with an actin loading control is visible in WesternBlot-2B.jpg and matches the actin panel in the figure by lane pattern and intensity."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "WesternBlot2D.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source file WesternBlot2D.jpg is a single-row image (uniform band across lanes) and does not clearly show the separate CMTM6 band pattern visible in the figure; protein labels are not visible in the raw image, so filename was used as fallback but the band pattern does not match."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "WesternBlot2D.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "WesternBlot2D.jpg does not visibly contain the multiple stacked bands expected for CMTM4 as presented in the figure; the raw image appears to show only a single uniform band row (likely an individual crop), so the CMTM4 piece in the figure cannot be verified from this file."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "WesternBlot2D.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The FAS panel in the figure is not clearly present in WesternBlot2D.jpg (the source shows a single even band row rather than the distinct higher-molecular-weight FAS band pattern), so the match cannot be confirmed."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "WesternBlot2D.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "No distinct Flag-labeled band pattern is visible in WesternBlot2D.jpg; the file appears to be a single-row crop and does not show the multiple protein panels present in the figure, so the Flag piece does not match visibly."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "WesternBlot2D.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "WesternBlot2D.jpg contains a uniform, evenly spaced row of bands consistent with an actin loading control and matches the actin panel in the figure by lane appearance and uniform intensity."
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "WesternBlot2E.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "WesternBlot2E.jpg contains multiple lane patterns including a prominent intense spot in one lane and additional bands that correspond in position and relative intensity to the CMTM6 panel in the figure; labels are not visible so filename was used as fallback."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "WesternBlot2E.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The same raw image shows additional bands beneath/adjacent to the prominent spot that match the CMTM4 pattern shown in the figure; cropping/contrast adjustments are consistent between the raw and figure images."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "WesternBlot-2F.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "WesternBlot-2F.jpg shows a single, very uniform row of bands across lanes (looks like a loading control), whereas the figure's CMTM6 panel shows variable/fainter banding at a different molecular weight; the raw image does not visually match the CMTM6 pattern in the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "WesternBlot-2F.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided raw (WesternBlot-2F.jpg) appears to contain a single uniform band row and does not show the multiple bands or intensity pattern present in the figure for CMTM4, so it does not match visually."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "WesternBlot-2G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "WesternBlot-2G.jpg contains multi-row banding with a faint top row and a stronger middle row; the lane pattern and the presence of a distinct single-lane stronger band correspond to the CMTM6 panel in the figure, consistent with cropping from this raw."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "WesternBlot-2G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The lower/middle band pattern in WesternBlot-2G.jpg matches the FAS band pattern shown in panel G by lane positions and relative intensities; cropping is consistent with the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "WesternBlot-2G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "A constitutive band row consistent with an actin loading control is visible in the raw file and matches the actin panel in the figure in lane pattern and intensity."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "WesternBlot-2H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "WesternBlot-2H.jpg shows a very uniform single row of bands (appearing like a loading control); it does not display the distinct CMTM6 band pattern present in the figure, so the match cannot be confirmed."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "WesternBlot-2H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The raw file WesternBlot-2H.jpg does not visibly show the multiple-band pattern seen for CMTM4 in the figure (instead a uniform band row), so it does not match."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "WesternBlot-2H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "FAS-specific higher-molecular-weight bands visible in the figure are not apparent in WesternBlot-2H.jpg (which shows a single uniform band row), so the FAS piece is not matched by this file."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "WesternBlot-2H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "WesternBlot-2H.jpg shows a uniform loading-control band across lanes that matches the actin panel in the figure by lane spacing and intensity."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8/content/2",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0d07291f941bb1140069bbeed8cac8819fbba0193e6df83158",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4612,
+      "output_tokens": 5407
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:42:08.743258"
+  }
+}

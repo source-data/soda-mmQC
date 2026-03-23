@@ -1,0 +1,52 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Welch’s t test was used for the analysis, ****P < 0.0001."
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Ordinary one-way ANOVA with Dunnett’s multiple comparisons test was used for the analysis. ****P < 0.0001."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:TMPRSS11B_Taqman_qpCR_Raw.xls; source_data:TMPRSS11B_Taqman_qpCR_Analysis.xlsx",
+    "response_id": "resp_0eede4a5a71449aa0069bc0b15a3c4819f8a5fb8dda2b059c6",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3797,
+      "output_tokens": 1513
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:41:43.912367"
+  }
+}

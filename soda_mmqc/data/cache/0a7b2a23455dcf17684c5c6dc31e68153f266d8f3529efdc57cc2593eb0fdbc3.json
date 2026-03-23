@@ -1,0 +1,68 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Genomic organization"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "disk diffusion assay"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "disk diffusion assay"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "disk diffusion assay"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "turbidity measurements"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "turbidity measurements"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "turbidity measurements"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "turbidity measurements"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Figure 1H.xlsx; source_data:Figure 1F.xlsx; source_data:Figure 1G.xlsx; source_data:Figure 1B.xlsx; source_data:Figure 1E.xlsx; source_data:Figure 1D.xlsx; source_data:Figure 1C.xlsx",
+    "response_id": "resp_04b2d298f92d2cde0069bd02ad74bc81a180747d3971311290",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5625,
+      "output_tokens": 954
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:18:00.176302"
+  }
+}

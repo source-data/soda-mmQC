@@ -1,0 +1,47 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      },
+      {
+        "panel_label": "D"
+      },
+      {
+        "panel_label": "E"
+      },
+      {
+        "panel_label": "F"
+      },
+      {
+        "panel_label": "G"
+      },
+      {
+        "panel_label": "H"
+      },
+      {
+        "panel_label": "I"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:~$Figure 7D.xlsx; source_data:Figure 7D.xlsx; source_data:Figure 7B.xlsx; source_data:~$Figure 7D.xlsx; source_data:Figure 7E.xlsx; source_data:Figure 7I.xlsx; source_data:Figure 7G.xlsx; source_data:Figue 7F - right.csv; source_data:Figure 7F - left.csv; source_data:Figure 7F - middle.csv; source_data:Figure 7H.xlsx",
+    "response_id": "resp_02760682bd009a160069bc10182810819082b69604403ed36a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5791,
+      "output_tokens": 407
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:02:56.599104"
+  }
+}

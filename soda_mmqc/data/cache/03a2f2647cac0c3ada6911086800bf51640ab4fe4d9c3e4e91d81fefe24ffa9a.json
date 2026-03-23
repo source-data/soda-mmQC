@@ -1,0 +1,38 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      },
+      {
+        "panel_label": "D"
+      },
+      {
+        "panel_label": "E"
+      },
+      {
+        "panel_label": "F"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:pH-low vs pH-high_Analysis.xlsx; source_data:pH-high vs pH-low_Ranked.xlsx; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SKIN_EPIDERMAL_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_BRAIN_MYELOID_MICROGLIAL_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS...",
+    "response_id": "resp_05b77f9dce514c840069bc105e2eec819d8b693d9227dc11e5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 14761,
+      "output_tokens": 270
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:04:04.526236"
+  }
+}

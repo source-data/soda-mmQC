@@ -1,0 +1,95 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "I",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "J",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "K",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "L",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "M",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "N",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "O",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/2",
+    "example_type": "figure",
+    "tables": "source_data:Figure 2O.xlsx; source_data:Figure 2H.xlsx; source_data:Figure 2A.xlsx; source_data:Figure 2F bottom right.xlsx; source_data:Figure 2C.xlsx; source_data:Figure 2M.xlsx; source_data:Figure 2J.xlsx; source_data:Figure 2L.xlsx; source_data:Figure 2E.xlsx; source_data:Figure 2B.xlsx",
+    "response_id": "resp_045d4c0662c527ca0069bceb2a9228819692d7b10136469661",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6703,
+      "output_tokens": 1566
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T07:37:45.396585"
+  }
+}

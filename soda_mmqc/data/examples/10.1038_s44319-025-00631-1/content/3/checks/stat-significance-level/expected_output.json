@@ -1,0 +1,108 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "p=0.0",
+                "FDR=0.0",
+                "p=0.0",
+                "FDR=0.0",
+                "p=0.0",
+                "FDR=0.0038"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ],
+            "from_the_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "p=1.89E-26",
+                "p=1.81E-29",
+                "p=8.47E-34",
+                "p=1.85E-23",
+                "p=2.93E-22",
+                "p=3.34E-04",
+                "p=3.37E-33",
+                "p=2.85E-03"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ],
+            "from_the_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ]
+        }
+    ]
+}

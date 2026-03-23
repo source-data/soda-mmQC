@@ -1,0 +1,74 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "C",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "F",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "G",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "H",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "I",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:~$Figure 7D.xlsx; source_data:Figure 7D.xlsx; source_data:Figure 7B.xlsx; source_data:~$Figure 7D.xlsx; source_data:Figure 7E.xlsx; source_data:Figure 7I.xlsx; source_data:Figure 7G.xlsx; source_data:Figue 7F - right.csv; source_data:Figure 7F - left.csv; source_data:Figure 7F - middle.csv; source_data:Figure 7H.xlsx",
+    "response_id": "resp_01fe30d980a332360069bc0f473ad88190a3ca0f81a8f84c94",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6033,
+      "output_tokens": 927
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:59:52.652694"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The uncropped source image (Western blot - 1C.tif) contains a FAS panel with the same lane order and band pattern (bands ~37–50 kDa across GFP-SF and CMTM-SF lanes) as shown in the figure; visual features and marker positions match."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The Flag panel is present in the same source file and shows the same band intensities and relative positions across lanes (including strong bands in GFP-SF lanes) as in the figure; cropping/annotation accounts for the presentation."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The Actin loading control panel in the source TIFF shows the same continuous band pattern and lane-to-lane intensities as the figure panel (consistent with a cropped region of the uncropped blot)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0b07958be1409f580069bbec75122c81a1815c1ee6a0459d25",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4382,
+      "output_tokens": 1263
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:30:59.577787"
+  }
+}

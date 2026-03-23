@@ -1,0 +1,62 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "PD-L1",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The raw blot in 'Western blot - 7C.tif' shows the PD-L1 bands with the same lane order, relative intensities and distinctive band shapes as the figure panel C; differences are limited to expected cropping and contrast adjustments."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The CMTM6 blot is present in 'Western blot - 7C.tif' and matches the figure: lane-by-lane band pattern and intensity are consistent, with only expected cropping/annotation differences."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The Actin loading control is visible in the same source file and matches the figure panel (consistent band positions and relative intensities across lanes); presentation differences are limited to cropping and contrast."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFail_label_switch_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFail_label_switch_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0959c1574d6833da0069bbf27f7a448192bbacdc3ae834c756",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4629,
+      "output_tokens": 1345
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:56:51.281939"
+  }
+}

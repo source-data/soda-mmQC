@@ -1,0 +1,84 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "calculated by one-way analysis of variance (ANOVA) followed by a Dunnett post-test."
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "calculated by one-way analysis of variance (ANOVA) followed by a Dunnett post-test."
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "calculated by one-way analysis of variance (ANOVA) followed by a Dunnett post-test."
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Figure 1H.xlsx; source_data:Figure 1F.xlsx; source_data:Figure 1G.xlsx; source_data:Figure 1B.xlsx; source_data:Figure 1E.xlsx; source_data:Figure 1D.xlsx; source_data:Figure 1C.xlsx",
+    "response_id": "resp_0a18e00fa8b4960c0069bc09faa7188191b9d046623556121e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5528,
+      "output_tokens": 1655
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:37:02.635289"
+  }
+}

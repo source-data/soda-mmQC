@@ -1,0 +1,62 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 2,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "no"
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "E",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "F",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:pH-low vs pH-high_Analysis.xlsx; source_data:pH-high vs pH-low_Ranked.xlsx; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SKIN_EPIDERMAL_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_BRAIN_MYELOID_MICROGLIAL_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS...",
+    "response_id": "resp_02e212008ecbbe5e0069bd02964d4c819c9c1ff724e0fa5a0f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 15399,
+      "output_tokens": 1215
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:17:39.160124"
+  }
+}

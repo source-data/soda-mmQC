@@ -1,0 +1,98 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "B",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "F",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "G",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "H",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "I",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "J",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "K",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "L",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "M",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:Figure 4E.xlsx; source_data:Figure 4B.xlsx; source_data:Figure 4K.xlsx; source_data:Figure 4L.xlsx; source_data:Figure 4M.xlsx; source_data:Figure 4C.xlsx; source_data:Figure 4D.xlsx; source_data:Figure 4A.xlsx; source_data:Figure 4F.xlsx; source_data:Figure 4H.xlsx; source_data:Figure 4I.xlsx; source_data:Figure 4G.xlsx",
+    "response_id": "resp_0cf1210d83acc6cc0069bc0f10004881a188048d5ba3e5da95",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6246,
+      "output_tokens": 1468
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:58:47.344678"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from biological replicates"
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from three independent biological replicates."
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from three independent biological replicates."
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from individual cells"
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from individual cells"
+      },
+      {
+        "panel_label": "I",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "J",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from biological replicates"
+      },
+      {
+        "panel_label": "K",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "L",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from individual cells"
+      },
+      {
+        "panel_label": "M",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from individual cells"
+      },
+      {
+        "panel_label": "N",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "O",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "mean ± SEM from biological replicates"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/2",
+    "example_type": "figure",
+    "tables": "source_data:Figure 2O.xlsx; source_data:Figure 2H.xlsx; source_data:Figure 2A.xlsx; source_data:Figure 2F bottom right.xlsx; source_data:Figure 2C.xlsx; source_data:Figure 2M.xlsx; source_data:Figure 2J.xlsx; source_data:Figure 2L.xlsx; source_data:Figure 2E.xlsx; source_data:Figure 2B.xlsx",
+    "response_id": "resp_09823af57f1effe00069bc08f8c0d081a29b356d9d7f20f2fb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6365,
+      "output_tokens": 2996
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:33:06.804744"
+  }
+}

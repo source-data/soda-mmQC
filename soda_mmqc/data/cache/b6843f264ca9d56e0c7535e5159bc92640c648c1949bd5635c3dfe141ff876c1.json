@@ -1,0 +1,35 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      },
+      {
+        "panel_label": "D"
+      },
+      {
+        "panel_label": "E"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/5",
+    "example_type": "figure",
+    "tables": "source_data:Marker genes used for immune cell deconvolution.csv; source_data:DGE_T11b-high LUSC vs LUAD.xls; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:gsea_report_for_na_neg_1723674399702.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS_WHITE_BLOOD_CELLS.tsv; source_data:ZHANG_UTERUS_C2_REGENERAT...",
+    "response_id": "resp_0cafac31935c02cd0069bc10556d54819791dc5009609c0296",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 15167,
+      "output_tokens": 387
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:03:57.337431"
+  }
+}

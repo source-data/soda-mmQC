@@ -1,0 +1,92 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed. Statistical analyses were conducted on ln-transformed data for (E)."
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:~$Figure 7D.xlsx; source_data:Figure 7D.xlsx; source_data:Figure 7B.xlsx; source_data:~$Figure 7D.xlsx; source_data:Figure 7E.xlsx; source_data:Figure 7I.xlsx; source_data:Figure 7G.xlsx; source_data:Figue 7F - right.csv; source_data:Figure 7F - left.csv; source_data:Figure 7F - middle.csv; source_data:Figure 7H.xlsx",
+    "response_id": "resp_022ac6028fe14db10069bc0ab9d8c081a3b6987fb313433352",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6267,
+      "output_tokens": 2050
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:40:18.756337"
+  }
+}

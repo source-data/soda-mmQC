@@ -1,0 +1,50 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "The plot represents mean with 95% CI."
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "The plot represents the mean with 95% CI."
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:Analysis of lactate concentrations.xlsx",
+    "response_id": "resp_0191cae1af76365e0069bc09e85648819396bfd4d5c7268e23",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3425,
+      "output_tokens": 1130
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:36:42.001352"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Split-GFP assay"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Epifluorescence microscopy"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Mean fluorescence intensity"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Mean fluorescence intensity"
+      },
+      {
+        "panel_label": "E",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Epifluorescence microscopy"
+      },
+      {
+        "panel_label": "F",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Split-GFP assay"
+      },
+      {
+        "panel_label": "G",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Split-GFP assay"
+      },
+      {
+        "panel_label": "H",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Split-GFP assay"
+      },
+      {
+        "panel_label": "I",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Disk diffusion assay"
+      },
+      {
+        "panel_label": "J",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Epifluorescence microscopy"
+      },
+      {
+        "panel_label": "K",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Mean fluorescence intensity"
+      },
+      {
+        "panel_label": "L",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Mean fluorescence intensity"
+      },
+      {
+        "panel_label": "M",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "Turbidity measurements"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:Figure 4E.xlsx; source_data:Figure 4B.xlsx; source_data:Figure 4K.xlsx; source_data:Figure 4L.xlsx; source_data:Figure 4M.xlsx; source_data:Figure 4C.xlsx; source_data:Figure 4D.xlsx; source_data:Figure 4A.xlsx; source_data:Figure 4F.xlsx; source_data:Figure 4H.xlsx; source_data:Figure 4I.xlsx; source_data:Figure 4G.xlsx",
+    "response_id": "resp_0c99f9d2dab151510069bd02e1273c81a292deaae921ee2779",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6577,
+      "output_tokens": 1617
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:18:57.258037"
+  }
+}

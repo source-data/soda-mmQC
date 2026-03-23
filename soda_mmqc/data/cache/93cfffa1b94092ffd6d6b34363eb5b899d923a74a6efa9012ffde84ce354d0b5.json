@@ -1,0 +1,96 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "Exact p values and biological replicate numbers are reported in Table EV6"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "Exact p values and biological replicate numbers are reported in Table EV6"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "Exact p values and biological replicate numbers are reported in Table EV6"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three independent biological replicates"
+        ],
+        "type_of_replicates": [
+          "independent biological replicates"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three independent biological replicates"
+        ],
+        "type_of_replicates": [
+          "independent biological replicates"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three independent biological replicates"
+        ],
+        "type_of_replicates": [
+          "independent biological replicates"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three independent biological replicates"
+        ],
+        "type_of_replicates": [
+          "independent biological replicates"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Figure 1H.xlsx; source_data:Figure 1F.xlsx; source_data:Figure 1G.xlsx; source_data:Figure 1B.xlsx; source_data:Figure 1E.xlsx; source_data:Figure 1D.xlsx; source_data:Figure 1C.xlsx",
+    "response_id": "resp_0ee580398683ae380069bd053f95e081a1ad0582cdd6b2809c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5390,
+      "output_tokens": 1799
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:29:04.620925"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "I",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "J",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:Figure 6F.xlsx; source_data:Figure 6H.xlsx; source_data:Figure 6I.xlsx; source_data:Figure 6E.xlsx; source_data:Figure 6D.xlsx; source_data:Figure 6C.xlsx",
+    "response_id": "resp_021fe7825b8ecaf20069bd00ef2320819f96ee41ab3d52c9cb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4901,
+      "output_tokens": 1069
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:10:52.951601"
+  }
+}

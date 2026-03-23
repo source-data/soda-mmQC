@@ -1,0 +1,98 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "yes",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "yes",
+        "symbols": [
+          "green outline (low pH region)",
+          "yellow outline (Tmprss11b-high region)",
+          "red RNAscope signal (Tmprss11b)",
+          "Cd68 spatial plot (heatmap)",
+          "Spp1 spatial plot (heatmap)",
+          "scale bar (black)"
+        ],
+        "symbols_defined_in_caption": [
+          "no",
+          "no",
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "",
+          "RNAscope of Tmprss11b (red) on a serial section.",
+          "spatial plots depicting enrichment of Cd68 (macrophage marker) and Spp1 (immunosuppressive macrophage marker) transcripts in these regions.",
+          "spatial plots depicting enrichment of Cd68 (macrophage marker) and Spp1 (immunosuppressive macrophage marker) transcripts in these regions.",
+          "Scale bar, 1\u0000mm."
+        ]
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "symbols": [],
+        "symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "symbols": [
+          "ICG fluorescence signal (green)",
+          "IHC HMOX1 brown staining",
+          "IHC MSR1 brown staining",
+          "scale bar (black)"
+        ],
+        "symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "Representative ICG fluorescence images (left) and the corresponding immunohistochemistry (IHC) validation of HMOX1 and MSR1 (right) in SNL lung sections.",
+          "Representative ICG fluorescence images (left) and the corresponding immunohistochemistry (IHC) validation of HMOX1 and MSR1 (right) in SNL lung sections.",
+          "Representative ICG fluorescence images (left) and the corresponding immunohistochemistry (IHC) validation of HMOX1 and MSR1 (right) in SNL lung sections.",
+          "Scale bar, 500\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:pH-low vs pH-high_Analysis.xlsx; source_data:pH-high vs pH-low_Ranked.xlsx; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SKIN_EPIDERMAL_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_BRAIN_MYELOID_MICROGLIAL_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS...",
+    "response_id": "resp_05166d874f1eea5e0069bd04fe32fc81a1a5d39364b2e38b21",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 15296,
+      "output_tokens": 5011
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:28:30.086003"
+  }
+}

@@ -1,0 +1,89 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "no"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "justify_why_units_are_missing": [
+                {
+                    "axis": "x",
+                    "justification": "Spatial coordinate (label 'spatial1' visible) is plotted along the x-axis but no physical units (e.g., µm, mm or pixels) are provided on the image or in the caption."
+                },
+                {
+                    "axis": "y",
+                    "justification": "Spatial coordinate is plotted along the y-axis (tissue image), but no physical units (e.g., µm, mm or pixels) are provided on the image or in the caption."
+                }
+            ],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Y-axis labeled as 'Fraction of cells (%)' (percent)"
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        }
+    ]
+}

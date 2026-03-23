@@ -1,0 +1,32 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      },
+      {
+        "panel_label": "D"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:TMPRSS11B_Taqman_qpCR_Raw.xls; source_data:TMPRSS11B_Taqman_qpCR_Analysis.xlsx",
+    "response_id": "resp_050aa092004bf9b60069bc104ecf348195a7c60010c247693a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3321,
+      "output_tokens": 195
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:03:48.293595"
+  }
+}

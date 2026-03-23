@@ -1,0 +1,212 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "***",
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no",
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "no",
+          "yes"
+        ],
+        "from_the_caption": [
+          "",
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****",
+          "0.08"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no",
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes",
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001",
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "**",
+          "****",
+          "0.22"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no",
+          "no",
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes",
+          "yes",
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "**P < 0.01",
+          "****P < 0.0001",
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "K",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "L",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P < 0.0001"
+        ]
+      },
+      {
+        "panel_label": "M",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:Figure 4E.xlsx; source_data:Figure 4B.xlsx; source_data:Figure 4K.xlsx; source_data:Figure 4L.xlsx; source_data:Figure 4M.xlsx; source_data:Figure 4C.xlsx; source_data:Figure 4D.xlsx; source_data:Figure 4A.xlsx; source_data:Figure 4F.xlsx; source_data:Figure 4H.xlsx; source_data:Figure 4I.xlsx; source_data:Figure 4G.xlsx",
+    "response_id": "resp_04d65df1b734c12c0069bc0baf9a14819783e7887c41c58ecd",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6855,
+      "output_tokens": 3845
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:44:43.313300"
+  }
+}

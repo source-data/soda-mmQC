@@ -1,0 +1,96 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "****",
+          "***"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "no",
+          "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+          "****P\u0000=\u00007.96E-78 (Classical monocyte); ****P\u0000=\u00004.74E-17 (Alveolar macrophage); ****P\u0000=\u00006.04E-133 (Leukocyte)",
+          "***P\u0000=\u00002.31E-05 (Non-classical monocyte)"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "p-value",
+          "FDR",
+          "NES"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes",
+          "yes",
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed",
+          "not_needed",
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed",
+          "not_needed",
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+          "p-value"
+        ],
+        "significance_level_symbols_defined_in_image": [
+          "yes"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+          "not_needed"
+        ],
+        "from_the_caption": [
+          "not_needed"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "no",
+        "significance_level_symbols_on_image": [],
+        "significance_level_symbols_defined_in_image": [],
+        "significance_level_symbols_defined_in_caption": [],
+        "from_the_caption": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/5",
+    "example_type": "figure",
+    "tables": "source_data:Marker genes used for immune cell deconvolution.csv; source_data:DGE_T11b-high LUSC vs LUAD.xls; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:gsea_report_for_na_neg_1723674399702.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS_WHITE_BLOOD_CELLS.tsv; source_data:ZHANG_UTERUS_C2_REGENERAT...",
+    "response_id": "resp_0749d07ec611e10e0069bc0c96db0881a2b2de9b14c19c4a58",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 16018,
+      "output_tokens": 3129
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:48:28.090333"
+  }
+}

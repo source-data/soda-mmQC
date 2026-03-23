@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:T11b high vs low squamous_Analysis.xlsx; source_data:T11b high vs low squamous_GSEA_Ranked.xlsx; source_data:HALLMARK_PROTEIN_SECRETION.tsv; source_data:HALLMARK_KRAS_SIGNALING_UP.tsv; source_data:gene_set_sizes.tsv; source_data:HALLMARK_MYOGENESIS.tsv; source_data:HALLMARK_ESTROGEN_RESPONSE_LATE.tsv; source_data:HALLMARK_MITOTIC_SPINDLE.tsv; source_data:gsea_report_for_na_neg_1723673606674.tsv; source_data:HALLMARK_ALLOGRAFT_REJECTION.tsv; source_data:HALLMARK_TNFA_SIGNALING_VIA_...",
+    "response_id": "resp_049b0656aac465320069bc084f347481a38cd9182e98cf8bd1",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 13688,
+      "output_tokens": 968
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:29:49.140577"
+  }
+}

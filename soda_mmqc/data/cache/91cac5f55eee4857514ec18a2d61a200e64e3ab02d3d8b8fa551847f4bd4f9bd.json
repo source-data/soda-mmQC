@@ -1,0 +1,100 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed. Statistical analyses were conducted on ln-transformed data for (C, E, H)."
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed. Statistical analyses were conducted on ln-transformed data for (C, E, H)."
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed. Statistical analyses were conducted on ln-transformed data for (C, E, H)."
+      },
+      {
+        "panel_label": "I",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "For statistical analysis, one-way ANOVA with a Dunnett post-test were performed."
+      },
+      {
+        "panel_label": "J",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:Figure 6F.xlsx; source_data:Figure 6H.xlsx; source_data:Figure 6I.xlsx; source_data:Figure 6E.xlsx; source_data:Figure 6D.xlsx; source_data:Figure 6C.xlsx",
+    "response_id": "resp_0b90b965d759a1760069bc0a98f0108190b277ed1690d99277",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4624,
+      "output_tokens": 1981
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:39:53.353867"
+  }
+}

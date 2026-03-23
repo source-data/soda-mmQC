@@ -1,0 +1,99 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "individual cells"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [],
+        "type_of_replicates": [
+          "individual cells"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "dozens"
+        ],
+        "type_of_replicates": [
+          "analyzed cells"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n = 3"
+        ],
+        "type_of_replicates": [
+          "individual cells",
+          "independent biological replicates"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n = 3"
+        ],
+        "type_of_replicates": [
+          "individual clusters",
+          "independent biological replicates"
+        ]
+      },
+      {
+        "panel_label": "I",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "n = 3"
+        ],
+        "type_of_replicates": [
+          "individual cells",
+          "independent biological replicates"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:~$Figure 7D.xlsx; source_data:Figure 7D.xlsx; source_data:Figure 7B.xlsx; source_data:~$Figure 7D.xlsx; source_data:Figure 7E.xlsx; source_data:Figure 7I.xlsx; source_data:Figure 7G.xlsx; source_data:Figue 7F - right.csv; source_data:Figure 7F - left.csv; source_data:Figure 7F - middle.csv; source_data:Figure 7H.xlsx",
+    "response_id": "resp_0f15aa511dcc6b7c0069bd05ab089881908e2e40275da18e26",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6129,
+      "output_tokens": 2384
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:30:58.565942"
+  }
+}

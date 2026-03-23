@@ -1,0 +1,146 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "Cl. caspase-8",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The file 'Western blot - 5C.tif' contains a cleaved caspase-8 panel with the same ladder, lane number, and band pattern/intensities as shown in the figure; visual features and positions match."
+          },
+          {
+            "protein_or_piece_label": "Cl. caspase-3",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Cleaved caspase-3 raw blot is present in 'Western blot - 5C.tif' and shows the same bands, relative lane intensities and ladder alignment as the figure panel."
+          },
+          {
+            "protein_or_piece_label": "Caspase-8",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The full-length caspase-8 blot in the source file matches the figure: band positions, number of lanes and intensity pattern correspond to the panel."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "CMTM6 bands present in 'Western blot - 5C.tif' match the figure in molecular weight region and lane pattern; visual appearance is consistent."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "FAS blot in the source image shows the same banding pattern, lane-by-lane intensity and ladder placement as the figure panel."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Actin loading control is present in the same file and matches the figure (same band positions and consistent lane intensities)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "caspase-8",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The caspase-8 blot in 'Western blot - 5F.tif' matches the figure panel with identical ladder, lane count and band intensities/pattern."
+          },
+          {
+            "protein_or_piece_label": "Cl. caspase-3",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Cleaved caspase-3 raw blot present in the file displays the same bands and lanewise intensities as in the figure."
+          },
+          {
+            "protein_or_piece_label": "Cl.Caspase-8",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The cleaved caspase-8 panel in the source image corresponds visually to the figure (matching band positions and relative intensities)."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "CMTM6 bands in 'Western blot - 5F.tif' match the figure in molecular weight region and lane pattern; visual features align."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "FAS blot in the source file shows the same banding pattern and lane intensities as the figure panel."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Actin loading control is present and matches the figure (same band positions and consistent lane intensities)."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFail_label_switch_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFail_label_switch_10.1038_s44319-026-00694-8/content/5",
+    "example_type": "figure",
+    "tables": "source_data:5C.xlsx; source_data:5F.xlsx",
+    "response_id": "resp_08fb6c9d5bfc9c720069bbed27efb48193afb9734d629abb4e",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6757,
+      "output_tokens": 1991
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:34:04.294246"
+  }
+}

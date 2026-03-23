@@ -1,0 +1,94 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "y",
+            "justification": "Mean ICG fluorescence intensity (continuous measurement) is plotted on the y-axis but no units are given on the axis, colorbar, or figure caption. This should state units (e.g., arbitrary units / mean fluorescence intensity [MFI] or AU) but none are provided."
+          }
+        ],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/6",
+    "example_type": "figure",
+    "tables": "source_data:pH-low vs pH-high_Analysis.xlsx; source_data:pH-high vs pH-low_Ranked.xlsx; source_data:ZHANG_UTERUS_C13_EPITHELIAL1_CELL.tsv; source_data:TABULA_MURIS_SENIS_TONGUE_KERATINOCYTE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SPLEEN_MACROPHAGE_AGEING.tsv; source_data:TABULA_MURIS_SENIS_MARROW_NAIVE_T_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_SKIN_EPIDERMAL_CELL_AGEING.tsv; source_data:TABULA_MURIS_SENIS_BRAIN_MYELOID_MICROGLIAL_CELL_AGEING.tsv; source_data:DESCARTES_ORGANOGENESIS...",
+    "response_id": "resp_053c7760e69826ca0069bceb0022e08196a33e55c03df96b54",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 15934,
+      "output_tokens": 1650
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T07:37:05.268695"
+  }
+}

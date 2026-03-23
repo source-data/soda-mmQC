@@ -1,0 +1,76 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "PD-L1 (Lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The raw file contains a lysate lane with a band at ~50 kDa that visually matches the PD-L1 band shown in the figure (same lane pattern, relative intensities and smear/glycosylation pattern). The protein name label is not visible on the raw image, so the filename was used to map this source to panel 7C."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (Lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The raw image shows a lower-molecular-weight band (~20 kDa) across the same lanes that corresponds to the CMTM6 lysate band in the figure (consistent band positions and lane-to-lane intensity). Protein name not visible on the raw TIFF; mapping done by file/folder context."
+          },
+          {
+            "protein_or_piece_label": "Actin (Lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The raw TIFF includes the lower panel with a ~40–45 kDa single band across lanes that matches the Actin loading control in the figure (same band shape and relative intensity). No textual protein label is visible in the raw image; identification based on band size and file association."
+          },
+          {
+            "protein_or_piece_label": "PD-L1 (IP: Alfa)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The right-side IP blot in the raw file contains a ~50 kDa band pattern that matches the PD-L1 immunoprecipitation shown in the figure (comparable lane pattern and intensities). The raw image lacks embedded protein labels, so filename/context was used to associate it with panel C."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (IP: Alfa)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The raw IP panel shows a lower ~20 kDa band co‑purifying in the same IP lanes that matches the CMTM6 band in the figure (consistent band positions and relative intensities). Protein name text is not visible on the source image; mapping was inferred from the file for figure 7C."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_missingLabels_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_missingLabels_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0eda739cd32c901c0069bbedb3fb7081979fb3d622f5bf8d9f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4619,
+      "output_tokens": 2754
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:36:36.233097"
+  }
+}

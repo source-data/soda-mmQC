@@ -1,0 +1,73 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "units_provided": [],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:T11b high vs low squamous_Analysis.xlsx; source_data:T11b high vs low squamous_GSEA_Ranked.xlsx; source_data:HALLMARK_PROTEIN_SECRETION.tsv; source_data:HALLMARK_KRAS_SIGNALING_UP.tsv; source_data:gene_set_sizes.tsv; source_data:HALLMARK_MYOGENESIS.tsv; source_data:HALLMARK_ESTROGEN_RESPONSE_LATE.tsv; source_data:HALLMARK_MITOTIC_SPINDLE.tsv; source_data:gsea_report_for_na_neg_1723673606674.tsv; source_data:HALLMARK_ALLOGRAFT_REJECTION.tsv; source_data:HALLMARK_TNFA_SIGNALING_VIA_...",
+    "response_id": "resp_08ec5ed3d77e0a6e0069bceabc40688195b8ea23d8c5150812",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 13558,
+      "output_tokens": 1558
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T07:35:56.235103"
+  }
+}

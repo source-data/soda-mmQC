@@ -1,0 +1,146 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "Cl. caspase-8",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A source file with the panel name (Western blot - 5C.tif) is present, but the image appears blank/white with no visible blot bands or protein labels; cannot verify or match to the figure panel."
+          },
+          {
+            "protein_or_piece_label": "Cl. caspase-3",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source file is present but contains no visible blot or labels; therefore it does not visually match the cleaved caspase-3 piece shown in the figure."
+          },
+          {
+            "protein_or_piece_label": "caspase-8",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Source file exists but is essentially blank and lacks the expected raw caspase-8 blot bands/labels, so it cannot be confirmed as matching the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image is present but shows no readable blot or protein label; therefore it does not allow verification that the CMTM6 blot matches the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although a file named for panel 5C is provided, the image is blank/white with no visible FAS bands or labels and cannot be matched to the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source file lacks visible housekeeping-actin bands/labels (image appears blank), so it does not confirm the actin loading control shown in the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "Cl. caspase-8",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A source file for panel 5F is present but the image is blank/white with no visible blot bands or labels; it cannot be visually matched to the figure's cleaved caspase-8 piece."
+          },
+          {
+            "protein_or_piece_label": "Cl. caspase-3",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided 5F source image contains no discernible bands or labels, so it does not confirm the cleaved caspase-3 blot shown in the figure."
+          },
+          {
+            "protein_or_piece_label": "caspase-8",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although the file exists, the image is essentially blank and lacks the expected caspase-8 raw blot features; cannot verify a match."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source image does not show visible CMTM6 bands or labels (appears blank), so it cannot be confirmed as matching the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided 5F file is blank/white with no visible FAS blot; therefore it does not match the FAS piece in the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 5F.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source file lacks visible actin bands/labels (image appears blank), preventing verification of the loading control shown in the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDwhiteImage_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDwhiteImage_10.1038_s44319-026-00694-8/content/5",
+    "example_type": "figure",
+    "tables": "source_data:5C.xlsx; source_data:5F.xlsx",
+    "response_id": "resp_09661babc318802d0069bbf38696508193836f19447086f85a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6761,
+      "output_tokens": 2479
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T14:01:32.908484"
+  }
+}

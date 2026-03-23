@@ -1,0 +1,45 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "image_matches_caption": "yes",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:Analysis of lactate concentrations.xlsx",
+    "response_id": "resp_0464df6a6f1b21d40069bd019ee4dc81a2a55133c77e3a634c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3763,
+      "output_tokens": 827
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:13:29.866238"
+  }
+}

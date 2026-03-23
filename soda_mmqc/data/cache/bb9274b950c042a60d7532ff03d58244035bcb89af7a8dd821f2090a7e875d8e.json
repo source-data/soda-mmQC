@@ -1,0 +1,50 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "yes"
+      },
+      {
+        "panel_label": "E",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/7",
+    "example_type": "figure",
+    "tables": "source_data:Analysis of lactate concentrations.xlsx",
+    "response_id": "resp_06846cfb5383bd3b0069bc0fd6baa081a3b1d2705457daee81",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3252,
+      "output_tokens": 435
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:01:50.714744"
+  }
+}

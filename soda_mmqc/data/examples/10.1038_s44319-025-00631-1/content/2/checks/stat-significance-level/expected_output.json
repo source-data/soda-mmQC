@@ -1,0 +1,76 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****",
+                "*",
+                "ns"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes",
+                "no"
+            ],
+            "from_the_caption": [
+                "****P < 0.0001 (RPR2, RPM, KP)",
+                "*P = 0.0133 (LP)",
+                ""
+            ]
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ]
+}

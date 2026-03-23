@@ -1,0 +1,71 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "FAS (IP:Flag)",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A source file named for panel 1C is present, but the image is blank/white and contains no visible blot or protein label, so the raw blot cannot be visually matched to the FAS IP band shown in the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag (IP:Flag)",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided file exists but is empty/white with no visible Flag blot; therefore it does not permit verification or matching to the Flag IP band in the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS (Lysate)",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The source file is present by filename but contains no visible lysate FAS blot or landmarks, so it does not match or allow confirmation of the lysate FAS panel."
+          },
+          {
+            "protein_or_piece_label": "Flag (Lysate)",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The file labelled for panel 1C is blank/white with no discernible Flag lysate bands, preventing visual confirmation against the figure."
+          },
+          {
+            "protein_or_piece_label": "Actin (Lysate)",
+            "source_data_filename": "Western blot - 1C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although a file named for panel 1C is provided, it lacks any visible Actin loading-control bands or features, so it does not match the Actin panel in the figure."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDwhiteImage_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDwhiteImage_10.1038_s44319-026-00694-8/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0cf72a9c789c32360069bbedd46e608192b47171bea50d1f56",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4280,
+      "output_tokens": 1466
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:36:49.790244"
+  }
+}

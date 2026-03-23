@@ -1,0 +1,62 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "error_bar_on_figure": "no",
+        "error_bar_defined_in_caption": "not needed",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Plot represents mean ± standard deviation (SD)"
+      },
+      {
+        "panel_label": "C",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "The plot represents mean with 95% confidence interval (CI)"
+      },
+      {
+        "panel_label": "D",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Plot represents mean ± standard deviation (SD)"
+      },
+      {
+        "panel_label": "E",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "The plot represents the standard error of the mean (SEM)"
+      },
+      {
+        "panel_label": "F",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Plot represents mean ± SD"
+      },
+      {
+        "panel_label": "G",
+        "error_bar_on_figure": "yes",
+        "error_bar_defined_in_caption": "yes",
+        "from_the_caption": "Plot represents mean ± SD"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes .xlsx; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes_DBA:2.xlsx",
+    "response_id": "resp_019dc9e65a78f92b0069bc098ef3fc81a091616870cdc4a3f5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 7336,
+      "output_tokens": 2195
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:35:19.719357"
+  }
+}

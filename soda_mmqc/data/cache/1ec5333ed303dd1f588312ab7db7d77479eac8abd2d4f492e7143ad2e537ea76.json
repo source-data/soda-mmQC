@@ -1,0 +1,41 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      },
+      {
+        "panel_label": "D"
+      },
+      {
+        "panel_label": "E"
+      },
+      {
+        "panel_label": "F"
+      },
+      {
+        "panel_label": "G"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes .xlsx; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes_DBA:2.xlsx",
+    "response_id": "resp_024cae3046f6b9fe0069bc10218124819f8de181da9544d68d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6921,
+      "output_tokens": 279
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T16:03:03.588349"
+  }
+}

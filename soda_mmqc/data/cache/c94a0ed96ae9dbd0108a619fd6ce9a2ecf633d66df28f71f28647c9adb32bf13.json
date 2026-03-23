@@ -1,0 +1,76 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "PD-L1 (lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The provided TIFF contains the lysate PD-L1 region (upper ~50 kDa band) matching the figure: lane pattern and band intensities align with the cropped figure. The image itself lacks an internal textual protein label, so identification was confirmed by matching band positions, ladder and the file name referencing panel 7C."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The lower ~15–25 kDa band pattern in the lysate block of the TIFF corresponds visually to the CMTM6 lysate crop in the figure (consistent lane-to-lane intensity and relative positions). Mapping used the 7C source file plus visual features because the raw file lacks explicit protein text."
+          },
+          {
+            "protein_or_piece_label": "PD-L1 (IP: Alfa)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The IP:Alfa upper band region (~50 kDa) in the source TIFF matches the IP crop in the figure by lane pattern and relative intensities; the same set of distinctive band smudges and lane-to-lane differences are present."
+          },
+          {
+            "protein_or_piece_label": "CMTM6 (IP: Alfa)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The lower band region in the IP:Alfa block of the TIFF matches the CMTM6 IP crop in the figure (consistent band shapes and lane distribution). Identification relied on visual correspondence and the 7C filename because internal protein labels are not visible."
+          },
+          {
+            "protein_or_piece_label": "Actin (lysate)",
+            "source_data_filename": "Western blot - 7C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The separate lower-left blot in the TIFF (mid-range ~40 kDa band) corresponds to the Actin loading-control crop in the figure; lane uniformity and band positions match the figure's presented panel."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_missingLabels_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_missingLabels_10.1038_s44319-026-00694-8/content/7",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_048e2f967075ab2a0069bbf2f6b10481a28ba40866d62b6550",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4625,
+      "output_tokens": 1976
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:59:04.524446"
+  }
+}

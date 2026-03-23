@@ -1,0 +1,305 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "sourceData_fig_6A.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A source data file named for panel A is present, but the image content shows unrelated blots (labels like NANOG/OCT4) and does not show a CMTM6 raw blot or matching band pattern."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "sourceData_fig_6A.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "File present by filename, but the contained image does not show CMTM4 or matching band features; content appears unrelated to the figure panel."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "sourceData_fig_6A.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided sourceData_fig_6A.jpg does not display FAS bands or the same blot features as the figure; image content and protein labels do not match."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "sourceData_fig_6A.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although a file for panel A exists, its internal blot shows β-ACTIN from an unrelated experiment (different layout/labels) and does not match the Actin piece shown in the figure."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "sourceData_fig_6B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "File named for panel B is present but its image content displays different proteins (e.g. NANOG/OCT4) and does not show a CMTM6 blot matching the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "sourceData_fig_6B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The sourceData_fig_6B.jpg image does not contain CMTM4 raw data or the same band patterns; content is from an unrelated blot."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "sourceData_fig_6B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Although a file for B exists, the image shows different blots/labels and lacks a FAS blot that visually matches the figure's FAS piece."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "sourceData_fig_6B.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Actin band in the provided file does not correspond to the Actin piece in the figure; labels and blot layout differ (unrelated image content)."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "sourceData_fig_6C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "sourceData_fig_6C.jpg exists but shows unrelated blot images (e.g. NANOG/OCT4) and does not contain a CMTM6 raw blot matching the figure."
+          },
+          {
+            "protein_or_piece_label": "CMTM4",
+            "source_data_filename": "sourceData_fig_6C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The image content in the provided file does not show CMTM4 or matching band features from panel C; labels and bands are inconsistent with the figure."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "sourceData_fig_6C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Flag blot expected in panel C is not visually present in sourceData_fig_6C.jpg; the file contains different proteins and band patterns."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "sourceData_fig_6C.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Actin band in the provided file does not match the Actin piece in panel C; the source image depicts unrelated blot data."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "sourceData_fig_6E.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The file named for panel E is present but contains unrelated blot images (NANOG/OCT4 etc.); it does not show a CMTM6 raw blot matching the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "sourceData_fig_6E.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "sourceData_fig_6E.jpg does not display a FAS blot consistent with the figure's FAS piece; labels and band patterns do not match."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "sourceData_fig_6E.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Flag blot expected in panel E is not present in the provided file; the image content is from a different experiment and does not match visually."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "sourceData_fig_6E.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Actin band in sourceData_fig_6E.jpg does not correspond to the Actin piece in the figure; different labels and blot layout are visible."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "sourceData_fig_6F.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "A file for panel F exists but its content shows unrelated blots (stem-cell markers) and not a CMTM6 blot matching the figure."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "sourceData_fig_6F.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The provided source image does not contain a FAS blot consistent with panel F; band patterns and labels differ."
+          },
+          {
+            "protein_or_piece_label": "Flag",
+            "source_data_filename": "sourceData_fig_6F.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Flag blot in the figure is not visible in sourceData_fig_6F.jpg; the file displays different protein blots and layout."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "sourceData_fig_6F.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Actin in the provided file does not match the Actin piece in the figure; the image content is unrelated."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "IP: Flag - CMTM6",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "sourceData_fig_6G.jpg is provided but contains different blot images (NANOG/OCT4 etc.) and does not show the IP:Flag CMTM6 blot or the same lane/band features as panel G."
+          },
+          {
+            "protein_or_piece_label": "IP: Flag - FAS",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The FAS blot expected in the IP panel is not present in the sourceData_fig_6G.jpg content; band patterns and labels do not match."
+          },
+          {
+            "protein_or_piece_label": "IP: Flag - Flag",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Flag IP blot from panel G cannot be identified in the provided file; the image content is from an unrelated experiment and does not match visually."
+          },
+          {
+            "protein_or_piece_label": "Lysate - CMTM6",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Though a file for G exists, the lysate CMTM6 blot shown in the figure is not visible in the source image; content and labels differ."
+          },
+          {
+            "protein_or_piece_label": "Lysate - FAS",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The lysate FAS bands in the figure are not present in sourceData_fig_6G.jpg; the provided image shows unrelated blot data."
+          },
+          {
+            "protein_or_piece_label": "Lysate - Flag",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The lysate Flag blot expected in panel G is not identifiable in the supplied file; labels and band layout do not correspond."
+          },
+          {
+            "protein_or_piece_label": "Lysate - Actin",
+            "source_data_filename": "sourceData_fig_6G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Actin band in the provided source file does not match the Actin shown in panel G; the image appears to be from a different experiment."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "IP: Flag - CMTM6",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "sourceData_fig_6H.jpg is present but depicts unrelated blots (stem-cell markers) and lacks the IP:Flag CMTM6 blot or matching band features from panel H."
+          },
+          {
+            "protein_or_piece_label": "IP: Flag - FAS",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The IP FAS blot from panel H is not visible in the provided image; the file content and labels do not correspond to the figure."
+          },
+          {
+            "protein_or_piece_label": "IP: Flag - Flag",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The Flag blot expected in panel H is not identifiable in sourceData_fig_6H.jpg; image content is inconsistent with the figure."
+          },
+          {
+            "protein_or_piece_label": "Lysate - CMTM6",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The lysate CMTM6 blot shown in the figure is not present in the supplied file; the source image contains different protein blots and labels."
+          },
+          {
+            "protein_or_piece_label": "Lysate - FAS",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Provided sourceData_fig_6H.jpg does not display lysate FAS bands matching the figure; the blot content is from an unrelated experiment."
+          },
+          {
+            "protein_or_piece_label": "Lysate - Flag",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "The lysate Flag blot expected in panel H cannot be located in the provided file; image content and labels are inconsistent."
+          },
+          {
+            "protein_or_piece_label": "Lysate - Actin",
+            "source_data_filename": "sourceData_fig_6H.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "no",
+            "western_blot_matching_result": "Actin band in the provided source file does not match the Actin piece in panel H; the file appears to contain unrelated blot data."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_SDrandomWB_10.1038_s44319-026-00694-8/content/6",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_09e087f3b398dd580069bbef63cb10819292879e6713235f3f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 16138,
+      "output_tokens": 4609
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:44:27.610159"
+  }
+}

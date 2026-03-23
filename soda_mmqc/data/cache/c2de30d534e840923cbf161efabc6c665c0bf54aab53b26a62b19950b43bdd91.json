@@ -1,0 +1,48 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "B",
+        "multicolored_overlay_micrograph": "yes",
+        "number_of_channels_in_overlay": 3,
+        "number_of_single_channel_images_shown": 2,
+        "all_channels_shown_separately": "no"
+      },
+      {
+        "panel_label": "C",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      },
+      {
+        "panel_label": "D",
+        "multicolored_overlay_micrograph": "no",
+        "number_of_channels_in_overlay": 0,
+        "number_of_single_channel_images_shown": 0,
+        "all_channels_shown_separately": "not_applicable"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:TMPRSS11B_Taqman_qpCR_Raw.xls; source_data:TMPRSS11B_Taqman_qpCR_Analysis.xlsx",
+    "response_id": "resp_0b0ccafd9092bd390069bd027512ec81908c192d48c9c689a2",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3959,
+      "output_tokens": 2031
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:17:12.997556"
+  }
+}

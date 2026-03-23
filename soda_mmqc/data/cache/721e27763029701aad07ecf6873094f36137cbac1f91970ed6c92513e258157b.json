@@ -1,0 +1,146 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "Cl. caspase-8",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file contains the uncropped blot with molecular weight ladder and the same cleaved caspase-8 bands in the same lane order and positions as the figure crops; cropping and contrast adjustments explain presentation differences."
+          },
+          {
+            "protein_or_piece_label": "Cl. caspase-3",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Cleaved caspase-3 bands and ladder visible in the source TIFF matching lane pattern and band shapes seen in the figure crop; cropping is consistent."
+          },
+          {
+            "protein_or_piece_label": "Caspase-8",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Full caspase-8 band series present in the source image with identical band intensities and relative positions to those shown in the figure; matches after cropping."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "CMTM6 blot visible in the source TIFF with the same low-MW band pattern and lane ordering as the figure crop; visually consistent."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "FAS bands and ladder present in the source file; band shapes, intensities and lane positions match the figure's cropped presentation."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "Western blot - 5C.tif",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Actin loading control bands are present in the TIFF and correspond in position and intensity pattern to the figure crop; matches expected cropping."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "pieces": [
+          {
+            "protein_or_piece_label": "Cl. caspase-8",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No raw blot image for panel F provided in the source_data folder; only spreadsheet (5F.xlsx) present, so raw blot cannot be verified."
+          },
+          {
+            "protein_or_piece_label": "Cl. caspase-3",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No raw blot image for panel F provided in the source_data folder; cannot match the cleaved caspase-3 panel."
+          },
+          {
+            "protein_or_piece_label": "Caspase-8",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "Missing raw data for caspase-8 in panel F; only quantification spreadsheet available."
+          },
+          {
+            "protein_or_piece_label": "CMTM6",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No source TIFF for CMTM6 in panel F provided; cannot confirm match."
+          },
+          {
+            "protein_or_piece_label": "FAS",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "No raw FAS blot provided for panel F in the source_data folder; source absent."
+          },
+          {
+            "protein_or_piece_label": "Actin",
+            "source_data_filename": "",
+            "source_data_status": "MISSING",
+            "source_data_matches_figure": "n/a",
+            "western_blot_matching_result": "Actin loading control raw image for panel F is not present in the provided source_data; cannot verify."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "pieces": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_missingSD_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_missingSD_10.1038_s44319-026-00694-8/content/5",
+    "example_type": "figure",
+    "tables": "source_data:5C.xlsx; source_data:5F.xlsx",
+    "response_id": "resp_0f196a43586121aa0069bbec530e5481a1b060e6267be3a661",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5428,
+      "output_tokens": 2291
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T13:30:31.935490"
+  }
+}

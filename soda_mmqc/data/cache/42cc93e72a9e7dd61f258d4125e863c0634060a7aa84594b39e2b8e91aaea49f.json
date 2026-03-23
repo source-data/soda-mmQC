@@ -1,0 +1,44 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "H&E; spatial plots"
+      },
+      {
+        "panel_label": "B",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "RNAscope"
+      },
+      {
+        "panel_label": "C",
+        "method-is-mentioned": "yes",
+        "method_source": "panel",
+        "from_the_caption": "FPKM"
+      },
+      {
+        "panel_label": "D",
+        "method-is-mentioned": "yes",
+        "method_source": "caption",
+        "from_the_caption": "qRT-PCR"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/4",
+    "example_type": "figure",
+    "tables": "source_data:TMPRSS11B_Taqman_qpCR_Raw.xls; source_data:TMPRSS11B_Taqman_qpCR_Analysis.xlsx",
+    "response_id": "resp_0238f776fa2a71bd0069bd036b2f2c819dbe4895e847201e10",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3894,
+      "output_tokens": 1921
+    },
+    "status": "completed",
+    "cached_at": "2026-03-20T09:21:17.392130"
+  }
+}

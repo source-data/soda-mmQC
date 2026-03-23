@@ -1,0 +1,84 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Asterisks above the means indicate statistically significant differences compared to the reference condition (PacL2) (*P < 0.05; ****P < 0.0001), calculated using an unpaired t-test."
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Asterisks above the means indicate statistically significant differences compared to the reference condition (PacL2) (*P < 0.05; ****P < 0.0001), calculated using an unpaired t-test."
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "Asterisks above the means indicate statistically significant differences compared to the reference condition (PacL2) (*P < 0.05; ****P < 0.0001), calculated using an unpaired t-test."
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-026-00715-1",
+    "source": "10.1038_s44318-026-00715-1/content/3",
+    "example_type": "figure",
+    "tables": "source_data:Figure 3E.xlsx; source_data:Figure 3B.csv; source_data:Figure 3C.xlsx; source_data:Figure 3D.xlsx; source_data:Figure 3A.csv; source_data:Figure 3G.xlsx",
+    "response_id": "resp_08db2936b35763220069bc0a3d516481929b865176829cb9c2",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4696,
+      "output_tokens": 2027
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:38:13.946165"
+  }
+}

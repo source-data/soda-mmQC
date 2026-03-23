@@ -1,0 +1,83 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "B",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "C",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "D",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "E",
+        "micrograph": "no",
+        "scale_bar_on_image": "",
+        "scale_bar_defined_in_caption": "",
+        "from_the_caption": "",
+        "scale_bar_defined_in_image": "",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "F",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "yes",
+        "from_the_caption": "Scale bar, 50 μm.",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      },
+      {
+        "panel_label": "G",
+        "micrograph": "yes",
+        "scale_bar_on_image": "yes",
+        "scale_bar_defined_in_caption": "yes",
+        "from_the_caption": "Scale bar, 50 μm.",
+        "scale_bar_defined_in_image": "no",
+        "from_the_image": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00631-1",
+    "source": "10.1038_s44319-025-00631-1/content/1",
+    "example_type": "figure",
+    "tables": "source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes .xlsx; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Raw.xls; source_data:Tmprss11b_KLN205 cells_qPCR_Taqman_Analysis.xlsx; source_data:KLN205 Syngeneic tumor volumes_DBA:2.xlsx",
+    "response_id": "resp_0d752b718d3da38f0069bc0e48ed8c81a2b1f4de814c8cfba5",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 7615,
+      "output_tokens": 828
+    },
+    "status": "completed",
+    "cached_at": "2026-03-19T15:55:20.578547"
+  }
+}
