@@ -1,0 +1,49 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "B",
+            "image_matches_caption": "no",
+            "discrepancies": "Right-side plate photographs are labeled ‘pacL2G17A+G20A’ (alanine mutations) while the figure caption (and accompanying data file names) refer to pacL2G17L+G20L (leucine substitutions). This is an inconsistency between the image labeling and the caption description."
+        },
+        {
+            "panel_label": "C",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "D",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "E",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "F",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "G",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "H",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        },
+        {
+            "panel_label": "I",
+            "image_matches_caption": "yes",
+            "discrepancies": ""
+        }
+    ]
+}

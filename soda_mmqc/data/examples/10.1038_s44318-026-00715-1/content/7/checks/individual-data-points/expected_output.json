@@ -1,0 +1,58 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "B",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        },
+        {
+            "panel_label": "C",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "D",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        },
+        {
+            "panel_label": "E",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        },
+        {
+            "panel_label": "F",
+            "plot": "no",
+            "average_values": "no",
+            "individual_values": "not needed"
+        },
+        {
+            "panel_label": "G",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        },
+        {
+            "panel_label": "H",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        },
+        {
+            "panel_label": "I",
+            "plot": "yes",
+            "average_values": "yes",
+            "individual_values": "yes"
+        }
+    ]
+}
