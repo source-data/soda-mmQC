@@ -1,0 +1,218 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The uncropped blot in 'Western blot - 2B.tif' shows CMTM6 with the same band pattern and lane arrangement as the figure (red-boxed region); cropping/contrast adjustments explain minor presentation differences."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM4 panel in the source file matches the figure panel (same band positions, ladder visible); the figure is a crop of this source."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS bands in the source image correspond to the figure (identical band locations/intensity pattern within the boxed region); differences are consistent with cropping."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin loading control in the source file matches the figure (same bands and relative intensities in the boxed area)."
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6 (FAS constructs, left column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The left-column CMTM6 blot in 'Western blot - 2D.tif' matches the figure (same ladder, band pattern and lane order; figure is a crop)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4 (FAS constructs, left column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 left-column bands in the source image correspond visually to the figure (identical band positions and surrounding features)."
+                },
+                {
+                    "protein_or_piece_label": "FAS (left column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS bands in the left-column blot of the source file match the cropped figure panel (same band pattern and ladder markers)."
+                },
+                {
+                    "protein_or_piece_label": "Actin (left column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin control in the left column of the source image matches the presented cropped Actin panel."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6 (TRAILR2 constructs, right column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Right-column CMTM6 in the source file corresponds to the figure's right-side panel (same band location/intensity within boxed area)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4 (TRAILR2 constructs, right column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 right-column bands in the source image match the figure crop (consistent banding and ladder features)."
+                },
+                {
+                    "protein_or_piece_label": "Flag (right column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The Flag blot visible in the source image matches the Flag panel shown in the figure (same multi-band pattern and lane arrangement)."
+                },
+                {
+                    "protein_or_piece_label": "Actin (right column)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Right-column Actin from the source matches the figure's cropped Actin panel."
+                }
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM6 blot in 'Western blot - 2E.tif' matches the figure crop (same band positions and ladder)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 in the source file corresponds to the figure (identical banding within the boxed region)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS panel in the source image matches the presented figure crop (same bands and spacing)."
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 in 'Western blot - 2F.tif' matches the figure (same lane pattern and band intensity in the boxed area)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 blot in the source image corresponds to the figure crop (consistent band positions and smears)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS panel in the source file matches the figure (same band location and relative intensity)."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM6 blot in 'Western blot - 2G.tif' matches the figure (identical bands and ladder markers in the boxed region)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS banding pattern in the source file corresponds to the figure (same single strong band in the cropped area)."
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 bands in 'Western blot - 2H.tif' match the figure (same multiple bands and ladder on the left; boxed region corresponds to figure crop)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 in the source image corresponds to the figure crop (same band pattern and spacing)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS panel in the source file matches the figure (identical bands and relative intensities within the boxed area)."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin loading control in the source image matches the figure (same bands and lane ordering in the boxed region)."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "Cl. caspase-8",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The uncropped blot in 'Western blot - 5C.tif' contains the Cleaved caspase-8 region with matching band positions and lane pattern (WT and Cmtm6KO, 0/3/6 h) consistent with the cropped panel."
+                },
+                {
+                    "protein_or_piece_label": "Cl. caspase-3",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The Cleaved caspase-3 band region is present in 'Western blot - 5C.tif' with the same band shapes and relative intensities across lanes as shown in the figure."
+                },
+                {
+                    "protein_or_piece_label": "Caspase-8",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The full-length Caspase-8 blot in the source file shows the same strong band pattern and lane order as the figure panel, consistent with a cropped region from this file."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM6 band region is visible in the uncropped 'Western blot - 5C.tif' and matches the figure in band position (~20–25 kDa) and lane pattern."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The FAS blot region in the source image matches the cropped FAS panel in the figure in band positions and relative intensities across lanes."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The Actin loading control is present in the uncropped source file and matches the figure's Actin panel in band position and uniformity across lanes."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "caspase-8",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The full-length caspase-8 blot in 'Western blot - 5F.tif' displays the same band pattern and lane arrangement (+EV and +CMTM6, 0/3/6 h) as the figure panel."
+                },
+                {
+                    "protein_or_piece_label": "Cl. caspase-3",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Cleaved caspase-3 bands are present in the source file and match the cropped figure region in band position and intensity distribution."
+                },
+                {
+                    "protein_or_piece_label": "Cl.Caspase-8",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The cleaved caspase-8 region in the uncropped blot corresponds to the figure panel with consistent band sizes and lane patterns."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM6 band (~20–25 kDa) is visible in 'Western blot - 5F.tif' and matches the figure in position and lane distribution (reconstituted vs EV)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The FAS blot region in the source image matches the figure panel in band appearance and relative intensities across lanes."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The Actin loading-control bands are present in the uncropped 'Western blot - 5F.tif' and correspond visually to the figure's Actin panel."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

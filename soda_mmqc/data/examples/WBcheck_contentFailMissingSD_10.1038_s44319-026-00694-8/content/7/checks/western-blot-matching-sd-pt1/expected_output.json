@@ -1,0 +1,53 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "PD-L1 (Lysate)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Source file 'Western blot - 7C.tif' contains the lysate PD-L1 row with the same ladder, band patterns and lane order visible in the figure panel; visual features and band intensities match the figure (within expected cropping)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6 (Lysate)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM6 lysate blot is present in 'Western blot - 7C.tif' and shows the same series of bands and relative intensities and lane positions as in the main figure; matches the figure image."
+                },
+                {
+                    "protein_or_piece_label": "PD-L1 (IP: Alfa)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The IP:Alfa PD-L1 blot is included in the same source image and shows the same band pattern and relative variations across lanes as in the figure's IP panel; visual features are consistent."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6 (IP: Alfa)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The IP:Alfa CMTM6 blot in 'Western blot - 7C.tif' matches the figure (same band positions and lane-to-lane pattern); image appears to be the uncropped source for the presented panel."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

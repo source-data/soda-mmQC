@@ -4,7 +4,7 @@
             "panel_label": "A",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data were presented as mean ± SEM from biological replicates"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "B",
@@ -16,13 +16,13 @@
             "panel_label": "C",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Results are presented as mean ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "D",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Results are presented as mean ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "E",
@@ -34,25 +34,25 @@
             "panel_label": "F",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data were presented as mean ± SEM from biological replicates"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "G",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data were presented as mean ± SEM from biological replicates"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "H",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data were presented as mean ± SEM from biological replicates"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "I",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "are shown as mean ± SEM from biological replicates"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "J",
@@ -64,19 +64,26 @@
             "panel_label": "K",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Results are presented as mean ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "L",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Results are presented as mean ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "M",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data represent mean ± SEM from biological triplicates"
+            "from_the_caption": "mean ± SEM"
+        },
+        {
+            "panel_label": "",
+            "error_bar_on_figure": "",
+            "error_bar_defined_in_caption": "",
+            "from_the_caption": ""
         }
-    ]
+    ],
+    "updated_at": "2026-03-23 14:54:56"
 }

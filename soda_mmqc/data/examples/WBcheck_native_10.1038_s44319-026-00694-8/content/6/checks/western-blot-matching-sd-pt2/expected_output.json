@@ -1,0 +1,247 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6A.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Raw blot for CMTM6 is present in 'Western blot - 6A.tif' and visually matches the lane pattern and band positions shown in the figure (consistent cropping/contrast adjustments only)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 6A.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Raw CMTM4 blot is contained in the same file and the band pattern and relative position match the figure panel (appears to be same raw image with cropping)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 6A.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS blot is present in 'Western blot - 6A.tif' and the strong doublet/multiple band pattern corresponds to the figure image after expected cropping.  \n"
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6A.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin control is visible in the source file and matches the figure lane in band position and intensity (consistent with a cropped lane from the raw image)."
+                }
+            ]
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 raw blot is in 'Western blot - 6B.tif' and matches the figure (same band positions/intensities within cropping)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 6B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 lane pattern and molecular-weight region are present in the source image and correspond to the figure panel (visual features match)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 6B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS raw bands appear in the same source file and match the figure (band pattern and placement consistent with cropping)."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin blot is visible in the raw file and corresponds to the figure (same lanes and intensity pattern)."
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 raw blot is included in 'Western blot - 6C.tif' and the band pattern/positions match the figure (left lanes and IP lanes visible)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 6C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM4 bands are present in the source file and align with the cropped figure panel (visual features consistent)."
+                },
+                {
+                    "protein_or_piece_label": "Flag",
+                    "source_data_filename": "Western blot - 6C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Flag blot (showing multiple Flag-tagged species) is in the same source image and matches the figure's Flag panels after cropping."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin loading control is visible in the raw image and corresponds to the lanes shown in the figure (same band positions/intensity)."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 raw blot is present in 'Western blot - 6E.tif' and the lane pattern and intensities match the figure (IP and lysate lanes visible)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 6E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS blot appears in the same source file and matches the multi-band pattern and lane arrangement shown in the figure.  \n"
+                },
+                {
+                    "protein_or_piece_label": "Flag",
+                    "source_data_filename": "Western blot - 6E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Flag blot (showing Flag-tagged constructs) is included in the source image and corresponds to the cropped figure panels (same band clusters)."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin control is in the source file and matches the figure lanes in position and relative intensity. "
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 raw blot is present in 'Western blot - 6F.tif' and matches the figure (consistent lane pattern across mutants and IP)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 6F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS bands in the source image match the multi-lane pattern and intensities seen in the figure (same raw image used for cropping)."
+                },
+                {
+                    "protein_or_piece_label": "Flag",
+                    "source_data_filename": "Western blot - 6F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Flag blot is contained in the source file and corresponds to the figure panel (band clusters and lane order match)."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin control is visible in the raw image and matches the figure lanes (consistent shape and intensity)."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 raw blot is in 'Western blot - 6G.tif' and the multiple lanes for lysate and IP align with the figure (band positions/intensities match)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 6G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS blot appears in the same source image and matches the figure's lysate and IP panels (same band pattern and relative intensities)."
+                },
+                {
+                    "protein_or_piece_label": "Flag",
+                    "source_data_filename": "Western blot - 6G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Flag blot is present in the source file and corresponds visually to the figure panels (matching lane order and band clusters)."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin control lanes are visible in the raw image and match the figure (consistent lane-to-lane intensity and position)."
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 6H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 raw blot is included in 'Western blot - 6H.tif' and matches the figure (lysate and IP lanes correspond in band pattern)."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 6H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS lanes in the source image match the figure's patterns and intensities (same raw image used for cropping)."
+                },
+                {
+                    "protein_or_piece_label": "Flag",
+                    "source_data_filename": "Western blot - 6H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Flag blot is present and corresponds to the figure (band clusters and lane order visually match)."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 6H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin control is visible in the source file and matches the cropped figure lanes in position and relative intensity."
+                }
+            ]
+        }
+    ]
+}

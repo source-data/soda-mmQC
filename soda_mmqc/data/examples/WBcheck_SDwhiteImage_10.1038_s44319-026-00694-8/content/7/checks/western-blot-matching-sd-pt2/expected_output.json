@@ -1,0 +1,60 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6 (IP)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "A source file named for panel 7C is present, but the image content is blank/white with no visible blot bands or protein labels; therefore the raw IP CMTM6 blot cannot be visually matched to the figure."
+                },
+                {
+                    "protein_or_piece_label": "PD-L1 (IP)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The provided TIFF is present but contains no visible PD-L1 IP blot or labels on inspection; cannot confirm that this source corresponds to the PD-L1 (IP) panel in the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6 (Lysate)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Although a file named for 7C is available, the image shows no discernible lysate CMTM6 bands or lane features; visual matching to the figure is not possible."
+                },
+                {
+                    "protein_or_piece_label": "PD-L1 (Lysate)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source TIFF exists but is blank/white with no visible PD-L1 lysate bands or identifiers; it does not visually match the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin (Lysate)",
+                    "source_data_filename": "Western blot - 7C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The only available source file is present but contains no visible actin bands or markers; therefore it cannot be confirmed as the raw data for the Actin lysate blot in the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "FAS (Lysate)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The uncropped source image contains the Lysate FAS blot with the same lane ordering and band pattern (including bands across CMTM lanes) as shown in the figure; visual features and intensity patterns match."
+                },
+                {
+                    "protein_or_piece_label": "FAS (IP:Flag)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The IP:Flag FAS blot is present in the source TIFF (right-side panel) showing the strong band in the CMTM6-SF lane and the same background and band positions as the figure, consistent with a match."
+                },
+                {
+                    "protein_or_piece_label": "Flag (Lysate)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The Lysate Flag blot in the source file matches the figure: lane-specific Flag bands and relative intensities correspond to the cropped figure panel."
+                },
+                {
+                    "protein_or_piece_label": "Flag (IP:Flag)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The IP:Flag Flag blot is present in the uncropped source image and displays the same band pattern and lane arrangement as in the figure (matches visually)."
+                },
+                {
+                    "protein_or_piece_label": "Actin (Lysate)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The Lysate Actin blot is shown in the source TIFF and matches the figure panel (consistent band positions and lane-to-lane signal)."
+                }
+            ]
+        }
+    ]
+}

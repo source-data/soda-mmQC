@@ -12,21 +12,21 @@
             "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "yes",
             "is_a_scheme": "no",
-            "is_mixed": "no"
+            "is_mixed": "yes"
         },
         {
             "panel_label": "C",
             "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "yes",
             "is_a_scheme": "no",
-            "is_mixed": "no"
+            "is_mixed": "yes"
         },
         {
             "panel_label": "D",
             "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "yes",
             "is_a_scheme": "no",
-            "is_mixed": "no"
+            "is_mixed": "yes"
         },
         {
             "panel_label": "E",
@@ -56,5 +56,6 @@
             "is_a_scheme": "no",
             "is_mixed": "no"
         }
-    ]
+    ],
+    "updated_at": "2026-03-23 12:05:53"
 }

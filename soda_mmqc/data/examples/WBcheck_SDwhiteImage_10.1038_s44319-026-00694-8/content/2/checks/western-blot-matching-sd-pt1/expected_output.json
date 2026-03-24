@@ -1,0 +1,225 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "File Western blot - 2B.tif is present but contains only a blank/white image with the label '2B' and no visible raw blot or protein labeling; it does not visually match the CMTM6 band shown in the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The provided file is a blank placeholder (only '2B' text) with no CMTM4 raw band or label visible, so it does not match the figure panel."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source file contains no visible FAS blot (only the panel label), so it does not match the FAS band in the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin band is not present in the provided source image (file only shows '2B'), therefore the source does not match the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Western blot - 2D.tif is available but is essentially blank with only the label '2D' and no raw blot bands or protein labels; it does not match the CMTM6 band shown in panel D."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source image contains no visible CMTM4 blot (only '2D' label), so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No FAS raw band is visible in Western blot - 2D.tif (image is blank/placeholder), so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "Flag",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The file lacks any visible Flag blot or labeling (only contains '2D'), therefore it does not match the figure's Flag panel."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin band not present in the supplied source image (only panel label visible); does not match the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Western blot - 2E.tif exists but is a blank/white image with '2E' text and no visible CMTM6 blot or labels, so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source file contains no CMTM4 raw band or label (only the panel label), therefore it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No FAS band or identifying labels are visible in the provided source image (placeholder), so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin is not visible in the source image (only '2E' label present); therefore the source does not match the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Western blot - 2F.tif is provided but contains only the '2F' label on a blank image with no raw CMTM6 band or labels; it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No CMTM4 raw blot or labeling is visible in the source file (placeholder), so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The supplied file lacks any visible FAS band or labels (only '2F' text), therefore it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin band not visible in Western blot - 2F.tif (image is a blank placeholder), so it does not match the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Western blot - 2G.tif is present but is a blank/white placeholder image labeled '2G' with no visible CMTM6 blot or labels; it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source file contains no visible CMTM4 band or annotation (only panel label), therefore it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No FAS band or identifying labels are visible in the supplied file (placeholder), so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin is not visible in Western blot - 2G.tif (only '2G' label), thus the source does not match the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Western blot - 2H.tif exists but is a blank image with only the label '2H' and no raw CMTM6 blot or labels, so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The provided file has no visible CMTM4 band or annotation (only the panel label), therefore it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No FAS raw band or label is visible in Western blot - 2H.tif (placeholder image), so it does not match the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin band not present in the source image (only '2H' label), therefore it does not match the figure."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "FAS (IP - Flag)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "A source file named 'Western blot - 1C.tif' is present, but the image content is essentially blank (only the text '1C' visible) and contains no visible raw blot bands, labels, or markers; therefore the raw blot cannot be visually matched to the FAS IP panel in the figure."
+                },
+                {
+                    "protein_or_piece_label": "Flag (IP - Flag)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The provided file exists but shows no raw Flag blot bands or lane features (image is blank/white aside from '1C' text), so it does not allow confirmation or visual matching to the Flag IP blot shown in the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS (Lysate)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The single source file does not show the lysate FAS blot (no bands or labels visible), so the lysate FAS piece in the figure cannot be validated against the provided source image."
+                },
+                {
+                    "protein_or_piece_label": "Flag (Lysate)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Although a file for panel 1C is present, it contains no visible Flag lysate blot or lane features; therefore it does not match or permit verification of the figure's Flag lysate panel."
+                },
+                {
+                    "protein_or_piece_label": "Actin (Lysate)",
+                    "source_data_filename": "Western blot - 1C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source image is blank except for the label '1C' and lacks the Actin loading control blot bands; consequently the Actin lysate piece cannot be matched to the provided source data."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "NANOG",
+                    "source_data_filename": "sourceData_fig.1G.jpg",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The raw NANOG blot is present in sourceData_fig.1G.jpg (top-left raw image) and shows the same strong Ctrl band and loss in Nanog-/- as in the figure; dashed crop region in the source matches the figure inset."
+                },
+                {
+                    "protein_or_piece_label": "OCT4",
+                    "source_data_filename": "sourceData_fig.1G.jpg",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The OCT4 raw blot is present in sourceData_fig.1G.jpg (lower large blot, left region) and the band pattern and lane ordering match the cropped OCT4 panel in the figure."
+                },
+                {
+                    "protein_or_piece_label": "SOX2",
+                    "source_data_filename": "sourceData_fig.1G.jpg",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The SOX2 raw blot is visible in sourceData_fig.1G.jpg (lower large blot, right region) and the bands and cropping indicated correspond to the SOX2 panel in the figure."
+                },
+                {
+                    "protein_or_piece_label": "TBX3",
+                    "source_data_filename": "sourceData_fig.1G.jpg",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The TBX3 raw blot appears in sourceData_fig.1G.jpg (middle-left blot) with the same relative intensities between Ctrl and Nanog-/- as shown in the figure; dashed crop region matches the panel."
+                },
+                {
+                    "protein_or_piece_label": "β-ACTIN",
+                    "source_data_filename": "sourceData_fig.1G.jpg",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The β-ACTIN loading control is present in sourceData_fig.1G.jpg (top-right blot) and visually matches the β-ACTIN band pattern and lane order used in the figure."
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

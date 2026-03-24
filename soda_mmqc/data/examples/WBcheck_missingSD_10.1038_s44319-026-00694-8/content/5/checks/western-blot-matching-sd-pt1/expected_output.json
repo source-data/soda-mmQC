@@ -1,0 +1,130 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "Cl. caspase-8",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The uncropped blot in 'Western blot - 5C.tif' shows a lane marker and matching bands at the same MW and relative intensities for cleaved caspase-8 across the WT and Cmtm6KO timepoints; cropping in the figure corresponds to the boxed region in the source image."
+                },
+                {
+                    "protein_or_piece_label": "Cl. caspase-3",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The cleaved caspase-3 band pattern and positions in the source TIFF match the figure panel (same marker lane at left and same band intensities across lanes); figure cropping corresponds to the boxed region in the raw image."
+                },
+                {
+                    "protein_or_piece_label": "Caspase-8",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The full-length caspase-8 band in the source image matches the figure (consistent band positions and relative intensities); the figure appears to be a crop of the same region from the raw TIFF."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The CMTM6 bands in the source TIFF are present at the same MW and show the same pattern as in the figure; cropping explains the presentation in the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS bands in the raw image align with the figure (matching lane order, band shape and intensity); figure panels are cropped from this uncropped blot."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin loading control in the TIFF matches the figure panel (same band positions and relative intensities); the figure is a crop of this source image."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "Cl. caspase-8",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw blot image for panel F provided in source_data; only spreadsheet (5F.xlsx) is present so the uncropped western blot for cleaved caspase-8 is not available."
+                },
+                {
+                    "protein_or_piece_label": "Cl. caspase-3",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw blot image for panel F provided in source_data; uncropped cleaved caspase-3 blot is missing."
+                },
+                {
+                    "protein_or_piece_label": "Caspase-8",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw blot image provided for the full-length caspase-8 shown in panel F."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw blot image for CMTM6 in panel F found in the source_data folder; only numeric data (5F.xlsx) is present."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No source image for the FAS blot in panel F; cannot verify match."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No uncropped actin blot image for panel F was provided in the source_data folder."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

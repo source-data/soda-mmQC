@@ -1,0 +1,218 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "File 'Western blot - 2B.tif' is present but contains only a mostly blank/white image with the header '2B' and no visible raw blot bands or protein labels; mapping is based on filename, so the raw blot cannot be visually confirmed to match the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Source file shows no visible blot bands or protein labels (only the panel header); therefore the CMTM4 piece cannot be visually matched to the figure despite the filename correspondence."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The provided source image lacks visible raw blot content (only a header '2B'), so the FAS band in the figure cannot be verified against the raw data; association is inferred from the filename."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2B.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin piece cannot be confirmed because 'Western blot - 2B.tif' contains no visible bands or protein labels—mapping done using the filename only."
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6 (FASWT panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "File 'Western blot - 2D.tif' exists but shows only a blank/white image with the header '2D' and no raw blot bands or in-image protein labels; cannot visually confirm the CMTM6 band in the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4 (FASWT panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Source image lacks visible blot data; the CMTM4 piece is mapped by filename but cannot be visually verified to match the figure."
+                },
+                {
+                    "protein_or_piece_label": "FAS (FASWT panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No raw blot bands or labels are visible in the provided file; therefore the FAS band cannot be matched visually to the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin (FASWT panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source file contains only a header image and no visible actin blot; visual confirmation is not possible."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6 (TRAILR2TM_FAS panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Although the filename corresponds to panel D, the image lacks any visible raw blot bands or labels, so this CMTM6 occurrence cannot be visually confirmed."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4 (TRAILR2TM_FAS panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No raw data visible inside 'Western blot - 2D.tif'; mapping relies on filename and the band cannot be visually matched."
+                },
+                {
+                    "protein_or_piece_label": "Flag (TRAILR2TM_FAS panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Provided source image is a blank/white image labeled '2D' with no visible Flag blot; thus the Flag band cannot be verified."
+                },
+                {
+                    "protein_or_piece_label": "Actin (TRAILR2TM_FAS panel)",
+                    "source_data_filename": "Western blot - 2D.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin band cannot be confirmed because the source file does not contain visible blot bands or labels—matching done by filename only."
+                }
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The file 'Western blot - 2E.tif' is present but only shows a header '2E' and no visible raw blot bands or protein labels; therefore CMTM6 cannot be visually matched to the figure."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2E.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Source image lacks visible blot content (only panel header), so the CMTM4 piece cannot be visually confirmed; mapping is inferred from the filename."
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "File 'Western blot - 2F.tif' contains only a header '2F' and no visible raw blot bands or in-image protein labels; the CMTM6 band cannot be visually verified."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No raw blot bands are visible in the provided file; CMTM4 mapping is based on filename and cannot be visually matched."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source image lacks visible bands or labels (only header), so the FAS piece cannot be visually confirmed against raw data."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Provided file 'Western blot - 2G.tif' shows only the header '2G' and no raw blot bands or protein labels; cannot visually confirm the CMTM6 band."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Source image contains no visible blot data (only panel header), so the FAS band cannot be matched visually to the figure."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2G.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin piece cannot be verified because 'Western blot - 2G.tif' lacks visible bands or protein labels; matching inferred from filename only."
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The 'Western blot - 2H.tif' file is present but contains only a header '2H' with no visible raw blot bands or protein labels; the CMTM6 band cannot be visually confirmed."
+                },
+                {
+                    "protein_or_piece_label": "CMTM4",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "No raw blot content is visible in the provided file; CMTM4 cannot be visually matched to the figure and was associated by filename."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "The source image lacks visible bands or labels (only the panel header), so the FAS band in the figure cannot be verified against raw data."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 2H.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "no",
+                    "western_blot_matching_result": "Actin piece cannot be confirmed because 'Western blot - 2H.tif' contains no visible blot bands or protein labels; mapping was done using the filename."
+                }
+            ]
+        }
+    ]
+}

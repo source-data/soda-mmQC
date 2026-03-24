@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Expected output — western-blot-matching-sd-pt1</title>
+<style>body { font-family: system-ui, sans-serif; max-width: 900px; margin: 1rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.25rem; color: #333; }
+    h3 { font-size: 1rem; margin: 1rem 0 0.5rem; color: #555; }
+    section { margin-bottom: 1.5rem; padding: 0.75rem; background: #f8f9fa; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid #dee2e6; }
+    th { background: #e9ecef; font-weight: 600; }
+    .empty { color: #6c757d; font-style: italic; margin: 0.25rem 0; }
+    ul { margin: 0.25rem 0; padding-left: 1.25rem; }
+    .meta { font-size: 0.85rem; color: #6c757d; margin-bottom: 1rem; }</style></head><body>
+<h1>Expected output — western-blot-matching-sd-pt1</h1>
+<section><h3>Panel A — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel B — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel C — Western blot: TRUE</h3>
+<table><thead><tr><th>protein_or_piece_label</th><th>source_data_filename</th><th>source_data_status</th><th>source_data_matches_figure</th><th>western_blot_matching_result</th></tr></thead><tbody><tr><td>CMTM6 (IP)</td><td>Western blot - 7C.tif</td><td>Source data found</td><td>no</td><td>The provided source file 'Western blot - 7C.tif' is present but the image is essentially blank (large white area with a single 'C' in the corner) and contains no visible raw blot bands or protein labels; therefore the IP CMTM6 piece cannot be visually matched to the figure.</td></tr><tr><td>PD-L1 (IP)</td><td>Western blot - 7C.tif</td><td>Source data found</td><td>no</td><td>The only source file appears empty/white and lacks any detectable PD-L1 IP blot or labels, so the PD-L1 (IP) piece in the figure cannot be confirmed from the provided file.</td></tr><tr><td>CMTM6 (Lysate)</td><td>Western blot - 7C.tif</td><td>Source data found</td><td>no</td><td>No lysate CMTM6 raw blot is visible in the supplied TIFF (image is blank), so the lysate CMTM6 piece shown in the figure cannot be validated against the source file.</td></tr><tr><td>PD-L1 (Lysate)</td><td>Western blot - 7C.tif</td><td>Source data found</td><td>no</td><td>The source TIFF does not show any PD-L1 lysate bands or labels (blank image), so the figure's PD-L1 (lysate) panel cannot be matched to raw data.</td></tr><tr><td>Actin (Lysate)</td><td>Western blot - 7C.tif</td><td>Source data found</td><td>no</td><td>Actin loading control is not visible in the provided source image (file appears empty), therefore the Actin lysate piece cannot be confirmed.</td></tr></tbody></table>
+</section>
+<section><h3>Panel D — Western blot: FALSE</h3>
+</section>
+</body></html>

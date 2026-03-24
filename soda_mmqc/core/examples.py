@@ -231,9 +231,9 @@ class FigureExample(Example):
         with open(caption_path, "r", encoding="utf-8") as f:
             self.caption = f.read().strip()
 
-        # Find image
+        # Find image (extensions must match what we can send to the API or convert)
         self.image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+        for ext in [".png", ".jpg", ".jpeg", ".webp", ".tiff", ".tif"]:
             for image_path in self.source_path.glob(f"content/*{ext}"):
                 self.image_path = image_path
                 break
@@ -322,7 +322,7 @@ class FigureExample(Example):
         img.save(buf, format="PNG")
         return "image/png", base64.b64encode(buf.getvalue()).decode("utf-8")
 
-    _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
+    _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp", ".tiff", ".tif")
 
     def _get_source_data_items(
         self,

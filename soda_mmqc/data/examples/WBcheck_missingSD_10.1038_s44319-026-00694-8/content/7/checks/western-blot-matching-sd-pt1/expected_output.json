@@ -1,0 +1,60 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "CMTM6 (IP)",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw blot image found in the provided source_data folder for the CMTM6 IP blot; only non-image files (.DS_Store, 7C.docx) are present."
+                },
+                {
+                    "protein_or_piece_label": "PD-L1 (IP)",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw blot image found in the provided source_data folder for the PD-L1 IP blot; source data files are missing."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6 (Lysate)",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw lysate blot for CMTM6 is present in the source_data folder; cannot verify match."
+                },
+                {
+                    "protein_or_piece_label": "PD-L1 (Lysate)",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw lysate blot for PD-L1 found among the provided source files; verification not possible."
+                },
+                {
+                    "protein_or_piece_label": "Actin (Lysate)",
+                    "source_data_filename": "",
+                    "source_data_status": "MISSING",
+                    "source_data_matches_figure": "n/a",
+                    "western_blot_matching_result": "No raw loading-control (Actin) blot image provided in the source_data folder; cannot confirm correspondence."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

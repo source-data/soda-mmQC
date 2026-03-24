@@ -1,0 +1,123 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "B",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "C",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "Cl. caspase-8",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The raw blot in 'Western blot - 5C.tif' shows the cleaved caspase-8 band at the same molecular weight, with matching lane pattern and intensity differences; matches the figure (cropping/annotations consistent)."
+                },
+                {
+                    "protein_or_piece_label": "Cl. caspase-3",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The cleaved caspase-3 panel is present in 'Western blot - 5C.tif' with the same band positions and lane pattern as in the figure; visually consistent after cropping."
+                },
+                {
+                    "protein_or_piece_label": "Caspase-8",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "The full-length caspase-8 band pattern in the source file matches the figure panel (same band shapes, relative intensities and lane order)."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 blot is present in the 5C source image with the same band cluster and lane arrangement as shown in the figure; matches within expected cropping."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS bands and relative intensities/positions in the source TIFF correspond to the figure panel; cropping and contrast adjustments appear applied but content matches."
+                },
+                {
+                    "protein_or_piece_label": "Actin",
+                    "source_data_filename": "Western blot - 5C.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Actin loading control band is present in the same file with matching band shape and lane order as the figure; matches the presented panel."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "E",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "F",
+            "is_western_blot": "TRUE",
+            "pieces": [
+                {
+                    "protein_or_piece_label": "Cl. caspase-8",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Cleaved caspase-8 blot in 'Western blot - 5F.tif' shows the same band pattern, lane order and intensities as the figure panel; matches after cropping."
+                },
+                {
+                    "protein_or_piece_label": "Cl. caspase-3",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Cleaved caspase-3 panel is present in the 5F source image with matching bands and lanes consistent with the figure."
+                },
+                {
+                    "protein_or_piece_label": "Caspase-8",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "Full-length caspase-8 bands in the source TIFF match the figure in band shape and relative intensities; lane ordering is consistent."
+                },
+                {
+                    "protein_or_piece_label": "CMTM6",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "CMTM6 blot is visible in 'Western blot - 5F.tif' with the same cluster of bands and lane pattern as in the figure; matches."
+                },
+                {
+                    "protein_or_piece_label": "FAS",
+                    "source_data_filename": "Western blot - 5F.tif",
+                    "source_data_status": "Source data found",
+                    "source_data_matches_figure": "yes",
+                    "western_blot_matching_result": "FAS panel in the source file corresponds to the figure panel (matching band positions and relative intensities); cropping is consistent."
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        },
+        {
+            "panel_label": "H",
+            "is_western_blot": "FALSE",
+            "pieces": []
+        }
+    ]
+}

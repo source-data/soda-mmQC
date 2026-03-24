@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Expected output — western-blot-matching-sd-pt1</title>
+<style>body { font-family: system-ui, sans-serif; max-width: 900px; margin: 1rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.25rem; color: #333; }
+    h3 { font-size: 1rem; margin: 1rem 0 0.5rem; color: #555; }
+    section { margin-bottom: 1.5rem; padding: 0.75rem; background: #f8f9fa; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid #dee2e6; }
+    th { background: #e9ecef; font-weight: 600; }
+    .empty { color: #6c757d; font-style: italic; margin: 0.25rem 0; }
+    ul { margin: 0.25rem 0; padding-left: 1.25rem; }
+    .meta { font-size: 0.85rem; color: #6c757d; margin-bottom: 1rem; }</style></head><body>
+<h1>Expected output — western-blot-matching-sd-pt1</h1>
+<section><h3>Panel A — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel B — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel C — Western blot: TRUE</h3>
+<table><thead><tr><th>protein_or_piece_label</th><th>source_data_filename</th><th>source_data_status</th><th>source_data_matches_figure</th><th>western_blot_matching_result</th></tr></thead><tbody><tr><td>Cl. caspase-8</td><td>Western blot - 5C.tif</td><td>Source data found</td><td>yes</td><td>The uncropped blot in 'Western blot - 5C.tif' shows a lane marker and matching bands at the same MW and relative intensities for cleaved caspase-8 across the WT and Cmtm6KO timepoints; cropping in the figure corresponds to the boxed region in the source image.</td></tr><tr><td>Cl. caspase-3</td><td>Western blot - 5C.tif</td><td>Source data found</td><td>yes</td><td>The cleaved caspase-3 band pattern and positions in the source TIFF match the figure panel (same marker lane at left and same band intensities across lanes); figure cropping corresponds to the boxed region in the raw image.</td></tr><tr><td>Caspase-8</td><td>Western blot - 5C.tif</td><td>Source data found</td><td>yes</td><td>The full-length caspase-8 band in the source image matches the figure (consistent band positions and relative intensities); the figure appears to be a crop of the same region from the raw TIFF.</td></tr><tr><td>CMTM6</td><td>Western blot - 5C.tif</td><td>Source data found</td><td>yes</td><td>The CMTM6 bands in the source TIFF are present at the same MW and show the same pattern as in the figure; cropping explains the presentation in the figure.</td></tr><tr><td>FAS</td><td>Western blot - 5C.tif</td><td>Source data found</td><td>yes</td><td>FAS bands in the raw image align with the figure (matching lane order, band shape and intensity); figure panels are cropped from this uncropped blot.</td></tr><tr><td>Actin</td><td>Western blot - 5C.tif</td><td>Source data found</td><td>yes</td><td>Actin loading control in the TIFF matches the figure panel (same band positions and relative intensities); the figure is a crop of this source image.</td></tr></tbody></table>
+</section>
+<section><h3>Panel D — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel E — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel F — Western blot: TRUE</h3>
+<table><thead><tr><th>protein_or_piece_label</th><th>source_data_filename</th><th>source_data_status</th><th>source_data_matches_figure</th><th>western_blot_matching_result</th></tr></thead><tbody><tr><td>Cl. caspase-8</td><td></td><td>MISSING</td><td>n/a</td><td>No raw blot image for panel F provided in source_data; only spreadsheet (5F.xlsx) is present so the uncropped western blot for cleaved caspase-8 is not available.</td></tr><tr><td>Cl. caspase-3</td><td></td><td>MISSING</td><td>n/a</td><td>No raw blot image for panel F provided in source_data; uncropped cleaved caspase-3 blot is missing.</td></tr><tr><td>Caspase-8</td><td></td><td>MISSING</td><td>n/a</td><td>No raw blot image provided for the full-length caspase-8 shown in panel F.</td></tr><tr><td>CMTM6</td><td></td><td>MISSING</td><td>n/a</td><td>No raw blot image for CMTM6 in panel F found in the source_data folder; only numeric data (5F.xlsx) is present.</td></tr><tr><td>FAS</td><td></td><td>MISSING</td><td>n/a</td><td>No source image for the FAS blot in panel F; cannot verify match.</td></tr><tr><td>Actin</td><td></td><td>MISSING</td><td>n/a</td><td>No uncropped actin blot image for panel F was provided in the source_data folder.</td></tr></tbody></table>
+</section>
+<section><h3>Panel G — Western blot: FALSE</h3>
+</section>
+<section><h3>Panel H — Western blot: FALSE</h3>
+</section>
+</body></html>
