@@ -72,6 +72,53 @@ def _lf_start_trace(client: Any, name: str, metadata: Optional[Dict[str, Any]] =
     return None
 
 
+def _sanitize_trace_token(value: Any, default: str) -> str:
+    """Return a trace-safe token (lowercase alnum, dash, underscore)."""
+    try:
+        text = str(value).strip().lower()
+    except Exception:
+        text = ""
+    if not text:
+        return default
+    safe = []
+    for ch in text:
+        if ch.isalnum() or ch in {"-", "_"}:
+            safe.append(ch)
+        else:
+            safe.append("-")
+    token = "".join(safe).strip("-")
+    return token or default
+
+
+def _infer_model_type(model: str) -> str:
+    """Infer a stable model-family token for trace naming."""
+    model_token = _sanitize_trace_token(model, "unknown")
+    parts = model_token.split("-")
+    if model_token.startswith("gpt-") and len(parts) >= 2:
+        return "-".join(parts[:2])
+    if model_token.startswith("claude-") and len(parts) >= 3:
+        return "-".join(parts[:3])
+    if model_token.startswith("o") and parts:
+        return parts[0]
+    return parts[0] if parts else model_token
+
+
+def _build_lf_trace_name(provider: str, model: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    """Build trace name from provider + model type + sub-function."""
+    metadata = metadata or {}
+    sub_function = (
+        metadata.get("sub_function")
+        or metadata.get("phase")
+        or metadata.get("operation")
+        or metadata.get("mode")
+        or "evaluate"
+    )
+    provider_token = _sanitize_trace_token(provider, "provider")
+    model_type = _infer_model_type(model)
+    sub_function_token = _sanitize_trace_token(sub_function, "evaluate")
+    return f"{provider_token}_{model_type}_{sub_function_token}_generate_response"
+
+
 def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str, prompt_obj: Optional[Any] = None) -> None:
     """Best-effort: create a child span + generation observation and finish.
 
@@ -569,21 +616,23 @@ def generate_response_openai(
     # Lazy-init Langfuse client and start per-call trace (best-effort)
     _lf_client = _get_langfuse_client()
     _lf_trace = None
+    trace_name = _build_lf_trace_name("openai", model, metadata)
     try:
         if _lf_client:
             _lf_trace = _lf_start_trace(
                 _lf_client,
-                name="openai_generate_response",
+                name=trace_name,
                 metadata={
                     "model": model,
                     "doc_id": metadata.get("doc_id") if metadata else None,
                     "prompt_name": metadata.get("prompt_name") if metadata else None,
+                    "sub_function": (metadata or {}).get("sub_function", "evaluate"),
                 },
             )
             if _lf_trace:
                 try:
                     try:
-                        print("Langfuse: started trace 'openai_generate_response' for doc_id=", (metadata or {}).get("doc_id"))
+                        print(f"Langfuse: started trace '{trace_name}' for doc_id=", (metadata or {}).get("doc_id"))
                     except Exception:
                         pass
                 except Exception:
@@ -935,15 +984,17 @@ def generate_response_anthropic(
     # Lazy-init Langfuse client and start per-call trace (best-effort)
     _lf_client = _get_langfuse_client()
     _lf_trace = None
+    trace_name = _build_lf_trace_name("anthropic", model, metadata)
     try:
         if _lf_client:
             _lf_trace = _lf_start_trace(
                 _lf_client,
-                name="anthropic_generate_response",
+                name=trace_name,
                 metadata={
                     "model": model,
                     "doc_id": metadata.get("doc_id") if metadata else None,
                     "prompt_name": metadata.get("prompt_name") if metadata else None,
+                    "sub_function": (metadata or {}).get("sub_function", "evaluate"),
                 },
             )
             if _lf_trace:
@@ -955,7 +1006,7 @@ def generate_response_anthropic(
                     except Exception:
                         pass
                     try:
-                        print("Langfuse: started trace 'anthropic_generate_response' for doc_id=", (metadata or {}).get("doc_id"))
+                        print(f"Langfuse: started trace '{trace_name}' for doc_id=", (metadata or {}).get("doc_id"))
                     except Exception:
                         pass
                 except Exception:

@@ -1,10 +1,16 @@
 from pathlib import Path
 from soda_mmqc import logger
-from langfuse import get_client
 import json
 
-# Initialize Langfuse client
-langfuse = get_client()
+# Initialize Langfuse client (optional — falls back to local files if unavailable)
+try:
+    from langfuse import get_client as _get_langfuse_client
+    try:
+        langfuse = _get_langfuse_client()
+    except Exception:
+        langfuse = None
+except Exception:
+    langfuse = None
 
 
 def load_json(file_path):
@@ -15,6 +21,13 @@ def load_json(file_path):
 
 def get_check_data(check_dir: Path, remote: bool = True):
     if remote:
+        if langfuse is None:
+            logger.warning(
+                "Langfuse client not initialized; falling back to local "
+                "prompt.txt and config.json for %s",
+                check_dir.name,
+            )
+            return get_check_data(check_dir, remote=False)
         # Use the canonical prompt key used elsewhere in the codebase:
         # "checklists/{checklist_name}/{check_name}" so Langfuse prompt
         # management returns the intended prompt rather than a file/path
@@ -38,10 +51,22 @@ def get_check_data(check_dir: Path, remote: bool = True):
 
 
 def get_remote_prompts(check_dir: Path, versions = [1, 2, 3, 4]):
+    if langfuse is None:
+        logger.warning(
+            "Langfuse client not initialized; returning local prompts for %s",
+            check_dir.name,
+        )
+        local_prompts = get_local_prompts(check_dir)
+        # get_local_prompts returns a dict of {stem: text}; pick the first entry
+        prompt_text = next(iter(local_prompts.values()), None) if isinstance(local_prompts, dict) else None
+        schema = get_local_schema(check_dir) or {}
+        benchmark = get_local_benchmark(check_dir) or {}
+        return prompt_text, schema, benchmark
+
     prompts = {}
     schemas = {}
     benchmarks = {}
-    
+
     try:
         checklist_name = check_dir.parent.name
     except Exception:

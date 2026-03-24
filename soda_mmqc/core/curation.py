@@ -210,29 +210,44 @@ def load_checklist(checklist_dir):
             #         with open(prompt_file, "r", encoding="utf-8") as f:
             #             checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
             # else:
-            # Fetch prompt from Langfuse SDK.
+            # Fetch prompt from Langfuse SDK or fall back to local prompt files.
             # The Langfuse prompt key will be: "checklists/{checklist_name}/{check_name}"
             # where checklist_name is the parent checklist directory name (e.g., 'doc-checklist')
-            try:
-                if langfuse_client is None:
-                    raise RuntimeError("Langfuse client not available or failed to initialize")
-
-                # Build the prompt key using the checklist directory name and the check name
-                checklist_name = checklist_dir.name if hasattr(checklist_dir, "name") else str(checklist_dir)
-                prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
-                logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
-                # `get_prompt` returns the production prompt (string) per user instructions
-                prompt_text = langfuse_client.get_prompt(prompt_key)
-                if prompt_text:
-                    # Use a filename derived from the check name as before
-                    prompt_filename = f"{check_dir.name}.txt"
-                    checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text.name
-            except Exception as e:
-                logger.info(f"Langfuse prompt fetch skipped or failed for {check_dir.name}: {e}")
+            if langfuse_client is None:
+                # Load from local prompt.txt or prompts/prompt*.txt
+                _prompt_txt = check_dir / "prompt.txt"
+                _prompts_dir = check_dir / "prompts"
+                if _prompt_txt.exists():
+                    try:
+                        with open(_prompt_txt, "r", encoding="utf-8") as f:
+                            checklist[check_dir.name]["prompts"]["prompt.txt"] = f.read()
+                    except Exception as e:
+                        logger.warning(f"Failed to load {_prompt_txt}: {e}")
+                elif _prompts_dir.exists():
+                    for _pf in sorted(_prompts_dir.glob("prompt*.txt")):
+                        try:
+                            with open(_pf, "r", encoding="utf-8") as f:
+                                checklist[check_dir.name]["prompts"][_pf.name] = f.read()
+                        except Exception as e:
+                            logger.warning(f"Failed to load {_pf}: {e}")
+            else:
                 try:
-                    st.warning(f"Could not load prompts from Langfuse for {check_dir.name}: {e}")
-                except Exception:
-                    pass
+                    # Build the prompt key using the checklist directory name and the check name
+                    checklist_name = checklist_dir.name if hasattr(checklist_dir, "name") else str(checklist_dir)
+                    prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+                    logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
+                    # `get_prompt` returns the production prompt (string) per user instructions
+                    prompt_text = langfuse_client.get_prompt(prompt_key)
+                    if prompt_text:
+                        # Use a filename derived from the check name as before
+                        prompt_filename = f"{check_dir.name}.txt"
+                        checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text.name
+                except Exception as e:
+                    logger.info(f"Langfuse prompt fetch skipped or failed for {check_dir.name}: {e}")
+                    try:
+                        st.warning(f"Could not load prompts from Langfuse for {check_dir.name}: {e}")
+                    except Exception:
+                        pass
     return checklist
    
 

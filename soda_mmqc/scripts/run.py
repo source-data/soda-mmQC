@@ -181,6 +181,7 @@ def run_model(
     model: str = DEFAULT_MODEL,
     prompt_name: Optional[str] = None,
     prompt_obj: Optional[object] = None,
+    sub_function: str = "evaluate",
 ) -> List[ModelResult]:
     """Step 2: Run the model on all inputs.
     
@@ -226,6 +227,7 @@ def run_model(
                 "source": example.relative_source_path,
                 "example_type": example.example_class_name,
                 "prompt_name": prompt_name,
+                "sub_function": sub_function,
             }
             # Check cache first if enabled
             if use_cache:
@@ -395,6 +397,78 @@ def save_analysis(
         raise
 
 
+def _load_local_config(check_dir: Path) -> Dict[str, Any]:
+    """Load config from local config.json, or derive from schema.json + benchmark.json."""
+    config_file = check_dir / "config.json"
+    if config_file.exists():
+        try:
+            with open(config_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.warning(f"Failed to load {config_file}: {e}")
+    # Derive config from existing local files
+    cfg: Dict[str, Any] = {}
+    schema_file = check_dir / "schema.json"
+    if schema_file.exists():
+        try:
+            with open(schema_file, "r", encoding="utf-8") as f:
+                cfg["output_schema"] = json.load(f)
+        except Exception as e:
+            logger.warning(f"Failed to load {schema_file}: {e}")
+    benchmark_file = check_dir / "benchmark.json"
+    if benchmark_file.exists():
+        try:
+            with open(benchmark_file, "r", encoding="utf-8") as f:
+                benchmark = json.load(f)
+            cfg.update(benchmark)
+        except Exception as e:
+            logger.warning(f"Failed to load {benchmark_file}: {e}")
+    return cfg
+
+
+def _load_local_prompts(check_dir: Path) -> Dict[str, Dict[str, Any]]:
+    """Load prompts from local prompt.txt or prompts/prompt*.txt files.
+
+    Checks (in order):
+      1. ``<check_dir>/prompt.txt``
+      2. ``<check_dir>/prompts/prompt.txt``
+      3. All ``<check_dir>/prompts/prompt*.txt`` (sorted, as multiple versions)
+    """
+    prompts: Dict[str, Dict[str, Any]] = {}
+    # Try a single prompt.txt at the check directory root or in prompts/
+    for candidate in [check_dir / "prompt.txt", check_dir / "prompts" / "prompt.txt"]:
+        if candidate.exists():
+            try:
+                with open(candidate, "r", encoding="utf-8") as f:
+                    text = f.read()
+                prompts[f"{check_dir.name}::local::prompt"] = {
+                    "text": text,
+                    "obj": None,
+                    "version_id": "local",
+                    "config": None,
+                }
+                return prompts
+            except Exception as e:
+                logger.warning(f"Failed to load {candidate}: {e}")
+    # Fall back to all numbered prompt files in prompts/
+    prompts_dir = check_dir / "prompts"
+    if prompts_dir.exists():
+        for prompt_file in sorted(prompts_dir.glob("prompt*.txt")):
+            try:
+                with open(prompt_file, "r", encoding="utf-8") as f:
+                    text = f.read()
+                key = f"{check_dir.name}::local::{prompt_file.stem}"
+                prompts[key] = {
+                    "text": text,
+                    "obj": None,
+                    "version_id": f"local::{prompt_file.stem}",
+                    "config": None,
+                }
+            except Exception as e:
+                logger.warning(f"Failed to load {prompt_file}: {e}")
+    return prompts
+
+
 def load_prompt_config_for_check(
     check_dir: Path,
     prompt_version: Optional[str] = None,
@@ -405,8 +479,12 @@ def load_prompt_config_for_check(
     This helper is used to pin multiple checks to one check's prompt config.
     """
     if langfuse_client is None:
-        logger.error("Langfuse client not initialized; cannot fetch prompt config")
-        return None
+        logger.warning(
+            "Langfuse client not initialized; falling back to local config.json for %s",
+            check_dir.name,
+        )
+        cfg = _load_local_config(check_dir)
+        return cfg if cfg else None
 
     prompt_version_norm = (
         str(prompt_version).strip().lower()
@@ -560,6 +638,67 @@ def prepare_check_data(
         if prompt_version is not None
         else None
     )
+
+    # When Langfuse is unavailable, fall back to local prompt.txt and config.json
+    if langfuse_client is None:
+        logger.warning(
+            "Langfuse client not initialized; falling back to local "
+            "prompt.txt and config.json for %s",
+            check_dir.name,
+        )
+        _cfg = _load_local_config(check_dir)
+        if fixed_prompt_config is not None:
+            _cfg = fixed_prompt_config
+        _schema = _cfg.get("output_schema", {})
+        _benchmark = {k: v for k, v in _cfg.items() if k != "output_schema"}
+        _check_name = _benchmark.get("name", check_dir.name)
+        _prompts = _load_local_prompts(check_dir)
+        if not _prompts:
+            logger.error(
+                f"No local prompt files found for {check_dir.name}; "
+                "cannot prepare check data without prompts"
+            )
+            return (None, {})
+        _example_paths = _benchmark.get("examples", [])
+        if not _example_paths:
+            logger.warning(f"No examples found in local config for check: {check_dir.name}")
+            return (None, {})
+        try:
+            _example_class = _benchmark["example_class"]
+        except KeyError:
+            logger.error(f"No example_class found in local config for {check_dir.name}")
+            return (None, {})
+        try:
+            _examples = [
+                EXAMPLE_FACTORY.create(ex_path, _example_class)
+                for ex_path in _example_paths
+            ]
+        except Exception as _e:
+            logger.error(f"Error gathering examples: {str(_e)}")
+            return (None, {})
+        if not _examples:
+            logger.warning(f"No valid examples for check: {check_dir.name}")
+            return (None, {})
+        _expected_outputs = []
+        for _ex in _examples:
+            try:
+                _out = _ex.get_expected_output(_check_name)
+            except Exception as _e:
+                logger.error(f"Error getting expected output ({_ex.doc_id}): {_e}")
+                continue
+            if _out is not None:
+                _expected_outputs.append(_out)
+        if not _expected_outputs or len(_expected_outputs) != len(_examples):
+            logger.warning(f"Missing expected outputs for check: {check_dir.name}")
+            return (None, {})
+        return CheckData(
+            check_dir_name=check_dir.name,
+            check_name=_check_name,
+            schema=_schema,
+            examples=_examples,
+            expected_outputs=_expected_outputs,
+            model_config=load_model_config(check_dir),
+        ), _prompts
 
     # Fetch check metadata and ALL prompt versions from Langfuse
     try:
@@ -968,6 +1107,7 @@ def process_check(
                 model=model,
                 prompt_name=prompt_key,
                 prompt_obj=prompt_obj,
+                sub_function="evaluate",
             )
 
         # Analyze results with all string metrics
@@ -1068,6 +1208,7 @@ def initialize(
                 model=model,
                 prompt_name=prompt_key,
                 prompt_obj=first_prompt_obj,
+                sub_function="init",
             )
 
             # Write expected outputs
