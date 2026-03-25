@@ -40,7 +40,12 @@ def _get_langfuse_client() -> Optional[Any]:
     This is intentionally minimal: it mirrors the example in
     `test_langfuse.py` and prefers the `get_client()` helper the SDK
     exposes. The calling code should treat a None return as "no tracing".
+    Returns None immediately when LANGFUSE_PUBLIC_KEY is not configured so
+    the SDK never emits authentication warnings.
     """
+    import os as _os
+    if not _os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        return None
     try:
         if _lf_get_client is None:
             from langfuse import get_client as _gc  # type: ignore

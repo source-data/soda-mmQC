@@ -1,9 +1,11 @@
 from pathlib import Path
 from soda_mmqc import logger
-import json
+import json, os
 
 # Initialize Langfuse client (optional — falls back to local files if unavailable)
 try:
+    if not os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        langfuse = None
     from langfuse import get_client as _get_langfuse_client
     try:
         langfuse = _get_langfuse_client()
