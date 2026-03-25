@@ -2,11 +2,15 @@
     "outputs": [
         {
             "panel_label": "A",
-            "source_data_filenames": []
+            "source_data_filenames": [
+                "3AB_diff_expression.csv"
+            ]
         },
         {
             "panel_label": "B",
-            "source_data_filenames": []
+            "source_data_filenames": [
+                "3AB_diff_expression.csv"
+            ]
         },
         {
             "panel_label": "C",
@@ -16,5 +20,6 @@
             "panel_label": "D",
             "source_data_filenames": []
         }
-    ]
+    ],
+    "not_mappable": []
 }

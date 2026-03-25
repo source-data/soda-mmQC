@@ -14,11 +14,16 @@
         },
         {
             "panel_label": "D",
-            "source_data_filenames": []
+            "source_data_filenames": [
+                "EMBOJ-2025-120546R_Fig1D.xlsx"
+            ]
         },
         {
             "panel_label": "E",
-            "source_data_filenames": []
+            "source_data_filenames": [
+                "EMBOJ-2025-120546R_Fig1E.xlsx"
+            ]
         }
-    ]
+    ],
+    "not_mappable": []
 }

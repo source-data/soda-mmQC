@@ -1159,11 +1159,9 @@ def initialize(
     Args:
         checklist_dir: Path to the checklist directory
         use_cache: If True, use cached outputs when available
+        model: Model to use for generation
+        check_name: If set, only initialize this check (reduces output)
     """
-    logger.info(
-        f"Initializing expected outputs for checklist: {checklist_dir.name}"
-    )
-    
     # Get all checks from the checklist
     checks = list_checks(checklist_dir)
     if not checks:
@@ -1175,7 +1173,8 @@ def initialize(
 
     # Process each check
     for check_dir_name, check_dir in checks.items():
-        logger.info(f"Processing check: {check_dir_name}")
+        if not check_name:
+            logger.info(f"Processing check: {check_dir_name}")
         
         # Prepare check data (use only the first prompt)
         prepared_data, prompts = prepare_check_data(

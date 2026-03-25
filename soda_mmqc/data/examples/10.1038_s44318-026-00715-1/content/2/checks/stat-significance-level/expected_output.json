@@ -1,0 +1,180 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        },
+        {
+            "panel_label": "I",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "J",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        },
+        {
+            "panel_label": "K",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "L",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        },
+        {
+            "panel_label": "M",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        },
+        {
+            "panel_label": "N",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "O",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000\u0000<\u0000\u000030.0001"
+            ]
+        }
+    ]
+}

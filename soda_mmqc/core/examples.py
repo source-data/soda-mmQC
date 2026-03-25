@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Dict, Any, Optional, Type, List, Tuple
 import hashlib
+import io
 import json
 import logging
 import base64
@@ -15,6 +16,11 @@ except Exception:
     OpenAI = None
 
 logger = logging.getLogger(__name__)
+
+# Image MIME types supported by OpenAI Responses API (TIFF is not supported)
+_API_SUPPORTED_IMAGE_TYPES = frozenset(
+    {"image/jpeg", "image/png", "image/gif", "image/webp"}
+)
 
 
 # Class mapping for factory pattern - will be populated after class definitions
@@ -177,6 +183,15 @@ class Example(ABC):
         with open(expected_output_path, "w", encoding="utf-8") as f:
             json.dump(output, f, indent=4, ensure_ascii=False)
 
+        # Write HTML version for easier viewing
+        try:
+            from soda_mmqc.lib.expected_output_html import output_to_html
+            html_path = expected_output_dir / "expected_output.html"
+            with open(html_path, "w", encoding="utf-8") as f:
+                f.write(output_to_html(output, title=f"Expected output — {check_name}"))
+        except Exception as e:
+            logger.debug("Could not write expected_output.html: %s", e)
+
         logger.info(
             f"Saved expected output: {expected_output_path}"
         )
@@ -295,42 +310,35 @@ class FigureExample(Example):
         mime_type, _ = mimetypes.guess_type(str(image_path))
         if not mime_type or not mime_type.startswith("image/"):
             raise ValueError(f"Not an image: {image_path}")
-        allowed = ("image/jpeg", "image/png", "image/gif", "image/webp")
-        if mime_type in allowed:
-            with open(image_path, "rb") as f:
-                b64 = base64.b64encode(f.read()).decode("utf-8")
-            return mime_type, b64
-        # convert to allowed format (PNG) and return (mime, b64)
-        mime, b64 = self._convert_image_to_allowed_format(image_path)
-        return mime, b64
+        with open(image_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode("utf-8")
+        return self._ensure_api_supported_image(mime_type, b64)
 
-    def _convert_image_to_allowed_format(self, image_path: Path, target_format: str = "PNG") -> tuple[str, str]:
-        """Convert image to an allowed format (default PNG) and return (mime_type, base64).
-
-        Requires Pillow (`PIL`). If Pillow is not installed, raises ValueError
-        instructing the user to install it.
+    def _ensure_api_supported_image(self, mime_type: str, b64: str) -> tuple[str, str]:
+        """Return (mime_type, b64) with a format the API accepts (jpeg, png, gif, webp).
+        Converts TIFF and other unsupported formats to PNG via PIL if available.
         """
+        if mime_type in _API_SUPPORTED_IMAGE_TYPES:
+            return mime_type, b64
         try:
             from PIL import Image
-        except Exception:
-            raise ValueError(
-                "Image format conversion requires Pillow. Install with: pip install Pillow"
+        except ImportError:
+            logger.warning(
+                "PIL not available; cannot convert %s to a supported format. "
+                "Install Pillow or use JPEG/PNG/GIF/WebP images.",
+                mime_type,
             )
-        try:
-            with Image.open(image_path) as img:
-                # Choose PNG when alpha is present or when target is PNG
-                out_buf = io.BytesIO()
-                save_kwargs = {}
-                if target_format.upper() == "JPEG":
-                    if img.mode in ("RGBA", "LA"):
-                        img = img.convert("RGB")
-                img.save(out_buf, format=target_format, **save_kwargs)
-                out_bytes = out_buf.getvalue()
-                b64 = base64.b64encode(out_bytes).decode("utf-8")
-                mime_type = "image/png" if target_format.upper() == "PNG" else f"image/{target_format.lower()}"
-                return mime_type, b64
-        except Exception as e:
-            raise ValueError(f"Error converting image {image_path}: {e}")
+            raise ValueError(
+                f"Image format {mime_type} is not supported by the API. "
+                "Use image/jpeg, image/png, image/gif, or image/webp, or install Pillow to convert TIFF."
+            )
+        raw = base64.b64decode(b64)
+        img = Image.open(io.BytesIO(raw))
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return "image/png", base64.b64encode(buf.getvalue()).decode("utf-8")
 
     _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
     _SOURCE_DATA_TABLE_EXTS = (".csv", ".tsv", ".xlsx", ".xls")
@@ -443,6 +451,24 @@ class FigureExample(Example):
             out.extend(tpaths)
         return sorted(out)
 
+    def _get_source_data_file_list(self) -> List[str]:
+        """List of all file names (and relative paths) in source_data folder.
+        Recursively includes every file so the model can see e.g. .xlsx, .csv
+        without opening them. Returns paths relative to source_data dir.
+        """
+        source_data_dir = self.source_path / "content" / "source_data"
+        if not source_data_dir.is_dir():
+            return []
+        out: List[str] = []
+        for f in sorted(source_data_dir.rglob("*")):
+            if f.is_file():
+                try:
+                    rel = f.relative_to(source_data_dir)
+                    out.append(rel.as_posix())
+                except ValueError:
+                    out.append(f.name)
+        return sorted(out)
+
     def prepare_model_input(
         self, prompt: str, model_config: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
@@ -452,6 +478,8 @@ class FigureExample(Example):
         images from content/source_data/ so the model can compare them to the figure.
         """
         self._ensure_loaded()
+        fig_mime, fig_b64 = self._get_image_mime_type(), self._encode_image()
+        fig_mime, fig_b64 = self._ensure_api_supported_image(fig_mime, fig_b64)
         content: List[Dict[str, Any]] = [
             {
                 "type": "input_text",
@@ -459,10 +487,7 @@ class FigureExample(Example):
             },
             {
                 "type": "input_image",
-                "image_url": (
-                    f"data:{self._get_image_mime_type()};base64,"
-                    f"{self._encode_image()}"
-                )
+                "image_url": f"data:{fig_mime};base64,{fig_b64}"
             }
         ]
         # Include source data files if this check requests them

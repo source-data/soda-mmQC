@@ -1,0 +1,61 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_filenames": []
+      },
+      {
+        "panel_label": "B",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_SourceDataForFigure4B.pzfx"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_SourceDataForFigure4C.xlsx"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_SourceDataForFigure4D.xlsx"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_SourceDataForFigure4E.pzfx"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_SourceDataForFigure4F.txt"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_SourceDataForFigure4G.xlsx"
+        ]
+      }
+    ],
+    "not_mappable": []
+  },
+  "metadata": {
+    "doc_id": "SDMap_10.1038_s44318-026-00693-4",
+    "source": "SDMap_10.1038_s44318-026-00693-4/content/4",
+    "example_type": "figure",
+    "tables": "source_data:EMBOJ-2025-120546R_SourceDataForFigure4C.xlsx; source_data:EMBOJ-2025-120546R_SourceDataForFigure4D.xlsx; source_data:EMBOJ-2025-120546R_SourceDataForFigure4G.xlsx",
+    "response_id": "resp_0b0e0ccb419fe6480069a6d1a696ac819682079effa0a43dac",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2764,
+      "output_tokens": 734
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T13:18:58.182339"
+  }
+}

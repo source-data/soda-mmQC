@@ -1,0 +1,48 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "yes",
+            "symbols": [
+                "green outline (annotated region / ROI)",
+                "scale bar (200 μm)"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "with the same region annotated in green.",
+                "Scale bar, 200 μm."
+            ]
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ]
+}

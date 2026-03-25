@@ -23,9 +23,14 @@
             "required": ["panel_label", "source_data_filenames"],
             "additionalProperties": false
           }
+        },
+        "not_mappable": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Filenames of source data files that could not be assigned to any panel"
         }
       },
-      "required": ["outputs"],
+      "required": ["outputs", "not_mappable"],
       "additionalProperties": false
     },
     "strict": true

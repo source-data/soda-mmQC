@@ -1,0 +1,229 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6A.tif) contains the CMTM6 blot that visually matches the panel (same band position/intensity in the lysate and IP lanes)."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6A.tif) shows the FAS bands with the same pattern and relative intensities as in the figure panel (matching band shapes and positions)."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6A.tif) includes the Actin blot that matches the figure (same 37 kDa band position and intensity in the displayed lanes)."
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6B.tif) contains the CMTM6 blot and the bands correspond in position and appearance to the figure (lysate and IP lanes match)."
+          },
+          {
+            "protein_or_band_label": "CMTM4",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6B.tif) shows the CMTM4 bands with similar pattern and intensity as in the figure (including the lower band region indicated)."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6B.tif) displays the FAS bands that match the figure in band position and appearance across lanes."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6B.tif) includes the Actin loading control matching the figure (same band position and intensity pattern)."
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6C.tif) contains the CMTM6 blot and the band pattern/position matches the figure (lysate and IP lanes consistent)."
+          },
+          {
+            "protein_or_band_label": "CMTM4",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6C.tif) shows the CMTM4 bands that correspond to the figure (similar intensity and lane appearance)."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6C.tif) includes the Flag blot with the same multiple bands and intensities as in the figure panels (both lysate and IP panels match)."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6C.tif) contains the Actin blot matching the figure (consistent band at ~37 kDa across lanes)."
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6E.tif) contains the CMTM6 blot and it visually matches the figure (bands in lysate and IP lanes line up and have similar intensity)."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6E.tif) shows the FAS bands with the same pattern and relative intensities as in the figure (matching band shapes across lanes)."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6E.tif) includes the Flag blot that corresponds to the figure (same multi-band pattern and lane order)."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6E.tif) shows the Actin loading control matching the figure (consistent ~37 kDa bands across lanes)."
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6F.tif) contains the CMTM6 blot and the bands match the figure in position and intensity (lysate and IP lanes consistent)."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6F.tif) shows the FAS bands that correspond in appearance to the figure (similar banding pattern across lanes)."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6F.tif) includes the Flag blot with the same strong bands and lane distribution as in the figure. "
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6F.tif) contains the Actin blot matching the figure (consistent band position/intensity across lanes)."
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6G.tif) contains the CMTM6 blots for both lysate and IP that visually match the figure (consistent band positions and intensities)."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6G.tif) shows the FAS blots matching the figure (same pattern of multiple bands across lanes)."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6G.tif) includes the Flag blots that correspond to the figure (matching multi-band pattern and lane distribution)."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6G.tif) contains the Actin blot matching the figure (consistent loading control bands across lanes)."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "CMTM6",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6H.tif) contains the CMTM6 blots and these match the figure in band position and intensity for lysate and IP."
+          },
+          {
+            "protein_or_band_label": "FAS",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6H.tif) shows the FAS blot with the same multi-band pattern and intensities as in the figure."
+          },
+          {
+            "protein_or_band_label": "Flag",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6H.tif) includes the Flag blots that correspond visually to the figure (matching bands across lanes)."
+          },
+          {
+            "protein_or_band_label": "Actin",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Source file (Western blot - 6H.tif) contains the Actin loading control that matches the figure (consistent band appearance across lanes)."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8",
+    "source": "WBcheck_contentFailMissingSD_10.1038_s44319-026-00694-8/content/6",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_0920becf8cca2d5d0069a6e4612c148191948db81501082755",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 11420,
+      "output_tokens": 2669
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T14:39:25.589370"
+  }
+}

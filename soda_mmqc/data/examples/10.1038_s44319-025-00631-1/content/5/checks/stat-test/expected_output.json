@@ -1,0 +1,44 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "A two-sided Mann–Whitney–Wilcoxon test was used for the statistical analysis (T11b-high LUSC n\u0000=\u0000344, LUAD n\u0000=\u00001148, biological replicates)"
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": "The nominal P and FDR values were obtained from the “GSEA Preranked” tool (from Broad Institute) using a weighted scoring scheme. Gene sets were evaluated based on the default normalized enrichment score method, and statistical significance was determined by bootstrapping with 1000 permutations."
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "no",
+            "justify_why_test_is_missing": "P-values are shown for differential expression (labels above bars) but the caption does not state which statistical test or method was used to compute them.",
+            "from_the_caption": ""
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
+            "from_the_caption": ""
+        }
+    ]
+}
