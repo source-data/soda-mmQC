@@ -126,10 +126,4 @@ runs/
 # MAC
 .DS_Store
 node_modules
-
-# Cached data
-cache/*
-
-# FACS & other auxiliary files
-*.fcs
-*.mrc
+uv.lock

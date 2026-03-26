@@ -1,10 +1,18 @@
 from pathlib import Path
 from soda_mmqc import logger
-from langfuse import get_client
-import json
+import json, os
 
-# Initialize Langfuse client
-langfuse = get_client()
+# Initialize Langfuse client (optional — falls back to local files if unavailable)
+try:
+    if not os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        langfuse = None
+    from langfuse import get_client as _get_langfuse_client
+    try:
+        langfuse = _get_langfuse_client()
+    except Exception:
+        langfuse = None
+except Exception:
+    langfuse = None
 
 
 def load_json(file_path):
@@ -15,7 +23,24 @@ def load_json(file_path):
 
 def get_check_data(check_dir: Path, remote: bool = True):
     if remote:
-        prompt_data = langfuse.get_prompt(str(check_dir))
+        if langfuse is None:
+            logger.warning(
+                "Langfuse client not initialized; falling back to local "
+                "prompt.txt and config.json for %s",
+                check_dir.name,
+            )
+            return get_check_data(check_dir, remote=False)
+        # Use the canonical prompt key used elsewhere in the codebase:
+        # "checklists/{checklist_name}/{check_name}" so Langfuse prompt
+        # management returns the intended prompt rather than a file/path
+        # based name which can point to unrelated prompt entities.
+        try:
+            checklist_name = check_dir.parent.name
+        except Exception:
+            checklist_name = str(check_dir.parent)
+        prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+        logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
+        prompt_data = langfuse.get_prompt(prompt_key)
         prompt_text = prompt_data.prompt
         schema = prompt_data.config.get("output_schema", {})
         benchmark = prompt_data.config.get("benchmark", {})
@@ -28,15 +53,43 @@ def get_check_data(check_dir: Path, remote: bool = True):
 
 
 def get_remote_prompts(check_dir: Path, versions = [1, 2, 3, 4]):
+    if langfuse is None:
+        logger.warning(
+            "Langfuse client not initialized; returning local prompts for %s",
+            check_dir.name,
+        )
+        local_prompts = get_local_prompts(check_dir)
+        # get_local_prompts returns a dict of {stem: text}; pick the first entry
+        prompt_text = next(iter(local_prompts.values()), None) if isinstance(local_prompts, dict) else None
+        schema = get_local_schema(check_dir) or {}
+        benchmark = get_local_benchmark(check_dir) or {}
+        return prompt_text, schema, benchmark
+
     prompts = {}
     schemas = {}
     benchmarks = {}
-    
+
+    try:
+        checklist_name = check_dir.parent.name
+    except Exception:
+        checklist_name = str(check_dir.parent)
+    prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+    prompt_text = None
+    schema = {}
+    benchmark = {}
     for version in versions:
-        prompt_data = langfuse.get_prompt(str(check_dir), version=version)
-        prompt_text = prompt_data.prompt
-        schema = prompt_data.config.get("output_schema", {})
-        benchmark = prompt_data.config.get("benchmark", {})
+        logger.info(f"Langfuse: fetching prompt for key={prompt_key} version={version}")
+        prompt_data = langfuse.get_prompt(prompt_key, version=version)
+        if prompt_data:
+            prompt_text = prompt_data.prompt
+            # schema = prompt_data.config.get("output_schema", {})
+            # benchmark = prompt_data.config.get("benchmark", {})
+            cfg = getattr(prompt_data, "config", {}) or {}
+            # Extract the output schema if present
+            schema = cfg.get("output_schema", {})
+            # Benchmark is the remaining config keys (everything except output_schema)
+            benchmark = {k: v for k, v in cfg.items() if k != "output_schema"}
+            break
     return prompt_text, schema, benchmark
 
 
