@@ -1175,7 +1175,7 @@ def initialize(
 
     # Process each check
     for check_dir_name, check_dir in checks.items():
-        if not check_name:
+        if not check_dir_name:
             logger.info(f"Processing check: {check_dir_name}")
         
         # Prepare check data (use only the first prompt)

@@ -243,7 +243,7 @@ class FigureExample(Example):
 
         # Find image
         self.image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+        for ext in [".png", ".jpg", ".jpeg", ".tiff", ".webp"]:
             for image_path in self.source_path.glob(f"content/*{ext}"):
                 self.image_path = image_path
                 break
