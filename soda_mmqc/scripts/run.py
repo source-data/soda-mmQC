@@ -32,8 +32,10 @@ try:
 except Exception:
     pass
 
+# Optional Langfuse SDK integration for fetching prompts
 try:
-    # Use the SDK helper the examples use: get_client()
+    if not os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        langfuse = None
     from langfuse import get_client as _get_langfuse_client
     try:
         langfuse_client = _get_langfuse_client()
