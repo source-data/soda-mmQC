@@ -865,30 +865,21 @@ def generate_response_openai(
         logger.error(f"Error getting metadata, ID, model, or usage: {raw_response}")
         response_metadata = {}
     # Log generation and finish trace (best-effort)
-    try:
-        if _lf_trace:
-            try:
-                input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
-            except Exception:
-                input_text = str(prompt)
-            try:
-                    try:
-                        _lf_log_generation(
-                            _lf_client,
-                            _lf_trace,
-                            span_name="openai-generation-span",
-                            gen_name="openai-generation",
-                            model=response_model or model,
-                            input_text=input_text,
-                            output_text=output_text,
-                            prompt_obj=prompt_obj,
-                        )
-                    except Exception:
-                        pass
-            except Exception:
-                pass
-    except Exception:
-        pass
+    if _lf_trace:
+        try:
+            input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            _lf_log_generation(
+                _lf_client,
+                _lf_trace,
+                span_name="openai-generation-span",
+                gen_name="openai-generation",
+                model=response_model or model,
+                input_text=input_text,
+                output_text=output_text,
+                prompt_obj=prompt_obj,
+            )
+        except Exception as e:
+            logger.debug(f"Error while logging generation trace: {e}")
     
     return response, response_metadata
 
