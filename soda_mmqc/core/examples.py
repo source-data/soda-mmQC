@@ -7,7 +7,6 @@ import json
 import logging
 import base64
 import mimetypes
-import io
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
 try:
