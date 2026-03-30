@@ -26,6 +26,155 @@ except ImportError:
 # API clients will be imported dynamically when needed
 
 
+# --- Langfuse helpers: simplified wrapper using langfuse.get_client() ---
+try:
+    # Prefer the documented entrypoint used by tests/examples
+    from langfuse import get_client as _lf_get_client  # type: ignore
+except Exception:
+    _lf_get_client = None
+
+
+def _get_langfuse_client() -> Optional[Any]:
+    """Return a Langfuse client instance, or None if unavailable.
+
+    This is intentionally minimal: it mirrors the example in
+    `test_langfuse.py` and prefers the `get_client()` helper the SDK
+    exposes. The calling code should treat a None return as "no tracing".
+    Returns None immediately when LANGFUSE_PUBLIC_KEY is not configured so
+    the SDK never emits authentication warnings.
+    """
+    import os as _os
+    if not _os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        return None
+    try:
+        if _lf_get_client is None:
+            from langfuse import get_client as _gc  # type: ignore
+            return _gc()
+        return _lf_get_client()
+    except Exception:
+        return None
+
+
+def _lf_start_trace(client: Any, name: str, metadata: Optional[Dict[str, Any]] = None) -> Optional[Any]:
+    """Start a top-level Langfuse span (trace root) and return it, or None.
+
+    Uses the Langfuse v4 API: client.start_observation(as_type="span").
+    The returned LangfuseSpan must be ended via _lf_log_generation.
+    All operations are best-effort and swallow exceptions so tracing
+    never breaks normal program flow.
+    """
+    if client is None:
+        return None
+    try:
+        return client.start_observation(name=name, as_type="span", metadata=(metadata or {}))
+    except Exception:
+        pass
+    return None
+
+
+def _sanitize_trace_token(value: Any, default: str) -> str:
+    """Return a trace-safe token (lowercase alnum, dash, underscore)."""
+    try:
+        text = str(value).strip().lower()
+    except Exception:
+        text = ""
+    if not text:
+        return default
+    safe = []
+    for ch in text:
+        if ch.isalnum() or ch in {"-", "_"}:
+            safe.append(ch)
+        else:
+            safe.append("-")
+    token = "".join(safe).strip("-")
+    return token or default
+
+
+def _infer_model_type(model: str) -> str:
+    """Infer a stable model-family token for trace naming."""
+    model_token = _sanitize_trace_token(model, "unknown")
+    parts = model_token.split("-")
+    if model_token.startswith("gpt-") and len(parts) >= 2:
+        return "-".join(parts[:2])
+    if model_token.startswith("claude-") and len(parts) >= 3:
+        return "-".join(parts[:3])
+    if model_token.startswith("o") and parts:
+        return parts[0]
+    return parts[0] if parts else model_token
+
+
+def _build_lf_trace_name(provider: str, model: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    """Build trace name from provider + model type + sub-function."""
+    metadata = metadata or {}
+    sub_function = (
+        metadata.get("sub_function")
+        or metadata.get("phase")
+        or metadata.get("operation")
+        or metadata.get("mode")
+        or "evaluate"
+    )
+    provider_token = _sanitize_trace_token(provider, "provider")
+    model_type = _infer_model_type(model)
+    sub_function_token = _sanitize_trace_token(sub_function, "evaluate")
+    return f"{provider_token}_{model_type}_{sub_function_token}_generate_response"
+
+
+def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str, prompt_obj: Optional[Any] = None) -> None:
+    """Best-effort: create a child generation observation inside the trace span,
+    end the trace, and flush.
+
+    Uses the Langfuse v4 API:
+      - trace.start_as_current_observation(as_type="generation", ...) context manager
+        creates a nested generation that is automatically ended on exit.
+      - trace.end() closes the root span.
+      - client.flush() ensures the batch is sent immediately.
+    All steps are wrapped in try/except and won't raise.
+    """
+    try:
+        if not (client and trace):
+            return
+
+        # Create a nested generation observation as a child of the root trace span.
+        try:
+            if hasattr(trace, "start_as_current_observation"):
+                kwargs: Dict[str, Any] = dict(
+                    name=gen_name,
+                    as_type="generation",
+                    model=model,
+                    input=input_text,
+                    output=output_text,
+                )
+                if prompt_obj is not None:
+                    kwargs["prompt"] = prompt_obj
+                with trace.start_as_current_observation(**kwargs):
+                    pass  # observation is ended automatically on context-manager exit
+        except Exception:
+            pass
+
+        # Update and close the root trace span.
+        try:
+            if hasattr(trace, "update"):
+                trace.update(output=output_text)
+        except Exception:
+            pass
+
+        try:
+            if hasattr(trace, "end"):
+                trace.end()
+        except Exception:
+            pass
+
+        try:
+            if hasattr(client, "flush"):
+                client.flush()
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+# --- end Langfuse helpers ---
+
+
 def _create_tool_from_schema(schema: dict) -> dict:
     """Convert a JSON schema to an Anthropic tool definition.
 
@@ -415,7 +564,8 @@ def generate_response_openai(
     schema: dict,
     model: str,
     metadata: dict,
-    model_config: Optional[Dict[str, Any]] = None
+    model_config: Optional[Dict[str, Any]] = None,
+    prompt_obj: Optional[Any] = None,
 ) -> Tuple[dict, dict]:
     """Generate response using OpenAI API with structured output.
 
@@ -433,6 +583,32 @@ def generate_response_openai(
         Tuple of (parsed response, response metadata with response_id and
         model)
     """
+    # Lazy-init Langfuse client and start per-call trace (best-effort)
+    _lf_client = _get_langfuse_client()
+    _lf_trace = None
+    trace_name = _build_lf_trace_name("openai", model, metadata)
+    try:
+        if _lf_client:
+            _lf_trace = _lf_start_trace(
+                _lf_client,
+                name=trace_name,
+                metadata={
+                    "model": model,
+                    "doc_id": metadata.get("doc_id") if metadata else None,
+                    "prompt_name": metadata.get("prompt_name") if metadata else None,
+                    "sub_function": (metadata or {}).get("sub_function", "evaluate"),
+                },
+            )
+            if _lf_trace:
+                try:
+                    try:
+                        print(f"Langfuse: started trace '{trace_name}' for doc_id=", (metadata or {}).get("doc_id"))
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+    except Exception:
+        _lf_trace = None
     # Import and initialize OpenAI client
     try:
         from openai import OpenAI
@@ -446,6 +622,20 @@ def generate_response_openai(
 
     # Prepare model input (supports multimodal content; model_config can enable source_data)
     model_input = example.prepare_model_input(prompt, model_config=model_config)
+
+    # Attach a small preview to the trace if available
+    try:
+        if _lf_trace:
+            preview = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            if isinstance(preview, str):
+                preview = preview[:200]
+            try:
+                if hasattr(_lf_trace, "update"):
+                    _lf_trace.update(input={"prompt_preview": preview, "metadata": (metadata or {})})
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # Build request kwargs
     create_kwargs = {
@@ -674,6 +864,22 @@ def generate_response_openai(
     except AttributeError:
         logger.error(f"Error getting metadata, ID, model, or usage: {raw_response}")
         response_metadata = {}
+    # Log generation and finish trace (best-effort)
+    if _lf_trace:
+        try:
+            input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            _lf_log_generation(
+                _lf_client,
+                _lf_trace,
+                span_name="openai-generation-span",
+                gen_name="openai-generation",
+                model=response_model or model,
+                input_text=input_text,
+                output_text=output_text,
+                prompt_obj=prompt_obj,
+            )
+        except Exception as e:
+            logger.debug(f"Error while logging generation trace: {e}")
     
     return response, response_metadata
 
@@ -690,7 +896,8 @@ def generate_response_anthropic(
     schema: dict,
     model: str,
     metadata: dict,
-    model_config: Optional[Dict[str, Any]] = None
+    model_config: Optional[Dict[str, Any]] = None,
+    prompt_obj: Optional[Any] = None,
 ) -> Tuple[dict, dict]:
     """Generate response using Anthropic API with structured output via tools.
 
@@ -735,6 +942,39 @@ def generate_response_anthropic(
     ]
 
     # Call Anthropic API with tool use for structured output
+    # Lazy-init Langfuse client and start per-call trace (best-effort)
+    _lf_client = _get_langfuse_client()
+    _lf_trace = None
+    trace_name = _build_lf_trace_name("anthropic", model, metadata)
+    try:
+        if _lf_client:
+            _lf_trace = _lf_start_trace(
+                _lf_client,
+                name=trace_name,
+                metadata={
+                    "model": model,
+                    "doc_id": metadata.get("doc_id") if metadata else None,
+                    "prompt_name": metadata.get("prompt_name") if metadata else None,
+                    "sub_function": (metadata or {}).get("sub_function", "evaluate"),
+                },
+            )
+            if _lf_trace:
+                try:
+                    # Try to attach a small request preview/update
+                    try:
+                        if hasattr(_lf_trace, "update"):
+                            _lf_trace.update(input={"messages_preview": str(messages)[:200]})
+                    except Exception:
+                        pass
+                    try:
+                        print(f"Langfuse: started trace '{trace_name}' for doc_id=", (metadata or {}).get("doc_id"))
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+    except Exception:
+        _lf_trace = None
+
     raw_response = client.messages.create(  # type: ignore
         model=model,
         max_tokens=4096,
@@ -778,6 +1018,37 @@ def generate_response_anthropic(
     # Add custom metadata if provided
     response_metadata.update(metadata)
 
+    # Log response and finish trace if any
+    try:
+        if _lf_trace:
+            try:
+                # Serialize inputs/outputs conservatively for the trace
+                try:
+                    input_text = json.dumps(messages, ensure_ascii=False)
+                except Exception:
+                    input_text = str(messages)
+                try:
+                    output_text = json.dumps(response, ensure_ascii=False)
+                except Exception:
+                    output_text = str(response)
+                try:
+                    _lf_log_generation(
+                        _lf_client,
+                        _lf_trace,
+                        span_name="anthropic-generation-span",
+                        gen_name="anthropic-generation",
+                        model=model,
+                        input_text=input_text,
+                        output_text=output_text,
+                        prompt_obj=prompt_obj,
+                    )
+                except Exception:
+                    pass
+            except Exception:
+                pass
+    except Exception:
+        pass
+
     return response, response_metadata
 
 
@@ -819,6 +1090,7 @@ def generate_response(
         model = DEFAULT_MODEL
 
     # Route to appropriate API
+    prompt_obj = getattr(model_input, "prompt_obj", None)
     if API_PROVIDER == "anthropic":
         return generate_response_anthropic(
             example=example,
@@ -826,7 +1098,8 @@ def generate_response(
             schema=schema,
             model=model,
             metadata=metadata,
-            model_config=model_config
+            model_config=model_config,
+            prompt_obj=prompt_obj,
         )
     else:
         return generate_response_openai(
@@ -835,5 +1108,6 @@ def generate_response(
             schema=schema,
             model=model,
             metadata=metadata,
-            model_config=model_config
+            model_config=model_config,
+            prompt_obj=prompt_obj,
         )

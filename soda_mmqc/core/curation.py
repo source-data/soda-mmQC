@@ -8,7 +8,31 @@ import argparse
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY
-import re
+# Load environment variables from .env when available
+import os
+try:
+    from dotenv import load_dotenv
+    try:
+        load_dotenv()
+    except Exception:
+        # ignore loading errors; env may already be set in the environment
+        pass
+except Exception:
+    # python-dotenv not installed, rely on os.environ
+    pass
+# Optional Langfuse SDK integration for fetching prompts
+try:
+    if not os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        # No public key configured; skip importing Langfuse entirely
+        langfuse_client = None
+    else:
+        from langfuse import get_client as _get_langfuse_client
+        try:
+            langfuse_client = _get_langfuse_client()
+        except Exception:
+            langfuse_client = None
+except Exception:
+    langfuse_client = None
 
 # Set page config for wider layout
 st.set_page_config(
@@ -65,137 +89,6 @@ def load_example_data(doc_id, fig, checklist=None):
         data["image_path"] = (
             str(example.image_path) if example.image_path else None
         )
-        # Discover tabular data in subfolders named like "Fig1B", "Fig2C", etc.
-        # Flexible matching: folder names may be `Fig1B`, `1B`, `Fig1_B`, `Figure1B`,
-        # `Fig-1-B`, etc. We normalize names to `Fig{n}{Label}` (e.g. `Fig1B`) for
-        # downstream checks but keep the original folder name as an alias to
-        # preserve backwards compatibility.
-        def normalize_panel_name(name: str):
-            """Try to normalize a folder name to the canonical form `Fig{n}{L}`.
-
-            Returns normalized name (e.g. 'Fig1B') or None if it can't be parsed.
-            """
-            if not name or not isinstance(name, str):
-                return None
-            s = name.lower()
-            # remove common separators
-            s_clean = re.sub(r"[\s_\-]", "", s)
-            # common patterns: fig1b, figure1b, 1b
-            m = re.search(r'(?:fig(?:ure)?)?(\d+)([a-z])', s_clean)
-            if m:
-                fig_num = int(m.group(1))
-                panel_letter = m.group(2).upper()
-                return f"Fig{fig_num}{panel_letter}"
-            return None
-
-        # For each subfolder attempt flexible matching and build a map of discovered
-        # tabular/image files per panel. Keys will include the normalized name and
-        # the original folder name (if different) to avoid breaking existing code.
-        tables_by_panel = {}
-        try:
-            fig_root = example.source_path
-            if fig_root and fig_root.exists():
-                # Helper to scan for candidate panel directories up to one level deep.
-                def scan_panel_dirs(root: Path):
-                    # Yield directories that are either direct children or one-level nested
-                    for child in root.iterdir():
-                        if not child.is_dir():
-                            continue
-                        yield child
-                        # iterate one level deeper (e.g., 'Figure 1/1A')
-                        try:
-                            for subchild in child.iterdir():
-                                if subchild.is_dir():
-                                    yield subchild
-                        except PermissionError:
-                            continue
-
-                for sub in scan_panel_dirs(fig_root):
-                    # sub may be a direct child or a nested child
-                    # Represent original name relative to fig_root to preserve nesting
-                    try:
-                        panel_name_original = str(sub.relative_to(fig_root))
-                    except Exception:
-                        panel_name_original = sub.name
-                    # Try to compute a normalized panel name from the folder name
-                    # Prefer the leaf folder name for normalization
-                    leaf_name = sub.name
-                    panel_name_normalized = normalize_panel_name(leaf_name)
-
-                    # Fallback heuristics: accept names that contain digits and a letter
-                    if not panel_name_normalized:
-                        m_fallback = re.match(r'^(\d+)([A-Za-z])$', leaf_name)
-                        if m_fallback:
-                            panel_name_normalized = f"Fig{int(m_fallback.group(1))}{m_fallback.group(2).upper()}"
-
-                    # If still not recognized, decide whether to keep this
-                    # directory as a candidate: if the original (relative)
-                    # name contains a digit, keep as-is; otherwise skip.
-                    if not panel_name_normalized:
-                        if any(ch.isdigit() for ch in panel_name_original):
-                            panel_name_normalized = panel_name_original
-                        else:
-                            # skip non-panel directories
-                            continue
-
-                    panel_name = panel_name_normalized
-                    panel_tables = []
-                    # Search directly inside the panel folder (not recursive by default)
-                    for f in sub.glob("*"):
-                        if not f.is_file():
-                            continue
-                        suffix = f.suffix.lower()
-                        try:
-                            # Tabular file types
-                            if suffix in [".csv", ".tsv"]:
-                                sep = "\t" if suffix == ".tsv" else ","
-                                df = pd.read_csv(f, sep=sep)
-                            elif suffix in [".xlsx", ".xls"]:
-                                df = pd.read_excel(f)
-                            elif suffix == ".json":
-                                # try to read JSON into a table
-                                df = pd.read_json(f)
-                            # Image file types: record as image entries
-                            elif suffix in [".png", ".jpg", ".jpeg", ".tif", ".tiff"]:
-                                file_entry = {"file": str(f), "type": "image"}
-                                panel_tables.append(file_entry)
-                                continue
-                            else:
-                                # Not a supported tabular or image format
-                                continue
-                            # Create a small preview and replace NaN/Inf with None
-                            # preview_df = df.head(5)
-                            try:
-                                df = preview_dfdf.where(pd.notnull(df), None)
-                            except Exception:
-                                df = df
-                            df_dict = df.to_dict(orient="records")
-                            file_entry = {
-                                "file": str(f),
-                                "columns": df.columns.tolist(),
-                                "num_rows": int(len(df)),
-                                "preview": df_dict,
-                                "type": "table",
-                            }
-                            print(f"Loaded table {f} with {len(df)} rows and columns: {df.columns.tolist()}")
-                        except Exception as e:
-                            logger.warning(f"Failed to load table {f}: {e}")
-                            file_entry = {"file": str(f), "error": str(e)}
-
-                        panel_tables.append(file_entry)
-
-                    if panel_tables:
-                        # Store under normalized panel name
-                        tables_by_panel[panel_name] = panel_tables
-                        # If the original folder name differs, also store as alias
-                        if panel_name != panel_name_original:
-                            tables_by_panel[panel_name_original] = panel_tables
-        except Exception as e:
-            logger.warning(f"Error discovering tabular data for {relative_path}: {e}")
-
-        # Attach tables info (may be empty dict)
-        data["tables"] = tables_by_panel
-        print(f"Discovered tables for {relative_path}: {tables_by_panel}")
         
         # Initialize expected_outputs dictionary (not check_outputs)
         data["check_outputs"] = {}
@@ -314,12 +207,51 @@ def load_checklist(checklist_dir):
                 with open(benchmark_path, "r") as f:
                     checklist[check_dir.name]["benchmark"] = json.load(f)
             # load the prompts
-            prompts_dir = check_dir / "prompts" 
+            prompts_dir = check_dir / "prompts"
             checklist[check_dir.name]["prompts"] = {}  # Initialize prompts dictionary
-            if prompts_dir.exists():
-                for prompt_file in prompts_dir.glob("*.txt"):
-                    with open(prompt_file, "r") as f:
-                        checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
+            # if prompts_dir.exists():
+            #     for prompt_file in prompts_dir.glob("*.txt"):
+            #         with open(prompt_file, "r", encoding="utf-8") as f:
+            #             checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
+            # else:
+            # Fetch prompt from Langfuse SDK or fall back to local prompt files.
+            # The Langfuse prompt key will be: "checklists/{checklist_name}/{check_name}"
+            # where checklist_name is the parent checklist directory name (e.g., 'doc-checklist')
+            if langfuse_client is None:
+                # Load from local prompt.txt or prompts/prompt*.txt
+                _prompt_txt = check_dir / "prompt.txt"
+                _prompts_dir = check_dir / "prompts"
+                if _prompt_txt.exists():
+                    try:
+                        with open(_prompt_txt, "r", encoding="utf-8") as f:
+                            checklist[check_dir.name]["prompts"]["prompt.txt"] = f.read()
+                    except Exception as e:
+                        logger.warning(f"Failed to load {_prompt_txt}: {e}")
+                elif _prompts_dir.exists():
+                    for _pf in sorted(_prompts_dir.glob("prompt*.txt")):
+                        try:
+                            with open(_pf, "r", encoding="utf-8") as f:
+                                checklist[check_dir.name]["prompts"][_pf.name] = f.read()
+                        except Exception as e:
+                            logger.warning(f"Failed to load {_pf}: {e}")
+            else:
+                try:
+                    # Build the prompt key using the checklist directory name and the check name
+                    checklist_name = checklist_dir.name if hasattr(checklist_dir, "name") else str(checklist_dir)
+                    prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+                    logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
+                    # `get_prompt` returns the production prompt (string) per user instructions
+                    prompt_text = langfuse_client.get_prompt(prompt_key)
+                    if prompt_text:
+                        # Use a filename derived from the check name as before
+                        prompt_filename = f"{check_dir.name}.txt"
+                        checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text.name
+                except Exception as e:
+                    logger.info(f"Langfuse prompt fetch skipped or failed for {check_dir.name}: {e}")
+                    try:
+                        st.warning(f"Could not load prompts from Langfuse for {check_dir.name}: {e}")
+                    except Exception:
+                        pass
     return checklist
    
 

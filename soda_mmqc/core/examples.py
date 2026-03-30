@@ -9,6 +9,10 @@ import base64
 import mimetypes
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
 
 logger = logging.getLogger(__name__)
 
@@ -201,6 +205,11 @@ class FigureExample(Example):
         self.caption: Optional[str] = None
         self.image_path: Optional[Path] = None
         self.figure_id: Optional[str] = None
+        # Table handling: include CSV/TSV and spreadsheet files alongside images
+        # If enabled, these will be included in hashing and model input preview.
+        self.include_tables: bool = True
+        # How many lines of table text preview to include for text tables
+        self.table_preview_lines: int = 10
 
     def load_from_source(self) -> None:
         """Load the example's content from the provided path.
@@ -233,7 +242,7 @@ class FigureExample(Example):
 
         # Find image
         self.image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+        for ext in [".png", ".jpg", ".jpeg", ".tiff", ".webp"]:
             for image_path in self.source_path.glob(f"content/*{ext}"):
                 self.image_path = image_path
                 break
@@ -272,6 +281,8 @@ class FigureExample(Example):
         mime_type, _ = mimetypes.guess_type(str(self.image_path))
         if mime_type:
             if mime_type.startswith('image/'):
+                # If mime type isn't one of the allowed formats, we'll convert
+                # later when encoding. Return the guessed mime for now.
                 return mime_type
             else:
                 raise ValueError(f"Not an image: {self.image_path}")
@@ -282,8 +293,14 @@ class FigureExample(Example):
         """Encode image to base64 string."""
         if not self.image_path or not self.image_path.exists():
             raise ValueError("Image file not found")
-        with open(self.image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
+        # Try to encode in an allowed format; convert if necessary
+        mime_type, _ = mimetypes.guess_type(str(self.image_path))
+        allowed = ("image/jpeg", "image/png", "image/gif", "image/webp")
+        if mime_type in allowed:
+            with open(self.image_path, "rb") as image_file:
+                return base64.b64encode(image_file.read()).decode('utf-8')
+        # convert to PNG by default
+        return self._convert_image_to_allowed_format(self.image_path)[1]
 
     def _encode_image_from_path(self, image_path: Path) -> tuple[str, str]:
         """Encode an image file to base64 and return (mime_type, base64_string)."""
@@ -323,6 +340,7 @@ class FigureExample(Example):
         return "image/png", base64.b64encode(buf.getvalue()).decode("utf-8")
 
     _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
+    _SOURCE_DATA_TABLE_EXTS = (".csv", ".tsv", ".xlsx", ".xls")
 
     def _get_source_data_items(
         self,
@@ -338,7 +356,8 @@ class FigureExample(Example):
         if not source_data_dir.is_dir():
             return []
         exts = list(self._SOURCE_DATA_IMAGE_EXTS)
-        subdirs = [d for d in source_data_dir.iterdir() if d.is_dir()]
+        # include nested subdirectories as panels as well
+        subdirs = [d for d in source_data_dir.rglob("*") if d.is_dir()]
         if subdirs:
             items: List[Tuple[Optional[str], List[Path]]] = []
             for d in sorted(subdirs):
@@ -355,11 +374,80 @@ class FigureExample(Example):
         paths = sorted(paths)
         return [(None, paths)] if paths else []
 
+    def _get_source_table_items(self) -> List[Tuple[Optional[str], List[Path]]]:
+        """Return table files (csv/tsv/xlsx/xls) grouped the same way as images.
+
+        Subfolders of `content/source_data/` are treated as panels. If there are
+        no subfolders, any table files directly under `source_data/` are returned
+        as a single group with panel_label None.
+        """
+        if not self.include_tables:
+            return []
+        # source_data_dir = self.source_path / "content" / "source_data"
+        source_data_dir = self.source_path / "content"
+        if not source_data_dir.is_dir():
+            return []
+        exts = list(self._SOURCE_DATA_TABLE_EXTS)
+        # include nested subdirectories as panels as well
+        subdirs = [d for d in source_data_dir.rglob("*") if d.is_dir()]
+        if subdirs:
+            items: List[Tuple[Optional[str], List[Path]]] = []
+            for d in sorted(subdirs):
+                paths: List[Path] = []
+                for ext in exts:
+                    paths.extend(d.glob(f"*{ext}"))
+                paths = sorted(paths)
+                if paths:
+                    items.append((d.name, paths))
+            return items
+        paths: List[Path] = []
+        for ext in exts:
+            paths.extend(source_data_dir.glob(f"*{ext}"))
+        paths = sorted(paths)
+        return [(None, paths)] if paths else []
+
+    def _upload_table_and_get_file_id(self, tpath: Path, purpose: str = "user_data") -> Optional[str]:
+        """Attempt to upload a table file to the OpenAI Files API and return the file id.
+
+        Args:
+            tpath: Path to the file to upload.
+            purpose: Purpose string for the Files API. Allowed values are:
+                'fine-tune', 'assistants', 'batch', 'user_data', 'vision', 'evals'.
+
+        Returns:
+            file id string on success, or None on failure.
+        """
+        allowed = ("fine-tune", "assistants", "batch", "user_data", "vision", "evals")
+        if purpose not in allowed:
+            logger.warning(
+                "Requested file purpose '%s' is not valid. Falling back to 'user_data'. Allowed: %s",
+                purpose,
+                allowed,
+            )
+            purpose = "user_data"
+
+        if OpenAI is None:
+            logger.debug("OpenAI client not available; skipping upload for %s", tpath)
+            return None
+        try:
+            client = OpenAI()
+            res = client.files.create(file=Path(tpath), purpose=purpose)
+            # SDK may return an object with attribute `id` or a dict with key 'id'
+            file_id = getattr(res, "id", None) or (res.get("id") if isinstance(res, dict) else None)
+            logger.info("Uploaded file %s to OpenAI with purpose '%s', id=%s", tpath, purpose, file_id)
+            return file_id
+        except Exception as e:
+            logger.warning("Failed to upload file %s to OpenAI (purpose=%s): %s", tpath, purpose, e)
+            return None
+
     def _get_all_source_data_paths(self) -> List[Path]:
         """Flat list of all source data image paths (for hashing)."""
         out: List[Path] = []
         for _panel, paths in self._get_source_data_items():
             out.extend(paths)
+        # include table files in the hash as well
+        for _panel, tpaths in self._get_source_table_items():
+            out.extend(tpaths)
         return sorted(out)
 
     def _get_source_data_file_list(self) -> List[str]:
@@ -405,35 +493,8 @@ class FigureExample(Example):
         if model_config:
             source_config = model_config.get("source_data_files") or {}
             if source_config.get("enabled"):
-                source_data_dir = self.source_path / "content" / "source_data"
-                if source_data_dir.is_dir():
-                    file_list = self._get_source_data_file_list()
-                    if file_list:
-                        content.append({
-                            "type": "input_text",
-                            "text": (
-                                "---\n"
-                                "File names in the **source_data** folder (same path as the figure and caption):\n"
-                                + "\n".join(f"  - {name}" for name in file_list)
-                            )
-                        })
-                source_items = self._get_source_data_items()
-                num_source_images = sum(len(paths) for _, paths in source_items)
-                if source_items:
-                    logger.info(
-                        "Including %d source data image(s) for %s",
-                        num_source_images,
-                        getattr(self, "doc_id", self.source_path),
-                    )
-                    content.append({
-                        "type": "input_text",
-                        "text": (
-                            "Images from the **source_data** folder (same path as the figure and caption). "
-                            "Each image is labelled with its filename and optionally the panel (e.g. Source data for panel A: filename). "
-                            "Use these images to compare with the western blot panels in the figure above."
-                        )
-                    })
-                for panel_label, paths in source_items:
+                # First add image source data as before
+                for panel_label, paths in self._get_source_data_items():
                     group_header = (
                         f"Source data for panel {panel_label}:"
                         if panel_label is not None
@@ -442,6 +503,7 @@ class FigureExample(Example):
                     for path in paths:
                         try:
                             mime_type, b64 = self._encode_image_from_path(path)
+                            logger.info("Including source image in model input: %s", path)
                             content.append({
                                 "type": "input_text",
                                 "text": f"{group_header} {path.name}".strip()
@@ -455,6 +517,35 @@ class FigureExample(Example):
                             logger.warning(
                                 "Skipping source data file %s: %s", path, e
                             )
+
+                # Then add any table-like source data — strictly upload files
+                # and reference them as `input_file`. If upload fails, log a
+                # warning and do not include any inline text preview or
+                # filename notes.
+                upload_purpose = None
+                if model_config:
+                    upload_purpose = model_config.get("openai_file_purpose")
+                # default to 'user_data' when not provided
+                if not upload_purpose:
+                    upload_purpose = "user_data"
+
+                for panel_label, tpaths in self._get_source_table_items():
+                    for tpath in tpaths:
+                        try:
+                            file_id = self._upload_table_and_get_file_id(tpath, purpose=upload_purpose)
+                            if file_id:
+                                content.append({
+                                    "type": "input_file",
+                                    "file_id": file_id,
+                                })
+                            else:
+                                logger.warning(
+                                    "Could not upload source table %s; skipping it."
+                                    " Ensure OpenAI client is configured and reachable.",
+                                    tpath,
+                                )
+                        except Exception as e:
+                            logger.warning("Skipping source table file %s: %s", tpath, e)
         return {"content": content}
 
     def to_dict(self) -> Dict[str, Any]:

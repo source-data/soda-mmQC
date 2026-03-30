@@ -87,6 +87,12 @@ class ModelCache:
             "check_name": check_name,
             "model": model,
         }
+        # If a prompt_name (full prompt path/key) is available on the
+        # model_input, include it so different prompts with the same text
+        # but different origins do not collide in cache.
+        prompt_name = getattr(model_input, "prompt_name", None)
+        if prompt_name:
+            cache_key_data["prompt_name"] = prompt_name
         if model_config is not None:
             cache_key_data["model_config"] = model_config
         return self._generate_cache_key(cache_key_data)
