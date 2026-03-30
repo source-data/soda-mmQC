@@ -1,5 +1,5 @@
-# This application
-# cache/
+# Model output cache (soda_mmqc/config.py CACHE_DIR); must not be committed
+soda_mmqc/data/cache/
 miscdoc/
 src/
 
