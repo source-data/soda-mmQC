@@ -1,0 +1,88 @@
+name: Sync checklist prompts to Langfuse
+
+on:
+    push:
+        branches:
+            # - master
+            - cg_dev
+        paths:
+            - 'soda_mmqc/data/checklist/fig-checklist/**.txt'
+            - 'soda_mmqc/data/checklist/fig-checklist/**.json'
+            - 'soda_mmqc/data/checklist/doc-checklist/**.txt'
+            - 'soda_mmqc/data/checklist/doc-checklist/**.json'
+    workflow_dispatch:
+
+concurrency:
+    group: sync-prompts-langfuse
+    cancel-in-progress: true
+
+jobs:
+    sync-prompts:
+        runs-on: ubuntu-latest
+
+        env:
+            LANGFUSE_HOST: ${{ secrets.LANGFUSE_HOST }}
+            LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+            LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+
+            - name: Validate required secrets
+              run: |
+                test -n "$LANGFUSE_HOST" || (echo "Missing LANGFUSE_HOST" && exit 1)
+                test -n "$LANGFUSE_PUBLIC_KEY" || (echo "Missing LANGFUSE_PUBLIC_KEY" && exit 1)
+                test -n "$LANGFUSE_SECRET_KEY" || (echo "Missing LANGFUSE_SECRET_KEY" && exit 1)
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.11"
+
+            - name: Install dependencies
+              run: |
+                pip install "langfuse>=2.0.0"
+
+            - name: Find changed checklist files
+              id: changed
+              shell: bash
+              run: |
+                if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                  echo "files=ALL" >> "$GITHUB_OUTPUT"
+                  exit 0
+                fi
+
+                BEFORE="${{ github.event.before }}"
+                AFTER="${{ github.sha }}"
+
+                PATHS=(
+                  'soda_mmqc/data/checklist/fig-checklist'
+                  'soda_mmqc/data/checklist/doc-checklist'
+                )
+
+                if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+                  FILES=$(git ls-files "${PATHS[@]}" | grep -E '\.(txt|json)$')
+                else
+                  FILES=$(git diff --name-only "$BEFORE" "$AFTER" -- "${PATHS[@]}" | grep -E '\.(txt|json)$')
+                fi
+
+                FILES=$(echo "$FILES" | sed '/^$/d' | paste -sd "," -)
+
+                if [ -z "$FILES" ]; then
+                  echo "files=" >> "$GITHUB_OUTPUT"
+                else
+                  echo "files=$FILES" >> "$GITHUB_OUTPUT"
+                fi
+
+            - name: Stop if nothing relevant changed
+              if: steps.changed.outputs.files == ''
+              run: |
+                echo "No .txt or .json changes detected under checklist directories"
+                exit 0
+
+            - name: Sync checklist prompts to Langfuse
+              run: |
+                python .github/scripts/sync_langfuse_checklist.py "${{ steps.changed.outputs.files }}"
