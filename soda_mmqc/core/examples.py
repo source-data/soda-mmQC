@@ -7,7 +7,6 @@ import json
 import logging
 import base64
 import mimetypes
-import io
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
 try:
@@ -504,7 +503,7 @@ class FigureExample(Example):
                     for path in paths:
                         try:
                             mime_type, b64 = self._encode_image_from_path(path)
-                            print(f"Including source image in model input: {path}")
+                            logger.info("Including source image in model input: %s", path)
                             content.append({
                                 "type": "input_text",
                                 "text": f"{group_header} {path.name}".strip()

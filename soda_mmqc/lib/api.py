@@ -56,24 +56,19 @@ def _get_langfuse_client() -> Optional[Any]:
 
 
 def _lf_start_trace(client: Any, name: str, metadata: Optional[Dict[str, Any]] = None) -> Optional[Any]:
-    """Start a top-level Langfuse span/trace and return it, or None.
+    """Start a top-level Langfuse span (trace root) and return it, or None.
 
-    The returned object is the SDK span/trace; callers can use the
-    helper `_lf_log_generation` below to record a generation and finish
-    the trace. All operations are best-effort and swallow exceptions so
-    tracing never breaks normal program flow.
+    Uses the Langfuse v4 API: client.start_observation(as_type="span").
+    The returned LangfuseSpan must be ended via _lf_log_generation.
+    All operations are best-effort and swallow exceptions so tracing
+    never breaks normal program flow.
     """
     if client is None:
         return None
     try:
-        return client.start_span(name=name, metadata=(metadata or {}))
+        return client.start_observation(name=name, as_type="span", metadata=(metadata or {}))
     except Exception:
-        # Try a couple of common alternate names the SDK might provide
-        try:
-            if hasattr(client, "start_trace"):
-                return client.start_trace(name=name, metadata=(metadata or {}))
-        except Exception:
-            pass
+        pass
     return None
 
 
@@ -125,71 +120,41 @@ def _build_lf_trace_name(provider: str, model: str, metadata: Optional[Dict[str,
 
 
 def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str, prompt_obj: Optional[Any] = None) -> None:
-    """Best-effort: create a child span + generation observation and finish.
+    """Best-effort: create a child generation observation inside the trace span,
+    end the trace, and flush.
 
-    This mirrors the sequence used in `test_langfuse.py`:
-      - trace.start_span(...) -> child span
-      - span.update(input=...)
-      - span.start_observation(as_type="generation", ...)
-      - end observation, update span with output, end span, end trace
-      - flush client
+    Uses the Langfuse v4 API:
+      - trace.start_as_current_observation(as_type="generation", ...) context manager
+        creates a nested generation that is automatically ended on exit.
+      - trace.end() closes the root span.
+      - client.flush() ensures the batch is sent immediately.
     All steps are wrapped in try/except and won't raise.
     """
     try:
         if not (client and trace):
             return
-        span = None
-        try:
-            if hasattr(trace, "start_span"):
-                span = trace.start_span(name=span_name)
-            elif hasattr(trace, "start_observation"):
-                span = trace.start_observation(name=span_name)
-        except Exception:
-            span = None
 
-        if span is None:
-            return
-
+        # Create a nested generation observation as a child of the root trace span.
         try:
-            if hasattr(span, "update"):
-                span.update(input={"prompt": input_text})
-        except Exception:
-            pass
-
-        try:
-            if hasattr(span, "start_observation"):
-                # If a Langfuse prompt object is provided, pass it so the
-                # observation is linked to the prompt in Langfuse UI.
-                kwargs = dict(
-                    as_type="generation",
+            if hasattr(trace, "start_as_current_observation"):
+                kwargs: Dict[str, Any] = dict(
                     name=gen_name,
+                    as_type="generation",
                     model=model,
                     input=input_text,
                     output=output_text,
                 )
                 if prompt_obj is not None:
-                    try:
-                        kwargs["prompt"] = prompt_obj
-                    except Exception:
-                        pass
-
-                gen = span.start_observation(**kwargs)
-                try:
-                    gen.end()
-                except Exception:
-                    pass
+                    kwargs["prompt"] = prompt_obj
+                with trace.start_as_current_observation(**kwargs):
+                    pass  # observation is ended automatically on context-manager exit
         except Exception:
             pass
 
+        # Update and close the root trace span.
         try:
-            if hasattr(span, "update"):
-                span.update(output=output_text)
-        except Exception:
-            pass
-
-        try:
-            if hasattr(span, "end"):
-                span.end()
+            if hasattr(trace, "update"):
+                trace.update(output=output_text)
         except Exception:
             pass
 
@@ -900,30 +865,21 @@ def generate_response_openai(
         logger.error(f"Error getting metadata, ID, model, or usage: {raw_response}")
         response_metadata = {}
     # Log generation and finish trace (best-effort)
-    try:
-        if _lf_trace:
-            try:
-                input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
-            except Exception:
-                input_text = str(prompt)
-            try:
-                    try:
-                        _lf_log_generation(
-                            _lf_client,
-                            _lf_trace,
-                            span_name="openai-generation-span",
-                            gen_name="openai-generation",
-                            model=response_model or model,
-                            input_text=input_text,
-                            output_text=output_text,
-                            prompt_obj=prompt_obj,
-                        )
-                    except Exception:
-                        pass
-            except Exception:
-                pass
-    except Exception:
-        pass
+    if _lf_trace:
+        try:
+            input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            _lf_log_generation(
+                _lf_client,
+                _lf_trace,
+                span_name="openai-generation-span",
+                gen_name="openai-generation",
+                model=response_model or model,
+                input_text=input_text,
+                output_text=output_text,
+                prompt_obj=prompt_obj,
+            )
+        except Exception as e:
+            logger.debug(f"Error while logging generation trace: {e}")
     
     return response, response_metadata
 
