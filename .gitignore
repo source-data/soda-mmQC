@@ -127,3 +127,4 @@ runs/
 .DS_Store
 node_modules
 uv.lock
+.secrets
