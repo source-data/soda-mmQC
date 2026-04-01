@@ -41,7 +41,7 @@ def get_langfuse_client():
     return Langfuse(
         public_key=os.environ["LANGFUSE_PUBLIC_KEY"],
         secret_key=os.environ["LANGFUSE_SECRET_KEY"],
-        host=os.environ["LANGFUSE_HOST"],
+        host=os.environ["LANGFUSE_BASE_URL"],
     )
 
 
@@ -208,7 +208,7 @@ def main() -> None:
         return
 
     langfuse = get_langfuse_client()
-    print(f"Connected to Langfuse at {os.environ.get('LANGFUSE_HOST')}\n")
+    print(f"Connected to Langfuse at {os.environ.get('LANGFUSE_BASE_URL')}\n")
 
     errors: list[str] = []
     for (checklist_name, check_name), only_txts in sorted(checks_to_sync.items()):

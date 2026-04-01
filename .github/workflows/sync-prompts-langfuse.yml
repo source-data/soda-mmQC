@@ -21,7 +21,7 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            LANGFUSE_HOST: ${{ secrets.LANGFUSE_HOST }}
+            LANGFUSE_BASE_URL: ${{ secrets.LANGFUSE_BASE_URL }}
             LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
             LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
 
@@ -33,7 +33,7 @@ jobs:
 
             - name: Validate required secrets
               run: |
-                test -n "$LANGFUSE_HOST" || (echo "Missing LANGFUSE_HOST" && exit 1)
+                test -n "$LANGFUSE_BASE_URL" || (echo "Missing LANGFUSE_BASE_URL" && exit 1)
                 test -n "$LANGFUSE_PUBLIC_KEY" || (echo "Missing LANGFUSE_PUBLIC_KEY" && exit 1)
                 test -n "$LANGFUSE_SECRET_KEY" || (echo "Missing LANGFUSE_SECRET_KEY" && exit 1)
 
