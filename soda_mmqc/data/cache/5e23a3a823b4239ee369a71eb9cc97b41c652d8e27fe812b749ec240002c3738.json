@@ -1,0 +1,71 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_filenames": [
+          "2A.xlsx"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "source_data_filenames": [
+          "Western blot - 2B.tif"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "source_data_filenames": [
+          "2C.docx"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "source_data_filenames": [
+          "Western blot - 2D.tif"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "source_data_filenames": [
+          "Western blot - 2E.tif"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "source_data_filenames": [
+          "Western blot - 2F.tif"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "source_data_filenames": [
+          "Western blot - 2G.tif"
+        ]
+      },
+      {
+        "panel_label": "H",
+        "source_data_filenames": [
+          "Western blot - 2H.tif"
+        ]
+      }
+    ],
+    "not_mappable": [
+      ".DS_Store"
+    ]
+  },
+  "metadata": {
+    "doc_id": "SDMap_10.1038_s44319-026-00694-8",
+    "source": "SDMap_10.1038_s44319-026-00694-8/content/2",
+    "example_type": "figure",
+    "tables": "source_data:2A.xlsx",
+    "response_id": "resp_0badb46c11523f2e0069a6c082d10481929a913ed4be7f9e98",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6703,
+      "output_tokens": 682
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T12:05:53.659299"
+  }
+}

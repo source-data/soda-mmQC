@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "I",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "J",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "K",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "L",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0df7b1007710248d006992e33f00f881979dec3febabc2e12f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2345,
+      "output_tokens": 621
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:28:39.117175"
+  }
+}

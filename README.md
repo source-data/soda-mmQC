@@ -128,6 +128,26 @@ The system validates your configuration on startup and provides helpful feedback
 
 For detailed configuration options, see the [API Provider Documentation](soda_mmqc/docs/api_providers.md).
 
+### Langfuse Integration (Optional)
+
+[Langfuse](https://langfuse.com) can be used for two purposes:
+
+1. **Remote prompt management** — fetch prompts from Langfuse instead of local `.txt` files. Prompts are looked up using the key `checklists/{checklist_name}/{check_name}`.
+2. **Tracing** — model calls are logged as Langfuse spans for observability.
+
+If `LANGFUSE_PUBLIC_KEY` is not set, the system silently falls back to local prompt files and tracing is disabled.
+
+Add the following to your `.env` file (or export as environment variables):
+
+```bash
+# Langfuse configuration (optional)
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+LANGFUSE_BASE_URL=https://cloud.langfuse.com  # omit to use the default Langfuse Cloud endpoint
+```
+
+Self-hosted Langfuse users should set `LANGFUSE_BASE_URL` to their own instance URL.
+
 ## Testing
 
 The project uses pytest for testing. Run tests with the virtual environment activated:
@@ -165,6 +185,9 @@ evaluate CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache] [--match-thre
 # Run a specific check in a checklist
 evaluate CHECKLIST_NAME --check CHECK_NAME [--model MODEL_NAME] [--mock] [--no-cache] [--match-threshold THRESHOLD]
 
+# Run multiple specific checks in a checklist
+evaluate CHECKLIST_NAME --checks CHECK_NAME_1 CHECK_NAME_2 [--model MODEL_NAME]
+
 # Initialize expected output files for a checklist
 init CHECKLIST_NAME [--no-cache]
 
@@ -177,8 +200,13 @@ Command line options:
 - `--mock`: Use expected outputs as model outputs (no API calls)
 - `--no-cache`: Disable caching of model outputs
 - `--check`: Specify a particular check to run within a checklist
+- `--checks`: Specify multiple checks to run within a checklist (space-separated)
 - `--initialize`: Initialize expected output files (alternative to `init` command)
 - `--match-threshold`: Set threshold for string matching across all metrics (default: 0.3)
+- `--sentence-transformer-model`: SentenceTransformer model to use for semantic similarity scoring
+- `--prompt-version`: Prompt version to run; accepts a version id/index or one of `production`, `latest`
+- `--config-from-version`: When `--prompt-version` is set, use that version's config instead of the production config
+- `--config-source-check`: Use the prompt config from this check (and the selected `--prompt-version`) for all selected checks
 
 **Note**: If no model is specified, the system automatically uses the default model for your configured API provider (see [Configuration](#configuration)).
 

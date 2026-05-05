@@ -1,0 +1,69 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "C",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "E",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "F",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "G",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "H",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "I",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "J",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1242_jcs.242834",
+    "source": "10.1242_jcs.242834/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0e56c17ac3cb0a8a006992e39d760c819fbe1ba88863ab5671",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3259,
+      "output_tokens": 478
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:30:11.547705"
+  }
+}

@@ -1,15 +1,25 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Dict, Any, Optional, Type
+from typing import Dict, Any, Optional, Type, List, Tuple
 import hashlib
+import io
 import json
 import logging
 import base64
 import mimetypes
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
 
 logger = logging.getLogger(__name__)
+
+# Image MIME types supported by OpenAI Responses API (TIFF is not supported)
+_API_SUPPORTED_IMAGE_TYPES = frozenset(
+    {"image/jpeg", "image/png", "image/gif", "image/webp"}
+)
 
 
 # Class mapping for factory pattern - will be populated after class definitions
@@ -111,11 +121,14 @@ class Example(ABC):
             self.load_from_source()
     
     @abstractmethod
-    def prepare_model_input(self, prompt: str) -> Dict[str, Any]:
+    def prepare_model_input(
+        self, prompt: str, model_config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """Prepare the example's content for model input.
         
         Args:
             prompt: The prompt to use for the model
+            model_config: Optional check-level config (e.g. source_data_files.enabled)
             
         Returns:
             Dictionary containing:
@@ -169,6 +182,15 @@ class Example(ABC):
         with open(expected_output_path, "w", encoding="utf-8") as f:
             json.dump(output, f, indent=4, ensure_ascii=False)
 
+        # Write HTML version for easier viewing
+        try:
+            from soda_mmqc.lib.expected_output_html import output_to_html
+            html_path = expected_output_dir / "expected_output.html"
+            with open(html_path, "w", encoding="utf-8") as f:
+                f.write(output_to_html(output, title=f"Expected output — {check_name}"))
+        except Exception as e:
+            logger.debug("Could not write expected_output.html: %s", e)
+
         logger.info(
             f"Saved expected output: {expected_output_path}"
         )
@@ -183,6 +205,11 @@ class FigureExample(Example):
         self.caption: Optional[str] = None
         self.image_path: Optional[Path] = None
         self.figure_id: Optional[str] = None
+        # Table handling: include CSV/TSV and spreadsheet files alongside images
+        # If enabled, these will be included in hashing and model input preview.
+        self.include_tables: bool = True
+        # How many lines of table text preview to include for text tables
+        self.table_preview_lines: int = 10
 
     def load_from_source(self) -> None:
         """Load the example's content from the provided path.
@@ -215,7 +242,7 @@ class FigureExample(Example):
 
         # Find image
         self.image_path = None
-        for ext in [".png", ".jpg", ".jpeg", ".tiff"]:
+        for ext in [".png", ".jpg", ".jpeg", ".tiff", ".webp"]:
             for image_path in self.source_path.glob(f"content/*{ext}"):
                 self.image_path = image_path
                 break
@@ -230,17 +257,19 @@ class FigureExample(Example):
     def get_content_hash(self) -> str:
         """Get a hash of the example's content for caching.
         
-        Returns:
-            A string hash of the content
+        Includes caption, main figure image, and any images in content/source_data/
+        so cache invalidates when source data is added or changed.
         """
         self._ensure_loaded()
         if self._content_hash is None:
-            # Hash both caption and image
             hasher = hashlib.sha256()
             if self.caption is not None:
                 hasher.update(self.caption.encode('utf-8'))
             if self.image_path and self.image_path.exists():
                 with open(self.image_path, "rb") as f:
+                    hasher.update(f.read())
+            for path in self._get_all_source_data_paths():
+                with open(path, "rb") as f:
                     hasher.update(f.read())
             self._content_hash = hasher.hexdigest()
         return self._content_hash
@@ -252,6 +281,8 @@ class FigureExample(Example):
         mime_type, _ = mimetypes.guess_type(str(self.image_path))
         if mime_type:
             if mime_type.startswith('image/'):
+                # If mime type isn't one of the allowed formats, we'll convert
+                # later when encoding. Return the guessed mime for now.
                 return mime_type
             else:
                 raise ValueError(f"Not an image: {self.image_path}")
@@ -262,36 +293,260 @@ class FigureExample(Example):
         """Encode image to base64 string."""
         if not self.image_path or not self.image_path.exists():
             raise ValueError("Image file not found")
-        with open(self.image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
+        # Try to encode in an allowed format; convert if necessary
+        mime_type, _ = mimetypes.guess_type(str(self.image_path))
+        allowed = ("image/jpeg", "image/png", "image/gif", "image/webp")
+        if mime_type in allowed:
+            with open(self.image_path, "rb") as image_file:
+                return base64.b64encode(image_file.read()).decode('utf-8')
+        # convert to PNG by default
+        return self._convert_image_to_allowed_format(self.image_path)[1]
 
-    def prepare_model_input(self, prompt: str) -> Dict[str, Any]:
+    def _encode_image_from_path(self, image_path: Path) -> tuple[str, str]:
+        """Encode an image file to base64 and return (mime_type, base64_string)."""
+        if not image_path.exists():
+            raise ValueError(f"Image file not found: {image_path}")
+        mime_type, _ = mimetypes.guess_type(str(image_path))
+        if not mime_type or not mime_type.startswith("image/"):
+            raise ValueError(f"Not an image: {image_path}")
+        with open(image_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode("utf-8")
+        return self._ensure_api_supported_image(mime_type, b64)
+
+    def _ensure_api_supported_image(self, mime_type: str, b64: str) -> tuple[str, str]:
+        """Return (mime_type, b64) with a format the API accepts (jpeg, png, gif, webp).
+        Converts TIFF and other unsupported formats to PNG via PIL if available.
+        """
+        if mime_type in _API_SUPPORTED_IMAGE_TYPES:
+            return mime_type, b64
+        try:
+            from PIL import Image
+        except ImportError:
+            logger.warning(
+                "PIL not available; cannot convert %s to a supported format. "
+                "Install Pillow or use JPEG/PNG/GIF/WebP images.",
+                mime_type,
+            )
+            raise ValueError(
+                f"Image format {mime_type} is not supported by the API. "
+                "Use image/jpeg, image/png, image/gif, or image/webp, or install Pillow to convert TIFF."
+            )
+        raw = base64.b64decode(b64)
+        img = Image.open(io.BytesIO(raw))
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return "image/png", base64.b64encode(buf.getvalue()).decode("utf-8")
+
+    _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
+    _SOURCE_DATA_TABLE_EXTS = (".csv", ".tsv", ".xlsx", ".xls")
+
+    def _get_source_data_items(
+        self,
+    ) -> List[Tuple[Optional[str], List[Path]]]:
+        """Return source data as (panel_label, image_paths) items.
+        
+        If content/source_data/ has subdirectories, each subfolder name is
+        treated as a panel label (e.g. A, B, 1G) and images inside are
+        grouped under that panel. If there are no subdirectories, all images
+        in source_data/ are returned as one item with panel_label None.
+        """
+        source_data_dir = self.source_path / "content" / "source_data"
+        if not source_data_dir.is_dir():
+            return []
+        exts = list(self._SOURCE_DATA_IMAGE_EXTS)
+        # include nested subdirectories as panels as well
+        subdirs = [d for d in source_data_dir.rglob("*") if d.is_dir()]
+        if subdirs:
+            items: List[Tuple[Optional[str], List[Path]]] = []
+            for d in sorted(subdirs):
+                paths = []
+                for ext in exts:
+                    paths.extend(d.glob(f"*{ext}"))
+                paths = sorted(paths)
+                if paths:
+                    items.append((d.name, paths))
+            return items
+        paths = []
+        for ext in exts:
+            paths.extend(source_data_dir.glob(f"*{ext}"))
+        paths = sorted(paths)
+        return [(None, paths)] if paths else []
+
+    def _get_source_table_items(self) -> List[Tuple[Optional[str], List[Path]]]:
+        """Return table files (csv/tsv/xlsx/xls) grouped the same way as images.
+
+        Subfolders of `content/source_data/` are treated as panels. If there are
+        no subfolders, any table files directly under `source_data/` are returned
+        as a single group with panel_label None.
+        """
+        if not self.include_tables:
+            return []
+        # source_data_dir = self.source_path / "content" / "source_data"
+        source_data_dir = self.source_path / "content"
+        if not source_data_dir.is_dir():
+            return []
+        exts = list(self._SOURCE_DATA_TABLE_EXTS)
+        # include nested subdirectories as panels as well
+        subdirs = [d for d in source_data_dir.rglob("*") if d.is_dir()]
+        if subdirs:
+            items: List[Tuple[Optional[str], List[Path]]] = []
+            for d in sorted(subdirs):
+                paths: List[Path] = []
+                for ext in exts:
+                    paths.extend(d.glob(f"*{ext}"))
+                paths = sorted(paths)
+                if paths:
+                    items.append((d.name, paths))
+            return items
+        paths: List[Path] = []
+        for ext in exts:
+            paths.extend(source_data_dir.glob(f"*{ext}"))
+        paths = sorted(paths)
+        return [(None, paths)] if paths else []
+
+    def _upload_table_and_get_file_id(self, tpath: Path, purpose: str = "user_data") -> Optional[str]:
+        """Attempt to upload a table file to the OpenAI Files API and return the file id.
+
+        Args:
+            tpath: Path to the file to upload.
+            purpose: Purpose string for the Files API. Allowed values are:
+                'fine-tune', 'assistants', 'batch', 'user_data', 'vision', 'evals'.
+
+        Returns:
+            file id string on success, or None on failure.
+        """
+        allowed = ("fine-tune", "assistants", "batch", "user_data", "vision", "evals")
+        if purpose not in allowed:
+            logger.warning(
+                "Requested file purpose '%s' is not valid. Falling back to 'user_data'. Allowed: %s",
+                purpose,
+                allowed,
+            )
+            purpose = "user_data"
+
+        if OpenAI is None:
+            logger.debug("OpenAI client not available; skipping upload for %s", tpath)
+            return None
+        try:
+            client = OpenAI()
+            res = client.files.create(file=Path(tpath), purpose=purpose)
+            # SDK may return an object with attribute `id` or a dict with key 'id'
+            file_id = getattr(res, "id", None) or (res.get("id") if isinstance(res, dict) else None)
+            logger.info("Uploaded file %s to OpenAI with purpose '%s', id=%s", tpath, purpose, file_id)
+            return file_id
+        except Exception as e:
+            logger.warning("Failed to upload file %s to OpenAI (purpose=%s): %s", tpath, purpose, e)
+            return None
+
+    def _get_all_source_data_paths(self) -> List[Path]:
+        """Flat list of all source data image paths (for hashing)."""
+        out: List[Path] = []
+        for _panel, paths in self._get_source_data_items():
+            out.extend(paths)
+        # include table files in the hash as well
+        for _panel, tpaths in self._get_source_table_items():
+            out.extend(tpaths)
+        return sorted(out)
+
+    def _get_source_data_file_list(self) -> List[str]:
+        """List of all file names (and relative paths) in source_data folder.
+        Recursively includes every file so the model can see e.g. .xlsx, .csv
+        without opening them. Returns paths relative to source_data dir.
+        """
+        source_data_dir = self.source_path / "content" / "source_data"
+        if not source_data_dir.is_dir():
+            return []
+        out: List[str] = []
+        for f in sorted(source_data_dir.rglob("*")):
+            if f.is_file():
+                try:
+                    rel = f.relative_to(source_data_dir)
+                    out.append(rel.as_posix())
+                except ValueError:
+                    out.append(f.name)
+        return sorted(out)
+
+    def prepare_model_input(
+        self, prompt: str, model_config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """Prepare the example's content for model input.
         
-        Args:
-            prompt: The prompt to use for the model
-            
-        Returns:
-            Dictionary containing:
-            - content: List of content items for the model
-            - metadata: Dictionary with tracing information
+        When model_config has source_data_files.enabled, also includes any
+        images from content/source_data/ so the model can compare them to the figure.
         """
         self._ensure_loaded()
-        return {
-            "content": [
-                {
-                    "type": "input_text",
-                    "text": f"{prompt}\n\nFigure Caption:\n{self.caption}"
-                },
-                {
-                    "type": "input_image",
-                    "image_url": (
-                        f"data:{self._get_image_mime_type()};base64,"
-                        f"{self._encode_image()}"
+        fig_mime, fig_b64 = self._get_image_mime_type(), self._encode_image()
+        fig_mime, fig_b64 = self._ensure_api_supported_image(fig_mime, fig_b64)
+        content: List[Dict[str, Any]] = [
+            {
+                "type": "input_text",
+                "text": f"{prompt}\n\nFigure Caption:\n{self.caption}"
+            },
+            {
+                "type": "input_image",
+                "image_url": f"data:{fig_mime};base64,{fig_b64}"
+            }
+        ]
+        # Include source data files if this check requests them
+        if model_config:
+            source_config = model_config.get("source_data_files") or {}
+            if source_config.get("enabled"):
+                # First add image source data as before
+                for panel_label, paths in self._get_source_data_items():
+                    group_header = (
+                        f"Source data for panel {panel_label}:"
+                        if panel_label is not None
+                        else "Source data files:"
                     )
-                }
-            ]
-        }
+                    for path in paths:
+                        try:
+                            mime_type, b64 = self._encode_image_from_path(path)
+                            logger.info("Including source image in model input: %s", path)
+                            content.append({
+                                "type": "input_text",
+                                "text": f"{group_header} {path.name}".strip()
+                            })
+                            content.append({
+                                "type": "input_image",
+                                "image_url": f"data:{mime_type};base64,{b64}"
+                            })
+                            group_header = ""  # subsequent images: filename only in next text
+                        except Exception as e:
+                            logger.warning(
+                                "Skipping source data file %s: %s", path, e
+                            )
+
+                # Then add any table-like source data — strictly upload files
+                # and reference them as `input_file`. If upload fails, log a
+                # warning and do not include any inline text preview or
+                # filename notes.
+                upload_purpose = None
+                if model_config:
+                    upload_purpose = model_config.get("openai_file_purpose")
+                # default to 'user_data' when not provided
+                if not upload_purpose:
+                    upload_purpose = "user_data"
+
+                for panel_label, tpaths in self._get_source_table_items():
+                    for tpath in tpaths:
+                        try:
+                            file_id = self._upload_table_and_get_file_id(tpath, purpose=upload_purpose)
+                            if file_id:
+                                content.append({
+                                    "type": "input_file",
+                                    "file_id": file_id,
+                                })
+                            else:
+                                logger.warning(
+                                    "Could not upload source table %s; skipping it."
+                                    " Ensure OpenAI client is configured and reachable.",
+                                    tpath,
+                                )
+                        except Exception as e:
+                            logger.warning("Skipping source table file %s: %s", tpath, e)
+        return {"content": content}
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert the example to a dictionary.
@@ -386,17 +641,10 @@ class WordExample(Example):
             self._content_hash = hasher.hexdigest()
         return self._content_hash
 
-    def prepare_model_input(self, prompt: str) -> Dict[str, Any]:
-        """Prepare the example's content for model input.
-        
-        Args:
-            prompt: The prompt to use for the model
-            
-        Returns:
-            Dictionary containing:
-            - content: List of content items for the model
-            - metadata: Dictionary with tracing information
-        """
+    def prepare_model_input(
+        self, prompt: str, model_config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Prepare the example's content for model input."""
         self._ensure_loaded()
         return {
             "content": [

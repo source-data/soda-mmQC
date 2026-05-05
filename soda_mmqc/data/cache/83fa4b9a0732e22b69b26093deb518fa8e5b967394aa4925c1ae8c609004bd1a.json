@@ -1,0 +1,91 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "C",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "D",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "F",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "G",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "H",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "I",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "J",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "K",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "L",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_051025f9d742f662006992eb71dcec8191b5d524d9cff55d7c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2241,
+      "output_tokens": 684
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:03:35.908647"
+  }
+}

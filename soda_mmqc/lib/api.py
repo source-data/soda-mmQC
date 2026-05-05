@@ -2,6 +2,9 @@ import os
 import json
 import base64
 import io
+import math
+import numbers
+from pathlib import Path
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -21,6 +24,155 @@ except ImportError:
     logger.warning("PIL (Pillow) not available. Image compression will be disabled.")
 
 # API clients will be imported dynamically when needed
+
+
+# --- Langfuse helpers: simplified wrapper using langfuse.get_client() ---
+try:
+    # Prefer the documented entrypoint used by tests/examples
+    from langfuse import get_client as _lf_get_client  # type: ignore
+except Exception:
+    _lf_get_client = None
+
+
+def _get_langfuse_client() -> Optional[Any]:
+    """Return a Langfuse client instance, or None if unavailable.
+
+    This is intentionally minimal: it mirrors the example in
+    `test_langfuse.py` and prefers the `get_client()` helper the SDK
+    exposes. The calling code should treat a None return as "no tracing".
+    Returns None immediately when LANGFUSE_PUBLIC_KEY is not configured so
+    the SDK never emits authentication warnings.
+    """
+    import os as _os
+    if not _os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        return None
+    try:
+        if _lf_get_client is None:
+            from langfuse import get_client as _gc  # type: ignore
+            return _gc()
+        return _lf_get_client()
+    except Exception:
+        return None
+
+
+def _lf_start_trace(client: Any, name: str, metadata: Optional[Dict[str, Any]] = None) -> Optional[Any]:
+    """Start a top-level Langfuse span (trace root) and return it, or None.
+
+    Uses the Langfuse v4 API: client.start_observation(as_type="span").
+    The returned LangfuseSpan must be ended via _lf_log_generation.
+    All operations are best-effort and swallow exceptions so tracing
+    never breaks normal program flow.
+    """
+    if client is None:
+        return None
+    try:
+        return client.start_observation(name=name, as_type="span", metadata=(metadata or {}))
+    except Exception:
+        pass
+    return None
+
+
+def _sanitize_trace_token(value: Any, default: str) -> str:
+    """Return a trace-safe token (lowercase alnum, dash, underscore)."""
+    try:
+        text = str(value).strip().lower()
+    except Exception:
+        text = ""
+    if not text:
+        return default
+    safe = []
+    for ch in text:
+        if ch.isalnum() or ch in {"-", "_"}:
+            safe.append(ch)
+        else:
+            safe.append("-")
+    token = "".join(safe).strip("-")
+    return token or default
+
+
+def _infer_model_type(model: str) -> str:
+    """Infer a stable model-family token for trace naming."""
+    model_token = _sanitize_trace_token(model, "unknown")
+    parts = model_token.split("-")
+    if model_token.startswith("gpt-") and len(parts) >= 2:
+        return "-".join(parts[:2])
+    if model_token.startswith("claude-") and len(parts) >= 3:
+        return "-".join(parts[:3])
+    if model_token.startswith("o") and parts:
+        return parts[0]
+    return parts[0] if parts else model_token
+
+
+def _build_lf_trace_name(provider: str, model: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    """Build trace name from provider + model type + sub-function."""
+    metadata = metadata or {}
+    sub_function = (
+        metadata.get("sub_function")
+        or metadata.get("phase")
+        or metadata.get("operation")
+        or metadata.get("mode")
+        or "evaluate"
+    )
+    provider_token = _sanitize_trace_token(provider, "provider")
+    model_type = _infer_model_type(model)
+    sub_function_token = _sanitize_trace_token(sub_function, "evaluate")
+    return f"{provider_token}_{model_type}_{sub_function_token}_generate_response"
+
+
+def _lf_log_generation(client: Any, trace: Any, span_name: str, gen_name: str, model: str, input_text: str, output_text: str, prompt_obj: Optional[Any] = None) -> None:
+    """Best-effort: create a child generation observation inside the trace span,
+    end the trace, and flush.
+
+    Uses the Langfuse v4 API:
+      - trace.start_as_current_observation(as_type="generation", ...) context manager
+        creates a nested generation that is automatically ended on exit.
+      - trace.end() closes the root span.
+      - client.flush() ensures the batch is sent immediately.
+    All steps are wrapped in try/except and won't raise.
+    """
+    try:
+        if not (client and trace):
+            return
+
+        # Create a nested generation observation as a child of the root trace span.
+        try:
+            if hasattr(trace, "start_as_current_observation"):
+                kwargs: Dict[str, Any] = dict(
+                    name=gen_name,
+                    as_type="generation",
+                    model=model,
+                    input=input_text,
+                    output=output_text,
+                )
+                if prompt_obj is not None:
+                    kwargs["prompt"] = prompt_obj
+                with trace.start_as_current_observation(**kwargs):
+                    pass  # observation is ended automatically on context-manager exit
+        except Exception:
+            pass
+
+        # Update and close the root trace span.
+        try:
+            if hasattr(trace, "update"):
+                trace.update(output=output_text)
+        except Exception:
+            pass
+
+        try:
+            if hasattr(trace, "end"):
+                trace.end()
+        except Exception:
+            pass
+
+        try:
+            if hasattr(client, "flush"):
+                client.flush()
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+# --- end Langfuse helpers ---
 
 
 def _create_tool_from_schema(schema: dict) -> dict:
@@ -325,13 +477,95 @@ def _extract_output_text_from_response(raw_response) -> str:
     return ""
 
 
+def _sanitize_metadata_for_model(obj: Any, *, max_preview_rows: int = 3, max_string_len: int = 200) -> Any:
+    """Recursively sanitize metadata so it's JSON-safe and compact for model input.
+
+    - Converts NaN to None
+    - Truncates previews to `max_preview_rows`
+    - Shortens long strings
+    - Replaces full file paths with basenames for brevity
+    - Converts non-serializable objects to strings as a last resort
+    """
+    # Primitive types
+    try:
+        if obj is None:
+            return None
+        if isinstance(obj, bool):
+            return obj
+        if isinstance(obj, (int, float)):
+            # Convert NaN/Inf to None and convert numpy scalars to python native
+            try:
+                # If it's a numpy scalar, get python value
+                if isinstance(obj, numbers.Number) and not isinstance(obj, bool):
+                    try:
+                        val = obj.item()
+                    except Exception:
+                        val = obj
+                else:
+                    val = obj
+            except Exception:
+                val = obj
+
+            # If float-like, ensure it's finite (not NaN/inf)
+            if isinstance(val, float):
+                if not math.isfinite(val):
+                    return None
+            return val
+        if isinstance(obj, str):
+            if len(obj) > max_string_len:
+                return obj[: max_string_len - 3] + "..."
+            return obj
+
+        # Lists
+        if isinstance(obj, list):
+            sanitized_list = [_sanitize_metadata_for_model(v, max_preview_rows=max_preview_rows, max_string_len=max_string_len) for v in obj]
+            return sanitized_list
+
+        # Dictionaries
+        if isinstance(obj, dict):
+            new = {}
+            for k, v in obj.items():
+                # If a preview, truncate rows
+                if k == "preview" and isinstance(v, list):
+                    truncated = v[:max_preview_rows]
+                    new[k] = [_sanitize_metadata_for_model(r, max_preview_rows=max_preview_rows, max_string_len=max_string_len) for r in truncated]
+                    continue
+
+                # If the key looks like a file path, shorten it
+                if isinstance(v, str) and (k == "file" or "path" in k or "file" in k):
+                    try:
+                        new[k] = Path(v).name
+                        continue
+                    except Exception:
+                        pass
+
+                new[k] = _sanitize_metadata_for_model(v, max_preview_rows=max_preview_rows, max_string_len=max_string_len)
+            return new
+
+        # Fallback for other types: try to convert to native python or string
+        # numpy types, pandas types, etc. often have .tolist() or .item()
+        try:
+            if hasattr(obj, "tolist"):
+                return _sanitize_metadata_for_model(obj.tolist(), max_preview_rows=max_preview_rows, max_string_len=max_string_len)
+            if hasattr(obj, "item"):
+                return _sanitize_metadata_for_model(obj.item(), max_preview_rows=max_preview_rows, max_string_len=max_string_len)
+        except Exception:
+            pass
+
+        # As a last resort, stringize
+        return str(obj)
+    except Exception:
+        return str(obj)
+
+
 def generate_response_openai(
     example,
     prompt: str,
     schema: dict,
     model: str,
     metadata: dict,
-    model_config: Optional[Dict[str, Any]] = None
+    model_config: Optional[Dict[str, Any]] = None,
+    prompt_obj: Optional[Any] = None,
 ) -> Tuple[dict, dict]:
     """Generate response using OpenAI API with structured output.
 
@@ -349,6 +583,32 @@ def generate_response_openai(
         Tuple of (parsed response, response metadata with response_id and
         model)
     """
+    # Lazy-init Langfuse client and start per-call trace (best-effort)
+    _lf_client = _get_langfuse_client()
+    _lf_trace = None
+    trace_name = _build_lf_trace_name("openai", model, metadata)
+    try:
+        if _lf_client:
+            _lf_trace = _lf_start_trace(
+                _lf_client,
+                name=trace_name,
+                metadata={
+                    "model": model,
+                    "doc_id": metadata.get("doc_id") if metadata else None,
+                    "prompt_name": metadata.get("prompt_name") if metadata else None,
+                    "sub_function": (metadata or {}).get("sub_function", "evaluate"),
+                },
+            )
+            if _lf_trace:
+                try:
+                    try:
+                        print(f"Langfuse: started trace '{trace_name}' for doc_id=", (metadata or {}).get("doc_id"))
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+    except Exception:
+        _lf_trace = None
     # Import and initialize OpenAI client
     try:
         from openai import OpenAI
@@ -360,8 +620,22 @@ def generate_response_openai(
 
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-    # Prepare model input (supports multimodal content)
-    model_input = example.prepare_model_input(prompt)
+    # Prepare model input (supports multimodal content; model_config can enable source_data)
+    model_input = example.prepare_model_input(prompt, model_config=model_config)
+
+    # Attach a small preview to the trace if available
+    try:
+        if _lf_trace:
+            preview = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            if isinstance(preview, str):
+                preview = preview[:200]
+            try:
+                if hasattr(_lf_trace, "update"):
+                    _lf_trace.update(input={"prompt_preview": preview, "metadata": (metadata or {})})
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # Build request kwargs
     create_kwargs = {
@@ -379,8 +653,155 @@ def generate_response_openai(
             }
         ],
         "text": schema,
-        "metadata": metadata
+        # We'll set metadata after coercing to API-safe strings below
     }
+    # Convert metadata to API-safe format: the Responses API may expect
+    # metadata values to be primitive/string values. Stringify complex
+    # objects (lists/dicts) so the request doesn't fail with
+    # "expected a string, but got an object" errors.
+    metadata_for_api = {}
+    if metadata:
+        for k, v in metadata.items():
+            # Keep strings as-is
+            if isinstance(v, str):
+                metadata_for_api[k] = v
+                continue
+            # Special-case large 'tables' metadata: produce a short summary
+            if k == "tables":
+                try:
+                    parts = []
+                    if isinstance(v, dict):
+                        for panel, files in v.items():
+                            # files is expected to be a list of file entries
+                            if isinstance(files, list):
+                                for fe in files:
+                                    try:
+                                        fname = Path(fe.get("file", "")).name if isinstance(fe, dict) else str(fe)
+                                    except Exception:
+                                        fname = str(fe)
+                                    # Only include panel and file basename (no rows/cols)
+                                    parts.append(f"{panel}:{fname}")
+                    summary = "; ".join(parts)
+                    # Truncate to API limit (keep margin)
+                    if len(summary) > 500:
+                        summary = summary[:497] + "..."
+                    metadata_for_api[k] = summary
+                    continue
+                except Exception:
+                    # Fallback to string conversion below
+                    pass
+            # For simple primitives, convert to string representation
+            if isinstance(v, (int, float, bool)) or v is None:
+                try:
+                    metadata_for_api[k] = json.dumps(v, ensure_ascii=False)
+                except Exception:
+                    metadata_for_api[k] = str(v)
+                continue
+            # For dicts/lists/complex objects, JSON-stringify
+            try:
+                s = json.dumps(v, ensure_ascii=False)
+                # Truncate long strings to comply with API limits (512 chars)
+                if isinstance(s, str) and len(s) > 512:
+                    s = s[:509] + "..."
+                metadata_for_api[k] = s
+            except Exception:
+                metadata_for_api[k] = str(v)
+    else:
+        metadata_for_api = {}
+
+    create_kwargs["metadata"] = metadata_for_api
+
+    # Embed sanitized metadata into the user messages so the model receives it textually.
+    # Some API clients may not surface request-level `metadata` into the token stream,
+    # so adding a user message with the JSON ensures the model can read and act on it.
+    if metadata:
+        try:
+            sanitized = _sanitize_metadata_for_model(metadata)
+            try:
+                metadata_json = json.dumps(sanitized, ensure_ascii=False, separators=(",", ":"))
+            except Exception as dump_exc:
+                # Diagnostic: walk the sanitized structure to find problematic values
+                def _find_problems(obj, path="root"):
+                    problems = []
+                    try:
+                        if obj is None or isinstance(obj, (str, bool, int)):
+                            return problems
+                        if isinstance(obj, float):
+                            if not math.isfinite(obj):
+                                problems.append((path, type(obj).__name__, obj))
+                            return problems
+                        # numpy scalars / objects
+                        try:
+                            if hasattr(obj, "item"):
+                                v = obj.item()
+                                return _find_problems(v, path)
+                            if hasattr(obj, "tolist") and not isinstance(obj, (str, bytes)):
+                                v = obj.tolist()
+                                return _find_problems(v, path)
+                        except Exception:
+                            pass
+
+                        if isinstance(obj, dict):
+                            for k, v in obj.items():
+                                problems.extend(_find_problems(v, f"{path}.{k}"))
+                            return problems
+                        if isinstance(obj, (list, tuple)):
+                            for i, v in enumerate(obj):
+                                problems.extend(_find_problems(v, f"{path}[{i}]"))
+                            return problems
+                        # If object isn't a basic serializable type, note it
+                        try:
+                            json.dumps(obj)
+                        except Exception:
+                            problems.append((path, type(obj).__name__, repr(obj)))
+                        return problems
+                    except Exception as _:
+                        return [(path, type(obj).__name__, "inspection-failed")]
+
+                problems = _find_problems(sanitized)
+                if problems:
+                    for p in problems[:10]:
+                        logger.error(f"Metadata serialization problem at {p[0]}: {p[1]} -> {p[2]}")
+                logger.warning(f"json.dumps failed for sanitized metadata: {dump_exc}")
+                # Best-effort fallback: coerce to JSON-safe representation
+                def _coerce_safe(obj):
+                    if obj is None or isinstance(obj, (str, bool, int)):
+                        return obj
+                    if isinstance(obj, float):
+                        if not math.isfinite(obj):
+                            return None
+                        return float(obj)
+                    try:
+                        if hasattr(obj, "item"):
+                            return _coerce_safe(obj.item())
+                        if hasattr(obj, "tolist") and not isinstance(obj, (str, bytes)):
+                            return _coerce_safe(obj.tolist())
+                    except Exception:
+                        pass
+                    if isinstance(obj, dict):
+                        return {k: _coerce_safe(v) for k, v in obj.items()}
+                    if isinstance(obj, (list, tuple)):
+                        return [_coerce_safe(v) for v in obj]
+                    # Fallback to string
+                    return str(obj)
+
+                safe_sanitized = _coerce_safe(sanitized)
+                try:
+                    metadata_json = json.dumps(safe_sanitized, ensure_ascii=False, separators=(",", ":"))
+                except Exception:
+                    # Last resort: stringify the whole metadata
+                    metadata_json = json.dumps(str(metadata), ensure_ascii=False)
+
+            metadata_message = {
+                "role": "user",
+                "content": (
+                    "Please consult the following METADATA_JSON block for table and file metadata. "
+                    "Use it when producing your structured output.\nMETADATA_JSON:\n" + metadata_json
+                )
+            }
+            create_kwargs["input"].append(metadata_message)
+        except Exception as e:
+            logger.warning(f"Failed to sanitize/attach metadata: {e}")
 
     # Add optional tool/config from model_config. Valid tool types (OpenAI
     # Responses API) include: web_search_preview, web_search_preview_2025_03_11,
@@ -443,6 +864,22 @@ def generate_response_openai(
     except AttributeError:
         logger.error(f"Error getting metadata, ID, model, or usage: {raw_response}")
         response_metadata = {}
+    # Log generation and finish trace (best-effort)
+    if _lf_trace:
+        try:
+            input_text = model_input.get("content", "") if isinstance(model_input, dict) else str(prompt)
+            _lf_log_generation(
+                _lf_client,
+                _lf_trace,
+                span_name="openai-generation-span",
+                gen_name="openai-generation",
+                model=response_model or model,
+                input_text=input_text,
+                output_text=output_text,
+                prompt_obj=prompt_obj,
+            )
+        except Exception as e:
+            logger.debug(f"Error while logging generation trace: {e}")
     
     return response, response_metadata
 
@@ -458,7 +895,9 @@ def generate_response_anthropic(
     prompt: str,
     schema: dict,
     model: str,
-    metadata: dict
+    metadata: dict,
+    model_config: Optional[Dict[str, Any]] = None,
+    prompt_obj: Optional[Any] = None,
 ) -> Tuple[dict, dict]:
     """Generate response using Anthropic API with structured output via tools.
 
@@ -468,6 +907,7 @@ def generate_response_anthropic(
         schema: The schema for structured output
         model: The model to use (e.g., 'claude-3-5-sonnet-20241022')
         metadata: Additional metadata for the API call
+        model_config: Optional check-level config (e.g. source_data_files.enabled)
 
     Returns:
         Tuple of (parsed response, response metadata with response_id and
@@ -484,8 +924,8 @@ def generate_response_anthropic(
 
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-    # Prepare model input (supports multimodal content)
-    model_input_content = example.prepare_model_input(prompt)
+    # Prepare model input (supports multimodal content; model_config can enable source_data)
+    model_input_content = example.prepare_model_input(prompt, model_config=model_config)
 
     # Convert content from OpenAI format to Anthropic format
     converted_content = _convert_content_for_anthropic(model_input_content["content"])
@@ -502,6 +942,39 @@ def generate_response_anthropic(
     ]
 
     # Call Anthropic API with tool use for structured output
+    # Lazy-init Langfuse client and start per-call trace (best-effort)
+    _lf_client = _get_langfuse_client()
+    _lf_trace = None
+    trace_name = _build_lf_trace_name("anthropic", model, metadata)
+    try:
+        if _lf_client:
+            _lf_trace = _lf_start_trace(
+                _lf_client,
+                name=trace_name,
+                metadata={
+                    "model": model,
+                    "doc_id": metadata.get("doc_id") if metadata else None,
+                    "prompt_name": metadata.get("prompt_name") if metadata else None,
+                    "sub_function": (metadata or {}).get("sub_function", "evaluate"),
+                },
+            )
+            if _lf_trace:
+                try:
+                    # Try to attach a small request preview/update
+                    try:
+                        if hasattr(_lf_trace, "update"):
+                            _lf_trace.update(input={"messages_preview": str(messages)[:200]})
+                    except Exception:
+                        pass
+                    try:
+                        print(f"Langfuse: started trace '{trace_name}' for doc_id=", (metadata or {}).get("doc_id"))
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+    except Exception:
+        _lf_trace = None
+
     raw_response = client.messages.create(  # type: ignore
         model=model,
         max_tokens=4096,
@@ -545,6 +1018,37 @@ def generate_response_anthropic(
     # Add custom metadata if provided
     response_metadata.update(metadata)
 
+    # Log response and finish trace if any
+    try:
+        if _lf_trace:
+            try:
+                # Serialize inputs/outputs conservatively for the trace
+                try:
+                    input_text = json.dumps(messages, ensure_ascii=False)
+                except Exception:
+                    input_text = str(messages)
+                try:
+                    output_text = json.dumps(response, ensure_ascii=False)
+                except Exception:
+                    output_text = str(response)
+                try:
+                    _lf_log_generation(
+                        _lf_client,
+                        _lf_trace,
+                        span_name="anthropic-generation-span",
+                        gen_name="anthropic-generation",
+                        model=model,
+                        input_text=input_text,
+                        output_text=output_text,
+                        prompt_obj=prompt_obj,
+                    )
+                except Exception:
+                    pass
+            except Exception:
+                pass
+    except Exception:
+        pass
+
     return response, response_metadata
 
 
@@ -586,13 +1090,16 @@ def generate_response(
         model = DEFAULT_MODEL
 
     # Route to appropriate API
+    prompt_obj = getattr(model_input, "prompt_obj", None)
     if API_PROVIDER == "anthropic":
         return generate_response_anthropic(
             example=example,
             prompt=prompt,
             schema=schema,
             model=model,
-            metadata=metadata
+            metadata=metadata,
+            model_config=model_config,
+            prompt_obj=prompt_obj,
         )
     else:
         return generate_response_openai(
@@ -601,5 +1108,6 @@ def generate_response(
             schema=schema,
             model=model,
             metadata=metadata,
-            model_config=model_config
+            model_config=model_config,
+            prompt_obj=prompt_obj,
         )

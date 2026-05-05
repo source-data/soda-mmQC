@@ -1,0 +1,103 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "WT, n=15; others, n=25"
+        ],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "WT, n=15; others, n=25"
+        ],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "WT, n=15; others, n=25"
+        ],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "I",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "J",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "WT, n=5; sin1, n=11; rictor, n=9"
+        ],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "K",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "WT, n=5; sin1, n=11; rictor, n=9"
+        ],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "L",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "WT, n=5; sin1, n=11; rictor, n=9"
+        ],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.312",
+    "source": "10.1038_emboj.2009.312/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0dae89c24db8da35006992f538dd4081a08865bb0729bd60bb",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2337,
+      "output_tokens": 1239
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:45:24.945762"
+  }
+}

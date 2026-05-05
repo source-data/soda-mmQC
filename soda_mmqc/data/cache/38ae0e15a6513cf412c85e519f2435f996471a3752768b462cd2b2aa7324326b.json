@@ -1,0 +1,70 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2A_0-4_VNC.czi",
+          "EMBOJ-2025-120546R_Fig2A_24-29_VNC.czi",
+          "EMBOJ-2025-120546R_Fig2A_29-36_VNC.czi",
+          "EMBOJ-2025-120546R_Fig2A_MB.czi"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2B.xlsx"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2C-aNSC.czi",
+          "EMBOJ-2025-120546R_Fig2C-qNSC.czi"
+        ]
+      },
+      {
+        "panel_label": "D",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2D.prism"
+        ]
+      },
+      {
+        "panel_label": "E",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2E_top.tif",
+          "EMBOJ-2025-120546R_Fig2E_bottom.tif"
+        ]
+      },
+      {
+        "panel_label": "F",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2F.pzfx"
+        ]
+      },
+      {
+        "panel_label": "G",
+        "source_data_filenames": [
+          "EMBOJ-2025-120546R_Fig2G.xlsx"
+        ]
+      }
+    ],
+    "not_mappable": [
+      ".DS_Store"
+    ]
+  },
+  "metadata": {
+    "doc_id": "SDMap_10.1038_s44318-026-00693-4",
+    "source": "SDMap_10.1038_s44318-026-00693-4/content/2",
+    "example_type": "figure",
+    "tables": "source_data:EMBOJ-2025-120546R_Fig2G.xlsx; source_data:EMBOJ-2025-120546R_Fig2B.xlsx",
+    "response_id": "resp_06a0337ac6a3e95b0069a6d17d78fc819681d6540a97de5af7",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4378,
+      "output_tokens": 1159
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T13:18:26.504905"
+  }
+}

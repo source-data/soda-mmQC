@@ -1,0 +1,202 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Lag (hours)"
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          },
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Period (hours)"
+          },
+          {
+            "axis": "x",
+            "definition": "log(amplitude) (arb. u.)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Ridge length (hours)"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Phase difference shown as angular ticks (π units); caption: \"In the polar histograms in (E) and (F) 2π corresponds to one full circadian cycle.\" (i.e., phase in radians)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Phase difference shown as angular ticks (π units); caption: \"In the polar histograms in (E) and (F) 2π corresponds to one full circadian cycle.\" (i.e., phase in radians)"
+          }
+        ]
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Time (hours)"
+          },
+          {
+            "axis": "y",
+            "definition": "Signal (arb. u.)"
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "no"
+          },
+          {
+            "axis": "y",
+            "answer": "no"
+          }
+        ],
+        "justify_why_units_are_missing": [
+          {
+            "axis": "x",
+            "justification": "Amplitude exponential decay rate (γ) is a rate (should carry units of inverse time, e.g., h⁻¹, because it multiplies time in the fitted model), but no units are provided on the axis or in the caption."
+          },
+          {
+            "axis": "y",
+            "justification": "Initial amplitude (A0) is plotted but its units are not specified; amplitudes are derived from signal values (which are shown as arbitrary units in panel G) and should be labeled (e.g., arb. u.)."
+          }
+        ],
+        "unit_definition_as_provided": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00092-7",
+    "source": "10.1038_s44320-025-00092-7/content/2",
+    "example_type": "figure",
+    "response_id": "resp_00575fc7250d6d3b006992ed164cbc8193a9c8210ec99c6e09",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3984,
+      "output_tokens": 3975
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:11:02.782516"
+  }
+}

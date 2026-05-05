@@ -1,0 +1,80 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****",
+                "***"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "****P\u0000=\u00007.96E-78 (Classical monocyte); ****P\u0000=\u00004.74E-17 (Alveolar macrophage); ****P\u0000=\u00006.04E-133 (Leukocyte)",
+                "***P\u0000=\u00002.31E-05 (Non-classical monocyte)"
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "p-value",
+                "FDR",
+                "NES"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ],
+            "from_the_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed"
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "p-value"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "yes"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "not_needed"
+            ],
+            "from_the_caption": [
+                "not_needed"
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ]
+}

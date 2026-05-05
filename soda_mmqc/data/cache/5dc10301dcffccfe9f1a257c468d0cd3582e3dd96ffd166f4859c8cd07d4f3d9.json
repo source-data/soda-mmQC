@@ -1,0 +1,59 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel includes bar graphs with asterisks indicating significance (e.g. * and **), but no statistical test name or method is specified in the provided caption or on the figure adjacent to these graphs.",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "statistical_test_needed": "no",
+        "statistical_test_mentioned": "not needed",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": ""
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "##: p<0.01, Tukey's test follows One-way ANOVA"
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "no",
+        "justify_why_test_is_missing": "The panel presents FACS histograms and the caption states that results from three independent experiments indicate changes, but no statistical test, p-values, or quantitative comparison are provided to support the claim.",
+        "from_the_caption": ""
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0c331b57a23486db006992e6b6028c8196bf46c2027f5f7b65",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2963,
+      "output_tokens": 1981
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:43:35.465622"
+  }
+}

@@ -1,0 +1,82 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "yes",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "yes",
+            "symbols": [
+                "green outline (low pH region)",
+                "yellow outline (Tmprss11b-high region)",
+                "red RNAscope signal (Tmprss11b)",
+                "Cd68 spatial plot (heatmap)",
+                "Spp1 spatial plot (heatmap)",
+                "scale bar (black)"
+            ],
+            "symbols_defined_in_caption": [
+                "no",
+                "no",
+                "yes",
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "",
+                "",
+                "RNAscope of Tmprss11b (red) on a serial section.",
+                "spatial plots depicting enrichment of Cd68 (macrophage marker) and Spp1 (immunosuppressive macrophage marker) transcripts in these regions.",
+                "spatial plots depicting enrichment of Cd68 (macrophage marker) and Spp1 (immunosuppressive macrophage marker) transcripts in these regions.",
+                "Scale bar, 1\u0000mm."
+            ]
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "yes",
+            "symbols": [
+                "ICG fluorescence signal (green)",
+                "IHC HMOX1 brown staining",
+                "IHC MSR1 brown staining",
+                "scale bar (black)"
+            ],
+            "symbols_defined_in_caption": [
+                "yes",
+                "yes",
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "Representative ICG fluorescence images (left) and the corresponding immunohistochemistry (IHC) validation of HMOX1 and MSR1 (right) in SNL lung sections.",
+                "Representative ICG fluorescence images (left) and the corresponding immunohistochemistry (IHC) validation of HMOX1 and MSR1 (right) in SNL lung sections.",
+                "Representative ICG fluorescence images (left) and the corresponding immunohistochemistry (IHC) validation of HMOX1 and MSR1 (right) in SNL lung sections.",
+                "Scale bar, 500\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+            ]
+        }
+    ]
+}

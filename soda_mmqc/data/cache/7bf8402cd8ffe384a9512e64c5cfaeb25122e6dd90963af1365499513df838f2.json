@@ -1,0 +1,67 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "yes",
+        "discrepancies": "Provided source images correspond to the three immunoblots shown in panel A (anti-Acet-K IP:cGAS, anti-cGAS IP:cGAS, and Input anti-cGAS). Lane count and relative band pattern/intensity across the six experimental lanes (NAM 0,4,8 and DMSO 0,4,8) are consistent between the source images and the figure panel. The source images show molecular-weight marker bands at the sides and the full uncropped lanes; the figure panels are cropped and contrast-adjusted in a manner consistent with normal presentation. No evidence of inconsistent lane rearrangement was observed."
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel B were provided, so match cannot be determined."
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel C were provided, so match cannot be determined."
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel D were provided, so match cannot be determined."
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel E were provided, so match cannot be determined."
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel F were provided, so match cannot be determined."
+      },
+      {
+        "panel_label": "I",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel I were provided, so match cannot be determined."
+      },
+      {
+        "panel_label": "J",
+        "is_western_blot": "TRUE",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files corresponding to panel J were provided, so match cannot be determined."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "A10.1038_s44319-026-00708-5",
+    "source": "A10.1038_s44319-026-00708-5/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0ecaf8da509dbc460069947ff8e71c819790b5215800b89891",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 5398,
+      "output_tokens": 1601
+    },
+    "status": "completed",
+    "cached_at": "2026-02-17T15:49:44.131689"
+  }
+}

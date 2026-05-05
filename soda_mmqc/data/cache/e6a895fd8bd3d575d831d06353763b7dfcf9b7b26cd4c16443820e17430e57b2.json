@@ -1,0 +1,39 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (uncropped/raw blot images or scans) were provided for Figure 4A, so I cannot verify whether the presented anti-HIPK2, anti-MeCP2, anti-S80P and anti-actin blots match their source data."
+      },
+      {
+        "panel_label": "B",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (uncropped/raw blot images or scans) were provided for Figure 4B, so I cannot verify whether the presented anti-HIPK2, anti-MeCP2, anti-S80P and anti-actin blots match their source data."
+      },
+      {
+        "panel_label": "C",
+        "source_data_matches_figure": "not_applicable",
+        "discrepancies": ""
+      },
+      {
+        "panel_label": "D",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (uncropped/raw blot images or scans) were provided for Figure 4D, so I cannot verify whether the presented anti-HIPK2, anti-MeCP2 and anti-actin blots match their source data."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_embor.2009.217",
+    "source": "10.1038_embor.2009.217/content/4",
+    "example_type": "figure",
+    "response_id": "resp_01f63246eae8c21a006992e35ddd2881979cec7927021c3a3c",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 1848,
+      "output_tokens": 727
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:29:08.605073"
+  }
+}

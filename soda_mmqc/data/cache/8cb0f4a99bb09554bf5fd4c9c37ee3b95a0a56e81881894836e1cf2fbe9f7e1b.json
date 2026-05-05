@@ -1,0 +1,83 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "unpaired two-tailed student’s t-test (A, C, D)"
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "one-way ANOVA (B)"
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "unpaired two-tailed student’s t-test (A, C, D)"
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "unpaired two-tailed student’s t-test (A, C, D)"
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "log-rank test (E–H)"
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "log-rank test (E–H)"
+      },
+      {
+        "panel_label": "G",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "log-rank test (E–H)"
+      },
+      {
+        "panel_label": "H",
+        "is_a_plot": "yes",
+        "statistical_test_needed": "yes",
+        "statistical_test_mentioned": "yes",
+        "justify_why_test_is_missing": "",
+        "from_the_caption": "log-rank test (E–H)"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_020e456512070da1006992e65dbd148195adbeaa8a774acf5f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2881,
+      "output_tokens": 1441
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:42:05.198527"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "B",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "C",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "D",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "E",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "F",
+        "is_western_blot": "FALSE",
+        "bands": []
+      },
+      {
+        "panel_label": "G",
+        "is_western_blot": "TRUE",
+        "bands": [
+          {
+            "protein_or_band_label": "NANOG",
+            "source_data_filename": "sourceData_fig.1G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "Uncropped source image contains the NANOG blot with a band in the Ctrl lane and loss in the Nanog-/- lane; the band shape, relative position, and absence in KO match the figure (cropped/dashed box in figure corresponds to region in the source file)."
+          },
+          {
+            "protein_or_band_label": "OCT4",
+            "source_data_filename": "sourceData_fig.1G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "OCT4 bands are present in both Ctrl and Nanog-/- lanes in the uncropped source image and match the cropped panel in the figure in position and intensity pattern (figure shows cropped region from the same blot)."
+          },
+          {
+            "protein_or_band_label": "SOX2",
+            "source_data_filename": "sourceData_fig.1G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "SOX2 strong bands in both lanes are visible in the uncropped source image and correspond to the cropped SOX2 panel in the figure (matching shape, relative intensity and lane order)."
+          },
+          {
+            "protein_or_band_label": "TBX3",
+            "source_data_filename": "sourceData_fig.1G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "TBX3 blot in the source file shows the same two lanes with the Nanog-/- lane appearing stronger, consistent with the figure; band position and relative intensity match the presented panel."
+          },
+          {
+            "protein_or_band_label": "β-ACTIN",
+            "source_data_filename": "sourceData_fig.1G.jpg",
+            "source_data_status": "Source data found",
+            "source_data_matches_figure": "yes",
+            "western_blot_matching_result": "The β-ACTIN loading control is present in the uncropped source image (separate region at right) and the bands and lane pattern match the β-ACTIN panel shown in the figure after cropping."
+          }
+        ]
+      },
+      {
+        "panel_label": "H",
+        "is_western_blot": "FALSE",
+        "bands": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-026-00707-6-wbpos",
+    "source": "10.1038_s44319-026-00707-6-wbpos/content/1",
+    "example_type": "figure",
+    "tables": "",
+    "response_id": "resp_094523f6410675b40069a6f7dfa41881939d2124a087be8a8b",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 6653,
+      "output_tokens": 1514
+    },
+    "status": "completed",
+    "cached_at": "2026-03-03T16:02:14.578822"
+  }
+}

@@ -8,6 +8,31 @@ import argparse
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY
+# Load environment variables from .env when available
+import os
+try:
+    from dotenv import load_dotenv
+    try:
+        load_dotenv()
+    except Exception:
+        # ignore loading errors; env may already be set in the environment
+        pass
+except Exception:
+    # python-dotenv not installed, rely on os.environ
+    pass
+# Optional Langfuse SDK integration for fetching prompts
+try:
+    if not os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        # No public key configured; skip importing Langfuse entirely
+        langfuse_client = None
+    else:
+        from langfuse import get_client as _get_langfuse_client
+        try:
+            langfuse_client = _get_langfuse_client()
+        except Exception:
+            langfuse_client = None
+except Exception:
+    langfuse_client = None
 
 # Set page config for wider layout
 st.set_page_config(
@@ -182,12 +207,51 @@ def load_checklist(checklist_dir):
                 with open(benchmark_path, "r") as f:
                     checklist[check_dir.name]["benchmark"] = json.load(f)
             # load the prompts
-            prompts_dir = check_dir / "prompts" 
+            prompts_dir = check_dir / "prompts"
             checklist[check_dir.name]["prompts"] = {}  # Initialize prompts dictionary
-            if prompts_dir.exists():
-                for prompt_file in prompts_dir.glob("*.txt"):
-                    with open(prompt_file, "r") as f:
-                        checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
+            # if prompts_dir.exists():
+            #     for prompt_file in prompts_dir.glob("*.txt"):
+            #         with open(prompt_file, "r", encoding="utf-8") as f:
+            #             checklist[check_dir.name]["prompts"][prompt_file.name] = f.read()
+            # else:
+            # Fetch prompt from Langfuse SDK or fall back to local prompt files.
+            # The Langfuse prompt key will be: "checklists/{checklist_name}/{check_name}"
+            # where checklist_name is the parent checklist directory name (e.g., 'doc-checklist')
+            if langfuse_client is None:
+                # Load from local prompt.txt or prompts/prompt*.txt
+                _prompt_txt = check_dir / "prompt.txt"
+                _prompts_dir = check_dir / "prompts"
+                if _prompt_txt.exists():
+                    try:
+                        with open(_prompt_txt, "r", encoding="utf-8") as f:
+                            checklist[check_dir.name]["prompts"]["prompt.txt"] = f.read()
+                    except Exception as e:
+                        logger.warning(f"Failed to load {_prompt_txt}: {e}")
+                elif _prompts_dir.exists():
+                    for _pf in sorted(_prompts_dir.glob("prompt*.txt")):
+                        try:
+                            with open(_pf, "r", encoding="utf-8") as f:
+                                checklist[check_dir.name]["prompts"][_pf.name] = f.read()
+                        except Exception as e:
+                            logger.warning(f"Failed to load {_pf}: {e}")
+            else:
+                try:
+                    # Build the prompt key using the checklist directory name and the check name
+                    checklist_name = checklist_dir.name if hasattr(checklist_dir, "name") else str(checklist_dir)
+                    prompt_key = f"checklists/{checklist_name}/{check_dir.name}"
+                    logger.info(f"Langfuse: fetching prompt for key={prompt_key}")
+                    # `get_prompt` returns the production prompt (string) per user instructions
+                    prompt_text = langfuse_client.get_prompt(prompt_key)
+                    if prompt_text:
+                        # Use a filename derived from the check name as before
+                        prompt_filename = f"{check_dir.name}.txt"
+                        checklist[check_dir.name]["prompts"][prompt_filename] = prompt_text.name
+                except Exception as e:
+                    logger.info(f"Langfuse prompt fetch skipped or failed for {check_dir.name}: {e}")
+                    try:
+                        st.warning(f"Could not load prompts from Langfuse for {check_dir.name}: {e}")
+                    except Exception:
+                        pass
     return checklist
    
 

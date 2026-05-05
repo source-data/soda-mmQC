@@ -1,0 +1,33 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_micrograph": "yes",
+        "is_a_nummerical_data_plot": "no",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      },
+      {
+        "panel_label": "B",
+        "is_a_micrograph": "no",
+        "is_a_nummerical_data_plot": "yes",
+        "is_a_scheme": "no",
+        "is_mixed": "no"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_emboj.2009.340",
+    "source": "10.1038_emboj.2009.340/content/3",
+    "example_type": "figure",
+    "response_id": "resp_0d5ac08eb236d612006992e8e701f08196adf2b8bc8590d99f",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2023,
+      "output_tokens": 473
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:52:44.748767"
+  }
+}

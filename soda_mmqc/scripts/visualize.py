@@ -9,7 +9,16 @@ from soda_mmqc.config import (
     EVALUATION_DIR,
 )
 from soda_mmqc import logger
-from typing import Dict, Any
+from typing import Dict, Any, Optional
+
+# Color palette for prompt series (used in checklist and check visualizations).
+# Paul Tol "Muted" – harmonious, colourblind-friendly, works on dark and light (see https://personal.sron.nl/~pault/).
+# Alternatives: px.colors.qualitative.Plotly, Dark2, Set2, Antique, Vivid, Set1.
+TOL_MUTED = [
+    "#332288", "#88CCEE", "#44AA99", "#117733", "#999933",
+    "#DDCC77", "#CC6677", "#882255", "#AA4499",
+]
+PROMPT_PALETTE = TOL_MUTED
 
 
 def load_schema(checklist_name, check_name):
@@ -109,6 +118,41 @@ def data_to_tabular(analysis, doc_id, item_id, aggregation_level, metric, prompt
     return data_points
 
 
+def normalize_prompt_name(prompt_name: str) -> str:
+    """Normalize prompt names to the format 'prompt.1', 'prompt.2', etc.
+    
+    Converts formats like 'error-bars-defined::version::0' to 'prompt.1',
+    'error-bars-defined::version::1' to 'prompt.2', etc.
+    
+    Args:
+        prompt_name: Original prompt name from analysis file
+        
+    Returns:
+        Normalized prompt name in format 'prompt.N'
+    """
+    # If already in the correct format, return as-is
+    if prompt_name.startswith('prompt.'):
+        return prompt_name
+    
+    # Extract version number from patterns like 'check-name::version::N'
+    if '::version::' in prompt_name:
+        try:
+            version_num = int(prompt_name.split('::version::')[-1])
+            return f'prompt.{version_num + 1}'  # Convert 0-indexed to 1-indexed
+        except (ValueError, IndexError):
+            pass
+    
+    # If we can't parse it, try to extract any trailing number
+    import re
+    match = re.search(r'(\d+)$', prompt_name)
+    if match:
+        return f'prompt.{int(match.group(1)) + 1}'
+    
+    # Default fallback: use the original name
+    logger.warning(f"Could not normalize prompt name: {prompt_name}, using as-is")
+    return prompt_name
+
+
 def prepare_data_for_plotting(
     results_by_prompt: Dict[str, Any]
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -124,10 +168,18 @@ def prepare_data_for_plotting(
 
     # Create a list to store all data points
     tabular_data = []
+    
+    # If there's only one prompt, always assign it to 'prompt.1'
+    if len(results_by_prompt) == 1:
+        single_prompt_name = list(results_by_prompt.keys())[0]
+        if single_prompt_name != 'prompt.1':
+            results_by_prompt = {'prompt.1': results_by_prompt[single_prompt_name]}
     tabular_metadata = []
 
     for prompt_name, prompt_results in results_by_prompt.items():
-        logger.debug(f"Processing prompt: {prompt_name}")
+        # Normalize the prompt name to ensure consistent format
+        normalized_prompt_name = normalize_prompt_name(prompt_name)
+        logger.debug(f"Processing prompt: {prompt_name} -> {normalized_prompt_name}")
         
         # Expect nested structure: {metric_name: [results]}
         if not isinstance(prompt_results, dict):
@@ -145,7 +197,7 @@ def prepare_data_for_plotting(
                     item_id=document['doc_id'],
                     aggregation_level=0,
                     metric=metric_name,
-                    prompt_name=prompt_name
+                    prompt_name=normalized_prompt_name
                 )
                 tabular_data.extend(new_rows)
                 tabular_metadata.append(metadata)
@@ -197,11 +249,44 @@ def get_check_data(checklist_name, check_name, model) -> tuple[pd.DataFrame | No
     """
 
     analysis_file = EVALUATION_DIR / checklist_name / check_name / model / 'analysis.json'
-    if analysis_file.exists():
-        with open(analysis_file, 'r') as f:
-            results = json.load(f)
-    else:
+    if not analysis_file.exists():
         logger.warning(f"Does not exist: {str(analysis_file)}")
+        return None, None
+
+    def safe_load_json(path: Path) -> Optional[dict]:
+        """Load JSON trying several encodings to avoid UnicodeDecodeError on Windows.
+
+        Tries in order: utf-8, utf-8-sig, cp1252, latin-1. If decoding succeeds
+        but JSON parsing fails, the JSONDecodeError is raised. As a last-resort
+        the file is decoded with errors='replace' and parsed again.
+        """
+        encodings = ['utf-8', 'utf-8-sig', 'cp1252', 'latin-1']
+        for enc in encodings:
+            try:
+                with open(path, 'r', encoding=enc) as f:
+                    logger.debug(f"Loading JSON {path} with encoding={enc}")
+                    return json.load(f)
+            except UnicodeDecodeError:
+                logger.debug(f"Encoding {enc} failed for {path}, trying next")
+                continue
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON decode error when reading {path} with encoding={enc}: {e}")
+                raise
+
+        # Last resort: read as binary and replace invalid chars, then parse
+        try:
+            with open(path, 'rb') as f:
+                raw = f.read()
+            text = raw.decode('utf-8', errors='replace')
+            logger.debug(f"Loaded {path} with replacement decoding as last resort")
+            return json.loads(text)
+        except Exception as e:
+            logger.error(f"Failed to load JSON file {path}: {e}")
+            return None
+
+    results = safe_load_json(analysis_file)
+    if results is None:
+        logger.warning(f"Failed to parse analysis file: {analysis_file}")
         return None, None
 
     try:
@@ -225,7 +310,8 @@ def checklist_visualization(
     output_dir=None,
     metric="semantic_similarity",
     score="score",
-    aggregation_level=0
+    aggregation_level=0,
+    checks=None
 ):
     """Create a comprehensive visualization of all checks in a checklist.
     
@@ -233,10 +319,14 @@ def checklist_visualization(
         checklist_name: Name of the checklist (e.g., 'mini')
         output_dir: Directory to save the output file
         metric: Metric to visualize
+        checks: Optional list of check names to include, in desired order. If None, all checks are used.
     """
-    # Get all checks for this checklist
- 
-    checks = get_checks_for_checklist(checklist_name)
+    # Get checks for this checklist (all, or the requested subset in order)
+    all_checks = get_checks_for_checklist(checklist_name)
+    if checks is not None:
+        checks = [c for c in checks if c in all_checks]
+    else:
+        checks = all_checks
 
     if not checks:
         logger.warning(f"No checks found for checklist: {checklist_name}")
@@ -264,13 +354,15 @@ def checklist_visualization(
         return
 
     prompts = list(df_data['prompt'].unique())
-    checks = list(df_data['check'].unique())
+    # Preserve order: use requested checks list restricted to those present in data
+    checks_in_data = df_data['check'].unique()
+    checks = [c for c in checks if c in checks_in_data]
     
     # Create a global mapping from check names to positions
     global_check_to_num = {check: j for j, check in enumerate(checks)}
     
     color_map = {
-        p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)]
+        p: PROMPT_PALETTE[i % len(PROMPT_PALETTE)]
         for i, p in enumerate(prompts)
     }
     
@@ -337,18 +429,18 @@ def checklist_visualization(
             mode='markers',
             name=prompt,
             marker=dict(
-                color="white",  #color_map[prompt],
-                size=10,
-                opacity=0.4,
-                line=dict(width=0, color='white')
+                color="white",
+                size=4,
+                opacity=0.6,
+                line=dict(width=0, color='white'),
             ),
             showlegend=True,
             hovertext=plotting_item_data['item_id']
         ))
 
     plot.update_layout(
-        width=1000,
-        height=600,
+        width=2400,
+        height=1200,
         title=dict(
             text=f'Benchmarking of "{checklist_name.title()}"<br>'
             f'<span style="font-size: 0.5em; color: #888;">Comparing values with {metric.replace("_", " ")}</span><br>'
@@ -368,7 +460,8 @@ def checklist_visualization(
         ),
         yaxis=dict(
             title='Score',
-            range=[0, 1.1]  # Adjusted range since scores are typically between 0 and 1
+            range=[0, 1.1],  # Adjusted range since scores are typically between 0 and 1
+            dtick=0.1  # Set tick increment to 0.1
         ),
         barmode='group',
         # boxmode='group',  # This ensures boxes are grouped by check
@@ -414,7 +507,7 @@ def check_visualization(
         return
     
     prompts = list(df_data['prompt'].unique())
-    color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
+    color_map = {p: PROMPT_PALETTE[i % len(PROMPT_PALETTE)] for i, p in enumerate(prompts)}
     
     plot = go.Figure()
     
@@ -448,7 +541,7 @@ def check_visualization(
             mode='markers',
             marker=dict(
                 color="white",
-                size=5,
+                size=3,
                 opacity=0.4,
                 line=dict(width=0, color='white')
             ),
@@ -513,6 +606,189 @@ def check_visualization(
         output_path = Path(output_dir) / f'{check_name}_{score}_{metric}_analysis.html'
         plot.write_html(str(output_path))
         logger.info(f"Visualization for {score} saved to {output_path}")
+
+    return plot, df_data, df_metadata
+
+def check_visualization_with_similarity_dict(
+    checklist_name,
+    check_name,
+    model,
+    similarity_dict: Optional[Dict[str, Any]] = None,
+    output_dir=None,
+    score: str = "score",
+    aggregation_level=1,
+    default_metric: str = "semantic_similarity",
+):
+    """Create a visualization of a specific check using a similarity dict that
+    maps each sub-check/field to the metric that should be used for that field.
+
+    Args:
+        checklist_name: Name of the checklist (e.g., 'mini')
+        check_name: Name of the check (e.g., 'error-bars-defined')
+        model: Model name (folder under check evaluation)
+        similarity_dict: Dictionary mapping check_name -> { 'main-check': ..., 'subchecks': { field: metric } }
+        output_dir: Directory to save the output file
+        score: Which score column to visualize (default: 'score')
+        aggregation_level: Aggregation level to plot for sub-fields
+        default_metric: Fallback metric to use if a field is not present in the dict
+    """
+
+    df_data, df_metadata = get_check_data(checklist_name, check_name, model)
+    if df_data is None:
+        logger.warning(f"No data found for check {check_name}")
+        return
+
+    if similarity_dict is None:
+        logger.warning("No similarity dictionary provided; nothing to plot")
+        return
+
+    # Build mapping of field -> metric for this check
+    check_entry = similarity_dict.get(check_name, {}) if isinstance(similarity_dict, dict) else {}
+    subchecks_mapping = check_entry.get('subchecks', {}) if isinstance(check_entry, dict) else {}
+
+    prompts = list(df_data['prompt'].unique())
+    color_map = {p: px.colors.qualitative.Set1[i % len(px.colors.qualitative.Set1)] for i, p in enumerate(prompts)}
+
+    plot = go.Figure()
+
+    # Determine fields present in the data for the chosen aggregation level
+    fields = list(df_data.loc[
+        (df_data['aggregation_level'] == aggregation_level) &
+        (df_data['field'] != 'all_fields_aggregated'),
+        'field'
+    ].unique())
+    
+    if not fields or len(fields) == 0:
+        logger.warning("No sub-field level data found for plotting. Setting the aggregation level to 0 to plot overall scores instead.")
+        aggregation_level = 0
+        fields = list(df_data.loc[
+            (df_data['aggregation_level'] == aggregation_level) &
+            (df_data['field'] != 'all_fields_aggregated'),
+            'field'
+        ].unique())
+
+    # Maintain order for ticks
+    fields = list(fields)
+    field_to_num = {field: j for j, field in enumerate(fields)}
+
+    for i, prompt in enumerate(prompts):
+        logger.info(f"Creating plot ({prompt}) using similarity dict for {check_name}...")
+        offset_width = 1 / (len(prompts) + 1)
+        x_offset = (i - (len(prompts) - 1) / 2) * offset_width
+
+        # containers for scatter (individual points) aggregated across fields
+        all_x = []
+        all_y = []
+        all_hover = []
+
+        # containers for bar (average + std) per field in order
+        avg_x = []
+        avg_y = []
+        avg_err = []
+        avg_hover = []
+
+        for field in fields:
+            # pick the metric for this field according to similarity_dict
+            metric_for_field = subchecks_mapping.get(field, default_metric)
+
+            item_data = df_data.loc[
+                (df_data['prompt'] == prompt) &
+                (df_data['metric'] == metric_for_field) &
+                (df_data['field'] == field) &
+                (df_data['aggregation_level'] == aggregation_level)
+            ]
+
+            if item_data.empty:
+                # skip fields that have no data for the chosen metric
+                continue
+
+            # jittered x positions for individual points
+            jitter = np.random.normal(0, 0.04, size=len(item_data))
+            x_scattered_positions = [field_to_num[field] + x_offset + j for j in jitter]
+
+            all_x.extend(x_scattered_positions)
+            all_y.extend(item_data[score].tolist())
+            all_hover.extend(item_data['item_id'].tolist())
+
+            # average and std for bar
+            avg_val = item_data[score].mean()
+            std_val = item_data[score].std() if len(item_data) > 1 else 0.0
+            avg_x.append(field_to_num[field] + x_offset)
+            avg_y.append(avg_val)
+            avg_err.append(std_val)
+            avg_hover.append(f"Field: {field}<br>Metric: {metric_for_field}")
+
+        # add scatter trace for this prompt
+        if all_x and all_y:
+            plot.add_trace(go.Scatter(
+                x=all_x,
+                y=all_y,
+                mode='markers',
+                name=prompt,
+                marker=dict(
+                    color="white",
+                    size=5,
+                    opacity=0.4,
+                    line=dict(width=0, color='white')
+                ),
+                showlegend=True,
+                hovertext=all_hover
+            ))
+
+        # add bar trace for averages
+        if avg_x and avg_y:
+            plot.add_trace(go.Bar(
+                x=avg_x,
+                y=avg_y,
+                name=prompt,
+                error_y=dict(
+                    type='data',
+                    array=avg_err,
+                    visible=True,
+                    color='grey',
+                    thickness=1,
+                    width=3
+                ),
+                marker_color=color_map[prompt],
+                showlegend=True,
+                width=offset_width,
+                hovertext=avg_hover
+            ))
+
+    # Format num_points string (based on available points for the last prompt iteration)
+    try:
+        num_points_series = df_data.loc[
+            (df_data['aggregation_level'] == aggregation_level) &
+            (df_data['field'] != 'all_fields_aggregated'), 'item_id'
+        ].groupby(df_data['field']).count()
+        min_points = int(num_points_series.min())
+        max_points = int(num_points_series.max())
+        num_points_str = str(min_points) if min_points == max_points else f"{min_points} - {max_points}"
+    except Exception:
+        num_points_str = "-"
+
+    plot.update_layout(
+        width=800,
+        height=600,
+        title=f'{score.replace("_", " ")} for {check_name.replace("_", " ")} (n={num_points_str})<br>'
+        f'<span style="font-size: 0.8em; color: #888;">Using per-field metrics from similarity dict</span>',
+        xaxis=dict(
+            title='Fields',
+            tickangle=45,
+            ticktext=fields,
+            tickvals=list(range(len(fields))),
+            range=[-0.5, len(fields) - 0.5]
+        ),
+        yaxis_title=f'{score.replace("_", " ")}',
+        boxmode='group',
+        showlegend=True,
+        template='plotly_dark'
+    )
+
+    if output_dir:
+        output_path = Path(output_dir) / f'{check_name}_{score}_by_similarity_dict.html'
+        plot.write_html(str(output_path))
+        logger.info(f"Visualization saved to {output_path}")
 
     return plot, df_data, df_metadata
 

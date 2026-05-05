@@ -1,0 +1,29 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "F",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Panel F shows immunoblots labeled IB: HDAC6 (~150 kDa) and IB: GAPDH (~40 kDa) comparing Healthy and BK (P. aeruginosa) corneas. No source data (uncropped/raw blot images or original scan files) were provided with this task, so I cannot compare lanes, band intensity, cropping, or any splicing to verify that the presented cropped blot matches the original data."
+      },
+      {
+        "panel_label": "H",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "Panel H shows immunoblots labeled IB: GFP (~150 kDa) and IB: GAPDH (~40 kDa) comparing GFP and GFP-HDAC6 samples. No source data (uncropped/raw blot images or original scan files) were provided with this task, so I cannot confirm that the displayed blot panels accurately reflect the original scans, nor assess cropping, lane order, or splicing."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44319-025-00438-0",
+    "source": "10.1038_s44319-025-00438-0/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0a9acd7d064e30d1006992e3539cdc8197b029862a013cf5d4",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3217,
+      "output_tokens": 743
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:29:01.421346"
+  }
+}

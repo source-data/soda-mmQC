@@ -1,0 +1,24 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "C",
+        "source_data_matches_figure": "cannot_determine",
+        "discrepancies": "No source data files (uncropped blots or raw scans) were provided for comparison. Panel C shows western blots (Ubiquitin, 1C2, αTubulin) in the figure, but without the corresponding source data I cannot verify whether the bands, lanes, cropping, or any splicing/reordering match the provided figure."
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/1",
+    "example_type": "figure",
+    "response_id": "resp_04e43eaff8e7ed58006992fc5c3ae081a0b591f15139da528a",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3119,
+      "output_tokens": 450
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T12:15:45.408486"
+  }
+}

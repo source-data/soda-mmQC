@@ -1,0 +1,161 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Promoters were binned based on their log2 Pol II ChIP-seq signal (i.e., x-axis is log2 Pol II ChIP-seq enrichment; binned)"
+          },
+          {
+            "axis": "y",
+            "definition": "State frequency (%) (percent, shown on the y-axis)"
+          }
+        ]
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Position relative to TSS (bp) — base pairs from the transcription start site (shown on the x-axis)"
+          },
+          {
+            "axis": "y",
+            "definition": "Number of single DNA molecules (each row is a molecule); example label shows '2952 molecules'"
+          }
+        ]
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Promoters were binned based on their log2 Pol II ChIP-seq signal (i.e., x-axis is log2 Pol II ChIP-seq enrichment; binned)"
+          },
+          {
+            "axis": "y",
+            "definition": "State frequency (%) (percent, shown on the y-axis)"
+          }
+        ]
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "yes"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "x",
+            "definition": "Position relative to TSS (bp) — base pairs from the transcription start site (shown on the x-axis)"
+          },
+          {
+            "axis": "y",
+            "definition": "Number of single DNA molecules (each row is a molecule); example label shows '2871 molecules'"
+          }
+        ]
+      },
+      {
+        "panel_label": "E",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "PIC occupancy (%) (percent; y-axis labeled with %)"
+          }
+        ]
+      },
+      {
+        "panel_label": "F",
+        "is_a_plot": "yes",
+        "units_provided": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "yes"
+          }
+        ],
+        "justify_why_units_are_missing": [],
+        "unit_definition_as_provided": [
+          {
+            "axis": "y",
+            "definition": "Pol II occupancy (%) (percent; y-axis labeled with %)"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44320-025-00094-5",
+    "source": "10.1038_s44320-025-00094-5/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0d19b568d9cf40fa006992ed51506081a2889b7e0f6635df26",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4081,
+      "output_tokens": 2271
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:11:50.941736"
+  }
+}

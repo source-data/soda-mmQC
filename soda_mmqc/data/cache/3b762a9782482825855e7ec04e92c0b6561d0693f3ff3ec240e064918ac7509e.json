@@ -1,0 +1,56 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "is_a_plot": "yes",
+        "gaps_defined": [
+          {
+            "axis": "x",
+            "answer": "not needed"
+          },
+          {
+            "axis": "y",
+            "answer": "not needed"
+          }
+        ],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "B",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "C",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      },
+      {
+        "panel_label": "D",
+        "is_a_plot": "no",
+        "gaps_defined": [],
+        "gap_description": [],
+        "justify_why_gaps_are_missing": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201404392",
+    "source": "10.15252_emmm.201404392/content/2",
+    "example_type": "figure",
+    "response_id": "resp_0ac9cc84b2381e4b006992e2d84ea8819d81756dfc95d1893d",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 4019,
+      "output_tokens": 733
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T10:26:55.498235"
+  }
+}

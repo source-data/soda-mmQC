@@ -1,5 +1,5 @@
 # This application
-# cache/
+cache/
 miscdoc/
 src/
 
@@ -13,6 +13,8 @@ __pycache__/
 logs/
 *.log
 
+# UV lock files
+uv.lock
 
 # Distribution / packaging
 .Python
@@ -124,3 +126,4 @@ runs/
 # MAC
 .DS_Store
 node_modules
+uv.lock

@@ -18,7 +18,6 @@ The following is an example of how to format a data availability statement:
 
 Data availability
 
-
 The datasets and computer code produced in this study are available in the following databases:
 
 RNA-Seq data: Gene Expression Omnibus GSE46843 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE46843)
@@ -33,7 +32,7 @@ If the study does not include datasets, the DAS still has to be present and shou
 ## 3. Check DAS is positioned correctly. 
 
 The DAS must follow directly the Material and Methods section of the manuscript. 
-Please make check if the DAS is in the correct position of the manuscript.
+Please check if the DAS is in the correct position of the manuscript.
 
 ## 4. Return your answers in the following format
 

@@ -1,0 +1,79 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "B",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "C",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "D",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "E",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "F",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "G",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      },
+      {
+        "panel_label": "H",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "I",
+        "plot": "yes",
+        "average_values": "yes",
+        "individual_values": "no"
+      },
+      {
+        "panel_label": "J",
+        "plot": "no",
+        "average_values": "no",
+        "individual_values": "not needed"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.15252_emmm.201606261",
+    "source": "10.15252_emmm.201606261/content/5",
+    "example_type": "figure",
+    "response_id": "resp_01bbcccf2d99868a006992ec527ac8819fbdb6c9aa6a758ec8",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2834,
+      "output_tokens": 478
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:07:20.625204"
+  }
+}

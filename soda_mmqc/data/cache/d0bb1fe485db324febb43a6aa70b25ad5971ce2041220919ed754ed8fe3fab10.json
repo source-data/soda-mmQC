@@ -1,0 +1,41 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "source_data_filenames": [
+          "3AB_diff_expression.csv"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "source_data_filenames": [
+          "3AB_diff_expression.csv"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "source_data_filenames": []
+      },
+      {
+        "panel_label": "D",
+        "source_data_filenames": []
+      }
+    ],
+    "not_mappable": []
+  },
+  "metadata": {
+    "doc_id": "D4R_10.1038_s44318-026-00697-0",
+    "source": "D4R_10.1038_s44318-026-00697-0/content/3",
+    "example_type": "figure",
+    "tables": "source_data:3AB_diff_expression.csv; source_data:3AB_diff_expression.csv",
+    "response_id": "resp_0012bf9ec457f4980069a5796b7ea08194b79de6e62a736b29",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 3165,
+      "output_tokens": 376
+    },
+    "status": "completed",
+    "cached_at": "2026-03-02T12:50:09.700193"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A"
+      },
+      {
+        "panel_label": "B"
+      },
+      {
+        "panel_label": "C"
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "D4R_0_1101_2024_09_03_611032",
+    "source": "D4R_0_1101_2024_09_03_611032/content/1",
+    "example_type": "figure",
+    "response_id": "resp_0e468b897fbc8edd006995d91694ac819084ebea7603dfb808",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 940,
+      "output_tokens": 211
+    },
+    "status": "completed",
+    "cached_at": "2026-02-18T16:22:02.695316"
+  }
+}

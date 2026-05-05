@@ -1,0 +1,75 @@
+{
+  "data": {
+    "outputs": [
+      {
+        "panel_label": "A",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "B",
+        "involves_replicates": "yes",
+        "number_of_replicates": [
+          "three"
+        ],
+        "type_of_replicates": [
+          "biological replicates"
+        ]
+      },
+      {
+        "panel_label": "C",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "D",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "E",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "F",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "G",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      },
+      {
+        "panel_label": "H",
+        "involves_replicates": "no",
+        "number_of_replicates": [],
+        "type_of_replicates": []
+      }
+    ]
+  },
+  "metadata": {
+    "doc_id": "10.1038_s44318-025-00416-1",
+    "source": "10.1038_s44318-025-00416-1/content/8",
+    "example_type": "figure",
+    "response_id": "resp_0293bf054b4344a9006992f6289bf0819f98682737dd301273",
+    "model": "gpt-5-mini-2025-08-07",
+    "usage": {
+      "input_tokens": 2743,
+      "output_tokens": 919
+    },
+    "status": "completed",
+    "cached_at": "2026-02-16T11:49:23.191964"
+  }
+}

@@ -1,0 +1,275 @@
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "GFP+ (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Distance (µm)  (listed in source data as Distance_(microns))"
+                },
+                {
+                    "axis": "y",
+                    "definition": "Intensity (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Fluorescence intensity (A.U.)"
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Fluorescence intensity (A.U.)"
+                }
+            ]
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Distance (µm)  (listed in source data as Distance_(microns))"
+                },
+                {
+                    "axis": "y",
+                    "definition": "Intensity (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "GFP+ (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "GFP+ (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "GFP+ (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "I",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Inhibition zone (%)"
+                }
+            ]
+        },
+        {
+            "panel_label": "J",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "K",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Fluorescence intensity (A.U.)"
+                }
+            ]
+        },
+        {
+            "panel_label": "L",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Fluorescence intensity (A.U.)"
+                }
+            ]
+        },
+        {
+            "panel_label": "M",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Days (time; axis labeled with day values)"
+                },
+                {
+                    "axis": "y",
+                    "definition": "McFarland units (turbidity measurements) — from caption: \"evaluated by turbidity measurements (McFarland units)\""
+                }
+            ]
+        }
+    ]
+}

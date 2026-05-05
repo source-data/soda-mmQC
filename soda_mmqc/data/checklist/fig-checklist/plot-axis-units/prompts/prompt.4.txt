@@ -8,6 +8,10 @@ Proceed step-by-step and establish a systematic strategy to be very accurate and
 ## 1. Identify all figure panels
 Understand the figure image and see where there are figure sub-part or "panels". Each panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Panels are typically labeled with consecutive letters (for example: A, B, C, ... or (a), (b), (c)). The first panel is usually on the top left. The last panel tends to be on the bottom right. Sometimes the layout is however a bit messy. Sometimes a panel can include several images. For example, a panel can include both a microscopy image and a plot. For each panel, locate the corresponding description in the figure caption.
 
+## 2. Determine if the panel is a quantitative plot
+For each panel in the figure:
+- Determine whether the panel is a plot of quantitative data with axes (XY or XYZ axes).
+- If, and only if, it is a quantitative plot with axes, proceed to check for units.
 
 ## 2. Provide your analysis in the following JSON format for EACH and EVERY panel:
 
