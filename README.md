@@ -128,6 +128,26 @@ The system validates your configuration on startup and provides helpful feedback
 
 For detailed configuration options, see the [API Provider Documentation](soda_mmqc/docs/api_providers.md).
 
+### Langfuse Integration (Optional)
+
+[Langfuse](https://langfuse.com) can be used for two purposes:
+
+1. **Remote prompt management** — fetch prompts from Langfuse instead of local `.txt` files. Prompts are looked up using the key `checklists/{checklist_name}/{check_name}`.
+2. **Tracing** — model calls are logged as Langfuse spans for observability.
+
+If `LANGFUSE_PUBLIC_KEY` is not set, the system silently falls back to local prompt files and tracing is disabled.
+
+Add the following to your `.env` file (or export as environment variables):
+
+```bash
+# Langfuse configuration (optional)
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+LANGFUSE_BASE_URL=https://cloud.langfuse.com  # omit to use the default Langfuse Cloud endpoint
+```
+
+Self-hosted Langfuse users should set `LANGFUSE_BASE_URL` to their own instance URL.
+
 ## Testing
 
 The project uses pytest for testing. Run tests with the virtual environment activated:
