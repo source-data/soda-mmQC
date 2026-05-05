@@ -165,6 +165,9 @@ evaluate CHECKLIST_NAME [--model MODEL_NAME] [--mock] [--no-cache] [--match-thre
 # Run a specific check in a checklist
 evaluate CHECKLIST_NAME --check CHECK_NAME [--model MODEL_NAME] [--mock] [--no-cache] [--match-threshold THRESHOLD]
 
+# Run multiple specific checks in a checklist
+evaluate CHECKLIST_NAME --checks CHECK_NAME_1 CHECK_NAME_2 [--model MODEL_NAME]
+
 # Initialize expected output files for a checklist
 init CHECKLIST_NAME [--no-cache]
 
@@ -177,8 +180,13 @@ Command line options:
 - `--mock`: Use expected outputs as model outputs (no API calls)
 - `--no-cache`: Disable caching of model outputs
 - `--check`: Specify a particular check to run within a checklist
+- `--checks`: Specify multiple checks to run within a checklist (space-separated)
 - `--initialize`: Initialize expected output files (alternative to `init` command)
 - `--match-threshold`: Set threshold for string matching across all metrics (default: 0.3)
+- `--sentence-transformer-model`: SentenceTransformer model to use for semantic similarity scoring
+- `--prompt-version`: Prompt version to run; accepts a version id/index or one of `production`, `latest`
+- `--config-from-version`: When `--prompt-version` is set, use that version's config instead of the production config
+- `--config-source-check`: Use the prompt config from this check (and the selected `--prompt-version`) for all selected checks
 
 **Note**: If no model is specified, the system automatically uses the default model for your configured API provider (see [Configuration](#configuration)).
 
