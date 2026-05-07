@@ -2,6 +2,7 @@
 cache/
 miscdoc/
 src/
+!mmqc_utils/src/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
