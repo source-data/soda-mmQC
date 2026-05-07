@@ -1,0 +1,27 @@
+{
+  "name": "plot-gap-labeling",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "gaps_defined": [],
+      "gap_description": [],
+      "justify_why_gaps_are_missing": []
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "no",
+      "gaps_defined": [],
+      "gap_description": [],
+      "justify_why_gaps_are_missing": []
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "no",
+      "gaps_defined": [],
+      "gap_description": [],
+      "justify_why_gaps_are_missing": []
+    }
+  ],
+  "updated_at": "2026-04-29 12:59:57"
+}

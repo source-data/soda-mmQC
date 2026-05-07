@@ -1,0 +1,79 @@
+{
+  "name": "micrograph-symbols-defined",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "micrograph": "no",
+      "symbols": [],
+      "symbols_defined_in_caption": [],
+      "from_the_caption": []
+    },
+    {
+      "panel_label": "B",
+      "micrograph": "no",
+      "symbols": [],
+      "symbols_defined_in_caption": [],
+      "from_the_caption": []
+    },
+    {
+      "panel_label": "C",
+      "micrograph": "yes",
+      "symbols": [
+        "white scale bar"
+      ],
+      "symbols_defined_in_caption": [
+        "yes"
+      ],
+      "from_the_caption": [
+        "Scale bar, 20 \u03bcm."
+      ]
+    },
+    {
+      "panel_label": "D",
+      "micrograph": "no",
+      "symbols": [],
+      "symbols_defined_in_caption": [],
+      "from_the_caption": []
+    },
+    {
+      "panel_label": "E",
+      "micrograph": "yes",
+      "symbols": [
+        "yellow traced line (wound boundary)",
+        "white scale bar"
+      ],
+      "symbols_defined_in_caption": [
+        "no",
+        "yes"
+      ],
+      "from_the_caption": [
+        "",
+        "Scale bars, 500 \u03bcm."
+      ]
+    },
+    {
+      "panel_label": "F",
+      "micrograph": "yes",
+      "symbols": [
+        "yellow traced line (wound boundary)",
+        "white scale bar"
+      ],
+      "symbols_defined_in_caption": [
+        "no",
+        "yes"
+      ],
+      "from_the_caption": [
+        "",
+        "Scale bars, 500 \u03bcm."
+      ]
+    },
+    {
+      "panel_label": "G",
+      "micrograph": "no",
+      "symbols": [],
+      "symbols_defined_in_caption": [],
+      "from_the_caption": []
+    }
+  ],
+  "updated_at": "2026-04-29 13:02:58"
+}

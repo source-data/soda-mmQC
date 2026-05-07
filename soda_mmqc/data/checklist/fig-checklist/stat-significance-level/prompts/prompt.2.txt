@@ -8,6 +8,7 @@ For each panel in the figure:
    - Direct p-values (e.g., "p<0.001")
 3. If significance indicators are present, verify if they're defined in the caption or the panel image
 4. If defined, extract the exact text describing the significance levels
+5. For each panel, add `Decision_and_explanation` as an array of short strings with your verdict (PASS, FAIL, or WARNING) and a brief rationale, or `[]` if not applicable
 
 Provide your analysis in this JSON format for each panel:
 
@@ -35,6 +36,9 @@ Provide your analysis in this JSON format for each panel:
                 "*P < 0.05",
                 "***P < 0.001",
                 "****P < 0.0001"
+            ],
+            "Decision_and_explanation": [
+                "PASS; all significance level symbols in the panel are defined in the image and/or caption."
             ]
         }
     ]

@@ -26,7 +26,8 @@
                 "not_needed",
                 "not_needed",
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "B",
@@ -34,7 +35,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
@@ -42,7 +44,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
@@ -50,7 +53,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         }
     ]
 }

@@ -1,0 +1,72 @@
+{
+    "name": "stat-significance-level",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "****",
+                "****"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "p < 0.0001 for Nup44A GKD",
+                "p < 0.0001 for lolal GKD"
+            ],
+            "Decision_and_explanation": []
+        }
+    ],
+    "updated_at": "2026-03-31 15:00:14"
+}

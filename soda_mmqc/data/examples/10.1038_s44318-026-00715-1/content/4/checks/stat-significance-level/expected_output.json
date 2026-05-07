@@ -18,7 +18,8 @@
             "from_the_caption": [
                 "",
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "B",
@@ -26,7 +27,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
@@ -46,7 +48,8 @@
             "from_the_caption": [
                 "****P < 0.0001",
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
@@ -70,7 +73,8 @@
                 "**P < 0.01",
                 "****P < 0.0001",
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "E",
@@ -78,7 +82,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "F",
@@ -94,7 +99,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "G",
@@ -110,7 +116,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "H",
@@ -126,7 +133,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "I",
@@ -142,7 +150,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "J",
@@ -150,7 +159,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "K",
@@ -166,7 +176,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "L",
@@ -182,7 +193,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "M",
@@ -190,7 +202,9 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 11:48:00"
 }

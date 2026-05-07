@@ -14,7 +14,8 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "B",
@@ -22,7 +23,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
@@ -30,7 +32,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
@@ -38,7 +41,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "E",
@@ -54,7 +58,8 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "F",
@@ -62,7 +67,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "G",
@@ -70,7 +76,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "H",
@@ -86,7 +93,8 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "I",
@@ -94,7 +102,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "J",
@@ -110,7 +119,8 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "K",
@@ -118,7 +128,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "L",
@@ -134,7 +145,8 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "M",
@@ -150,7 +162,8 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "N",
@@ -158,7 +171,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "O",
@@ -174,7 +188,9 @@
             ],
             "from_the_caption": [
                 "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+            ],
+            "Decision_and_explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-03-25 10:53:32"
 }

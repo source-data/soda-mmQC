@@ -22,7 +22,8 @@
                 "not_needed",
                 "not_needed",
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "B",
@@ -42,7 +43,8 @@
             "from_the_caption": [
                 "not_needed",
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
@@ -58,7 +60,8 @@
             ],
             "from_the_caption": [
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
@@ -74,7 +77,8 @@
             ],
             "from_the_caption": [
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "E",
@@ -90,7 +94,8 @@
             ],
             "from_the_caption": [
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "F",
@@ -106,7 +111,8 @@
             ],
             "from_the_caption": [
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "G",
@@ -122,7 +128,8 @@
             ],
             "from_the_caption": [
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "H",
@@ -138,7 +145,8 @@
             ],
             "from_the_caption": [
                 "not_needed"
-            ]
+            ],
+            "Decision_and_explanation": []
         }
     ],
     "updated_at": "2026-01-28 15:56:44"

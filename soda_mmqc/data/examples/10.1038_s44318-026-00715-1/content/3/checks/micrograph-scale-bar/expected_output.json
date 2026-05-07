@@ -2,20 +2,20 @@
     "outputs": [
         {
             "panel_label": "A",
-            "micrograph": "yes",
-            "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": "no",
+            "micrograph": "no",
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
             "from_the_caption": "",
-            "scale_bar_defined_in_image": "no",
+            "scale_bar_defined_in_image": "",
             "from_the_image": ""
         },
         {
             "panel_label": "B",
-            "micrograph": "yes",
-            "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": "no",
+            "micrograph": "no",
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
             "from_the_caption": "",
-            "scale_bar_defined_in_image": "no",
+            "scale_bar_defined_in_image": "",
             "from_the_image": ""
         },
         {
@@ -47,11 +47,11 @@
         },
         {
             "panel_label": "F",
-            "micrograph": "yes",
-            "scale_bar_on_image": "no",
-            "scale_bar_defined_in_caption": "no",
+            "micrograph": "no",
+            "scale_bar_on_image": "",
+            "scale_bar_defined_in_caption": "",
             "from_the_caption": "",
-            "scale_bar_defined_in_image": "no",
+            "scale_bar_defined_in_image": "",
             "from_the_image": ""
         },
         {
@@ -72,5 +72,6 @@
             "scale_bar_defined_in_image": "",
             "from_the_image": ""
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 11:31:52"
 }

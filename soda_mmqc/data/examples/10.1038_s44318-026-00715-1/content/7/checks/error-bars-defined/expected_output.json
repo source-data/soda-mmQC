@@ -10,7 +10,7 @@
             "panel_label": "B",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "mean ± SEM from biological replicates"
+            "from_the_caption": "mean ± SEM "
         },
         {
             "panel_label": "C",
@@ -22,13 +22,13 @@
             "panel_label": "D",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "means ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "E",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "means ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "F",
@@ -40,19 +40,20 @@
             "panel_label": "G",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "means ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "H",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "means ± SEM from individual clusters"
+            "from_the_caption": "mean ± SEM"
         },
         {
             "panel_label": "I",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "means ± SEM from individual cells"
+            "from_the_caption": "mean ± SEM"
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 14:25:41"
 }

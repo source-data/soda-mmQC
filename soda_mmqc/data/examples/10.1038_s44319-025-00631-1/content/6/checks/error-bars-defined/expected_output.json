@@ -10,7 +10,7 @@
             "panel_label": "B",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Plot represents mean ± SD."
+            "from_the_caption": "mean ± SD."
         },
         {
             "panel_label": "C",
@@ -36,5 +36,6 @@
             "error_bar_defined_in_caption": "not needed",
             "from_the_caption": ""
         }
-    ]
+    ],
+    "updated_at": "2026-03-27 16:24:44"
 }

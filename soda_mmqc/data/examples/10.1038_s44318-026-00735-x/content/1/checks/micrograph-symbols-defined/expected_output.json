@@ -1,0 +1,275 @@
+{
+  "name": "micrograph-symbols-defined",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "micrograph": "yes",
+      "symbols": [
+        "grey 40S density",
+        "red EMCV IRES",
+        "purple Met-tRNAiMet",
+        "blue uS13",
+        "green uS19",
+        "cyan eIF1A",
+        "yellow eIF3",
+        "gold eIF2\u03b1",
+        "beige eIF2\u03b3"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes"
+      ],
+      "from_the_caption": [
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly."
+      ]
+    },
+    {
+      "panel_label": "B",
+      "micrograph": "yes",
+      "symbols": [
+        "grey 40S density",
+        "red EMCV IRES",
+        "purple Met-tRNAiMet",
+        "blue uS13",
+        "green uS19",
+        "cyan eIF1A",
+        "yellow eIF3",
+        "gold eIF2\u03b1",
+        "beige eIF2\u03b3",
+        "black rotation arrow (60\u00b0)"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "no"
+      ],
+      "from_the_caption": [
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        ""
+      ]
+    },
+    {
+      "panel_label": "C",
+      "micrograph": "yes",
+      "symbols": [
+        "grey 40S density",
+        "red EMCV IRES",
+        "purple Met-tRNAiMet",
+        "blue uS13",
+        "green uS19",
+        "cyan eIF1A",
+        "yellow eIF3",
+        "gold eIF2\u03b1",
+        "beige eIF2\u03b3",
+        "black rotation arrow (120\u00b0)"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "no"
+      ],
+      "from_the_caption": [
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        "The 40S ribosomal subunit, ribosomal proteins uS13 and uS19, associated initiation factors, Met-tRNAiMet and EMCV IRES are shown in distinct colors and are labeled accordingly.",
+        ""
+      ]
+    },
+    {
+      "panel_label": "D",
+      "micrograph": "yes",
+      "symbols": [
+        "text domain labels (Ib, Ic, Id, Ie)"
+      ],
+      "symbols_defined_in_caption": [
+        "yes"
+      ],
+      "from_the_caption": [
+        "The individual domains of the IRES are indicated in these views."
+      ]
+    },
+    {
+      "panel_label": "E",
+      "micrograph": "yes",
+      "symbols": [
+        "text domain labels (Ib, Ic, Id, Ie)"
+      ],
+      "symbols_defined_in_caption": [
+        "yes"
+      ],
+      "from_the_caption": [
+        "The individual domains of the IRES are indicated in these views."
+      ]
+    },
+    {
+      "panel_label": "F",
+      "micrograph": "yes",
+      "symbols": [
+        "text domain labels (Ib, Ic, Id, Ie)"
+      ],
+      "symbols_defined_in_caption": [
+        "yes"
+      ],
+      "from_the_caption": [
+        "The individual domains of the IRES are indicated in these views."
+      ]
+    },
+    {
+      "panel_label": "G",
+      "micrograph": "yes",
+      "symbols": [
+        "text domain labels (Ib, Ic, Id, Ie)"
+      ],
+      "symbols_defined_in_caption": [
+        "yes"
+      ],
+      "from_the_caption": [
+        "The individual domains of the IRES are indicated in these views."
+      ]
+    },
+    {
+      "panel_label": "H",
+      "micrograph": "yes",
+      "symbols": [
+        "red EMCV IRES",
+        "magenta initiator tRNA",
+        "blue uS13",
+        "green uS19",
+        "purple rectangular zoom box"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "no"
+      ],
+      "from_the_caption": [
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        ""
+      ]
+    },
+    {
+      "panel_label": "I",
+      "micrograph": "yes",
+      "symbols": [
+        "red EMCV IRES",
+        "magenta initiator tRNA",
+        "blue uS13",
+        "green uS19",
+        "purple rectangular zoom box"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "no"
+      ],
+      "from_the_caption": [
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        ""
+      ]
+    },
+    {
+      "panel_label": "J",
+      "micrograph": "yes",
+      "symbols": [
+        "red EMCV IRES",
+        "magenta initiator tRNA",
+        "blue uS13",
+        "green uS19",
+        "purple rectangular zoom box"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "no"
+      ],
+      "from_the_caption": [
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        ""
+      ]
+    },
+    {
+      "panel_label": "K",
+      "micrograph": "yes",
+      "symbols": [
+        "red EMCV IRES",
+        "magenta initiator tRNA",
+        "blue uS13",
+        "green uS19",
+        "purple rectangular zoom box"
+      ],
+      "symbols_defined_in_caption": [
+        "yes",
+        "yes",
+        "yes",
+        "yes",
+        "no"
+      ],
+      "from_the_caption": [
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        "showing the key interactions between the EMCV IRES (red) and initiator tRNA (magenta), uS13 (blue) and uS19 (green).",
+        ""
+      ]
+    }
+  ],
+  "updated_at": "2026-04-29 12:59:56"
+}

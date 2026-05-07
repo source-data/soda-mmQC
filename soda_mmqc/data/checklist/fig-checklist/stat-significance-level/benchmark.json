@@ -16,7 +16,19 @@
     "10.1038_s44319-025-00631-1/content/4",
     "10.1038_s44319-025-00631-1/content/5",
     "10.1038_s44319-025-00631-1/content/6",
-    "10.1038_s44319-025-00631-1/content/7"
+    "10.1038_s44319-025-00631-1/content/7",
+    "10.1038_s44318-026-00759-3/content/1",
+    "10.1038_s44318-026-00759-3/content/2",
+    "10.1038_s44318-026-00759-3/content/3",
+    "10.1038_s44318-026-00759-3/content/4",
+    "10.1038_s44318-026-00759-3/content/5",
+    "10.1038_s44318-026-00735-x/content/1",
+    "10.1038_s44318-026-00735-x/content/2",
+    "10.1038_s44318-026-00735-x/content/3",
+    "10.1038_s44318-026-00735-x/content/4",
+    "10.1038_s44318-026-00735-x/content/5",
+    "10.1038_s44318-026-00735-x/content/6",
+    "10.1038_s44318-026-00735-x/content/7" 
   ],
   "_previous_examples_archived": {
     "note": "Former benchmark examples (inactive). The pipeline reads only `examples`. Copy entries back into `examples` to restore.",

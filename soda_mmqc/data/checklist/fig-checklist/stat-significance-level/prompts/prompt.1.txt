@@ -34,6 +34,9 @@ For each symbol:
 
 *IMPORTANT:* When extracting the text from the caption, ONLY include the specific text that describes the levels of significance. Do NOT include general descriptions of the figure or panel content. If there is no relevant text, do not extract anything for this panel.
 
+## 6. Decision and explanation
+For each panel, provide `Decision_and_explanation` as an array of one or more short strings giving your overall verdict (e.g. PASS, FAIL, or WARNING) and a concise explanation of whether all significance-level symbols in that panel are properly defined in the image and/or caption. Use an empty array `[]` when `is_a_plot` is "no" or when there are no significance symbols to assess.
+
 Provide your analysis in the following JSON format for EACH and EVERY panel:
 
 {
@@ -60,6 +63,9 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
                 "*P < 0.05",
                 "***P < 0.001",
                 "****P < 0.0001"
+            ],
+            "Decision_and_explanation": [
+                "PASS; all significance level symbols in the panel are defined in the image and/or caption."
             ]
         },
         {
@@ -68,7 +74,8 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         }
     ]
 }
