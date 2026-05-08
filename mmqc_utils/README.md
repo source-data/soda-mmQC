@@ -92,10 +92,7 @@ text = html_to_text("<p>Hello <b>world</b></p>")
 
 To release a new version of `mmqc-utils` to PyPI:
 
-1. **Update the version number**:
-   ```bash
-   uv run --group publish bump2version [major|minor|patch]
-   ```
+1. **Update the version number** in `pyproject.toml`.
 2. **Update the uv.lock file**:
    ```bash
    uv lock
@@ -103,8 +100,7 @@ To release a new version of `mmqc-utils` to PyPI:
 3. **Update the changelog** in `CHANGELOG.md`.
 4. **Build the distribution**:
    ```bash
-   just clean
-   uv run --group publish python -m build
+   just build
    ```
 5. **Check the distribution**:
    ```bash
