@@ -2,14 +2,14 @@
 
 ## System Requirements
 
-- Python 3.8+
-- [Pandoc](https://pandoc.org/installing.html) (must be installed and available in your PATH)
+- Python 3.12+
+- [ImageMagick](https://imagemagick.org/download/) (must be installed and available in your PATH)
 
-### Install Pandoc
+### Install ImageMagick
 
-- **macOS:** `brew install pandoc`
-- **Ubuntu/Debian:** `sudo apt-get install pandoc`
-- **Windows:** [Download installer](https://pandoc.org/installing.html)
+- **macOS:** `brew install imagemagick`
+- **Ubuntu/Debian:** `sudo apt-get install imagemagick`
+- **Windows:** [Download installer](https://imagemagick.org/download/)
 
 ---
 
