@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## [0.2.0] - 2026-05-08
+
+### Added
+- type hinting support: added `py.typed` marker for PEP 561 compliance
+
 ## [0.1.0] - 2026-05-07
 
 ### Added

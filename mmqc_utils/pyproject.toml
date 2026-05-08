@@ -1,6 +1,6 @@
 [project]
 name = "mmqc-utils"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reusable conversion utilities for images, documents, text, and related data types."
 readme = "README.md"
 authors = [
@@ -71,6 +71,9 @@ select = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+mmqc_utils = ["py.typed"]
 
 [tool.uv]
 package = true

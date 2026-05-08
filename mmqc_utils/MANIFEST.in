@@ -5,6 +5,7 @@ include justfile
 
 recursive-include tests *
 recursive-include src *.py
+recursive-include src py.typed
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
