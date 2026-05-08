@@ -9,6 +9,7 @@ import base64
 import mimetypes
 import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
+from mmqc_utils import convert_to_bounded_jpeg
 try:
     from openai import OpenAI
 except Exception:
@@ -274,70 +275,28 @@ class FigureExample(Example):
             self._content_hash = hasher.hexdigest()
         return self._content_hash
 
-    def _get_image_mime_type(self) -> str:
-        """Get the MIME type of the image file based on its extension."""
-        if not self.image_path:
-            raise ValueError("No image path available")
-        mime_type, _ = mimetypes.guess_type(str(self.image_path))
-        if mime_type:
-            if mime_type.startswith('image/'):
-                # If mime type isn't one of the allowed formats, we'll convert
-                # later when encoding. Return the guessed mime for now.
-                return mime_type
-            else:
-                raise ValueError(f"Not an image: {self.image_path}")
-        else:
-            raise ValueError(f"Could not guess mime type: {self.image_path}")
-
-    def _encode_image(self) -> str:
+    def _encode_image(self) -> tuple[str, str]:
         """Encode image to base64 string."""
         if not self.image_path or not self.image_path.exists():
             raise ValueError("Image file not found")
-        # Try to encode in an allowed format; convert if necessary
-        mime_type, _ = mimetypes.guess_type(str(self.image_path))
-        allowed = ("image/jpeg", "image/png", "image/gif", "image/webp")
-        if mime_type in allowed:
-            with open(self.image_path, "rb") as image_file:
-                return base64.b64encode(image_file.read()).decode('utf-8')
-        # convert to PNG by default
-        return self._convert_image_to_allowed_format(self.image_path)[1]
+        return self._encode_image_from_path(self.image_path)
 
     def _encode_image_from_path(self, image_path: Path) -> tuple[str, str]:
         """Encode an image file to base64 and return (mime_type, base64_string)."""
         if not image_path.exists():
             raise ValueError(f"Image file not found: {image_path}")
+
         mime_type, _ = mimetypes.guess_type(str(image_path))
         if not mime_type or not mime_type.startswith("image/"):
             raise ValueError(f"Not an image: {image_path}")
-        with open(image_path, "rb") as f:
-            b64 = base64.b64encode(f.read()).decode("utf-8")
-        return self._ensure_api_supported_image(mime_type, b64)
 
-    def _ensure_api_supported_image(self, mime_type: str, b64: str) -> tuple[str, str]:
-        """Return (mime_type, b64) with a format the API accepts (jpeg, png, gif, webp).
-        Converts TIFF and other unsupported formats to PNG via PIL if available.
-        """
-        if mime_type in _API_SUPPORTED_IMAGE_TYPES:
-            return mime_type, b64
-        try:
-            from PIL import Image
-        except ImportError:
-            logger.warning(
-                "PIL not available; cannot convert %s to a supported format. "
-                "Install Pillow or use JPEG/PNG/GIF/WebP images.",
-                mime_type,
-            )
-            raise ValueError(
-                f"Image format {mime_type} is not supported by the API. "
-                "Use image/jpeg, image/png, image/gif, or image/webp, or install Pillow to convert TIFF."
-            )
-        raw = base64.b64decode(b64)
-        img = Image.open(io.BytesIO(raw))
-        if img.mode in ("RGBA", "P"):
-            img = img.convert("RGB")
-        buf = io.BytesIO()
-        img.save(buf, format="PNG")
-        return "image/png", base64.b64encode(buf.getvalue()).decode("utf-8")
+        with open(image_path, "rb") as f:
+            image_bytes = f.read()
+        
+        if mime_type not in _API_SUPPORTED_IMAGE_TYPES:
+            image_bytes = convert_to_bounded_jpeg(io.BytesIO(image_bytes))
+            mime_type = "image/jpeg"
+        return mime_type, base64.b64encode(image_bytes).decode("utf-8")
 
     _SOURCE_DATA_IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".tiff", ".tif")
     _SOURCE_DATA_TABLE_EXTS = (".csv", ".tsv", ".xlsx", ".xls")
@@ -477,8 +436,7 @@ class FigureExample(Example):
         images from content/source_data/ so the model can compare them to the figure.
         """
         self._ensure_loaded()
-        fig_mime, fig_b64 = self._get_image_mime_type(), self._encode_image()
-        fig_mime, fig_b64 = self._ensure_api_supported_image(fig_mime, fig_b64)
+        fig_mime, fig_b64 = self._encode_image()
         content: List[Dict[str, Any]] = [
             {
                 "type": "input_text",
