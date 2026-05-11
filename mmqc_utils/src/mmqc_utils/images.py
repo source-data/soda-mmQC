@@ -6,9 +6,6 @@ from io import BytesIO
 from pathlib import Path
 from typing import BinaryIO
 
-from wand.color import Color
-from wand.image import Image
-
 PathLikeOrFile = str | Path | bytes | bytearray | BinaryIO
 
 _QUALITY_LADDER = (80, 70, 60, 50, 40, 30)
@@ -55,6 +52,9 @@ def convert_to_bounded_jpeg(
     background : str, optional
         The background color to use when flattening images with transparency (e.g., PNGs). Default is "white".
     """
+    from wand.color import Color
+    from wand.image import Image
+
     image_bytes = _read_bytes(source)
     output_format = "jpg"
 

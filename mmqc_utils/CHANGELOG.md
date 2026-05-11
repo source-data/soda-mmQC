@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## [0.2.1] - 2026-05-11
+
+### Added
+- make wand imports lazy to avoid unnecessary ImageMagick dependency for users who don't need image processing features.
+
 ## [0.2.0] - 2026-05-08
 
 ### Added
