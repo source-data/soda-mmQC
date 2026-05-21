@@ -33,3 +33,15 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-04-30] ingest | `evaluation-hierarchical-scoring.md`: normative JSON-aligned policy — `""` → FP, `null`/missing key → FN for string-only slots; arguments; list toy de-implementationized. `evaluation-leaf-primitives.md`: null/empty cross-ref.
 
 ## [2026-04-30] ingest | `evaluation-hierarchical-scoring.md`: list-of-X when X is object or nested array — element TP/FP/FN vs inner subtree metrics; toys; deduped list-of-objects section.
+
+## [2026-05-21] lint | Harmonized wiki terms: **slot** / **property** / **element** / **value**; removed **edge**; vocabulary section in `evaluation-hierarchical-scoring.md`; aligned `evaluation-leaf-primitives.md`.
+
+## [2026-05-21] ingest | `evaluation-hierarchical-scoring.md`: two-layer reporting — **applicability** (correct_NA, spurious/withheld applicable) vs **answer** (applicable-only; binary yes/no TP/TN; multiclass match/mismatch); scale-bar example; free-text FP/FN scoped separately.
+
+## [2026-05-21] ingest | `evaluation-hierarchical-scoring.md`: **Schema contract** — `enum` alone does not define N/A or polarity; `na_values` / `x-naValues`; string vs boolean; repo examples (`""` vs `not needed`).
+
+## [2026-05-21] ingest | Normative **eval-manifest.json** sidecar (no `x-*` on OpenAI `schema.json`); path-keyed metric profiles; example for micrograph-scale-bar.
+
+## [2026-05-21] ingest | `evaluation-hierarchical-scoring.md`: **Bubbling** — three aggregates (score, structural slots, manifest layers); `whole_object_match` vs applicability/answer F1.
+
+## [2026-05-21] lint | Applicability: separate **`τ_applic`** / `applicability_score`; do not AND spurious_applicable into structural `whole_object_match` (equivalent to `τ_applic=1` only on layer 1).
