@@ -66,7 +66,7 @@ Same as numbers today: **exact** equality, binary score.
 
 ## Null, missing keys, and empty strings
 
-Follow **JSON** and **JSON Schema**: `null`, absent property, and `""` are different. For how **object slot FP vs FN** should be labeled when gold expects a string, see the **normative policy** in [evaluation-hierarchical-scoring.md](evaluation-hierarchical-scoring.md) (subsection **Adopted policy: FP vs FN for required string properties on objects**).
+Follow **JSON** and **JSON Schema**: `null`, absent property, and `""` are different. For **free-text** object slots (not N/A enums), see [evaluation-hierarchical-scoring.md](evaluation-hierarchical-scoring.md) (**Free-text string properties: FP vs FN on objects**).
 
 If the schema allows `**null`** at a leaf (`type` union includes `"null"`), comparison follows JSON null rules (`null` vs `null` → full `**score`**; `null` vs string → low `**score**`, parent classifies slot).
 
@@ -76,15 +76,39 @@ Leaves often return **partial credit** (e.g. similarity `0.4`). Only the **paren
 
 ## Output shape at a leaf (conceptual)
 
-A **primitive leaf** comparison should yield at least a **graded `score`** in `[0, 1]` and whatever **leaf-local diagnostics** you need for debugging. It should **not** be the place where you define **slot `match`**, list-element **TP/FP/FN**, or nested `**element_scores` / `field_scores`**—those belong to **object** and **list** comparison and hierarchical roll-up ([evaluation-hierarchical-scoring.md](evaluation-hierarchical-scoring.md)).
+**Normative for now:** every primitive leaf returns one **`score` in `[0, 1]`**, regardless of JSON type:
 
-**Separation of concerns:** treat **leaf value comparison** (two JSON primitives + leaf schema → quality) as a **different responsibility** from **structural comparison** (required keys, list alignment, predicates on child subtrees). That split is part of the design even if the codebase later chooses one shared datatype for convenience.
+| Leaf type | How `score` is formed (typical) |
+|-----------|----------------------------------|
+| **string** | Exact / fuzzy / semantic similarity → `[0, 1]` |
+| **number / integer** | Exact equality → `0.0` or `1.0` (tolerance later if needed) |
+| **boolean** | Exact equality → `0.0` or `1.0` |
+| **enum string** | Exact match on allowed literal → `0.0` or `1.0` |
 
-**Uniform recursion vs clean types (implementation, not prescribed here):** you might use one recursive result type with container-only fields empty or `None` at leaves, or a **dedicated leaf result** type that is converted or wrapped when stepping back out to objects/lists. The tradeoff is **one shape for `compare` all the way down** versus **types that cannot accidentally carry `field_scores` on a bare string**. Either is fine if the **boundary contract** holds: **leaves emit `score` (and diagnostics); parents own predicates and slot bookkeeping.**
+Optional **leaf-local diagnostics** (e.g. which fuzzy metric fired) are fine; they do not replace **`score`**.
 
-## Code organization (direction of travel)
+A leaf does **not** define **slot `match`**, list-element TP/FP/FN, or nested **`element_scores` / `field_scores`** — those belong to **object** and **list** parents ([evaluation-hierarchical-scoring.md](evaluation-hierarchical-scoring.md)).
 
-We still plan a dedicated module (working name `**leaves.py`** in the `evaluation` package): one place for “given `(pred, exp, leaf_schema)`, run **primitive** comparison,” with dispatch by schema `type` and optional Python-type fallback for loose schemas. How that output is **named or merged** with container results is a separate implementation choice. See the split-evaluation plan and [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md).
+**Separation of concerns:** **leaf** = compare two primitive values → **`score`**. **Parent** = alignment, keys, **`predicate`**, manifest layers, roll-up.
+
+### `LeafComparisonResult` vs `ComparisonResult` (target design)
+
+**Not implemented yet.** Today [`evaluation.py`](../soda_mmqc/core/evaluation.py) still uses one **`ComparisonResult`** type everywhere (with empty `field_scores` at leaves). The refactor should split:
+
+- **`LeafComparisonResult`** — only **`score`** in `[0, 1]` plus optional **`false_positive` / `false_negative`** for leaf-local cases (e.g. `None` vs string). **No** `field_scores` or `element_scores`.
+- **`ComparisonResult`** — **objects and lists** only: roll-up **`score`**, drill-down maps, precision/recall on containers.
+
+At the boundary, leaves would call **`leaf.to_comparison_result(match_threshold)`** before a parent stores the child under `field_scores` or `element_scores`:
+
+```text
+_compare_strings("yes", "no")  →  LeafComparisonResult(score=0.0)
+                                      ↓ to_comparison_result(τ)
+field_scores["plot"]           →  ComparisonResult(score=0.0, field_scores={}, …)
+```
+
+Example mistake this prevents: attaching `field_scores={"nested": …}` to a bare string compare — the leaf type cannot express that.
+
+**Direction:** move primitive dispatch into **`leaves.py`** returning `LeafComparisonResult`; containers keep returning `ComparisonResult`. See the split-evaluation plan and [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md).
 
 ## See also
 
