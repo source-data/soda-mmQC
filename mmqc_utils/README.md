@@ -86,6 +86,24 @@ text = html_to_text("<p>Hello <b>world</b></p>")
 
 `compute_plain_text` is an alias for `html_to_text`. Block-level tags (`<p>`, `<div>`, `<br>`, headings, list items, …) are replaced by a space; inline tags are stripped; whitespace is collapsed.
 
+### Quote matching
+
+```python
+from mmqc_utils import align_quote
+
+text = "A Shows protein structure. B Shows binding site."
+quote = "Shows protein structure."
+
+alignment = align_quote(quote, text)
+# → QuoteAlignment(..., score=1.0, alignment_status=AlignmentStatus.MATCH_EXACT)
+```
+
+`align_quote` performs no normalization or plain-text conversion. Returned half-open intervals index into exactly the `text` string passed by the caller. If the source content is HTML, call `compute_plain_text` on both `quote` and `text` before matching.
+
+It returns both score and match type: `MATCH_EXACT` for a contiguous exact quote, `MATCH_GREATER` for a quote stitched from ordered source spans with extra source text between them, `MATCH_LESSER` when small quote gaps were skipped, and `MATCH_FUZZY` for the RapidFuzz fallback.
+
+For non-contiguous matches, `source_gaps` reports text present in `text` between matched spans but omitted from the quote. `quote_gaps` reports text present in `quote` that was skipped to produce a partial literal match.
+
 ## Development
 
 ### Releasing a New Version
