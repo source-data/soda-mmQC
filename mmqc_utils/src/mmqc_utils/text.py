@@ -4,18 +4,110 @@ from __future__ import annotations
 
 import re
 from html import unescape
+from html.parser import HTMLParser
+from unicodedata import category
 
-_BLOCK_TAG_PATTERN = re.compile(
-    r"</?(?:p|br|div|h[1-6]|li|tr|blockquote|ul|ol|table|section|article)(?:\s[^>]*)?/?>",
-    flags=re.IGNORECASE,
+_SEPARATING_TAGS = frozenset(
+    {
+        "address",
+        "article",
+        "aside",
+        "blockquote",
+        "body",
+        "br",
+        "caption",
+        "dd",
+        "details",
+        "dialog",
+        "div",
+        "dl",
+        "dt",
+        "fieldset",
+        "figcaption",
+        "figure",
+        "footer",
+        "form",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "header",
+        "hgroup",
+        "hr",
+        "html",
+        "li",
+        "main",
+        "nav",
+        "ol",
+        "p",
+        "pre",
+        "section",
+        "summary",
+        "table",
+        "tbody",
+        "td",
+        "tfoot",
+        "th",
+        "thead",
+        "tr",
+        "ul",
+    }
 )
-"""Pattern to match block-level HTML tags."""
+"""HTML tags that should separate adjacent visible text."""
 
-_TAG_PATTERN = re.compile(r"<[^>]+>")
-"""Pattern to match any HTML tag."""
+_IGNORED_CONTENT_TAGS = frozenset({"head", "script", "style", "template"})
+"""HTML tags whose content is not browser-visible document text."""
 
 _WHITESPACE_PATTERN = re.compile(r"\s+")
 """Pattern to match any sequence of whitespace characters."""
+
+
+def _remove_control_characters(text: str) -> str:
+    """Remove non-whitespace control and format characters from visible text."""
+    return "".join(ch for ch in text if ch.isspace() or category(ch) not in {"Cc", "Cf"})
+
+
+class _PlainTextParser(HTMLParser):
+    """Extract browser-visible text while preserving inline text joins."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+        self._ignored_depth = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self._handle_tag(tag)
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if tag in _IGNORED_CONTENT_TAGS:
+            if self._ignored_depth:
+                self._ignored_depth -= 1
+            return
+        self._handle_tag(tag)
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() in _IGNORED_CONTENT_TAGS:
+            return
+        self._handle_tag(tag)
+
+    def handle_data(self, data: str) -> None:
+        if self._ignored_depth:
+            return
+        if data:
+            self.parts.append(_remove_control_characters(data))
+
+    def _handle_tag(self, tag: str) -> None:
+        tag = tag.lower()
+        if tag in _IGNORED_CONTENT_TAGS:
+            self._ignored_depth += 1
+            return
+        if self._ignored_depth:
+            return
+        if tag in _SEPARATING_TAGS:
+            self.parts.append(" ")
 
 
 def html_to_text(html: str) -> str:
@@ -23,15 +115,11 @@ def html_to_text(html: str) -> str:
     if not html:
         return ""
 
-    # Unescape HTML entities first (e.g., &amp; -> &)
-    text = unescape(html)
-
-    # Replace block-level tags with spaces. This preserves the usual visual separation of block elements in the
-    # resulting text.
-    text = _BLOCK_TAG_PATTERN.sub(" ", text)
-
-    # Strip remaining HTML tags (inline elements like <i>, <b>, <em>, <strong>, <sub>, <sup>, etc.).
-    text = _TAG_PATTERN.sub("", text)
+    # Decode first so escaped pandoc fragments like "&lt;p&gt;..." are handled the same way as real tags.
+    parser = _PlainTextParser()
+    parser.feed(unescape(html))
+    parser.close()
+    text = "".join(parser.parts)
 
     # Normalize multiple consecutive whitespace to a single space and trim leading/trailing whitespace.
     text = _WHITESPACE_PATTERN.sub(" ", text)
