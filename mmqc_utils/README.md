@@ -7,6 +7,8 @@ Reusable conversion utilities for MMQC projects.
 - Convert and downscale common image formats (TIFF, JPEG, PNG, GIF, WebP, PDF) to bounded JPEG previews, with optional byte-size budget enforcement
 - Convert DOCX, RTF, ODT, TeX, and PDF documents to HTML
 - Normalize HTML to plain text
+- Align a quote against a source text and return character-level spans, score, and match status
+- Render HTML fragments visualizing a single alignment or multi-quote coverage of a shared source
 
 ## System requirements
 
@@ -88,21 +90,158 @@ text = html_to_text("<p>Hello <b>world</b></p>")
 
 ### Quote matching
 
+`align_quote` performs no normalization. Returned half-open character intervals index into exactly the `text` string passed by the caller. It tries four strategies in order, using the first that succeeds:
+
+| Status | When | `char_intervals` | `score` |
+|---|---|---|---|
+| `MATCH_EXACT` | verbatim contiguous substring | set | `1.0` |
+| `MATCH_GREATER` | all quote chars found across ordered source spans; source has extra text between them (`source_gaps`) | set | `1.0` |
+| `MATCH_LESSER` | greedy match skipped some quote chars (`quote_gaps`) | set | matched chars / len(quote) |
+| `MATCH_FUZZY` | RapidFuzz partial-ratio fallback | `None` | partial ratio / 100 |
+
+For `MATCH_FUZZY` results above the confidence threshold, `approximate_char_intervals` (not `char_intervals`) is set.
+
+**MATCH_EXACT** — verbatim substring:
+
 ```python
-from mmqc_utils import align_quote
+from mmqc_utils import align_quote, AlignmentStatus, CharInterval
 
 text = "A Shows protein structure. B Shows binding site."
 quote = "Shows protein structure."
 
 alignment = align_quote(quote, text)
-# → QuoteAlignment(..., score=1.0, alignment_status=AlignmentStatus.MATCH_EXACT)
+assert alignment.alignment_status is AlignmentStatus.MATCH_EXACT
+assert alignment.score == 1.0
+assert alignment.char_intervals == [CharInterval(2, 26)]
+assert text[2:26] == quote
 ```
 
-`align_quote` performs no normalization or plain-text conversion. Returned half-open intervals index into exactly the `text` string passed by the caller. If the source content is HTML, call `compute_plain_text` on both `quote` and `text` before matching.
+**MATCH_GREATER** — quote assembled from multiple non-contiguous source spans:
 
-It returns both score and match type: `MATCH_EXACT` for a contiguous exact quote, `MATCH_GREATER` for a quote stitched from ordered source spans with extra source text between them, `MATCH_LESSER` when small quote gaps were skipped, and `MATCH_FUZZY` for the RapidFuzz fallback.
+```python
+text = (
+    "(a-c) Line plots showing runtime across cell counts. "
+    "Evaluations were performed on single-cell transcriptomic data (a), "
+    "joint profiling of transcriptomic and chromatin accessibility data (b), "
+    "and surface protein data (c)."
+)
+quote = (
+    "Line plots showing runtime across cell counts. "
+    "Evaluations were performed on joint profiling of transcriptomic and chromatin accessibility data"
+)
 
-For non-contiguous matches, `source_gaps` reports text present in `text` between matched spans but omitted from the quote. `quote_gaps` reports text present in `quote` that was skipped to produce a partial literal match.
+alignment = align_quote(quote, text)
+assert alignment.alignment_status is AlignmentStatus.MATCH_GREATER
+assert alignment.score == 1.0
+assert len(alignment.char_intervals) == 2          # two disjoint spans in source
+assert alignment.source_gaps[0].text == "single-cell transcriptomic data (a), "
+assert alignment.quote_gaps is None
+```
+
+`source_gaps` lists text present in `text` between matched spans but absent from the quote.
+
+**MATCH_LESSER** — quote contains chars not present in source:
+
+```python
+text = "A Shows protein structure. B Shows binding site."
+quote = "Shows protein structure.!"   # trailing "!" absent from source
+
+alignment = align_quote(quote, text)
+assert alignment.alignment_status is AlignmentStatus.MATCH_LESSER
+assert alignment.char_intervals == [CharInterval(2, 26)]
+assert 0.9 < alignment.score < 1.0
+assert alignment.quote_gaps[0].text == "!"
+assert alignment.source_gaps is None
+```
+
+`quote_gaps` lists text present in `quote` that was skipped to produce the literal match.
+
+**MATCH_FUZZY** — approximate match (e.g. typo):
+
+```python
+text = "Prefix Alpha beta gamma delta epsilon suffix"
+quote = "Alpha beta gamma delta epsylon"   # typo: "epsylon"
+
+alignment = align_quote(quote, text)
+assert alignment.alignment_status is AlignmentStatus.MATCH_FUZZY
+assert alignment.char_intervals is None
+assert alignment.approximate_char_intervals == [CharInterval(7, 37)]
+assert text[7:37] == "Alpha beta gamma delta epsilon"
+assert alignment.score > 0.9
+```
+
+`approximate_char_intervals` covers the best-matching region; exact boundaries may not be precise.
+
+### Quote alignment visualization
+
+Both functions return self-contained HTML fragments. The caller is responsible for providing the CSS classes they reference (listed below each function). Inputs must be plain text — use `compute_plain_text` to convert HTML before calling `align_quote` or either rendering function.
+
+#### `render_alignment_view`
+
+Shows a single `QuoteAlignment` as a two-row Quote / Source block. The quote row highlights unmatched quote chars; the source row highlights matched spans and source gaps with surrounding context.
+
+```python
+from mmqc_utils import align_quote, render_alignment_view, compute_plain_text
+
+text  = compute_plain_text("<p>A Shows protein structure. B Shows binding site.</p>")
+quote = compute_plain_text("<em>Shows protein structure.</em>")
+
+alignment = align_quote(quote, text)
+fragment  = render_alignment_view(quote, text, alignment)
+# Returns a <div class="alignment-view"> with two rows:
+#   Quote:  Shows protein structure.
+#   Source: A [Shows protein structure.] B Shows binding site.
+```
+
+For `MATCH_LESSER` and `MATCH_FUZZY` the quote row marks unmatched chars and the source row marks the corresponding gaps, making the divergence immediately visible.
+
+`context_chars` (default `200`) controls how many characters of plain context appear before and after matched spans in the source row. Increase it when the source is long and surrounding text matters.
+
+Required CSS classes:
+
+| Class | Used for |
+|---|---|
+| `mark.match` | matched spans in source and quote (fuzzy) |
+| `mark.gap-q` | quote chars that could not be matched |
+| `mark.gap-s` | source text between matched spans (not in quote) |
+| `.alignment-view` | wrapper `<div>` |
+| `.av-row` | each label + text row |
+| `.av-label` | "Quote" / "Source" label |
+| `.av-text` | the `<pre>` element |
+
+#### `render_coverage_view`
+
+Shows a shared source text with multiple alignments highlighted simultaneously — each alignment in a distinct color. Intended for cases where several quotes all target the same source, such as panel captions within a figure caption or figure captions within a manuscript's caption section.
+
+```python
+from mmqc_utils import align_quote, render_coverage_view
+
+source = "(a) Shows protein structure. (b) Shows binding site. (c) Shows expression."
+labeled = [
+    ("panel-a", align_quote("Shows protein structure.", source)),
+    ("panel-b", align_quote("Shows binding site.", source)),
+    ("panel-c", align_quote("Shows expression.", source)),
+]
+fragment = render_coverage_view(source, labeled)
+# Returns a <div class="coverage-view"> with a color legend above
+# the source text; each panel's matched span is highlighted in its color.
+```
+
+Exact spans (`char_intervals`) are filled with the alignment's color. Approximate spans (`approximate_char_intervals`) are shown as a colored underline only, signalling lower positional confidence. All marks carry a `title` attribute — single-coverage marks show the alignment label; overlapping regions list all contributing labels.
+
+A custom `palette` (list of CSS color strings) can be passed to override the built-in 8-color default.
+
+```python
+fragment = render_coverage_view(source, labeled, palette=["#c7d2fe", "#bbf7d0", "#fde68a"])
+```
+
+Required CSS classes:
+
+| Class | Used for |
+|---|---|
+| `.coverage-view` | wrapper `<div>` |
+| `.cov-legend` | legend row above the source |
+| `.cov-chip` | each colored label chip in the legend |
 
 ## Development
 

@@ -16,6 +16,7 @@ def test_align_quote_indexes_into_exact_input_text() -> None:
     alignment = align_quote(quote, text)
 
     assert alignment.char_intervals == [CharInterval(2, 26)]
+    assert alignment.approximate_char_intervals is None
     assert alignment.char_intervals is not None
     interval = alignment.char_intervals[0]
     assert text[interval.start_pos : interval.end_pos] == quote
@@ -30,6 +31,7 @@ def test_align_quote_reports_exact_match() -> None:
     assert alignment.alignment_status is AlignmentStatus.MATCH_EXACT
     assert alignment.score == 1.0
     assert alignment.char_intervals == [CharInterval(2, 26)]
+    assert alignment.approximate_char_intervals is None
     assert alignment.matched_text == quote
     assert alignment.source_gaps is None
     assert alignment.quote_gaps is None
@@ -110,15 +112,18 @@ def test_align_quote_returns_no_intervals_for_missing_or_empty_quote() -> None:
     empty_text = align_quote("Shows protein structure.", "")
 
     assert empty_quote.char_intervals is None
+    assert empty_quote.approximate_char_intervals is None
     assert empty_quote.score == 0.0
     assert empty_quote.alignment_status is None
     assert empty_quote.source_gaps is None
     assert empty_quote.quote_gaps is None
     assert missing_quote.char_intervals is None
+    assert missing_quote.approximate_char_intervals is None
     assert missing_quote.alignment_status is AlignmentStatus.MATCH_FUZZY
     assert missing_quote.source_gaps is None
     assert missing_quote.quote_gaps is None
     assert empty_text.char_intervals is None
+    assert empty_text.approximate_char_intervals is None
     assert empty_text.score == 0.0
     assert empty_text.alignment_status is None
     assert empty_text.source_gaps is None
@@ -142,8 +147,10 @@ def test_align_quote_close_quote_score_is_below_one() -> None:
 
     assert close_alignment.alignment_status is AlignmentStatus.MATCH_FUZZY
     assert close_alignment.char_intervals is None
+    assert close_alignment.approximate_char_intervals == [CharInterval(0, 58)]
     assert close_alignment.score == pytest.approx(0.7758620689655173)
     assert absent_alignment.score < close_alignment.score
+    assert absent_alignment.approximate_char_intervals is None
     assert close_alignment.score < 1.0
 
 
@@ -199,6 +206,7 @@ def test_align_quote_does_not_return_partial_word_anchor_after_case_mismatch() -
 
     assert alignment.alignment_status is AlignmentStatus.MATCH_FUZZY
     assert alignment.char_intervals is None
+    assert alignment.approximate_char_intervals is not None
 
 
 def test_align_quote_recovers_spans_when_long_quote_has_single_extra_character() -> None:
@@ -220,3 +228,27 @@ def test_align_quote_recovers_spans_when_long_quote_has_single_extra_character()
             char_interval=CharInterval(len(first), len(first) + 1),
         )
     ]
+
+
+def test_align_quote_returns_approximate_interval_for_fuzzy_typo() -> None:
+    text = "Prefix Alpha beta gamma delta epsilon suffix"
+    quote = "Alpha beta gamma delta epsylon"
+
+    alignment = align_quote(quote, text)
+
+    assert alignment.alignment_status is AlignmentStatus.MATCH_FUZZY
+    assert alignment.char_intervals is None
+    assert alignment.approximate_char_intervals == [CharInterval(7, 37)]
+    assert text[7:37] == "Alpha beta gamma delta epsilon"
+    assert alignment.score == pytest.approx(0.9666666666666667)
+
+
+def test_align_quote_omits_approximate_interval_for_low_confidence_fuzzy_match() -> None:
+    text = "A Shows protein structure. B Shows binding site."
+    quote = "Nonexistent caption segment."
+
+    alignment = align_quote(quote, text)
+
+    assert alignment.alignment_status is AlignmentStatus.MATCH_FUZZY
+    assert alignment.char_intervals is None
+    assert alignment.approximate_char_intervals is None

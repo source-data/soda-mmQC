@@ -2,7 +2,15 @@
 
 from .documents import document_to_html
 from .images import compress_to_bounded_jpeg, convert_to_bounded_jpeg
-from .quote import AlignmentGap, AlignmentStatus, CharInterval, QuoteAlignment, align_quote
+from .quote import (
+    AlignmentGap,
+    AlignmentStatus,
+    CharInterval,
+    QuoteAlignment,
+    align_quote,
+    render_alignment_view,
+    render_coverage_view,
+)
 from .text import compute_plain_text, html_to_text
 
 __all__ = [
@@ -16,4 +24,6 @@ __all__ = [
     "convert_to_bounded_jpeg",
     "document_to_html",
     "html_to_text",
+    "render_alignment_view",
+    "render_coverage_view",
 ]
