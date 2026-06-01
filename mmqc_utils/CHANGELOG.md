@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented here.
 
+## [0.3.0] - 2026-05-11
+
+### Added
+- quote matching in & similarity to source text: find the best matching span(s) in the source text for a quote and provide a score for how literal the quote is.
+- visualization of quote matching.
+
+### Changed
+- use stdlib HTMLParser in `compute_plain_text` instead of regex solution.
+
 ## [0.2.1] - 2026-05-11
 
 ### Added
