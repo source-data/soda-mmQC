@@ -8,6 +8,7 @@ Reusable conversion utilities for MMQC projects.
 - Convert DOCX, RTF, ODT, TeX, and PDF documents to HTML
 - Normalize HTML to plain text
 - Align a quote against a source text and return character-level spans, score, and match status
+- Align multiple quotes against a shared source with automatic resolution of duplicate-occurrence ambiguity
 - Render HTML fragments visualizing a single alignment or multi-quote coverage of a shared source
 
 ## System requirements
@@ -171,6 +172,41 @@ assert alignment.score > 0.9
 ```
 
 `approximate_char_intervals` covers the best-matching region; exact boundaries may not be precise.
+
+### Aligning multiple quotes against a shared source
+
+When several quotes all target the same source text — for example, panel captions extracted from a figure caption — the same phrase can appear more than once in the source, causing `align_quote` to always return the first occurrence regardless of which one is correct for each panel.
+
+`align_quotes` processes quotes in order and maintains a set of claimed spans. When a quote's alignment overlaps a span already claimed by an earlier quote, it retries the alignment starting from the end of the conflicting region. The retry result is used only if its score is at least as good as the original; otherwise the original is kept unchanged.
+
+**Typical use case:** an LLM-extracted panel caption contains "Two-way ANOVA with multiple comparisons was performed", but the phrase appears twice in the figure caption — once in the panel A section and once in the panel E section. Panel A is quoted with a wider string that also contains the phrase, so after processing panel A first, `align_quotes` correctly directs panel E's alignment to the second occurrence.
+
+```python
+from mmqc_utils import align_quotes, AlignmentStatus
+
+figure_caption = (
+    "a) Tumor growth curves are shown. ... "
+    "Two-way ANOVA with multiple comparisons was performed. "   # panel A region
+    "... "
+    "e) Two-way ANOVA with multiple comparisons was performed"  # panel E region
+)
+
+panel_a_quote = "Tumor growth curves are shown. ... Two-way ANOVA with multiple comparisons was performed."
+panel_e_quote = "Two-way ANOVA with multiple comparisons was performed"
+
+results = align_quotes([panel_a_quote, panel_e_quote], figure_caption)
+a, e = results
+
+# panel A claims a wide span that contains the first occurrence of the phrase
+assert a.alignment_status is AlignmentStatus.MATCH_EXACT
+
+# panel E is resolved to the second occurrence, not the first
+assert e.char_intervals[0].start_pos > a.char_intervals[0].end_pos
+```
+
+The function also handles `MATCH_GREATER` results (multi-interval quotes): if any of a quote's intervals overlaps a claimed span, the retry uses `search_start` to skip past the claimed region and re-run the full greedy search from there.
+
+Quotes should be passed in the natural reading order of the source so that earlier panels take priority on the first occurrence.
 
 ### Quote alignment visualization
 

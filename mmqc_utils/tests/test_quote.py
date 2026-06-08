@@ -5,6 +5,7 @@ from mmqc_utils import (
     AlignmentStatus,
     CharInterval,
     align_quote,
+    align_quotes,
     compute_plain_text,
 )
 
@@ -81,6 +82,48 @@ def test_align_quote_supports_multi_section_quotes() -> None:
             text="single-cell transcriptomic data (a), ",
             char_interval=CharInterval(source_gap_start, source_gap_end),
         )
+    ]
+    assert alignment.quote_gaps is None
+
+
+def test_align_quote_selects_multi_section_quotes_in_order() -> None:
+    text = (
+        "a) Some measurements were done and two-way ANOVA was performed. "
+        "(b-d) Line plots showing runtime across cell counts. "
+        "Evaluations were performed on single-cell transcriptomic data (b), "
+        "joint profiling of transcriptomic and chromatin accessibility data (c), "
+        "and surface protein data (d) and two-way ANOVA was performed."
+    )
+    quote = (
+        "Line plots showing runtime across cell counts. Evaluations were performed on "
+        "joint profiling of transcriptomic and chromatin accessibility data "
+        "and two-way ANOVA was performed"
+    )
+
+    alignment = align_quote(quote, text)
+
+    first = "Line plots showing runtime across cell counts. Evaluations were performed on "
+    second = "joint profiling of transcriptomic and chromatin accessibility data "
+    third = "and two-way ANOVA was performed"
+    index_third_start = text.index(second)  # correct segment comes after second quote section
+    expected = [
+        (text.index(first), text.index(first) + len(first)),
+        (text.index(second), text.index(second) + len(second)),
+        (text.index(third, index_third_start), text.index(third, index_third_start) + len(third)),
+    ]
+    assert alignment.char_intervals == [CharInterval(start, end) for start, end in expected]
+    assert alignment.alignment_status is AlignmentStatus.MATCH_GREATER
+    assert alignment.score == 1.0
+    assert alignment.matched_text == quote
+    assert alignment.source_gaps == [
+        AlignmentGap(
+            text="single-cell transcriptomic data (b), ",
+            char_interval=CharInterval(expected[0][1], expected[1][0]),
+        ),
+        AlignmentGap(
+            text="(c), and surface protein data (d) ",
+            char_interval=CharInterval(expected[1][1], expected[2][0]),
+        ),
     ]
     assert alignment.quote_gaps is None
 
@@ -252,3 +295,103 @@ def test_align_quote_omits_approximate_interval_for_low_confidence_fuzzy_match()
     assert alignment.alignment_status is AlignmentStatus.MATCH_FUZZY
     assert alignment.char_intervals is None
     assert alignment.approximate_char_intervals is None
+
+
+# --- align_quotes ---
+
+
+def test_align_quotes_unique_quotes_are_unchanged() -> None:
+    text = "Panel A shows growth. Panel B shows markers. Panel C shows survival."
+    quotes = [
+        "Panel A shows growth.",
+        "Panel B shows markers.",
+        "Panel C shows survival.",
+    ]
+
+    results = align_quotes(quotes, text)
+
+    assert len(results) == 3
+    for quote, result in zip(quotes, results, strict=True):
+        assert result.alignment_status is AlignmentStatus.MATCH_EXACT
+        assert result.char_intervals is not None
+        start, end = result.char_intervals[0].start_pos, result.char_intervals[0].end_pos
+        assert text[start:end] == quote
+
+
+def test_align_quotes_resolves_exact_duplicate() -> None:
+    # "Stat test performed." appears twice: once inside panel A's wider quote, once later.
+    text = "Alpha data shown. Stat test performed. Beta data shown. Gamma data shown. Stat test performed."
+    panel_a = "Alpha data shown. Stat test performed."
+    panel_e = "Stat test performed."
+
+    # Confirm the phrase appears twice in the full text.
+    assert text.count(panel_e) == 2
+
+    results = align_quotes([panel_a, panel_e], text)
+    a, e = results
+
+    assert a.alignment_status is AlignmentStatus.MATCH_EXACT
+    assert a.char_intervals is not None
+    assert text[a.char_intervals[0].start_pos : a.char_intervals[0].end_pos] == panel_a
+
+    # Panel E should be assigned the second occurrence, not the first (which is inside panel A).
+    assert e.alignment_status is AlignmentStatus.MATCH_EXACT
+    assert e.occurrence_count == 2
+    assert e.char_intervals is not None
+    second_occurrence = text.rfind(panel_e)
+    assert e.char_intervals[0].start_pos == second_occurrence
+    assert text[e.char_intervals[0].start_pos : e.char_intervals[0].end_pos] == panel_e
+
+
+def test_align_quotes_resolves_greater_overlap() -> None:
+    # "alpha omega" is not verbatim in text, so it aligns as MATCH_GREATER.
+    # The greedy algorithm prefers the first "alpha" (smaller source gap to "omega"),
+    # which falls inside panel A's claimed span. align_quotes must retry from after
+    # panel A's claim end and land on the second "alpha".
+    text = "alpha claimed omega. filler filler. alpha. filler filler filler. omega end."
+    panel_a = "alpha claimed omega."
+    panel_e = "alpha omega"
+
+    # Confirm the baseline: without dedup, align_quote picks the overlapping first "alpha".
+    baseline = align_quote(panel_e, text)
+    assert baseline.alignment_status is AlignmentStatus.MATCH_GREATER
+    assert baseline.char_intervals is not None
+    assert baseline.char_intervals[0].start_pos == 0  # inside panel A's region
+
+    results = align_quotes([panel_a, panel_e], text)
+    a, e = results
+
+    assert a.alignment_status is AlignmentStatus.MATCH_EXACT
+    assert a.char_intervals is not None
+    a_start = a.char_intervals[0].start_pos
+    a_end = a.char_intervals[0].end_pos
+    assert a_start is not None and a_end is not None
+    assert text[a_start:a_end] == panel_a
+
+    # All of panel E's intervals must lie outside panel A's claimed span.
+    assert e.alignment_status is AlignmentStatus.MATCH_GREATER
+    assert e.char_intervals is not None
+    for interval in e.char_intervals:
+        start = interval.start_pos
+        end = interval.end_pos
+        assert start is not None and end is not None
+        assert not (start < a_end and a_start < end), (
+            f"interval ({start}, {end}) overlaps panel A claim ({a_start}, {a_end})"
+        )
+
+
+def test_align_quotes_keeps_original_when_no_unclaimed_occurrence() -> None:
+    # The phrase appears only once; the second panel cannot be relocated.
+    text = "alpha omega single occurrence."
+    quotes = ["alpha omega", "alpha omega"]
+
+    results = align_quotes(quotes, text)
+    first, second = results
+
+    assert first.char_intervals is not None
+    assert first.char_intervals[0].start_pos == 0
+
+    # Second panel keeps the original alignment (same span) rather than degrading to fuzzy.
+    assert second.alignment_status is AlignmentStatus.MATCH_EXACT
+    assert second.char_intervals is not None
+    assert second.char_intervals[0].start_pos == 0

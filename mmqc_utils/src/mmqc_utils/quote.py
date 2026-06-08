@@ -68,6 +68,8 @@ class QuoteAlignment:
             the quote; non-None for MATCH_GREATER and some MATCH_FUZZY results.
         quote_gaps: text present in ``quote`` that was skipped to produce a literal
             match; non-None for MATCH_LESSER.
+        occurrence_count: number of exact occurrences of ``quote`` in ``text``;
+            set for MATCH_EXACT only; None otherwise.
     """
 
     quote: str
@@ -78,6 +80,7 @@ class QuoteAlignment:
     matched_text: str | None = None
     source_gaps: list[AlignmentGap] | None = None
     quote_gaps: list[AlignmentGap] | None = None
+    occurrence_count: int | None = None
 
 
 @dataclass(frozen=True)
@@ -109,8 +112,8 @@ class _FuzzyMatch:
     segments: list[_SegmentMatch]
 
 
-def _find_exact_match(text: str, pattern: str) -> Span | None:
-    index = text.find(pattern)
+def _find_exact_match(text: str, pattern: str, start: int = 0) -> Span | None:
+    index = text.find(pattern, start)
     if index < 0:
         return None
     return index, index + len(pattern)
@@ -213,13 +216,14 @@ def _find_greedy_quote_spans(
     min_match_len: int,
     max_gap_chars: int,
     max_segments: int,
+    search_start: int = 0,
 ) -> _GreedyMatch | None:
     beam_size = 40
     states = [
         _SearchState(
             segments=[],
             quote_pos=0,
-            search_start=0,
+            search_start=search_start,
             matched_quote_chars=0,
             skipped_quote_chars=0,
         )
@@ -383,6 +387,7 @@ def align_quote(
     max_gap_chars: int = 2,
     max_segments: int = 3,
     min_fuzzy_span_score: float = 0.75,
+    search_start: int = 0,
 ) -> QuoteAlignment:
     """Align *quote* against *text* and return spans, score, and alignment status.
 
@@ -409,11 +414,14 @@ def align_quote(
         max_segments: Maximum disjoint spans the greedy search may use.
         min_fuzzy_span_score: RapidFuzz score threshold below which
             ``approximate_char_intervals`` is left as None.
+        search_start: Earliest position in *text* from which to begin matching.
+            Text before this offset is ignored by MATCH_EXACT and greedy strategies.
+            Has no effect on the MATCH_FUZZY fallback.
     """
     if not quote or not text:
         return QuoteAlignment(quote=quote, score=0.0)
 
-    exact_match = _find_exact_match(text, quote)
+    exact_match = _find_exact_match(text, quote, search_start)
     if exact_match is not None:
         return QuoteAlignment(
             quote=quote,
@@ -421,6 +429,7 @@ def align_quote(
             char_intervals=_char_intervals([exact_match]),
             alignment_status=AlignmentStatus.MATCH_EXACT,
             matched_text=quote,
+            occurrence_count=text.count(quote),
         )
 
     greedy_match = _find_greedy_quote_spans(
@@ -429,6 +438,7 @@ def align_quote(
         min_match_len=min_match_len,
         max_gap_chars=max_gap_chars,
         max_segments=max_segments,
+        search_start=search_start,
     )
     if greedy_match is not None:
         text_spans = [segment.text_span for segment in greedy_match.segments]
@@ -471,6 +481,69 @@ def align_quote(
         score=max(0.0, min(1.0, score)),
         alignment_status=AlignmentStatus.MATCH_FUZZY,
     )
+
+
+def _spans_overlap(a: Span, b: Span) -> bool:
+    return a[0] < b[1] and b[0] < a[1]
+
+
+def _claim_spans(alignment: QuoteAlignment) -> list[Span]:
+    if alignment.char_intervals:
+        return [(ci.start_pos or 0, ci.end_pos or 0) for ci in alignment.char_intervals]
+    if alignment.approximate_char_intervals:
+        return [(ci.start_pos or 0, ci.end_pos or 0) for ci in alignment.approximate_char_intervals]
+    return []
+
+
+def align_quotes(
+    quotes: list[str],
+    text: str,
+    *,
+    min_match_len: int = 5,
+    max_gap_chars: int = 2,
+    max_segments: int = 3,
+    min_fuzzy_span_score: float = 0.75,
+) -> list[QuoteAlignment]:
+    """Align multiple quotes against *text*, resolving duplicate-occurrence ambiguity.
+
+    Calls :func:`align_quote` for each entry in *quotes* in order.  When the
+    result has ``char_intervals`` and any of those intervals overlaps a span
+    already claimed by an earlier quote, the function retries :func:`align_quote`
+    with ``search_start`` set to the end of the latest overlapping claimed span.
+    The retry result is used only if its score is at least as good as the
+    original; otherwise the original alignment is kept unchanged.
+
+    All resolved spans are added to a claimed set so that subsequent quotes
+    avoid them.  Quotes are processed in the order given, so callers should
+    pass them in the natural reading order of the source (e.g. panel A before
+    panel E) to ensure earlier panels get priority on the first occurrence.
+    """
+    kwargs: dict = dict(
+        min_match_len=min_match_len,
+        max_gap_chars=max_gap_chars,
+        max_segments=max_segments,
+        min_fuzzy_span_score=min_fuzzy_span_score,
+    )
+
+    claimed: list[Span] = []
+    results: list[QuoteAlignment] = []
+
+    for quote in quotes:
+        alignment = align_quote(quote, text, **kwargs)
+
+        if alignment.char_intervals:
+            spans = [(ci.start_pos or 0, ci.end_pos or 0) for ci in alignment.char_intervals]
+            overlapping = [c for c in claimed if any(_spans_overlap(s, c) for s in spans)]
+            if overlapping:
+                retry_start = max(c[1] for c in overlapping)
+                retry = align_quote(quote, text, search_start=retry_start, **kwargs)
+                if retry.char_intervals and retry.score >= alignment.score:
+                    alignment = retry
+
+        claimed.extend(_claim_spans(alignment))
+        results.append(alignment)
+
+    return results
 
 
 def _annotate_gaps_html(s: str, gaps: list[AlignmentGap] | None, css_class: str) -> str:

@@ -8,6 +8,7 @@ from .quote import (
     CharInterval,
     QuoteAlignment,
     align_quote,
+    align_quotes,
     render_alignment_view,
     render_coverage_view,
 )
@@ -19,6 +20,7 @@ __all__ = [
     "CharInterval",
     "QuoteAlignment",
     "align_quote",
+    "align_quotes",
     "compress_to_bounded_jpeg",
     "compute_plain_text",
     "convert_to_bounded_jpeg",

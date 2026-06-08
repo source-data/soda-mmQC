@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## [0.3.1] - 2026-06-08
+
+### Added
+- match multiple quotes from the same source text: order-aware quote alignment to prevent multiple quotes from matching to the same span in the source text, if that span is repeated later in the source.
+
 ## [0.3.0] - 2026-05-11
 
 ### Added
