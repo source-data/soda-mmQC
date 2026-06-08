@@ -1,6 +1,6 @@
 # Hierarchical scoring in schema-guided JSON comparison
 
-This note defines a **target design** for **roll-up scores**, **drill-down**, and **slot-level FP/FN** when recursively comparing prediction JSON to gold JSON under **JSON Schema**. It is **normative for the project’s direction** (implementations may still diverge until refactors land). It also explains why `**element_scores`** vs `**field_scores**` is easy to misread in a single-result-tree shape.
+This note defines a **target design** for **roll-up scores**, **drill-down**, and **slot-level FP/FN** when recursively comparing prediction JSON to gold JSON under **JSON Schema**. It is **normative for the project’s direction** (implementations may still diverge until refactors land). [Drill-down](#drill-down-field_scores-and-element_scores) uses two parallel child maps — `field_scores` and `element_scores` — because objects and lists name their children differently in schema.
 
 ## Vocabulary: slot, element, value
 
@@ -20,9 +20,9 @@ See also [evaluation-leaf-primitives.md](evaluation-leaf-primitives.md) for **le
 ## Why both roll-up and drill-down?
 
 - **Roll-up at this node** — Two ideas: (1) a **roll-up score** — one quality scalar in `[0, 1]` (often **mean of child `score`s**; lists may use `max(n_pred, n_exp)` in the denominator); (2) **confusion-style summaries** — `precision`, `recall`, `f1_score` (and strict “all matched” booleans) computed from **slot counts** built using each child’s **slot `match`**, declared **at this parent** (see **Where `match` is defined** below). `std_score` summarizes spread of child scores where applicable.
-- **Drill-down dictionaries** — Debugging, error messages, and per-path reporting need **where** the mismatch lives: which key, which list slot, which nested branch. Without nested structures, a single number throws away the explanation.
+- **Drill-down dictionaries** — Debugging, error messages, and per-path reporting need **where** the mismatch lives: which key, which list slot, which nested branch. Without nested structures, a single number throws away the explanation. See [Drill-down: `field_scores` and `element_scores`](#drill-down-field_scores-and-element_scores) for why there are two maps and how to read them.
 
-So every level of the recursion ideally carries: **(1) a summary for the node** and **(2) optional child maps** that preserve hierarchy.
+So every level of the recursion ideally carries: **(1) a summary for the node** and **(2) child maps** that preserve hierarchy — keyed the way JSON Schema names (or does not name) children at that node.
 
 **Leaves matter for roll-up:** each **primitive leaf** contributes `**score`** (and hard failures as `score = 0`). A leaf compares **property values** on objects (e.g. `pred["label"]` vs `exp["label"]`) or **element values** on lists when **X** is primitive—but in every case it only supplies `**score`**. **[Slot `match` is not a leaf responsibility](#where-match-is-defined-normative)** for **property slots** or **element slots** (nor for “did this whole nested branch succeed?”); the **object** or **list** parent decides that from the **child subtree** result (primitive or composite).
 
@@ -33,7 +33,7 @@ So every level of the recursion ideally carries: **(1) a summary for the node** 
 
 | Slot (parent)                            | Who declares `**match`** for that slot?                                       | Rule (default)                                                                                                                                                                                                                                                                                                                           |
 | ---------------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Object property slot** `k`             | The **object** parent, after comparing property values `pred[k]` and `exp[k]` | Build child subtree `ComparisonResult` `R`. Then `**match_k = predicate(R)`** — typically `**R.score >= τ**`, plus **FP/FN kind** for string property slots from the [adopted string policy](#adopted-policy-fp-vs-fn-for-required-string-properties-on-objects) (missing / `null` / wrong value). Primitives only supply `**R.score`**. |
+| **Object property slot** `k`             | The **object** parent, after comparing property values `pred[k]` and `exp[k]` | Build child subtree `ComparisonResult` `R`. Then `**match_k = predicate(R)`** — typically `**R.score >= τ**`, plus **FP/FN kind** for string property slots from the [free-text policy](#free-text-string-properties-fp-vs-fn-on-objects) (missing / `null` / wrong value). Primitives only supply `**R.score`**. |
 | **List element slot** (aligned `i`, `j`) | The **list** parent, after subtree compare for that pair                      | `**match_el = predicate(R_{i,j})`**, default `**R_{i,j}.score >= τ**`. Works for **any** element type **X** (primitive, object, nested array) because every **X** comparison returns a rolled-up `**score`** in `[0, 1]`.                                                                                                                |
 
 
@@ -44,7 +44,7 @@ So every level of the recursion ideally carries: **(1) a summary for the node** 
 At **parents** (structural roll-up, all field types):
 
 - **Roll-up score** — aggregate child `**score`s** (e.g. mean over required fields or over `n_all` list slots). Answers “how close” even when slot `**match`** is false.
-- **Structural slot TP / FP / FN** — extra keys, missing required properties, unmatched list rows (see **Objects** / **Lists**). Distinct from **applicability** / **answer** reporting below.
+- **Structural slot TP / FP / FN** — extra keys, missing required properties, unmatched list rows (see [Objects](#objects) / [Lists](#lists)). Distinct from **applicability** / **answer** reporting below.
 
 **Principle:** treat **JSON and JSON Schema** literally—do not collapse distinctions with Python idioms (`None`, truthiness on `""`).
 
@@ -206,15 +206,15 @@ Full 3×3 for debugging (all nine gold×pred pairs); **headline F1** should use 
 
 Structural comparison (objects, lists, Hungarian) is unchanged; only **reporting** gains this split.
 
-### Bubbling: two layers → property slots → object `match`
+## Bubbling: three parallel aggregates
 
-Do **not** fold applicability F1 and answer F1 into one opaque flag. At each node, think of **three parallel aggregates** (nested children roll up into parents the same way):
+Do **not** fold applicability F1 and answer F1 into one opaque structural flag. At **every** node in the recursion, three aggregates roll up in parallel (children → parents the same way):
 
-| Aggregate | What it measures | Typical roll-up |
-|-----------|------------------|-----------------|
-| **Roll-up `score`** | How close (graded) | Mean (or list `n_all` rule) of child **`score`s** |
-| **Structural slot counts** | Required keys / aligned elements / extras | Sum child slot TP, FP, FN; object/list P, R, F1 |
-| **Manifest reporting** | Applicability + answer (layers 1–2) | Sum layer labels from manifest profile per path |
+| Aggregate | What it measures | Typical roll-up | Detail |
+|-----------|------------------|-----------------|--------|
+| **Roll-up `score`** | How close (graded) | Mean of child `score`s (lists: `n_all` rule) | [Objects](#objects), [Lists](#lists) |
+| **Structural slot counts** | Property / element slots | Sum TP, FP, FN; P, R, F1 | [Where `match` is defined](#where-match-is-defined-normative), shape sections below |
+| **Manifest reporting** | Applicability + answer (layers 1–2) | Sum layer labels per manifest path | [Applicability and answer metrics](#applicability-and-answer-metrics-reporting) |
 
 ```mermaid
 flowchart TB
@@ -239,14 +239,64 @@ flowchart TB
   L --> Oscore
 ```
 
-**Per required property `k` (pipeline):**
+**Pipeline (every parent, abstract):**
 
-1. Recurse: `R = compare(pred[k], exp[k])` (leaf, nested object, or list).
-2. **Structural slot `match_k`** = `predicate(R)` — default **`R.score >= τ`**. Today’s code often mirrors this as `R.true_positive` on the child; the parent increments structural TP/FP/FN from that (and missing/extra keys).
-3. **Manifest (sidecar):** load profile for path `…/k`. Classify **layer 1** (applicability) and **layer 2** (answer, only if gold applicable) from `(exp[k], pred[k])`. Optional **`applicability_score`** + **`τ_applic`**. These feed **reporting aggregates only** — they **do not** replace structural **`match_k`** (do not AND “no spurious_applicable” into `predicate`; that duplicates **`τ_applic = 1`** on applicability alone).
-4. Store `R` in `field_scores[k]` (drill-down).
+1. **Recurse** — for each child slot (property `k` or aligned list element), `R = compare(pred, exp)`. The child may be a leaf, a [nested object](#nested-object-property-values), or a [list](#lists).
+2. **Structural `match`** — the parent sets `match = predicate(R)` (default `R.score >= τ`) and increments structural TP/FP/FN. Leaves supply `score` only; parents declare `match`.
+3. **Manifest (sidecar, reporting only)** — load the profile for the path; classify layer 1 (applicability) and layer 2 (answer when gold is applicable). Optional `applicability_score` + `τ_applic`. These feed **reporting aggregates only** — they **do not** replace structural `match` (do not AND “no spurious_applicable” into `predicate`; that duplicates `τ_applic = 1` on applicability alone).
+4. **Drill-down** — store each `R` in `field_scores[k]` (object parent) or `element_scores[…]` (list parent). See [Drill-down](#drill-down-field_scores-and-element_scores).
 
-**Object-level “whole object matched” (strict flag):**
+Export **both** structural summaries and layer summaries so dashboards are not forced to infer one from the other.
+
+**Implementation note:** code today implements **structural** roll-up + `true_positive` only. **Manifest layer sums** and **`τ_applic`** are not wired yet. **`whole_object_match`** stays structural (all required **`match_k`**, no extra keys). Applicability strictness belongs in **layer 1 metrics**, not as a hidden second conjunct on structural match.
+
+### Composition example: three tracks on one enum field
+
+The same property slot can look good on one track and bad on another. On `scale_bar_on_image` with `na_values = [""]`:
+
+**When gold is `""` and pred is `""`:**
+
+- **Structural:** `score = 1` → `slot_match_k` true → structural **TP**.
+- **Layer 1:** **correct_NA** (do not let many of these dominate **applicability F1** if that metric is meant to be hard — use a separate denominator or report **correct_NA** rate alone).
+- **Layer 2:** **skipped** (gold not applicable).
+
+**When gold is `yes` and pred is `no`:**
+
+- **Structural:** `slot_match_k` false → property **FP**-like at the object slot layer.
+- **Layer 1:** both applicable → pass to layer 2.
+- **Layer 2:** polarity **FP** or **FN** (from manifest `positive_value`).
+
+A checklist panel can have every `""`/`""` field as **correct_NA** (layer 1) while one `yes`/`no` flip makes `whole_object_match` false via structural `slot_match` — the tracks are independent by design.
+
+---
+
+## Three structural shapes
+
+The dispatcher looks at JSON Schema `type` (and `required`, `items`, etc.) at the current path. Three shapes matter for drill-down and roll-up:
+
+| Shape | Meaning | Roll-up / drill-down |
+|-------|---------|----------------------|
+| **Object** | JSON object with named properties | [Objects](#objects); drill-down via `field_scores` (property names) |
+| **List of X** | Array whose `items` schema describes element type **X** | [Lists](#lists); drill-down via `element_scores` (alignment keys); **X is not “scalar only”** |
+| **List of objects** | **X** is `object` | [Lists](#lists) + [`element_scores` and `field_scores` together](#list-of-objects-two-questions-two-dicts) |
+
+**What is X?** Whatever `items` declares: primitives (`string`, `number`, …), `object`, or `array` (nested lists). Recursion uses the same machinery at each depth.
+
+---
+
+## Objects
+
+### Required properties as slots
+
+**Unit of accounting:** each **required schema property** is one slot. Extra keys in the prediction (not in the gold schema’s required set for that object) are **FP**-like; a required property that gold requires but pred does not satisfy is **FN**-like.
+
+For each required key `k`, compare `pred[k]` to `exp[k]` to get child `R`. The parent computes **`match_k = predicate(R)`** and applies structural FP/FN rules ([free-text table](#free-text-string-properties-fp-vs-fn-on-objects) when the value is a string; [nested object rules](#nested-object-property-values) when the value is an object). With a manifest, also attach layer 1/2 labels for reporting on that path. Store `R` in `field_scores[k]`.
+
+At the **object** node (non-empty required set):
+
+- **`score`** — mean of child scores (missing keys → 0).
+- **Precision / recall / F1** — from **structural** property-slot TP, FP, FN (extra keys increase FP).
+- **`whole_object_match`** — strict all-or-nothing flag:
 
 ```text
 whole_object_match =
@@ -254,44 +304,32 @@ whole_object_match =
   ∧ (no extra keys in pred)
 ```
 
-- Same idea as today’s `ComparisonResult.true_positive` on objects in [`evaluation.py`](../soda_mmqc/core/evaluation.py): all required fields “passed” **and** no spurious properties.
-- **Stricter than object P/R:** you can have precision `1.0` with one FN if the denominator counts slots differently; the strict flag is **all-or-nothing** on required keys.
-- **Independent of headline applicability/answer F1:** e.g. every `""`/`""` panel field can be **correct_NA** (layer 1) while one `scale_bar_on_image` `yes`/`no` flip makes `whole_object_match` false via `slot_match` false.
+Same idea as today’s `ComparisonResult.true_positive` on objects in [`evaluation.py`](../soda_mmqc/core/evaluation.py). **Stricter than object P/R:** precision can be `1.0` with one FN if denominators count slots differently. **Independent of applicability/answer F1** (see [composition example](#composition-example-three-tracks-on-one-enum-field)).
 
-**When gold is `""` and pred is `""` on an enum field:**
+### Nested object property values
 
-- **Structural:** `score = 1` → `slot_match_k` true → that property counts as structural **TP**.
-- **Layer 1:** **correct_NA** (good, but do not let many of these dominate **applicability F1** if that metric is meant to be hard — use a separate denominator or report **correct_NA** rate alone).
-- **Layer 2:** **skipped** (gold not applicable).
+**When it applies:** a required property `k` has schema `type: object` (or a sub-schema with `properties`). The parent compares `pred[k]` and `exp[k]` as **whole subtrees**.
 
-**When gold is `yes` and pred is `no`:**
+**Unit of accounting at the parent:** property `k` is still **one slot**. The nested object’s required properties are slots **inside** child `R`, not on the grandparent.
 
-- **Structural:** `slot_match_k` false → property **FP**-like (and may also increment FN-style slot counts depending on child flags).
-- **Layer 1:** both applicable → pass to layer 2.
-- **Layer 2:** polarity **FP** or **FN** (from manifest `positive_value`).
+**Pipeline:**
 
-**Lists and nested objects (e.g. `outputs[]` panel row):**
+1. `R = compare(pred[k], exp[k])` — full [object](#required-properties-as-slots) machinery runs inside the child (and deeper if needed).
+2. Parent sets **`match_k = predicate(R)`** — default **`R.score >= τ`** (mean of nested field scores). Alternative: **`predicate(R) = R.whole_object_match`** when the product wants property `k` to pass only if the inner object is perfect.
+3. **Parent slot FP/FN:** if pred **supplies** a JSON object for `k` but `match_k` is false → **FP** on the parent (precision failure). If the key is **absent** or `null` when the schema disallows it → **FN** (same recall story as [string slots](#free-text-string-properties-fp-vs-fn-on-objects)). **Do not** promote inner field FP/FN to the parent’s slot counters — the parent asks whether the **nested branch** succeeded as a unit.
+4. **Drill-down:** `field_scores[k]` holds the full nested `ComparisonResult` (inner `field_scores`, inner P/R/F1, inner `whole_object_match`).
+5. **Manifest:** layer 1/2 labels attach to leaf paths under `k`; the parent **sums** descendant counts from `R.field_scores` for reporting roll-ups.
 
-- Each **element slot** gets a child `R` that may be a **whole object** subtree.
-- **Element `match_el`** = `predicate(R)` on that subtree (default: subtree roll-up **`score >= τ`**, or strict: subtree **`whole_object_match`** if you want element = “perfect panel”).
-- List P/R/F1 uses **element slots** (alignment, extras, misses).
-- Inside the panel object, property-level layer 1/2 counts **bubble up** by summing over `field_scores`; the list’s own manifest profile on `outputs[]` is optional if each element is an object with per-field profiles under `outputs[].<field>`.
+**Roll-up score:** the parent object `score` treats `R.score` like any other property (mean over required keys).
 
-**Checklist root:** top-level `outputs` array → list metrics; each panel object → object metrics + summed manifest counts. Export **both** strict flags and layer summaries so dashboards are not forced to infer one from the other.
+**Toy — parent with nested `metadata` object**
 
-**Implementation note:** code today implements **structural** roll-up + `true_positive` only. **Manifest layer sums** and **`τ_applic`** are not wired yet. **`whole_object_match`** stays structural (all required **`match_k`**, no extra keys). Applicability strictness belongs in **layer 1 metrics**, not as a hidden second conjunct on structural match.
+- Gold: `{ "id": 1, "metadata": { "author": "Ada", "year": 1843 } }`
+- Pred: `{ "id": 1, "metadata": { "author": "Ada", "year": 1900 } }`
+- Inner: `author` TP, `year` FP → inner `whole_object_match` false, inner `score` < 1.
+- Parent: `id` → TP; `metadata` → one property slot **FP**. Parent `whole_object_match` false. Drill-down in `field_scores["metadata"]` shows which inner field failed.
 
-### Objects (required keys as slots)
-
-**Unit of accounting:** each **required schema property** is one slot. Extra keys in the prediction (not in the gold schema’s required set for that object) are naturally **FP**-like; a required property for which gold is not satisfied is **FN**-like.
-
-For each required key `k`, compare `pred[k]` to `exp[k]` to get child `R`. The parent computes **`match_k = predicate(R)`** and applies structural FP/FN rules (free-text table below when no manifest), then increments **structural** TP / FP / FN slot counters. With a manifest, also attach layer 1/2 labels for reporting on that path.
-
-Then at the **object** node (non-empty required set):
-
-- **`score`** — mean of child scores (missing keys → 0).
-- **Precision / recall / F1** — from **structural** property-slot TP, FP, FN (extra keys increase FP).
-- **`whole_object_match`** — all required `match_k` true, no extra keys (see [bubbling](#bubbling-two-layers--property-slots--object-match) above).
+**Contrast with [lists](#lists):** the same JSON shape under a **property** is one **property slot** on the parent object. As an element of `outputs[]` it is an **element slot** on the list parent — same subtree `R`, different parent bookkeeping ([list of objects](#when-x-is-an-object-or-nested-array)).
 
 ### Free-text string properties: FP vs FN on objects
 
@@ -339,139 +377,200 @@ Slot totals: `**TP = 1`, `FP = 1`, `FN = 0`** → precision `1/2`, recall `1`. A
 - Gold: `{ "id": 1 }`, Pred: `{ "id": 1, "noise": true }`  
 - One **FP** slot from `noise`, so object precision drops; object `true_positive` is false.
 
-### List of X (including primitives and nested non-object items)
+## Lists
 
-**Unit of accounting:** **list elements after alignment**, not raw indices. Build pairwise **subtree `score`s**, **align** (e.g. Hungarian), then for each aligned pair let the **list parent** set **element-slot `match`** via `**match_el = predicate(R)**` (default `**R.score >= τ**`). Rows that are pred-only or gold-only after that step are **FP elements** / **FN elements** in the list story.
+**Unit of accounting:** **list elements after alignment**, not raw indices. At any list node, **TP / FP / FN always describe list *elements*** (whole items), never individual fields inside those items. Inner fields and inner lists have their own TP/FP/FN inside each element’s nested `ComparisonResult`.
 
-Let `TP_el` = number of matched pairs above threshold, `FP_el` = extra predicted elements, `FN_el` = missing expected elements. The implementation uses `n_all = max(len(pred), len(exp))` when averaging **scores** across slots (including zero-score stubs for missing/extra).
+### Element slots and alignment
 
-- **List precision** ≈ `TP_el / (TP_el + FP_el)` — “of what the model predicted as aligned mass, how much was good?”
-- **List recall** ≈ `TP_el / (TP_el + FN_el)` — “of what gold required, how much was recovered above threshold?”
+1. For every candidate pair `(pred_i, exp_j)`, run the **full subtree comparison** for element type **X** and read rolled-up subtree `score` in `[0, 1]` (primitives, [nested objects](#nested-object-property-values), or inner lists all produce a score).
+2. **Align** on those scores (e.g. Hungarian to maximize total similarity).
+3. For each aligned pair, the **list parent** sets **`match_el = predicate(R_{i,j})`** — default **`R_{i,j}.score >= τ`**. Alternative: subtree **`whole_object_match`** when an element must be a “perfect panel.”
+4. Pairs **below threshold** do not count as `TP_el`; those rows become **unmatched** → pred-only rows are **FP elements**, gold-only rows are **FN elements**.
+
+Let `TP_el` = matched pairs above threshold, `FP_el` = extra predicted elements, `FN_el` = missing expected elements. The implementation uses `n_all = max(len(pred), len(exp))` when averaging **scores** (including zero-score stubs for missing/extra).
+
+- **List precision** ≈ `TP_el / (TP_el + FP_el)`
+- **List recall** ≈ `TP_el / (TP_el + FN_el)`
 - **List F1** from precision and recall as usual.
+
+**Why not propagate inner TP/FP/FN to the list row?** The list layer answers **“which items aligned?”** (set-style). Inner metrics live in `element_scores["match_i_j"].field_scores` (objects) or deeper `element_scores` (arrays). See [drill-down](#drill-down-field_scores-and-element_scores).
+
+**Checklist root:** top-level `outputs` → list metrics; each panel object → [object metrics](#objects) + summed manifest counts from per-field profiles under `outputs[].<field>`.
+
+### When X is a primitive
+
+No list-level `field_scores` rollup — only `element_scores` with [synthetic alignment keys](#element_scores--break-down-by-list-slot).
 
 **Toy — list of strings, exact match threshold 1.0**
 
 - Gold: `["a", "b"]`, Pred: `["a", "b", "x"]`  
-- Alignment: match two pairs (`a`,`b`), one prediction row `x` is **extra** → `TP_el = 2`, `FP_el = 1`, `FN_el = 0` → precision `2/3`, recall `1`.
+- Alignment: two pairs match; `x` is **extra** → `TP_el = 2`, `FP_el = 1`, `FN_el = 0` → precision `2/3`, recall `1`.
 
 **Toy — same length, one substituted value (`x` vs `c`)**
 
 - Gold: `["a", "b", "c"]`, Pred: `["a", "b", "x"]`  
-- Hungarian matching still assigns **position-wise** pairs that maximize total similarity (here `(0,0)`, `(1,1)`, `(2,2)`). The first two pairs score `1.0` at exact match; `**"x"` vs `"c"`** scores `0.0` (below threshold `1.0`).
+- Hungarian assigns `(0,0)`, `(1,1)`, `(2,2)`. First two pairs score `1.0`; `"x"` vs `"c"` scores `0.0` (below threshold).
 
-Under **threshold-gated** alignment, a pair **below threshold** does **not** count toward `TP_el`. The prediction index `2` is then treated as an **unmatched prediction slot** → **one FP element** (pred side paid a “bad / unmatched” row). The expected index `2` is an **unmatched expected slot** → **one FN element** (gold side paid a “not recovered” row).
+The pair below threshold does **not** count toward `TP_el`. Pred index `2` → **one FP element**; gold index `2` → **one FN element**. Both labels apply at the element-slot layer — one failed alignment charges one pred row and one gold row, not the same atom twice.
 
-So **both** labels apply at the **element-slot** layer: `**x` → FP**, `**c` → FN**. That is not a logical contradiction: one **failed alignment** charges **one pred row** and **one gold row** in the bookkeeping, not the same JSON atom wearing two hats.
+With `TP_el = 2`, `FP_el = 1`, `FN_el = 1`: precision and recall both `2/3`.
 
-With `TP_el = 2`, `FP_el = 1`, `FN_el = 1`: **precision** `= 2/(2+1) = 2/3`, **recall** `= 2/(2+1) = 2/3`. Intuitively: one wrong pred slot and one missed gold slot relative to a perfect 3-for-3 alignment.
-
-**Toy — list of strings, one wrong value (sub-threshold pair)**
+**Toy — one wrong value (sub-threshold pair)**
 
 - Gold: `["a"]`, Pred: `["z"]`  
-- Hungarian still assigns the pair, but if similarity is **below** `match_threshold`, the pair does **not** count as `TP_el`. The prediction and expected rows then fall through to **unmatched** element accounting, so element-level FP/FN drive list precision/recall.
+- Hungarian assigns the pair; similarity below `match_threshold` → element-level FP/FN drive list precision/recall.
 
-### List of X when **X** is not a leaf (objects or nested arrays)
+### When X is an object or nested array
 
-**Normative rule:** at any list node, **TP / FP / FN always describe list *elements*** (whole **items** after alignment), never individual fields *inside* those items. Fields and inner lists have **their own** TP/FP/FN **inside** the nested `ComparisonResult` for that item.
-
-**How element-slot `match` is decided when X is an object or array:**
-
-1. For every pair `(pred_i, exp_j)`, run the **full subtree comparison** for type **X** and read that pair’s **rolled-up subtree `score`** in `[0, 1]` (already aggregating whatever is inside: object fields, inner lists, leaves).
-2. Build the **assignment** on those scores (e.g. Hungarian to maximize sum of scores).
-3. **Element-slot `match` at the list parent** — `predicate(R_{i,j})`; default `**R_{i,j}.score >= τ`** (one decision per **whole element** subtree, independent of whether **X** is primitive, object, or array).
-4. `**TP_el` / `FP_el` / `FN_el`** at this list are **exactly** the same slot story as for list-of-strings: matched slots above threshold, unmatched pred rows → FP, unmatched exp rows → FN.
-
-**Why not propagate inner TP/FP/FN to the list row?** The list layer answers **“which checklist items aligned?”** (set-style), not **“how many fields inside an item?”** Inner metrics live in `**element_scores["match_i_j"].field_scores`** (objects) or deeper `**element_scores`** (arrays).
+Element-slot `match` uses the same `predicate(R)` rule as primitives — one decision per **whole element** subtree.
 
 **List of objects (`X` = `object`):**
 
-- **Element layer** — as above; each matched item carries a full object subtree (`field_scores` per property, object-level P/R/F1 inside that subtree).
-- **Cross-list field rollups** — **additionally**, for each required **object field name** across items, the **second** `field_scores` block on the **list** node aggregates how that field behaved over all alignments (see below). Element TP/FP/FN and field rollups answer different questions.
+- **Element layer** — each matched item carries a full [object](#objects) subtree (`field_scores` per property, object-level P/R/F1 inside that subtree).
+- **Cross-list field rollups** — additionally, for each required object field name `f`, the **second** `field_scores` block on the **list** node aggregates how `f` behaved over all alignments: matched items contribute that field’s subtree; each **extra** pred row adds **FP** for every `f`; each **missing** gold row adds **FN** for every `f`. That yields another P/R/F1 per `f` in `field_scores[f]` — a different question from element-layer P/R (“how did field `title` behave across the whole checklist?”).
 
 **List of arrays (`X` = `array`):**
 
-- **No** list-level `field_scores` rollup (arrays have no named fields). Drill-down is `**element_scores`** only: each slot holds a nested list’s own `ComparisonResult` (with its own element-level TP/FP/FN for the inner list).
-- **Outer** TP/FP/FN = quality of **which inner lists** matched as wholes; **inner** TP/FP/FN = quality **inside** each inner list.
+- **No** list-level `field_scores` rollup. Drill-down is `element_scores` only; each slot holds a nested list’s own `ComparisonResult`.
+- **Outer** TP/FP/FN = which inner lists matched as wholes; **inner** TP/FP/FN = quality inside each inner list.
 
-**Toy — list of two small objects (same structure, one wrong field inside one item)**
+**Toy — list of two small objects (one wrong field inside one item)**
 
 - Gold: `[ { "id": 1, "t": "a" }, { "id": 2, "t": "b" } ]`  
 - Pred: `[ { "id": 1, "t": "a" }, { "id": 2, "t": "wrong" } ]`
 
-After alignment, both pairs can sit on the diagonal; the **second item’s subtree score** is below threshold if `t` drives the object roll-up down. Then that row behaves like the `**"x"` vs `"c"`** string case: **one FP element** (bad second pred object) and **one FN element** (second gold object not recovered as a `match`) at the **list** element layer—**even though** the first object matched. Inside the second item’s drill-down, you still see **which** field failed (`t`) and object-internal FP/FN there.
+After alignment, the second item’s subtree score is below threshold → **one FP element** and **one FN element** at the list layer (same pattern as `"x"` vs `"c"`). Inside the second item’s drill-down, object-internal FP/FN show which field failed (`t`).
 
 **Toy — list of lists**
 
 - Gold: `[ [1,2], [3] ]`, Pred: `[ [1,2], [9] ]`  
-- Outer list: two items; compare inner lists pairwise; if inner list `[3]` vs `[9]` fails threshold, same **FP/FN element** pattern at the **outer** slot level. Inner list `[1,2]` vs `[1,2]` has its own `TP_el` etc. inside the nested result.
+- Outer list: if `[3]` vs `[9]` fails threshold, same FP/FN element pattern at the outer slot level. Inner `[1,2]` vs `[1,2]` has its own `TP_el` inside the nested result.
 
-When **X** is a **primitive** only, there is **no** second `field_scores` rollup under the list—only `**element_scores`** with synthetic alignment keys.
+**Toy — list of `{ "id": integer }`, one missing item**
 
-**List-of-objects — second layer only (`field_scores` on the list node):** beyond element-layer `TP_el` / `FP_el` / `FN_el`, for each **required object field name** `f` aggregate over all list slots: matched items contribute that field’s subtree; each **extra** pred list row adds **FP** for every `f`; each **missing** gold row adds **FN** for every `f`. That yields **another** precision/recall/F1 per `f` in `**field_scores[f]`**—different question from element-layer P/R (“how did field `title` behave across the whole checklist list?”).
+- Gold: `[ { "id": 1 }, { "id": 2 } ]`, Pred: `[ { "id": 1 } ]`  
+- Element-level **FN**; list recall < 1. Field `id` rollup reflects one matched `id` and one missing row’s **FN** contribution.
 
-The words **precision / recall** on a **list-of-objects** node can therefore mean **element-layer** metrics **or** `**field_scores[f]` rollups**—always check which subtree you are reading.
-
-**Toy — list of `{ "id": integer }`, threshold such that only `id` must match**
-
-- Gold: `[ { "id": 1 }, { "id": 2 } ]`  
-- Pred: `[ { "id": 1 } ]`
-
-Hungarian matches one object; one gold object is missing → element-level **FN**; list recall < 1. For field `id`, the rollup counts reflect one matched `id` and one missing row’s **FN** contribution to that field’s rollup.
-
-### Accuracy
-
-**Accuracy** depends on which layer and field profile you mean. **Applicable-only** accuracy for a `yes`/`no` field can use (TP + TN) / (applicable slots). **Full-panel** accuracy that counts **correct_NA** needs its own denominator and label — do not merge with polarity F1 without an explicit definition.
+On a **list-of-objects** node, **precision / recall** can mean **element-layer** metrics **or** `field_scores[f]` rollups — always check which subtree you are reading.
 
 ---
 
-## Three structural shapes (why we distinguish them)
+## Accuracy
 
-The dispatcher looks at the JSON Schema `**type`** (and `required`, `items`, etc.) at the current path. Three shapes matter for how we attach drill-down:
+**Accuracy** depends on which layer and field profile you mean. **Applicable-only** accuracy for a `yes`/`no` field can use (TP + TN) / (applicable slots). **Full-panel** accuracy that counts **correct_NA** needs its own denominator and label — do not merge with polarity F1 without an explicit definition.
 
+## Drill-down: `field_scores` and `element_scores`
 
-| Shape               | Meaning                                                                 | Drill-down role                                                                                                                                                                     |
-| ------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Object**          | JSON object with named properties                                       | One nested result **per property name** (schema `required` keys).                                                                                                                   |
-| **List of X**       | JSON array whose `**items`** schema describes element type **X**        | Drill-down is **per list alignment slot** (see below). **X is not “scalar only.”**                                                                                                  |
-| **List of objects** | **X** is `object` — each element is an object with its own `properties` | Same per-slot drill-down, **plus** a second need: roll-ups **per object field name across the whole list** (e.g. average score for field `title` across all matched list elements). |
+Roll-up answers **how good** a node is. Drill-down answers **where** the comparison went wrong (or right) inside that node. Without child maps, a single `score` or F1 is not actionable — you cannot build error messages, per-field dashboards, or “open this panel and see which property failed.”
 
+The design problem: **objects and lists do not name their children the same way in JSON Schema.**
 
-### What is X in “list of X”?
+| Parent shape | How schema identifies children | Natural drill-down key |
+|--------------|-------------------------------|------------------------|
+| **Object** | `properties` + `required` → **property names** (`title`, `scale_bar_on_image`, …) | The JSON key string |
+| **Array** | `items` describes element **type**, not slot names or stable IDs | An **alignment event** (which pred index paired with which gold index, or extra/missing row) |
 
-**X** is whatever the schema says `**items`** is: the single element sub-schema. In our evaluator that can be:
+One generic `children: dict` would either force fake property names onto list slots or lose the cross-list field question (below). Hence **two** dict fields on every `ComparisonResult`, each reserved for one key namespace. At any given node, **one dict is filled and the other is empty** — except list-of-objects, which uses both for **different questions**.
 
-- **Primitives** in the JSON Schema sense: `string`, `number`, `integer`, `boolean` (sometimes loosely called “scalars” together with `null` when you add it).
-- `**object`** — list of objects (the case that triggers extra cross-element field roll-ups).
-- `**array`** — **nested list**; recursion continues with the same list machinery on inner arrays. So **X can absolutely be a list** (list of lists, list of lists of objects, …).
+### `field_scores` — break down by **property name**
 
-So “list of X” is **not** restricted to primitive leaves; **X** is any valid `items` schema the navigator recurses into.
+**When the parent is an object**, each required (or extra) property `k` gets one entry:
 
-## Hungarian alignment and synthetic keys
+```text
+field_scores[k] → ComparisonResult for compare(pred[k], exp[k])
+```
 
-For lists whose elements are **not** 1:1 with positional identity (we use **optimal bipartite matching** on pairwise similarity), a matched pair is identified by **indices** `(pred_idx, exp_idx)` after assignment. Keys such as `match_0_2` mean: “prediction index 0 was paired with expected index 2.” Unmatched prediction rows become `unexpected_element_{pred_idx}`; unmatched expected rows become `missing_element_{exp_idx}`.
+Keys are **real schema property names** — the same strings you see in JSON and in the evaluation manifest (`outputs[].scale_bar_on_image`). Values are **full subtrees** (leaves, nested objects, or lists), not just a float.
 
-Those strings are **synthetic** because the **schema does not name element slots**—only order and value. The key encodes the **alignment event**, not a property name from JSON.
+**On a list parent:** `field_scores` is **empty** unless `items` is `object`. Then it holds a **second** kind of entry (see [list-of-objects](#list-of-objects-two-questions-two-dicts) below) — not per-list-slot keys.
 
-## `element_scores` vs `field_scores` (and why `field_scores` feels wrong on lists)
+**On leaves:** both dicts are empty; the node only has `score`.
 
-The implementation uses **one** dataclass for every node type, with two dict fields. That keeps serialization uniform but **overloads names**:
+### `element_scores` — break down by **list slot**
 
-### On an **object** node
+**When the parent is a list**, each alignment outcome gets one entry:
 
-- `**field_scores`** — Keys are **real JSON property names**. Values are full nested `ComparisonResult` trees for that property. This matches the word “field.”
-- `**element_scores`** — Unused (empty dict).
+```text
+element_scores[alignment_key] → ComparisonResult for that whole element subtree
+```
 
-### On a **list** node
+Keys are **synthetic** because arrays have no named slots in schema — only order and value. After Hungarian (or positional) matching, keys encode the **alignment event**:
 
-- `**element_scores`** — Keys are the **synthetic alignment keys** above. Values are nested `ComparisonResult` trees for **each matched pair** or **stub rows** for extra/missing elements. This is the natural “list drill-down.”
-- `**field_scores`** — Filled **only when items are objects**. Keys are again **object field names**, but values are **aggregated summaries across the entire list** (mean score and P/R/F1-style counts for that field name over all alignments)—**not** another layer of per-slot object keys. Per-slot **per-field** detail still lives **inside** each match’s nested `ComparisonResult.field_scores`.
+| Key pattern | Meaning |
+|-------------|---------|
+| `match_{pred_idx}_{exp_idx}` | Prediction index `pred_idx` paired with expected index `exp_idx` and above threshold |
+| `unexpected_element_{pred_idx}` | Extra predicted row (unmatched or sub-threshold pred side) |
+| `missing_element_{exp_idx}` | Missing expected row (unmatched or sub-threshold gold side) |
 
-So `**field_scores` means two different things** depending on the parent:
+Example: `match_0_2` means “prediction index 0 was paired with expected index 2.”
 
-1. **Under an object:** “per-property subtree.”
-2. **Under a list-of-objects:** “per-property **list-level rollup**,” not the same semantic as (1).
+**On an object parent:** `element_scores` is always empty. Objects do not have element slots.
 
-Your doubt is reasonable: reusing `**field_scores`** for the list-of-objects rollup is **compact** (one JSON shape everywhere) but **confusing** because “field” suggests object keys, not “summary across many list elements.” Alternatives discussed for code (not all done yet): rename to roles like `list_item_field_rollups`, or use a **discriminated union** (`ObjectBreakdown` vs `ListBreakdown`) instead of two parallel dicts. See the refactor plan’s section on hierarchical results.
+### List-of-objects: two questions, two dicts
+
+Checklist `outputs[]` is the motivating case. A list-of-objects node must answer **two unrelated questions**:
+
+| Question | Layer | Dict | What you get |
+|----------|-------|------|--------------|
+| **Which panels aligned as wholes?** | Element | `element_scores` | One subtree per aligned/extra/missing **row** (`match_0_0` → whole panel object) |
+| **How did field `f` behave across all panels?** | Cross-list rollup | `field_scores` on the **list** node | Aggregated P/R/F1 and mean score for property name `f` over every alignment |
+
+These are not duplicates. Element-layer metrics can be perfect (two panels matched) while `field_scores["scale_bar_on_image"]` on the list node shows poor recall because one panel’s inner field failed — and vice versa.
+
+**Per-panel, per-field detail** lives one level deeper:
+
+```text
+element_scores["match_0_0"].field_scores["scale_bar_on_image"]
+```
+
+That path is the manifest path `outputs[].scale_bar_on_image` instantiated for panel 0. The list-level `field_scores["scale_bar_on_image"]` is the **aggregate across all panels** — the metric you want for “how often did the model get scale bars right on micrographs?” without re-walking every `match_*` entry.
+
+```mermaid
+flowchart TB
+  subgraph listNode [List node outputs array]
+    ES["element_scores: match_0_0, missing_element_1, …"]
+    FS["field_scores: scale_bar_on_image, micrograph, … rollups"]
+  end
+  subgraph panel [element_scores match_0_0 — one panel object]
+    PFS["field_scores: micrograph, scale_bar_on_image, … subtrees"]
+  end
+  ES --> panel
+  FS -.->|"aggregates over all panels"| PFS
+```
+
+### Walkthrough — nested path in a result tree
+
+Typical drill-down path in [`evaluation.py`](../soda_mmqc/core/evaluation.py) output (simplified):
+
+```text
+root.element_scores["match_0_0"]                    # list: which panel
+  .field_scores["scale_bar_on_image"]             # object: which property on that panel
+    .score                                         # leaf roll-up
+```
+
+If `sections_as_in_manuscript` is itself a list on the panel object:
+
+```text
+…field_scores["sections_as_in_manuscript"]
+  .element_scores["match_0_0"]                     # inner list alignment
+    .field_scores["name"]                          # property on section object
+```
+
+The pattern repeats at every depth: **object → `field_scores` (property names); list → `element_scores` (alignment keys)**. Nested objects use `field_scores` at each object layer; nested lists use `element_scores` at each list layer.
+
+### Implementation note: one dataclass, overloaded `field_scores`
+
+The repo uses a **single** `ComparisonResult` type everywhere ([`evaluation.py`](../soda_mmqc/core/evaluation.py)) so JSON serialization stays uniform. That forces both dicts onto every node even when one is always `{}`.
+
+**The naming trap:** `field_scores` means:
+
+1. **Under an object** — per-property **subtrees** (keys = property names).
+2. **Under a list-of-objects** — per-property **cross-list rollups** (keys = same property names, values = aggregates, not another alignment layer).
+
+So “open `field_scores`” is ambiguous until you know the **parent node type**. `element_scores` is less ambiguous — it is only meaningful under lists.
+
+Alternatives for a future refactor: discriminated breakdown types (`ObjectBreakdown` vs `ListBreakdown`), or rename list rollups to `list_item_field_rollups`. Behavior in this wiki is the contract; naming may change when the type is split.
 
 ## How this should guide implementation
 
@@ -479,13 +578,14 @@ For **schema-guided** recursive comparison:
 
 1. **Every recursive node** should be able to expose a **roll-up** so parents can aggregate (mean, counts, Hungarian cost, etc.).
 2. **Every non-leaf node** should be able to expose **drill-down** keyed in a way that matches **object vs list** semantics—not only generic “children.”
-3. **List-of-objects** is the only shape that needs **two** drill-down concepts: **per alignment slot** (whole element comparison) and **per schema field name across the list** (cross-element rollup). That is why the current type carries two dicts even though names collide mentally.
+3. **List-of-objects** is the only shape that needs **both** dicts at once: `element_scores` for per-alignment subtrees and `field_scores` for cross-list field rollups — see [list-of-objects: two questions](#list-of-objects-two-questions-two-dicts).
 4. **Object string slots** should implement the **adopted FP/FN policy** above (JSON `""` vs `null` vs missing key)—refactors should converge code to this contract.
 
 When we refactor toward a package layout (e.g. schema-driven **leaves**, **compare_lists** / **compare_objects**, and a clearer **ComparisonResult**), this page is the **normative contract** for behavior and naming. Legacy code may still differ until aligned.
 
 ## See also
 
+- [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases (shared schema/manifest) for lists, objects, list-of-objects, and nesting.
 - [Leaf primitives (strings, numbers, booleans)](evaluation-leaf-primitives.md) — how terminal / non-structured values are compared schema-first.
 - [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md) — why this comparator is custom vs OSS frameworks.
 - [README.md](README.md) — wiki conventions.

@@ -58,3 +58,4 @@ Canonical list with blurbs: **[`index.md`](index.md)**. Quick links:
 | JSON evaluation vs OSS frameworks | [`evaluation-json-vs-open-source.md`](evaluation-json-vs-open-source.md) |
 | Hierarchical scoring (normative FP/FN for JSON `""`/`null`, roll-up) | [`evaluation-hierarchical-scoring.md`](evaluation-hierarchical-scoring.md) |
 | Leaf primitives (`score`, `match`, strings, numbers, booleans) | [`evaluation-leaf-primitives.md`](evaluation-leaf-primitives.md) |
+| Evaluation toy examples (shared schema/manifest) | [`evaluation-toy-examples.md`](evaluation-toy-examples.md) |

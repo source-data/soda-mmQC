@@ -47,3 +47,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-05-21] lint | Applicability: separate **`τ_applic`** / `applicability_score`; do not AND spurious_applicable into structural `whole_object_match` (equivalent to `τ_applic=1` only on layer 1).
 
 ## [2026-05-21] design | Target **`LeafComparisonResult`** vs **`ComparisonResult`** (wiki only; code reverted — thinking phase).
+
+## [2026-06-08] ingest | `evaluation-toy-examples.md`: shared toy schema/manifest; worked examples for list-of-primitives, object slots, list-of-objects, nested `item.meta`.

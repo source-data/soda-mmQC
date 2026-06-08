@@ -113,5 +113,6 @@ Example mistake this prevents: attaching `field_scores={"nested": …}` to a bar
 ## See also
 
 - [Hierarchical scoring](evaluation-hierarchical-scoring.md) — how leaf scores roll up inside objects and lists.
+- [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases using a shared schema and manifest.
 - [JSON evaluation vs open source](evaluation-json-vs-open-source.md) — why this leaf machinery stays project-specific.
 
