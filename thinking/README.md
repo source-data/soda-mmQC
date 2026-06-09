@@ -56,6 +56,7 @@ Canonical list with blurbs: **[`index.md`](index.md)**. Quick links:
 |--------|----------|
 | Wiki usage and maintenance | [`README.md`](README.md) |
 | JSON evaluation vs OSS frameworks | [`evaluation-json-vs-open-source.md`](evaluation-json-vs-open-source.md) |
-| Hierarchical scoring (normative FP/FN for JSON `""`/`null`, roll-up) | [`evaluation-hierarchical-scoring.md`](evaluation-hierarchical-scoring.md) |
-| Leaf primitives (`score`, `match`, strings, numbers, booleans) | [`evaluation-leaf-primitives.md`](evaluation-leaf-primitives.md) |
+| Flat leaf scoring (normative) | [`evaluation-scoring.md`](evaluation-scoring.md) |
 | Evaluation toy examples (shared schema/manifest) | [`evaluation-toy-examples.md`](evaluation-toy-examples.md) |
+| Leaf primitives (`score`, strings, numbers, booleans) | [`evaluation-leaf-primitives.md`](evaluation-leaf-primitives.md) |
+| Hierarchical scoring (DEPRECATED) | [`evaluation-hierarchical-scoring-DEPRECATED.md`](evaluation-hierarchical-scoring-DEPRECATED.md) |

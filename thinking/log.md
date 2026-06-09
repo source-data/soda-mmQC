@@ -49,3 +49,15 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-05-21] design | Target **`LeafComparisonResult`** vs **`ComparisonResult`** (wiki only; code reverted — thinking phase).
 
 ## [2026-06-08] ingest | `evaluation-toy-examples.md`: shared toy schema/manifest; worked examples for list-of-primitives, object slots, list-of-objects, nested `item.meta`.
+
+## [2026-06-08] ingest | **Flat leaf scoring:** new `evaluation-scoring.md`; rewrote `evaluation-toy-examples.md` (leaf paths only, layer 1/2); `evaluation-hierarchical-scoring.md` marked archive in catalog.
+
+## [2026-06-08] lint | `evaluation-scoring.md`: required `by_property` summaries (mean_score, layer1/2 counts per leaf property); no cross-property aggregation; clarified multi-instance comparisons.
+
+## [2026-06-08] lint | `evaluation-scoring.md` rewritten self-contained: no hierarchical compare/drop table; manifest and scoring rules inlined.
+
+## [2026-06-08] design | List-of-objects alignment: row similarity = mean primitive scores (gold-applicable fields default; fallback all row leaves); alignment-only, not in `by_property`.
+
+## [2026-06-08] design | List-of-objects alignment simplified: manifest `list_alignment` names row field(s) only (e.g. `panels: ["label"]`); removed mean-over-all/applicable heuristics.
+
+## [2026-06-08] lint | Renamed `evaluation-hierarchical-scoring.md` → `evaluation-hierarchical-scoring-DEPRECATED.md`; updated catalog links.

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "evaluation-hierarchical-scoring.md",
+                "file": "evaluation-hierarchical-scoring-DEPRECATED.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "evaluation-hierarchical-scoring"
+              "title": "evaluation-hierarchical-scoring-DEPRECATED"
             }
           }
         ]
@@ -190,6 +190,6 @@
     "index.md",
     "evaluation-leaf-primitives.md",
     "evaluation-json-vs-open-source.md",
-    "evaluation-hierarchical-scoring.md"
+    "evaluation-hierarchical-scoring-DEPRECATED.md"
   ]
 }

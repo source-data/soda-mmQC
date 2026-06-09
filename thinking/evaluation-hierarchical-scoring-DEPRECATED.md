@@ -1,6 +1,8 @@
-# Hierarchical scoring in schema-guided JSON comparison
+# DEPRECATED — Hierarchical scoring in schema-guided JSON comparison
 
-This note defines a **target design** for **roll-up scores**, **drill-down**, and **slot-level FP/FN** when recursively comparing prediction JSON to gold JSON under **JSON Schema**. It is **normative for the project’s direction** (implementations may still diverge until refactors land). [Drill-down](#drill-down-field_scores-and-element_scores) uses two parallel child maps — `field_scores` and `element_scores` — because objects and lists name their children differently in schema.
+> **DEPRECATED.** Do not use for new work. Normative design: [evaluation-scoring.md](evaluation-scoring.md). This file is kept for history only (`evaluation-hierarchical-scoring-DEPRECATED.md`).
+
+This note described a **recursive** design for **roll-up scores**, **drill-down**, and **slot-level FP/FN** when comparing prediction JSON to gold JSON under **JSON Schema**. [Drill-down](#drill-down-field_scores-and-element_scores) used two parallel child maps — `field_scores` and `element_scores`.
 
 ## Vocabulary: slot, element, value
 
@@ -585,7 +587,8 @@ When we refactor toward a package layout (e.g. schema-driven **leaves**, **compa
 
 ## See also
 
-- [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases (shared schema/manifest) for lists, objects, list-of-objects, and nesting.
+- [Evaluation scoring](evaluation-scoring.md) — normative design (use this).
+- [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases (flat leaf model).
 - [Leaf primitives (strings, numbers, booleans)](evaluation-leaf-primitives.md) — how terminal / non-structured values are compared schema-first.
 - [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md) — why this comparator is custom vs OSS frameworks.
 - [README.md](README.md) — wiki conventions.

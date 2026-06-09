@@ -1,0 +1,331 @@
+# Evaluation scoring (flat leaf model)
+
+Normative design for comparing prediction JSON to gold JSON under **JSON Schema** and an **evaluation manifest** (`eval-manifest.json`).
+
+One comparator invocation takes a single `exp` JSON and a single `pred` JSON with the same schema. The comparator:
+
+1. Identifies **leaf properties** (lowest-level fields).
+2. Compares values (with list alignment where needed).
+3. Emits a **score** per leaf instance and, when configured, **layer 1** (applicability) and **layer 2** (answer) labels.
+4. Emits **per leaf property** summaries: `mean_score`, `layer1_counts`, `layer2_counts`.
+
+Worked examples: [evaluation-toy-examples.md](evaluation-toy-examples.md).
+
+---
+
+## Leaf properties
+
+A **leaf property** is a schema path whose value is either:
+
+- a **primitive** (`string`, `number`, `integer`, `boolean`), or
+- an **array of primitives** (e.g. `tags: string[]`).
+
+Intermediate objects are not scored as units — only their primitive descendants are leaves. Object nesting in the schema is flattened to dotted paths (`item.meta.author`).
+
+**Path notation:**
+
+| Form | Meaning |
+|------|---------|
+| `item.label` | One scalar leaf |
+| `tags` | One leaf whose value is a primitive array |
+| `panels[].status` | Leaf property pattern; one **instance** per aligned panel row (`panels[0].status`, `panels[1].status`, …) |
+
+Nested arrays as leaf values are out of scope.
+
+**Discovery:** walk `schema.json` from the output root; follow `properties` and `items`; stop at primitives or `array` whose `items` is primitive.
+
+**Toy schema leaves (illustration):**
+
+```text
+tags
+item.id
+item.label
+item.status
+item.meta.author
+item.meta.year
+panels[].id
+panels[].label
+panels[].status
+```
+
+---
+
+## Leaf instances vs leaf properties
+
+| Term | Meaning |
+|------|---------|
+| **Leaf property** | Manifest/schema path **pattern** (e.g. `panels[].status`) |
+| **Leaf instance** | One concrete path in this comparison (e.g. `panels[1].status`) |
+
+A single `exp` / `pred` pair may contain **many instances** of the same property (multiple panels, multiple document rows in an `outputs[]` list, etc.). Summaries aggregate **within one leaf property only** — never across properties (`tags` is not averaged with `panels[].label`).
+
+---
+
+## Pipeline
+
+```mermaid
+flowchart LR
+  schema[schema.json] --> flatten[Flatten to leaf paths]
+  flatten --> align[Align lists where needed]
+  align --> score[Score each instance]
+  manifest[eval-manifest.json] --> report[Layer 1 and 2]
+  score --> report
+  report --> instances[Per-instance results]
+  report --> summary[by_property summaries]
+```
+
+1. **Flatten** — enumerate leaf paths from schema and manifest.
+2. **Align lists** — Hungarian matching for primitive arrays and for object lists before reading per-row leaves (see below).
+3. **Score** — per instance, `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
+4. **Report** — layer 1, then layer 2 when layer 1 = `correct_applicable`.
+5. **Summarize** — required `by_property` block per leaf property key.
+
+Missing required values, disallowed `null`, and failed alignment → `score = 0` on the affected instance unless a profile defines otherwise.
+
+---
+
+## Comparator output (required)
+
+### Per leaf instance
+
+Every concrete path:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `path` | yes | e.g. `panels[1].status` |
+| `leaf_property` | yes | Pattern, e.g. `panels[].status` |
+| `exp_value` / `pred_value` | yes | Compared values after alignment |
+| `score` | yes | `[0, 1]` |
+| `layer1` | if manifest profile | Applicability label |
+| `layer2` | if profile and `correct_applicable` | Answer label |
+
+For a **list-of-primitives** leaf (`tags`), the single instance `tags` includes the aggregated list `score` and optional alignment diagnostics (`TP`, `FP`, `FN` for element matching).
+
+### Per leaf property (`by_property`)
+
+For **each** leaf property key, the comparator **must** return:
+
+| Field | Description |
+|-------|-------------|
+| `mean_score` | Mean of instance `score`s for this property only |
+| `layer1_counts` | Counts of layer 1 labels (manifest-profiled instances) |
+| `layer2_counts` | Counts of layer 2 labels (instances with `correct_applicable`) |
+
+Properties without a manifest profile still appear with `mean_score`; `layer1_counts` / `layer2_counts` may be empty.
+
+```json
+{
+  "instances": [ "…" ],
+  "by_property": {
+    "item.label": {
+      "mean_score": 1.0,
+      "layer1_counts": { "correct_applicable": 1 },
+      "layer2_counts": { "match": 1 }
+    },
+    "item.status": {
+      "mean_score": 1.0,
+      "layer1_counts": { "correct_NA": 1 },
+      "layer2_counts": {}
+    },
+    "panels[].status": {
+      "mean_score": 1.0,
+      "layer1_counts": { "correct_applicable": 1, "correct_NA": 1 },
+      "layer2_counts": { "TP": 1 }
+    },
+    "tags": {
+      "mean_score": 1.0,
+      "layer1_counts": {},
+      "layer2_counts": {}
+    }
+  }
+}
+```
+
+Do **not** pool counts or means across different leaf properties. Compute precision, recall, and F1 per property from that property’s counts when needed.
+
+---
+
+## Scoring rules
+
+### Primitives
+
+| Type | Default |
+|------|---------|
+| `string`, `number`, `integer`, `boolean` | Exact equality → `score` 1.0 or 0.0 |
+| Graded / fuzzy strings | Similarity in `[0, 1]`; layer 2 match uses `match_threshold` from manifest |
+| Enum | Exact match on allowed literal → 1.0 or 0.0 |
+
+Default exact-match threshold: `τ = 1.0`.
+
+### Missing, null, and empty string
+
+Treat JSON literally:
+
+- **Absent key** — no value supplied; `score = 0`.
+- **`null`** when schema is string-only — no string supplied; `score = 0`.
+- **`""`** — a string value exists; compare like any other string. For enums, `""` may mean N/A when listed in manifest `na_values` (layer 1), not “missing”.
+
+Do not use Python truthiness (`if not value:`) — it conflates `""`, `null`, and absent keys.
+
+### List of primitives
+
+Example path: `tags` (`string[]`).
+
+1. Build pairwise similarity `exp[i]` vs `pred[j]` (exact → 0 or 1).
+2. Hungarian assignment; pairs with similarity `< τ` are unmatched (alignment **FP** on pred row, **FN** on gold row).
+3. Instance `tags` **score** = mean over `n_all = max(len(exp), len(pred))`, counting unmatched slots as 0.
+
+Layer 1 / 2 apply only if the manifest defines a profile for that path.
+
+### List of objects
+
+Example pattern: `panels[]` with leaves `panels[].id`, `panels[].label`, `panels[].status`.
+
+Rows must be **aligned** before per-field leaf instances exist. Alignment uses **only the field(s) named in the manifest** for that list — not a mean over every primitive on the row.
+
+#### Row similarity (alignment only)
+
+The manifest declares **`list_alignment`**: for each list-of-objects property, which row field(s) identify a match. Usually **one** field (e.g. `label`).
+
+```json
+"list_alignment": {
+  "panels": ["label"]
+}
+```
+
+Field names are **relative to the row object** (`label` → compare `panels[i].label` vs `panels[j].label`). For checklist `outputs[]`, you might use `["micrograph"]` or another stable key.
+
+For each candidate pair `(exp_i, pred_j)`:
+
+```text
+s(i,j) = mean{ score(exp_i[k], pred_j[k]) : k in list_alignment[list_name] }
+```
+
+With a single key, `s(i,j)` is just that field’s leaf score (exact → 0 or 1). `s(i,j)` is **only for Hungarian matching** — not reported in `by_property`.
+
+#### Alignment steps
+
+1. Build `s(i,j)` from the manifest alignment keys only.
+2. Hungarian assignment; pair is **matched** only if `s(i,j) >= τ` (default `τ = 1.0` for exact keys).
+3. For each gold row index `k`, take the assigned pred row and emit all row leaves (`panels[k].id`, `panels[k].label`, `panels[k].status`, …).
+4. Score each leaf instance; apply layer 1 / 2 per manifest field profiles.
+
+Unmatched gold row → leaf instances with missing pred → `score = 0`. Unmatched pred row → alignment FP.
+
+Other row fields (e.g. `status`) are scored **after** pairing. A wrong `status` on a correctly aligned row affects only that leaf — not how rows were matched.
+
+Every object list in the schema needs a `list_alignment` entry (or a documented default) before evaluation runs.
+
+---
+
+## Evaluation manifest
+
+**Location:** alongside checklist schema, e.g.  
+`soda_mmqc/data/checklist/fig-checklist/<checklist-name>/eval-manifest.json`
+
+**Purpose:** map leaf property paths → metric profile. The evaluator loads `schema.json` + `eval-manifest.json`. Evaluation semantics live here, **not** in `schema.json` (which remains the structured-output contract for the model).
+
+**Path keys:** JSON-pointer-style patterns from the output root, e.g. `outputs[].scale_bar_on_image`, `item.status`. `[]` matches any list index.
+
+**Example:**
+
+```json
+{
+  "checklist": "toy-eval-examples",
+  "defaults": {
+    "answer_metric": "binary_polarity",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "panels": ["label"]
+  },
+  "fields": {
+    "item.status": {
+      "na_values": [""],
+      "answer_metric": "binary_polarity"
+    },
+    "item.label": {
+      "answer_metric": "graded_string",
+      "match_threshold": 1.0
+    },
+    "panels[].status": {
+      "na_values": [""],
+      "answer_metric": "binary_polarity"
+    },
+    "panels[].label": {
+      "answer_metric": "graded_string",
+      "match_threshold": 1.0
+    }
+  }
+}
+```
+
+**Manifest keys:**
+
+| Key | Role |
+|-----|------|
+| `list_alignment` | Map **list property name** → array of **row field names** used only to align list-of-object elements (e.g. `"panels": ["label"]`) |
+| `na_values` | Per field: literals meaning **not applicable** (layer 1). Omit or `[]` = always applicable. |
+| `answer_metric` | `binary_polarity` \| `multiclass` \| `graded_string` |
+| `positive_value` / `negative_value` | For `binary_polarity` (layer 2) |
+| `match_threshold` | `τ` for graded / fuzzy layer 2 match |
+
+**Schema vs manifest:** JSON Schema `enum` lists allowed literals but does **not** define which is N/A or which is “positive”. Configure `na_values` and polarity in the manifest. Repo examples: `enum: ["yes", "no", ""]` needs `na_values: [""]`; `enum: ["yes", "no", "not needed"]` needs `na_values: ["not needed"]`.
+
+Leaves without a manifest entry receive **score** only.
+
+---
+
+## Layer 1 — Applicability
+
+For each instance with a manifest profile:
+
+
+| Gold applicable? | Pred applicable? | Label |
+|------------------|------------------|-------|
+| no (`na_values`) | no | **correct_NA** |
+| no | yes | **spurious_applicable** |
+| yes | no | **withheld_applicable** |
+| yes | yes | **correct_applicable** (eligible for layer 2) |
+
+**Applicable** = value present and ∉ `na_values`. Missing pred when gold expected an answer → **withheld_applicable**. Missing pred when gold is N/A (`""` ∈ `na_values`) → **correct_NA** (pred did not spuriously answer).
+
+`layer1_counts` in `by_property` tally these labels across instances of that property.
+
+---
+
+## Layer 2 — Answer
+
+Runs only when layer 1 = **correct_applicable**. Denominator: instances where gold was applicable.
+
+
+| `answer_metric` | Layer 2 labels |
+|-----------------|----------------|
+| **binary_polarity** | **TP**, **FP**, **FN**, **TN** (`positive_value` / `negative_value`, applicable gold only) |
+| **multiclass** | **match** / **mismatch**; build confusion matrix per property |
+| **graded_string** | **match** / **mismatch** where `score >= match_threshold` |
+
+`no` / `no` when `negative_value` is `"no"` → **TN**. Layer 2 for `correct_NA` instances is omitted (not counted in `layer2_counts`).
+
+---
+
+## What this design excludes
+
+- Scores at intermediate object or list nodes.
+- A single global score mixing unrelated leaf properties.
+- Inferring N/A or polarity from enum order or English word shape alone.
+
+---
+
+## Implementation
+
+Target module: [`evaluation.py`](../soda_mmqc/core/evaluation.py) (refactor in progress). Contract: flatten → align → score instances → manifest layers → `instances` + `by_property`.
+
+---
+
+## See also
+
+- [Toy examples](evaluation-toy-examples.md) — gold/pred walkthroughs on a shared schema and manifest.
+- [Leaf primitives](evaluation-leaf-primitives.md) — additional detail on string comparison modes and `LeafComparisonResult` target types.

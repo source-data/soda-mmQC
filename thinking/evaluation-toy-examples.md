@@ -1,55 +1,57 @@
 # Evaluation toy examples
 
-Worked examples for [hierarchical scoring](evaluation-hierarchical-scoring.md), using **one shared toy schema** and **one toy manifest** throughout. Each section isolates a structural shape; unchanged parts of gold and pred are omitted or shown as `…` for brevity.
+Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). One shared toy schema and manifest; each example lists **leaf instances** and **`by_property`** summaries.
 
-**Assumptions (unless noted):**
+**Assumptions:**
 
-- **Structural threshold** `τ = 1.0` — exact match on primitives and enums; a pair must score `1.0` to count as a matched list element or property slot.
-- **String comparison** — character-exact (no fuzzy matching in these toys).
-- **List alignment** — Hungarian assignment on pairwise subtree scores, then threshold gating ([Lists](evaluation-hierarchical-scoring.md#lists)).
-- **Manifest** — layers 1–2 are **reporting only**; they do not replace structural `match` ([Bubbling](evaluation-hierarchical-scoring.md#bubbling-three-parallel-aggregates)).
+- **Exact match** on primitives (`τ = 1.0`) unless noted.
+- **`tags`** — list-of-primitives leaf: Hungarian alignment, one aggregate `score` on path `tags` (+ alignment TP/FP/FN diagnostics).
+- **`panels[]`** — align panel **rows** first; then leaves `panels[k].id`, `panels[k].label`, `panels[k].status` for each gold index `k` using the matched pred row (or missing).
+- **Manifest** — layer 1 / 2 only on paths with a profile (`item.status`, `item.label`, `panels[].status`, `panels[].label`).
 
-Normative definitions: [evaluation-hierarchical-scoring.md](evaluation-hierarchical-scoring.md). Leaf `score` rules: [evaluation-leaf-primitives.md](evaluation-leaf-primitives.md).
+---
 
-**How to read an example:** work **bottom-up**, then roll up — same order as [bubbling](evaluation-hierarchical-scoring.md#bubbling-three-parallel-aggregates).
+## Leaf inventory (toy schema)
 
-1. **Per-slot structural match** — leaf `score`, `match_k`, structural TP/FP/FN for each slot.
-2. **Manifest layer 1 & 2** — reporting labels per manifest path (parallel track; does not replace step 1).
-3. **Parent roll-up** — roll-up `score`, structural TP/FP/FN + `whole_object_match`, sums of layer 1 / layer 2 labels.
+| Path | Value type | Manifest profile |
+|------|------------|------------------|
+| `tags` | `string[]` | — (score only) |
+| `item.id` | integer | — |
+| `item.label` | string | `graded_string` |
+| `item.status` | enum `""` / `yes` / `no` | `binary_polarity`, `na_values: [""]` |
+| `item.meta.author` | string | — |
+| `item.meta.year` | integer | — |
+| `panels[k].id` | integer | — |
+| `panels[k].label` | string | `graded_string` (pattern `panels[].label`) |
+| `panels[k].status` | enum | `binary_polarity`, `na_values: [""]` |
 
-[§2 Objects](#2-objects-with-primitive-properties) uses all three steps explicitly. §1 and §4 have no manifest rows on those paths; §3 adds list element slots before field rollups.
+**How to read each example:**
+
+1. **What changed** — diff vs baseline gold.
+2. **Per leaf instance** — table of concrete paths: `score`, layer 1, layer 2 (— when not applicable).
+3. **Per leaf property** — required summary for each property key (`item.label`, `panels[].status`, …): `mean_score`, `layer1_counts`, `layer2_counts` — **never mixed across properties** ([evaluation-scoring.md](evaluation-scoring.md#2--per-leaf-property-required)).
+4. **List alignment** — diagnostics for `tags` or `panels` row matching only.
+
+Layer 1 labels: **correct_NA** · **spurious_applicable** · **withheld_applicable** · **correct_applicable**.  
+Layer 2 runs only when layer 1 = **correct_applicable**.
 
 ---
 
 ## Shared toy schema
-
-Illustrative checklist output root — three top-level properties that cover all four shapes:
-
-| Property | Schema shape | Section |
-|----------|--------------|---------|
-| `tags` | `array` of `string` | [§1 Lists of primitives](#1-lists-of-primitives) |
-| `item` | `object` with primitive fields + nested `meta` | [§2 Objects](#2-objects-with-primitive-properties), [§4 Nested objects](#4-nested-objects) |
-| `panels` | `array` of `object` | [§3 Lists of objects](#3-lists-of-objects) |
 
 ```json
 {
   "type": "object",
   "required": ["tags", "item", "panels"],
   "properties": {
-    "tags": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
+    "tags": { "type": "array", "items": { "type": "string" } },
     "item": {
       "type": "object",
       "required": ["id", "label", "status", "meta"],
       "properties": {
         "id": { "type": "integer" },
         "label": { "type": "string" },
-        "status": {
-          "type": "string",
-          "enum": ["", "yes", "no"]
-        },
+        "status": { "type": "string", "enum": ["", "yes", "no"] },
         "meta": {
           "type": "object",
           "required": ["author", "year"],
@@ -68,10 +70,7 @@ Illustrative checklist output root — three top-level properties that cover all
         "properties": {
           "id": { "type": "integer" },
           "label": { "type": "string" },
-          "status": {
-            "type": "string",
-            "enum": ["", "yes", "no"]
-          }
+          "status": { "type": "string", "enum": ["", "yes", "no"] }
         }
       }
     }
@@ -79,7 +78,7 @@ Illustrative checklist output root — three top-level properties that cover all
 }
 ```
 
-**Baseline gold** (reference for all examples — other sections only change the highlighted part):
+**Baseline gold:**
 
 ```json
 {
@@ -97,6 +96,8 @@ Illustrative checklist output root — three top-level properties that cover all
 }
 ```
 
+**Baseline pred** = baseline gold (perfect run) unless an example says otherwise.
+
 ---
 
 ## Shared toy manifest
@@ -110,450 +111,208 @@ Illustrative checklist output root — three top-level properties that cover all
     "negative_value": "no",
     "na_values": []
   },
+  "list_alignment": {
+    "panels": ["label"]
+  },
   "fields": {
-    "item.status": {
-      "na_values": [""],
-      "answer_metric": "binary_polarity"
-    },
-    "item.label": {
-      "answer_metric": "graded_string",
-      "match_threshold": 1.0
-    },
-    "panels[].status": {
-      "na_values": [""],
-      "answer_metric": "binary_polarity"
-    },
-    "panels[].label": {
-      "answer_metric": "graded_string",
-      "match_threshold": 1.0
-    }
+    "item.status": { "na_values": [""], "answer_metric": "binary_polarity" },
+    "item.label": { "answer_metric": "graded_string", "match_threshold": 1.0 },
+    "panels[].status": { "na_values": [""], "answer_metric": "binary_polarity" },
+    "panels[].label": { "answer_metric": "graded_string", "match_threshold": 1.0 }
   }
 }
 ```
 
-Enum field `status` uses `na_values: [""]`. Free-text `label` uses exact graded match (`τ = 1.0`). Fields without manifest entries (`id`, `tags`, `meta.*`) use **structural** comparison only.
+---
+
+## A — Baseline (all leaves, perfect)
+
+Pred = baseline gold.
+
+| Path | exp → pred | `score` | Layer 1 | Layer 2 |
+|------|------------|---------|---------|---------|
+| `tags` | `["alpha","beta"]` → same | 1.0 | — | — |
+| `item.id` | `1` → `1` | 1.0 | — | — |
+| `item.label` | `"Panel A"` → same | 1.0 | correct_applicable | match |
+| `item.status` | `""` → `""` | 1.0 | correct_NA | — |
+| `item.meta.author` | `"Ada"` → same | 1.0 | — | — |
+| `item.meta.year` | `1843` → same | 1.0 | — | — |
+| `panels[0].id` | `1` → `1` | 1.0 | — | — |
+| `panels[0].label` | `"Fig 1"` → same | 1.0 | correct_applicable | match |
+| `panels[0].status` | `"yes"` → same | 1.0 | correct_applicable | TP |
+| `panels[1].id` | `2` → `2` | 1.0 | — | — |
+| `panels[1].label` | `"Fig 2"` → same | 1.0 | correct_applicable | match |
+| `panels[1].status` | `""` → `""` | 1.0 | correct_NA | — |
+
+**Per leaf property (`by_property`):**
+
+| Leaf property | `mean_score` | `layer1_counts` | `layer2_counts` |
+|---------------|--------------|-----------------|-----------------|
+| `tags` | 1.0 | — | — |
+| `item.id` | 1.0 | — | — |
+| `item.label` | 1.0 | correct_applicable: 1 | match: 1 |
+| `item.status` | 1.0 | correct_NA: 1 | — |
+| `item.meta.author` | 1.0 | — | — |
+| `item.meta.year` | 1.0 | — | — |
+| `panels[].id` | 1.0 | — | — |
+| `panels[].label` | 1.0 | correct_applicable: 2 | match: 2 |
+| `panels[].status` | 1.0 | correct_applicable: 1, correct_NA: 1 | TP: 1 |
+
+No row pools `tags` with `panels[].*` or `item.*`.
 
 ---
 
-## 1. Lists of primitives
+## B — List of primitives (`tags`)
 
-**Shape:** `tags` — `array` of `string`. **Unit of accounting:** [element slots](evaluation-hierarchical-scoring.md#element-slots-and-alignment) after alignment. **Drill-down:** `element_scores` only (no list-level `field_scores`).
+Other leaves = baseline. Only `tags` differs.
 
-### 1.1 Perfect match
+### B.1 Extra element
 
-| | `tags` |
-|---|--------|
-| Gold | `["alpha", "beta"]` |
-| Pred | `["alpha", "beta"]` |
+| `tags` pred | `["alpha", "beta", "gamma"]` |
+|-------------|------------------------------|
 
-**Alignment:** `(0,0)`, `(1,1)`; both pairs score `1.0`.
+| Path | `score` | List alignment |
+|------|---------|----------------|
+| `tags` | 2/3 ≈ 0.67 | TP=2, FP=1, FN=0 |
 
-| Metric | Value |
-|--------|-------|
-| `TP_el` | 2 |
-| `FP_el` | 0 |
-| `FN_el` | 0 |
-| Precision / recall | 1.0 / 1.0 |
-| List `score` | 1.0 (mean over `n_all = 2`) |
+**`by_property`:** `tags` → `mean_score` 0.67 only; other leaf properties unchanged from example A.
 
-`element_scores`: `match_0_0`, `match_1_1` (each leaf `score = 1.0`).
+### B.2 Substituted element
 
-### 1.2 Extra predicted element
+| `tags` gold | `["alpha", "beta", "gamma"]` |
+| `tags` pred | `["alpha", "beta", "delta"]` |
 
-| | `tags` |
-|---|--------|
-| Gold | `["alpha", "beta"]` |
-| Pred | `["alpha", "beta", "gamma"]` |
+| Path | `score` | List alignment |
+|------|---------|----------------|
+| `tags` | 2/3 ≈ 0.67 | TP=2, FP=1, FN=1 |
 
-**Alignment:** match `alpha` and `beta`; index `2` is unmatched on pred side.
+### B.3 Total mismatch (length 1)
 
-| Metric | Value |
-|--------|-------|
-| `TP_el` | 2 |
-| `FP_el` | 1 |
-| `FN_el` | 0 |
-| Precision | 2/3 |
-| Recall | 1.0 |
+| `tags` gold | `["alpha"]` |
+| `tags` pred | `["omega"]` |
 
-`element_scores`: `match_0_0`, `match_1_1`, `unexpected_element_2`.
-
-### 1.3 Same length, one wrong value (`x` vs `c`)
-
-| | `tags` |
-|---|--------|
-| Gold | `["alpha", "beta", "gamma"]` |
-| Pred | `["alpha", "beta", "delta"]` |
-
-**Alignment:** Hungarian assigns `(0,0)`, `(1,1)`, `(2,2)`. Pair `(2,2)` scores `0.0` → below `τ`.
-
-| Metric | Value |
-|--------|-------|
-| `TP_el` | 2 |
-| `FP_el` | 1 (pred index 2) |
-| `FN_el` | 1 (gold index 2) |
-| Precision / recall | 2/3, 2/3 |
-
-One failed alignment charges **one pred row** and **one gold row** — not the same atom twice. `element_scores`: `match_0_0`, `match_1_1`, `unexpected_element_2`, `missing_element_2`.
-
-### 1.4 Single-element mismatch
-
-| | `tags` |
-|---|--------|
-| Gold | `["alpha"]` |
-| Pred | `["omega"]` |
-
-Hungarian assigns the only pair; similarity `0.0` → sub-threshold → both unmatched element accounting.
-
-| Metric | Value |
-|--------|-------|
-| `TP_el` | 0 |
-| `FP_el` | 1 |
-| `FN_el` | 1 |
-| Precision / recall | 0 / 0 |
+| Path | `score` | List alignment |
+|------|---------|----------------|
+| `tags` | 0.0 | TP=0, FP=1, FN=1 |
 
 ---
 
-## 2. Objects with primitive properties
+## C — Scalar leaves on `item`
 
-**Shape:** `item` — `object` with primitive properties `id`, `label`, `status` (and `meta` held equal in these examples). **Unit of accounting:** [property slots](evaluation-hierarchical-scoring.md#required-properties-as-slots). **Drill-down:** `field_scores` keyed by property name; `element_scores` empty.
+`tags` and `panels` = baseline.
 
-In §2 examples, `meta` matches baseline on both sides unless noted. Slots without a manifest profile (`id`, `meta`) appear only in **step 1**; manifest tables cover `item.status` and `item.label` only.
+### C.1 Wrong `item.label`
 
-**Read order (matches [bubbling](evaluation-hierarchical-scoring.md#bubbling-three-parallel-aggregates)):**
+| Field | Gold | Pred |
+|-------|------|------|
+| `item.label` | `"Panel A"` | `"Panel B"` |
 
-| Step | What you are looking at | Feeds which object roll-up |
-|------|-------------------------|----------------------------|
-| **1. Per-slot structural match** | Each property slot: leaf `score`, `match_k = predicate(R)`, TP / FP / FN | Structural slot counts; roll-up `score` |
-| **2. Manifest layer 1 & 2** | Same paths, reporting labels only (does **not** change `match_k`) | Sum of layer 1 / layer 2 labels |
-| **3. Object roll-up** | Three **parallel** aggregates on the `item` node | Dashboard / strict flag |
+| Path | `score` | Layer 1 | Layer 2 |
+|------|---------|---------|---------|
+| `item.label` | 0.0 | correct_applicable | mismatch |
+| *(other `item.*` leaves)* | 1.0 | *(as in example A)* | *(as in A)* |
 
-```text
-Per slot:  compare → score, match_k, structural TP|FP|FN
-             manifest → layer 1 label, layer 2 label (if applicable)
-Object:      score = mean(required child scores)
-             structural: TP/FP/FN, P/R, whole_object_match
-             manifest:   Σ layer 1 counts, Σ layer 2 counts
-```
+**`by_property`:** `item.label` → `mean_score` 0.0, `layer1_counts` { correct_applicable: 1 }, `layer2_counts` { mismatch: 1 }.
 
----
+### C.2 `item.status` spurious applicable
 
-### 2.1 Perfect match
+| Field | Gold | Pred |
+|-------|------|------|
+| `item.status` | `""` | `"yes"` |
 
-**What changed:** pred `item` equals baseline (no diff).
+| Path | `score` | Layer 1 | Layer 2 |
+|------|---------|---------|---------|
+| `item.status` | 0.0 | spurious_applicable | — |
 
-#### 1 — Per-slot structural match
+**`by_property`:** `item.status` → `mean_score` 0.0, `layer1_counts` { spurious_applicable: 1 }, `layer2_counts` {}.
 
-| Slot | Gold → pred | `score` | `match_k` | Structural |
-|------|-------------|---------|-----------|------------|
-| `id` | `1` → `1` | 1.0 | true | TP |
-| `label` | `"Panel A"` → `"Panel A"` | 1.0 | true | TP |
-| `status` | `""` → `""` | 1.0 | true | TP |
-| `meta` | baseline → baseline | 1.0 | true | TP |
+### C.3 Missing `item.label`
 
-#### 2 — Manifest layer 1 & 2 (per path)
+| Field | Gold | Pred |
+|-------|------|------|
+| `item.label` | `"Panel A"` | *(absent)* |
 
-| Path | Gold | Pred | Layer 1 | Layer 2 |
-|------|------|------|---------|---------|
-| `item.status` | `""` | `""` | correct_NA | — (skipped) |
-| `item.label` | `"Panel A"` | `"Panel A"` | pass → layer 2 | match |
+| Path | `score` | Layer 1 | Layer 2 |
+|------|---------|---------|---------|
+| `item.label` | 0.0 | withheld_applicable | — |
 
-#### 3 — Object roll-up
+### C.4 Wrong `item.meta.year` (flat leaf, not a nested roll-up)
 
-| Aggregate | Value |
-|-----------|-------|
-| **Roll-up `score`** | 1.0 (mean over required slots: `id`, `label`, `status`, `meta`) |
-| **Structural** | `TP` / `FP` / `FN` = 4 / 0 / 0 · precision / recall = 1.0 / 1.0 · **`whole_object_match` = true** |
-| **Manifest layer 1** | 1× correct_NA · 1× pass → layer 2 |
-| **Manifest layer 2** | 1× match (`item.label`) · 1× skipped (`item.status`; gold N/A) |
+| Field | Gold | Pred |
+|-------|------|------|
+| `item.meta.year` | `1843` | `1900` |
+
+| Path | `score` | Layer 1 | Layer 2 |
+|------|---------|---------|---------|
+| `item.meta.year` | 0.0 | — | — |
+
+`item.meta.author` and other leaves unchanged at 1.0. There is no parent `meta` score — only the two primitive leaves matter.
 
 ---
 
-### 2.2 Wrong free-text string (`label`)
+## D — `panels[]` leaves (after row alignment)
 
-**What changed:** `item.label` `"Panel A"` → `"Panel B"`; all other `item` fields = baseline.
+`tags` and `item` = baseline.
 
-#### 1 — Per-slot structural match
+**Row alignment** ([evaluation-scoring.md](evaluation-scoring.md#list-of-objects)): `list_alignment.panels = ["label"]` — Hungarian matching uses **only** `label` scores between candidate rows. Other fields (`id`, `status`) are scored after pairing.
 
-| Slot | Gold → pred | `score` | `match_k` | Structural |
-|------|-------------|---------|-----------|------------|
-| `id` | `1` → `1` | 1.0 | true | TP |
-| `label` | `"Panel A"` → `"Panel B"` | 0.0 | false | **FP** |
-| `status` | `""` → `""` | 1.0 | true | TP |
-| `meta` | baseline → baseline | 1.0 | true | TP |
+### D.1 Perfect panels
 
-#### 2 — Manifest layer 1 & 2 (per path)
+Same as example A panel rows.
 
-| Path | Gold | Pred | Layer 1 | Layer 2 |
-|------|------|------|---------|---------|
-| `item.status` | `""` | `""` | correct_NA | — (skipped) |
-| `item.label` | `"Panel A"` | `"Panel B"` | pass → layer 2 | **mismatch** |
+### D.2 Wrong `status` on panel 1 (gold index 1)
 
-*`graded_string` layer 2 uses match / mismatch, not polarity TP/FP/TN/FN.*
+| | `panels[1].status` | other panel fields |
+|---|-------------------|-------------------|
+| Gold | `""` | baseline |
+| Pred | `"yes"` | baseline |
 
-#### 3 — Object roll-up
+**Row alignment:** both panels match by `label` (`"Fig 1"`, `"Fig 2"`). The `status` error does not affect pairing.
 
-| Aggregate | Value |
-|-----------|-------|
-| **Roll-up `score`** | 3/4 = 0.75 |
-| **Structural** | `TP` / `FP` / `FN` = 3 / 1 / 0 · precision / recall = 3/4 / 1.0 · **`whole_object_match` = false** |
-| **Manifest layer 1** | 1× correct_NA · 1× pass → layer 2 |
-| **Manifest layer 2** | 1× skipped (`item.status`) · 1× **mismatch** (`item.label`) |
+| Path | `score` | Layer 1 | Layer 2 |
+|------|---------|---------|---------|
+| `panels[1].status` | 0.0 | spurious_applicable | — |
+| `panels[0].*` | 1.0 | *(as in A)* | *(as in A)* |
 
----
+### D.3 Missing panel (gold row 1 has no pred partner)
 
-### 2.3 Enum applicability error (`status`)
+| `panels` pred | `[ { "id": 1, "label": "Fig 1", "status": "yes" } ]` |
 
-**What changed:** `item.status` `""` → `"yes"`; all other `item` fields = baseline.
+**Row alignment:** gold panel 0 matches; gold panel 1 unmatched (alignment FN=1).
 
-#### 1 — Per-slot structural match
+| Path | exp → pred | `score` | Layer 1 | Layer 2 |
+|------|------------|---------|---------|---------|
+| `panels[0].*` | baseline → matched | 1.0 | *(as in A)* | *(as in A)* |
+| `panels[1].id` | `2` → *(missing)* | 0.0 | — | — |
+| `panels[1].label` | `"Fig 2"` → *(missing)* | 0.0 | withheld_applicable | — |
+| `panels[1].status` | `""` → *(missing)* | 0.0 | correct_NA | — |
 
-| Slot | Gold → pred | `score` | `match_k` | Structural |
-|------|-------------|---------|-----------|------------|
-| `id` | `1` → `1` | 1.0 | true | TP |
-| `label` | `"Panel A"` → `"Panel A"` | 1.0 | true | TP |
-| `status` | `""` → `"yes"` | 0.0 | false | **FP** |
-| `meta` | baseline → baseline | 1.0 | true | TP |
+Missing pred on an N/A gold field (`""`) → **correct_NA** (pred did not spuriously answer). Missing pred when gold expected a string label → **withheld_applicable**.
 
-#### 2 — Manifest layer 1 & 2 (per path)
+### D.4 Extra panel in pred
 
-| Path | Gold | Pred | Layer 1 | Layer 2 |
-|------|------|------|---------|---------|
-| `item.status` | `""` | `"yes"` | **spurious_applicable** | — (skipped; gold N/A) |
-| `item.label` | `"Panel A"` | `"Panel A"` | pass → layer 2 | match |
+| `panels` pred | baseline panels + `{ "id": 99, "label": "Fig 99", "status": "no" }` |
 
-#### 3 — Object roll-up
+**Row alignment:** baseline rows match; extra pred row → alignment FP=1 (unpaired pred index not given leaf paths in this toy).
 
-| Aggregate | Value |
-|-----------|-------|
-| **Roll-up `score`** | 3/4 = 0.75 |
-| **Structural** | `TP` / `FP` / `FN` = 3 / 1 / 0 · precision / recall = 3/4 / 1.0 · **`whole_object_match` = false** |
-| **Manifest layer 1** | 1× **spurious_applicable** · 1× pass → layer 2 |
-| **Manifest layer 2** | 1× match · 1× skipped (no layer-2 row for `item.status`) |
-
-Structural `status` fails **`whole_object_match`** while layer 2 is empty for that path — [three independent tracks](evaluation-hierarchical-scoring.md#composition-example-three-tracks-on-one-enum-field).
-
----
-
-### 2.4 Missing required property (`label`)
-
-**What changed:** `item.label` present in gold, **absent** in pred; other required fields = baseline.
-
-#### 1 — Per-slot structural match
-
-| Slot | Gold → pred | `score` | `match_k` | Structural |
-|------|-------------|---------|-----------|------------|
-| `id` | `1` → `1` | 1.0 | true | TP |
-| `label` | `"Panel A"` → *(missing)* | 0.0 | false | **FN** |
-| `status` | `""` → `""` | 1.0 | true | TP |
-| `meta` | baseline → baseline | 1.0 | true | TP |
-
-#### 2 — Manifest layer 1 & 2 (per path)
-
-| Path | Gold | Pred | Layer 1 | Layer 2 |
-|------|------|------|---------|---------|
-| `item.status` | `""` | `""` | correct_NA | — (skipped) |
-| `item.label` | `"Panel A"` | *(missing)* | **withheld_applicable** | — (no pred value to grade) |
-
-#### 3 — Object roll-up
-
-| Aggregate | Value |
-|-----------|-------|
-| **Roll-up `score`** | 3/4 = 0.75 |
-| **Structural** | `TP` / `FP` / `FN` = 3 / 0 / 1 · precision / recall = 1.0 / 3/4 · **`whole_object_match` = false** |
-| **Manifest layer 1** | 1× correct_NA · 1× **withheld_applicable** |
-| **Manifest layer 2** | 1× skipped · 0× match/mismatch (label never reached layer 2) |
-
----
-
-### 2.5 Extra key in pred (`noise`)
-
-**What changed:** pred adds `"noise": true`; all required fields = baseline.
-
-#### 1 — Per-slot structural match
-
-| Slot | Gold → pred | `score` | `match_k` | Structural |
-|------|-------------|---------|-----------|------------|
-| `id` | `1` → `1` | 1.0 | true | TP |
-| `label` | `"Panel A"` → `"Panel A"` | 1.0 | true | TP |
-| `status` | `""` → `""` | 1.0 | true | TP |
-| `meta` | baseline → baseline | 1.0 | true | TP |
-| `noise` *(extra)* | — → `true` | 0.0 | false | **FP** |
-
-#### 2 — Manifest layer 1 & 2 (per path)
-
-| Path | Gold | Pred | Layer 1 | Layer 2 |
-|------|------|------|---------|---------|
-| `item.status` | `""` | `""` | correct_NA | — (skipped) |
-| `item.label` | `"Panel A"` | `"Panel A"` | pass → layer 2 | match |
-
-*`noise` has no manifest profile — structural FP only.*
-
-#### 3 — Object roll-up
-
-| Aggregate | Value |
-|-----------|-------|
-| **Roll-up `score`** | 1.0 (mean over **required** slots only; extra `noise` excluded from mean) |
-| **Structural** | `TP` / `FP` / `FN` = 4 / 1 / 0 · precision / recall = 4/5 / 1.0 · **`whole_object_match` = false** (extra key) |
-| **Manifest layer 1** | 1× correct_NA · 1× pass → layer 2 |
-| **Manifest layer 2** | 1× match · 1× skipped |
-
----
-
-## 3. Lists of objects
-
-**Shape:** `panels` — `array` of panel objects. **Two layers of metrics** ([list-of-objects](evaluation-hierarchical-scoring.md#when-x-is-an-object-or-nested-array)):
-
-1. **Element layer** — did each **panel row** align as a whole? (`element_scores`, list P/R/F1).
-2. **Field rollup** — how did property `f` behave **across all panels**? (`field_scores` on the **list** node).
-
-Per-panel per-field detail: `element_scores["match_i_j"].field_scores["status"]`, etc.
-
-### 3.1 Perfect match
-
-Pred `panels` equals baseline.
-
-**Element layer:** `TP_el = 2`, precision / recall 1.0. `element_scores`: `match_0_0`, `match_1_1`.
-
-**Field rollups** (on list node `field_scores`):
-
-| Field | Mean score (illustrative) | Notes |
-|-------|---------------------------|-------|
-| `id` | 1.0 | both panels matched |
-| `label` | 1.0 | |
-| `status` | 1.0 | panel 2: `""`/`""` |
-
-### 3.2 One wrong field inside a matched panel
-
-| | `panels[1]` | `panels[0]` |
-|---|-------------|-------------|
-| Gold | `{ "id": 2, "label": "Fig 2", "status": "" }` | baseline |
-| Pred | `{ "id": 2, "label": "Fig 2", "status": "yes" }` | baseline |
-
-**Alignment:** diagonal `(0,0)`, `(1,1)`. Panel 1 subtree `score` < 1.0 because `status` failed.
-
-**Element layer** (same pattern as list-of-strings §1.3):
-
-| Metric | Value |
-|--------|-------|
-| `TP_el` | 1 (panel 0 only) |
-| `FP_el` | 1 (pred panel 1) |
-| `FN_el` | 1 (gold panel 1 not recovered) |
-
-**Inside** `element_scores["match_1_1"]` (or the unmatched stubs): drill-down shows `field_scores["status"]` with `score = 0`.
-
-**Field rollup `panels[].status`:** counts reflect one spurious `yes` on an N/A field — layer 1 **spurious_applicable** on that path; element layer still charges FP/FN for the **whole row**.
-
-### 3.3 Missing panel
-
-| | `panels` |
-|---|----------|
-| Gold | baseline (2 panels) |
-| Pred | `[ { "id": 1, "label": "Fig 1", "status": "yes" } ]` |
-
-| Element layer | |
-|---------------|--|
-| `TP_el` | 1 |
-| `FN_el` | 1 (gold panel 2 missing) |
-| List recall | 1/2 |
-
-**Field rollup `id`:** one matched `id`, one missing row contributes **FN** to the field rollup.
-
-### 3.4 Element vs field rollup — different questions
-
-| | `panels` |
-|---|----------|
-| Gold | `[ { "id": 1, … }, { "id": 2, … } ]` |
-| Pred | `[ { "id": 1, … }, { "id": 2, … }, { "id": 99, … } ]` |
-
-- **Element precision** — penalized for the **extra panel** (`FP_el`).
-- **`field_scores["id"]` rollup** — extra panel adds **FP** contributions for `id` (and every required field) on the cross-list aggregate.
-
-Reading `precision` on the list node: check whether you mean **element-layer** or **`field_scores[f]`** ([drill-down](evaluation-hierarchical-scoring.md#list-of-objects-two-questions-two-dicts)).
-
----
-
-## 4. Nested objects
-
-**Shape:** `item.meta` — object nested under property `meta` on `item`. **Parent slot:** `meta` is **one property slot** on `item`; inner `author` / `year` are slots **inside** the child subtree ([nested object property values](evaluation-hierarchical-scoring.md#nested-object-property-values)).
-
-**Drill-down path:** `field_scores["item"].field_scores["meta"].field_scores["year"]` (from root; exact path depends on compare entry point).
-
-In §4 examples, `item` primitives other than `meta` match baseline.
-
-### 4.1 Perfect nested object
-
-Pred `item.meta` equals `{ "author": "Ada", "year": 1843 }`.
-
-| Level | `whole_object_match` / `match_k` |
-|-------|----------------------------------|
-| Inner `meta` | true (both fields TP) |
-| Parent `item.meta` slot | true (`R.score = 1.0`) |
-| Outer `item` | true |
-
-### 4.2 One wrong inner field
-
-| | `item.meta` |
-|---|-------------|
-| Gold | `{ "author": "Ada", "year": 1843 }` |
-| Pred | `{ "author": "Ada", "year": 1900 }` |
-
-**Inner object `meta`:**
-
-| Slot | Structural |
-|------|------------|
-| `author` | TP |
-| `year` | FP (wrong integer) |
-| Inner `whole_object_match` | false |
-
-**Parent `item`:**
-
-| Slot | Structural |
-|------|------------|
-| `meta` | **FP** (pred supplied an object, subtree below `τ` or strict inner flag false) |
-| `id`, `label`, `status` | TP |
-| `item.whole_object_match` | false |
-
-Drill-down: `field_scores["meta"].field_scores["year"]` shows the failing leaf (`score = 0`).
-
-### 4.3 Missing nested object
-
-| | `item` |
-|---|--------|
-| Gold | baseline (includes `meta`) |
-| Pred | `{ "id": 1, "label": "Panel A", "status": "" }` — **no `meta`** |
-
-| Slot | Structural |
-|------|------------|
-| `meta` | **FN** (required key absent) |
-
-Parent `item` `whole_object_match` false. Inner metrics do not exist in drill-down — no subtree to attach.
-
-### 4.4 Contrast: same object as list **element** vs nested **property**
-
-The same JSON object shape `{ "id", "label", "status" }` appears under `panels[]` (§3) and under `item.meta` is a different shape — but compare a **panel object as list element** vs **hypothetical** nesting:
-
-| Context | Parent bookkeeping | Key in drill-down |
-|---------|-------------------|-------------------|
-| `panels[0]` | **Element slot** on list | `element_scores["match_0_0"]` |
-| `item.meta` | **Property slot** on object | `field_scores["meta"]` |
-
-Same subtree comparison machinery; different parent TP/FP/FN and key namespace ([nested objects — contrast with lists](evaluation-hierarchical-scoring.md#nested-object-property-values)).
+| Path | `score` | Layer 1 | Layer 2 |
+|------|---------|---------|---------|
+| `panels[0].*`, `panels[1].*` | 1.0 | *(as in A)* | *(as in A)* |
 
 ---
 
 ## Quick reference
 
-| Section | JSON path | Parent node | Drill-down dict | Slot unit |
-|---------|-----------|-------------|-----------------|-----------|
-| §1 | `tags[]` | list | `element_scores` | element |
-| §2 | `item.*` | object | `field_scores` | property |
-| §3 | `panels[]` | list | `element_scores` + `field_scores` rollups | element + cross-list field |
-| §4 | `item.meta.*` | object → object | `field_scores` at each object layer | property (nested) |
+| Topic | Section |
+|-------|---------|
+| All leaves perfect | A |
+| `tags` only | B |
+| `item.*` / `item.meta.*` scalars | C |
+| `panels[k].*` after alignment | D |
 
 ---
 
 ## See also
 
-- [Hierarchical scoring](evaluation-hierarchical-scoring.md) — normative rules referenced by these toys.
-- [Leaf primitives](evaluation-leaf-primitives.md) — how terminal `score` is formed.
-- [Drill-down: `field_scores` and `element_scores`](evaluation-hierarchical-scoring.md#drill-down-field_scores-and-element_scores) — how to read result trees from these examples in code.
+- [Evaluation scoring](evaluation-scoring.md) — normative rules for this model.
+- [Leaf primitives](evaluation-leaf-primitives.md) — string comparison modes and graded scores.
