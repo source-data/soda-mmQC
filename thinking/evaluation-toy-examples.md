@@ -11,6 +11,14 @@ Worked examples for [hierarchical scoring](evaluation-hierarchical-scoring.md), 
 
 Normative definitions: [evaluation-hierarchical-scoring.md](evaluation-hierarchical-scoring.md). Leaf `score` rules: [evaluation-leaf-primitives.md](evaluation-leaf-primitives.md).
 
+**How to read an example:** work **bottom-up**, then roll up — same order as [bubbling](evaluation-hierarchical-scoring.md#bubbling-three-parallel-aggregates).
+
+1. **Per-slot structural match** — leaf `score`, `match_k`, structural TP/FP/FN for each slot.
+2. **Manifest layer 1 & 2** — reporting labels per manifest path (parallel track; does not replace step 1).
+3. **Parent roll-up** — roll-up `score`, structural TP/FP/FN + `whole_object_match`, sums of layer 1 / layer 2 labels.
+
+[§2 Objects](#2-objects-with-primitive-properties) uses all three steps explicitly. §1 and §4 have no manifest rows on those paths; §3 adds list element slots before field rollups.
+
 ---
 
 ## Shared toy schema
@@ -209,100 +217,185 @@ Hungarian assigns the only pair; similarity `0.0` → sub-threshold → both unm
 
 **Shape:** `item` — `object` with primitive properties `id`, `label`, `status` (and `meta` held equal in these examples). **Unit of accounting:** [property slots](evaluation-hierarchical-scoring.md#required-properties-as-slots). **Drill-down:** `field_scores` keyed by property name; `element_scores` empty.
 
-In §2 examples, `meta` matches baseline on both sides unless noted.
+In §2 examples, `meta` matches baseline on both sides unless noted. Slots without a manifest profile (`id`, `meta`) appear only in **step 1**; manifest tables cover `item.status` and `item.label` only.
+
+**Read order (matches [bubbling](evaluation-hierarchical-scoring.md#bubbling-three-parallel-aggregates)):**
+
+| Step | What you are looking at | Feeds which object roll-up |
+|------|-------------------------|----------------------------|
+| **1. Per-slot structural match** | Each property slot: leaf `score`, `match_k = predicate(R)`, TP / FP / FN | Structural slot counts; roll-up `score` |
+| **2. Manifest layer 1 & 2** | Same paths, reporting labels only (does **not** change `match_k`) | Sum of layer 1 / layer 2 labels |
+| **3. Object roll-up** | Three **parallel** aggregates on the `item` node | Dashboard / strict flag |
+
+```text
+Per slot:  compare → score, match_k, structural TP|FP|FN
+             manifest → layer 1 label, layer 2 label (if applicable)
+Object:      score = mean(required child scores)
+             structural: TP/FP/FN, P/R, whole_object_match
+             manifest:   Σ layer 1 counts, Σ layer 2 counts
+```
+
+---
 
 ### 2.1 Perfect match
 
-Pred equals baseline `item`.
+**What changed:** pred `item` equals baseline (no diff).
 
-| Property slot | `match_k` | Structural |
-|---------------|-----------|------------|
-| `id` | true | TP |
-| `label` | true | TP |
-| `status` | true | TP |
+#### 1 — Per-slot structural match
 
-| Object metric | Value |
-|---------------|-------|
-| `score` | 1.0 |
-| Precision / recall | 1.0 / 1.0 |
-| `whole_object_match` | true |
+| Slot | Gold → pred | `score` | `match_k` | Structural |
+|------|-------------|---------|-----------|------------|
+| `id` | `1` → `1` | 1.0 | true | TP |
+| `label` | `"Panel A"` → `"Panel A"` | 1.0 | true | TP |
+| `status` | `""` → `""` | 1.0 | true | TP |
+| `meta` | baseline → baseline | 1.0 | true | TP |
 
-**Manifest (reporting):**
+#### 2 — Manifest layer 1 & 2 (per path)
 
-| Path | Layer 1 | Layer 2 |
-|------|---------|---------|
-| `item.status` `""`/`""` | correct_NA | skipped |
-| `item.label` | applicable / applicable | graded match |
+| Path | Gold | Pred | Layer 1 | Layer 2 |
+|------|------|------|---------|---------|
+| `item.status` | `""` | `""` | correct_NA | — (skipped) |
+| `item.label` | `"Panel A"` | `"Panel A"` | pass → layer 2 | match |
+
+#### 3 — Object roll-up
+
+| Aggregate | Value |
+|-----------|-------|
+| **Roll-up `score`** | 1.0 (mean over required slots: `id`, `label`, `status`, `meta`) |
+| **Structural** | `TP` / `FP` / `FN` = 4 / 0 / 0 · precision / recall = 1.0 / 1.0 · **`whole_object_match` = true** |
+| **Manifest layer 1** | 1× correct_NA · 1× pass → layer 2 |
+| **Manifest layer 2** | 1× match (`item.label`) · 1× skipped (`item.status`; gold N/A) |
+
+---
 
 ### 2.2 Wrong free-text string (`label`)
 
-| | `item.label` | rest |
-|---|--------------|------|
-| Gold | `"Panel A"` | baseline |
-| Pred | `"Panel B"` | baseline |
+**What changed:** `item.label` `"Panel A"` → `"Panel B"`; all other `item` fields = baseline.
 
-| Property slot | `match_k` | Structural |
-|---------------|-----------|------------|
-| `id` | true | TP |
-| `label` | false | **FP** (pred asserted a string, wrong) |
-| `status` | true | TP |
+#### 1 — Per-slot structural match
 
-| Object metric | Value |
-|---------------|-------|
-| `TP` / `FP` / `FN` | 2 / 1 / 0 |
-| Precision | 2/3 |
-| `whole_object_match` | false |
+| Slot | Gold → pred | `score` | `match_k` | Structural |
+|------|-------------|---------|-----------|------------|
+| `id` | `1` → `1` | 1.0 | true | TP |
+| `label` | `"Panel A"` → `"Panel B"` | 0.0 | false | **FP** |
+| `status` | `""` → `""` | 1.0 | true | TP |
+| `meta` | baseline → baseline | 1.0 | true | TP |
 
-**Manifest:** `item.label` — layer 2 graded mismatch (no polarity TP/TN).
+#### 2 — Manifest layer 1 & 2 (per path)
 
-### 2.3 Enum polarity error (`status`)
+| Path | Gold | Pred | Layer 1 | Layer 2 |
+|------|------|------|---------|---------|
+| `item.status` | `""` | `""` | correct_NA | — (skipped) |
+| `item.label` | `"Panel A"` | `"Panel B"` | pass → layer 2 | **mismatch** |
 
-| | `item.status` | rest |
-|---|---------------|------|
-| Gold | `""` | baseline |
-| Pred | `"yes"` | baseline |
+*`graded_string` layer 2 uses match / mismatch, not polarity TP/FP/TN/FN.*
 
-| Property slot | Structural |
-|---------------|------------|
-| `status` | **FP**-like (`match_k` false, `score = 0`) |
+#### 3 — Object roll-up
 
-**Three tracks on one field** ([composition example](evaluation-hierarchical-scoring.md#composition-example-three-tracks-on-one-enum-field)):
+| Aggregate | Value |
+|-----------|-------|
+| **Roll-up `score`** | 3/4 = 0.75 |
+| **Structural** | `TP` / `FP` / `FN` = 3 / 1 / 0 · precision / recall = 3/4 / 1.0 · **`whole_object_match` = false** |
+| **Manifest layer 1** | 1× correct_NA · 1× pass → layer 2 |
+| **Manifest layer 2** | 1× skipped (`item.status`) · 1× **mismatch** (`item.label`) |
 
-| Track | Outcome |
-|-------|---------|
-| Structural | `match_k` false → slot not TP |
-| Layer 1 | spurious_applicable (gold N/A, pred answered) |
-| Layer 2 | skipped (gold not applicable) |
+---
 
-`whole_object_match` false **even though** layer 2 is empty — tracks are independent.
+### 2.3 Enum applicability error (`status`)
 
-### 2.4 Missing required property
+**What changed:** `item.status` `""` → `"yes"`; all other `item` fields = baseline.
 
-| | `item` |
-|---|--------|
-| Gold | `{ "id": 1, "label": "Panel A", "status": "", "meta": { … } }` |
-| Pred | `{ "id": 1, "status": "", "meta": { … } }` — **no `label`** |
+#### 1 — Per-slot structural match
 
-| Property slot | Structural |
-|---------------|------------|
-| `label` | **FN** (key absent) |
+| Slot | Gold → pred | `score` | `match_k` | Structural |
+|------|-------------|---------|-----------|------------|
+| `id` | `1` → `1` | 1.0 | true | TP |
+| `label` | `"Panel A"` → `"Panel A"` | 1.0 | true | TP |
+| `status` | `""` → `"yes"` | 0.0 | false | **FP** |
+| `meta` | baseline → baseline | 1.0 | true | TP |
 
-| Object metric | Value |
-|---------------|-------|
-| `FN` | 1 |
-| `whole_object_match` | false |
+#### 2 — Manifest layer 1 & 2 (per path)
 
-### 2.5 Extra key in pred
+| Path | Gold | Pred | Layer 1 | Layer 2 |
+|------|------|------|---------|---------|
+| `item.status` | `""` | `"yes"` | **spurious_applicable** | — (skipped; gold N/A) |
+| `item.label` | `"Panel A"` | `"Panel A"` | pass → layer 2 | match |
 
-| | `item` |
-|---|--------|
-| Gold | baseline `item` |
-| Pred | baseline + `"noise": true` |
+#### 3 — Object roll-up
 
-| Structural | |
-|------------|--|
-| Extra `noise` | **FP** slot |
-| `whole_object_match` | false (extra keys forbidden) |
+| Aggregate | Value |
+|-----------|-------|
+| **Roll-up `score`** | 3/4 = 0.75 |
+| **Structural** | `TP` / `FP` / `FN` = 3 / 1 / 0 · precision / recall = 3/4 / 1.0 · **`whole_object_match` = false** |
+| **Manifest layer 1** | 1× **spurious_applicable** · 1× pass → layer 2 |
+| **Manifest layer 2** | 1× match · 1× skipped (no layer-2 row for `item.status`) |
+
+Structural `status` fails **`whole_object_match`** while layer 2 is empty for that path — [three independent tracks](evaluation-hierarchical-scoring.md#composition-example-three-tracks-on-one-enum-field).
+
+---
+
+### 2.4 Missing required property (`label`)
+
+**What changed:** `item.label` present in gold, **absent** in pred; other required fields = baseline.
+
+#### 1 — Per-slot structural match
+
+| Slot | Gold → pred | `score` | `match_k` | Structural |
+|------|-------------|---------|-----------|------------|
+| `id` | `1` → `1` | 1.0 | true | TP |
+| `label` | `"Panel A"` → *(missing)* | 0.0 | false | **FN** |
+| `status` | `""` → `""` | 1.0 | true | TP |
+| `meta` | baseline → baseline | 1.0 | true | TP |
+
+#### 2 — Manifest layer 1 & 2 (per path)
+
+| Path | Gold | Pred | Layer 1 | Layer 2 |
+|------|------|------|---------|---------|
+| `item.status` | `""` | `""` | correct_NA | — (skipped) |
+| `item.label` | `"Panel A"` | *(missing)* | **withheld_applicable** | — (no pred value to grade) |
+
+#### 3 — Object roll-up
+
+| Aggregate | Value |
+|-----------|-------|
+| **Roll-up `score`** | 3/4 = 0.75 |
+| **Structural** | `TP` / `FP` / `FN` = 3 / 0 / 1 · precision / recall = 1.0 / 3/4 · **`whole_object_match` = false** |
+| **Manifest layer 1** | 1× correct_NA · 1× **withheld_applicable** |
+| **Manifest layer 2** | 1× skipped · 0× match/mismatch (label never reached layer 2) |
+
+---
+
+### 2.5 Extra key in pred (`noise`)
+
+**What changed:** pred adds `"noise": true`; all required fields = baseline.
+
+#### 1 — Per-slot structural match
+
+| Slot | Gold → pred | `score` | `match_k` | Structural |
+|------|-------------|---------|-----------|------------|
+| `id` | `1` → `1` | 1.0 | true | TP |
+| `label` | `"Panel A"` → `"Panel A"` | 1.0 | true | TP |
+| `status` | `""` → `""` | 1.0 | true | TP |
+| `meta` | baseline → baseline | 1.0 | true | TP |
+| `noise` *(extra)* | — → `true` | 0.0 | false | **FP** |
+
+#### 2 — Manifest layer 1 & 2 (per path)
+
+| Path | Gold | Pred | Layer 1 | Layer 2 |
+|------|------|------|---------|---------|
+| `item.status` | `""` | `""` | correct_NA | — (skipped) |
+| `item.label` | `"Panel A"` | `"Panel A"` | pass → layer 2 | match |
+
+*`noise` has no manifest profile — structural FP only.*
+
+#### 3 — Object roll-up
+
+| Aggregate | Value |
+|-----------|-------|
+| **Roll-up `score`** | 1.0 (mean over **required** slots only; extra `noise` excluded from mean) |
+| **Structural** | `TP` / `FP` / `FN` = 4 / 1 / 0 · precision / recall = 4/5 / 1.0 · **`whole_object_match` = false** (extra key) |
+| **Manifest layer 1** | 1× correct_NA · 1× pass → layer 2 |
+| **Manifest layer 2** | 1× match · 1× skipped |
 
 ---
 
