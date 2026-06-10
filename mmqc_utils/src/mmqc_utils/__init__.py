@@ -1,6 +1,7 @@
 """Reusable conversion utilities for MMQC projects."""
 
 from .documents import document_to_html
+from .html_cleanup import postprocess_html
 from .images import compress_to_bounded_jpeg, convert_to_bounded_jpeg
 from .quote import (
     AlignmentGap,
@@ -26,6 +27,7 @@ __all__ = [
     "convert_to_bounded_jpeg",
     "document_to_html",
     "html_to_text",
+    "postprocess_html",
     "render_alignment_view",
     "render_coverage_view",
 ]

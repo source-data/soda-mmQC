@@ -1,6 +1,6 @@
 [project]
 name = "mmqc-utils"
-version = "0.3.3"
+version = "0.3.4"
 description = "Reusable conversion utilities for images, documents, text, and related data types."
 readme = "README.md"
 authors = [

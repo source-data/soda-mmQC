@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 from pypdf import PdfReader
 
 from .exceptions import DocumentConversionError, UnsupportedDocumentFormatError
+from .html_cleanup import postprocess_html as _cleanup_html
 
 PathLikeOrFile = str | Path | bytes | bytearray | BinaryIO
 _PANDOC_EXTENSIONS = {".docx", ".rtf", ".odt", ".tex"}
@@ -56,6 +57,7 @@ def _pdf_to_html(path: Path) -> str:
 
 
 def _postprocess_html(html: str, strip_tags_if_empty: frozenset[str] = frozenset({"li", "ol", "ul"})) -> str:
+    html = _cleanup_html(html)
     if len(strip_tags_if_empty) == 0:
         return html
 
