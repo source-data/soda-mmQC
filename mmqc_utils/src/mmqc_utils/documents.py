@@ -8,6 +8,7 @@ from tempfile import NamedTemporaryFile
 from typing import BinaryIO
 
 import pypandoc
+from bs4 import BeautifulSoup
 from pypdf import PdfReader
 
 from .exceptions import DocumentConversionError, UnsupportedDocumentFormatError
@@ -54,6 +55,37 @@ def _pdf_to_html(path: Path) -> str:
     return "\n".join(html_content)
 
 
+def _postprocess_html(html: str, strip_tags_if_empty: frozenset[str] = frozenset({"li", "ol", "ul"})) -> str:
+    if len(strip_tags_if_empty) == 0:
+        return html
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    def do_strip(tag) -> bool:
+        return (
+            tag.name in strip_tags_if_empty  # only strip if the tag is in the specified set
+            and (
+                not tag.contents  # completely empty tag
+                or len(tag.get_text(strip=True)) <= 0  # tag with only whitespace text
+            )
+        )
+
+    for tag in soup.find_all(do_strip):
+        tag.decompose()
+    return str(soup)
+
+
+def _postprocess_html_decorator(func):
+    def wrapper(*args, post_process_html: bool = True, **kwargs) -> str:
+        html = func(*args, **kwargs)
+        if post_process_html:
+            return _postprocess_html(html)
+        return html
+
+    return wrapper
+
+
+@_postprocess_html_decorator
 def document_to_html(
     source: PathLikeOrFile,
     *,

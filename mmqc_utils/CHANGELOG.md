@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## [0.3.2] - 2026-06-10
+
+### Added
+- `document_to_html`: option to strip certain empty HTML tags (`li`, `ol`, `ul`) from the output, default `True`. Handles case of empty list items in place of tracked change (deletion) in .docx files.
+
 ## [0.3.1] - 2026-06-08
 
 ### Added
