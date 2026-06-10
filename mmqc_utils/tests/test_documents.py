@@ -2,6 +2,7 @@ from io import BytesIO
 from pathlib import Path
 
 import pytest
+from bs4 import BeautifulSoup
 from pypdf import PdfWriter
 
 from mmqc_utils.documents import document_to_html
@@ -204,12 +205,10 @@ def test_pdf_page_structure() -> None:
 
 
 def _find_empty_tags_in_html(html: str) -> list[str]:
-    from bs4 import BeautifulSoup
-
     return [
         str(tag)
         for tag in BeautifulSoup(html, "html.parser").find_all(
-            lambda tag: not tag.contents or len(tag.get_text(strip=True)) <= 0
+            lambda tag: tag.name != "meta" and (not tag.contents or len(tag.get_text(strip=True)) <= 0)
         )
     ]
 
@@ -236,3 +235,19 @@ def test_html_empty_tags_stripped(doc_with_empty_tags: Path) -> None:
     assert expected_text in stripped_html, (
         f"Expected text not found in post-processed HTML from {doc_with_empty_tags.name}: {stripped_html}"
     )
+
+
+# --- standalone HTML tests ---
+
+
+def test_standalone_html_contains_head_and_meta() -> None:
+    html = document_to_html(FIXTURES / "doc.docx", standalone=True)
+
+    assert "<head>" in html
+    assert '<meta charset="utf-8"/>' in html
+
+
+def test_non_standalone_html_does_not_contain_head() -> None:
+    html = document_to_html(FIXTURES / "doc.docx", standalone=False)
+
+    assert "<head>" not in html

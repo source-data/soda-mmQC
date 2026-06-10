@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## [0.3.3] - 2026-06-10
+
+### Added
+- `document_to_html`: option to produce standalone HTML for easier readability, correct display of unicode symbols in browser.
+
 ## [0.3.2] - 2026-06-10
 
 ### Added

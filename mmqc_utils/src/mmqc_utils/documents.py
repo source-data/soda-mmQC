@@ -90,20 +90,24 @@ def document_to_html(
     source: PathLikeOrFile,
     *,
     input_format: str | None = None,
+    standalone: bool = True,
 ) -> str:
     """Convert a supported document to HTML."""
     path, is_temporary, detected_format = _materialize_source(source, input_format)
+    convert_file_kwargs = {}
+    if standalone:
+        convert_file_kwargs["extra_args"] = ["--embed-resources", "--standalone"]
     try:
         suffix = f".{detected_format.lower().lstrip('.')}" if detected_format else path.suffix.lower()
         if suffix not in _ALLOWED_EXTENSIONS:
             raise UnsupportedDocumentFormatError(f"Unsupported document format: {suffix or '[unknown]'}")
 
         if suffix in _PANDOC_EXTENSIONS:
-            result = pypandoc.convert_file(str(path), "html", format=suffix.lstrip("."))
+            result = pypandoc.convert_file(str(path), "html", format=suffix.lstrip("."), **convert_file_kwargs)
             return str(result) if result else ""
 
         try:
-            result = pypandoc.convert_file(str(path), "html", format="pdf")
+            result = pypandoc.convert_file(str(path), "html", format="pdf", **convert_file_kwargs)
             if result:
                 return str(result)
         except Exception:
