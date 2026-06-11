@@ -1,6 +1,6 @@
 # DEPRECATED — Hierarchical scoring in schema-guided JSON comparison
 
-> **DEPRECATED.** Do not use for new work. Normative design: [evaluation-scoring.md](evaluation-scoring.md). This file is kept for history only (`evaluation-hierarchical-scoring-DEPRECATED.md`).
+> **DEPRECATED.** Do not use for new work. Normative design: [evaluation-scoring.md](evaluation-scoring.md). This file is kept for history only (`evaluation-hierarchical-scoring-DEPRECATED.md`). Manifest key `answer_metric` here is now **`matching_metric`** in the flat model.
 
 This note described a **recursive** design for **roll-up scores**, **drill-down**, and **slot-level FP/FN** when comparing prediction JSON to gold JSON under **JSON Schema**. [Drill-down](#drill-down-field_scores-and-element_scores) used two parallel child maps — `field_scores` and `element_scores`.
 

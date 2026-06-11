@@ -6,7 +6,7 @@ One comparator invocation takes a single `exp` JSON and a single `pred` JSON wit
 
 1. Identifies **leaf properties** (lowest-level fields).
 2. Compares values (with list alignment where needed).
-3. Emits a **score** per leaf instance and, when configured, **layer 1** (applicability) and **layer 2** (answer) labels.
+3. Emits a **score** per leaf instance and, when configured, **layer 1** (applicability) and **layer 2** (matching) labels.
 4. Emits **per leaf property** summaries: `mean_score`, `layer1_counts`, `layer2_counts`.
 
 Worked examples: [evaluation-toy-examples.md](evaluation-toy-examples.md).
@@ -156,7 +156,7 @@ Do **not** pool counts or means across different leaf properties. Compute precis
 | `number`, `integer`, `boolean` | Exact equality → `score` 1.0 or 0.0 |
 | `graded_string` (manifest) | Requires `string_compare`; layer 2 **match** / **mismatch** from `match_threshold` |
 
-**`answer_metric`** (layer 2 reporting) and **`string_compare`** (how `score` is computed) are separate. Use `string_compare` only on **non-enum** strings with `graded_string` — enum fields (`binary_polarity`, `multiclass`) are always exact; do not declare `string_compare` there.
+**`matching_metric`** (layer 2 reporting) and **`string_compare`** (how `score` is computed) are separate. Use `string_compare` only on **non-enum** strings with `graded_string` — enum fields (`binary_polarity`, `multiclass`) are always exact; do not declare `string_compare` there.
 
 Default `match_threshold` for layer 2: `1.0` when using exact compare; lower values (e.g. `0.8`) for fuzzy or semantic fields.
 
@@ -200,13 +200,13 @@ Keys are **list property names** from the schema (no `[]` suffix). Values are **
   },
   "fields": {
     "panels[].label": {
-      "answer_metric": "graded_string",
+      "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
     },
     "panels[].status": {
       "na_values": [""],
-      "answer_metric": "binary_polarity"
+      "matching_metric": "binary_polarity"
     }
   }
 }
@@ -283,7 +283,7 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
 {
   "checklist": "toy-eval-examples",
   "defaults": {
-    "answer_metric": "binary_polarity",
+    "matching_metric": "binary_polarity",
     "positive_value": "yes",
     "negative_value": "no",
     "na_values": []
@@ -294,24 +294,24 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
   "fields": {
     "item.status": {
       "na_values": [""],
-      "answer_metric": "binary_polarity"
+      "matching_metric": "binary_polarity"
     },
     "item.label": {
-      "answer_metric": "graded_string",
+      "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
     },
     "panels[].status": {
       "na_values": [""],
-      "answer_metric": "binary_polarity"
+      "matching_metric": "binary_polarity"
     },
     "panels[].label": {
-      "answer_metric": "graded_string",
+      "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
     },
     "outputs[].from_the_caption": {
-      "answer_metric": "graded_string",
+      "matching_metric": "graded_string",
       "string_compare": "semantic",
       "match_threshold": 0.8
     }
@@ -329,7 +329,7 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
 |-----|------|
 | `list_alignment` | Map **list property name** → array of **row field names** used only to align list-of-object elements (e.g. `"panels": ["label"]`) |
 | `na_values` | Per field: literals meaning **not applicable** (layer 1). Omit or `[]` = always applicable. |
-| `answer_metric` | `binary_polarity` \| `multiclass` \| `graded_string` — **layer 2** reporting shape only |
+| `matching_metric` | `binary_polarity` \| `multiclass` \| `graded_string` — **layer 2** reporting shape only |
 | `string_compare` | **Required** on non-enum `graded_string` fields. **Omit** on schema `enum` fields (always exact). Not a `defaults` key. |
 | `positive_value` / `negative_value` | For `binary_polarity` (layer 2) |
 | `match_threshold` | For `graded_string` only: layer 2 **match** if `score >= match_threshold`; also gates list alignment when an alignment key is a graded string |
@@ -375,18 +375,18 @@ For each instance with a manifest profile:
 | yes | no | **withheld_applicable** |
 | yes | yes | **correct_applicable** (eligible for layer 2) |
 
-**Applicable** = value present and ∉ `na_values`. Missing pred when gold expected an answer → **withheld_applicable**. Missing pred when gold is N/A (`""` ∈ `na_values`) → **correct_NA** (pred did not spuriously answer).
+**Applicable** = value present and ∉ `na_values`. Missing pred when gold expected an applicable value → **withheld_applicable**. Missing pred when gold is N/A (`""` ∈ `na_values`) → **correct_NA** (pred did not spuriously answer).
 
 `layer1_counts` in `by_property` tally these labels across instances of that property.
 
 ---
 
-## Layer 2 — Answer
+## Layer 2 — Matching
 
 Runs only when layer 1 = **correct_applicable**. Denominator: instances where gold was applicable.
 
 
-| `answer_metric` | Layer 2 labels |
+| `matching_metric` | Layer 2 labels |
 |-----------------|----------------|
 | **binary_polarity** | **TP**, **FP**, **FN**, **TN** (`positive_value` / `negative_value`, applicable gold only) |
 | **multiclass** | **match** / **mismatch**; build confusion matrix per property |
@@ -406,7 +406,7 @@ Runs only when layer 1 = **correct_applicable**. Denominator: instances where go
 
 ## Implementation
 
-Target module: [`evaluation.py`](../soda_mmqc/core/evaluation.py) (refactor in progress). Contract: flatten → align → score instances → manifest layers → `instances` + `by_property`.
+Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (phase 3), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator, phase 5). Contract: flatten → align → score instances → applicability and matching labels → `instances` + `by_property`.
 
 ---
 

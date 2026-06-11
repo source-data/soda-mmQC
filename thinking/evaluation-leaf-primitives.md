@@ -23,7 +23,7 @@ A **leaf property** is a schema path to a primitive value (or array of primitive
 
 **Manifest** (`eval-manifest.json`) constrains how we **score and report** profiled leaves:
 
-- `answer_metric`, `na_values`, `positive_value` / `negative_value` — layers 1–2.
+- `matching_metric`, `na_values`, `positive_value` / `negative_value` — layers 1–2.
 - `string_compare`, `match_threshold` — **only** on non-enum `graded_string` fields ([evaluation-scoring.md](evaluation-scoring.md#string_compare--how-the-leaf-score-is-computed)).
 
 There is no global string metric: each free-text `graded_string` field declares its own `string_compare`. Schema `enum` fields are always exact; omit `string_compare` on those profiles.
@@ -41,7 +41,7 @@ There is no global string metric: each free-text `graded_string` field declares 
 
 ### Non-enum strings (`graded_string`)
 
-For free `string` leaves with `answer_metric: graded_string`, declare **`string_compare`** in `fields` (`exact`, `fuzzy`, `semantic`). The leaf returns **`score`**; **`match_threshold`** turns that into layer 2 **match** / **mismatch** (`score >= τ`).
+For free `string` leaves with `matching_metric: graded_string`, declare **`string_compare`** in `fields` (`exact`, `fuzzy`, `semantic`). The leaf returns **`score`**; **`match_threshold`** turns that into layer 2 **match** / **mismatch** (`score >= τ`).
 
 | `string_compare` | Behaviour |
 |------------------|-----------|
@@ -58,8 +58,8 @@ For free `string` leaves with `answer_metric: graded_string`, declare **`string_
 If the schema lists `enum`, compare **exactly**; **do not** set `string_compare` on the manifest profile. Pred outside `enum` → **`score = 0`**.
 
 - **N/A sentinel enums** (e.g. `["", "yes", "no"]` where `""` = not applicable): `""` is a **class**, not “empty wrong text.” Which literal is N/A and which is positive/negative is in **`eval-manifest.json`** (`na_values`, `positive_value`, `negative_value`). Layer 1 / 2: [evaluation-scoring.md](evaluation-scoring.md).
-- **Multiclass enums** (`answer_metric: multiclass`): exact literal match → layer 2 **match** / **mismatch**; `mean_score` over instances.
-- **Binary polarity enums** (`answer_metric: binary_polarity`): exact class match; layer 2 **TP** / **FP** / **FN** / **TN** on gold-applicable instances only. No `match_threshold`.
+- **Multiclass enums** (`matching_metric: multiclass`): exact literal match → layer 2 **match** / **mismatch**; `mean_score` over instances.
+- **Binary polarity enums** (`matching_metric: binary_polarity`): exact class match; layer 2 **TP** / **FP** / **FN** / **TN** on gold-applicable instances only. No `match_threshold`.
 
 ## Numbers and integers
 
@@ -119,7 +119,7 @@ The flat comparator stores one result per leaf **instance** path (`panels[1].sta
 
 The outer comparator maps `LeafComparisonResult` + manifest profile → per-instance record (`path`, `layer1`, `layer2`, …). No hierarchical `field_scores` attachment at leaves.
 
-**Direction:** primitive dispatch in a dedicated module (e.g. `leaves.py`); list alignment and manifest layers in the evaluator. See [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md).
+**Direction:** primitive dispatch in `leaves.py`; applicability and matching labels in `applicability_and_matching.py`; list alignment in the evaluator. See [evaluation-implementation-plan.md](evaluation-implementation-plan.md).
 
 ## See also
 

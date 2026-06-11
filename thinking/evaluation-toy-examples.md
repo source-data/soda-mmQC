@@ -109,7 +109,7 @@ Layer 2 runs only when layer 1 = **correct_applicable**.
 {
   "checklist": "toy-eval-examples",
   "defaults": {
-    "answer_metric": "binary_polarity",
+    "matching_metric": "binary_polarity",
     "positive_value": "yes",
     "negative_value": "no",
     "na_values": []
@@ -118,10 +118,10 @@ Layer 2 runs only when layer 1 = **correct_applicable**.
     "panels": ["label"]
   },
   "fields": {
-    "item.status": { "na_values": [""], "answer_metric": "binary_polarity" },
-    "item.label": { "answer_metric": "graded_string", "string_compare": "exact", "match_threshold": 1.0 },
-    "panels[].status": { "na_values": [""], "answer_metric": "binary_polarity" },
-    "panels[].label": { "answer_metric": "graded_string", "string_compare": "exact", "match_threshold": 1.0 }
+    "item.status": { "na_values": [""], "matching_metric": "binary_polarity" },
+    "item.label": { "matching_metric": "graded_string", "string_compare": "exact", "match_threshold": 1.0 },
+    "panels[].status": { "na_values": [""], "matching_metric": "binary_polarity" },
+    "panels[].label": { "matching_metric": "graded_string", "string_compare": "exact", "match_threshold": 1.0 }
   }
 }
 ```

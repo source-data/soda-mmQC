@@ -14,7 +14,7 @@ from soda_mmqc.core.leaves import StringCompareMode
 _INDEX_RE = re.compile(r"^(\w+)\[(\d+)\]$")
 
 
-class AnswerMetric(str, Enum):
+class MatchingMetric(str, Enum):
     """Layer 2 reporting shape for a profiled leaf property."""
 
     BINARY_POLARITY = "binary_polarity"
@@ -26,7 +26,7 @@ class AnswerMetric(str, Enum):
 class FieldProfile:
     """Resolved metric profile for one leaf property."""
 
-    answer_metric: Optional[AnswerMetric] = None
+    matching_metric: Optional[MatchingMetric] = None
     na_values: tuple[str, ...] = ()
     positive_value: Optional[str] = None
     negative_value: Optional[str] = None
@@ -35,7 +35,7 @@ class FieldProfile:
 
     @property
     def is_profiled(self) -> bool:
-        return self.answer_metric is not None
+        return self.matching_metric is not None
 
 
 @dataclass(frozen=True)
@@ -147,7 +147,7 @@ def _parse_list_alignment(raw: Mapping[str, Any]) -> dict[str, tuple[str, ...]]:
 
 
 def _profile_from_raw(raw: Mapping[str, Any], *, context: str) -> FieldProfile:
-    answer_metric = _parse_answer_metric(raw.get("answer_metric"), context=context)
+    matching_metric = _parse_matching_metric(raw.get("matching_metric"), context=context)
     na_values = _parse_na_values(raw.get("na_values"), context=context)
     positive_value = _optional_str(raw.get("positive_value"), field="positive_value")
     negative_value = _optional_str(raw.get("negative_value"), field="negative_value")
@@ -158,7 +158,7 @@ def _profile_from_raw(raw: Mapping[str, Any], *, context: str) -> FieldProfile:
         raw.get("match_threshold"), context=context
     )
     return FieldProfile(
-        answer_metric=answer_metric,
+        matching_metric=matching_metric,
         na_values=na_values,
         positive_value=positive_value,
         negative_value=negative_value,
@@ -174,10 +174,10 @@ def _merge_profiles(
     override_keys: frozenset[str],
 ) -> FieldProfile:
     return FieldProfile(
-        answer_metric=(
-            override.answer_metric
-            if "answer_metric" in override_keys
-            else defaults.answer_metric
+        matching_metric=(
+            override.matching_metric
+            if "matching_metric" in override_keys
+            else defaults.matching_metric
         ),
         na_values=(
             override.na_values
@@ -215,10 +215,10 @@ def _validate_defaults(raw: Mapping[str, Any]) -> None:
 
 
 def _validate_field_profile(path_key: str, merged: FieldProfile) -> None:
-    if merged.answer_metric is None:
-        raise ValueError(f"fields[{path_key!r}] must set answer_metric")
+    if merged.matching_metric is None:
+        raise ValueError(f"fields[{path_key!r}] must set matching_metric")
 
-    if merged.answer_metric == AnswerMetric.GRADED_STRING:
+    if merged.matching_metric == MatchingMetric.GRADED_STRING:
         if merged.string_compare is None:
             raise ValueError(
                 f"fields[{path_key!r}] graded_string requires string_compare"
@@ -228,7 +228,7 @@ def _validate_field_profile(path_key: str, merged: FieldProfile) -> None:
                 f"fields[{path_key!r}] graded_string requires match_threshold"
             )
 
-    if merged.answer_metric == AnswerMetric.BINARY_POLARITY:
+    if merged.matching_metric == MatchingMetric.BINARY_POLARITY:
         if merged.positive_value is None or merged.negative_value is None:
             raise ValueError(
                 f"fields[{path_key!r}] binary_polarity requires "
@@ -236,19 +236,19 @@ def _validate_field_profile(path_key: str, merged: FieldProfile) -> None:
             )
 
 
-def _parse_answer_metric(
+def _parse_matching_metric(
     value: Any, *, context: str
-) -> Optional[AnswerMetric]:
+) -> Optional[MatchingMetric]:
     if value is None:
         return None
     if not isinstance(value, str):
-        raise ValueError(f"{context}.answer_metric must be a string")
+        raise ValueError(f"{context}.matching_metric must be a string")
     try:
-        return AnswerMetric(value)
+        return MatchingMetric(value)
     except ValueError as exc:
-        allowed = ", ".join(metric.value for metric in AnswerMetric)
+        allowed = ", ".join(metric.value for metric in MatchingMetric)
         raise ValueError(
-            f"{context}.answer_metric must be one of: {allowed}"
+            f"{context}.matching_metric must be one of: {allowed}"
         ) from exc
 
 

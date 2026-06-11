@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from soda_mmqc.core.eval_manifest import (
-    AnswerMetric,
+    MatchingMetric,
     EvalManifest,
     instance_to_leaf_property,
     load_eval_manifest,
@@ -76,7 +76,7 @@ class TestProfileLookup:
     ):
         profile = toy_manifest.profile_for("item.status")
         assert profile is not None
-        assert profile.answer_metric == AnswerMetric.BINARY_POLARITY
+        assert profile.matching_metric == MatchingMetric.BINARY_POLARITY
         assert profile.na_values == ("",)
         assert profile.positive_value == "yes"
         assert profile.negative_value == "no"
@@ -85,14 +85,14 @@ class TestProfileLookup:
     def test_graded_string_field(self, toy_manifest: EvalManifest):
         profile = toy_manifest.profile_for("item.label")
         assert profile is not None
-        assert profile.answer_metric == AnswerMetric.GRADED_STRING
+        assert profile.matching_metric == MatchingMetric.GRADED_STRING
         assert profile.string_compare == StringCompareMode.EXACT
         assert profile.match_threshold == 1.0
 
     def test_list_object_field_pattern(self, toy_manifest: EvalManifest):
         profile = toy_manifest.profile_for("panels[].status")
         assert profile is not None
-        assert profile.answer_metric == AnswerMetric.BINARY_POLARITY
+        assert profile.matching_metric == MatchingMetric.BINARY_POLARITY
         assert profile.na_values == ("",)
 
     def test_semantic_graded_string(self, toy_manifest: EvalManifest):
@@ -107,7 +107,7 @@ class TestProfileLookup:
         leaf_property = instance_to_leaf_property("panels[0].label")
         profile = toy_manifest.profile_for(leaf_property)
         assert profile is not None
-        assert profile.answer_metric == AnswerMetric.GRADED_STRING
+        assert profile.matching_metric == MatchingMetric.GRADED_STRING
 
 
 class TestDefaultsInheritance:
@@ -116,14 +116,14 @@ class TestDefaultsInheritance:
             {
                 "checklist": "test",
                 "defaults": {
-                    "answer_metric": "binary_polarity",
+                    "matching_metric": "binary_polarity",
                     "positive_value": "yes",
                     "negative_value": "no",
                     "na_values": ["not needed"],
                 },
                 "fields": {
                     "item.status": {
-                        "answer_metric": "binary_polarity",
+                        "matching_metric": "binary_polarity",
                         "na_values": [""],
                     }
                 },
@@ -139,17 +139,17 @@ class TestDefaultsInheritance:
             {
                 "checklist": "test",
                 "defaults": {
-                    "answer_metric": "multiclass",
+                    "matching_metric": "multiclass",
                     "na_values": [],
                 },
                 "fields": {
-                    "plot.type": {"answer_metric": "multiclass"},
+                    "plot.type": {"matching_metric": "multiclass"},
                 },
             }
         )
         profile = manifest.profile_for("plot.type")
         assert profile is not None
-        assert profile.answer_metric == AnswerMetric.MULTICLASS
+        assert profile.matching_metric == MatchingMetric.MULTICLASS
         assert profile.na_values == ()
 
     def test_explicit_empty_na_values_overrides_defaults(self):
@@ -157,14 +157,14 @@ class TestDefaultsInheritance:
             {
                 "checklist": "test",
                 "defaults": {
-                    "answer_metric": "binary_polarity",
+                    "matching_metric": "binary_polarity",
                     "positive_value": "yes",
                     "negative_value": "no",
                     "na_values": ["not needed"],
                 },
                 "fields": {
                     "item.status": {
-                        "answer_metric": "binary_polarity",
+                        "matching_metric": "binary_polarity",
                         "na_values": [],
                     }
                 },
@@ -205,7 +205,7 @@ class TestValidation:
                     "checklist": "x",
                     "fields": {
                         "item.label": {
-                            "answer_metric": "graded_string",
+                            "matching_metric": "graded_string",
                             "match_threshold": 1.0,
                         }
                     },
@@ -219,7 +219,7 @@ class TestValidation:
                     "checklist": "x",
                     "fields": {
                         "item.label": {
-                            "answer_metric": "graded_string",
+                            "matching_metric": "graded_string",
                             "string_compare": "exact",
                         }
                     },
@@ -234,18 +234,18 @@ class TestValidation:
                 {
                     "checklist": "x",
                     "fields": {
-                        "item.status": {"answer_metric": "binary_polarity"},
+                        "item.status": {"matching_metric": "binary_polarity"},
                     },
                 }
             )
 
-    def test_invalid_answer_metric(self):
-        with pytest.raises(ValueError, match="answer_metric must be one of"):
+    def test_invalid_matching_metric(self):
+        with pytest.raises(ValueError, match="matching_metric must be one of"):
             parse_eval_manifest(
                 {
                     "checklist": "x",
                     "fields": {
-                        "item.status": {"answer_metric": "unknown"},
+                        "item.status": {"matching_metric": "unknown"},
                     },
                 }
             )
@@ -267,13 +267,13 @@ class TestMergeProfiles:
             {
                 "checklist": "x",
                 "defaults": {
-                    "answer_metric": "binary_polarity",
+                    "matching_metric": "binary_polarity",
                     "positive_value": "yes",
                     "negative_value": "no",
                 },
                 "fields": {
                     "item.label": {
-                        "answer_metric": "graded_string",
+                        "matching_metric": "graded_string",
                         "string_compare": "fuzzy",
                         "match_threshold": 0.9,
                     }

@@ -34,7 +34,7 @@ Pure functions: two values (+ minimal schema hints) → `LeafComparisonResult` w
 **Module:** `soda_mmqc/core/eval_manifest.py`
 
 - `load_eval_manifest` / `parse_eval_manifest`
-- `FieldProfile`, `EvalManifest`, `AnswerMetric`
+- `FieldProfile`, `EvalManifest`, `MatchingMetric`
 - `profile_for(leaf_property)` with defaults inheritance (key-aware merge)
 - `list_alignment` top-level map + `alignment_keys_for`
 - Path helpers: `instance_to_leaf_property`, `path_matches_pattern`
@@ -44,16 +44,16 @@ Pure functions: two values (+ minimal schema hints) → `LeafComparisonResult` w
 
 ---
 
-## Phase 3 — Layer 1 / Layer 2 reporting
+## Phase 3 — Applicability and matching reporting
 
-**Module:** `soda_mmqc/core/layers.py` (name TBD)
+**Module:** `soda_mmqc/core/applicability_and_matching.py`
 
-Given `LeafComparisonResult` + field profile + `(exp, pred)` applicability:
+Given `LeafComparisonResult` + field profile + `(exp, pred)` values:
 
-- Layer 1: `correct_NA`, `spurious_applicable`, `withheld_applicable`, `correct_applicable`
-- Layer 2: `TP`/`FP`/`FN`/`TN`, `match`/`mismatch` per `answer_metric`
+- **Layer 1 (applicability):** `correct_NA`, `spurious_applicable`, `withheld_applicable`, `correct_applicable`
+- **Layer 2 (matching):** `TP`/`FP`/`FN`/`TN`, `match`/`mismatch` per `matching_metric`
 
-**Tests:** mirror [evaluation-toy-examples.md](evaluation-toy-examples.md) sections C (status/label) and graded_string threshold cases.
+**Tests:** `tests/test_applicability_and_matching.py` — mirror [evaluation-toy-examples.md](evaluation-toy-examples.md) sections C (status/label) and graded_string threshold cases.
 
 ---
 
@@ -77,7 +77,7 @@ Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 1. Flatten schema → leaf paths
 2. Align lists
 3. Score instances (`leaves.py`)
-4. Apply layers (`layers.py`)
+4. Apply applicability and matching labels (`applicability_and_matching.py`)
 5. Emit `instances` + `by_property`
 
 **Tests:** full toy examples A–D; golden `by_property` JSON snapshots.
