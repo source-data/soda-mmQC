@@ -1,6 +1,6 @@
 [project]
 name = "mmqc-utils"
-version = "0.3.4"
+version = "0.3.5"
 description = "Reusable conversion utilities for images, documents, text, and related data types."
 readme = "README.md"
 authors = [
@@ -21,9 +21,12 @@ classifiers = [
 license = "Apache-2.0"
 dependencies = [
     "beautifulsoup4>=4.15.0",
+    "imagecodecs>=2026.6.6",
+    "pillow>=12.2.0",
     "pypandoc-binary>=1.17",
     "pypdf>=6.10.2",
     "rapidfuzz>=3.14.3",
+    "tifffile>=2026.6.1",
     "Wand>=0.6.13",
 ]
 requires-python = ">= 3.12"

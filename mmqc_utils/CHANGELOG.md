@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## [0.3.5] - 2026-06-12
+
+### Added
+- Exception handling for malformed tiff files. These fail with the Wand conversion. A `tifffile` fallback implemented, imagemagick is still the main image reader.
+
 ## [0.3.4] - 2026-06-11
 
 ### Added

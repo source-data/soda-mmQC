@@ -69,7 +69,8 @@ def unwrap_li_paragraphs(soup: BeautifulSoup) -> int:
 def _paragraph_urls(p: Tag) -> list[str]:
     urls: list[str] = []
     for a in p.find_all("a", href=True):
-        href = (a.get("href") or "").strip()
+        href_attr = a.get("href")
+        href = href_attr.strip() if isinstance(href_attr, str) else ""
         text = visible_text(a)
         if href:
             urls.append(href)

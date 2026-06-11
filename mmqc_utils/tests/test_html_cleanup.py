@@ -21,7 +21,9 @@ def _soup(html: str) -> BeautifulSoup:
 
 def test_visible_text_normalizes_whitespace() -> None:
     soup = _soup("<p>  Hello \n  <em>world</em>  </p>")
-    assert visible_text(soup.find("p")) == "Hello world"
+    paragraph = soup.find("p")
+    assert paragraph is not None
+    assert visible_text(paragraph) == "Hello world"
 
 
 def test_is_br_only_detects_br_placeholders() -> None:
