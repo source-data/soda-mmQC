@@ -392,7 +392,7 @@ Runs only when layer 1 = **correct_applicable**. Denominator: instances where go
 | **multiclass** | **match** / **mismatch**; build confusion matrix per property |
 | **graded_string** | **match** / **mismatch** where `score >= match_threshold` |
 
-`no` / `no` when `negative_value` is `"no"` → **TN**. Layer 2 for `correct_NA` instances is omitted (not counted in `layer2_counts`).
+`no` / `no` when `negative_value` is `"no"` → **TN**. Gold positive + pred negative → **FN**; gold negative + pred positive → **FP**. Layer 2 for `correct_NA` instances is omitted (not counted in `layer2_counts`).
 
 ---
 

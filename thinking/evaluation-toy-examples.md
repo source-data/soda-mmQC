@@ -283,12 +283,12 @@ Pred rows swapped; `Fig 1` has wrong `status` and `id`:
 |------|------------|---------|---------|---------|
 | `panels[0].id` | `1` → `8` | 0.0 | — | — |
 | `panels[0].label` | `"Fig 1"` → `"Fig 1"` | 1.0 | correct_applicable | match |
-| `panels[0].status` | `"yes"` → `"no"` | 0.0 | correct_applicable | FP |
+| `panels[0].status` | `"yes"` → `"no"` | 0.0 | correct_applicable | FN |
 | `panels[1].id` | `2` → `9` | 0.0 | — | — |
 | `panels[1].label` | `"Fig 2"` → `"Fig 2"` | 1.0 | correct_applicable | match |
 | `panels[1].status` | `""` → `""` | 1.0 | correct_NA | — |
 
-**`by_property` (panel leaves only):** `panels[].id` → `mean_score` 0.0; `panels[].label` → `mean_score` 1.0, `layer2_counts` { match: 2 }; `panels[].status` → `mean_score` 0.5, `layer1_counts` { correct_applicable: 1, correct_NA: 1 }, `layer2_counts` { FP: 1 }.
+**`by_property` (panel leaves only):** `panels[].id` → `mean_score` 0.0; `panels[].label` → `mean_score` 1.0, `layer2_counts` { match: 2 }; `panels[].status` → `mean_score` 0.5, `layer1_counts` { correct_applicable: 1, correct_NA: 1 }, `layer2_counts` { FN: 1 }.
 
 ### D.3 Wrong `status` on panel 1 (gold index 1)
 

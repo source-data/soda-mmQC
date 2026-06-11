@@ -44,7 +44,7 @@ Pure functions: two values (+ minimal schema hints) → `LeafComparisonResult` w
 
 ---
 
-## Phase 3 — Applicability and matching reporting
+## Phase 3 — Applicability and matching reporting ✅ *complete*
 
 **Module:** `soda_mmqc/core/applicability_and_matching.py`
 
@@ -102,4 +102,4 @@ These import the deleted hierarchical `JSONEvaluator` and stay **broken until ph
 - `tests/test_compare_lists.py`
 - `tests/test_compare_objects.py`
 
-Run phases 1–2: `pytest tests/test_leaves.py tests/test_eval_manifest.py`.
+Run phases 1–3: `pytest tests/test_leaves.py tests/test_eval_manifest.py tests/test_applicability_and_matching.py`.

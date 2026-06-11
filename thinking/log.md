@@ -81,3 +81,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-08] lint | Phase 3 module named `applicability_and_answer.py` (was `layers.py`).
 
 ## [2026-06-08] lint | Terminology: `answer_metric` → `matching_metric`; module `applicability_and_matching.py`.
+
+## [2026-06-08] ingest | Phase 3 eval: `applicability_and_matching.py`; `tests/test_applicability_and_matching.py` (toy examples A/C/D).
