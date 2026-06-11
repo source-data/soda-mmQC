@@ -2,113 +2,127 @@
 
 **Wiki:** catalog `[index.md](index.md)`; conventions `[README.md](README.md)`.
 
-This page is about **terminal values** in schema-guided JSON comparison: the JSON types that do **not** contain nested objects or arrays. We compare them when recursion reaches a node whose schema says `string`, `number`, `integer`, `boolean`, or (if we add it) `null`. **Strings are the richest case** because we support several similarity modes; other primitives are usually **exact** today.
+This page is about **terminal values** in schema-guided JSON comparison: the JSON types that do **not** contain nested objects or arrays. We compare them when the comparator reaches a path whose schema says `string`, `number`, `integer`, `boolean`, or (if we add it) `null`. **Strings are the richest case** because non-enum strings can use several similarity modes via the manifest; other primitives are **exact** today.
 
-Code reference: `[JSONEvaluator](../soda_mmqc/core/evaluation.py)` in `[soda_mmqc/core/evaluation.py](../soda_mmqc/core/evaluation.py)` (`_compare_values_with_schema`, `_compare_strings`, and the non-string branch for other types).
+Normative scoring contract: [evaluation-scoring.md](evaluation-scoring.md). Worked examples: [evaluation-toy-examples.md](evaluation-toy-examples.md).
 
 ## Vocabulary: primitive vs scalar
 
 - **JSON primitives** (common wording): `**string`**, `**number`**, `**integer**`, `**boolean**`, `**null**`. They are the values that sit at **leaves** of the JSON value tree (no `{}` or `[]` inside them).
 - **“Scalar”** is used loosely in data and ML contexts to mean **one non-container value**. It often includes strings; sometimes people reserve “scalar” for numeric types only. In this wiki we say **primitive** or **leaf value** when we want to be precise.
 
-A **leaf property** is a schema path to a primitive value (or array of primitives). Comparison produces **`score`** only at these paths. Normative model: [evaluation-scoring.md](evaluation-scoring.md).
+A **leaf property** is a schema path to a primitive value (or array of primitives). Comparison produces **`score`** at these paths; manifest profiles add **layer 1** / **layer 2** labels per [evaluation-scoring.md](evaluation-scoring.md).
 
-## Schema-first: the leaf schema fragment decides behavior
+## Schema vs manifest at leaves
 
-Leaf comparison is **not** only “global string metric on the evaluator.” The **sub-schema at the current path** tells us:
+**Schema** (`schema.json`) constrains what the model may emit:
 
-- `**type`** — which family of comparators applies.
-- `**enum`** (for strings) — prediction must be one of the allowed literals or we score failure.
+- `**type**` — which JSON family applies.
+- `**enum**` (for strings) — closed vocabulary; pred outside `enum` → `score = 0`.
 - Future: `**format**`, numeric bounds (`minimum` / `maximum`), `const`, etc.
 
-The navigator passes **prediction value, expected value, and that fragment** into the leaf layer so behavior stays aligned with the checklist schema.
+**Manifest** (`eval-manifest.json`) constrains how we **score and report** profiled leaves:
+
+- `answer_metric`, `na_values`, `positive_value` / `negative_value` — layers 1–2.
+- `string_compare`, `match_threshold` — **only** on non-enum `graded_string` fields ([evaluation-scoring.md](evaluation-scoring.md#string_compare--how-the-leaf-score-is-computed)).
+
+There is no global string metric: each free-text `graded_string` field declares its own `string_compare`. Schema `enum` fields are always exact; omit `string_compare` on those profiles.
 
 ## Vocabulary at leaves (only what leaves own)
 
+| Term | Meaning at a **primitive leaf** |
+|------|----------------------------------|
+| `**score**` | Numeric quality in `**[0, 1]**` (exact → `0`/`1`; fuzzy / semantic → graded). Aggregated per property as `mean_score` in `by_property`. |
+| **Validity / kind signals** | Hard failures (`enum` violation, type mismatch) → `**score == 0**` before layer reporting. |
 
-| Term                        | Meaning at a **primitive leaf**                                                                                                                                                                                                                                       |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `**score`**                 | Numeric quality in `**[0, 1]`** (exact match → `0`/`1`; fuzzy / semantic → graded). Feeds **roll-up averages** and any **parent** decision rule.                                                                                                                      |
-| **Validity / kind signals** | Hard failures (`enum` violation, type mismatch) should surface as `**score == 0`** (and/or explicit signals later) for layer 1 / layer 2 reporting ([evaluation-scoring.md](evaluation-scoring.md)). |
-
-
-**Normative split:** a leaf compares two values and emits **`score`**. **Layer 1 / layer 2** reporting (applicability, TP/FP/FN/TN, match/mismatch) is applied per leaf from the manifest — see [evaluation-scoring.md](evaluation-scoring.md). There is no container roll-up in the flat model.
+**Normative split:** the leaf comparator returns **`score`** (and compared values). **Layer 1 / layer 2** (applicability, TP/FP/FN/TN, match/mismatch) come from the manifest profile on that leaf property — see [evaluation-scoring.md](evaluation-scoring.md). No container roll-up in the flat model.
 
 ## Strings
 
-Strings are the main flexible leaf type in our stack.
+### Non-enum strings (`graded_string`)
 
-- **Exact match** — Character-for-character equality (after whatever normalization we apply in code, e.g. none vs strip).
-- **Fuzzy match** — Historically LCS-based ratio in-repo; the refactor plan moves this to a **library** (e.g. rapidfuzz) with normalized score in `[0, 1]`.
-- **Semantic similarity** — Embedding-based cosine similarity (e.g. SentenceTransformer), mapped to `[0, 1]`.
+For free `string` leaves with `answer_metric: graded_string`, declare **`string_compare`** in `fields` (`exact`, `fuzzy`, `semantic`). The leaf returns **`score`**; **`match_threshold`** turns that into layer 2 **match** / **mismatch** (`score >= τ`).
 
-**Threshold:** `match_threshold` in the manifest turns graded `**score`** into layer 2 **match** / **mismatch** on that leaf ([evaluation-scoring.md](evaluation-scoring.md)). The leaf only produces the score.
+| `string_compare` | Behaviour |
+|------------------|-----------|
+| **exact** | Character-level equality → `0.0` or `1.0` |
+| **fuzzy** | rapidfuzz `fuzz.ratio` (edit-distance) in `[0, 1]` |
+| **semantic** | SentenceTransformer cosine similarity in `[0, 1]` |
 
-**Enum strings:** if the schema lists `enum`, compare **exactly** (unless a profile says otherwise); outside `enum` → **`score = 0`**.
+`string_compare` is **not** a `defaults` key — set it on each free-text `graded_string` field that needs it.
 
-- **N/A sentinel enums** (e.g. `["", "yes", "no"]` where `""` = not applicable): `""` is a **class**, not “empty wrong text.” Which literal is N/A and which is positive/negative is declared in **`eval-manifest.json`**. Reporting: [evaluation-scoring.md](evaluation-scoring.md) (layers 1–2 per leaf).
-- **Multi-class enums** (many non-N/A values): leaf **`score`** + **match/mismatch** and mean **`score`**; no binary TP/TN unless you define a profile.
-- **Binary polarity enums** (`yes` / `no` + N/A): layer 2 can use TP/FP/TN/FN on **gold-applicable** slots only.
+**List alignment:** when a row field is an alignment key (e.g. `list_alignment.panels: ["label"]`), use that field’s `fields` profile (`string_compare`, `match_threshold`) to score `s(i,j)` for Hungarian matching. See [evaluation-scoring.md](evaluation-scoring.md#list-of-objects).
+
+### Schema `enum` strings
+
+If the schema lists `enum`, compare **exactly**; **do not** set `string_compare` on the manifest profile. Pred outside `enum` → **`score = 0`**.
+
+- **N/A sentinel enums** (e.g. `["", "yes", "no"]` where `""` = not applicable): `""` is a **class**, not “empty wrong text.” Which literal is N/A and which is positive/negative is in **`eval-manifest.json`** (`na_values`, `positive_value`, `negative_value`). Layer 1 / 2: [evaluation-scoring.md](evaluation-scoring.md).
+- **Multiclass enums** (`answer_metric: multiclass`): exact literal match → layer 2 **match** / **mismatch**; `mean_score` over instances.
+- **Binary polarity enums** (`answer_metric: binary_polarity`): exact class match; layer 2 **TP** / **FP** / **FN** / **TN** on gold-applicable instances only. No `match_threshold`.
 
 ## Numbers and integers
 
-Today: **strict equality** between Python values parsed from JSON (`pred_value == exp_value`) → `**score`** `1.0` or `0.0`. The **object parent** maps that to slot TP/FP/FN (see hierarchical doc).
+**Strict equality** between JSON-parsed values (`pred_value == exp_value`) → **`score`** `1.0` or `0.0`. No manifest profile required unless you add layers later.
 
-**Roadmap (design only):** tolerance (epsilon), `multipleOf`, integer-vs-float rules, or schema `const` — still keyed off the same **schema fragment**, not ad-hoc globals.
+**Roadmap (design only):** tolerance (epsilon), `multipleOf`, integer-vs-float rules, or schema `const` — keyed off the schema fragment.
 
 ## Booleans
 
-Same as numbers today: **exact** equality, binary score.
+Same as numbers: **exact** equality, binary score.
 
 ## Null, missing keys, and empty strings
 
-Follow **JSON** and **JSON Schema**: `null`, absent property, and `""` are different. For missing keys vs `null` vs `""` on string leaves, see [evaluation-scoring.md](evaluation-scoring.md) (layer 1 withheld / layer 2 skipped).
+Follow **JSON** and **JSON Schema** literally — see [evaluation-scoring.md](evaluation-scoring.md#missing-null-and-empty-string):
 
-If the schema allows `**null`** at a leaf (`type` union includes `"null"`), comparison follows JSON null rules (`null` vs `null` → full `**score`**; `null` vs string → low `**score**`, parent classifies slot).
+- **Absent key** — `score = 0`.
+- **`null`** on a string-only schema — `score = 0`.
+- **`""`** — a string value; compare like any other string. For enums, `""` may be N/A via `na_values` (layer 1), not “missing”.
 
-## Graded scores without declaring container `match`
+Do not use truthiness that conflates `""`, `null`, and absent keys.
 
-Leaves often return **partial credit** (e.g. similarity `0.4`). Only the **parent** knows whether that counts as `**match`** for its slot policy (`score >= τ`, strict all-fields, etc.). Keep `**score`** and **slot `match`** **separate in design**: high score with `**match` false** still improves **roll-up averages** above the level where `match` failed.
+If the schema allows `**null**` at a leaf (`type` union includes `"null"`), `null` vs `null` → full **`score`**; `null` vs non-null → `score = 0`.
+
+## `score` vs layer 2 “match”
+
+Leaves often return **partial credit** on `graded_string` paths (e.g. semantic similarity `0.4`). Layer 2 **match** / **mismatch** is **`score >= match_threshold`** — separate from `mean_score`, which averages raw scores across instances of that property. A high `score` below τ still counts as layer 2 **mismatch** but raises `mean_score`.
+
+For `binary_polarity` and `multiclass` enums, layer 2 is **class identity**, not thresholded graded match.
 
 ## Output shape at a leaf (conceptual)
 
-**Normative for now:** every primitive leaf returns one **`score` in `[0, 1]`**, regardless of JSON type:
+Every primitive leaf instance returns at minimum **`score` in `[0, 1]`**:
 
-| Leaf type | How `score` is formed (typical) |
-|-----------|----------------------------------|
-| **string** | Exact / fuzzy / semantic similarity → `[0, 1]` |
-| **number / integer** | Exact equality → `0.0` or `1.0` (tolerance later if needed) |
+| Leaf type | How `score` is formed |
+|-----------|------------------------|
+| **free `string`** (`graded_string`) | `string_compare` from manifest → `[0, 1]` |
+| **schema `enum` string** | Exact literal match → `0.0` or `1.0` |
+| **number / integer** | Exact equality → `0.0` or `1.0` |
 | **boolean** | Exact equality → `0.0` or `1.0` |
-| **enum string** | Exact match on allowed literal → `0.0` or `1.0` |
 
-Optional **leaf-local diagnostics** (e.g. which fuzzy metric fired) are fine; they do not replace **`score`**.
+Optional leaf-local diagnostics (e.g. which comparator ran) are fine; they do not replace **`score`**.
 
-A leaf does **not** define nested **`element_scores` / `field_scores`** — the flat model stores one result per leaf path ([evaluation-scoring.md](evaluation-scoring.md)).
+The flat comparator stores one result per leaf **instance** path (`panels[1].status`, …) plus **`by_property`** summaries — no nested `field_scores` / `element_scores` trees ([evaluation-scoring.md](evaluation-scoring.md#comparator-output-required)).
 
-**Separation of concerns:** **leaf** = compare two primitive values → **`score`**. **Parent** = alignment, keys, **`predicate`**, manifest layers, roll-up.
+**Separation of concerns:**
 
-### `LeafComparisonResult` vs `ComparisonResult` (target design)
+- **Leaf compare** — two values + schema fragment + optional manifest profile → **`score`**.
+- **Comparator** — flatten paths, align lists (`list_alignment`), apply manifest layers, emit `instances` + `by_property`.
 
-**Not implemented yet.** Today [`evaluation.py`](../soda_mmqc/core/evaluation.py) still uses one **`ComparisonResult`** type everywhere (with empty `field_scores` at leaves). The refactor should split:
+### `LeafComparisonResult` (target type)
 
-- **`LeafComparisonResult`** — only **`score`** in `[0, 1]` plus optional **`false_positive` / `false_negative`** for leaf-local cases (e.g. `None` vs string). **No** `field_scores` or `element_scores`.
-- **`ComparisonResult`** — **objects and lists** only: roll-up **`score`**, drill-down maps, precision/recall on containers.
+**Not implemented yet** — target for the flat reimplementation. A small type returned by primitive compare functions:
 
-At the boundary, leaves would call **`leaf.to_comparison_result(match_threshold)`** before a parent stores the child under `field_scores` or `element_scores`:
+- **`score`** in `[0, 1]`
+- optional **`exp_value` / `pred_value`** (or the caller attaches these on the instance record)
+- optional hard-failure flags (enum violation, type mismatch)
 
-```text
-_compare_strings("yes", "no")  →  LeafComparisonResult(score=0.0)
-                                      ↓ to_comparison_result(τ)
-field_scores["plot"]           →  ComparisonResult(score=0.0, field_scores={}, …)
-```
+The outer comparator maps `LeafComparisonResult` + manifest profile → per-instance record (`path`, `layer1`, `layer2`, …). No hierarchical `field_scores` attachment at leaves.
 
-Example mistake this prevents: attaching `field_scores={"nested": …}` to a bare string compare — the leaf type cannot express that.
-
-**Direction:** move primitive dispatch into **`leaves.py`** returning `LeafComparisonResult`; containers keep returning `ComparisonResult`. See the split-evaluation plan and [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md).
+**Direction:** primitive dispatch in a dedicated module (e.g. `leaves.py`); list alignment and manifest layers in the evaluator. See [evaluation-json-vs-open-source.md](evaluation-json-vs-open-source.md).
 
 ## See also
 
-- [Flat leaf scoring](evaluation-scoring.md) — manifest layers and list alignment.
-- [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases using a shared schema and manifest.
+- [Flat leaf scoring](evaluation-scoring.md) — manifest, layers, `list_alignment`, `by_property`.
+- [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases.
 - [JSON evaluation vs open source](evaluation-json-vs-open-source.md) — why this leaf machinery stays project-specific.
-

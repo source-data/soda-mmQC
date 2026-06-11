@@ -151,11 +151,14 @@ Do **not** pool counts or means across different leaf properties. Compute precis
 
 | Type | Default |
 |------|---------|
-| `string`, `number`, `integer`, `boolean` | Exact equality → `score` 1.0 or 0.0 |
-| Graded / fuzzy strings | Similarity in `[0, 1]`; layer 2 match uses `match_threshold` from manifest |
-| Enum | Exact match on allowed literal → 1.0 or 0.0 |
+| `string` (no schema `enum`) | `score` from manifest `string_compare` when profiled |
+| Schema `enum` | Always **exact** literal match → 1.0 or 0.0; **`string_compare` omitted** |
+| `number`, `integer`, `boolean` | Exact equality → `score` 1.0 or 0.0 |
+| `graded_string` (manifest) | Requires `string_compare`; layer 2 **match** / **mismatch** from `match_threshold` |
 
-Default exact-match threshold: `τ = 1.0`.
+**`answer_metric`** (layer 2 reporting) and **`string_compare`** (how `score` is computed) are separate. Use `string_compare` only on **non-enum** strings with `graded_string` — enum fields (`binary_polarity`, `multiclass`) are always exact; do not declare `string_compare` there.
+
+Default `match_threshold` for layer 2: `1.0` when using exact compare; lower values (e.g. `0.8`) for fuzzy or semantic fields.
 
 ### Missing, null, and empty string
 
@@ -183,17 +186,41 @@ Example pattern: `panels[]` with leaves `panels[].id`, `panels[].label`, `panels
 
 Rows must be **aligned** before per-field leaf instances exist. Alignment uses **only the field(s) named in the manifest** for that list — not a mean over every primitive on the row.
 
-#### Row similarity (alignment only)
+#### Where `list_alignment` lives in the manifest
 
-The manifest declares **`list_alignment`**: for each list-of-objects property, which row field(s) identify a match. Usually **one** field (e.g. `label`).
+`list_alignment` is a **top-level key** in `eval-manifest.json`, alongside `defaults` and `fields`. It is **not** nested under `fields`.
+
+Keys are **list property names** from the schema (no `[]` suffix). Values are **row field names** — short names from the row object’s `properties`, not full leaf paths.
 
 ```json
-"list_alignment": {
-  "panels": ["label"]
+{
+  "defaults": { "…": "…" },
+  "list_alignment": {
+    "panels": ["label"]
+  },
+  "fields": {
+    "panels[].label": {
+      "answer_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "panels[].status": {
+      "na_values": [""],
+      "answer_metric": "binary_polarity"
+    }
+  }
 }
 ```
 
-Field names are **relative to the row object** (`label` → compare `panels[i].label` vs `panels[j].label`). For checklist `outputs[]`, you might use `["micrograph"]` or another stable key.
+| Manifest location | Example | Meaning |
+|-------------------|---------|---------|
+| `list_alignment` key | `"panels"` | The array property on the output root (`schema.properties.panels`) |
+| `list_alignment` value | `["label"]` | Compare `panels[i].label` vs `panels[j].label` to pair rows |
+| `fields` key | `"panels[].label"` | How to **score** that leaf after rows are paired (layer 1/2, `string_compare`, …) |
+
+For a checklist whose root has `outputs[]`, you might write `"outputs": ["micrograph"]` and still score row leaves under `fields` as `outputs[].scale_bar_on_image`, etc.
+
+#### Row similarity (alignment only)
 
 For each candidate pair `(exp_i, pred_j)`:
 
@@ -201,14 +228,37 @@ For each candidate pair `(exp_i, pred_j)`:
 s(i,j) = mean{ score(exp_i[k], pred_j[k]) : k in list_alignment[list_name] }
 ```
 
-With a single key, `s(i,j)` is just that field’s leaf score (exact → 0 or 1). `s(i,j)` is **only for Hungarian matching** — not reported in `by_property`.
+The score for each alignment key `k` uses that field’s **`fields`** profile when present (e.g. `panels[].label` → `string_compare: exact`, `match_threshold: 1.0`). With one key, `s(i,j)` is that field’s leaf score. `s(i,j)` is **only for Hungarian matching** — not reported in `by_property`.
+
+**Concrete example** — toy `panels` with `list_alignment.panels: ["label"]` and exact labels (`τ = 1.0`):
+
+Gold:
+
+```json
+[
+  { "id": 1, "label": "Fig 1", "status": "yes" },
+  { "id": 2, "label": "Fig 2", "status": "" }
+]
+```
+
+Pred (rows reordered; `Fig 1` has wrong `status`):
+
+```json
+[
+  { "id": 9, "label": "Fig 2", "status": "" },
+  { "id": 8, "label": "Fig 1", "status": "no" }
+]
+```
+
+Hungarian pairs by `label`: gold `[0]` ↔ pred `[1]`, gold `[1]` ↔ pred `[0]`. Then emit leaves at **gold indices** — `panels[0].status` compares gold `yes` vs pred `no`; `panels[0].id` compares `1` vs `8`. Wrong `id` on a correctly aligned row does not change how rows were matched.
 
 #### Alignment steps
 
-1. Build `s(i,j)` from the manifest alignment keys only.
-2. Hungarian assignment; pair is **matched** only if `s(i,j) >= τ` (default `τ = 1.0` for exact keys).
-3. For each gold row index `k`, take the assigned pred row and emit all row leaves (`panels[k].id`, `panels[k].label`, `panels[k].status`, …).
-4. Score each leaf instance; apply layer 1 / 2 per manifest field profiles.
+1. Look up `list_alignment["panels"]` → `["label"]`.
+2. Build `s(i,j)` from those keys only, using each key’s `fields` profile for scoring.
+3. Hungarian assignment; pair is **matched** only if `s(i,j) >= τ` (`match_threshold` from the alignment key’s profile, default `1.0` for exact).
+4. For each gold row index `k`, take the assigned pred row and emit all row leaves (`panels[k].id`, `panels[k].label`, `panels[k].status`, …).
+5. Score each leaf instance; apply layer 1 / 2 per `fields` profiles.
 
 Unmatched gold row → leaf instances with missing pred → `score = 0`. Unmatched pred row → alignment FP.
 
@@ -227,7 +277,7 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
 
 **Path keys:** JSON-pointer-style patterns from the output root, e.g. `outputs[].scale_bar_on_image`, `item.status`. `[]` matches any list index.
 
-**Example:**
+**Example** (enum polarity slots omit `string_compare`; free-text `graded_string` fields declare it):
 
 ```json
 {
@@ -248,6 +298,7 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
     },
     "item.label": {
       "answer_metric": "graded_string",
+      "string_compare": "exact",
       "match_threshold": 1.0
     },
     "panels[].status": {
@@ -256,11 +307,21 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
     },
     "panels[].label": {
       "answer_metric": "graded_string",
+      "string_compare": "exact",
       "match_threshold": 1.0
+    },
+    "outputs[].from_the_caption": {
+      "answer_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
     }
   }
 }
 ```
+
+- **`item.status`**, **`panels[].status`** — schema `enum` (`yes` / `no` / `""`); `binary_polarity` only; exact match implicit.
+- **`item.label`**, **`panels[].label`** — free `string`; `graded_string` + `string_compare` + `match_threshold` (also used for `list_alignment` on `panels`).
+- **`outputs[].from_the_caption`** — free text; semantic compare with a lower threshold.
 
 **Manifest keys:**
 
@@ -268,9 +329,33 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
 |-----|------|
 | `list_alignment` | Map **list property name** → array of **row field names** used only to align list-of-object elements (e.g. `"panels": ["label"]`) |
 | `na_values` | Per field: literals meaning **not applicable** (layer 1). Omit or `[]` = always applicable. |
-| `answer_metric` | `binary_polarity` \| `multiclass` \| `graded_string` |
+| `answer_metric` | `binary_polarity` \| `multiclass` \| `graded_string` — **layer 2** reporting shape only |
+| `string_compare` | **Required** on non-enum `graded_string` fields. **Omit** on schema `enum` fields (always exact). Not a `defaults` key. |
 | `positive_value` / `negative_value` | For `binary_polarity` (layer 2) |
-| `match_threshold` | `τ` for graded / fuzzy layer 2 match |
+| `match_threshold` | For `graded_string` only: layer 2 **match** if `score >= match_threshold`; also gates list alignment when an alignment key is a graded string |
+
+Put polarity defaults in manifest `defaults`; set `string_compare` per free-text `graded_string` field only.
+
+### `string_compare` — how the leaf score is computed
+
+For free-text and other non-enum strings, the manifest names the **comparison method**. This replaces a single global evaluator setting — each leaf property can differ.
+
+
+| `string_compare` | `score` computation | Typical use |
+|------------------|---------------------|-------------|
+| **`exact`** | Character-level equality (after optional normalization) → `1.0` or `0.0` | Titles, labels, citation snippets that must match literally |
+| **`fuzzy`** | rapidfuzz `fuzz.ratio` (edit-distance) in `[0, 1]` | Minor typos, whitespace variants |
+| **`semantic`** | Embedding cosine similarity in `[0, 1]` (model from evaluator config) | Captions, free-text descriptions where paraphrase is OK |
+
+**Schema `enum` fields** (`binary_polarity`, `multiclass`): always **exact** literal match for `score`. Do not set `string_compare` — it would be redundant and misleading.
+
+**Pipeline for a non-enum `graded_string` field:**
+
+1. `score = compare(exp, pred)` using `string_compare`.
+2. Layer 1 from `na_values` (if any).
+3. Layer 2: **match** if `score >= match_threshold`, else **mismatch**.
+
+**List alignment:** when an alignment key is a free-text field (e.g. `list_alignment.panels: ["label"]` on a `graded_string` path), use that field’s `string_compare` and `match_threshold` to compute `s(i,j)`. Enum alignment keys use exact match only (no `string_compare`).
 
 **Schema vs manifest:** JSON Schema `enum` lists allowed literals but does **not** define which is N/A or which is “positive”. Configure `na_values` and polarity in the manifest. Repo examples: `enum: ["yes", "no", ""]` needs `na_values: [""]`; `enum: ["yes", "no", "not needed"]` needs `na_values: ["not needed"]`.
 

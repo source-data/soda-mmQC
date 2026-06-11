@@ -61,3 +61,17 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-08] design | List-of-objects alignment simplified: manifest `list_alignment` names row field(s) only (e.g. `panels: ["label"]`); removed mean-over-all/applicable heuristics.
 
 ## [2026-06-08] lint | Renamed `evaluation-hierarchical-scoring.md` → `evaluation-hierarchical-scoring-DEPRECATED.md`; updated catalog links.
+
+## [2026-06-08] ingest | `evaluation-scoring.md`: manifest `string_compare` (`exact` / `fuzzy` / `semantic`) per field for `graded_string` score vs `match_threshold` for layer 2.
+
+## [2026-06-08] lint | `evaluation-scoring.md`: illustrative manifest — omit `string_compare` on enum `binary_polarity` fields; not in `defaults`; prose on three field classes.
+
+## [2026-06-08] lint | `evaluation-leaf-primitives.md`: aligned with flat `evaluation-scoring.md` — schema vs manifest, `string_compare` scope, no hierarchical roll-up/parent language.
+
+## [2026-06-08] lint | `evaluation-toy-examples.md`: aligned with `evaluation-scoring.md` — assumptions, manifest notes, `by_property` `{}`, D.2 reordered panels, fixed anchor.
+
+## [2026-06-08] ingest | Phase 1 eval: `evaluation-implementation-plan.md`; `soda_mmqc/core/leaves.py` primitive comparators; `tests/test_leaves.py`.
+
+## [2026-06-08] ingest | Fuzzy leaf compare: `rapidfuzz` in `pyproject.toml`; `fuzzy_ratio` replaces hand-rolled LCS in `leaves.py`.
+
+## [2026-06-08] ingest | Phase 2 eval: `eval_manifest.py` (load, profile lookup, list_alignment, path patterns); `tests/test_eval_manifest.py`.

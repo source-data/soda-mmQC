@@ -4,10 +4,11 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 
 **Assumptions:**
 
-- **Exact match** on primitives (`τ = 1.0`) unless noted.
-- **`tags`** — list-of-primitives leaf: Hungarian alignment, one aggregate `score` on path `tags` (+ alignment TP/FP/FN diagnostics).
-- **`panels[]`** — align panel **rows** first; then leaves `panels[k].id`, `panels[k].label`, `panels[k].status` for each gold index `k` using the matched pred row (or missing).
-- **Manifest** — layer 1 / 2 only on paths with a profile (`item.status`, `item.label`, `panels[].status`, `panels[].label`).
+- **Enum leaves** (`item.status`, `panels[].status`) — always exact literal match; no `string_compare` in manifest.
+- **Graded strings** (`item.label`, `panels[].label`) — `string_compare: exact`, `match_threshold: 1.0` (`τ = 1.0`).
+- **`tags`** — list-of-primitives leaf: Hungarian alignment with exact element match, one aggregate `score` on path `tags` (+ alignment TP/FP/FN diagnostics). No manifest profile → score only.
+- **`panels[]`** — top-level manifest `list_alignment.panels: ["label"]` pairs rows by `label` (using the `panels[].label` field profile); then score `panels[k].id`, `panels[k].label`, `panels[k].status` at **gold indices** `k`.
+- **Manifest** — layer 1 / 2 only on profiled paths (`item.status`, `item.label`, `panels[].status`, `panels[].label`). Unprofiled leaves appear in `by_property` with `mean_score` only (`layer1_counts` / `layer2_counts` = `{}`).
 
 ---
 
@@ -17,20 +18,22 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 |------|------------|------------------|
 | `tags` | `string[]` | — (score only) |
 | `item.id` | integer | — |
-| `item.label` | string | `graded_string` |
+| `item.label` | string | `graded_string`, `string_compare: exact` |
 | `item.status` | enum `""` / `yes` / `no` | `binary_polarity`, `na_values: [""]` |
 | `item.meta.author` | string | — |
 | `item.meta.year` | integer | — |
 | `panels[k].id` | integer | — |
-| `panels[k].label` | string | `graded_string` (pattern `panels[].label`) |
+| `panels[k].label` | string | `graded_string`, `string_compare: exact` (pattern `panels[].label`; also `list_alignment` key for `panels`) |
 | `panels[k].status` | enum | `binary_polarity`, `na_values: [""]` |
+
+Row alignment: manifest `list_alignment.panels → ["label"]` (top-level key, not under `fields`).
 
 **How to read each example:**
 
 1. **What changed** — diff vs baseline gold.
 2. **Per leaf instance** — table of concrete paths: `score`, layer 1, layer 2 (— when not applicable).
-3. **Per leaf property** — required summary for each property key (`item.label`, `panels[].status`, …): `mean_score`, `layer1_counts`, `layer2_counts` — **never mixed across properties** ([evaluation-scoring.md](evaluation-scoring.md#2--per-leaf-property-required)).
-4. **List alignment** — diagnostics for `tags` or `panels` row matching only.
+3. **Per leaf property** — required summary for each property key (`item.label`, `panels[].status`, …): `mean_score`, `layer1_counts`, `layer2_counts` — **never mixed across properties** ([evaluation-scoring.md](evaluation-scoring.md#per-leaf-property-by_property)). Tables use `{}` for empty count objects.
+4. **List alignment** — diagnostics for `tags` or `panels` row matching only (not in `by_property`).
 
 Layer 1 labels: **correct_NA** · **spurious_applicable** · **withheld_applicable** · **correct_applicable**.  
 Layer 2 runs only when layer 1 = **correct_applicable**.
@@ -116,12 +119,16 @@ Layer 2 runs only when layer 1 = **correct_applicable**.
   },
   "fields": {
     "item.status": { "na_values": [""], "answer_metric": "binary_polarity" },
-    "item.label": { "answer_metric": "graded_string", "match_threshold": 1.0 },
+    "item.label": { "answer_metric": "graded_string", "string_compare": "exact", "match_threshold": 1.0 },
     "panels[].status": { "na_values": [""], "answer_metric": "binary_polarity" },
-    "panels[].label": { "answer_metric": "graded_string", "match_threshold": 1.0 }
+    "panels[].label": { "answer_metric": "graded_string", "string_compare": "exact", "match_threshold": 1.0 }
   }
 }
 ```
+
+- **`list_alignment.panels`** — pair rows by `label` only (uses `panels[].label` profile for `s(i,j)`).
+- **`item.status`**, **`panels[].status`** — schema `enum`; `binary_polarity` only (no `string_compare`).
+- **`item.label`**, **`panels[].label`** — free `string`; `graded_string` + `string_compare` + `match_threshold`.
 
 ---
 
@@ -148,15 +155,15 @@ Pred = baseline gold.
 
 | Leaf property | `mean_score` | `layer1_counts` | `layer2_counts` |
 |---------------|--------------|-----------------|-----------------|
-| `tags` | 1.0 | — | — |
-| `item.id` | 1.0 | — | — |
-| `item.label` | 1.0 | correct_applicable: 1 | match: 1 |
-| `item.status` | 1.0 | correct_NA: 1 | — |
-| `item.meta.author` | 1.0 | — | — |
-| `item.meta.year` | 1.0 | — | — |
-| `panels[].id` | 1.0 | — | — |
-| `panels[].label` | 1.0 | correct_applicable: 2 | match: 2 |
-| `panels[].status` | 1.0 | correct_applicable: 1, correct_NA: 1 | TP: 1 |
+| `tags` | 1.0 | `{}` | `{}` |
+| `item.id` | 1.0 | `{}` | `{}` |
+| `item.label` | 1.0 | { correct_applicable: 1 } | { match: 1 } |
+| `item.status` | 1.0 | { correct_NA: 1 } | `{}` |
+| `item.meta.author` | 1.0 | `{}` | `{}` |
+| `item.meta.year` | 1.0 | `{}` | `{}` |
+| `panels[].id` | 1.0 | `{}` | `{}` |
+| `panels[].label` | 1.0 | { correct_applicable: 2 } | { match: 2 } |
+| `panels[].status` | 1.0 | { correct_applicable: 1, correct_NA: 1 } | { TP: 1 } |
 
 No row pools `tags` with `panels[].*` or `item.*`.
 
@@ -236,6 +243,8 @@ Other leaves = baseline. Only `tags` differs.
 |------|---------|---------|---------|
 | `item.label` | 0.0 | withheld_applicable | — |
 
+**`by_property`:** `item.label` → `mean_score` 0.0, `layer1_counts` { withheld_applicable: 1 }, `layer2_counts` `{}`.
+
 ### C.4 Wrong `item.meta.year` (flat leaf, not a nested roll-up)
 
 | Field | Gold | Pred |
@@ -254,13 +263,34 @@ Other leaves = baseline. Only `tags` differs.
 
 `tags` and `item` = baseline.
 
-**Row alignment** ([evaluation-scoring.md](evaluation-scoring.md#list-of-objects)): `list_alignment.panels = ["label"]` — Hungarian matching uses **only** `label` scores between candidate rows. Other fields (`id`, `status`) are scored after pairing.
+**Row alignment** ([evaluation-scoring.md](evaluation-scoring.md#list-of-objects)): top-level `list_alignment.panels → ["label"]` — Hungarian matching uses **only** `label` (via the `panels[].label` field profile). `id` and `status` are scored after pairing at gold indices.
 
 ### D.1 Perfect panels
 
 Same as example A panel rows.
 
-### D.2 Wrong `status` on panel 1 (gold index 1)
+### D.2 Reordered rows (alignment by `label` only)
+
+Pred rows swapped; `Fig 1` has wrong `status` and `id`:
+
+| `panels` pred |
+|---------------|
+| `[ { "id": 9, "label": "Fig 2", "status": "" }, { "id": 8, "label": "Fig 1", "status": "no" } ]` |
+
+**Row alignment:** gold `[0]` (`Fig 1`) ↔ pred `[1]`; gold `[1]` (`Fig 2`) ↔ pred `[0]`. Wrong `status` / `id` on matched rows does not change pairing.
+
+| Path | exp → pred | `score` | Layer 1 | Layer 2 |
+|------|------------|---------|---------|---------|
+| `panels[0].id` | `1` → `8` | 0.0 | — | — |
+| `panels[0].label` | `"Fig 1"` → `"Fig 1"` | 1.0 | correct_applicable | match |
+| `panels[0].status` | `"yes"` → `"no"` | 0.0 | correct_applicable | FP |
+| `panels[1].id` | `2` → `9` | 0.0 | — | — |
+| `panels[1].label` | `"Fig 2"` → `"Fig 2"` | 1.0 | correct_applicable | match |
+| `panels[1].status` | `""` → `""` | 1.0 | correct_NA | — |
+
+**`by_property` (panel leaves only):** `panels[].id` → `mean_score` 0.0; `panels[].label` → `mean_score` 1.0, `layer2_counts` { match: 2 }; `panels[].status` → `mean_score` 0.5, `layer1_counts` { correct_applicable: 1, correct_NA: 1 }, `layer2_counts` { FP: 1 }.
+
+### D.3 Wrong `status` on panel 1 (gold index 1)
 
 | | `panels[1].status` | other panel fields |
 |---|-------------------|-------------------|
@@ -274,7 +304,7 @@ Same as example A panel rows.
 | `panels[1].status` | 0.0 | spurious_applicable | — |
 | `panels[0].*` | 1.0 | *(as in A)* | *(as in A)* |
 
-### D.3 Missing panel (gold row 1 has no pred partner)
+### D.4 Missing panel (gold row 1 has no pred partner)
 
 | `panels` pred | `[ { "id": 1, "label": "Fig 1", "status": "yes" } ]` |
 
@@ -289,7 +319,7 @@ Same as example A panel rows.
 
 Missing pred on an N/A gold field (`""`) → **correct_NA** (pred did not spuriously answer). Missing pred when gold expected a string label → **withheld_applicable**.
 
-### D.4 Extra panel in pred
+### D.5 Extra panel in pred
 
 | `panels` pred | baseline panels + `{ "id": 99, "label": "Fig 99", "status": "no" }` |
 
@@ -308,7 +338,7 @@ Missing pred on an N/A gold field (`""`) → **correct_NA** (pred did not spurio
 | All leaves perfect | A |
 | `tags` only | B |
 | `item.*` / `item.meta.*` scalars | C |
-| `panels[k].*` after alignment | D |
+| `panels[k].*` after alignment | D (D.2 = reordered rows) |
 
 ---
 
