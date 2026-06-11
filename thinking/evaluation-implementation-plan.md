@@ -57,14 +57,27 @@ Given `LeafComparisonResult` + field profile + `(exp, pred)` values:
 
 ---
 
-## Phase 4 — List alignment
+## Phase 4a — List of primitives alignment ✅ *complete*
 
-**Module:** `soda_mmqc/core/alignment.py` (name TBD)
+**Module:** `soda_mmqc/core/alignment.py` — `align_primitive_lists`, `build_similarity_matrix`, `exact_primitive_similarity`
 
-- List of primitives: Hungarian + aggregate `score` on path `tags`
-- List of objects: `list_alignment` keys → `s(i,j)` → Hungarian → emit leaves at gold indices
+- Pairwise element similarity → Hungarian assignment
+- Pairs below `match_threshold` → alignment FP/FN; aggregate **score** over `max(len(exp), len(pred))`
 
-**Tests:** toy examples B and D.
+**Tests:** `tests/test_alignment_primitive_lists.py` — toy example B
+
+---
+
+## Phase 4b — List of objects alignment ✅ *complete*
+
+**Module:** `soda_mmqc/core/alignment.py` (extend)
+
+- `align_object_lists`, `row_similarity`, `score_alignment_key`, `build_object_similarity_matrix`
+- `list_alignment` keys (e.g. `panels → ["label"]`) drive which row fields participate in `s(i,j)`
+- Each key uses the **`fields`** profile for `{list_name}[].{key}` (`string_compare`, `match_threshold` for graded strings; exact for enum/polarity)
+- Hungarian assignment; pairs below mean key threshold → FP/FN; `gold_to_pred` mapping for downstream leaf scoring
+
+**Tests:** `tests/test_alignment_object_lists.py` — toy example D (row alignment sections)
 
 ---
 
@@ -102,4 +115,4 @@ These import the deleted hierarchical `JSONEvaluator` and stay **broken until ph
 - `tests/test_compare_lists.py`
 - `tests/test_compare_objects.py`
 
-Run phases 1–3: `pytest tests/test_leaves.py tests/test_eval_manifest.py tests/test_applicability_and_matching.py`.
+Run phases 1–4: `pytest tests/test_leaves.py tests/test_eval_manifest.py tests/test_applicability_and_matching.py tests/test_alignment_primitive_lists.py tests/test_alignment_object_lists.py`.

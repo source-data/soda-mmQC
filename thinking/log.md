@@ -83,3 +83,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-08] lint | Terminology: `answer_metric` → `matching_metric`; module `applicability_and_matching.py`.
 
 ## [2026-06-08] ingest | Phase 3 eval: `applicability_and_matching.py`; `tests/test_applicability_and_matching.py` (toy examples A/C/D).
+
+## [2026-06-08] ingest | Phase 4a: `alignment.py` primitive list Hungarian alignment; `tests/test_alignment_primitive_lists.py` (toy B).
