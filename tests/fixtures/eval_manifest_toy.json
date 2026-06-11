@@ -1,0 +1,37 @@
+{
+  "checklist": "toy-eval-examples",
+  "defaults": {
+    "answer_metric": "binary_polarity",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "panels": ["label"]
+  },
+  "fields": {
+    "item.status": {
+      "na_values": [""],
+      "answer_metric": "binary_polarity"
+    },
+    "item.label": {
+      "answer_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "panels[].status": {
+      "na_values": [""],
+      "answer_metric": "binary_polarity"
+    },
+    "panels[].label": {
+      "answer_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].from_the_caption": {
+      "answer_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}

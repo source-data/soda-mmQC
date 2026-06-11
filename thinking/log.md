@@ -75,3 +75,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-08] ingest | Fuzzy leaf compare: `rapidfuzz` in `pyproject.toml`; `fuzzy_ratio` replaces hand-rolled LCS in `leaves.py`.
 
 ## [2026-06-08] ingest | Phase 2 eval: `eval_manifest.py` (load, profile lookup, list_alignment, path patterns); `tests/test_eval_manifest.py`.
+
+## [2026-06-08] lint | `config.py`: removed legacy `STRING_METRICS` / `DEFAULT_MATCH_THRESHOLD`; `STRING_COMPARE_MODES` only.
