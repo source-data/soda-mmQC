@@ -153,7 +153,9 @@ class TestTables:
         frame = layer1_instance_table(prompt2_summary)
         assert not frame.empty
         assert "spurious_applicable" in frame["layer1"].unique()
-        assert "scale_bar" in "".join(frame["field"].tolist())
+        assert "scale_bar" in "".join(frame["leaf_property"].tolist())
+        assert frame["path"].str.fullmatch(r"outputs\[\d+\]").all()
+        assert "outputs[]" not in frame["leaf_property"].iloc[0]
 
     def test_layer2_errors_empty_on_perfect_prompt1(self, prompt1_summary):
         frame = layer2_instance_table(prompt1_summary)

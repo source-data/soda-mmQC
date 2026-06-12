@@ -42,6 +42,28 @@ class NavigationError(LookupError):
         self.step = step
 
 
+def instance_object_path(path: str) -> str:
+    """Drop the leaf field segment from an instance path.
+
+    Example: ``outputs[7].scale_bar_on_image`` → ``outputs[7]``.
+    """
+    if not path:
+        return path
+    segments = path.split(".")
+    if len(segments) <= 1:
+        return path
+    if _SEGMENT_RE.match(segments[-1]):
+        return path
+    return ".".join(segments[:-1])
+
+
+def instance_navigation_path(object_path: str, leaf_name: str) -> str:
+    """Recombine object path and leaf name for :func:`path_string_to_steps`."""
+    if not object_path:
+        return leaf_name
+    return f"{object_path}.{leaf_name}"
+
+
 def path_string_to_steps(path: str) -> tuple[PathStep, ...]:
     """Convert a table ``path`` or ``context_path`` string to navigation steps.
 

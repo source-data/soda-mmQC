@@ -2,7 +2,7 @@
 
 Plan for rewriting [`visualize.py`](../soda_mmqc/scripts/visualize.py) from scratch, inspired by [`notebooks/flat-eval-reporting-demo.ipynb`](../notebooks/flat-eval-reporting-demo.ipynb).
 
-**Status:** Phases 1–2b implemented (`soda_mmqc/reporting/`, [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)); plots (Phase 3) planned below.
+**Status:** Phases 1–4 implemented (`soda_mmqc/reporting/`, [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)); Phase 5 CLI optional.
 
 **Primary usage:** Jupyter notebooks calling `soda_mmqc.reporting` (plots + interactive tables). A CLI is **out of scope for early phases** — add last if batch HTML export is still wanted.
 
@@ -77,7 +77,8 @@ Extract notebook logic into **`soda_mmqc/reporting/`** — importable from analy
 | `soda_mmqc/reporting/tables.py` | Build Layer S / 1 / 2 summary DataFrames; instance-level drill-down tables |
 | `soda_mmqc/reporting/navigate.py` | `get_at_steps(doc, steps)`; optional `path_string_to_steps()` for table `path` columns |
 | `soda_mmqc/reporting/context.py` | `InstanceRef`, `ExampleContext`, `inspect_instance()`, `inspect_layer_s_row()` |
-| `soda_mmqc/reporting/plots.py` | Plotly primitives + dashboard composer (`go.Figure` in → `.show()` in notebook) |
+| `soda_mmqc/reporting/plots.py` | Plotly primitives, `build_dashboard`, comparison charts |
+| `soda_mmqc/reporting/compare.py` | `build_comparison_report`, `show_comparison_report` |
 | `soda_mmqc/reporting/display.py` | Interactive table widgets + `show_instance_context()` |
 | `soda_mmqc/reporting/styles.py` | Outcome orders, colour maps (from notebook) |
 | `soda_mmqc/scripts/visualize.py` | **Phase 5 (optional):** thin CLI wrapping the same API for batch HTML export |
@@ -578,19 +579,21 @@ Plots (Phase 3) do not depend on this phase.
 - Tests: `tests/test_reporting_context.py`
 - [`reporting.ipynb`](../notebooks/reporting.ipynb) — inspect workflow after table filter
 
-### Phase 3 — Plots (`plots.py`)
+### Phase 3 — Plots (`plots.py`) ✅ *complete*
 
-- Port notebook plotting primitives + `build_dashboard(RunSummary)`
-- Comparison plots (`plot_comparison_layer1`, layer-2 variants)
-- Extend [`flat-eval-reporting-demo.ipynb`](../notebooks/flat-eval-reporting-demo.ipynb) or add `notebooks/flat-eval-reporting-micrograph.ipynb` using the library end-to-end
+- `plot_layer_s_bar`, `plot_layer1_stacked`, `plot_layer2_stacked`, `plot_mean_score_bars`
+- `build_dashboard(RunSummary)` — 4-column subplot (S, L1, L2 binary, L2 graded)
+- Comparison plots: `plot_comparison_layer1`, `plot_comparison_layer2_binary`, `plot_comparison_layer2_graded`
+- Tests: `tests/test_reporting_plots.py`
+- [`reporting.ipynb`](../notebooks/reporting.ipynb) — dashboard + prompt contrast charts
 
-### Phase 4 — Comparison mode in notebooks
+### Phase 4 — Comparison mode in notebooks ✅ *complete*
 
-- `load_flat_runs()` for multiple prompts or models
-- `show_comparison_errors()` long-form table + overlay charts
-- Primary cases on `micrograph-scale-bar`:
-  - **Prompt contrast:** `gpt-5-mini-2025-08-07`, prompts 1–3 (prompt.2 scale-bar weakness)
-  - **Model contrast:** `prompt.1`, models `gpt-5-mini-2025-08-07` vs `gpt-5`
+- `compare.py`: `ComparisonReport`, `build_comparison_report()`, `show_comparison_report()`
+- Overlay charts: Structure, Applicability, Matching-binary, Matching-graded + `plot_comparison_layer_s`
+- Interactive long-form culprits via `show_comparison_errors()` (called from `show_comparison_report`)
+- Tests: `tests/test_reporting_compare.py`
+- [`reporting.ipynb`](../notebooks/reporting.ipynb) — Phase 4 A (prompt contrast) and B (model contrast) on `micrograph-scale-bar`
 
 ### Phase 5 (optional) — CLI & batch export
 

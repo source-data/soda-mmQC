@@ -21,6 +21,8 @@ from soda_mmqc.reporting.navigate import (
     get_at_steps,
     layer_s_row_steps,
     parent_row_steps,
+    instance_navigation_path,
+    instance_object_path,
     path_string_to_steps,
 )
 
@@ -30,6 +32,18 @@ MODEL_MINI = "gpt-5-mini-2025-08-07"
 
 
 class TestNavigate:
+    def test_instance_object_path_strips_leaf(self):
+        assert instance_object_path("outputs[7].scale_bar_on_image") == "outputs[7]"
+        assert instance_object_path("outputs[7]") == "outputs[7]"
+
+    def test_instance_navigation_path_recombines(self):
+        assert instance_navigation_path("outputs[7]", "scale_bar_on_image") == (
+            "outputs[7].scale_bar_on_image"
+        )
+        assert path_string_to_steps(
+            instance_navigation_path("outputs[7]", "scale_bar_on_image")
+        ) == ("outputs", 7, "scale_bar_on_image")
+
     def test_path_string_to_steps_leaf(self):
         assert path_string_to_steps("outputs[7].scale_bar_on_image") == (
             "outputs",

@@ -15,6 +15,7 @@ from soda_mmqc.reporting.aggregate import (
     leaf_property_tail,
 )
 from soda_mmqc.reporting.load import FlatRecord
+from soda_mmqc.reporting.navigate import instance_object_path
 from soda_mmqc.reporting.styles import (
     LAYER1_OUTLIER_OUTCOMES,
     LAYER2_BINARY_ORDER,
@@ -95,6 +96,16 @@ def split_layer2_by_metric(
     return pd.DataFrame(binary_rows), pd.DataFrame(graded_rows)
 
 
+def _instance_location_columns(instance: Mapping[str, Any]) -> dict[str, str]:
+    """Object path and leaf name for instance drill-down tables."""
+    raw_path = str(instance.get("path") or "")
+    raw_leaf = str(instance.get("leaf_property") or "")
+    return {
+        "path": instance_object_path(raw_path),
+        "leaf_property": leaf_property_tail(raw_leaf) if raw_leaf else "",
+    }
+
+
 def _iter_instances(records: Sequence[FlatRecord]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for record in records:
@@ -164,13 +175,10 @@ def layer1_instance_table(summary: RunSummary) -> pd.DataFrame:
         layer1 = instance.get("layer1")
         if layer1 not in LAYER1_OUTLIER_OUTCOMES:
             continue
-        leaf_property = instance.get("leaf_property", "")
         rows.append(
             {
                 "doc_id": instance.get("doc_id"),
-                "path": instance.get("path"),
-                "leaf_property": leaf_property,
-                "field": leaf_property_tail(str(leaf_property)),
+                **_instance_location_columns(instance),
                 "layer1": layer1,
                 "exp_value": instance.get("exp_value"),
                 "pred_value": instance.get("pred_value"),
@@ -186,13 +194,10 @@ def layer2_instance_table(summary: RunSummary) -> pd.DataFrame:
         layer2 = instance.get("layer2")
         if layer2 not in LAYER2_ERROR_OUTCOMES:
             continue
-        leaf_property = instance.get("leaf_property", "")
         rows.append(
             {
                 "doc_id": instance.get("doc_id"),
-                "path": instance.get("path"),
-                "leaf_property": leaf_property,
-                "field": leaf_property_tail(str(leaf_property)),
+                **_instance_location_columns(instance),
                 "layer2": layer2,
                 "score": instance.get("score"),
                 "exp_value": instance.get("exp_value"),
@@ -210,13 +215,10 @@ def instance_culprits_table(summary: RunSummary) -> pd.DataFrame:
         layer2 = instance.get("layer2")
         if layer1 not in LAYER1_OUTLIER_OUTCOMES and layer2 not in LAYER2_ERROR_OUTCOMES:
             continue
-        leaf_property = instance.get("leaf_property", "")
         rows.append(
             {
                 "doc_id": instance.get("doc_id"),
-                "path": instance.get("path"),
-                "leaf_property": leaf_property,
-                "field": leaf_property_tail(str(leaf_property)),
+                **_instance_location_columns(instance),
                 "layer1": layer1,
                 "layer2": layer2,
                 "score": instance.get("score"),
@@ -312,9 +314,13 @@ def filter_by_doc(frame: pd.DataFrame, doc_id: str) -> pd.DataFrame:
 
 
 def filter_by_field(frame: pd.DataFrame, field: str) -> pd.DataFrame:
-    if frame.empty or "field" not in frame.columns:
+    if frame.empty:
         return frame
-    return frame.loc[frame["field"] == field].reset_index(drop=True)
+    if "leaf_property" in frame.columns:
+        return frame.loc[frame["leaf_property"] == field].reset_index(drop=True)
+    if "field" in frame.columns:
+        return frame.loc[frame["field"] == field].reset_index(drop=True)
+    return frame
 
 
 def filter_by_layer_outcome(frame: pd.DataFrame, column: str, outcome: str) -> pd.DataFrame:

@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+LAYER_S_TITLE = "Structure (Layer S)"
+LAYER1_TITLE = "Applicability (Layer 1)"
+LAYER2_BINARY_TITLE = "Matching-binary (Layer 2)"
+LAYER2_GRADED_TITLE = "Matching-graded (Layer 2)"
+
 LAYER_S_ORDER = ("correct_row", "missing_row", "spurious_row")
 
 LAYER1_ORDER = (
@@ -19,6 +24,12 @@ LAYER_S_COLORS = {
     "missing_row": "#ca8a04",
     "spurious_row": "#dc2626",
 }
+
+# Opacity ladder for prompt comparison series on outcome-colored bars.
+COMPARISON_SERIES_OPACITIES = (1.0, 0.6, 0.35)
+
+# Hatch patterns for model comparison series (first entry = solid fill).
+COMPARISON_SERIES_PATTERNS = ("", "/", "\\", "x", "|", "-", "+", ".")
 
 LAYER1_COLORS = {
     "correct_NA": "#94a3b8",

@@ -42,6 +42,17 @@ def _ensure_itables_notebook_mode() -> None:
     _ITABLES_INITIALIZED = True
 
 
+def _column_search_cols(
+    frame: pd.DataFrame,
+    column_search: Mapping[str, str],
+) -> list[dict[str, str] | None]:
+    """DataTables ``searchCols`` entries aligned with ``frame`` columns."""
+    return [
+        {"search": column_search[column]} if column in column_search else None
+        for column in frame.columns
+    ]
+
+
 def _column_order(
     frame: pd.DataFrame,
     default_sort: Sequence[str] | None,
@@ -74,6 +85,7 @@ def show_table(
     caption: str | None = None,
     default_sort: Sequence[str] | None = None,
     column_filters: Literal["header", "footer"] | None = "footer",
+    column_search: Mapping[str, str] | None = None,
     length_menu: Sequence[int] = (10, 25, 50, 100),
 ) -> Any:
     """Display a DataFrame with itables (sort, search, column filters).
@@ -87,14 +99,16 @@ def show_table(
         from itables import show
 
         _ensure_itables_notebook_mode()
-        return show(
-            prepared,
-            caption=caption,
-            order=_column_order(prepared, default_sort),
-            column_filters=column_filters,
-            lengthMenu=list(length_menu),
-            layout={"topStart": "pageLength", "topEnd": "search"},
-        )
+        show_kwargs: dict[str, Any] = {
+            "caption": caption,
+            "order": _column_order(prepared, default_sort),
+            "column_filters": column_filters,
+            "lengthMenu": list(length_menu),
+            "layout": {"topStart": "pageLength", "topEnd": "search"},
+        }
+        if column_search:
+            show_kwargs["searchCols"] = _column_search_cols(prepared, column_search)
+        return show(prepared, **show_kwargs)
 
     logger.warning(
         "itables is not installed; falling back to plain display. "
@@ -135,6 +149,7 @@ def show_layer1_errors(
     *,
     field: str | None = None,
     doc_id: str | None = None,
+    layer1: str | None = None,
     caption: str | None = None,
 ) -> Any:
     """Layer-1 applicability outliers."""
@@ -146,10 +161,12 @@ def show_layer1_errors(
     title = caption or (
         f"Layer 1 outliers — {summary.check} / {summary.model} / {summary.prompt}"
     )
+    column_search = {"layer1": layer1} if layer1 is not None else None
     return show_table(
         frame,
         caption=title,
-        default_sort=("doc_id", "field", "path"),
+        default_sort=("doc_id", "leaf_property", "path"),
+        column_search=column_search,
     )
 
 
@@ -172,7 +189,7 @@ def show_layer2_errors(
     return show_table(
         frame,
         caption=title,
-        default_sort=("doc_id", "field", "path"),
+        default_sort=("doc_id", "leaf_property", "path"),
     )
 
 
@@ -211,7 +228,6 @@ def comparison_errors_table(
                 "doc_id",
                 "path",
                 "leaf_property",
-                "field",
                 "layer1",
                 "layer2",
                 "score",
@@ -223,7 +239,7 @@ def comparison_errors_table(
         )
 
     combined = pd.concat(frames, ignore_index=True)
-    sort_cols = [series_col, "doc_id", "field", "path"]
+    sort_cols = [series_col, "doc_id", "leaf_property", "path"]
     return combined.sort_values(
         [col for col in sort_cols if col in combined.columns],
         kind="stable",
@@ -247,10 +263,10 @@ def show_comparison_errors(
     )
     if compare == "prompt":
         title = caption or f"Layer 2 comparison — model={model}"
-        default_sort = ("prompt", "doc_id", "field", "path")
+        default_sort = ("prompt", "doc_id", "leaf_property", "path")
     else:
         title = caption or f"Layer 2 comparison — prompt={prompt}"
-        default_sort = ("model", "doc_id", "field", "path")
+        default_sort = ("model", "doc_id", "leaf_property", "path")
     return show_table(frame, caption=title, default_sort=default_sort)
 
 
