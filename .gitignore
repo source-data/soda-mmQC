@@ -1,5 +1,6 @@
 # This application
 cache/
+soda_mmqc/data/cache/
 miscdoc/
 src/
 !mmqc_utils/src/
