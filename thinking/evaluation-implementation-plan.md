@@ -14,6 +14,7 @@ Build the flat leaf comparator in small steps. Each step lands with **unit tests
 | [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) | Layer S → `by_list` (`correct_row`, `missing_row`, `spurious_row`) |
 | [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py) | Manifest load and field profiles |
 | [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) | Layers 1 and 2 reporting on leaf instances |
+| [`schema_discovery.py`](../soda_mmqc/core/schema_discovery.py) | Schema walk → leaf properties + object lists |
 | [`evaluation.py`](../soda_mmqc/core/evaluation.py) | Orchestrator |
 
 `alignment.py` has been **removed** (split into `matching.py`, `leaves.compare_primitive_list`, and `object_list_pairing.py`).
@@ -125,20 +126,34 @@ Replaces the earlier monolithic `alignment.py` phases 4a/4b. Implement in order.
 
 ---
 
-## Phase 5 — Flat evaluator orchestration
+## Phase 5 — Flat evaluator orchestration ✅ *complete*
 
 **Module:** `soda_mmqc/core/evaluation.py` (reintroduced)
+
+**Also:** `soda_mmqc/core/schema_discovery.py` — schema walk → leaf properties + object lists.
 
 Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 
 1. Flatten schema → leaf paths
-2. For each list-of-objects property: `align_object_rows` → `build_by_list` → accumulate **`by_list`**
+2. For each **predictive** list-of-objects property (`list_alignment` present): `align_object_rows` → `build_by_list` → accumulate **`by_list`**. Structural lists: positional join only (no layer S).
 3. Score extended primitives via **`leaves.compare_primitive_list`** (one instance per array leaf)
 4. Score row leaves at gold indices (`leaves.py` scalar compares)
 5. Apply layers 1 and 2 (`applicability_and_matching.py`)
 6. Emit `instances` + `by_list` + `by_property`
 
-**Tests:** full toy examples A–D; golden `by_property` and `by_list` JSON snapshots.
+**Tests:** `tests/test_schema_discovery.py`, `tests/test_evaluation.py` — toy examples A–D; golden `by_property` and `by_list` snapshots in `tests/fixtures/evaluation_snapshots/`.
+
+---
+
+## Phase 5.1 — Structural vs predictive lists (wiki + evaluator)
+
+**Wiki:** [evaluation-scoring.md](evaluation-scoring.md#structural-vs-predictive-lists-schema-driven) — `schema.json` is model-call only (no wrappers); all object lists in schema are predictive; collation wrappers exist only in eval gold/pred; `list_alignment` validated against schema.
+
+**Code (pending):**
+
+- Discover predictive lists from `schema.json` only; structural lists from eval document shape (prefix paths not in schema).
+- Validate manifest `list_alignment`: covers every schema predictive list (at its eval-document path), no keys on structural-only paths, alignment keys ⊆ row `items.properties`.
+- `FlatEvaluator`: positional join for structural collation; Hungarian + `by_list` for schema predictive lists; qualified keys (e.g. `figures.panels`).
 
 ---
 

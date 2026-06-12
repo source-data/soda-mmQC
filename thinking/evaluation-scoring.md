@@ -5,10 +5,10 @@ Normative design for comparing prediction JSON to gold JSON under **JSON Schema*
 One comparator invocation takes a single `exp` JSON and a single `pred` JSON with the same schema. The comparator:
 
 1. Identifies **leaf properties** (lowest-level fields).
-2. Aligns **list-of-objects** rows where needed and emits **layer S** structural reporting (`by_list`).
+2. For **predictive** list-of-objects properties (per schema; aligned using manifest `list_alignment`): Hungarian row matching and **layer S** (`by_list`).
 3. Compares leaf values (including **extended primitives** — arrays of primitives).
 4. Emits a **score** per leaf instance and, when configured, **layer 1** (applicability) and **layer 2** (matching) reporting on that instance.
-5. Emits **per leaf property** summaries (`by_property`) and **per list** structural summaries (`by_list`).
+5. Emits **per leaf property** summaries (`by_property`) and, for each predictive list, **per list** structural summaries (`by_list`).
 
 Worked examples: [evaluation-toy-examples.md](evaluation-toy-examples.md).
 
@@ -80,11 +80,11 @@ flowchart LR
 ```
 
 1. **Flatten** — enumerate leaf paths from schema and manifest.
-2. **Align object lists** — Hungarian row matching for each list-of-objects property (see [List of objects](#list-of-objects)); emit **layer S** structural reporting in `by_list`.
+2. **Join lists** — positional index for structural ancestors; Hungarian matching for predictive lists using `list_alignment` (see [List of objects](#list-of-objects)); emit **layer S** in `by_list` for predictive lists only.
 3. **Score extended primitives** — compare array-of-primitives leaves (e.g. `tags`) as a single leaf instance with aggregate `score` (see [List of primitives](#list-of-primitives)).
-4. **Score row leaves** — at each gold row index with a `correct_row` partner (or with missing pred on `missing_row`), compare all row leaf fields; `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
+4. **Score row leaves** — at each gold row index: use the paired pred row (Hungarian for predictive lists, positional for structural lists); `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
 5. **Report** — layer 1 applicability reporting, then layer 2 matching reporting when layer 1 = `correct_applicable`.
-6. **Summarize** — required `by_property` per leaf property key; required `by_list` per list-of-objects property key.
+6. **Summarize** — required `by_property` per leaf property key; `by_list` only for predictive lists.
 
 Missing required values, disallowed `null`, and `missing_row` gold indices → `score = 0` on the affected leaf instance unless a profile defines otherwise.
 
@@ -109,14 +109,16 @@ For a **list-of-primitives** (extended primitive) leaf such as `tags`, the compa
 
 ### Per list (`by_list`)
 
-For **each list-of-objects** property (e.g. `panels`), the comparator **must** return:
+For **each predictive list-of-objects** property (per schema; e.g. `panels` when the model segments panel captions) — the comparator **must** return:
 
 | Field | Description |
 |-------|-------------|
 | `row_counts` | Layer S structural reporting counts: `correct_row`, `missing_row`, `spurious_row` |
 | `rows` | Per-row structural detail (see [Layer S](#layer-s--structural-row-alignment)) |
 
-`by_list` is keyed by the **list property name** (no `[]` suffix). It is separate from `by_property` — structural row events are not mixed into leaf-property rollups.
+`by_list` is keyed by the **list property name** (no `[]` suffix; use dotted paths for nested lists, e.g. `figures.panels`). It is separate from `by_property` — structural row events are not mixed into leaf-property rollups.
+
+**Structural lists** (collection wrappers; no `list_alignment`) do **not** appear in `by_list` — see [Structural vs predictive lists](#structural-vs-predictive-lists-schema-driven).
 
 ### Per leaf property (`by_property`)
 
@@ -216,13 +218,54 @@ Layer 1 / 2 apply only if the manifest defines a profile for that path. The aggr
 
 Example pattern: `panels[]` with leaves `panels[].id`, `panels[].label`, `panels[].status`.
 
-Rows must be **aligned** before per-field leaf instances exist. Alignment uses **only the field(s) named in the manifest** for that list — not a mean over every primitive on the row.
+Row leaves under a list-of-objects still emit one instance per **gold index**. How pred rows are joined to gold indices depends on whether the list is **predictive** or **structural** (below).
+
+#### Structural vs predictive lists (schema-driven)
+
+**Terminology (strict):**
+
+| Term | Meaning |
+|------|---------|
+| **`schema.json`** | The JSON Schema passed to the model for **one** structured-output call. Describes exactly what the model must produce. **Contains no collation wrappers** (`figures[]`, `papers[]`, …). |
+| **Evaluation document** | Gold or pred JSON the comparator receives. May **embed** one or more model outputs under collation paths that do not appear in `schema.json`. |
+| **Predictive list** | Every `array` of objects in `schema.json` — by definition model-produced, variable-length, needs alignment. |
+| **Structural list** | An object array in the **evaluation document only**, nesting repeated model outputs (one slot per figure, paper, run). Never part of `schema.json`. |
+
+**The schema is the reference for predictive lists.** The manifest configures **how** to align them (`list_alignment`) and is validated against the schema. Structural lists are inferred from the evaluation document shape relative to the schema — they are not declared in the schema at all.
+
+| | **Predictive list** | **Structural list** |
+|---|---------------------|---------------------|
+| **Where it lives** | `schema.json` (model call) | Evaluation gold/pred only (collation) |
+| **Definition** | Object array the model was asked to **produce** (`panels[]`, `outputs[]`, …) | Wrapper array **above** embedded model output — how benchmark results are **indexed** (which figure, which paper) |
+| **Row join** | **Hungarian** on manifest alignment keys; pairs below `τ` count as unmatched | **Positional:** gold `[i]` ↔ pred `[i]` when that index exists in pred |
+| **Layer S / `by_list`** | **Yes** — `correct_row`, `missing_row`, `spurious_row` | **No** |
+| **Leaf scoring** | **Yes** — at each gold index after pairing | **Yes** — for eval-only row fields (`figures[1].figure_label`, …) if present in gold/pred and manifest |
+| **Extra pred-only rows** | `spurious_row` in `by_list`; no gold-indexed instances | Ignored; not reported as `spurious_row` |
+| **Missing pred rows** | `missing_row` in `by_list`; gold leaves get `pred_value = null` | Gold leaves get `pred_value = null`; not reported as `missing_row` |
+
+**Model output vs collation.** One model call returns JSON validating against `schema.json` (e.g. `{ "panels": [ … ] }`). Benchmark gold/pred may **collate** many such outputs: `{ "figures": [ { "panels": [ … ] }, … ] }`. Here `figures[]` is structural (not in `schema.json`); `figures[i].panels[]` is the same predictive list as `panels[]` in the schema, reached through a collation prefix. Evaluation walks structural ancestors by index, then aligns predictive lists per schema inside each slice.
+
+**Example:** panel-caption segmentation — `schema.json` has `panels[]` only. Figure-benchmark eval JSON wraps each run under `figures[]`. `list_alignment` uses `"figures.panels": ["label"]` (path in the **evaluation document**); `fields` may use `figures[].panels[].label`. Row fields on `figures[]` itself (e.g. `figure_label` copied from input) are eval metadata — positional join, no layer S.
+
+**Discovering predictive lists:** walk **`schema.json` only**; every `array` whose `items` is an `object` is predictive. There is no “structural list in schema” case — wrappers exist only in evaluation documents.
+
+**Manifest `list_alignment` — configuration and validation, not classification:**
+
+| Rule | Meaning |
+|------|---------|
+| **Required** | Every predictive list (per schema) has exactly one `list_alignment` entry |
+| **Forbidden** | Keys for structural / collection lists |
+| **Key shape** | Dotted path without `[]`: `panels`, `figures.panels`, … matching the list’s position in the eval document |
+| **Value shape** | Non-empty array of row field names that exist on that list’s `items.properties` |
+| **Profile consistency** | Each alignment key has a matching `fields` entry (e.g. `panels[].label`) when that field is used for `s(i,j)` |
+
+At manifest load (or evaluator init), reject inconsistent manifests: missing alignment for a predictive list, alignment on a structural path, or alignment keys not in the row schema.
 
 #### Where `list_alignment` lives in the manifest
 
 `list_alignment` is a **top-level key** in `eval-manifest.json`, alongside `defaults` and `fields`. It is **not** nested under `fields`.
 
-Keys are **list property names** from the schema (no `[]` suffix). Values are **row field names** — short names from the row object’s `properties`, not full leaf paths.
+Keys use the same dotted path as the list in the evaluation document (no `[]` suffix). Values are **row field names** — short names from the row object’s `properties`, not full leaf paths. Keys must correspond to **predictive** lists expected from the schema (see validation table above).
 
 ```json
 {
@@ -246,11 +289,13 @@ Keys are **list property names** from the schema (no `[]` suffix). Values are **
 
 | Manifest location | Example | Meaning |
 |-------------------|---------|---------|
-| `list_alignment` key | `"panels"` | The array property on the output root (`schema.properties.panels`) |
-| `list_alignment` value | `["label"]` | Compare `panels[i].label` vs `panels[j].label` to pair rows |
-| `fields` key | `"panels[].label"` | How to **score** that leaf after rows are paired (layer 1/2, `string_compare`, …) |
+| `list_alignment` key | `"panels"` | Align predictive `panels` at check output root |
+| `list_alignment` key | `"figures.panels"` | Align predictive `panels` nested under structural `figures` |
+| `list_alignment` value | `["label"]` | Row fields used only for Hungarian `s(i,j)` — not for layer 1/2 rollups |
+| `fields` key | `"panels[].label"` | How to **score** that leaf after rows are joined (layer 1/2, `string_compare`, …) |
+| *(no key — structural list)* | — | `figures[]` collection wrapper: positional join, no `by_list`; may still have `figures[].figure_label` in `fields` |
 
-For a checklist whose root has `outputs[]`, you might write `"outputs": ["micrograph"]` and still score row leaves under `fields` as `outputs[].scale_bar_on_image`, etc.
+For a check whose schema produces `outputs[]`, `list_alignment` must include `"outputs": […]`. A collation-only `figures[]` wrapper must **not** appear in `list_alignment`; row leaves under `figures[].*` are still scored via positional join.
 
 #### Row similarity (alignment only)
 
@@ -284,9 +329,11 @@ Pred (rows reordered; `Fig 1` has wrong `status`):
 
 Hungarian pairs by `label`: gold `[0]` ↔ pred `[1]`, gold `[1]` ↔ pred `[0]`. Then emit leaves at **gold indices** — `panels[0].status` compares gold `yes` vs pred `no`; `panels[0].id` compares `1` vs `8`. Wrong `id` on a correctly aligned row does not change how rows were matched.
 
-#### Alignment steps
+#### Alignment steps (predictive lists only)
 
-1. Look up `list_alignment["panels"]` → `["label"]`.
+For each list named in `list_alignment`:
+
+1. Look up keys, e.g. `list_alignment["panels"]` → `["label"]`.
 2. Build `s(i,j)` from those keys only, using each key’s `fields` profile for scoring.
 3. Hungarian assignment; emit layer S structural reporting (see below).
 4. For each gold row index `k` with `correct_row`, take the paired pred row and emit all row leaves (`panels[k].id`, `panels[k].label`, `panels[k].status`, …).
@@ -297,7 +344,16 @@ Hungarian pairs by `label`: gold `[0]` ↔ pred `[1]`, gold `[1]` ↔ pred `[0]`
 
 Other row fields (e.g. `status`) are scored **after** row pairing. A wrong `status` on a `correct_row` affects only that leaf — not how rows were matched.
 
-Every object list in the schema needs a `list_alignment` entry (or a documented default) before evaluation runs.
+#### Positional join (structural lists)
+
+For object lists classified as **structural** (not in the schema’s predictive set — therefore no `list_alignment` entry):
+
+1. For each gold row index `k` from `0` to `len(gold_rows) - 1`, take `pred_rows[k]` when `k < len(pred_rows)`, else treat the pred row as absent.
+2. Emit row leaves at gold index `k` with values from the gold row and the positional pred row (or `pred_value = null`).
+3. Do **not** run Hungarian alignment; do **not** emit `by_list` for this list.
+4. Extra pred rows beyond the gold length are ignored (same effect as `spurious_row` on leaf paths, but not counted in layer S).
+
+When a predictive list is nested under a structural parent (e.g. `panels` under `figures`), repeat the positional join for each parent gold index, then run predictive alignment **within** that parent’s gold/pred row slice.
 
 ---
 
@@ -306,7 +362,7 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
 **Location:** alongside checklist schema, e.g.  
 `soda_mmqc/data/checklist/fig-checklist/<checklist-name>/eval-manifest.json`
 
-**Purpose:** map leaf property paths → metric profile. The evaluator loads `schema.json` + `eval-manifest.json`. Evaluation semantics live here, **not** in `schema.json` (which remains the structured-output contract for the model).
+**Purpose:** map leaf property paths → metric profile. The evaluator loads the model `schema.json` + `eval-manifest.json`. Evaluation semantics live here, **not** in `schema.json` (which is **only** the per-call structured-output contract for the model — no collation wrappers). Manifest `fields` paths may include collation prefixes (e.g. `figures[].panels[].label`) when eval gold/pred embeds model output that way.
 
 **Path keys:** JSON-pointer-style patterns from the output root, e.g. `outputs[].scale_bar_on_image`, `item.status`. `[]` matches any list index.
 
@@ -360,7 +416,7 @@ Every object list in the schema needs a `list_alignment` entry (or a documented 
 
 | Key | Role |
 |-----|------|
-| `list_alignment` | Map **list property name** → array of **row field names** used only to align list-of-object elements (e.g. `"panels": ["label"]`) |
+| `list_alignment` | Map each **schema predictive list** → row field names for Hungarian `s(i,j)` only (e.g. `"panels": ["label"]`). Must match schema predictive set; validated at load. Structural collection lists omitted. |
 | `na_values` | Per field: literals meaning **not applicable** (layer 1). Omit or `[]` = always applicable. |
 | `matching_metric` | `binary_polarity` \| `multiclass` \| `graded_string` — **layer 2** reporting shape only |
 | `string_compare` | **Required** on non-enum `graded_string` fields. **Omit** on schema `enum` fields (always exact). Not a `defaults` key. |
@@ -398,7 +454,7 @@ Leaves without a manifest entry receive **score** only.
 
 ## Layer S — Structural row alignment
 
-**Layer S** reports whether each **row slot** in a list-of-objects was correctly paired, missing from pred, or spurious in pred. It applies **only** to list-of-objects properties (`panels`, `outputs`, …) — **not** to extended-primitive leaves such as `tags`.
+**Layer S** reports whether each **row slot** in a **predictive** list-of-objects was correctly paired, missing from pred, or spurious in pred. It applies **only** to lists the schema classifies as model-produced — **not** to structural collection lists (`figures`, `papers`, …), and **not** to extended-primitive leaves such as `tags`.
 
 Layer S is **orthogonal** to layer 1 and layer 2:
 
@@ -500,7 +556,7 @@ Runs only when layer 1 = **correct_applicable**. Denominator: instances where go
 
 ## Implementation
 
-Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py) (scalar + `compare_primitive_list`), [`matching.py`](../soda_mmqc/core/matching.py) (shared Hungarian), [`object_list_pairing.py`](../soda_mmqc/core/object_list_pairing.py) (row pairing), [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) (layer S / `by_list`), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (layers 1 and 2), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator). Contract: flatten → pair object rows → layer S → score leaf instances → layers 1 and 2 → `instances` + `by_list` + `by_property`.
+Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py) (scalar + `compare_primitive_list`), [`matching.py`](../soda_mmqc/core/matching.py) (shared Hungarian), [`object_list_pairing.py`](../soda_mmqc/core/object_list_pairing.py) (row pairing), [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) (layer S / `by_list`), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (layers 1 and 2), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator). Contract: flatten → pair **predictive** object lists (Hungarian) / join **structural** lists (positional) → layer S for predictive lists only → score leaf instances → layers 1 and 2 → `instances` + `by_list` + `by_property`.
 
 ---
 

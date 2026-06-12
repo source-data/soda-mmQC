@@ -99,3 +99,9 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-08] ingest | Phase 4.3: `object_list_pairing.py` (`align_object_rows`, pairing-only result); deleted `alignment.py`; `tests/test_object_list_pairing.py`.
 
 ## [2026-06-08] ingest | Phase 4.4: `structural_reporting.py` (layer S, `build_by_list`, recall/precision); `tests/test_structural_reporting.py` (toy D.2, D.4, D.5).
+
+## [2026-06-12] design | Structural vs predictive object lists: `list_alignment` marks predictive lists (Hungarian + layer S); structural lists (figures, papers) use positional join, no `by_list`. Wiki updated in `evaluation-scoring.md`.
+
+## [2026-06-12] design | Consolidated list roles: schema is authoritative for predictive (model-produced) vs structural (collection envelope); manifest `list_alignment` configures Hungarian keys and is validated against schema predictive set.
+
+## [2026-06-12] design | Strict schema scope: `schema.json` = model structured-output contract only (no collation wrappers); structural lists exist only in evaluation gold/pred documents.

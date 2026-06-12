@@ -15,7 +15,7 @@ A **leaf property** is a schema path to a primitive value or an **array of primi
 
 **Extended primitives** (`tags: string[]`) are leaves whose value is a primitive array. Compare them as one leaf instance with aggregate `score` via **`leaves.compare_primitive_list`** (uses `matching.py` internally). There is no structural (layer S) reporting for extended primitives — unmatched elements are reflected in the aggregate `score` only.
 
-**List-of-objects** (`panels[]` with row fields) is **not** a leaf value. Objects are containers; only their primitive descendants are leaves. Row pairing lives in **`object_list_pairing.py`** and feeds layer S (`by_list`); see [evaluation-scoring.md](evaluation-scoring.md#layer-s--structural-row-alignment).
+**List-of-objects** (`panels[]` with row fields) is **not** a leaf value. Objects are containers; only their primitive descendants are leaves. **Predictive** lists (model-produced per schema) are row-paired in **`object_list_pairing.py`** using manifest `list_alignment` keys and feed layer S (`by_list`). **Structural** collection lists use positional join only — no layer S. See [evaluation-scoring.md](evaluation-scoring.md#structural-vs-predictive-lists-schema-driven).
 
 ## Schema vs manifest at leaves
 
@@ -39,7 +39,7 @@ There is no global string metric: each free-text `graded_string` field declares 
 | `**score**` | Numeric quality in `**[0, 1]**` (exact → `0`/`1`; fuzzy / semantic → graded). Aggregated per property as `mean_score` in `by_property`. |
 | **Validity / kind signals** | Hard failures (`enum` violation, type mismatch) → `**score == 0**` before layer reporting. |
 
-**Normative split:** the leaf comparator returns **`score`** (and compared values). **Layer 1 / layer 2** (applicability, TP/FP/FN/TN, match/mismatch) come from the manifest profile on that leaf property — see [evaluation-scoring.md](evaluation-scoring.md). **Layer S** (`correct_row`, `missing_row`, `spurious_row`) applies only to list-of-objects row slots in `by_list`, not to extended primitives or scalar leaves. No container roll-up in the flat model.
+**Normative split:** the leaf comparator returns **`score`** (and compared values). **Layer 1 / layer 2** (applicability, TP/FP/FN/TN, match/mismatch) come from the manifest profile on that leaf property — see [evaluation-scoring.md](evaluation-scoring.md). **Layer S** (`correct_row`, `missing_row`, `spurious_row`) applies only to **predictive** list-of-objects row slots in `by_list`, not to structural container lists, extended primitives, or scalar leaves. No container roll-up in the flat model.
 
 ## Strings
 
@@ -115,7 +115,7 @@ The flat comparator stores one result per leaf **instance** path (`panels[1].sta
 - **Extended primitive compare** (`leaves.compare_primitive_list` + `matching.py`) — two primitive arrays → one aggregate **`score`** on one leaf path.
 - **Object row pairing** (`object_list_pairing.py`) — structural prerequisite for row leaves; not a leaf comparison.
 - **Layer S** (`structural_reporting.py`) — `by_list` row outcomes; not mixed into `by_property`.
-- **Comparator** (`evaluation.py`) — flatten paths, pair rows, emit layer S, score leaves, apply layers 1 and 2, emit `instances` + `by_list` + `by_property`.
+- **Comparator** (`evaluation.py`) — flatten paths, pair predictive rows / join structural rows, emit layer S for predictive lists, score leaves, apply layers 1 and 2, emit `instances` + `by_list` + `by_property`.
 
 ### `LeafComparisonResult`
 

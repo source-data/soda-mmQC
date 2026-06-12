@@ -7,7 +7,7 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 - **Enum leaves** (`item.status`, `panels[].status`) — always exact literal match; no `string_compare` in manifest.
 - **Graded strings** (`item.label`, `panels[].label`) — `string_compare: exact`, `match_threshold: 1.0` (`τ = 1.0`).
 - **`tags`** — extended-primitive leaf (`string[]`): Hungarian element matching, one aggregate `score` on path `tags`. No layer S. No manifest profile → score only.
-- **`panels[]`** — top-level manifest `list_alignment.panels: ["label"]` pairs rows by `label` (using the `panels[].label` field profile); layer S in `by_list.panels`; then score `panels[k].id`, `panels[k].label`, `panels[k].status` at **gold indices** `k`.
+- **`panels[]`** — **predictive** per toy schema (model-produced rows): manifest `list_alignment.panels: ["label"]` must match schema and pairs rows by `label`; layer S in `by_list.panels`; then score `panels[k].*` at **gold indices** `k`. This toy schema has no structural collection wrappers (e.g. no `figures[]`).
 - **Manifest** — layer 1 / 2 only on profiled paths (`item.status`, `item.label`, `panels[].status`, `panels[].label`). Unprofiled leaves appear in `by_property` with `mean_score` only (`layer1_counts` / `layer2_counts` = `{}`).
 
 ---
@@ -33,7 +33,7 @@ Row alignment: manifest `list_alignment.panels → ["label"]` (top-level key, no
 1. **What changed** — diff vs baseline gold.
 2. **Per leaf instance** — table of concrete paths: `score`, layer 1, layer 2 (— when not applicable).
 3. **Per leaf property** — required summary for each property key (`item.label`, `panels[].status`, …): `mean_score`, `layer1_counts`, `layer2_counts` — **never mixed across properties** ([evaluation-scoring.md](evaluation-scoring.md#per-leaf-property-by_property)). Tables use `{}` for empty count objects.
-4. **Layer S (`by_list`)** — structural reporting for list-of-objects properties only: `row_counts` and per-row `structural` outcomes (`correct_row`, `missing_row`, `spurious_row`). Not in `by_property`.
+4. **Layer S (`by_list`)** — structural reporting for **predictive** lists only (schema-defined model output; configured via `list_alignment`): `row_counts` and per-row `structural` outcomes. Not in `by_property`. Collection wrappers are omitted from `by_list`.
 
 Layer 1 applicability reporting: **correct_NA** · **spurious_applicable** · **withheld_applicable** · **correct_applicable**.  
 Layer 2 matching reporting runs only when layer 1 = **correct_applicable**.  
