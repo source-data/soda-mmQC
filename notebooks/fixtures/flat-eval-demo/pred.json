@@ -1,0 +1,49 @@
+{
+  "figures": [
+    {
+      "figure_label": "Figure 1",
+      "panels": [
+        {
+          "label": "1A",
+          "is_micrograph": "yes",
+          "caption_snippet": "EM of cells at 40k magnification"
+        },
+        {
+          "label": "1B",
+          "is_micrograph": "no",
+          "caption_snippet": ""
+        }
+      ]
+    },
+    {
+      "figure_label": "Figure 2x",
+      "panels": [
+        {
+          "label": "2B",
+          "is_micrograph": "no",
+          "caption_snippet": ""
+        },
+        {
+          "label": "2A",
+          "is_micrograph": "no",
+          "caption_snippet": "Western blot of protein X"
+        }
+      ]
+    },
+    {
+      "figure_label": "Figure 3",
+      "panels": [
+        {
+          "label": "3A",
+          "is_micrograph": "yes",
+          "caption_snippet": "Bar chart of replicate means"
+        },
+        {
+          "label": "3C",
+          "is_micrograph": "yes",
+          "caption_snippet": "Hallucinated extra panel"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "checklist": "flat-eval-demo",
+  "defaults": {
+    "matching_metric": "binary_polarity",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "panels": ["label"]
+  },
+  "fields": {
+    "figures[].figure_label": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "figures[].panels[].label": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "figures[].panels[].is_micrograph": {
+      "na_values": [""],
+      "matching_metric": "binary_polarity"
+    },
+    "figures[].panels[].caption_snippet": {
+      "matching_metric": "graded_string",
+      "string_compare": "fuzzy",
+      "match_threshold": 0.85
+    }
+  }
+}

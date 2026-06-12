@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "required": ["figures"],
+  "properties": {
+    "figures": {
+      "type": "array",
+      "description": "Three composite figures, each with two labelled panels",
+      "items": {
+        "type": "object",
+        "required": ["figure_label", "panels"],
+        "properties": {
+          "figure_label": {
+            "type": "string",
+            "description": "Caption-style figure identifier (e.g. Figure 1)"
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["label", "is_micrograph"],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "description": "Panel label within the figure (e.g. 1A, 2B)"
+                },
+                "is_micrograph": {
+                  "type": "string",
+                  "enum": ["yes", "no", ""],
+                  "description": "Whether the panel shows a micrograph"
+                },
+                "caption_snippet": {
+                  "type": "string",
+                  "description": "Short caption text describing the panel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
