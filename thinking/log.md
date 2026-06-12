@@ -105,3 +105,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-12] design | Consolidated list roles: schema is authoritative for predictive (model-produced) vs structural (collection envelope); manifest `list_alignment` configures Hungarian keys and is validated against schema predictive set.
 
 ## [2026-06-12] design | Strict schema scope: `schema.json` = model structured-output contract only (no collation wrappers); structural lists exist only in evaluation gold/pred documents.
+
+## [2026-06-12] design | Collation discovery: compare eval JSON shape to schema; object-array ancestors above the embedded schema subtree are structural; schema predictive lists at resolved eval paths.

@@ -249,13 +249,26 @@ Row leaves under a list-of-objects still emit one instance per **gold index**. H
 
 **Discovering predictive lists:** walk **`schema.json` only**; every `array` whose `items` is an `object` is predictive. There is no “structural list in schema” case — wrappers exist only in evaluation documents.
 
+**Discovering structural lists (collation):** compare the **evaluation document shape** to `schema.json`. Embed the schema in the eval JSON (same property names and nesting for the model-output subtree). Any object-array path in the eval document that sits **above** that embedded schema — i.e. is an ancestor of the model output but is **not** in `schema.json` — is produced by the **evaluation collation mechanism** and is structural.
+
+```text
+schema.json          →  { panels: object[] }           predictive: panels
+eval gold/pred       →  { figures: [ { panels: … } ] }
+                         ^^^^^^^^^ structural (not in schema)
+                                    ^^^^^^ predictive (schema list at eval path figures.panels)
+```
+
+**General rule:** structural = eval shape minus schema shape at the wrapping layers; predictive = schema object-lists at their resolved path in the eval document (which may equal the schema path when eval JSON matches the schema root, or be qualified when wrapped, e.g. `figures.panels`).
+
+The comparator can derive this at runtime from `(schema, exp)` (and should agree for `pred`), without a separate collation config, as long as gold and pred use the same embedding. Manifest `list_alignment` keys must use those **resolved eval paths**; validation checks they cover exactly the schema predictive set.
+
 **Manifest `list_alignment` — configuration and validation, not classification:**
 
 | Rule | Meaning |
 |------|---------|
-| **Required** | Every predictive list (per schema) has exactly one `list_alignment` entry |
-| **Forbidden** | Keys for structural / collection lists |
-| **Key shape** | Dotted path without `[]`: `panels`, `figures.panels`, … matching the list’s position in the eval document |
+| **Required** | Every schema predictive list has exactly one `list_alignment` entry at its **resolved eval path** (from schema ↔ eval shape comparison) |
+| **Forbidden** | Keys on structural-only paths (collation ancestors not in schema) |
+| **Key shape** | Dotted path without `[]`: `panels` when eval root matches schema; `figures.panels` when schema is embedded under `figures[]` |
 | **Value shape** | Non-empty array of row field names that exist on that list’s `items.properties` |
 | **Profile consistency** | Each alignment key has a matching `fields` entry (e.g. `panels[].label`) when that field is used for `s(i,j)` |
 

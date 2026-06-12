@@ -151,8 +151,8 @@ Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 
 **Code (pending):**
 
-- Discover predictive lists from `schema.json` only; structural lists from eval document shape (prefix paths not in schema).
-- Validate manifest `list_alignment`: covers every schema predictive list (at its eval-document path), no keys on structural-only paths, alignment keys ⊆ row `items.properties`.
+- Discover predictive lists from `schema.json`; discover structural lists by comparing eval JSON shape to schema (ancestor object-arrays above the embedded schema subtree).
+- Resolve eval paths for schema lists (e.g. `panels` → `figures.panels`); validate `list_alignment` covers that set exactly; alignment keys ⊆ row `items.properties`.
 - `FlatEvaluator`: positional join for structural collation; Hungarian + `by_list` for schema predictive lists; qualified keys (e.g. `figures.panels`).
 
 ---
