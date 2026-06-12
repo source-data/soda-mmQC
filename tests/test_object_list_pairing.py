@@ -1,4 +1,4 @@
-"""Tests for list-of-objects alignment (phase 4b)."""
+"""Tests for list-of-objects row pairing (phase 4.3)."""
 
 from __future__ import annotations
 
@@ -6,14 +6,14 @@ from pathlib import Path
 
 import pytest
 
-from soda_mmqc.core.alignment import (
-    align_object_lists,
+from soda_mmqc.core.eval_manifest import FieldProfile, load_eval_manifest
+from soda_mmqc.core.leaves import StringCompareMode
+from soda_mmqc.core.object_list_pairing import (
+    align_object_rows,
     leaf_property_for_alignment_key,
     row_similarity,
     score_alignment_key,
 )
-from soda_mmqc.core.eval_manifest import FieldProfile, MatchingMetric, load_eval_manifest
-from soda_mmqc.core.leaves import StringCompareMode
 
 FIXTURES = Path(__file__).parent / "fixtures"
 TOY_MANIFEST = load_eval_manifest(FIXTURES / "eval_manifest_toy.json")
@@ -67,25 +67,24 @@ class TestRowSimilarity:
         assert row_similarity(exp, pred, ["label"], (panels_label_profile,)) == 1.0
 
 
-class TestAlignObjectLists:
+class TestAlignObjectRows:
     def test_perfect_match(self):
-        result = align_object_lists(
+        result = align_object_rows(
             BASELINE_GOLD_PANELS,
             BASELINE_GOLD_PANELS,
             list_name="panels",
             manifest=TOY_MANIFEST,
         )
         assert result.gold_to_pred == ((0, 0), (1, 1))
-        assert result.true_positives == 2
-        assert result.false_positives == 0
-        assert result.false_negatives == 0
+        assert result.match_threshold == 1.0
+        assert len(result.pair_similarities) == 2
 
     def test_d2_reordered_rows(self):
         pred = [
             {"id": 9, "label": "Fig 2", "status": ""},
             {"id": 8, "label": "Fig 1", "status": "no"},
         ]
-        result = align_object_lists(
+        result = align_object_rows(
             BASELINE_GOLD_PANELS,
             pred,
             list_name="panels",
@@ -94,11 +93,10 @@ class TestAlignObjectLists:
         assert result.gold_to_pred == ((0, 1), (1, 0))
         assert result.pred_index_for_gold(0) == 1
         assert result.pred_index_for_gold(1) == 0
-        assert result.true_positives == 2
 
     def test_d4_missing_panel(self):
         pred = [{"id": 1, "label": "Fig 1", "status": "yes"}]
-        result = align_object_lists(
+        result = align_object_rows(
             BASELINE_GOLD_PANELS,
             pred,
             list_name="panels",
@@ -106,30 +104,29 @@ class TestAlignObjectLists:
         )
         assert result.gold_to_pred == ((0, 0),)
         assert result.pred_index_for_gold(1) is None
-        assert result.false_negatives == 1
-        assert result.false_positives == 0
 
     def test_d5_extra_panel(self):
         pred = BASELINE_GOLD_PANELS + [
             {"id": 99, "label": "Fig 99", "status": "no"},
         ]
-        result = align_object_lists(
+        result = align_object_rows(
             BASELINE_GOLD_PANELS,
             pred,
             list_name="panels",
             manifest=TOY_MANIFEST,
         )
         assert result.gold_to_pred == ((0, 0), (1, 1))
-        assert result.false_positives == 1
+        assert len(result.pair_similarities) == 2
+        assert all(pred != 2 for _, pred, _ in result.pair_similarities)
 
     def test_missing_list_alignment_raises(self):
         with pytest.raises(ValueError, match="list_alignment"):
-            align_object_lists([], [], list_name="unknown", manifest=TOY_MANIFEST)
+            align_object_rows([], [], list_name="unknown", manifest=TOY_MANIFEST)
 
     def test_both_empty(self):
-        result = align_object_lists([], [], list_name="panels", manifest=TOY_MANIFEST)
+        result = align_object_rows([], [], list_name="panels", manifest=TOY_MANIFEST)
         assert result.gold_to_pred == ()
-        assert result.true_positives == 0
+        assert result.pair_similarities == ()
 
 
 class TestSemanticAlignmentKey:

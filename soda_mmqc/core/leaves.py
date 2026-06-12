@@ -14,6 +14,13 @@ from typing import Any, Callable, Optional, Sequence
 from rapidfuzz import fuzz
 
 from soda_mmqc.config import DEFAULT_SENTENCE_TRANSFORMER_MODEL
+from soda_mmqc.core.matching import (
+    build_similarity_matrix,
+    hungarian_match_pairs,
+    mean_gated_similarity,
+)
+
+ElementSimilarity = Callable[[Any, Any], float]
 
 
 class StringCompareMode(str, Enum):
@@ -174,6 +181,57 @@ def compare_number(
 ) -> LeafComparisonResult:
     """Exact numeric equality (JSON-parsed int or float)."""
     return _leaf(_score_exact_value(pred, exp))
+
+
+def exact_primitive_similarity(pred: Any, exp: Any) -> float:
+    """Exact equality similarity for one element in a primitive array."""
+    if pred is None or exp is None:
+        return 0.0
+    return 1.0 if pred == exp else 0.0
+
+
+def compare_primitive_list(
+    pred: Sequence[Any],
+    exp: Sequence[Any],
+    *,
+    element_similarity: ElementSimilarity = exact_primitive_similarity,
+    match_threshold: float = 1.0,
+) -> LeafComparisonResult:
+    """Compare two primitive arrays as one extended-primitive leaf.
+
+    Hungarian element matching; aggregate **score** = mean over
+    ``max(len(exp), len(pred))``, counting unmatched slots and pairs below
+    ``match_threshold`` as 0. Both empty → ``score`` 1.0.
+    """
+    if not exp and not pred:
+        return _leaf(1.0)
+
+    n_exp = len(exp)
+    n_pred = len(pred)
+    if max(n_exp, n_pred) == 0:
+        return _leaf(1.0)
+
+    matrix_sim = _matrix_element_similarity(element_similarity)
+    matrix = build_similarity_matrix(exp, pred, matrix_sim)
+    pairs = hungarian_match_pairs(matrix)
+    score = mean_gated_similarity(
+        pairs,
+        n_left=n_exp,
+        n_right=n_pred,
+        threshold=match_threshold,
+    )
+    return _leaf(score)
+
+
+def _matrix_element_similarity(
+    element_similarity: ElementSimilarity,
+) -> Callable[[Any, Any], float]:
+    """Adapt ``(pred, exp)`` element similarity to matrix ``(exp, pred)`` rows."""
+
+    def _similarity(exp_value: Any, pred_value: Any) -> float:
+        return element_similarity(pred_value, exp_value)
+
+    return _similarity
 
 
 def _score_exact_value(pred: Any, exp: Any) -> float:

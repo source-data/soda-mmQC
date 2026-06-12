@@ -15,8 +15,10 @@ from soda_mmqc.core.leaves import (
     compare_exact_strings,
     compare_fuzzy_strings,
     compare_number,
+    compare_primitive_list,
     compare_semantic_strings,
     compare_strings,
+    exact_primitive_similarity,
     fuzzy_ratio,
     score_exact_string,
     score_fuzzy_string,
@@ -253,6 +255,64 @@ class TestCompareBoolean:
         assert compare_boolean(None, True).score == 0.0
         assert compare_boolean(True, None).score == 0.0
         assert compare_boolean(None, None).score == 0.0
+
+
+class TestExactPrimitiveSimilarity:
+    def test_match(self):
+        assert exact_primitive_similarity("alpha", "alpha") == 1.0
+        assert exact_primitive_similarity(1, 1) == 1.0
+
+    def test_mismatch(self):
+        assert exact_primitive_similarity("alpha", "beta") == 0.0
+
+    def test_none(self):
+        assert exact_primitive_similarity(None, "x") == 0.0
+
+
+class TestComparePrimitiveList:
+    """Extended-primitive leaf (toy example B) — aggregate score only."""
+
+    def test_both_empty(self):
+        assert compare_primitive_list([], []).score == 1.0
+
+    def test_perfect_match(self):
+        tags = ["alpha", "beta"]
+        assert compare_primitive_list(tags, tags).score == 1.0
+
+    def test_b1_extra_element(self):
+        exp = ["alpha", "beta"]
+        pred = ["alpha", "beta", "gamma"]
+        assert compare_primitive_list(pred, exp).score == pytest.approx(2 / 3)
+
+    def test_b2_substituted_element(self):
+        exp = ["alpha", "beta", "gamma"]
+        pred = ["alpha", "beta", "delta"]
+        assert compare_primitive_list(pred, exp).score == pytest.approx(2 / 3)
+
+    def test_b3_total_mismatch(self):
+        assert compare_primitive_list(["omega"], ["alpha"]).score == 0.0
+
+    def test_missing_pred(self):
+        assert compare_primitive_list([], ["alpha", "beta"]).score == 0.0
+
+    def test_missing_gold(self):
+        assert compare_primitive_list(["alpha"], []).score == 0.0
+
+    def test_custom_element_similarity(self):
+        def fuzzy(pred: str, exp: str) -> float:
+            return 1.0 if pred.lower() == exp.lower() else 0.0
+
+        assert compare_primitive_list(
+            ["yes"],
+            ["Yes"],
+            element_similarity=fuzzy,
+            match_threshold=1.0,
+        ).score == 1.0
+
+    def test_score_is_leaf_comparison_result(self):
+        result = compare_primitive_list(["a"], ["a"])
+        assert isinstance(result, LeafComparisonResult)
+        assert 0.0 <= result.score <= 1.0
 
 
 class TestCompareNumber:
