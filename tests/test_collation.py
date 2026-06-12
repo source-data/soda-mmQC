@@ -10,6 +10,7 @@ import pytest
 from soda_mmqc.core.collation import (
     build_eval_leaf_specs,
     discover_collation_layout,
+    validate_manifest_field_patterns,
     validate_manifest_list_alignment,
 )
 from soda_mmqc.core.eval_manifest import load_eval_manifest
@@ -64,11 +65,23 @@ class TestManifestValidation:
 
 
 class TestBuildEvalLeafSpecs:
-    def test_remapped_panel_leaves_and_structural_figure_label(self):
+    def test_remapped_schema_leaves_only(self):
         layout = discover_collation_layout(PANEL_SCHEMA, COLLATED_GOLD, COLLATED_PRED)
-        specs = build_eval_leaf_specs(PANEL_SCHEMA, layout, COLLATED_MANIFEST)
+        specs = build_eval_leaf_specs(PANEL_SCHEMA, layout)
         patterns = {spec.eval_pattern for spec in specs}
         assert "figures[].panels[].label" in patterns
         assert "figures[].panels[].is_micrograph" in patterns
-        assert "figures[].figure_label" in patterns
+        assert "figures[].figure_label" not in patterns
         assert "panels[].label" not in patterns
+
+
+class TestValidateManifestFieldPatterns:
+    def test_structural_field_rejected(self, tmp_path):
+        layout = discover_collation_layout(PANEL_SCHEMA, COLLATED_GOLD, COLLATED_PRED)
+        raw = json.loads((FIXTURES / "eval_manifest_collated.json").read_text())
+        raw["fields"]["figures[].figure_label"] = raw["fields"]["figures[].panels[].label"]
+        manifest_path = tmp_path / "manifest.json"
+        manifest_path.write_text(json.dumps(raw), encoding="utf-8")
+        manifest = load_eval_manifest(manifest_path)
+        with pytest.raises(ValueError, match="structural"):
+            validate_manifest_field_patterns(manifest, PANEL_SCHEMA, layout)

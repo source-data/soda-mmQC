@@ -41,7 +41,6 @@ class TestCollatedEvaluation:
 
     def test_reordered_panels_in_second_figure(self, collated_evaluator: FlatEvaluator):
         result = collated_evaluator.evaluate(COLLATED_GOLD, COLLATED_PRED)
-        assert _instance(result, "figures[1].figure_label").layer2 == "mismatch"
         assert _instance(result, "figures[1].panels[0].is_micrograph").layer2 == "FN"
         assert result.by_list["figures.panels"]["row_counts"]["correct_row"] == 4
 

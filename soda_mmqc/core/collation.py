@@ -86,16 +86,13 @@ def discover_collation_layout(
 def build_eval_leaf_specs(
     schema: Mapping[str, Any],
     layout: CollationLayout,
-    manifest: EvalManifest,
 ) -> tuple[EvalLeafSpec, ...]:
-    """Schema leaves remapped to eval paths plus manifest-only structural leaves."""
+    """Schema leaves remapped to eval paths (predictive model output only)."""
     prefix = _eval_pattern_prefix(layout.embedding_prefix)
     specs: list[EvalLeafSpec] = []
-    schema_eval_patterns: set[str] = set()
 
     for leaf in discover_schema(schema):
         eval_pattern = _remap_schema_pattern(leaf.pattern, prefix)
-        schema_eval_patterns.add(eval_pattern)
         eval_list = _eval_list_for_schema_list(
             layout, leaf.object_list_name
         )
@@ -109,27 +106,30 @@ def build_eval_leaf_specs(
             )
         )
 
-    for pattern in manifest.field_patterns():
-        if pattern in schema_eval_patterns:
-            continue
-        if prefix and not pattern.startswith(prefix):
-            continue
-        eval_list = _eval_list_for_row_pattern(layout, pattern)
-        if "[]." in pattern:
-            if eval_list is None:
-                continue
-            kind = LeafKind.ROW
-        else:
-            kind = LeafKind.SCALAR
-        specs.append(
-            EvalLeafSpec(
-                eval_pattern=pattern,
-                kind=kind,
-                eval_list=eval_list,
-            )
-        )
-
     return tuple(specs)
+
+
+def validate_manifest_field_patterns(
+    manifest: EvalManifest,
+    schema: Mapping[str, Any],
+    layout: CollationLayout,
+) -> None:
+    """Reject ``fields`` entries on structural-only eval paths."""
+    prefix = _eval_pattern_prefix(layout.embedding_prefix)
+    schema_eval_patterns = {
+        _remap_schema_pattern(leaf.pattern, prefix)
+        for leaf in discover_schema(schema)
+    }
+    forbidden = sorted(
+        pattern
+        for pattern in manifest.field_patterns()
+        if pattern not in schema_eval_patterns
+    )
+    if forbidden:
+        raise ValueError(
+            "fields entries on non-schema (structural) paths are forbidden: "
+            + ", ".join(forbidden)
+        )
 
 
 def validate_manifest_list_alignment(
@@ -372,26 +372,6 @@ def _eval_list_for_schema_list(
         if spec.is_predictive and spec.schema_list_name == schema_list_name:
             return spec
     return None
-
-
-def _eval_list_for_row_pattern(
-    layout: CollationLayout, pattern: str
-) -> Optional[EvalListSpec]:
-    best: Optional[EvalListSpec] = None
-    best_len = -1
-    for spec in layout.eval_lists:
-        prefix = _list_instance_prefix(spec)
-        if pattern.startswith(prefix) and len(prefix) > best_len:
-            best = spec
-            best_len = len(prefix)
-    return best
-
-
-def _list_instance_prefix(spec: EvalListSpec) -> str:
-    if spec.parent is None:
-        return f"{spec.field_name}[]."
-    parent_prefix = _list_instance_prefix(spec.parent)
-    return f"{parent_prefix}{spec.field_name}[]."
 
 
 def _schema_row_properties(schema: Mapping[str, Any]) -> dict[str, frozenset[str]]:

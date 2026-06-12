@@ -10,11 +10,6 @@
     "figures.panels": ["label"]
   },
   "fields": {
-    "figures[].figure_label": {
-      "matching_metric": "graded_string",
-      "string_compare": "exact",
-      "match_threshold": 1.0
-    },
     "figures[].panels[].label": {
       "matching_metric": "graded_string",
       "string_compare": "exact",

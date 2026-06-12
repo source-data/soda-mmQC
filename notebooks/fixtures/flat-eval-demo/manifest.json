@@ -10,11 +10,6 @@
     "papers.figures.outputs": ["label"]
   },
   "fields": {
-    "papers[].figures[].figure_label": {
-      "matching_metric": "graded_string",
-      "string_compare": "exact",
-      "match_threshold": 1.0
-    },
     "papers[].figures[].outputs[].label": {
       "matching_metric": "graded_string",
       "string_compare": "exact",

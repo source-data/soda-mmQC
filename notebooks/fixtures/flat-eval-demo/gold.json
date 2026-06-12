@@ -8,7 +8,7 @@
           "outputs": [
             {
               "label": "1A",
-              "is_micrograph": "yes",
+              "is_micrograph": "no",
               "caption_snippet": "EM of cells at 40k magnification"
             },
             {

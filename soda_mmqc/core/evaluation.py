@@ -13,6 +13,7 @@ from soda_mmqc.core.collation import (
     EvalListSpec,
     build_eval_leaf_specs,
     discover_collation_layout,
+    validate_manifest_field_patterns,
     validate_manifest_list_alignment,
 )
 from soda_mmqc.core.eval_manifest import (
@@ -171,7 +172,8 @@ class FlatEvaluator:
         """Run the full flat evaluation pipeline."""
         layout = discover_collation_layout(self.schema, exp, pred)
         validate_manifest_list_alignment(self.manifest, self.schema, layout)
-        leaf_specs = build_eval_leaf_specs(self.schema, layout, self.manifest)
+        validate_manifest_field_patterns(self.manifest, self.schema, layout)
+        leaf_specs = build_eval_leaf_specs(self.schema, layout)
 
         instances: list[LeafInstanceResult] = []
         by_list: dict[str, dict[str, Any]] = {}
