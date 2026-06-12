@@ -1,39 +1,26 @@
 {
   "type": "object",
-  "required": ["figures"],
+  "required": ["outputs"],
   "properties": {
-    "figures": {
+    "outputs": {
       "type": "array",
-      "description": "Three composite figures, each with two labelled panels",
+      "description": "Panel-level model output for one figure caption segmentation call",
       "items": {
         "type": "object",
-        "required": ["figure_label", "panels"],
+        "required": ["label", "is_micrograph"],
         "properties": {
-          "figure_label": {
+          "label": {
             "type": "string",
-            "description": "Caption-style figure identifier (e.g. Figure 1)"
+            "description": "Panel label (e.g. 1A, 2B)"
           },
-          "panels": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["label", "is_micrograph"],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Panel label within the figure (e.g. 1A, 2B)"
-                },
-                "is_micrograph": {
-                  "type": "string",
-                  "enum": ["yes", "no", ""],
-                  "description": "Whether the panel shows a micrograph"
-                },
-                "caption_snippet": {
-                  "type": "string",
-                  "description": "Short caption text describing the panel"
-                }
-              }
-            }
+          "is_micrograph": {
+            "type": "string",
+            "enum": ["yes", "no", ""],
+            "description": "Whether the panel shows a micrograph"
+          },
+          "caption_snippet": {
+            "type": "string",
+            "description": "Short caption text describing the panel"
           }
         }
       }

@@ -7,24 +7,24 @@
     "na_values": []
   },
   "list_alignment": {
-    "panels": ["label"]
+    "papers.figures.outputs": ["label"]
   },
   "fields": {
-    "figures[].figure_label": {
+    "papers[].figures[].figure_label": {
       "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
     },
-    "figures[].panels[].label": {
+    "papers[].figures[].outputs[].label": {
       "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
     },
-    "figures[].panels[].is_micrograph": {
+    "papers[].figures[].outputs[].is_micrograph": {
       "na_values": [""],
       "matching_metric": "binary_polarity"
     },
-    "figures[].panels[].caption_snippet": {
+    "papers[].figures[].outputs[].caption_snippet": {
       "matching_metric": "graded_string",
       "string_compare": "fuzzy",
       "match_threshold": 0.85

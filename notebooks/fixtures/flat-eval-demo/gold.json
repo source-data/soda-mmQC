@@ -1,47 +1,52 @@
 {
-  "figures": [
+  "papers": [
     {
-      "figure_label": "Figure 1",
-      "panels": [
+      "paper_id": "smith2024",
+      "figures": [
         {
-          "label": "1A",
-          "is_micrograph": "yes",
-          "caption_snippet": "EM of cells at 40k magnification"
+          "figure_label": "Figure 1",
+          "outputs": [
+            {
+              "label": "1A",
+              "is_micrograph": "yes",
+              "caption_snippet": "EM of cells at 40k magnification"
+            },
+            {
+              "label": "1B",
+              "is_micrograph": "no",
+              "caption_snippet": ""
+            }
+          ]
         },
         {
-          "label": "1B",
-          "is_micrograph": "no",
-          "caption_snippet": ""
-        }
-      ]
-    },
-    {
-      "figure_label": "Figure 2",
-      "panels": [
-        {
-          "label": "2A",
-          "is_micrograph": "yes",
-          "caption_snippet": "Western blot of protein X"
+          "figure_label": "Figure 2",
+          "outputs": [
+            {
+              "label": "2A",
+              "is_micrograph": "yes",
+              "caption_snippet": "Western blot of protein X"
+            },
+            {
+              "label": "2B",
+              "is_micrograph": "",
+              "caption_snippet": ""
+            }
+          ]
         },
         {
-          "label": "2B",
-          "is_micrograph": "",
-          "caption_snippet": ""
-        }
-      ]
-    },
-    {
-      "figure_label": "Figure 3",
-      "panels": [
-        {
-          "label": "3A",
-          "is_micrograph": "yes",
-          "caption_snippet": "Bar chart of replicate means"
-        },
-        {
-          "label": "3B",
-          "is_micrograph": "no",
-          "caption_snippet": "Experimental scheme"
+          "figure_label": "Figure 3",
+          "outputs": [
+            {
+              "label": "3A",
+              "is_micrograph": "yes",
+              "caption_snippet": "Bar chart of replicate means"
+            },
+            {
+              "label": "3B",
+              "is_micrograph": "no",
+              "caption_snippet": "Experimental scheme"
+            }
+          ]
         }
       ]
     }
