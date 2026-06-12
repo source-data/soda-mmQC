@@ -85,3 +85,17 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-08] ingest | Phase 3 eval: `applicability_and_matching.py`; `tests/test_applicability_and_matching.py` (toy examples A/C/D).
 
 ## [2026-06-08] ingest | Phase 4a: `alignment.py` primitive list Hungarian alignment; `tests/test_alignment_primitive_lists.py` (toy B).
+
+## [2026-06-08] design | Layer S structural row alignment (`correct_row`, `missing_row`, `spurious_row`) in `by_list` for list-of-objects only; extended primitives (`tags`) stay aggregate score without layer S; TP/FP/FN reserved for layer 2.
+
+## [2026-06-08] ingest | Wiki: `evaluation-scoring.md`, `evaluation-toy-examples.md`, `evaluation-leaf-primitives.md`, `evaluation-implementation-plan.md` — layer S, `by_list`, extended primitive terminology.
+
+## [2026-06-08] design | Module split: `matching.py`, `leaves.compare_primitive_list`, `object_list_pairing.py`, `structural_reporting.py`; retire `alignment.py`. Phase 4 refresh (4.1–4.4) before phase 5.
+
+## [2026-06-08] ingest | Phase 4.1: `matching.py` (Hungarian, threshold gating); `alignment.py` delegates; `tests/test_matching.py`.
+
+## [2026-06-08] ingest | Phase 4.2: `leaves.compare_primitive_list`, `exact_primitive_similarity`; removed primitive alignment from `alignment.py`; toy B tests in `test_leaves.py`.
+
+## [2026-06-08] ingest | Phase 4.3: `object_list_pairing.py` (`align_object_rows`, pairing-only result); deleted `alignment.py`; `tests/test_object_list_pairing.py`.
+
+## [2026-06-08] ingest | Phase 4.4: `structural_reporting.py` (layer S, `build_by_list`, recall/precision); `tests/test_structural_reporting.py` (toy D.2, D.4, D.5).

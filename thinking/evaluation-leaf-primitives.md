@@ -11,7 +11,11 @@ Normative scoring contract: [evaluation-scoring.md](evaluation-scoring.md). Work
 - **JSON primitives** (common wording): `**string`**, `**number`**, `**integer**`, `**boolean**`, `**null**`. They are the values that sit at **leaves** of the JSON value tree (no `{}` or `[]` inside them).
 - **“Scalar”** is used loosely in data and ML contexts to mean **one non-container value**. It often includes strings; sometimes people reserve “scalar” for numeric types only. In this wiki we say **primitive** or **leaf value** when we want to be precise.
 
-A **leaf property** is a schema path to a primitive value (or array of primitives). Comparison produces **`score`** at these paths; manifest profiles add **layer 1** / **layer 2** labels per [evaluation-scoring.md](evaluation-scoring.md).
+A **leaf property** is a schema path to a primitive value or an **array of primitives** (extended primitive). Comparison produces **`score`** at these paths; manifest profiles add **layer 1** / **layer 2** labels per [evaluation-scoring.md](evaluation-scoring.md).
+
+**Extended primitives** (`tags: string[]`) are leaves whose value is a primitive array. Compare them as one leaf instance with aggregate `score` via **`leaves.compare_primitive_list`** (uses `matching.py` internally). There is no structural (layer S) reporting for extended primitives — unmatched elements are reflected in the aggregate `score` only.
+
+**List-of-objects** (`panels[]` with row fields) is **not** a leaf value. Objects are containers; only their primitive descendants are leaves. Row pairing lives in **`object_list_pairing.py`** and feeds layer S (`by_list`); see [evaluation-scoring.md](evaluation-scoring.md#layer-s--structural-row-alignment).
 
 ## Schema vs manifest at leaves
 
@@ -35,7 +39,7 @@ There is no global string metric: each free-text `graded_string` field declares 
 | `**score**` | Numeric quality in `**[0, 1]**` (exact → `0`/`1`; fuzzy / semantic → graded). Aggregated per property as `mean_score` in `by_property`. |
 | **Validity / kind signals** | Hard failures (`enum` violation, type mismatch) → `**score == 0**` before layer reporting. |
 
-**Normative split:** the leaf comparator returns **`score`** (and compared values). **Layer 1 / layer 2** (applicability, TP/FP/FN/TN, match/mismatch) come from the manifest profile on that leaf property — see [evaluation-scoring.md](evaluation-scoring.md). No container roll-up in the flat model.
+**Normative split:** the leaf comparator returns **`score`** (and compared values). **Layer 1 / layer 2** (applicability, TP/FP/FN/TN, match/mismatch) come from the manifest profile on that leaf property — see [evaluation-scoring.md](evaluation-scoring.md). **Layer S** (`correct_row`, `missing_row`, `spurious_row`) applies only to list-of-objects row slots in `by_list`, not to extended primitives or scalar leaves. No container roll-up in the flat model.
 
 ## Strings
 
@@ -95,6 +99,7 @@ Every primitive leaf instance returns at minimum **`score` in `[0, 1]`**:
 
 | Leaf type | How `score` is formed |
 |-----------|------------------------|
+| **primitive array** (extended primitive) | `compare_primitive_list` → mean over matched slots → `[0, 1]` |
 | **free `string`** (`graded_string`) | `string_compare` from manifest → `[0, 1]` |
 | **schema `enum` string** | Exact literal match → `0.0` or `1.0` |
 | **number / integer** | Exact equality → `0.0` or `1.0` |
@@ -106,23 +111,25 @@ The flat comparator stores one result per leaf **instance** path (`panels[1].sta
 
 **Separation of concerns:**
 
-- **Leaf compare** — two values + schema fragment + optional manifest profile → **`score`**.
-- **Comparator** — flatten paths, align lists (`list_alignment`), apply manifest layers, emit `instances` + `by_property`.
+- **Scalar leaf compare** (`leaves.py`) — two primitive values → **`score`** via `LeafComparisonResult`.
+- **Extended primitive compare** (`leaves.compare_primitive_list` + `matching.py`) — two primitive arrays → one aggregate **`score`** on one leaf path.
+- **Object row pairing** (`object_list_pairing.py`) — structural prerequisite for row leaves; not a leaf comparison.
+- **Layer S** (`structural_reporting.py`) — `by_list` row outcomes; not mixed into `by_property`.
+- **Comparator** (`evaluation.py`) — flatten paths, pair rows, emit layer S, score leaves, apply layers 1 and 2, emit `instances` + `by_list` + `by_property`.
 
-### `LeafComparisonResult` (target type)
+### `LeafComparisonResult`
 
-**Not implemented yet** — target for the flat reimplementation. A small type returned by primitive compare functions:
+Small type returned by primitive compare functions in `leaves.py`:
 
 - **`score`** in `[0, 1]`
-- optional **`exp_value` / `pred_value`** (or the caller attaches these on the instance record)
-- optional hard-failure flags (enum violation, type mismatch)
+- optional **`enum_violation`** for pred outside schema `enum`
 
 The outer comparator maps `LeafComparisonResult` + manifest profile → per-instance record (`path`, `layer1`, `layer2`, …). No hierarchical `field_scores` attachment at leaves.
 
-**Direction:** primitive dispatch in `leaves.py`; applicability and matching labels in `applicability_and_matching.py`; list alignment in the evaluator. See [evaluation-implementation-plan.md](evaluation-implementation-plan.md).
+See [evaluation-implementation-plan.md](evaluation-implementation-plan.md).
 
 ## See also
 
-- [Flat leaf scoring](evaluation-scoring.md) — manifest, layers, `list_alignment`, `by_property`.
+- [Flat leaf scoring](evaluation-scoring.md) — manifest, layers 1/2/S, `list_alignment`, `by_property`, `by_list`.
 - [Toy examples](evaluation-toy-examples.md) — worked gold/pred cases.
 - [JSON evaluation vs open source](evaluation-json-vs-open-source.md) — why this leaf machinery stays project-specific.

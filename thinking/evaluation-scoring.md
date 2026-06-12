@@ -5,9 +5,10 @@ Normative design for comparing prediction JSON to gold JSON under **JSON Schema*
 One comparator invocation takes a single `exp` JSON and a single `pred` JSON with the same schema. The comparator:
 
 1. Identifies **leaf properties** (lowest-level fields).
-2. Compares values (with list alignment where needed).
-3. Emits a **score** per leaf instance and, when configured, **layer 1** (applicability) and **layer 2** (matching) labels.
-4. Emits **per leaf property** summaries: `mean_score`, `layer1_counts`, `layer2_counts`.
+2. Aligns **list-of-objects** rows where needed and emits **layer S** structural reporting (`by_list`).
+3. Compares leaf values (including **extended primitives** — arrays of primitives).
+4. Emits a **score** per leaf instance and, when configured, **layer 1** (applicability) and **layer 2** (matching) reporting on that instance.
+5. Emits **per leaf property** summaries (`by_property`) and **per list** structural summaries (`by_list`).
 
 Worked examples: [evaluation-toy-examples.md](evaluation-toy-examples.md).
 
@@ -66,21 +67,26 @@ A single `exp` / `pred` pair may contain **many instances** of the same property
 ```mermaid
 flowchart LR
   schema[schema.json] --> flatten[Flatten to leaf paths]
-  flatten --> align[Align lists where needed]
-  align --> score[Score each instance]
-  manifest[eval-manifest.json] --> report[Layer 1 and 2]
+  flatten --> alignObj[Align object lists]
+  alignObj --> layerS[Layer S structural reporting]
+  layerS --> score[Score each leaf instance]
+  flatten --> scorePrim[Compare extended primitives]
+  manifest[eval-manifest.json] --> report[Layer 1 and 2 reporting]
   score --> report
+  scorePrim --> report
   report --> instances[Per-instance results]
-  report --> summary[by_property summaries]
+  report --> byProp[by_property summaries]
+  layerS --> byList[by_list summaries]
 ```
 
 1. **Flatten** — enumerate leaf paths from schema and manifest.
-2. **Align lists** — Hungarian matching for primitive arrays and for object lists before reading per-row leaves (see below).
-3. **Score** — per instance, `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
-4. **Report** — layer 1, then layer 2 when layer 1 = `correct_applicable`.
-5. **Summarize** — required `by_property` block per leaf property key.
+2. **Align object lists** — Hungarian row matching for each list-of-objects property (see [List of objects](#list-of-objects)); emit **layer S** structural reporting in `by_list`.
+3. **Score extended primitives** — compare array-of-primitives leaves (e.g. `tags`) as a single leaf instance with aggregate `score` (see [List of primitives](#list-of-primitives)).
+4. **Score row leaves** — at each gold row index with a `correct_row` partner (or with missing pred on `missing_row`), compare all row leaf fields; `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
+5. **Report** — layer 1 applicability reporting, then layer 2 matching reporting when layer 1 = `correct_applicable`.
+6. **Summarize** — required `by_property` per leaf property key; required `by_list` per list-of-objects property key.
 
-Missing required values, disallowed `null`, and failed alignment → `score = 0` on the affected instance unless a profile defines otherwise.
+Missing required values, disallowed `null`, and `missing_row` gold indices → `score = 0` on the affected leaf instance unless a profile defines otherwise.
 
 ---
 
@@ -96,10 +102,21 @@ Every concrete path:
 | `leaf_property` | yes | Pattern, e.g. `panels[].status` |
 | `exp_value` / `pred_value` | yes | Compared values after alignment |
 | `score` | yes | `[0, 1]` |
-| `layer1` | if manifest profile | Applicability label |
-| `layer2` | if profile and `correct_applicable` | Answer label |
+| `layer1` | if manifest profile | Applicability reporting outcome |
+| `layer2` | if profile and `correct_applicable` | Matching reporting outcome |
 
-For a **list-of-primitives** leaf (`tags`), the single instance `tags` includes the aggregated list `score` and optional alignment diagnostics (`TP`, `FP`, `FN` for element matching).
+For a **list-of-primitives** (extended primitive) leaf such as `tags`, the comparator emits **one** instance on path `tags` with an aggregate `score` only — no layer S structural reporting.
+
+### Per list (`by_list`)
+
+For **each list-of-objects** property (e.g. `panels`), the comparator **must** return:
+
+| Field | Description |
+|-------|-------------|
+| `row_counts` | Layer S structural reporting counts: `correct_row`, `missing_row`, `spurious_row` |
+| `rows` | Per-row structural detail (see [Layer S](#layer-s--structural-row-alignment)) |
+
+`by_list` is keyed by the **list property name** (no `[]` suffix). It is separate from `by_property` — structural row events are not mixed into leaf-property rollups.
 
 ### Per leaf property (`by_property`)
 
@@ -108,14 +125,27 @@ For **each** leaf property key, the comparator **must** return:
 | Field | Description |
 |-------|-------------|
 | `mean_score` | Mean of instance `score`s for this property only |
-| `layer1_counts` | Counts of layer 1 labels (manifest-profiled instances) |
-| `layer2_counts` | Counts of layer 2 labels (instances with `correct_applicable`) |
+| `layer1_counts` | Layer 1 applicability reporting counts (manifest-profiled instances) |
+| `layer2_counts` | Layer 2 matching reporting counts (instances with `correct_applicable`) |
 
 Properties without a manifest profile still appear with `mean_score`; `layer1_counts` / `layer2_counts` may be empty.
 
 ```json
 {
   "instances": [ "…" ],
+  "by_list": {
+    "panels": {
+      "row_counts": {
+        "correct_row": 2,
+        "missing_row": 0,
+        "spurious_row": 0
+      },
+      "rows": [
+        { "gold_index": 0, "pred_index": 0, "structural": "correct_row", "similarity": 1.0 },
+        { "gold_index": 1, "pred_index": 1, "structural": "correct_row", "similarity": 1.0 }
+      ]
+    }
+  },
   "by_property": {
     "item.label": {
       "mean_score": 1.0,
@@ -141,7 +171,7 @@ Properties without a manifest profile still appear with `mean_score`; `layer1_co
 }
 ```
 
-Do **not** pool counts or means across different leaf properties. Compute precision, recall, and F1 per property from that property’s counts when needed.
+Do **not** pool counts or means across different leaf properties. Compute precision, recall, and F1 per property from that property’s `layer2_counts` when needed. List-level precision and recall come from `by_list.row_counts` (see [Layer S](#layer-s--structural-row-alignment)).
 
 ---
 
@@ -170,15 +200,17 @@ Treat JSON literally:
 
 Do not use Python truthiness (`if not value:`) — it conflates `""`, `null`, and absent keys.
 
-### List of primitives
+### List of primitives (extended primitive)
+
+An **extended primitive** is a leaf whose value is an **array of primitives** (e.g. `tags: string[]`). The leaf path is the array property itself (`tags`), not per-element paths. The orchestrator scores it via **`leaves.compare_primitive_list`** (bipartite element matching internally, via `matching.py`); there is **no** layer S.
 
 Example path: `tags` (`string[]`).
 
-1. Build pairwise similarity `exp[i]` vs `pred[j]` (exact → 0 or 1).
-2. Hungarian assignment; pairs with similarity `< τ` are unmatched (alignment **FP** on pred row, **FN** on gold row).
-3. Instance `tags` **score** = mean over `n_all = max(len(exp), len(pred))`, counting unmatched slots as 0.
+1. Build pairwise element similarity `exp[i]` vs `pred[j]` (exact → 0 or 1 by default).
+2. Hungarian assignment; pairs with similarity `< τ` count as unmatched slots (score contribution 0).
+3. Instance `tags` **score** = mean over `n_all = max(len(exp), len(pred))`, counting unmatched gold slots, unmatched pred slots, and below-threshold pairs as 0.
 
-Layer 1 / 2 apply only if the manifest defines a profile for that path.
+Layer 1 / 2 apply only if the manifest defines a profile for that path. The aggregate `score` already reflects extra, missing, and mismatched elements; no separate structural layer is emitted for extended primitives.
 
 ### List of objects
 
@@ -256,13 +288,14 @@ Hungarian pairs by `label`: gold `[0]` ↔ pred `[1]`, gold `[1]` ↔ pred `[0]`
 
 1. Look up `list_alignment["panels"]` → `["label"]`.
 2. Build `s(i,j)` from those keys only, using each key’s `fields` profile for scoring.
-3. Hungarian assignment; pair is **matched** only if `s(i,j) >= τ` (`match_threshold` from the alignment key’s profile, default `1.0` for exact).
-4. For each gold row index `k`, take the assigned pred row and emit all row leaves (`panels[k].id`, `panels[k].label`, `panels[k].status`, …).
-5. Score each leaf instance; apply layer 1 / 2 per `fields` profiles.
+3. Hungarian assignment; emit layer S structural reporting (see below).
+4. For each gold row index `k` with `correct_row`, take the paired pred row and emit all row leaves (`panels[k].id`, `panels[k].label`, `panels[k].status`, …).
+5. For each gold row index `k` with `missing_row`, emit row leaves at `k` with `pred_value = null` and `score = 0`.
+6. Score each leaf instance; apply layer 1 / 2 per `fields` profiles.
 
-Unmatched gold row → leaf instances with missing pred → `score = 0`. Unmatched pred row → alignment FP.
+**Spurious pred rows** (`spurious_row`) do not receive gold-indexed leaf instances.
 
-Other row fields (e.g. `status`) are scored **after** pairing. A wrong `status` on a correctly aligned row affects only that leaf — not how rows were matched.
+Other row fields (e.g. `status`) are scored **after** row pairing. A wrong `status` on a `correct_row` affects only that leaf — not how rows were matched.
 
 Every object list in the schema needs a `list_alignment` entry (or a documented default) before evaluation runs.
 
@@ -363,13 +396,71 @@ Leaves without a manifest entry receive **score** only.
 
 ---
 
+## Layer S — Structural row alignment
+
+**Layer S** reports whether each **row slot** in a list-of-objects was correctly paired, missing from pred, or spurious in pred. It applies **only** to list-of-objects properties (`panels`, `outputs`, …) — **not** to extended-primitive leaves such as `tags`.
+
+Layer S is **orthogonal** to layer 1 and layer 2:
+
+| Layer | Scope | Question |
+|-------|-------|----------|
+| **S** | Row slot in a list of objects | Was this gold/pred row correctly present and paired? |
+| **1** | Leaf value | Was each side applicable (N/A vs real answer)? |
+| **2** | Leaf value | Given both applicable, did values match per `matching_metric`? |
+
+**Structural reporting outcomes:**
+
+| Outcome | Meaning |
+|---------|---------|
+| **correct_row** | Gold row `i` paired with pred row `j`, `s(i,j) >= τ` |
+| **missing_row** | Gold row with no acceptable pred partner (unmatched after Hungarian, or Hungarian pair with `s(i,j) < τ`) |
+| **spurious_row** | Pred row with no acceptable gold partner (unmatched after Hungarian, or Hungarian pair with `s(i,j) < τ`) |
+
+When Hungarian assigns a pair below `τ`, emit **both** a `missing_row` for the gold index and a `spurious_row` for the pred index — they are not linked as `correct_row`.
+
+**`by_list` row records** use nullable indices in a single `rows` array:
+
+```json
+{
+  "gold_index": 0,
+  "pred_index": 1,
+  "structural": "correct_row",
+  "similarity": 1.0
+}
+```
+
+| Situation | `gold_index` | `pred_index` | `structural` |
+|-----------|--------------|--------------|--------------|
+| Paired above τ | `k` | `j` | `correct_row` |
+| Gold row unmatched | `k` | `null` | `missing_row` |
+| Pred row unmatched | `null` | `j` | `spurious_row` |
+
+`similarity` is the alignment score `s(i,j)` on `correct_row` entries; `null` otherwise.
+
+**List-level metrics** from `row_counts`:
+
+```text
+recall    = correct_row / (correct_row + missing_row)
+precision = correct_row / (correct_row + spurious_row)
+```
+
+When `correct_row + missing_row = 0`, recall is undefined (empty gold list). When `correct_row + spurious_row = 0`, precision is undefined (no pred rows accepted).
+
+**Relationship to leaf instances on `missing_row`:**
+
+A `missing_row` still emits leaf instances at the gold index with `pred_value = null` and `score = 0`. Layer 1 applicability reporting may yield `withheld_applicable` or `correct_NA` per field profile. Layer 2 matching reporting is omitted. Those field-level outcomes describe **values within** a structurally missing row; layer S describes the **row event** itself.
+
+**`spurious_row` entries** have no gold-indexed leaf instances. Optional metadata on the row record (e.g. alignment-key values from the pred row) may aid debugging but does not create phantom leaf paths.
+
+---
+
 ## Layer 1 — Applicability
 
 For each instance with a manifest profile:
 
 
-| Gold applicable? | Pred applicable? | Label |
-|------------------|------------------|-------|
+| Gold applicable? | Pred applicable? | Outcome |
+|------------------|------------------|---------|
 | no (`na_values`) | no | **correct_NA** |
 | no | yes | **spurious_applicable** |
 | yes | no | **withheld_applicable** |
@@ -377,7 +468,7 @@ For each instance with a manifest profile:
 
 **Applicable** = value present and ∉ `na_values`. Missing pred when gold expected an applicable value → **withheld_applicable**. Missing pred when gold is N/A (`""` ∈ `na_values`) → **correct_NA** (pred did not spuriously answer).
 
-`layer1_counts` in `by_property` tally these labels across instances of that property.
+`layer1_counts` in `by_property` tally these outcomes across instances of that property.
 
 ---
 
@@ -385,28 +476,31 @@ For each instance with a manifest profile:
 
 Runs only when layer 1 = **correct_applicable**. Denominator: instances where gold was applicable.
 
+**TP**, **FP**, **FN**, and **TN** are **layer 2 matching reporting outcomes only** — value-level polarity on profiled leaves (`binary_polarity`). They do **not** describe missing or spurious **rows**; those are layer S (`missing_row`, `spurious_row`).
 
-| `matching_metric` | Layer 2 labels |
-|-----------------|----------------|
+| `matching_metric` | Layer 2 outcomes |
+|-----------------|------------------|
 | **binary_polarity** | **TP**, **FP**, **FN**, **TN** (`positive_value` / `negative_value`, applicable gold only) |
 | **multiclass** | **match** / **mismatch**; build confusion matrix per property |
 | **graded_string** | **match** / **mismatch** where `score >= match_threshold` |
 
-`no` / `no` when `negative_value` is `"no"` → **TN**. Gold positive + pred negative → **FN**; gold negative + pred positive → **FP**. Layer 2 for `correct_NA` instances is omitted (not counted in `layer2_counts`).
+`no` / `no` when `negative_value` is `"no"` → **TN**. Gold positive + pred negative on a `correct_row` → **FN**; gold negative + pred positive → **FP**. Layer 2 for `correct_NA` and `withheld_applicable` instances is omitted (not counted in `layer2_counts`).
 
 ---
 
 ## What this design excludes
 
-- Scores at intermediate object or list nodes.
+- Scores at intermediate object or list nodes (objects are not leaf values).
 - A single global score mixing unrelated leaf properties.
 - Inferring N/A or polarity from enum order or English word shape alone.
+- Layer S structural reporting on extended-primitive leaves (`tags`).
+- Gold-indexed leaf instances for `spurious_row` pred rows.
 
 ---
 
 ## Implementation
 
-Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (phase 3), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator, phase 5). Contract: flatten → align → score instances → applicability and matching labels → `instances` + `by_property`.
+Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py) (scalar + `compare_primitive_list`), [`matching.py`](../soda_mmqc/core/matching.py) (shared Hungarian), [`object_list_pairing.py`](../soda_mmqc/core/object_list_pairing.py) (row pairing), [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) (layer S / `by_list`), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (layers 1 and 2), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator). Contract: flatten → pair object rows → layer S → score leaf instances → layers 1 and 2 → `instances` + `by_list` + `by_property`.
 
 ---
 

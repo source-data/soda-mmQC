@@ -6,8 +6,8 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 
 - **Enum leaves** (`item.status`, `panels[].status`) — always exact literal match; no `string_compare` in manifest.
 - **Graded strings** (`item.label`, `panels[].label`) — `string_compare: exact`, `match_threshold: 1.0` (`τ = 1.0`).
-- **`tags`** — list-of-primitives leaf: Hungarian alignment with exact element match, one aggregate `score` on path `tags` (+ alignment TP/FP/FN diagnostics). No manifest profile → score only.
-- **`panels[]`** — top-level manifest `list_alignment.panels: ["label"]` pairs rows by `label` (using the `panels[].label` field profile); then score `panels[k].id`, `panels[k].label`, `panels[k].status` at **gold indices** `k`.
+- **`tags`** — extended-primitive leaf (`string[]`): Hungarian element matching, one aggregate `score` on path `tags`. No layer S. No manifest profile → score only.
+- **`panels[]`** — top-level manifest `list_alignment.panels: ["label"]` pairs rows by `label` (using the `panels[].label` field profile); layer S in `by_list.panels`; then score `panels[k].id`, `panels[k].label`, `panels[k].status` at **gold indices** `k`.
 - **Manifest** — layer 1 / 2 only on profiled paths (`item.status`, `item.label`, `panels[].status`, `panels[].label`). Unprofiled leaves appear in `by_property` with `mean_score` only (`layer1_counts` / `layer2_counts` = `{}`).
 
 ---
@@ -33,10 +33,11 @@ Row alignment: manifest `list_alignment.panels → ["label"]` (top-level key, no
 1. **What changed** — diff vs baseline gold.
 2. **Per leaf instance** — table of concrete paths: `score`, layer 1, layer 2 (— when not applicable).
 3. **Per leaf property** — required summary for each property key (`item.label`, `panels[].status`, …): `mean_score`, `layer1_counts`, `layer2_counts` — **never mixed across properties** ([evaluation-scoring.md](evaluation-scoring.md#per-leaf-property-by_property)). Tables use `{}` for empty count objects.
-4. **List alignment** — diagnostics for `tags` or `panels` row matching only (not in `by_property`).
+4. **Layer S (`by_list`)** — structural reporting for list-of-objects properties only: `row_counts` and per-row `structural` outcomes (`correct_row`, `missing_row`, `spurious_row`). Not in `by_property`.
 
-Layer 1 labels: **correct_NA** · **spurious_applicable** · **withheld_applicable** · **correct_applicable**.  
-Layer 2 runs only when layer 1 = **correct_applicable**.
+Layer 1 applicability reporting: **correct_NA** · **spurious_applicable** · **withheld_applicable** · **correct_applicable**.  
+Layer 2 matching reporting runs only when layer 1 = **correct_applicable**.  
+Layer S structural reporting: **correct_row** · **missing_row** · **spurious_row**.
 
 ---
 
@@ -165,22 +166,28 @@ Pred = baseline gold.
 | `panels[].label` | 1.0 | { correct_applicable: 2 } | { match: 2 } |
 | `panels[].status` | 1.0 | { correct_applicable: 1, correct_NA: 1 } | { TP: 1 } |
 
+**`by_list.panels`:**
+
+| `row_counts` | `rows` |
+|--------------|--------|
+| { correct_row: 2, missing_row: 0, spurious_row: 0 } | `[{ gold_index: 0, pred_index: 0, structural: correct_row, similarity: 1.0 }, { gold_index: 1, pred_index: 1, structural: correct_row, similarity: 1.0 }]` |
+
 No row pools `tags` with `panels[].*` or `item.*`.
 
 ---
 
-## B — List of primitives (`tags`)
+## B — Extended primitive (`tags`)
 
-Other leaves = baseline. Only `tags` differs.
+Other leaves = baseline. Only `tags` differs. No `by_list` entry for `tags`.
 
 ### B.1 Extra element
 
 | `tags` pred | `["alpha", "beta", "gamma"]` |
 |-------------|------------------------------|
 
-| Path | `score` | List alignment |
-|------|---------|----------------|
-| `tags` | 2/3 ≈ 0.67 | TP=2, FP=1, FN=0 |
+| Path | `score` |
+|------|---------|
+| `tags` | 2/3 ≈ 0.67 |
 
 **`by_property`:** `tags` → `mean_score` 0.67 only; other leaf properties unchanged from example A.
 
@@ -189,18 +196,18 @@ Other leaves = baseline. Only `tags` differs.
 | `tags` gold | `["alpha", "beta", "gamma"]` |
 | `tags` pred | `["alpha", "beta", "delta"]` |
 
-| Path | `score` | List alignment |
-|------|---------|----------------|
-| `tags` | 2/3 ≈ 0.67 | TP=2, FP=1, FN=1 |
+| Path | `score` |
+|------|---------|
+| `tags` | 2/3 ≈ 0.67 |
 
 ### B.3 Total mismatch (length 1)
 
 | `tags` gold | `["alpha"]` |
 | `tags` pred | `["omega"]` |
 
-| Path | `score` | List alignment |
-|------|---------|----------------|
-| `tags` | 0.0 | TP=0, FP=1, FN=1 |
+| Path | `score` |
+|------|---------|
+| `tags` | 0.0 |
 
 ---
 
@@ -277,7 +284,7 @@ Pred rows swapped; `Fig 1` has wrong `status` and `id`:
 |---------------|
 | `[ { "id": 9, "label": "Fig 2", "status": "" }, { "id": 8, "label": "Fig 1", "status": "no" } ]` |
 
-**Row alignment:** gold `[0]` (`Fig 1`) ↔ pred `[1]`; gold `[1]` (`Fig 2`) ↔ pred `[0]`. Wrong `status` / `id` on matched rows does not change pairing.
+**`by_list.panels`:** both rows `correct_row` — gold `[0]` ↔ pred `[1]`; gold `[1]` ↔ pred `[0]` (`similarity` 1.0 each). Wrong `status` / `id` on matched rows does not change pairing.
 
 | Path | exp → pred | `score` | Layer 1 | Layer 2 |
 |------|------------|---------|---------|---------|
@@ -308,7 +315,13 @@ Pred rows swapped; `Fig 1` has wrong `status` and `id`:
 
 | `panels` pred | `[ { "id": 1, "label": "Fig 1", "status": "yes" } ]` |
 
-**Row alignment:** gold panel 0 matches; gold panel 1 unmatched (alignment FN=1).
+**`by_list.panels`:**
+
+| `row_counts` | `rows` |
+|--------------|--------|
+| { correct_row: 1, missing_row: 1, spurious_row: 0 } | `[{ gold_index: 0, pred_index: 0, structural: correct_row, similarity: 1.0 }, { gold_index: 1, pred_index: null, structural: missing_row, similarity: null }]` |
+
+List recall = 1/2.
 
 | Path | exp → pred | `score` | Layer 1 | Layer 2 |
 |------|------------|---------|---------|---------|
@@ -317,13 +330,19 @@ Pred rows swapped; `Fig 1` has wrong `status` and `id`:
 | `panels[1].label` | `"Fig 2"` → *(missing)* | 0.0 | withheld_applicable | — |
 | `panels[1].status` | `""` → *(missing)* | 0.0 | correct_NA | — |
 
-Missing pred on an N/A gold field (`""`) → **correct_NA** (pred did not spuriously answer). Missing pred when gold expected a string label → **withheld_applicable**.
+Layer S records the missing row. Field-level layer 1 on that row: missing pred on an N/A gold field (`""`) → **correct_NA**; missing pred when gold expected an applicable label → **withheld_applicable**. No layer 2 on `missing_row` leaves.
 
 ### D.5 Extra panel in pred
 
 | `panels` pred | baseline panels + `{ "id": 99, "label": "Fig 99", "status": "no" }` |
 
-**Row alignment:** baseline rows match; extra pred row → alignment FP=1 (unpaired pred index not given leaf paths in this toy).
+**`by_list.panels`:**
+
+| `row_counts` | `rows` |
+|--------------|--------|
+| { correct_row: 2, missing_row: 0, spurious_row: 1 } | `[{ gold_index: 0, pred_index: 0, structural: correct_row, similarity: 1.0 }, { gold_index: 1, pred_index: 1, structural: correct_row, similarity: 1.0 }, { gold_index: null, pred_index: 2, structural: spurious_row, similarity: null }]` |
+
+List precision = 2/3. The spurious pred row (`Fig 99`) has no gold-indexed leaf instances.
 
 | Path | `score` | Layer 1 | Layer 2 |
 |------|---------|---------|---------|
@@ -336,7 +355,8 @@ Missing pred on an N/A gold field (`""`) → **correct_NA** (pred did not spurio
 | Topic | Section |
 |-------|---------|
 | All leaves perfect | A |
-| `tags` only | B |
+| Extended primitive (`tags`) | B |
+| Layer S (`by_list.panels`) | D.4, D.5 |
 | `item.*` / `item.meta.*` scalars | C |
 | `panels[k].*` after alignment | D (D.2 = reordered rows) |
 
