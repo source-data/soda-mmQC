@@ -125,3 +125,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-12] design | Interactive drill-down tables: `itables` (resolved).
 
 ## [2026-06-12] design | Viz first validation: micrograph-scale-bar with `gpt-5` + `gpt-5-mini`; prompt and model contrast.
+
+## [2026-06-12] ingest | Phase 1 visualization: `soda_mmqc/reporting/` (load, aggregate, tables, styles); `tests/test_reporting_phase1.py`.

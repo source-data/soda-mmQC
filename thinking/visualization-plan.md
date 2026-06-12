@@ -2,7 +2,7 @@
 
 Plan for rewriting [`visualize.py`](../soda_mmqc/scripts/visualize.py) from scratch, inspired by [`notebooks/flat-eval-reporting-demo.ipynb`](../notebooks/flat-eval-reporting-demo.ipynb).
 
-**Status:** design — not yet implemented.
+**Status:** Phases 1–2 implemented (`soda_mmqc/reporting/`, [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)); plots and example-context drill-down planned below.
 
 **Primary usage:** Jupyter notebooks calling `soda_mmqc.reporting` (plots + interactive tables). A CLI is **out of scope for early phases** — add last if batch HTML export is still wanted.
 
@@ -72,11 +72,13 @@ Extract notebook logic into **`soda_mmqc/reporting/`** — importable from analy
 
 | Module | Responsibility |
 |--------|----------------|
-| `soda_mmqc/reporting/load.py` | Load `analysis.json`, resolve paths, normalize prompt labels |
+| `soda_mmqc/reporting/load.py` | Load `analysis.json`, normalize prompt labels; optional gold/pred payloads per record |
 | `soda_mmqc/reporting/aggregate.py` | Fold per-doc `analysis` dicts into `RunSummary` |
 | `soda_mmqc/reporting/tables.py` | Build Layer S / 1 / 2 summary DataFrames; instance-level drill-down tables |
+| `soda_mmqc/reporting/navigate.py` | **Planned:** `get_at_steps(doc, steps)` — walk gold/pred JSON by key/index list (no string parser) |
+| `soda_mmqc/reporting/context.py` | **Planned:** `InstanceRef`, `ExampleContext`, `inspect_instance()` |
 | `soda_mmqc/reporting/plots.py` | Plotly primitives + dashboard composer (`go.Figure` in → `.show()` in notebook) |
-| `soda_mmqc/reporting/display.py` | Interactive table widgets: sort, filter, search on drill-down DataFrames |
+| `soda_mmqc/reporting/display.py` | Interactive table widgets; **planned:** `show_instance_context()` for example drill-down |
 | `soda_mmqc/reporting/styles.py` | Outcome orders, colour maps (from notebook) |
 | `soda_mmqc/scripts/visualize.py` | **Phase 5 (optional):** thin CLI wrapping the same API for batch HTML export |
 
@@ -153,6 +155,18 @@ Each `(model, prompt)` pair in the cross-product (after filtering) yields one `F
 | `prompt` | Normalized label (`prompt.1`, …) |
 | `records` | List of per-doc flat records |
 | `manifest` | `EvalManifest` for profile lookup |
+
+### `FlatRecord` (one benchmark example in a run)
+
+Today `load_flat_runs()` keeps `doc_id`, `metadata`, and `analysis` only. Each raw `analysis.json` entry also carries **`expected_output`** and **`model_output`** (full eval gold/pred JSON for that example). Example-context drill-down needs those payloads — see [Example context drill-down](#example-context-drill-down-on-demand).
+
+| Field | Source | Used for |
+|-------|--------|----------|
+| `doc_id` | entry root | Row keys in tables; half of an `InstanceRef` |
+| `metadata` | entry root | `source` path into `EXAMPLES_DIR`, `example_type`, model usage |
+| `analysis` | entry root | `instances`, `by_list`, `by_property` (current reporting) |
+| `expected_output` | entry root (**not loaded yet**) | Gold subtree at `path` |
+| `model_output` | entry root (**not loaded yet**) | Pred subtree at `path` |
 
 ### `summarize_runs(runs) -> RunSummaries`
 
@@ -348,6 +362,186 @@ For each check under review:
 2. **Issue tables** — Layer S missing/spurious (interactive)
 3. **Layer 2 culprits** — full instance table, pre-sorted by `doc_id` / `field`
 4. **Comparison block** (optional) — overlay chart + long-form error table filtered to differing fields
+5. **Example context** (on demand) — after picking a row, inspect gold/pred (and figure image when available); see [Example context drill-down](#example-context-drill-down-on-demand)
+
+Instance tables stay **narrow** (`doc_id`, `path`, `field`, layer outcomes, `exp_value` / `pred_value`). Full JSON, panel rows, captions, and images are **not** inlined per row.
+
+---
+
+## Example context drill-down (on-demand)
+
+### Problem
+
+Drill-down tables answer *where* something went wrong (`doc_id`, `outputs[7].scale_bar_on_image`, layer outcome). They do not answer *what the example looked like* — the panel row, the figure image, the caption, or the full gold vs pred subtree.
+
+We need a second step: the user picks a `doc_id` and navigates into gold/pred with an explicit **list of keys and indices** — no string path parser required.
+
+```python
+doc_id = "10.1038_s44318-026-00715-1"
+steps = ["outputs", 0]                              # row-level (full panel object)
+steps = ["outputs", 0, "scale_bar_on_image"]        # leaf-level (one field)
+steps = ["papers", 0, "figures", 2, "outputs", 3]   # collated row
+```
+
+Drill-down tables still expose human-readable `path` strings (e.g. `outputs[7].scale_bar_on_image`) for search and sorting. The inspect API takes **`steps`**, which the user builds from the table row by hand (or via an optional one-line helper — not a general parser).
+
+### Locator model
+
+**`PathStep`** = `str` (object key) or `int` (list index).
+
+| Navigation target | Example `steps` | Table `path` column (display only) |
+|-------------------|-----------------|-------------------------------------|
+| Leaf field | `["outputs", 7, "scale_bar_on_image"]` | `outputs[7].scale_bar_on_image` |
+| Full panel row | `["outputs", 7]` | *(derive from leaf or indices)* |
+| Whole predictive list | `["outputs"]` | `outputs` |
+| Collated row | `["papers", 0, "figures", 2, "outputs", 3]` | `papers[0].figures[2].outputs[3].…` |
+
+Proposed **`InstanceRef`** (immutable):
+
+```python
+@dataclass(frozen=True)
+class InstanceRef:
+    doc_id: str
+    steps: tuple[PathStep, ...]    # keys + indices into eval JSON root
+```
+
+Layer S rows (`gold_index`, `pred_index`, `context_path`) may use a separate helper that **constructs `steps` from indices** already in the analysis row — still a list, not parsed from a string.
+
+### Data sources (two tiers)
+
+```mermaid
+flowchart TD
+  table[Drill-down table row] --> ref[InstanceRef]
+  ref --> record[FlatRecord for doc_id in RunSummary]
+  record --> tierA[Tier A: expected_output / model_output in analysis.json]
+  record --> tierB[Tier B: EXAMPLES_DIR via metadata.source]
+  tierA --> subtree[get_at_steps]
+  tierB --> assets[Figure image, caption, source files]
+  subtree --> display[show_instance_context]
+  assets --> display
+```
+
+| Tier | Source | What it provides | When required |
+|------|--------|------------------|---------------|
+| **A — Inline JSON** | `expected_output`, `model_output` on each `analysis.json` flat entry | Gold/pred values and row objects at `steps` | Always (value drill-down) |
+| **B — Example assets** | `metadata.source` → `EXAMPLES_DIR / {source}` via `EXAMPLE_FACTORY` | Figure image, caption, tables (`FigureExample`); whole-doc content for doc-checklist | Visual context; optional if JSON alone suffices |
+
+Tier A is already written by `run.py` but **dropped** by `load_flat_runs()` today. Tier B is not duplicated in `analysis.json` — must resolve through `metadata.source` (e.g. `10.1038_s44318-026-00715-1/content/1`).
+
+**Lazy loading (resolved):** `analysis.json` entries are large. Extend `FlatRecord` with optional payloads; default `load_flat_runs(..., include_payloads=False)` for charts/tables. `inspect_instance()` loads gold/pred for that `doc_id` on first use (`include_payloads=True` on demand, or `load_record_payload(record)`).
+
+### Path navigation (simple walk — not a parser)
+
+No bracket-string parser. The caller supplies `steps: Sequence[str | int]`; the library walks the JSON:
+
+```python
+def get_at_steps(doc: Mapping[str, Any], steps: Sequence[str | int]) -> Any:
+    current: Any = doc
+    for step in steps:
+        if isinstance(step, int):
+            current = current[step]
+        else:
+            current = current[step]
+    return current
+```
+
+(~10 lines with type checks and clear `KeyError` / `IndexError` messages naming `doc_id` and the failing step.)
+
+Optional convenience only — **not** part of the core contract:
+
+- `path_string_to_steps("outputs[7].scale_bar_on_image")` for users who copied the table `path` column and want a shortcut. Skip if it adds complexity; manual `["outputs", 7, "scale_bar_on_image"]` is always valid.
+
+**Edge cases:**
+
+| Case | Behaviour |
+|------|-----------|
+| `missing_row` (Layer S) | Build gold `steps` with `gold_index`; pred side absent — show gold only |
+| `spurious_row` | Build pred `steps` with `pred_index`; gold absent — show pred only |
+| `withheld_applicable` | `get_at_steps` on gold; pred missing at leaf — show empty pred |
+| Step not found | Error names `doc_id`, `steps`, and which side (gold/pred) failed |
+
+### Display API (notebook)
+
+Pure builders in `context.py`; rendering in `display.py`.
+
+```python
+@dataclass
+class ExampleContext:
+    ref: InstanceRef
+    exp_value: Any
+    pred_value: Any
+    exp_row: dict[str, Any] | None      # parent row when path is a leaf
+    pred_row: dict[str, Any] | None
+    exp_subtree: Any                    # value at path (scalar, row, or list)
+    pred_subtree: Any
+    metadata: dict[str, Any]
+    example_preview: ExamplePreview | None   # image path, caption, example_type
+
+def inspect_instance(
+    summary: RunSummary,
+    *,
+    doc_id: str,
+    steps: Sequence[str | int],
+    include_example_assets: bool = True,
+) -> ExampleContext: ...
+
+def show_instance_context(ctx: ExampleContext) -> None: ...
+```
+
+**`show_instance_context`** layout (v1, no custom itables JS):
+
+1. Header — `doc_id`, `steps`, model/prompt from summary
+2. **Figure preview** (if `example_type == "figure"` and image exists) — caption + image via `IPython.display`
+3. **Side-by-side** — gold vs pred for the resolved subtree (pretty JSON for objects; scalars inline)
+4. **Row context** — when inspecting a leaf, show the parent row dict on both sides
+5. **Eval snippet** — optional collapsed full `expected_output` / `model_output`
+
+Workflow in [`reporting.ipynb`](../notebooks/reporting.ipynb):
+
+```python
+row = culprits.query("field == 'scale_bar_on_image'").iloc[0]
+# Table path "outputs[3].scale_bar_on_image" → user supplies steps explicitly:
+ctx = inspect_instance(
+    summary_p2,
+    doc_id=row["doc_id"],
+    steps=["outputs", 3, "scale_bar_on_image"],
+)
+show_instance_context(ctx)
+```
+
+### itables integration (later)
+
+v1: **explicit** `inspect_instance()` after picking `doc_id` from a table row and supplying `steps` (indices/keys read from the row's `path` column or from `gold_index` / `pred_index`).
+
+v2 options (defer):
+
+- `ipywidgets` “Inspect” button driven by selected row
+- Custom itables column with `javascript` callback (heavier)
+- Precomputed `instance_key` column (`doc_id|path`) for search → `inspect_instance(**parse_key(key))`
+
+Do **not** embed images or full JSON in table rows.
+
+### Check-type differences
+
+| Checklist type | `metadata.source` | Preview focus |
+|----------------|-------------------|---------------|
+| **fig-checklist** | `doc_id/content/{figure_id}` | Image + caption + panel row JSON |
+| **doc-checklist** | document slice path | Caption / section text; usually no figure image |
+
+`ExamplePreview` should branch on `metadata.example_type` (`figure` vs future types).
+
+### Implementation phase — **2b Example context** (after Phase 2, before or parallel to Phase 3 plots)
+
+| Step | Work |
+|------|------|
+| 1 | Extend `FlatRecord` + `load_flat_runs(..., include_payloads=)` |
+| 2 | `navigate.py`: `get_at_steps` (+ optional `path_string_to_steps` helper) |
+| 3 | `context.py`: `InstanceRef`, `ExampleContext`, `inspect_instance`, Layer S variant |
+| 4 | `display.py`: `show_instance_context` (JSON + figure preview) |
+| 5 | Wire [`reporting.ipynb`](../notebooks/reporting.ipynb) — inspect a known prompt.2 scale-bar row |
+| 6 | Tests: `get_at_steps` fixtures; `inspect_instance` on micrograph-scale-bar real run; missing/spurious asymmetry |
+
+Plots (Phase 3) do not depend on this phase.
 
 ---
 
@@ -363,18 +557,26 @@ For each check under review:
 
 ## Implementation phases
 
-### Phase 1 — Core library (load + aggregate + tables)
+### Phase 1 — Core library (load + aggregate + tables) ✅ *complete*
 
-- `load.py`, `aggregate.py`, `styles.py`
-- `RunSummary` dataclass; `aggregate_run(records, manifest)`
+- `soda_mmqc/reporting/load.py`, `aggregate.py`, `tables.py`, `styles.py`
+- `RunSummary` / `RunSummaries`; `aggregate_run`, `summarize_runs`, `load_flat_runs`
 - Drill-down table builders (instance-level, not just rollups)
-- Unit tests on `micrograph-scale-bar` `analysis.json` slices; golden DataFrame snapshots for table schemas
+- Tests: `tests/test_reporting_phase1.py` (micrograph-scale-bar + collated demo)
 
-### Phase 2 — Interactive drill-down (`display.py`)
+### Phase 2 — Interactive drill-down (`display.py`) ✅ *complete*
 
-- `show_table()` with itables; `show_issues_table`, `show_layer2_errors`
-- Add `itables` to `requirements.txt`
-- Notebook smoke test: micrograph-scale-bar real run — search for a known prompt.2 scale-bar culprit
+- `show_table()` with itables; `show_issues_table`, `show_layer1_errors`, `show_layer2_errors`, `show_comparison_errors`
+- `instance_culprits_table` for combined Layer 1 + Layer 2 drill-down (prompt.2 scale-bar story)
+- `itables` in `pyproject.toml`
+- Smoke notebook: [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)
+
+### Phase 2b — Example context (on-demand) — **planned**
+
+- `navigate.py` + `context.py`; extend `load.py` for lazy gold/pred payloads
+- `inspect_instance(doc_id, steps)` / `show_instance_context()` — step list → gold/pred subtree + figure preview
+- Update [`reporting.ipynb`](../notebooks/reporting.ipynb) with inspect workflow after table filter
+- Does not block Phase 3 plots
 
 ### Phase 3 — Plots (`plots.py`)
 
@@ -412,6 +614,10 @@ For each check under review:
 | Table column schema | Golden snapshot of column names + dtypes per builder |
 | `show_table` smoke | Returns without error when itables installed (optional marker) |
 | Comparison plot data | N series × M profiled fields on x-axis |
+| `get_at_steps` | `["outputs", 2, "micrograph"]`, collated `["papers", 0, "figures", 1, "outputs", 3, "label"]` |
+| `inspect_instance` | Known prompt.2 row → correct `exp_value` / `pred_value` at leaf path |
+| `show_instance_context` | Figure example loads image from `metadata.source`; missing_row shows gold only |
+| `load_flat_runs(include_payloads=True)` | `FlatRecord` carries `expected_output` / `model_output` |
 
 ---
 
@@ -478,6 +684,8 @@ Review before implementation:
 | ~~4~~ | ~~Package name~~ | **Resolved:** `soda_mmqc/reporting/` |
 | ~~5~~ | ~~Interactive table widget library?~~ | **Resolved:** [`itables`](https://github.com/mwouts/itables) (DataTables.js); fallback to plain `display(df)` if not installed |
 | 6 | CLI in v1? | **No** — notebook API first; CLI in Phase 5 only if needed |
+| ~~7~~ | ~~Example content in drill-down tables?~~ | **Resolved: no.** Instance rows stay narrow. Content is unpredictable (text-only, text + images, images + data later) and too large for table cells. On-demand `inspect_instance(doc_id, steps)` (Phase 2b). Tier A: gold/pred JSON; Tier B: figure assets via `metadata.source` |
+| ~~8~~ | ~~Load gold/pred on every `load_flat_runs()`?~~ | **Resolved: lazy by default.** `include_payloads=False` for aggregates; load payloads when inspecting |
 
 ---
 
@@ -496,7 +704,14 @@ From `flat-eval-reporting-demo.ipynb`:
 
 These operate on `EvaluationResult` today; the library version should accept **`RunSummary`** (rollups for charts) plus raw per-doc `instances` / `by_list` rows for drill-down table builders.
 
-**New (not in demo yet):**
+**Implemented in `soda_mmqc/reporting/`:**
 
-- Instance-level tables from `analysis["instances"]` filtered by `layer1` / `layer2`
+- Instance-level tables from `analysis["instances"]` filtered by `layer1` / `layer2` (+ `instance_culprits_table`)
 - `display.show_table()` wrapping itables for notebook inspection
+- [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb) smoke test on micrograph-scale-bar
+
+**Planned (Phase 2b):**
+
+- `InstanceRef(doc_id, steps)` + `get_at_steps()` (key/index list walk — no string parser)
+- `inspect_instance()` / `show_instance_context()` — gold/pred subtree + optional figure preview
+- Lazy load of `expected_output` / `model_output` from `analysis.json`
