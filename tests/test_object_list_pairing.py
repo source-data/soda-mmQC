@@ -132,7 +132,7 @@ class TestAlignObjectRows:
 class TestSemanticAlignmentKey:
     def test_uses_string_compare_from_fields_profile(self):
         manifest = load_eval_manifest(FIXTURES / "eval_manifest_toy.json")
-        profile = manifest.profile_for("outputs[].from_the_caption")
+        profile = manifest.profile_for("panels[].caption")
         assert profile is not None
         assert profile.string_compare == StringCompareMode.SEMANTIC
 
@@ -151,12 +151,12 @@ class TestSemanticAlignmentKey:
         ).score
         assert score == 1.0
 
-        exp_row = {"from_the_caption": "caption text"}
-        pred_row = {"from_the_caption": "caption text"}
+        exp_row = {"caption": "caption text"}
+        pred_row = {"caption": "caption text"}
         sim = row_similarity(
             exp_row,
             pred_row,
-            ["from_the_caption"],
+            ["caption"],
             (profile,),
             embedder=embed,
         )

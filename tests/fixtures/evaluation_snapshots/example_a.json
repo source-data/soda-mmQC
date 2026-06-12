@@ -59,6 +59,15 @@
       "layer2_counts": {
         "TP": 1
       }
+    },
+    "panels[].caption": {
+      "mean_score": 0.9999999701976776,
+      "layer1_counts": {
+        "correct_applicable": 2
+      },
+      "layer2_counts": {
+        "match": 2
+      }
     }
   },
   "by_list": {

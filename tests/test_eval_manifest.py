@@ -104,7 +104,7 @@ class TestProfileLookup:
         assert profile.na_values == ("",)
 
     def test_semantic_graded_string(self, toy_manifest: EvalManifest):
-        profile = toy_manifest.profile_for("outputs[].from_the_caption")
+        profile = toy_manifest.profile_for("panels[].caption")
         assert profile is not None
         assert profile.string_compare == StringCompareMode.SEMANTIC
         assert profile.match_threshold == 0.8

@@ -7,7 +7,7 @@
     "meta": { "author": "Ada", "year": 1843 }
   },
   "panels": [
-    { "id": 1, "label": "Fig 1", "status": "yes" },
-    { "id": 2, "label": "Fig 2", "status": "" }
+    { "id": 1, "label": "Fig 1", "status": "yes", "caption": "Panel one" },
+    { "id": 2, "label": "Fig 2", "status": "", "caption": "Panel two" }
   ]
 }

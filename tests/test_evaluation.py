@@ -17,9 +17,16 @@ BASELINE_GOLD = json.loads((FIXTURES / "toy_eval_gold_baseline.json").read_text(
 MANIFEST = load_eval_manifest(FIXTURES / "eval_manifest_toy.json")
 
 
+def _mock_embedder(texts):
+    import torch
+
+    dim = 8
+    return torch.stack([torch.ones(dim) for _ in texts])
+
+
 @pytest.fixture
 def evaluator() -> FlatEvaluator:
-    return FlatEvaluator(SCHEMA, MANIFEST)
+    return FlatEvaluator(SCHEMA, MANIFEST, embedder=_mock_embedder)
 
 
 def _instance(result, path: str) -> dict:
@@ -76,10 +83,10 @@ class TestExampleA:
         assert _property_summary(result, "tags")["mean_score"] == 1.0
         assert _property_summary(result, "tags")["layer1_counts"] == {}
         assert result.aggregate_layer1_counts() == {
-            "correct_applicable": 4,
+            "correct_applicable": 6,
             "correct_NA": 2,
         }
-        assert result.aggregate_layer2_counts() == {"match": 3, "TP": 1}
+        assert result.aggregate_layer2_counts() == {"match": 5, "TP": 1}
 
 
 class TestExampleB:
@@ -135,8 +142,8 @@ class TestExampleD:
     def test_d2_reordered_panels(self, evaluator: FlatEvaluator):
         pred = copy.deepcopy(BASELINE_GOLD)
         pred["panels"] = [
-            {"id": 9, "label": "Fig 2", "status": ""},
-            {"id": 8, "label": "Fig 1", "status": "no"},
+            {"id": 9, "label": "Fig 2", "status": "", "caption": "Panel two"},
+            {"id": 8, "label": "Fig 1", "status": "no", "caption": "Panel one"},
         ]
         result = evaluator.evaluate(BASELINE_GOLD, pred)
 
@@ -156,7 +163,9 @@ class TestExampleD:
 
     def test_d4_missing_panel(self, evaluator: FlatEvaluator):
         pred = copy.deepcopy(BASELINE_GOLD)
-        pred["panels"] = [{"id": 1, "label": "Fig 1", "status": "yes"}]
+        pred["panels"] = [
+            {"id": 1, "label": "Fig 1", "status": "yes", "caption": "Panel one"},
+        ]
         result = evaluator.evaluate(BASELINE_GOLD, pred)
 
         assert result.by_list["panels"]["row_counts"] == {
@@ -170,7 +179,7 @@ class TestExampleD:
     def test_d5_extra_panel(self, evaluator: FlatEvaluator):
         pred = copy.deepcopy(BASELINE_GOLD)
         pred["panels"] = BASELINE_GOLD["panels"] + [
-            {"id": 99, "label": "Fig 99", "status": "no"},
+            {"id": 99, "label": "Fig 99", "status": "no", "caption": ""},
         ]
         result = evaluator.evaluate(BASELINE_GOLD, pred)
 
@@ -195,8 +204,18 @@ class TestGoldenSnapshots:
                 lambda pred: pred.update(
                     {
                         "panels": [
-                            {"id": 9, "label": "Fig 2", "status": ""},
-                            {"id": 8, "label": "Fig 1", "status": "no"},
+                            {
+                                "id": 9,
+                                "label": "Fig 2",
+                                "status": "",
+                                "caption": "Panel two",
+                            },
+                            {
+                                "id": 8,
+                                "label": "Fig 1",
+                                "status": "no",
+                                "caption": "Panel one",
+                            },
                         ]
                     }
                 )

@@ -27,6 +27,11 @@
       "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
+    },
+    "panels[].caption": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
     }
   }
 }
