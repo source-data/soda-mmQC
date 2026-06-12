@@ -1,0 +1,342 @@
+"""Interactive notebook display for flat evaluation drill-down tables."""
+
+from __future__ import annotations
+
+import json
+from typing import Any, Literal, Mapping, Sequence
+
+import pandas as pd
+
+from soda_mmqc import logger
+from soda_mmqc.reporting.aggregate import RunSummaries, RunSummary
+from soda_mmqc.reporting.context import ExampleContext
+from soda_mmqc.reporting.tables import (
+    filter_by_doc,
+    filter_by_field,
+    instance_culprits_table,
+    layer1_instance_table,
+    layer_s_issues_table,
+)
+
+_ITABLES_INITIALIZED = False
+
+
+def _itables_available() -> bool:
+    try:
+        import itables  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
+def _ensure_itables_notebook_mode() -> None:
+    global _ITABLES_INITIALIZED
+    if _ITABLES_INITIALIZED:
+        return
+    try:
+        from itables import init_notebook_mode
+
+        init_notebook_mode(all_interactive=False)
+    except Exception as exc:
+        logger.debug("itables init_notebook_mode skipped: %s", exc)
+    _ITABLES_INITIALIZED = True
+
+
+def _column_order(
+    frame: pd.DataFrame,
+    default_sort: Sequence[str] | None,
+) -> list[list[int | str]]:
+    if not default_sort:
+        return []
+    order: list[list[int | str]] = []
+    for column in default_sort:
+        if column in frame.columns:
+            order.append([int(frame.columns.get_loc(column)), "asc"])
+    return order
+
+
+def sort_frame(
+    frame: pd.DataFrame,
+    default_sort: Sequence[str] | None = None,
+) -> pd.DataFrame:
+    """Return a copy sorted by ``default_sort`` columns when present."""
+    if frame.empty or not default_sort:
+        return frame.copy()
+    columns = [col for col in default_sort if col in frame.columns]
+    if not columns:
+        return frame.copy()
+    return frame.sort_values(columns, kind="stable").reset_index(drop=True)
+
+
+def show_table(
+    frame: pd.DataFrame,
+    *,
+    caption: str | None = None,
+    default_sort: Sequence[str] | None = None,
+    column_filters: Literal["header", "footer"] | None = "footer",
+    length_menu: Sequence[int] = (10, 25, 50, 100),
+) -> Any:
+    """Display a DataFrame with itables (sort, search, column filters).
+
+    Falls back to plain ``IPython.display.display`` when itables is missing.
+    Returns the itables widget when available, else the sorted DataFrame.
+    """
+    prepared = sort_frame(frame, default_sort)
+
+    if _itables_available():
+        from itables import show
+
+        _ensure_itables_notebook_mode()
+        return show(
+            prepared,
+            caption=caption,
+            order=_column_order(prepared, default_sort),
+            column_filters=column_filters,
+            lengthMenu=list(length_menu),
+            layout={"topStart": "pageLength", "topEnd": "search"},
+        )
+
+    logger.warning(
+        "itables is not installed; falling back to plain display. "
+        "Install with: pip install itables"
+    )
+    try:
+        from IPython.display import display
+
+        if caption:
+            display(caption)
+        display(prepared)
+    except ImportError:
+        if caption:
+            print(caption)
+        print(prepared.to_string())
+    return prepared
+
+
+def show_issues_table(
+    summary: RunSummary,
+    *,
+    caption: str | None = None,
+) -> Any:
+    """Layer S missing and spurious rows."""
+    frame = layer_s_issues_table(summary)
+    title = caption or (
+        f"Layer S issues — {summary.check} / {summary.model} / {summary.prompt}"
+    )
+    return show_table(
+        frame,
+        caption=title,
+        default_sort=("doc_id", "list_key", "structural"),
+    )
+
+
+def show_layer1_errors(
+    summary: RunSummary,
+    *,
+    field: str | None = None,
+    doc_id: str | None = None,
+    caption: str | None = None,
+) -> Any:
+    """Layer-1 applicability outliers."""
+    frame = layer1_instance_table(summary)
+    if doc_id is not None:
+        frame = filter_by_doc(frame, doc_id)
+    if field is not None:
+        frame = filter_by_field(frame, field)
+    title = caption or (
+        f"Layer 1 outliers — {summary.check} / {summary.model} / {summary.prompt}"
+    )
+    return show_table(
+        frame,
+        caption=title,
+        default_sort=("doc_id", "field", "path"),
+    )
+
+
+def show_layer2_errors(
+    summary: RunSummary,
+    *,
+    field: str | None = None,
+    doc_id: str | None = None,
+    caption: str | None = None,
+) -> Any:
+    """Layer-1 outliers and layer-2 culprits for drill-down."""
+    frame = instance_culprits_table(summary)
+    if doc_id is not None:
+        frame = filter_by_doc(frame, doc_id)
+    if field is not None:
+        frame = filter_by_field(frame, field)
+    title = caption or (
+        f"Layer 2 errors — {summary.check} / {summary.model} / {summary.prompt}"
+    )
+    return show_table(
+        frame,
+        caption=title,
+        default_sort=("doc_id", "field", "path"),
+    )
+
+
+def comparison_errors_table(
+    summaries: RunSummaries,
+    *,
+    compare: Literal["prompt", "model"] = "prompt",
+    model: str | None = None,
+    prompt: str | None = None,
+) -> pd.DataFrame:
+    """Long-form layer-2 errors across prompts or models."""
+    if compare == "prompt":
+        if model is None:
+            raise ValueError("model is required when compare='prompt'")
+        selected = summaries.for_model(model)
+        series_col = "prompt"
+    else:
+        if prompt is None:
+            raise ValueError("prompt is required when compare='model'")
+        selected = summaries.for_prompt(prompt)
+        series_col = "model"
+
+    frames: list[pd.DataFrame] = []
+    for summary in selected:
+        frame = instance_culprits_table(summary)
+        if frame.empty:
+            continue
+        tagged = frame.copy()
+        tagged["model"] = summary.model
+        tagged["prompt"] = summary.prompt
+        frames.append(tagged)
+
+    if not frames:
+        return pd.DataFrame(
+            columns=[
+                "doc_id",
+                "path",
+                "leaf_property",
+                "field",
+                "layer1",
+                "layer2",
+                "score",
+                "exp_value",
+                "pred_value",
+                "model",
+                "prompt",
+            ]
+        )
+
+    combined = pd.concat(frames, ignore_index=True)
+    sort_cols = [series_col, "doc_id", "field", "path"]
+    return combined.sort_values(
+        [col for col in sort_cols if col in combined.columns],
+        kind="stable",
+    ).reset_index(drop=True)
+
+
+def show_comparison_errors(
+    summaries: RunSummaries,
+    *,
+    compare: Literal["prompt", "model"] = "prompt",
+    model: str | None = None,
+    prompt: str | None = None,
+    caption: str | None = None,
+) -> Any:
+    """Interactive layer-2 error table across prompts or models."""
+    frame = comparison_errors_table(
+        summaries,
+        compare=compare,
+        model=model,
+        prompt=prompt,
+    )
+    if compare == "prompt":
+        title = caption or f"Layer 2 comparison — model={model}"
+        default_sort = ("prompt", "doc_id", "field", "path")
+    else:
+        title = caption or f"Layer 2 comparison — prompt={prompt}"
+        default_sort = ("model", "doc_id", "field", "path")
+    return show_table(frame, caption=title, default_sort=default_sort)
+
+
+def _format_value(value: Any) -> str:
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, indent=2, ensure_ascii=False)
+    return repr(value)
+
+
+def _display_markdown(text: str) -> None:
+    try:
+        from IPython.display import Markdown, display
+
+        display(Markdown(text))
+    except ImportError:
+        print(text)
+
+
+def _display_side_by_side(
+    left_title: str,
+    left_value: Any,
+    right_title: str,
+    right_value: Any,
+) -> None:
+    frame = pd.DataFrame(
+        {
+            left_title: [_format_value(left_value)],
+            right_title: [_format_value(right_value)],
+        }
+    )
+    try:
+        from IPython.display import display
+
+        display(frame)
+    except ImportError:
+        print(frame.to_string())
+
+
+def show_instance_context(
+    ctx: ExampleContext,
+    *,
+    show_full_eval: bool = False,
+) -> None:
+    """Display gold/pred content and optional figure preview for one instance."""
+    header = (
+        f"**Example context** — `{ctx.checklist}` / `{ctx.check}` / "
+        f"`{ctx.model}` / `{ctx.prompt}`  \n"
+        f"`doc_id={ctx.ref.doc_id}` · `steps={list(ctx.steps)}`"
+    )
+    if ctx.pred_missing:
+        header += " · *pred row missing*"
+    _display_markdown(header)
+
+    preview = ctx.example_preview
+    if preview is not None:
+        caption = preview.caption or ""
+        _display_markdown(f"**Caption** ({preview.source})  \n{caption}")
+        if preview.image_path is not None and preview.image_path.is_file():
+            try:
+                from IPython.display import Image, display
+
+                display(Image(filename=str(preview.image_path)))
+            except ImportError:
+                logger.info("Figure image at %s", preview.image_path)
+
+    pred_label = "pred (missing)" if ctx.pred_missing else "pred"
+    _display_markdown("**At steps (gold vs pred)**")
+    _display_side_by_side("gold", ctx.exp_subtree, pred_label, ctx.pred_subtree)
+
+    if ctx.exp_row is not None or ctx.pred_row is not None:
+        _display_markdown("**Parent row (gold vs pred)**")
+        _display_side_by_side(
+            "gold row",
+            ctx.exp_row,
+            f"{pred_label} row",
+            ctx.pred_row,
+        )
+
+    if ctx.exp_row is not None and ctx.pred_row is not None:
+        leaf = ctx.steps[-1] if ctx.steps else None
+        if isinstance(leaf, str):
+            _display_markdown(f"**Leaf field `{leaf}` (gold vs pred)**")
+            _display_side_by_side("gold", ctx.exp_value, pred_label, ctx.pred_value)
+
+    if show_full_eval:
+        _display_markdown("**Full expected_output**")
+        _display_side_by_side("expected_output", ctx.expected_output, "—", "—")
+        _display_markdown("**Full model_output**")
+        _display_side_by_side("model_output", ctx.model_output, "—", "—")

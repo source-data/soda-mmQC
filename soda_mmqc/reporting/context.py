@@ -1,0 +1,263 @@
+"""Build example context for on-demand drill-down inspection."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Mapping, Sequence
+
+from soda_mmqc import logger
+from soda_mmqc.core.examples import EXAMPLE_FACTORY
+from soda_mmqc.reporting.aggregate import RunSummary
+from soda_mmqc.reporting.load import ensure_record_payloads, find_record
+from soda_mmqc.reporting.navigate import (
+    PathStep,
+    get_at_steps,
+    get_at_steps_optional,
+    layer_s_row_steps,
+    parent_row_steps,
+)
+
+
+@dataclass(frozen=True)
+class InstanceRef:
+    """Locate one eval subtree inside a benchmark example."""
+
+    doc_id: str
+    steps: tuple[PathStep, ...]
+
+
+@dataclass(frozen=True)
+class ExamplePreview:
+    """On-disk example assets (figure image, caption, …)."""
+
+    example_type: str
+    source: str
+    caption: str | None = None
+    image_path: Path | None = None
+
+
+@dataclass
+class ExampleContext:
+    """Gold/pred content at ``ref.steps`` plus optional figure preview."""
+
+    ref: InstanceRef
+    checklist: str
+    check: str
+    model: str
+    prompt: str
+    steps: tuple[PathStep, ...]
+    exp_subtree: Any
+    pred_subtree: Any | None
+    exp_value: Any
+    pred_value: Any | None
+    exp_row: dict[str, Any] | None
+    pred_row: dict[str, Any] | None
+    metadata: dict[str, Any]
+    expected_output: dict[str, Any]
+    model_output: dict[str, Any]
+    example_preview: ExamplePreview | None = None
+    pred_missing: bool = False
+
+
+def _load_example_preview(
+    metadata: Mapping[str, Any],
+    *,
+    include_example_assets: bool,
+) -> ExamplePreview | None:
+    if not include_example_assets:
+        return None
+    source = metadata.get("source")
+    if not isinstance(source, str) or not source:
+        return None
+    example_type = metadata.get("example_type")
+    if not isinstance(example_type, str) or not example_type:
+        return None
+    try:
+        example = EXAMPLE_FACTORY.create(source, example_type)
+    except Exception as exc:
+        logger.warning("Could not load example preview for %s: %s", source, exc)
+        return None
+
+    image_path = getattr(example, "image_path", None)
+    return ExamplePreview(
+        example_type=example_type,
+        source=source,
+        caption=getattr(example, "caption", None),
+        image_path=image_path if isinstance(image_path, Path) else None,
+    )
+
+
+def _resolve_rows(
+    expected_output: Mapping[str, Any],
+    model_output: Mapping[str, Any] | None,
+    steps: Sequence[PathStep],
+    *,
+    doc_id: str,
+    pred_missing: bool,
+) -> tuple[Any, Any | None, Any, Any | None, dict[str, Any] | None, dict[str, Any] | None]:
+    exp_subtree = get_at_steps(
+        expected_output,
+        steps,
+        side="gold",
+        doc_id=doc_id,
+    )
+    pred_subtree = (
+        None
+        if pred_missing or model_output is None
+        else get_at_steps_optional(
+            model_output,
+            steps,
+            side="pred",
+            doc_id=doc_id,
+        )
+    )
+
+    row_steps = parent_row_steps(steps)
+    exp_row: dict[str, Any] | None = None
+    pred_row: dict[str, Any] | None = None
+    if row_steps is not None:
+        row_value = get_at_steps(
+            expected_output,
+            row_steps,
+            side="gold",
+            doc_id=doc_id,
+        )
+        if isinstance(row_value, dict):
+            exp_row = dict(row_value)
+        if not pred_missing and model_output is not None:
+            pred_row_value = get_at_steps_optional(
+                model_output,
+                row_steps,
+                side="pred",
+                doc_id=doc_id,
+            )
+            if isinstance(pred_row_value, dict):
+                pred_row = dict(pred_row_value)
+
+    exp_value = exp_subtree
+    pred_value = pred_subtree
+    if isinstance(steps[-1], str):
+        field = steps[-1]
+        if isinstance(exp_row, dict):
+            exp_value = exp_row.get(field, exp_subtree)
+        if isinstance(pred_row, dict):
+            pred_value = pred_row.get(field, pred_subtree)
+
+    return exp_subtree, pred_subtree, exp_value, pred_value, exp_row, pred_row
+
+
+def inspect_instance(
+    summary: RunSummary,
+    *,
+    doc_id: str,
+    steps: Sequence[PathStep],
+    include_example_assets: bool = True,
+    pred_missing: bool = False,
+) -> ExampleContext:
+    """Resolve gold/pred content at ``steps`` for one benchmark example."""
+    record = find_record(summary.records, doc_id)
+    expected_output, model_output = ensure_record_payloads(
+        record,
+        checklist=summary.checklist,
+        check=summary.check,
+        model=summary.model,
+        prompt=summary.prompt,
+    )
+    step_tuple = tuple(steps)
+    ref = InstanceRef(doc_id=doc_id, steps=step_tuple)
+    (
+        exp_subtree,
+        pred_subtree,
+        exp_value,
+        pred_value,
+        exp_row,
+        pred_row,
+    ) = _resolve_rows(
+        expected_output,
+        model_output,
+        step_tuple,
+        doc_id=doc_id,
+        pred_missing=pred_missing,
+    )
+    return ExampleContext(
+        ref=ref,
+        checklist=summary.checklist,
+        check=summary.check,
+        model=summary.model,
+        prompt=summary.prompt,
+        steps=step_tuple,
+        exp_subtree=exp_subtree,
+        pred_subtree=pred_subtree,
+        exp_value=exp_value,
+        pred_value=pred_value,
+        exp_row=exp_row,
+        pred_row=pred_row,
+        metadata=dict(record.metadata),
+        expected_output=expected_output,
+        model_output=model_output,
+        example_preview=_load_example_preview(
+            record.metadata,
+            include_example_assets=include_example_assets,
+        ),
+        pred_missing=pred_missing,
+    )
+
+
+def inspect_layer_s_row(
+    summary: RunSummary,
+    *,
+    doc_id: str,
+    list_key: str,
+    gold_index: int | None = None,
+    pred_index: int | None = None,
+    context_path: str | None = None,
+    structural: str | None = None,
+    include_example_assets: bool = True,
+) -> ExampleContext:
+    """Inspect the gold and/or pred row behind a Layer S alignment record."""
+    if structural == "missing_row":
+        steps = layer_s_row_steps(
+            list_key=list_key,
+            context_path=context_path,
+            index=gold_index,
+        )
+        if steps is None:
+            raise ValueError("missing_row requires gold_index")
+        return inspect_instance(
+            summary,
+            doc_id=doc_id,
+            steps=steps,
+            include_example_assets=include_example_assets,
+            pred_missing=True,
+        )
+    if structural == "spurious_row":
+        steps = layer_s_row_steps(
+            list_key=list_key,
+            context_path=context_path,
+            index=pred_index,
+        )
+        if steps is None:
+            raise ValueError("spurious_row requires pred_index")
+        return inspect_instance(
+            summary,
+            doc_id=doc_id,
+            steps=steps,
+            include_example_assets=include_example_assets,
+            pred_missing=False,
+        )
+
+    index = gold_index if gold_index is not None else pred_index
+    steps = layer_s_row_steps(
+        list_key=list_key,
+        context_path=context_path,
+        index=index,
+    )
+    if steps is None:
+        raise ValueError("Layer S row requires gold_index or pred_index")
+    return inspect_instance(
+        summary,
+        doc_id=doc_id,
+        steps=steps,
+        include_example_assets=include_example_assets,
+    )
