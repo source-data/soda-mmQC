@@ -2,7 +2,7 @@
 
 Plan for rewriting [`visualize.py`](../soda_mmqc/scripts/visualize.py) from scratch, inspired by [`notebooks/flat-eval-reporting-demo.ipynb`](../notebooks/flat-eval-reporting-demo.ipynb).
 
-**Status:** Phases 1–2 implemented (`soda_mmqc/reporting/`, [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)); plots and example-context drill-down planned below.
+**Status:** Phases 1–2b implemented (`soda_mmqc/reporting/`, [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)); plots (Phase 3) planned below.
 
 **Primary usage:** Jupyter notebooks calling `soda_mmqc.reporting` (plots + interactive tables). A CLI is **out of scope for early phases** — add last if batch HTML export is still wanted.
 
@@ -75,10 +75,10 @@ Extract notebook logic into **`soda_mmqc/reporting/`** — importable from analy
 | `soda_mmqc/reporting/load.py` | Load `analysis.json`, normalize prompt labels; optional gold/pred payloads per record |
 | `soda_mmqc/reporting/aggregate.py` | Fold per-doc `analysis` dicts into `RunSummary` |
 | `soda_mmqc/reporting/tables.py` | Build Layer S / 1 / 2 summary DataFrames; instance-level drill-down tables |
-| `soda_mmqc/reporting/navigate.py` | **Planned:** `get_at_steps(doc, steps)` — walk gold/pred JSON by key/index list (no string parser) |
-| `soda_mmqc/reporting/context.py` | **Planned:** `InstanceRef`, `ExampleContext`, `inspect_instance()` |
+| `soda_mmqc/reporting/navigate.py` | `get_at_steps(doc, steps)`; optional `path_string_to_steps()` for table `path` columns |
+| `soda_mmqc/reporting/context.py` | `InstanceRef`, `ExampleContext`, `inspect_instance()`, `inspect_layer_s_row()` |
 | `soda_mmqc/reporting/plots.py` | Plotly primitives + dashboard composer (`go.Figure` in → `.show()` in notebook) |
-| `soda_mmqc/reporting/display.py` | Interactive table widgets; **planned:** `show_instance_context()` for example drill-down |
+| `soda_mmqc/reporting/display.py` | Interactive table widgets + `show_instance_context()` |
 | `soda_mmqc/reporting/styles.py` | Outcome orders, colour maps (from notebook) |
 | `soda_mmqc/scripts/visualize.py` | **Phase 5 (optional):** thin CLI wrapping the same API for batch HTML export |
 
@@ -165,8 +165,8 @@ Today `load_flat_runs()` keeps `doc_id`, `metadata`, and `analysis` only. Each r
 | `doc_id` | entry root | Row keys in tables; half of an `InstanceRef` |
 | `metadata` | entry root | `source` path into `EXAMPLES_DIR`, `example_type`, model usage |
 | `analysis` | entry root | `instances`, `by_list`, `by_property` (current reporting) |
-| `expected_output` | entry root (**not loaded yet**) | Gold subtree at `path` |
-| `model_output` | entry root (**not loaded yet**) | Pred subtree at `path` |
+| `expected_output` | entry root (lazy) | Gold subtree at `steps` |
+| `model_output` | entry root (lazy) | Pred subtree at `steps` |
 
 ### `summarize_runs(runs) -> RunSummaries`
 
@@ -571,12 +571,12 @@ Plots (Phase 3) do not depend on this phase.
 - `itables` in `pyproject.toml`
 - Smoke notebook: [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb)
 
-### Phase 2b — Example context (on-demand) — **planned**
+### Phase 2b — Example context (on-demand) ✅ *complete*
 
-- `navigate.py` + `context.py`; extend `load.py` for lazy gold/pred payloads
-- `inspect_instance(doc_id, steps)` / `show_instance_context()` — step list → gold/pred subtree + figure preview
-- Update [`reporting.ipynb`](../notebooks/reporting.ipynb) with inspect workflow after table filter
-- Does not block Phase 3 plots
+- `navigate.py` + `context.py`; `load.py` lazy gold/pred via `ensure_record_payloads()` / `load_record_payloads()`
+- `inspect_instance(doc_id, steps)` / `inspect_layer_s_row()` / `show_instance_context()`
+- Tests: `tests/test_reporting_context.py`
+- [`reporting.ipynb`](../notebooks/reporting.ipynb) — inspect workflow after table filter
 
 ### Phase 3 — Plots (`plots.py`)
 
@@ -710,8 +710,8 @@ These operate on `EvaluationResult` today; the library version should accept **`
 - `display.show_table()` wrapping itables for notebook inspection
 - [`notebooks/reporting.ipynb`](../notebooks/reporting.ipynb) smoke test on micrograph-scale-bar
 
-**Planned (Phase 2b):**
+**Phase 2b (example context):**
 
-- `InstanceRef(doc_id, steps)` + `get_at_steps()` (key/index list walk — no string parser)
+- `InstanceRef(doc_id, steps)` + `get_at_steps()` (key/index list walk)
 - `inspect_instance()` / `show_instance_context()` — gold/pred subtree + optional figure preview
 - Lazy load of `expected_output` / `model_output` from `analysis.json`
