@@ -106,4 +106,4 @@ grep '^## \[' thinking/log.md | tail -5
 
 ## [2026-06-12] design | Strict schema scope: `schema.json` = model structured-output contract only (no collation wrappers); structural lists exist only in evaluation gold/pred documents.
 
-## [2026-06-12] design | Collation discovery: compare eval JSON shape to schema; object-array ancestors above the embedded schema subtree are structural; schema predictive lists at resolved eval paths.
+## [2026-06-12] ingest | Phase 5.1: `collation.py` (eval/schema shape comparison, structural positional join); collated eval tests; demo manifest `figures.panels`.

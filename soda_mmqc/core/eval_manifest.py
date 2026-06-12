@@ -57,9 +57,17 @@ class EvalManifest:
         return _merge_profiles(self.defaults, override, override_keys=override_keys)
 
     def alignment_keys_for(self, list_name: str) -> Optional[tuple[str, ...]]:
-        return self.list_alignment.get(list_name)
+        """Look up alignment keys by list name or ``by_list`` key."""
+        if list_name in self.list_alignment:
+            return self.list_alignment[list_name]
+        normalized = list_name.replace("[].", ".")
+        return self.list_alignment.get(normalized)
 
     def profiled_leaf_properties(self) -> tuple[str, ...]:
+        return tuple(sorted(self._fields))
+
+    def field_patterns(self) -> tuple[str, ...]:
+        """All manifest ``fields`` path keys."""
         return tuple(sorted(self._fields))
 
 

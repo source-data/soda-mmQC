@@ -1,0 +1,13 @@
+{
+  "tags": ["alpha", "beta"],
+  "item": {
+    "id": 1,
+    "label": "Panel A",
+    "status": "",
+    "meta": { "author": "Ada", "year": 1843 }
+  },
+  "panels": [
+    { "id": 1, "label": "Fig 1", "status": "yes" },
+    { "id": 2, "label": "Fig 2", "status": "" }
+  ]
+}

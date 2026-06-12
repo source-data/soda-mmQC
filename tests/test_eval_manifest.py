@@ -44,6 +44,14 @@ class TestListAlignment:
     def test_panels_label_key(self, toy_manifest: EvalManifest):
         assert toy_manifest.alignment_keys_for("panels") == ("label",)
 
+    def test_alignment_keys_normalize_list_name(self, toy_manifest: EvalManifest):
+        assert toy_manifest.alignment_keys_for("panels") == ("label",)
+        assert toy_manifest.alignment_keys_for("figures[].panels") is None
+
+        collated = load_eval_manifest(FIXTURES / "eval_manifest_collated.json")
+        assert collated.alignment_keys_for("figures.panels") == ("label",)
+        assert collated.alignment_keys_for("figures[].panels") == ("label",)
+
     def test_unknown_list_returns_none(self, toy_manifest: EvalManifest):
         assert toy_manifest.alignment_keys_for("outputs") is None
 

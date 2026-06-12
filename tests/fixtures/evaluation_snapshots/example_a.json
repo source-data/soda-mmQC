@@ -1,0 +1,97 @@
+{
+  "by_property": {
+    "tags": {
+      "mean_score": 1.0,
+      "layer1_counts": {},
+      "layer2_counts": {}
+    },
+    "item.id": {
+      "mean_score": 1.0,
+      "layer1_counts": {},
+      "layer2_counts": {}
+    },
+    "item.label": {
+      "mean_score": 1.0,
+      "layer1_counts": {
+        "correct_applicable": 1
+      },
+      "layer2_counts": {
+        "match": 1
+      }
+    },
+    "item.status": {
+      "mean_score": 1.0,
+      "layer1_counts": {
+        "correct_NA": 1
+      },
+      "layer2_counts": {}
+    },
+    "item.meta.author": {
+      "mean_score": 1.0,
+      "layer1_counts": {},
+      "layer2_counts": {}
+    },
+    "item.meta.year": {
+      "mean_score": 1.0,
+      "layer1_counts": {},
+      "layer2_counts": {}
+    },
+    "panels[].id": {
+      "mean_score": 1.0,
+      "layer1_counts": {},
+      "layer2_counts": {}
+    },
+    "panels[].label": {
+      "mean_score": 1.0,
+      "layer1_counts": {
+        "correct_applicable": 2
+      },
+      "layer2_counts": {
+        "match": 2
+      }
+    },
+    "panels[].status": {
+      "mean_score": 1.0,
+      "layer1_counts": {
+        "correct_applicable": 1,
+        "correct_NA": 1
+      },
+      "layer2_counts": {
+        "TP": 1
+      }
+    }
+  },
+  "by_list": {
+    "panels": {
+      "row_counts": {
+        "correct_row": 2,
+        "missing_row": 0,
+        "spurious_row": 0
+      },
+      "rows": [
+        {
+          "context_path": "panels",
+          "ancestor_gold": [],
+          "ancestor_pred": [],
+          "gold_index": 0,
+          "pred_index": 0,
+          "structural": "correct_row",
+          "similarity": 1.0,
+          "gold_alignment": "Fig 1",
+          "pred_alignment": "Fig 1"
+        },
+        {
+          "context_path": "panels",
+          "ancestor_gold": [],
+          "ancestor_pred": [],
+          "gold_index": 1,
+          "pred_index": 1,
+          "structural": "correct_row",
+          "similarity": 1.0,
+          "gold_alignment": "Fig 2",
+          "pred_alignment": "Fig 2"
+        }
+      ]
+    }
+  }
+}

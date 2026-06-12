@@ -14,7 +14,8 @@ Build the flat leaf comparator in small steps. Each step lands with **unit tests
 | [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) | Layer S → `by_list` (`correct_row`, `missing_row`, `spurious_row`) |
 | [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py) | Manifest load and field profiles |
 | [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) | Layers 1 and 2 reporting on leaf instances |
-| [`schema_discovery.py`](../soda_mmqc/core/schema_discovery.py) | Schema walk → leaf properties + object lists |
+| [`schema_discovery.py`](../soda_mmqc/core/schema_discovery.py) | Model schema walk → leaf properties + predictive list names |
+| [`collation.py`](../soda_mmqc/core/collation.py) | Embed schema in eval JSON; structural vs predictive paths; manifest validation |
 | [`evaluation.py`](../soda_mmqc/core/evaluation.py) | Orchestrator |
 
 `alignment.py` has been **removed** (split into `matching.py`, `leaves.compare_primitive_list`, and `object_list_pairing.py`).
@@ -145,15 +146,19 @@ Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 
 ---
 
-## Phase 5.1 — Structural vs predictive lists (wiki + evaluator)
+## Phase 5.1 — Structural vs predictive lists ✅ *complete*
 
-**Wiki:** [evaluation-scoring.md](evaluation-scoring.md#structural-vs-predictive-lists-schema-driven) — `schema.json` is model-call only (no wrappers); all object lists in schema are predictive; collation wrappers exist only in eval gold/pred; `list_alignment` validated against schema.
+**Wiki:** [evaluation-scoring.md](evaluation-scoring.md#structural-vs-predictive-lists-schema-driven)
 
-**Code (pending):**
+**Module:** `soda_mmqc/core/collation.py`
 
-- Discover predictive lists from `schema.json`; discover structural lists by comparing eval JSON shape to schema (ancestor object-arrays above the embedded schema subtree).
-- Resolve eval paths for schema lists (e.g. `panels` → `figures.panels`); validate `list_alignment` covers that set exactly; alignment keys ⊆ row `items.properties`.
-- `FlatEvaluator`: positional join for structural collation; Hungarian + `by_list` for schema predictive lists; qualified keys (e.g. `figures.panels`).
+- `discover_collation_layout` — compare eval JSON shape to model `schema.json`; embedding prefix + structural vs predictive eval lists
+- `build_eval_leaf_specs` — schema leaves remapped to eval paths; manifest-only structural row fields
+- `validate_manifest_list_alignment` — `list_alignment` keys match resolved predictive paths; alignment keys ⊆ schema row properties
+- `FlatEvaluator` — positional join for structural lists; Hungarian + `by_list` for schema predictive lists only
+- `eval_manifest.alignment_keys_for` accepts `figures[].panels` or `figures.panels`
+
+**Tests:** `tests/test_collation.py`, `tests/test_evaluation_collated.py`; toy tests unchanged (root embedding).
 
 ---
 
