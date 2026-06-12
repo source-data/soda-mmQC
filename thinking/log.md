@@ -107,3 +107,21 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-12] design | Strict schema scope: `schema.json` = model structured-output contract only (no collation wrappers); structural lists exist only in evaluation gold/pred documents.
 
 ## [2026-06-12] ingest | Phase 5.1: `collation.py` (eval/schema shape comparison, structural positional join); collated eval tests; demo manifest `figures.panels`.
+
+## [2026-06-12] design | Visualization rewrite plan: flat `analysis.json`, per-property Layer S/1/2 charts, prompt vs model contrast; `thinking/visualization-plan.md`.
+
+## [2026-06-12] design | Visualization plan revised: notebook-first API, drill-down tables first-class (itables), CLI moved to Phase 5.
+
+## [2026-06-12] design | `load_flat_runs`: multi-model + multi-prompt loading; `RunSummaries` keyed by `(model, prompt)`.
+
+## [2026-06-12] design | Run-level `mean_score`: pool all leaf instances per property (no per-figure hierarchical average).
+
+## [2026-06-12] design | Viz plan: clarify Layer S `by_list` keys (row arrays) vs leaf properties; open decision #2 resolved.
+
+## [2026-06-12] design | Viz v1 scope: single-check reporting only; no checklist-level overview.
+
+## [2026-06-12] design | Viz package name resolved: `soda_mmqc/reporting/`.
+
+## [2026-06-12] design | Interactive drill-down tables: `itables` (resolved).
+
+## [2026-06-12] design | Viz first validation: micrograph-scale-bar with `gpt-5` + `gpt-5-mini`; prompt and model contrast.
