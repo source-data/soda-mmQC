@@ -28,6 +28,7 @@
     },
     "outputs[].from_the_caption": {
       "matching_metric": "graded_string",
+      "na_values": [""],
       "string_compare": "semantic",
       "match_threshold": 0.8
     },
@@ -37,6 +38,7 @@
     },
     "outputs[].from_the_image": {
       "matching_metric": "graded_string",
+      "na_values": [""],
       "string_compare": "semantic",
       "match_threshold": 0.8
     }
