@@ -11,7 +11,7 @@ from unittest.mock import patch
 from soda_mmqc.core.evaluation import FlatEvaluator
 from soda_mmqc.reporting.aggregate import aggregate_run
 from soda_mmqc.reporting.context import inspect_instance, inspect_layer_s_row, inspect_source
-from soda_mmqc.reporting.display import show_instance_context
+from soda_mmqc.reporting.display import _display_figure_image, show_instance_context
 from soda_mmqc.reporting.load import (
     FlatRecord,
     FlatRun,
@@ -266,6 +266,29 @@ class TestShowInstanceContext:
                 include_example_assets=False,
             )
         mock_prompt.assert_called_once()
+
+    def test_zoomable_figure_preview(self, summary_p2):
+        with patch(
+            "soda_mmqc.reporting.display._display_figure_image"
+        ) as mock_image, patch(
+            "soda_mmqc.reporting.display._display_markdown"
+        ), patch(
+            "soda_mmqc.reporting.display._display_side_by_side"
+        ), patch(
+            "soda_mmqc.reporting.display._display_prompt"
+        ):
+            show_instance_context(
+                summary_p2,
+                source=FIGURE1_SOURCE,
+                figure_height=360,
+                figure_width=480,
+            )
+        mock_image.assert_called_once()
+        assert mock_image.call_args.kwargs == {
+            "height": 360,
+            "width": 480,
+            "zoomable": True,
+        }
 
 
 class TestInspectLayerS:

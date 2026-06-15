@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any, Literal, Mapping, Sequence, overload
 
 import pandas as pd
@@ -306,6 +307,56 @@ def _display_side_by_side(
         print(frame.to_string())
 
 
+def _display_figure_image(
+    image_path: Path | str,
+    *,
+    height: int = 420,
+    width: int | None = None,
+    zoomable: bool = True,
+) -> None:
+    """Show a figure image in the notebook; Plotly enables zoom/pan when available."""
+    path = Path(image_path)
+    if not path.is_file():
+        logger.warning("Figure image not found: %s", path)
+        return
+
+    if zoomable:
+        try:
+            import plotly.express as px
+            from PIL import Image
+
+            with Image.open(path) as img:
+                pixel_width, pixel_height = img.size
+                layout_width = width
+                if layout_width is None:
+                    layout_width = max(240, int(height * pixel_width / pixel_height))
+                fig = px.imshow(img)
+                fig.update_layout(
+                    margin=dict(l=0, r=0, t=0, b=0),
+                    height=height,
+                    width=layout_width,
+                    dragmode="zoom",
+                )
+                fig.update_xaxes(visible=False, constrain="domain")
+                fig.update_yaxes(
+                    visible=False,
+                    scaleanchor="x",
+                    scaleratio=1,
+                    autorange="reversed",
+                )
+                fig.show(config={"scrollZoom": True})
+                return
+        except Exception as exc:
+            logger.debug("Plotly figure preview failed, falling back: %s", exc)
+
+    try:
+        from IPython.display import Image, display
+
+        display(Image(filename=str(path)))
+    except ImportError:
+        logger.info("Figure image at %s", path)
+
+
 def _display_prompt(text: str) -> None:
     try:
         from IPython.display import Markdown, display
@@ -321,6 +372,9 @@ def _render_instance_context(
     *,
     show_full_eval: bool = False,
     show_prompt: bool = True,
+    figure_height: int = 420,
+    figure_width: int | None = None,
+    zoomable_figure: bool = True,
 ) -> None:
     """Display gold/pred content and optional figure preview for one instance."""
     header = (
@@ -339,12 +393,12 @@ def _render_instance_context(
         caption = preview.caption or ""
         _display_markdown(f"**Caption**  \n{caption}")
         if preview.image_path is not None and preview.image_path.is_file():
-            try:
-                from IPython.display import Image, display
-
-                display(Image(filename=str(preview.image_path)))
-            except ImportError:
-                logger.info("Figure image at %s", preview.image_path)
+            _display_figure_image(
+                preview.image_path,
+                height=figure_height,
+                width=figure_width,
+                zoomable=zoomable_figure,
+            )
 
     pred_label = "pred (missing)" if ctx.pred_missing else "pred"
     leaf_name = ctx.steps[-1] if ctx.steps and isinstance(ctx.steps[-1], str) else None
@@ -384,6 +438,9 @@ def show_instance_context(
     *,
     show_full_eval: bool = False,
     show_prompt: bool = True,
+    figure_height: int = 420,
+    figure_width: int | None = None,
+    zoomable_figure: bool = True,
     source: None = None,
     object_path: None = None,
     leaf: None = None,
@@ -400,6 +457,9 @@ def show_instance_context(
     leaf: None = None,
     show_full_eval: bool = False,
     show_prompt: bool = True,
+    figure_height: int = 420,
+    figure_width: int | None = None,
+    zoomable_figure: bool = True,
     include_example_assets: bool = True,
 ) -> None: ...
 
@@ -413,6 +473,9 @@ def show_instance_context(
     leaf: str,
     show_full_eval: bool = False,
     show_prompt: bool = True,
+    figure_height: int = 420,
+    figure_width: int | None = None,
+    zoomable_figure: bool = True,
     include_example_assets: bool = True,
 ) -> None: ...
 
@@ -425,6 +488,9 @@ def show_instance_context(
     leaf: str | None = None,
     show_full_eval: bool = False,
     show_prompt: bool = True,
+    figure_height: int = 420,
+    figure_width: int | None = None,
+    zoomable_figure: bool = True,
     include_example_assets: bool = True,
 ) -> None:
     """Display gold/pred content for one model-call source.
@@ -432,12 +498,19 @@ def show_instance_context(
     Pass a pre-built :class:`ExampleContext`, or a :class:`RunSummary` with
     ``source`` to show the full model output for that example. Optionally pass
     ``object_path`` and ``leaf`` from a culprits table row for one leaf field.
+
+    Figure images use a Plotly widget (zoom/pan via toolbar; scroll to zoom when
+    enabled). Set ``zoomable_figure=False`` to fall back to a static image.
+    Resize the initial viewport with ``figure_height`` / ``figure_width``.
     """
     if isinstance(ctx, ExampleContext):
         _render_instance_context(
             ctx,
             show_full_eval=show_full_eval,
             show_prompt=show_prompt,
+            figure_height=figure_height,
+            figure_width=figure_width,
+            zoomable_figure=zoomable_figure,
         )
         return
 
@@ -464,4 +537,7 @@ def show_instance_context(
         resolved,
         show_full_eval=show_full_eval,
         show_prompt=show_prompt,
+        figure_height=figure_height,
+        figure_width=figure_width,
+        zoomable_figure=zoomable_figure,
     )
