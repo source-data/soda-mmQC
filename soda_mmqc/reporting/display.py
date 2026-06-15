@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import json
-from typing import Any, Literal, Mapping, Sequence
+from typing import Any, Literal, Mapping, Sequence, overload
 
 import pandas as pd
 
 from soda_mmqc import logger
 from soda_mmqc.reporting.aggregate import RunSummaries, RunSummary
-from soda_mmqc.reporting.context import ExampleContext
+from soda_mmqc.reporting.context import ExampleContext, inspect_instance
 from soda_mmqc.reporting.tables import (
     filter_by_doc,
     filter_by_field,
@@ -305,7 +305,7 @@ def _display_side_by_side(
         print(frame.to_string())
 
 
-def show_instance_context(
+def _render_instance_context(
     ctx: ExampleContext,
     *,
     show_full_eval: bool = False,
@@ -356,3 +356,59 @@ def show_instance_context(
         _display_side_by_side("expected_output", ctx.expected_output, "—", "—")
         _display_markdown("**Full model_output**")
         _display_side_by_side("model_output", ctx.model_output, "—", "—")
+
+
+@overload
+def show_instance_context(
+    ctx: ExampleContext,
+    *,
+    show_full_eval: bool = False,
+    doc_id: None = None,
+    object_path: None = None,
+    leaf: None = None,
+    include_example_assets: bool = True,
+) -> None: ...
+
+
+@overload
+def show_instance_context(
+    summary: RunSummary,
+    *,
+    doc_id: str,
+    object_path: str,
+    leaf: str,
+    show_full_eval: bool = False,
+    include_example_assets: bool = True,
+) -> None: ...
+
+
+def show_instance_context(
+    ctx: ExampleContext | RunSummary,
+    *,
+    doc_id: str | None = None,
+    object_path: str | None = None,
+    leaf: str | None = None,
+    show_full_eval: bool = False,
+    include_example_assets: bool = True,
+) -> None:
+    """Display gold/pred content for one instance.
+
+    Pass a pre-built :class:`ExampleContext`, or a :class:`RunSummary` with
+    ``doc_id``, ``object_path``, and ``leaf`` from a culprits table row.
+    """
+    if isinstance(ctx, ExampleContext):
+        _render_instance_context(ctx, show_full_eval=show_full_eval)
+        return
+
+    if doc_id is None or object_path is None or leaf is None:
+        raise ValueError(
+            "doc_id, object_path, and leaf are required when passing RunSummary"
+        )
+    resolved = inspect_instance(
+        ctx,
+        doc_id=doc_id,
+        object_path=object_path,
+        leaf=leaf,
+        include_example_assets=include_example_assets,
+    )
+    _render_instance_context(resolved, show_full_eval=show_full_eval)

@@ -14,8 +14,10 @@ from soda_mmqc.reporting.navigate import (
     PathStep,
     get_at_steps,
     get_at_steps_optional,
+    instance_navigation_path,
     layer_s_row_steps,
     parent_row_steps,
+    path_string_to_steps,
 )
 
 
@@ -151,11 +153,27 @@ def inspect_instance(
     summary: RunSummary,
     *,
     doc_id: str,
-    steps: Sequence[PathStep],
+    steps: Sequence[PathStep] | None = None,
+    object_path: str | None = None,
+    leaf: str | None = None,
     include_example_assets: bool = True,
     pred_missing: bool = False,
 ) -> ExampleContext:
-    """Resolve gold/pred content at ``steps`` for one benchmark example."""
+    """Resolve gold/pred content for one benchmark example.
+
+    Pass either explicit ``steps`` or table-style ``object_path`` and ``leaf``
+    (from culprits columns ``path`` and ``leaf_property``).
+    """
+    if steps is not None:
+        if object_path is not None or leaf is not None:
+            raise ValueError("pass either steps or (object_path, leaf), not both")
+        step_tuple = tuple(steps)
+    elif object_path is not None and leaf is not None:
+        nav_path = instance_navigation_path(object_path, leaf)
+        step_tuple = path_string_to_steps(nav_path)
+    else:
+        raise ValueError("either steps or (object_path, leaf) is required")
+
     record = find_record(summary.records, doc_id)
     expected_output, model_output = ensure_record_payloads(
         record,
@@ -164,7 +182,6 @@ def inspect_instance(
         model=summary.model,
         prompt=summary.prompt,
     )
-    step_tuple = tuple(steps)
     ref = InstanceRef(doc_id=doc_id, steps=step_tuple)
     (
         exp_subtree,

@@ -10,6 +10,7 @@ import pytest
 from soda_mmqc.core.evaluation import FlatEvaluator
 from soda_mmqc.reporting.aggregate import aggregate_run
 from soda_mmqc.reporting.context import inspect_instance, inspect_layer_s_row
+from soda_mmqc.reporting.display import show_instance_context
 from soda_mmqc.reporting.load import (
     FlatRecord,
     FlatRun,
@@ -157,6 +158,33 @@ class TestInspectInstance:
         )
         return aggregate_run(runs[0])
 
+    def test_inspect_requires_steps_or_object_path_and_leaf(self, summary_p2):
+        with pytest.raises(ValueError, match="either steps or"):
+            inspect_instance(
+                summary_p2,
+                doc_id="10.1038_s44318-026-00715-1",
+            )
+        with pytest.raises(ValueError, match="not both"):
+            inspect_instance(
+                summary_p2,
+                doc_id="10.1038_s44318-026-00715-1",
+                steps=["outputs", 0],
+                object_path="outputs[0]",
+                leaf="scale_bar_on_image",
+            )
+
+    def test_inspect_leaf_via_object_path_and_leaf(self, summary_p2):
+        ctx = inspect_instance(
+            summary_p2,
+            doc_id="10.1038_s44318-026-00715-1",
+            object_path="outputs[0]",
+            leaf="scale_bar_on_image",
+            include_example_assets=False,
+        )
+        assert ctx.exp_value == ""
+        assert ctx.pred_value == "no"
+        assert ctx.steps == ("outputs", 0, "scale_bar_on_image")
+
     def test_lazy_payload_inspect_leaf(self, summary_p2):
         ctx = inspect_instance(
             summary_p2,
@@ -191,6 +219,22 @@ class TestInspectInstance:
         assert preview.caption
         assert preview.image_path is not None
         assert preview.image_path.is_file()
+
+
+class TestShowInstanceContext:
+    @pytest.fixture
+    def summary_p2(self):
+        runs = load_flat_runs(
+            "fig-checklist",
+            MICROGRAPH,
+            models=MODEL_MINI,
+            prompts="prompt.2",
+        )
+        return aggregate_run(runs[0])
+
+    def test_requires_drill_args_with_summary(self, summary_p2):
+        with pytest.raises(ValueError, match="doc_id, object_path, and leaf"):
+            show_instance_context(summary_p2)
 
 
 class TestInspectLayerS:
