@@ -110,9 +110,13 @@ class TestSingleRunPlots:
 
     def test_build_dashboard_layout(self, prompt1_summary):
         fig = build_dashboard(prompt1_summary)
+        assert fig.layout.barmode == "stack"
         assert hasattr(fig.layout, "xaxis4")
         assert len(fig.data) >= 4
         assert fig.layout.yaxis.rangemode == "tozero"
+        stacked_traces = [trace for trace in fig.data if trace.type == "bar" and trace.name]
+        assert stacked_traces
+        assert all(getattr(trace, "base", None) in (None, 0) for trace in stacked_traces)
         subplot_titles = [
             annotation.text
             for annotation in fig.layout.annotations

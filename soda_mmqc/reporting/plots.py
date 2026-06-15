@@ -582,7 +582,6 @@ def _add_dashboard_stacked_column(
     if frame.empty:
         return
     fields = frame["field"].tolist()
-    stack_base = [0] * len(fields)
     legend_name = f"legend{col}"
     for outcome in order:
         if outcome not in frame.columns:
@@ -594,7 +593,6 @@ def _add_dashboard_stacked_column(
             go.Bar(
                 x=fields,
                 y=values,
-                base=stack_base,
                 name=outcome,
                 marker_color=color_map[outcome],
                 legend=legend_name,
@@ -604,7 +602,6 @@ def _add_dashboard_stacked_column(
             row=1,
             col=col,
         )
-        stack_base = [base + value for base, value in zip(stack_base, values)]
 
 
 def build_dashboard(
@@ -677,6 +674,7 @@ def build_dashboard(
     layout_kwargs: dict[str, Any] = {
         "title_text": title,
         "height": 460,
+        "barmode": "stack",
         "showlegend": False,
         "yaxis": _zero_rangemode(),
         "yaxis2": _zero_rangemode(),
