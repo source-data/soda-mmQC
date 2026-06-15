@@ -10,6 +10,7 @@ import pandas as pd
 from soda_mmqc import logger
 from soda_mmqc.reporting.aggregate import RunSummaries, RunSummary
 from soda_mmqc.reporting.context import ExampleContext, inspect_instance, inspect_source
+from soda_mmqc.reporting.load import load_prompt_text
 from soda_mmqc.reporting.tables import (
     filter_by_doc,
     filter_by_field,
@@ -305,10 +306,21 @@ def _display_side_by_side(
         print(frame.to_string())
 
 
+def _display_prompt(text: str) -> None:
+    try:
+        from IPython.display import Markdown, display
+
+        display(Markdown(f"**Prompt**\n\n```\n{text}\n```"))
+    except ImportError:
+        print("Prompt:\n")
+        print(text)
+
+
 def _render_instance_context(
     ctx: ExampleContext,
     *,
     show_full_eval: bool = False,
+    show_prompt: bool = True,
 ) -> None:
     """Display gold/pred content and optional figure preview for one instance."""
     header = (
@@ -335,29 +347,24 @@ def _render_instance_context(
                 logger.info("Figure image at %s", preview.image_path)
 
     pred_label = "pred (missing)" if ctx.pred_missing else "pred"
+    leaf_name = ctx.steps[-1] if ctx.steps and isinstance(ctx.steps[-1], str) else None
 
     if not ctx.steps:
         _display_markdown("**Model output (gold vs pred)**")
         _display_side_by_side("gold", ctx.expected_output, pred_label, ctx.model_output)
-        return
-
-    _display_markdown("**At steps (gold vs pred)**")
-    _display_side_by_side("gold", ctx.exp_subtree, pred_label, ctx.pred_subtree)
-
-    if ctx.exp_row is not None or ctx.pred_row is not None:
-        _display_markdown("**Parent row (gold vs pred)**")
+    elif leaf_name is not None and ctx.exp_row is not None:
+        _display_markdown("**Panel row (gold vs pred)**")
         _display_side_by_side(
             "gold row",
             ctx.exp_row,
             f"{pred_label} row",
             ctx.pred_row,
         )
-
-    if ctx.exp_row is not None and ctx.pred_row is not None:
-        leaf = ctx.steps[-1] if ctx.steps else None
-        if isinstance(leaf, str):
-            _display_markdown(f"**Leaf field `{leaf}` (gold vs pred)**")
-            _display_side_by_side("gold", ctx.exp_value, pred_label, ctx.pred_value)
+        _display_markdown(f"**`{leaf_name}` (gold vs pred)**")
+        _display_side_by_side("gold", ctx.exp_value, pred_label, ctx.pred_value)
+    else:
+        _display_markdown("**At steps (gold vs pred)**")
+        _display_side_by_side("gold", ctx.exp_subtree, pred_label, ctx.pred_subtree)
 
     if show_full_eval:
         _display_markdown("**Full expected_output**")
@@ -365,12 +372,18 @@ def _render_instance_context(
         _display_markdown("**Full model_output**")
         _display_side_by_side("model_output", ctx.model_output, "—", "—")
 
+    if show_prompt:
+        prompt_text = load_prompt_text(ctx.checklist, ctx.check, ctx.prompt)
+        if prompt_text is not None:
+            _display_prompt(prompt_text)
+
 
 @overload
 def show_instance_context(
     ctx: ExampleContext,
     *,
     show_full_eval: bool = False,
+    show_prompt: bool = True,
     source: None = None,
     object_path: None = None,
     leaf: None = None,
@@ -386,6 +399,7 @@ def show_instance_context(
     object_path: None = None,
     leaf: None = None,
     show_full_eval: bool = False,
+    show_prompt: bool = True,
     include_example_assets: bool = True,
 ) -> None: ...
 
@@ -398,6 +412,7 @@ def show_instance_context(
     object_path: str,
     leaf: str,
     show_full_eval: bool = False,
+    show_prompt: bool = True,
     include_example_assets: bool = True,
 ) -> None: ...
 
@@ -409,6 +424,7 @@ def show_instance_context(
     object_path: str | None = None,
     leaf: str | None = None,
     show_full_eval: bool = False,
+    show_prompt: bool = True,
     include_example_assets: bool = True,
 ) -> None:
     """Display gold/pred content for one model-call source.
@@ -418,7 +434,11 @@ def show_instance_context(
     ``object_path`` and ``leaf`` from a culprits table row for one leaf field.
     """
     if isinstance(ctx, ExampleContext):
-        _render_instance_context(ctx, show_full_eval=show_full_eval)
+        _render_instance_context(
+            ctx,
+            show_full_eval=show_full_eval,
+            show_prompt=show_prompt,
+        )
         return
 
     if source is None:
@@ -440,4 +460,8 @@ def show_instance_context(
         )
     else:
         raise ValueError("pass both object_path and leaf, or neither")
-    _render_instance_context(resolved, show_full_eval=show_full_eval)
+    _render_instance_context(
+        resolved,
+        show_full_eval=show_full_eval,
+        show_prompt=show_prompt,
+    )

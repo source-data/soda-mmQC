@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 import pytest
+from unittest.mock import patch
 
 from soda_mmqc.core.evaluation import FlatEvaluator
 from soda_mmqc.reporting.aggregate import aggregate_run
@@ -15,6 +16,7 @@ from soda_mmqc.reporting.load import (
     FlatRecord,
     FlatRun,
     load_flat_runs,
+    load_prompt_text,
     load_record_payloads,
     record_source,
 )
@@ -86,6 +88,11 @@ class TestNavigate:
 
 
 class TestLoadRecordPayloads:
+    def test_load_prompt_text_for_check(self):
+        text = load_prompt_text("fig-checklist", MICROGRAPH, "prompt.2")
+        assert text is not None
+        assert len(text) > 0
+
     def test_lazy_load_micrograph_payloads(self):
         expected, model = load_record_payloads(
             "fig-checklist",
@@ -242,6 +249,23 @@ class TestShowInstanceContext:
     def test_requires_source_with_summary(self, summary_p2):
         with pytest.raises(ValueError, match="source is required"):
             show_instance_context(summary_p2)
+
+    def test_show_prompt_appended_by_default(self, summary_p2):
+        with patch(
+            "soda_mmqc.reporting.display._display_prompt"
+        ) as mock_prompt, patch(
+            "soda_mmqc.reporting.display._display_markdown"
+        ), patch(
+            "soda_mmqc.reporting.display._display_side_by_side"
+        ):
+            show_instance_context(
+                summary_p2,
+                source=FIGURE1_SOURCE,
+                object_path="outputs[0]",
+                leaf="scale_bar_on_image",
+                include_example_assets=False,
+            )
+        mock_prompt.assert_called_once()
 
 
 class TestInspectLayerS:

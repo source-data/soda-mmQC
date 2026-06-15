@@ -258,6 +258,27 @@ def load_eval_manifest_for_check(checklist: str, check: str) -> EvalManifest:
     return load_eval_manifest(path)
 
 
+def load_prompt_text(checklist: str, check: str, prompt: str) -> str | None:
+    """Load prompt text for a normalized prompt label (e.g. ``prompt.2``)."""
+    check_dir = CHECKLIST_DIR / checklist / check
+    prompt_path = check_dir / "prompts" / f"{prompt}.txt"
+    if prompt_path.is_file():
+        return prompt_path.read_text(encoding="utf-8")
+
+    for candidate in (check_dir / "prompt.txt", check_dir / "prompts" / "prompt.txt"):
+        if candidate.is_file():
+            return candidate.read_text(encoding="utf-8")
+
+    logger.warning(
+        "No prompt text found for %s / %s / %s under %s",
+        checklist,
+        check,
+        prompt,
+        check_dir,
+    )
+    return None
+
+
 def load_flat_runs(
     checklist: str,
     check: str,
