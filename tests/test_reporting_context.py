@@ -9,13 +9,14 @@ import pytest
 
 from soda_mmqc.core.evaluation import FlatEvaluator
 from soda_mmqc.reporting.aggregate import aggregate_run
-from soda_mmqc.reporting.context import inspect_instance, inspect_layer_s_row
+from soda_mmqc.reporting.context import inspect_instance, inspect_layer_s_row, inspect_source
 from soda_mmqc.reporting.display import show_instance_context
 from soda_mmqc.reporting.load import (
     FlatRecord,
     FlatRun,
     load_flat_runs,
     load_record_payloads,
+    record_source,
 )
 from soda_mmqc.reporting.navigate import (
     NavigationError,
@@ -30,6 +31,7 @@ from soda_mmqc.reporting.navigate import (
 DEMO_DIR = Path(__file__).resolve().parents[1] / "notebooks/fixtures/flat-eval-demo"
 MICROGRAPH = "micrograph-scale-bar"
 MODEL_MINI = "gpt-5-mini-2025-08-07"
+FIGURE1_SOURCE = "10.1038_s44318-026-00715-1/content/1"
 
 
 class TestNavigate:
@@ -90,7 +92,7 @@ class TestLoadRecordPayloads:
             MICROGRAPH,
             MODEL_MINI,
             "prompt.2",
-            "10.1038_s44318-026-00715-1",
+            FIGURE1_SOURCE,
         )
         assert "outputs" in expected
         assert "outputs" in model
@@ -104,6 +106,7 @@ class TestLoadRecordPayloads:
         )
         record = runs[0].records[0]
         assert not record.has_payloads
+        assert record_source(record)
 
     def test_load_flat_runs_with_payloads(self):
         runs = load_flat_runs(
@@ -128,11 +131,7 @@ def demo_summary():
     record = FlatRecord(
         doc_id="demo-doc",
         metadata={"example_type": "figure", "source": "unused/for/test"},
-        analysis={
-            "instances": result.instances,
-            "by_list": result.by_list,
-            "by_property": result.by_property,
-        },
+        analysis=result.to_dict(),
         expected_output=gold,
         model_output=pred,
     )
@@ -162,12 +161,12 @@ class TestInspectInstance:
         with pytest.raises(ValueError, match="either steps or"):
             inspect_instance(
                 summary_p2,
-                doc_id="10.1038_s44318-026-00715-1",
+                source=FIGURE1_SOURCE,
             )
         with pytest.raises(ValueError, match="not both"):
             inspect_instance(
                 summary_p2,
-                doc_id="10.1038_s44318-026-00715-1",
+                source=FIGURE1_SOURCE,
                 steps=["outputs", 0],
                 object_path="outputs[0]",
                 leaf="scale_bar_on_image",
@@ -176,7 +175,7 @@ class TestInspectInstance:
     def test_inspect_leaf_via_object_path_and_leaf(self, summary_p2):
         ctx = inspect_instance(
             summary_p2,
-            doc_id="10.1038_s44318-026-00715-1",
+            source=FIGURE1_SOURCE,
             object_path="outputs[0]",
             leaf="scale_bar_on_image",
             include_example_assets=False,
@@ -184,11 +183,12 @@ class TestInspectInstance:
         assert ctx.exp_value == ""
         assert ctx.pred_value == "no"
         assert ctx.steps == ("outputs", 0, "scale_bar_on_image")
+        assert ctx.ref.source == FIGURE1_SOURCE
 
     def test_lazy_payload_inspect_leaf(self, summary_p2):
         ctx = inspect_instance(
             summary_p2,
-            doc_id="10.1038_s44318-026-00715-1",
+            source=FIGURE1_SOURCE,
             steps=["outputs", 0, "scale_bar_on_image"],
             include_example_assets=False,
         )
@@ -200,7 +200,7 @@ class TestInspectInstance:
     def test_inspect_panel_row(self, summary_p2):
         ctx = inspect_instance(
             summary_p2,
-            doc_id="10.1038_s44318-026-00715-1",
+            source=FIGURE1_SOURCE,
             steps=["outputs", 0],
             include_example_assets=False,
         )
@@ -210,7 +210,7 @@ class TestInspectInstance:
     def test_figure_preview_when_assets_available(self, summary_p2):
         ctx = inspect_instance(
             summary_p2,
-            doc_id="10.1038_s44318-026-00715-1",
+            source=FIGURE1_SOURCE,
             steps=["outputs", 0],
         )
         preview = ctx.example_preview
@@ -219,6 +219,13 @@ class TestInspectInstance:
         assert preview.caption
         assert preview.image_path is not None
         assert preview.image_path.is_file()
+
+    def test_inspect_source_returns_full_payload(self, summary_p2):
+        ctx = inspect_source(summary_p2, source=FIGURE1_SOURCE, include_example_assets=False)
+        assert ctx.steps == ()
+        assert "outputs" in ctx.expected_output
+        assert ctx.exp_subtree == ctx.expected_output
+        assert ctx.pred_subtree == ctx.model_output
 
 
 class TestShowInstanceContext:
@@ -232,8 +239,8 @@ class TestShowInstanceContext:
         )
         return aggregate_run(runs[0])
 
-    def test_requires_drill_args_with_summary(self, summary_p2):
-        with pytest.raises(ValueError, match="doc_id, object_path, and leaf"):
+    def test_requires_source_with_summary(self, summary_p2):
+        with pytest.raises(ValueError, match="source is required"):
             show_instance_context(summary_p2)
 
 
@@ -241,7 +248,7 @@ class TestInspectLayerS:
     def test_missing_row_gold_only(self, demo_summary):
         ctx = inspect_layer_s_row(
             demo_summary,
-            doc_id="demo-doc",
+            source="unused/for/test",
             list_key="papers.figures.outputs",
             context_path="papers[0].figures[2].outputs",
             gold_index=1,
@@ -255,7 +262,7 @@ class TestInspectLayerS:
     def test_spurious_row_pred_side(self, demo_summary):
         ctx = inspect_layer_s_row(
             demo_summary,
-            doc_id="demo-doc",
+            source="unused/for/test",
             list_key="papers.figures.outputs",
             context_path="papers[0].figures[2].outputs",
             pred_index=1,

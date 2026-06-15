@@ -9,12 +9,13 @@ import pandas as pd
 
 from soda_mmqc import logger
 from soda_mmqc.reporting.aggregate import RunSummaries, RunSummary
-from soda_mmqc.reporting.context import ExampleContext, inspect_instance
+from soda_mmqc.reporting.context import ExampleContext, inspect_instance, inspect_source
 from soda_mmqc.reporting.tables import (
     filter_by_doc,
     filter_by_field,
-    instance_culprits_table,
+    filter_by_source,
     layer1_instance_table,
+    layer2_instance_table,
     layer_s_issues_table,
 )
 
@@ -140,7 +141,7 @@ def show_issues_table(
     return show_table(
         frame,
         caption=title,
-        default_sort=("doc_id", "list_key", "structural"),
+        default_sort=("source", "list_key", "structural"),
     )
 
 
@@ -148,14 +149,14 @@ def show_layer1_errors(
     summary: RunSummary,
     *,
     field: str | None = None,
-    doc_id: str | None = None,
+    source: str | None = None,
     layer1: str | None = None,
     caption: str | None = None,
 ) -> Any:
     """Layer-1 applicability outliers."""
     frame = layer1_instance_table(summary)
-    if doc_id is not None:
-        frame = filter_by_doc(frame, doc_id)
+    if source is not None:
+        frame = filter_by_source(frame, source)
     if field is not None:
         frame = filter_by_field(frame, field)
     title = caption or (
@@ -165,7 +166,7 @@ def show_layer1_errors(
     return show_table(
         frame,
         caption=title,
-        default_sort=("doc_id", "leaf_property", "path"),
+        default_sort=("source", "leaf_property", "path"),
         column_search=column_search,
     )
 
@@ -174,13 +175,13 @@ def show_layer2_errors(
     summary: RunSummary,
     *,
     field: str | None = None,
-    doc_id: str | None = None,
+    source: str | None = None,
     caption: str | None = None,
 ) -> Any:
-    """Layer-1 outliers and layer-2 culprits for drill-down."""
-    frame = instance_culprits_table(summary)
-    if doc_id is not None:
-        frame = filter_by_doc(frame, doc_id)
+    """Layer-2 matching errors only (FP, FN, mismatch)."""
+    frame = layer2_instance_table(summary)
+    if source is not None:
+        frame = filter_by_source(frame, source)
     if field is not None:
         frame = filter_by_field(frame, field)
     title = caption or (
@@ -189,7 +190,7 @@ def show_layer2_errors(
     return show_table(
         frame,
         caption=title,
-        default_sort=("doc_id", "leaf_property", "path"),
+        default_sort=("source", "leaf_property", "path"),
     )
 
 
@@ -214,7 +215,7 @@ def comparison_errors_table(
 
     frames: list[pd.DataFrame] = []
     for summary in selected:
-        frame = instance_culprits_table(summary)
+        frame = layer2_instance_table(summary)
         if frame.empty:
             continue
         tagged = frame.copy()
@@ -225,10 +226,9 @@ def comparison_errors_table(
     if not frames:
         return pd.DataFrame(
             columns=[
-                "doc_id",
+                "source",
                 "path",
                 "leaf_property",
-                "layer1",
                 "layer2",
                 "score",
                 "exp_value",
@@ -239,7 +239,7 @@ def comparison_errors_table(
         )
 
     combined = pd.concat(frames, ignore_index=True)
-    sort_cols = [series_col, "doc_id", "leaf_property", "path"]
+    sort_cols = [series_col, "source", "leaf_property", "path"]
     return combined.sort_values(
         [col for col in sort_cols if col in combined.columns],
         kind="stable",
@@ -263,10 +263,10 @@ def show_comparison_errors(
     )
     if compare == "prompt":
         title = caption or f"Layer 2 comparison — model={model}"
-        default_sort = ("prompt", "doc_id", "leaf_property", "path")
+        default_sort = ("prompt", "source", "leaf_property", "path")
     else:
         title = caption or f"Layer 2 comparison — prompt={prompt}"
-        default_sort = ("model", "doc_id", "leaf_property", "path")
+        default_sort = ("model", "source", "leaf_property", "path")
     return show_table(frame, caption=title, default_sort=default_sort)
 
 
@@ -314,8 +314,10 @@ def _render_instance_context(
     header = (
         f"**Example context** — `{ctx.checklist}` / `{ctx.check}` / "
         f"`{ctx.model}` / `{ctx.prompt}`  \n"
-        f"`doc_id={ctx.ref.doc_id}` · `steps={list(ctx.steps)}`"
+        f"`source={ctx.ref.source}`"
     )
+    if ctx.steps:
+        header += f" · `steps={list(ctx.steps)}`"
     if ctx.pred_missing:
         header += " · *pred row missing*"
     _display_markdown(header)
@@ -323,7 +325,7 @@ def _render_instance_context(
     preview = ctx.example_preview
     if preview is not None:
         caption = preview.caption or ""
-        _display_markdown(f"**Caption** ({preview.source})  \n{caption}")
+        _display_markdown(f"**Caption**  \n{caption}")
         if preview.image_path is not None and preview.image_path.is_file():
             try:
                 from IPython.display import Image, display
@@ -333,6 +335,12 @@ def _render_instance_context(
                 logger.info("Figure image at %s", preview.image_path)
 
     pred_label = "pred (missing)" if ctx.pred_missing else "pred"
+
+    if not ctx.steps:
+        _display_markdown("**Model output (gold vs pred)**")
+        _display_side_by_side("gold", ctx.expected_output, pred_label, ctx.model_output)
+        return
+
     _display_markdown("**At steps (gold vs pred)**")
     _display_side_by_side("gold", ctx.exp_subtree, pred_label, ctx.pred_subtree)
 
@@ -363,7 +371,7 @@ def show_instance_context(
     ctx: ExampleContext,
     *,
     show_full_eval: bool = False,
-    doc_id: None = None,
+    source: None = None,
     object_path: None = None,
     leaf: None = None,
     include_example_assets: bool = True,
@@ -374,7 +382,19 @@ def show_instance_context(
 def show_instance_context(
     summary: RunSummary,
     *,
-    doc_id: str,
+    source: str,
+    object_path: None = None,
+    leaf: None = None,
+    show_full_eval: bool = False,
+    include_example_assets: bool = True,
+) -> None: ...
+
+
+@overload
+def show_instance_context(
+    summary: RunSummary,
+    *,
+    source: str,
     object_path: str,
     leaf: str,
     show_full_eval: bool = False,
@@ -385,30 +405,39 @@ def show_instance_context(
 def show_instance_context(
     ctx: ExampleContext | RunSummary,
     *,
-    doc_id: str | None = None,
+    source: str | None = None,
     object_path: str | None = None,
     leaf: str | None = None,
     show_full_eval: bool = False,
     include_example_assets: bool = True,
 ) -> None:
-    """Display gold/pred content for one instance.
+    """Display gold/pred content for one model-call source.
 
     Pass a pre-built :class:`ExampleContext`, or a :class:`RunSummary` with
-    ``doc_id``, ``object_path``, and ``leaf`` from a culprits table row.
+    ``source`` to show the full model output for that example. Optionally pass
+    ``object_path`` and ``leaf`` from a culprits table row for one leaf field.
     """
     if isinstance(ctx, ExampleContext):
         _render_instance_context(ctx, show_full_eval=show_full_eval)
         return
 
-    if doc_id is None or object_path is None or leaf is None:
-        raise ValueError(
-            "doc_id, object_path, and leaf are required when passing RunSummary"
+    if source is None:
+        raise ValueError("source is required when passing RunSummary")
+
+    if object_path is None and leaf is None:
+        resolved = inspect_source(
+            ctx,
+            source=source,
+            include_example_assets=include_example_assets,
         )
-    resolved = inspect_instance(
-        ctx,
-        doc_id=doc_id,
-        object_path=object_path,
-        leaf=leaf,
-        include_example_assets=include_example_assets,
-    )
+    elif object_path is not None and leaf is not None:
+        resolved = inspect_instance(
+            ctx,
+            source=source,
+            object_path=object_path,
+            leaf=leaf,
+            include_example_assets=include_example_assets,
+        )
+    else:
+        raise ValueError("pass both object_path and leaf, or neither")
     _render_instance_context(resolved, show_full_eval=show_full_eval)

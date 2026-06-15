@@ -154,11 +154,21 @@ def _parse_flat_records(
     return tuple(records)
 
 
+def record_source(record: FlatRecord) -> str:
+    """Benchmark example path for one flat record (``metadata.source``)."""
+    source = record.metadata.get("source")
+    if isinstance(source, str) and source:
+        return source
+    if record.doc_id:
+        return record.doc_id
+    raise ValueError("FlatRecord has no metadata.source or doc_id")
+
+
 def _find_flat_entry(
     raw: Mapping[str, Any],
     *,
     prompt: str,
-    doc_id: str,
+    source: str,
 ) -> dict[str, Any] | None:
     for prompt_key, prompt_payload in raw.items():
         if not _prompt_matches(prompt_key, [prompt]):
@@ -169,7 +179,12 @@ def _find_flat_entry(
         if not isinstance(flat_entries, list):
             continue
         for entry in flat_entries:
-            if isinstance(entry, dict) and entry.get("doc_id") == doc_id:
+            if not isinstance(entry, dict):
+                continue
+            metadata = entry.get("metadata")
+            if not isinstance(metadata, dict):
+                continue
+            if metadata.get("source") == source:
                 return entry
     return None
 
@@ -179,7 +194,7 @@ def load_record_payloads(
     check: str,
     model: str,
     prompt: str,
-    doc_id: str,
+    source: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Load ``expected_output`` and ``model_output`` for one flat record."""
     analysis_path = EVALUATION_DIR / checklist / check / model / "analysis.json"
@@ -190,27 +205,27 @@ def load_record_payloads(
     if not isinstance(raw, dict):
         raise ValueError(f"Expected object at root of {analysis_path}")
 
-    entry = _find_flat_entry(raw, prompt=prompt, doc_id=doc_id)
+    entry = _find_flat_entry(raw, prompt=prompt, source=source)
     if entry is None:
         raise KeyError(
-            f"No flat record for doc_id={doc_id!r} prompt={prompt!r} in {analysis_path}"
+            f"No flat record for source={source!r} prompt={prompt!r} in {analysis_path}"
         )
 
     expected_output = _parse_payload(entry, "expected_output")
     model_output = _parse_payload(entry, "model_output")
     if expected_output is None or model_output is None:
         raise KeyError(
-            f"Record {doc_id!r} in {analysis_path} is missing expected_output or model_output"
+            f"Record {source!r} in {analysis_path} is missing expected_output or model_output"
         )
     return expected_output, model_output
 
 
-def find_record(summary_records: Sequence[Any], doc_id: str) -> FlatRecord:
-    """Return the :class:`FlatRecord` matching ``doc_id``."""
+def find_record(summary_records: Sequence[Any], *, source: str) -> FlatRecord:
+    """Return the :class:`FlatRecord` matching ``metadata.source``."""
     for record in summary_records:
-        if getattr(record, "doc_id", None) == doc_id:
+        if record_source(record) == source:
             return record
-    raise KeyError(f"No record with doc_id={doc_id!r}")
+    raise KeyError(f"No record with source={source!r}")
 
 
 def ensure_record_payloads(
@@ -226,14 +241,12 @@ def ensure_record_payloads(
         assert record.expected_output is not None
         assert record.model_output is not None
         return record.expected_output, record.model_output
-    if record.doc_id is None:
-        raise ValueError("Cannot load payloads for a record without doc_id")
     return load_record_payloads(
         checklist,
         check,
         model,
         prompt,
-        record.doc_id,
+        record_source(record),
     )
 
 

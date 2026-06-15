@@ -156,6 +156,7 @@ class TestTables:
         assert "scale_bar" in "".join(frame["leaf_property"].tolist())
         assert frame["path"].str.fullmatch(r"outputs\[\d+\]").all()
         assert "outputs[]" not in frame["leaf_property"].iloc[0]
+        assert frame["source"].str.contains("/content/").all()
 
     def test_layer2_errors_empty_on_perfect_prompt1(self, prompt1_summary):
         frame = layer2_instance_table(prompt1_summary)
@@ -164,7 +165,7 @@ class TestTables:
     def test_layer_s_issues_table_columns(self, prompt1_summary):
         frame = layer_s_issues_table(prompt1_summary)
         assert list(frame.columns) == [
-            "doc_id",
+            "source",
             "list_key",
             "structural",
             "location",

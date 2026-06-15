@@ -19,6 +19,7 @@ from soda_mmqc.reporting.load import (
     load_flat_runs,
     load_record_payloads,
     normalize_prompt_name,
+    record_source,
 )
 from soda_mmqc.reporting.compare import (
     ComparisonReport,
@@ -31,6 +32,7 @@ from soda_mmqc.reporting.context import (
     InstanceRef,
     inspect_instance,
     inspect_layer_s_row,
+    inspect_source,
 )
 from soda_mmqc.reporting.display import (
     comparison_errors_table,
@@ -68,6 +70,7 @@ from soda_mmqc.reporting.tables import (
     filter_by_doc,
     filter_by_field,
     filter_by_layer_outcome,
+    filter_by_source,
     layer1_instance_table,
     layer2_instance_table,
     layer_counts_by_property,
@@ -99,11 +102,13 @@ __all__ = [
     "filter_by_doc",
     "filter_by_field",
     "filter_by_layer_outcome",
+    "filter_by_source",
     "find_record",
     "get_at_steps",
     "instance_navigation_path",
     "instance_object_path",
     "inspect_instance",
+    "inspect_source",
     "inspect_layer_s_row",
     "layer1_instance_table",
     "layer2_instance_table",
@@ -118,6 +123,7 @@ __all__ = [
     "normalize_prompt_name",
     "parent_row_steps",
     "path_string_to_steps",
+    "record_source",
     "per_doc_property_table",
     "plot_comparison_layer1",
     "plot_comparison_layer2_binary",

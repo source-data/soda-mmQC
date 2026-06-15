@@ -9,7 +9,7 @@ from typing import Any, Mapping, Sequence
 from soda_mmqc import logger
 from soda_mmqc.core.examples import EXAMPLE_FACTORY
 from soda_mmqc.reporting.aggregate import RunSummary
-from soda_mmqc.reporting.load import ensure_record_payloads, find_record
+from soda_mmqc.reporting.load import ensure_record_payloads, find_record, record_source
 from soda_mmqc.reporting.navigate import (
     PathStep,
     get_at_steps,
@@ -25,6 +25,7 @@ from soda_mmqc.reporting.navigate import (
 class InstanceRef:
     """Locate one eval subtree inside a benchmark example."""
 
+    source: str
     doc_id: str
     steps: tuple[PathStep, ...]
 
@@ -95,14 +96,14 @@ def _resolve_rows(
     model_output: Mapping[str, Any] | None,
     steps: Sequence[PathStep],
     *,
-    doc_id: str,
+    source: str,
     pred_missing: bool,
 ) -> tuple[Any, Any | None, Any, Any | None, dict[str, Any] | None, dict[str, Any] | None]:
     exp_subtree = get_at_steps(
         expected_output,
         steps,
         side="gold",
-        doc_id=doc_id,
+        doc_id=source,
     )
     pred_subtree = (
         None
@@ -111,7 +112,7 @@ def _resolve_rows(
             model_output,
             steps,
             side="pred",
-            doc_id=doc_id,
+            doc_id=source,
         )
     )
 
@@ -123,7 +124,7 @@ def _resolve_rows(
             expected_output,
             row_steps,
             side="gold",
-            doc_id=doc_id,
+            doc_id=source,
         )
         if isinstance(row_value, dict):
             exp_row = dict(row_value)
@@ -132,14 +133,14 @@ def _resolve_rows(
                 model_output,
                 row_steps,
                 side="pred",
-                doc_id=doc_id,
+                doc_id=source,
             )
             if isinstance(pred_row_value, dict):
                 pred_row = dict(pred_row_value)
 
     exp_value = exp_subtree
     pred_value = pred_subtree
-    if isinstance(steps[-1], str):
+    if steps and isinstance(steps[-1], str):
         field = steps[-1]
         if isinstance(exp_row, dict):
             exp_value = exp_row.get(field, exp_subtree)
@@ -149,32 +150,15 @@ def _resolve_rows(
     return exp_subtree, pred_subtree, exp_value, pred_value, exp_row, pred_row
 
 
-def inspect_instance(
+def _build_example_context(
     summary: RunSummary,
+    record: Any,
     *,
-    doc_id: str,
-    steps: Sequence[PathStep] | None = None,
-    object_path: str | None = None,
-    leaf: str | None = None,
-    include_example_assets: bool = True,
-    pred_missing: bool = False,
+    steps: tuple[PathStep, ...],
+    include_example_assets: bool,
+    pred_missing: bool,
 ) -> ExampleContext:
-    """Resolve gold/pred content for one benchmark example.
-
-    Pass either explicit ``steps`` or table-style ``object_path`` and ``leaf``
-    (from culprits columns ``path`` and ``leaf_property``).
-    """
-    if steps is not None:
-        if object_path is not None or leaf is not None:
-            raise ValueError("pass either steps or (object_path, leaf), not both")
-        step_tuple = tuple(steps)
-    elif object_path is not None and leaf is not None:
-        nav_path = instance_navigation_path(object_path, leaf)
-        step_tuple = path_string_to_steps(nav_path)
-    else:
-        raise ValueError("either steps or (object_path, leaf) is required")
-
-    record = find_record(summary.records, doc_id)
+    source = record_source(record)
     expected_output, model_output = ensure_record_payloads(
         record,
         checklist=summary.checklist,
@@ -182,7 +166,8 @@ def inspect_instance(
         model=summary.model,
         prompt=summary.prompt,
     )
-    ref = InstanceRef(doc_id=doc_id, steps=step_tuple)
+    doc_id = record.doc_id or ""
+    ref = InstanceRef(source=source, doc_id=doc_id, steps=steps)
     (
         exp_subtree,
         pred_subtree,
@@ -193,8 +178,8 @@ def inspect_instance(
     ) = _resolve_rows(
         expected_output,
         model_output,
-        step_tuple,
-        doc_id=doc_id,
+        steps,
+        source=source,
         pred_missing=pred_missing,
     )
     return ExampleContext(
@@ -203,7 +188,7 @@ def inspect_instance(
         check=summary.check,
         model=summary.model,
         prompt=summary.prompt,
-        steps=step_tuple,
+        steps=steps,
         exp_subtree=exp_subtree,
         pred_subtree=pred_subtree,
         exp_value=exp_value,
@@ -221,10 +206,62 @@ def inspect_instance(
     )
 
 
+def inspect_source(
+    summary: RunSummary,
+    *,
+    source: str,
+    include_example_assets: bool = True,
+) -> ExampleContext:
+    """Resolve full gold/pred JSON for one model-call source."""
+    record = find_record(summary.records, source=source)
+    return _build_example_context(
+        summary,
+        record,
+        steps=(),
+        include_example_assets=include_example_assets,
+        pred_missing=False,
+    )
+
+
+def inspect_instance(
+    summary: RunSummary,
+    *,
+    source: str,
+    steps: Sequence[PathStep] | None = None,
+    object_path: str | None = None,
+    leaf: str | None = None,
+    include_example_assets: bool = True,
+    pred_missing: bool = False,
+) -> ExampleContext:
+    """Resolve gold/pred content for one leaf instance within a source.
+
+    Pass either explicit ``steps`` or table-style ``object_path`` and ``leaf``
+    (from culprits columns ``path`` and ``leaf_property``).
+    """
+    if steps is not None:
+        if object_path is not None or leaf is not None:
+            raise ValueError("pass either steps or (object_path, leaf), not both")
+        step_tuple = tuple(steps)
+    elif object_path is not None and leaf is not None:
+        nav_path = instance_navigation_path(object_path, leaf)
+        step_tuple = path_string_to_steps(nav_path)
+    else:
+        raise ValueError("either steps or (object_path, leaf) is required")
+
+    record = find_record(summary.records, source=source)
+    return _build_example_context(
+        summary,
+        record,
+        steps=step_tuple,
+        include_example_assets=include_example_assets,
+        pred_missing=pred_missing,
+    )
+
+
 def inspect_layer_s_row(
     summary: RunSummary,
     *,
-    doc_id: str,
+    source: str,
     list_key: str,
     gold_index: int | None = None,
     pred_index: int | None = None,
@@ -243,7 +280,7 @@ def inspect_layer_s_row(
             raise ValueError("missing_row requires gold_index")
         return inspect_instance(
             summary,
-            doc_id=doc_id,
+            source=source,
             steps=steps,
             include_example_assets=include_example_assets,
             pred_missing=True,
@@ -258,7 +295,7 @@ def inspect_layer_s_row(
             raise ValueError("spurious_row requires pred_index")
         return inspect_instance(
             summary,
-            doc_id=doc_id,
+            source=source,
             steps=steps,
             include_example_assets=include_example_assets,
             pred_missing=False,
@@ -274,7 +311,7 @@ def inspect_layer_s_row(
         raise ValueError("Layer S row requires gold_index or pred_index")
     return inspect_instance(
         summary,
-        doc_id=doc_id,
+        source=source,
         steps=steps,
         include_example_assets=include_example_assets,
     )

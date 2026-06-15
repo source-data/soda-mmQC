@@ -55,7 +55,7 @@ class TestComparisonErrorsTable:
         assert "prompt" in frame.columns
         assert set(frame["prompt"].unique()).issubset({"prompt.1", "prompt.2"})
 
-    def test_prompt2_scale_bar_culprits(self, summaries):
+    def test_prompt2_has_layer2_matching_errors(self, summaries):
         frame = comparison_errors_table(
             summaries,
             compare="prompt",
@@ -63,7 +63,8 @@ class TestComparisonErrorsTable:
         )
         prompt2 = frame.loc[frame["prompt"] == "prompt.2"]
         assert not prompt2.empty
-        assert prompt2["leaf_property"].str.contains("scale_bar").any()
+        assert prompt2["layer2"].isin({"FP", "FN", "mismatch"}).all()
+        assert "layer1" not in prompt2.columns
 
     def test_model_contrast_requires_prompt(self, summaries):
         with pytest.raises(ValueError, match="prompt is required"):
@@ -139,10 +140,11 @@ class TestShowTable:
         summary = summaries["gpt-5-mini-2025-08-07", "prompt.2"]
 
         with patch("soda_mmqc.reporting.display.show_table") as mock_show:
-            show_layer2_errors(summary, field="scale_bar_on_image")
+            show_layer2_errors(summary, field="micrograph")
         passed_frame = mock_show.call_args[0][0]
         assert not passed_frame.empty
-        assert (passed_frame["leaf_property"] == "scale_bar_on_image").all()
+        assert (passed_frame["leaf_property"] == "micrograph").all()
+        assert "layer1" not in passed_frame.columns
 
     def test_show_comparison_errors_delegates(self):
         runs = load_flat_runs(

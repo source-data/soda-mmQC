@@ -14,7 +14,7 @@ from soda_mmqc.reporting.aggregate import (
     field_order,
     leaf_property_tail,
 )
-from soda_mmqc.reporting.load import FlatRecord
+from soda_mmqc.reporting.load import FlatRecord, record_source
 from soda_mmqc.reporting.navigate import instance_object_path
 from soda_mmqc.reporting.styles import (
     LAYER1_OUTLIER_OUTCOMES,
@@ -96,11 +96,15 @@ def split_layer2_by_metric(
     return pd.DataFrame(binary_rows), pd.DataFrame(graded_rows)
 
 
-def _instance_location_columns(instance: Mapping[str, Any]) -> dict[str, str]:
-    """Object path and leaf name for instance drill-down tables."""
+def _instance_table_columns(
+    record: FlatRecord,
+    instance: Mapping[str, Any],
+) -> dict[str, str]:
+    """Source, panel path, and leaf field for instance drill-down tables."""
     raw_path = str(instance.get("path") or "")
     raw_leaf = str(instance.get("leaf_property") or "")
     return {
+        "source": record_source(record),
         "path": instance_object_path(raw_path),
         "leaf_property": leaf_property_tail(raw_leaf) if raw_leaf else "",
     }
@@ -114,12 +118,17 @@ def _iter_instances(records: Sequence[FlatRecord]) -> list[dict[str, Any]]:
             continue
         for instance in instances:
             if isinstance(instance, dict):
-                rows.append({**instance, "doc_id": record.doc_id})
+                rows.append(
+                    {
+                        **instance,
+                        **_instance_table_columns(record, instance),
+                    }
+                )
     return rows
 
 
 _LAYER_S_ISSUE_COLUMNS = [
-    "doc_id",
+    "source",
     "list_key",
     "structural",
     "location",
@@ -151,7 +160,7 @@ def layer_s_issues_table(summary: RunSummary) -> pd.DataFrame:
                 alignment_col = f"{side}_alignment"
                 rows.append(
                     {
-                        "doc_id": record.doc_id,
+                        "source": record_source(record),
                         "list_key": list_key,
                         "structural": structural,
                         "location": format_ancestor_context(
@@ -177,8 +186,9 @@ def layer1_instance_table(summary: RunSummary) -> pd.DataFrame:
             continue
         rows.append(
             {
-                "doc_id": instance.get("doc_id"),
-                **_instance_location_columns(instance),
+                "source": instance.get("source"),
+                "path": instance.get("path"),
+                "leaf_property": instance.get("leaf_property"),
                 "layer1": layer1,
                 "exp_value": instance.get("exp_value"),
                 "pred_value": instance.get("pred_value"),
@@ -196,8 +206,9 @@ def layer2_instance_table(summary: RunSummary) -> pd.DataFrame:
             continue
         rows.append(
             {
-                "doc_id": instance.get("doc_id"),
-                **_instance_location_columns(instance),
+                "source": instance.get("source"),
+                "path": instance.get("path"),
+                "leaf_property": instance.get("leaf_property"),
                 "layer2": layer2,
                 "score": instance.get("score"),
                 "exp_value": instance.get("exp_value"),
@@ -217,8 +228,9 @@ def instance_culprits_table(summary: RunSummary) -> pd.DataFrame:
             continue
         rows.append(
             {
-                "doc_id": instance.get("doc_id"),
-                **_instance_location_columns(instance),
+                "source": instance.get("source"),
+                "path": instance.get("path"),
+                "leaf_property": instance.get("leaf_property"),
                 "layer1": layer1,
                 "layer2": layer2,
                 "score": instance.get("score"),
@@ -311,6 +323,12 @@ def filter_by_doc(frame: pd.DataFrame, doc_id: str) -> pd.DataFrame:
     if frame.empty or "doc_id" not in frame.columns:
         return frame
     return frame.loc[frame["doc_id"] == doc_id].reset_index(drop=True)
+
+
+def filter_by_source(frame: pd.DataFrame, source: str) -> pd.DataFrame:
+    if frame.empty or "source" not in frame.columns:
+        return frame
+    return frame.loc[frame["source"] == source].reset_index(drop=True)
 
 
 def filter_by_field(frame: pd.DataFrame, field: str) -> pd.DataFrame:

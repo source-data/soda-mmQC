@@ -66,7 +66,7 @@ class TestComparisonReport:
         assert report.series_labels == (MODEL_MINI, "gpt-5")
         assert "model" in report.errors_table.columns
 
-    def test_prompt_contrast_scale_bar_signal(self, summaries_prompt):
+    def test_prompt_contrast_layer2_errors_only(self, summaries_prompt):
         report = build_comparison_report(
             summaries_prompt,
             compare="prompt",
@@ -76,7 +76,8 @@ class TestComparisonReport:
             report.errors_table["prompt"] == "prompt.2"
         ]
         assert not prompt2_errors.empty
-        assert prompt2_errors["leaf_property"].str.contains("scale_bar").any()
+        assert prompt2_errors["layer2"].isin({"FP", "FN", "mismatch"}).all()
+        assert "layer1" not in prompt2_errors.columns
 
     def test_plot_comparison_layer_s_series(self, summaries_prompt):
         fig = plot_comparison_layer_s(
