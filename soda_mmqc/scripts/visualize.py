@@ -311,7 +311,8 @@ def checklist_visualization(
     metric="semantic_similarity",
     score="score",
     aggregation_level=0,
-    checks=None
+    checks=None,
+    theme: str = "dark"
 ):
     """Create a comprehensive visualization of all checks in a checklist.
     
@@ -320,7 +321,23 @@ def checklist_visualization(
         output_dir: Directory to save the output file
         metric: Metric to visualize
         checks: Optional list of check names to include, in desired order. If None, all checks are used.
+        theme: Plot theme, either 'dark' or 'light'.
     """
+    theme = theme.lower()
+    if theme not in {"dark", "light"}:
+        raise ValueError(f"Invalid theme '{theme}'. Expected 'dark' or 'light'.")
+
+    if theme == "light":
+        template = "plotly_white"
+        scatter_color = "black"
+        error_color = "#666666"
+        subtitle_color = "#555"
+    else:
+        template = "plotly_dark"
+        scatter_color = "white"
+        error_color = "grey"
+        subtitle_color = "#888"
+
     # Get checks for this checklist (all, or the requested subset in order)
     all_checks = get_checks_for_checklist(checklist_name)
     if checks is not None:
@@ -401,7 +418,7 @@ def checklist_visualization(
                 type='data',
                 array=[std_scores[check] for check in checks_with_data],  # Use std in the correct order
                 visible=True,
-                color="grey",
+                color=error_color,
                 thickness=1,
                 width=3
             ),
@@ -429,10 +446,10 @@ def checklist_visualization(
             mode='markers',
             name=prompt,
             marker=dict(
-                color="white",
+                color=scatter_color,
                 size=4,
                 opacity=0.6,
-                line=dict(width=0, color='white'),
+                line=dict(width=0, color=scatter_color),
             ),
             showlegend=True,
             hovertext=plotting_item_data['item_id']
@@ -443,14 +460,14 @@ def checklist_visualization(
         height=1200,
         title=dict(
             text=f'Benchmarking of "{checklist_name.title()}"<br>'
-            f'<span style="font-size: 0.5em; color: #888;">Comparing values with {metric.replace("_", " ")}</span><br>'
-            f'<span style="font-size: 0.5em; color: #888;">Model: {model}</span>',
+            f'<span style="font-size: 0.5em; color: {subtitle_color};">Comparing values with {metric.replace("_", " ")}</span><br>'
+            f'<span style="font-size: 0.5em; color: {subtitle_color};">Model: {model}</span>',
             x=0.5,
             y=0.95
         ),
         title_x=0.5,
         title_font_size=24,
-        template='plotly_dark',
+        template=template,
         xaxis=dict(
             title='Check',
             tickangle=45,
