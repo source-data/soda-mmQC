@@ -8,7 +8,7 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 - **Graded strings** (`item.label`, `panels[].label`) — `string_compare: exact`, `match_threshold: 1.0` (`τ = 1.0`).
 - **`tags`** — extended-primitive leaf (`string[]`): Hungarian element matching, one aggregate `score` on path `tags`. No layer S. No manifest profile → score only.
 - **`panels[]`** — **predictive** per toy schema (model-produced rows): manifest `list_alignment.panels: ["label"]` must match schema and pairs rows by `label`; layer S in `by_list.panels`; then score `panels[k].*` at **gold indices** `k`. This toy schema has no structural collection wrappers (e.g. no `figures[]`).
-- **Manifest** — layer 1 / 2 only on profiled paths (`item.status`, `item.label`, `panels[].status`, `panels[].label`). Unprofiled leaves appear in `by_property` with `mean_score` only (`layer1_counts` / `layer2_counts` = `{}`).
+- **Manifest** — layer 1 / 2 only on profiled paths (`item.status`, `item.label`, `panels[].status`, `panels[].label`). Unprofiled leaves appear in `by_property` with `mean_score` only (`layer1_counts` / `layer2_counts` = `{}`). **`mean_score`** on profiled paths averages scores over `correct_applicable` instances only (Layer 2 eligibility); unprofiled paths average all instances.
 
 ---
 
@@ -37,6 +37,7 @@ Row alignment: manifest `list_alignment.panels → ["label"]` (top-level key, no
 
 Layer 1 applicability reporting: **correct_NA** · **spurious_applicable** · **withheld_applicable** · **correct_applicable**.  
 Layer 2 matching reporting runs only when layer 1 = **correct_applicable**.  
+**`mean_score`** (Layer 2 continuous rollup) averages instance `score`s over `correct_applicable` instances only — not N/A.  
 Layer S structural reporting: **correct_row** · **missing_row** · **spurious_row**.
 
 ---
@@ -159,7 +160,7 @@ Pred = baseline gold.
 | `tags` | 1.0 | `{}` | `{}` |
 | `item.id` | 1.0 | `{}` | `{}` |
 | `item.label` | 1.0 | { correct_applicable: 1 } | { match: 1 } |
-| `item.status` | 1.0 | { correct_NA: 1 } | `{}` |
+| `item.status` | 0.0 | { correct_NA: 1 } | `{}` |
 | `item.meta.author` | 1.0 | `{}` | `{}` |
 | `item.meta.year` | 1.0 | `{}` | `{}` |
 | `panels[].id` | 1.0 | `{}` | `{}` |
@@ -295,7 +296,7 @@ Pred rows swapped; `Fig 1` has wrong `status` and `id`:
 | `panels[1].label` | `"Fig 2"` → `"Fig 2"` | 1.0 | correct_applicable | match |
 | `panels[1].status` | `""` → `""` | 1.0 | correct_NA | — |
 
-**`by_property` (panel leaves only):** `panels[].id` → `mean_score` 0.0; `panels[].label` → `mean_score` 1.0, `layer2_counts` { match: 2 }; `panels[].status` → `mean_score` 0.5, `layer1_counts` { correct_applicable: 1, correct_NA: 1 }, `layer2_counts` { FN: 1 }.
+**`by_property` (panel leaves only):** `panels[].id` → `mean_score` 0.0; `panels[].label` → `mean_score` 1.0, `layer2_counts` { match: 2 }; `panels[].status` → `mean_score` 0.0, `layer1_counts` { correct_applicable: 1, correct_NA: 1 }, `layer2_counts` { FN: 1 }.
 
 ### D.3 Wrong `status` on panel 1 (gold index 1)
 

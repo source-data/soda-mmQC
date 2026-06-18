@@ -47,7 +47,8 @@ That format is obsolete. `JSONEvaluator` has been removed; `run.py` now writes *
 |-------|--------|-------|
 | **S** | `by_list[list_key].row_counts` | Structural row outcomes (`correct_row`, `missing_row`, `spurious_row`) |
 | **1** | `by_property[*].layer1_counts` | Applicability per leaf property |
-| **2** | `by_property[*].layer2_counts` | Matching per leaf property; split by `matching_metric` |
+| **2** | `by_property[*].layer2_counts` | Matching counts per leaf property (stacked bars) |
+| **2 (continuous)** | `by_property[*].mean_score` + pooled `instances` | **Separate** bar + scatter: mean score bar with applicable instance scores overlaid (see [Layer 2 mean score plot](#layer-2-mean-score-plot-bar--instances)) |
 
 **Normative rule** ([evaluation-scoring.md](evaluation-scoring.md)): never pool counts or means across different leaf properties. Charts use **field tail** on the x-axis (`micrograph`, `panel_label`, …), one bar group per property.
 
@@ -231,10 +232,14 @@ For almost all fig-checklist checks there is **one** predictive list — the mod
 - If `by_list` is empty (no predictive array in schema) → omit the Layer S dashboard column.
 - If multiple keys ever appear (schema with more than one `list_alignment` entry) → one Layer S bar chart per key, titled with that key. No need to pick a “primary” from the manifest.
 
-### Layer 1 & 2 (per `leaf_property`)
+### Layer 1 (per `leaf_property`)
 
-- **`mean_score`**: mean of **all instance `score`s** for that property across the run (recompute from pooled `instances`, or equivalently instance-weighted combination of per-doc summaries).
-- **`layer1_counts`**, **`layer2_counts`**: sum instance-level layer outcomes for that property across the run.
+- **`layer1_counts`**: sum instance-level applicability outcomes for that property across the run.
+
+### Layer 2 (per `leaf_property`)
+
+- **`layer2_counts`**: sum instance-level matching outcomes (`correct_applicable` instances only).
+- **`mean_score`**: mean of instance `score`s where layer 1 = `correct_applicable` (same denominator as Layer 2 counts — excludes N/A). Recompute from pooled `instances`, or instance-weighted combination of per-doc summaries. If none eligible, `0.0`.
 
 ### Field ordering (x-axis)
 
@@ -251,7 +256,104 @@ Use `manifest.profile_for(leaf_property).matching_metric`:
 | `binary_polarity` | TP, TN, FP, FN | Stacked bar per field |
 | `graded_string` | match, mismatch | Stacked bar per field |
 
-Unprofiled properties: show `mean_score` only (no Layer 1/2 stacks).
+Unprofiled properties: include in the mean-score plot only (no Layer 1/2 stacks); scatter uses all instances.
+
+---
+
+## Layer 2 mean score plot (bar + instances)
+
+**Purpose:** Show the Layer 2 **continuous** summary (`mean_score`) while exposing the underlying per-instance `score` distribution. Discrete Layer 2 stacked bars (TP/FN, match/mismatch) hide partial credit on graded strings; this plot makes that visible.
+
+**Not in the 4-column dashboard** — a **separate figure** shown alongside `build_dashboard()` (same notebook cell or the next one).
+
+### Data
+
+| Trace | Source | Filter |
+|-------|--------|--------|
+| Bar height | `RunSummary.by_property[leaf_property].mean_score` | Profiled: mean over `correct_applicable` instances only ([evaluation-scoring.md](evaluation-scoring.md)). Unprofiled: mean over all instances. |
+| Scatter points | Pooled `instances` across `summary.records` | Profiled: `layer1 == "correct_applicable"`. Unprofiled: all instances with a numeric `score`. |
+
+**Frame builders** (`plots.py`):
+
+- `mean_scores_frame(summary)` — one row per `leaf_property`: `field`, `mean_score` (existing).
+- `applicable_instance_scores_frame(summary)` — one row per eligible instance: `leaf_property`, `field`, `doc_id`, `path`, `score`, optional `layer2` for hover.
+
+Field order and x-axis labels: same as other property charts (`field_order` + `leaf_property_tail`).
+
+### Plotly construction (numeric x + jitter)
+
+Plotly category axes do not compose well with overlaid scatter jitter. Use **numeric x coordinates** for both traces, then set tick labels to field tails.
+
+```python
+fields = frame["field"].tolist()  # display order
+field_to_x = {field: float(i) for i, field in enumerate(fields)}
+
+# Bar — one trace, all properties
+bar_x = [field_to_x[f] for f in fields]
+fig.add_trace(go.Bar(
+    x=bar_x,
+    y=frame["mean_score"],
+    width=0.55,
+    marker_color=MEAN_SCORE_BAR_COLOR,
+    name="mean score",
+    hovertext=[f"{f}<br>mean: {s:.3f}" for f, s in zip(fields, frame["mean_score"])],
+    hoverinfo="text",
+))
+
+# Scatter — applicable instances, jittered around bar center
+rng = np.random.default_rng(seed)  # fixed seed for reproducible tests/notebooks
+inst = applicable_instance_scores_frame(summary)
+jitter = rng.normal(0, 0.06, size=len(inst))
+scatter_x = [field_to_x[row.field] + j for row, j in zip(inst.itertuples(), jitter)]
+fig.add_trace(go.Scatter(
+    x=scatter_x,
+    y=inst["score"],
+    mode="markers",
+    marker=dict(size=6, color=INSTANCE_SCORE_MARKER_COLOR, opacity=0.65, line=dict(width=0.5, color="white")),
+    name="instance score",
+    hovertext=[
+        f"{row.doc_id}<br>{row.path}<br>score: {row.score:.3f}"
+        + (f"<br>{row.layer2}" if row.layer2 else "")
+        for row in inst.itertuples()
+    ],
+    hoverinfo="text",
+))
+
+fig.update_layout(
+    xaxis=dict(
+        tickmode="array",
+        tickvals=bar_x,
+        ticktext=fields,
+        title="leaf field",
+    ),
+    yaxis=dict(range=[0, 1], title="score"),
+    barmode="overlay",  # bar under scatter
+)
+```
+
+**Jitter:** `Normal(0, σ)` with `σ ≈ 0.04–0.08` (tune so dense runs avoid vertical stacks). Use a **fixed RNG seed** in library code so pytest snapshots and notebook re-runs are stable.
+
+**Bar width:** `0.55` on unit-spaced integer x (adjust if comparison mode adds grouped bars — see below).
+
+### Comparison mode (later)
+
+For prompt/model contrast on the same check, reuse the offset pattern from legacy [`visualize.py`](../soda_mmqc/scripts/visualize.py) (`check_visualization`): per series, `x_offset = (series_index - (n-1)/2) * offset_width`, bars at `field_to_x[field] + x_offset`, scatter at `field_to_x[field] + x_offset + jitter`. Defer to a follow-up `plot_comparison_mean_score(...)` after single-run plot lands.
+
+### API
+
+| Function | Purpose |
+|----------|---------|
+| `plot_mean_score_with_instances(summary, *, title, seed=0)` | **New** — bar + jittered scatter (replaces plain `plot_mean_score_bars` as the primary mean-score chart) |
+| `plot_mean_score_bars(frame, *, title)` | **Deprecated / thin wrapper** — bars only; keep for backward compat or remove once notebook migrates |
+
+**Notebook:**
+
+```python
+from soda_mmqc.reporting.plots import build_dashboard, plot_mean_score_with_instances
+
+build_dashboard(s).show()
+plot_mean_score_with_instances(s, title=f"{s.check} — scores").show()
+```
 
 ---
 
@@ -277,7 +379,8 @@ Distinct colour palettes per layer (notebook: `LAYER_S_COLORS`, `LAYER1_COLORS`,
 | `plot_layer_s_bar(counts, *, title)` | Single-run structural outcomes |
 | `plot_layer1_stacked(df, *, title)` | x = field tail, stack = Layer 1 outcomes |
 | `plot_layer2_stacked(df, order, colors, *, title)` | x = field tail; binary or graded |
-| `plot_mean_score_bars(df, *, title)` | Supplementary: per-property `mean_score` |
+| `plot_mean_score_with_instances(summary, *, title, seed=0)` | **Layer 2 continuous:** bar = `mean_score`, scatter = applicable instance `score`s (numeric x + jitter) |
+| `plot_mean_score_bars(df, *, title)` | Bars only (legacy / tests); prefer `plot_mean_score_with_instances` |
 | `plot_comparison_layer1(runs, *, mode)` | Grouped/stacked: x = field, series = prompt or model |
 | `plot_comparison_layer2_binary(...)` | Comparison for binary properties |
 | `plot_comparison_layer2_graded(...)` | Comparison for graded properties |
@@ -293,6 +396,8 @@ Mirror the notebook:
 4. **Layer 2 graded** — match/mismatch by field
 
 One legend per Layer 1 / L2 subplot (not a single global legend).
+
+**Separate figure:** [`plot_mean_score_with_instances`](#layer-2-mean-score-plot-bar--instances) — not a fifth dashboard column (different y semantics and trace mix).
 
 ### Comparison layout (multi run)
 
@@ -587,6 +692,19 @@ Plots (Phase 3) do not depend on this phase.
 - Tests: `tests/test_reporting_plots.py`
 - [`reporting.ipynb`](../notebooks/reporting.ipynb) — dashboard + prompt contrast charts
 
+### Phase 3.1 — Layer 2 mean score plot *(planned)*
+
+Depends on **Phase 5.2** `mean_score` denominator ([evaluation-implementation-plan.md](evaluation-implementation-plan.md)) so bar heights match scatter eligibility.
+
+| Step | Work |
+|------|------|
+| 1 | `aggregate.py` — filter `mean_score` to `correct_applicable` (profiled paths) |
+| 2 | `applicable_instance_scores_frame(summary)` in `plots.py` |
+| 3 | `plot_mean_score_with_instances` — `go.Bar` + `go.Scatter` with numeric x and seeded jitter; styles in `styles.py` |
+| 4 | Wire [`reporting.ipynb`](../notebooks/reporting.ipynb) — show after dashboard |
+| 5 | Tests: bar count = profile count; scatter count = eligible instances; fixed seed → stable x positions; hover columns present |
+| 6 | Optional later: `plot_comparison_mean_score` (grouped bars + offset jitter, legacy `visualize.py` pattern) |
+
 ### Phase 4 — Comparison mode in notebooks ✅ *complete*
 
 - `compare.py`: `ComparisonReport`, `build_comparison_report()`, `show_comparison_report()`
@@ -617,6 +735,7 @@ Plots (Phase 3) do not depend on this phase.
 | Table column schema | Golden snapshot of column names + dtypes per builder |
 | `show_table` smoke | Returns without error when itables installed (optional marker) |
 | Comparison plot data | N series × M profiled fields on x-axis |
+| `plot_mean_score_with_instances` | 2 traces (bar + scatter); scatter x within ±0.15 of bar center; eligible instance count matches manual filter |
 | `get_at_steps` | `["outputs", 2, "micrograph"]`, collated `["papers", 0, "figures", 1, "outputs", 3, "label"]` |
 | `inspect_instance` | Known prompt.2 row → correct `exp_value` / `pred_value` at leaf path |
 | `show_instance_context` | Figure example loads image from `metadata.source`; missing_row shows gold only |
@@ -681,7 +800,7 @@ Review before implementation:
 
 | # | Question | Recommendation |
 |---|----------|----------------|
-| ~~1~~ | ~~Cross-doc `mean_score`~~ | **Resolved:** instance mean per `leaf_property` (pool all leaf instances; no per-figure tier). See [Aggregation rules](#aggregation-rules). |
+| ~~1~~ | ~~Cross-doc `mean_score`~~ | **Resolved:** instance mean per `leaf_property` over `correct_applicable` instances (profiled paths); unprofiled paths pool all instances. No per-figure tier. See [Aggregation rules](#aggregation-rules). |
 | ~~2~~ | ~~Multiple predictive lists / `by_list` keys~~ | **Resolved:** Layer S uses keys from `analysis["by_list"]` (the aligned **row array**, not leaf fields). Fig-checklist checks typically have one key (`outputs` or `papers.figures.outputs`). See [Terminology](#terminology-predictive-list-vs-leaf-property-vs-by_list-key). |
 | ~~3~~ | ~~Checklist-level overview in v1?~~ | **Resolved: no.** Single-check reporting only for v1; no checklist-wide summary or index page. |
 | ~~4~~ | ~~Package name~~ | **Resolved:** `soda_mmqc/reporting/` |

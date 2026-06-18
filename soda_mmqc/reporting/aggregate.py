@@ -8,6 +8,7 @@ from typing import Any, Iterator, Mapping, Sequence
 
 from soda_mmqc.core.eval_manifest import EvalManifest
 
+from soda_mmqc.core.property_rollup import property_mean_score
 from soda_mmqc.reporting.load import FlatRun, FlatRuns
 
 
@@ -101,12 +102,9 @@ def aggregate_run(run: FlatRun) -> RunSummary:
 
     by_property: dict[str, PropertyRollup] = {}
     for leaf_property, instances in grouped.items():
-        scores = [
-            float(inst["score"])
-            for inst in instances
-            if isinstance(inst.get("score"), (int, float))
-        ]
-        mean_score = sum(scores) / len(scores) if scores else 0.0
+        profile = run.manifest.profile_for(leaf_property)
+        profiled = profile is not None and profile.is_profiled
+        mean_score = property_mean_score(instances, profiled=profiled)
         layer1 = Counter(
             inst["layer1"]
             for inst in instances

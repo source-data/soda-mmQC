@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import plotly.io as pio
 import pytest
 
 from soda_mmqc.reporting import (
@@ -16,10 +17,16 @@ from soda_mmqc.reporting import (
     plot_layer2_stacked,
     plot_layer_s_bar,
     plot_mean_score_bars,
+    plot_mean_score_with_instances,
     split_layer2_by_metric,
     summarize_runs,
 )
-from soda_mmqc.reporting.plots import mean_scores_frame
+from soda_mmqc.reporting.plots import (
+    _field_numeric_positions,
+    applicable_instance_scores_frame,
+    mean_scores_frame,
+)
+from soda_mmqc.reporting.styles import MEAN_SCORE_BAR_SPACING, PLOTLY_TEMPLATE
 from soda_mmqc.reporting.styles import (
     LAYER1_ORDER,
     LAYER1_TITLE,
@@ -108,8 +115,25 @@ class TestSingleRunPlots:
         assert len(fig.data) == 1
         assert len(fig.data[0].y) == len(frame)
 
+    def test_plot_mean_score_with_instances(self, prompt1_summary):
+        frame = mean_scores_frame(prompt1_summary)
+        inst = applicable_instance_scores_frame(prompt1_summary)
+        fields = frame["field"].tolist()
+        field_to_x = _field_numeric_positions(fields, spacing=MEAN_SCORE_BAR_SPACING)
+        fig = plot_mean_score_with_instances(prompt1_summary, seed=0)
+        assert len(fig.data) == 2
+        assert fig.data[0].type == "bar"
+        assert fig.data[1].type == "scatter"
+        assert fig.data[0].marker.color in ("#000000", "rgb(0, 0, 0)", "#000")
+        assert len(fig.data[1].x) == len(inst)
+        for x_val, row in zip(fig.data[1].x, inst.itertuples(index=False), strict=True):
+            assert abs(x_val - field_to_x[row.field]) <= 0.25
+        fig_repeat = plot_mean_score_with_instances(prompt1_summary, seed=0)
+        assert list(fig.data[1].x) == list(fig_repeat.data[1].x)
+
     def test_build_dashboard_layout(self, prompt1_summary):
         fig = build_dashboard(prompt1_summary)
+        assert fig.layout.template == pio.templates[PLOTLY_TEMPLATE]
         assert fig.layout.barmode == "stack"
         assert hasattr(fig.layout, "xaxis4")
         assert len(fig.data) >= 4

@@ -33,6 +33,7 @@ from soda_mmqc.core.leaves import (
 )
 from soda_mmqc.core.object_list_pairing import align_object_rows
 from soda_mmqc.core.schema_discovery import LeafKind
+from soda_mmqc.core.property_rollup import property_mean_score
 from soda_mmqc.core.structural_reporting import ByListResult, build_by_list
 
 
@@ -191,7 +192,7 @@ class FlatEvaluator:
                     self._evaluate_row_leaves(exp, pred, leaf_spec, pairings)
                 )
 
-        by_property = _summarize_by_property(instances, leaf_specs)
+        by_property = _summarize_by_property(instances, leaf_specs, self.manifest)
         return EvaluationResult(
             instances=tuple(instances),
             by_list=by_list,
@@ -417,6 +418,7 @@ def score_leaf_pair(
 def _summarize_by_property(
     instances: Sequence[LeafInstanceResult],
     leaf_specs: Sequence[EvalLeafSpec],
+    manifest: EvalManifest,
 ) -> dict[str, PropertySummary]:
     grouped: dict[str, list[LeafInstanceResult]] = defaultdict(list)
     for instance in instances:
@@ -425,10 +427,10 @@ def _summarize_by_property(
     summaries: dict[str, PropertySummary] = {}
     for leaf_spec in leaf_specs:
         property_instances = grouped.get(leaf_spec.eval_pattern, ())
+        profile = manifest.profile_for(leaf_spec.eval_pattern)
+        profiled = profile is not None and profile.is_profiled
         if property_instances:
-            mean_score = sum(item.score for item in property_instances) / len(
-                property_instances
-            )
+            mean_score = property_mean_score(property_instances, profiled=profiled)
             layer1_counts = Counter(
                 item.layer1 for item in property_instances if item.layer1
             )

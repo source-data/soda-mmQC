@@ -75,6 +75,11 @@ class TestExampleA:
             "layer1_counts": {"correct_applicable": 1},
             "layer2_counts": {"match": 1},
         }
+        assert _property_summary(result, "item.status") == {
+            "mean_score": 0.0,
+            "layer1_counts": {"correct_NA": 1},
+            "layer2_counts": {},
+        }
         assert _property_summary(result, "panels[].status") == {
             "mean_score": 1.0,
             "layer1_counts": {"correct_applicable": 1, "correct_NA": 1},
@@ -152,7 +157,7 @@ class TestExampleD:
         assert _instance(result, "panels[0].id")["score"] == 0.0
         assert _instance(result, "panels[1].label")["layer2"] == "match"
         assert _property_summary(result, "panels[].status")["mean_score"] == pytest.approx(
-            0.5
+            0.0
         )
 
     def test_d3_spurious_panel_status(self, evaluator: FlatEvaluator):

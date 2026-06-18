@@ -36,7 +36,8 @@ There is no global string metric: each free-text `graded_string` field declares 
 
 | Term | Meaning at a **primitive leaf** |
 |------|----------------------------------|
-| `**score**` | Numeric quality in `**[0, 1]**` (exact → `0`/`1`; fuzzy / semantic → graded). Aggregated per property as `mean_score` in `by_property`. |
+| `**score**` | Numeric quality in `**[0, 1]**` (exact → `0`/`1`; fuzzy / semantic → graded). Per-instance; always computed before layer labeling. |
+| **`mean_score`** | Layer 2 rollup in `by_property`: mean of instance `score`s where layer 1 = `correct_applicable` only (excludes N/A). Unprofiled leaves: mean over all instances. |
 | **Validity / kind signals** | Hard failures (`enum` violation, type mismatch) → `**score == 0**` before layer reporting. |
 
 **Normative split:** the leaf comparator returns **`score`** (and compared values). **Layer 1 / layer 2** (applicability, TP/FP/FN/TN, match/mismatch) come from the manifest profile on that leaf property — see [evaluation-scoring.md](evaluation-scoring.md). **Layer S** (`correct_row`, `missing_row`, `spurious_row`) applies only to **predictive** list-of-objects row slots in `by_list`, not to structural container lists, extended primitives, or scalar leaves. No container roll-up in the flat model.
@@ -62,7 +63,7 @@ For free `string` leaves with `matching_metric: graded_string`, declare **`strin
 If the schema lists `enum`, compare **exactly**; **do not** set `string_compare` on the manifest profile. Pred outside `enum` → **`score = 0`**.
 
 - **N/A sentinel enums** (e.g. `["", "yes", "no"]` where `""` = not applicable): `""` is a **class**, not “empty wrong text.” Which literal is N/A and which is positive/negative is in **`eval-manifest.json`** (`na_values`, `positive_value`, `negative_value`). Layer 1 / 2: [evaluation-scoring.md](evaluation-scoring.md).
-- **Multiclass enums** (`matching_metric: multiclass`): exact literal match → layer 2 **match** / **mismatch**; `mean_score` over instances.
+- **Multiclass enums** (`matching_metric: multiclass`): exact literal match → layer 2 **match** / **mismatch**; `mean_score` over `correct_applicable` instances only.
 - **Binary polarity enums** (`matching_metric: binary_polarity`): exact class match; layer 2 **TP** / **FP** / **FN** / **TN** on gold-applicable instances only. No `match_threshold`.
 
 ## Numbers and integers
@@ -87,11 +88,13 @@ Do not use truthiness that conflates `""`, `null`, and absent keys.
 
 If the schema allows `**null**` at a leaf (`type` union includes `"null"`), `null` vs `null` → full **`score`**; `null` vs non-null → `score = 0`.
 
-## `score` vs layer 2 “match”
+## Instance `score` vs Layer 2 reporting
 
-Leaves often return **partial credit** on `graded_string` paths (e.g. semantic similarity `0.4`). Layer 2 **match** / **mismatch** is **`score >= match_threshold`** — separate from `mean_score`, which averages raw scores across instances of that property. A high `score` below τ still counts as layer 2 **mismatch** but raises `mean_score`.
+Every instance receives a **`score`**. Layer 1 labels applicability; Layer 2 assigns discrete labels (**match** / **mismatch**, TP/FP/FN/TN) only when layer 1 = `correct_applicable`.
 
-For `binary_polarity` and `multiclass` enums, layer 2 is **class identity**, not thresholded graded match.
+**`mean_score`** is the Layer 2 **continuous** summary: average instance `score` over `correct_applicable` instances only (not over N/A). On `graded_string` paths, a high `score` below `match_threshold` still counts as Layer 2 **mismatch** but contributes to `mean_score`. Example: semantic similarity `0.85` with threshold `0.8` → **match** and `mean_score` includes `0.85`.
+
+For `binary_polarity` and `multiclass` enums, Layer 2 discrete labels use exact class identity, not a similarity threshold.
 
 ## Output shape at a leaf (conceptual)
 

@@ -20,7 +20,7 @@
       }
     },
     "item.status": {
-      "mean_score": 1.0,
+      "mean_score": 0.0,
       "layer1_counts": {
         "correct_NA": 1
       },
@@ -51,7 +51,7 @@
       }
     },
     "panels[].status": {
-      "mean_score": 0.5,
+      "mean_score": 0.0,
       "layer1_counts": {
         "correct_applicable": 1,
         "correct_NA": 1

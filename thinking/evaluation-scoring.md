@@ -84,7 +84,7 @@ flowchart LR
 3. **Score extended primitives** — compare array-of-primitives leaves (e.g. `tags`) as a single leaf instance with aggregate `score` (see [List of primitives](#list-of-primitives)).
 4. **Score row leaves** — at each gold row index: use the paired pred row (Hungarian for predictive lists, positional for structural lists); `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
 5. **Report** — layer 1 applicability reporting, then layer 2 matching reporting when layer 1 = `correct_applicable`.
-6. **Summarize** — required `by_property` per leaf property key; `by_list` only for predictive lists.
+6. **Summarize** — required `by_property` per leaf property key (`mean_score` as Layer 2 rollup over `correct_applicable` instances only; `layer1_counts`; `layer2_counts`); `by_list` only for predictive lists.
 
 Missing required values, disallowed `null`, and `missing_row` gold indices → `score = 0` on the affected leaf instance unless a profile defines otherwise.
 
@@ -126,7 +126,7 @@ For **each** leaf property key, the comparator **must** return:
 
 | Field | Description |
 |-------|-------------|
-| `mean_score` | Mean of instance `score`s for this property only |
+| `mean_score` | **Layer 2** continuous rollup: mean of instance `score`s where layer 1 = `correct_applicable` (same eligibility as `layer2_counts`). Excludes N/A and other non-applicable instances so empty-string matches do not dominate. If no eligible instances, `0.0`. Unprofiled properties: mean over all instances (no applicability axis). |
 | `layer1_counts` | Layer 1 applicability reporting counts (manifest-profiled instances) |
 | `layer2_counts` | Layer 2 matching reporting counts (instances with `correct_applicable`) |
 
@@ -155,7 +155,7 @@ Properties without a manifest profile still appear with `mean_score`; `layer1_co
       "layer2_counts": { "match": 1 }
     },
     "item.status": {
-      "mean_score": 1.0,
+      "mean_score": 0.0,
       "layer1_counts": { "correct_NA": 1 },
       "layer2_counts": {}
     },
@@ -544,6 +544,8 @@ For each instance with a manifest profile:
 ## Layer 2 — Matching
 
 Runs only when layer 1 = **correct_applicable**. Denominator: instances where gold was applicable.
+
+**`mean_score`** in `by_property` is the **Layer 2 continuous summary**: the mean of instance `score`s over the same `correct_applicable` instances that receive Layer 2 labels. Instances with `correct_NA`, `withheld_applicable`, or `spurious_applicable` are **excluded** — otherwise N/A fields (e.g. matching `""` on scale-bar quotes for non-micrograph panels) would inflate the average. When a profiled property has no `correct_applicable` instances, `mean_score` is `0.0`.
 
 **TP**, **FP**, **FN**, and **TN** are **layer 2 matching reporting outcomes only** — value-level polarity on profiled leaves (`binary_polarity`). They do **not** describe missing or spurious **rows**; those are layer S (`missing_row`, `spurious_row`).
 

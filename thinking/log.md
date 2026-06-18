@@ -114,7 +114,13 @@ grep '^## \[' thinking/log.md | tail -5
 
 ## [2026-06-12] design | `load_flat_runs`: multi-model + multi-prompt loading; `RunSummaries` keyed by `(model, prompt)`.
 
-## [2026-06-12] design | Run-level `mean_score`: pool all leaf instances per property (no per-figure hierarchical average).
+## [2026-06-18] impl | Phase 5.2 + 3.1: `property_rollup.py` (mean_score over `correct_applicable`); `plot_mean_score_with_instances` (bar + jittered scatter); tests + `benchmarking.md`.
+
+## [2026-06-16] design | **Layer 2 mean score plot:** separate bar (`mean_score`) + jittered scatter (applicable instance scores); numeric x + `go.Bar`/`go.Scatter`; Phase 3.1 in `visualization-plan.md`.
+
+## [2026-06-16] design | **`mean_score` as Layer 2 rollup:** average instance `score`s over `correct_applicable` only (exclude N/A); normative updates in `evaluation-scoring.md`, `evaluation-leaf-primitives.md`, `visualization-plan.md`, toy examples; implementation **Phase 5.2** in `evaluation-implementation-plan.md`.
+
+## [2026-06-12] design | Run-level `mean_score`: pool all leaf instances per property (no per-figure hierarchical average). *(Superseded for profiled paths by 2026-06-16: pool only `correct_applicable` instances.)*
 
 ## [2026-06-12] design | Viz plan: clarify Layer S `by_list` keys (row arrays) vs leaf properties; open decision #2 resolved.
 

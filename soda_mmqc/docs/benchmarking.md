@@ -113,7 +113,7 @@ match     if score >= match_threshold
 mismatch  otherwise
 ```
 
-A semantic similarity of `0.85` with `match_threshold: 0.8` counts as a **match**, even though the strings differ. The property’s `mean_score` still reflects the raw `0.85`.
+A semantic similarity of `0.85` with `match_threshold: 0.8` counts as a **match**, even though the strings differ. The property’s `mean_score` averages raw scores over **applicable** instances only (`layer1 = correct_applicable`), so N/A fields do not inflate the average.
 
 For **yes/no** fields (`binary_polarity`), the discrete label is **TP**, **FP**, **FN**, or **TN** from exact class identity — not a similarity threshold.
 
@@ -266,7 +266,7 @@ JSON Schema `enum` lists allowed literals but does not define which mean N/A or 
 | Section | Contents |
 |---------|----------|
 | `instances` | One record per leaf instance: `path`, `leaf_property`, `exp_value`, `pred_value`, `score`, optional `layer1` / `layer2` |
-| `by_property` | Per leaf property: `mean_score`, `layer1_counts`, `layer2_counts` |
+| `by_property` | Per leaf property: `mean_score` (Layer 2 mean over applicable instances only), `layer1_counts`, `layer2_counts` |
 | `by_list` | Per object list (e.g. `outputs`): `row_counts`, per-row alignment detail |
 
 The `evaluate` CLI stores one such result per benchmark example in `data/evaluation/{checklist}/{check}/{model}/analysis.json`, under each prompt key’s `flat` array. See the README **Benchmarking system** section for the on-disk layout.

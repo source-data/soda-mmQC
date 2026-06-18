@@ -162,6 +162,27 @@ Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 
 ---
 
+## Phase 5.2 — Layer 2 `mean_score` denominator *(planned)*
+
+**Normative change** ([evaluation-scoring.md](evaluation-scoring.md#layer-2--matching)): `mean_score` is a **Layer 2 continuous rollup**. Average instance `score`s over **`correct_applicable` instances only** — same eligibility as `layer2_counts`. Exclude `correct_NA`, `withheld_applicable`, and `spurious_applicable` so N/A fields (matching `""`) do not dominate. If no eligible instances on a profiled property, `mean_score` = `0.0`. Unprofiled properties unchanged (mean over all instances).
+
+**Code changes required:**
+
+| Location | Change |
+|----------|--------|
+| [`evaluation.py`](../soda_mmqc/core/evaluation.py) `_summarize_by_property` | Filter to `layer1 == "correct_applicable"` before averaging; unprofiled properties keep all instances |
+| [`reporting/aggregate.py`](../soda_mmqc/reporting/aggregate.py) `_pool_instances` / `aggregate_run` | Same filter when pooling `instances` across a run |
+| [`tests/test_evaluation.py`](../tests/test_evaluation.py) | Update expectations for mixed applicable/N/A properties |
+| [`tests/fixtures/evaluation_snapshots/`](../tests/fixtures/evaluation_snapshots/) | Regenerate golden `by_property` snapshots |
+| [`tests/test_run_analyze_results.py`](../tests/test_run_analyze_results.py) | Adjust if integration asserts on `mean_score` for N/A-heavy fields |
+| [`soda_mmqc/docs/benchmarking.md`](../soda_mmqc/docs/benchmarking.md) | Document Layer 2 `mean_score` rule (after normative sign-off) |
+
+**Toy example deltas:** `item.status` (N/A only) → `mean_score` `0.0`; `panels[].status` in D.2 → `0.0` not `0.5` (one applicable instance at score `0.0`).
+
+**Out of scope:** changing per-instance `score` computation or Layer 1 / Layer 2 label rules.
+
+---
+
 ## Phase 6 — Integration
 
 - Rewire `soda_mmqc/scripts/run.py`

@@ -4,15 +4,20 @@ from __future__ import annotations
 
 from typing import Any, Literal, Mapping, Sequence
 
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+from soda_mmqc.core.property_rollup import instance_eligible_for_mean_score
 from soda_mmqc.reporting.aggregate import RunSummaries, RunSummary, field_order, leaf_property_tail
 from soda_mmqc.reporting.styles import (
     COMPARISON_SERIES_OPACITIES,
     COMPARISON_SERIES_PATTERNS,
+    INSTANCE_SCORE_MARKER_COLOR,
+    INSTANCE_SCORE_MARKER_BORDER_COLOR,
+    INSTANCE_SCORE_MARKER_BORDER_WIDTH,
     LAYER1_COLORS,
     LAYER1_ORDER,
     LAYER1_TITLE,
@@ -22,9 +27,16 @@ from soda_mmqc.reporting.styles import (
     LAYER2_GRADED_COLORS,
     LAYER2_GRADED_ORDER,
     LAYER2_GRADED_TITLE,
+    MEAN_SCORE_BAR_COLOR,
+    MEAN_SCORE_BAR_SPACING,
+    MEAN_SCORE_BAR_WIDTH,
+    MEAN_SCORE_JITTER_STDDEV,
+    MEAN_SCORE_PLOT_TITLE,
+    MEAN_SCORE_Y_MAX,
     LAYER_S_COLORS,
     LAYER_S_ORDER,
     LAYER_S_TITLE,
+    PLOTLY_TEMPLATE,
 )
 from soda_mmqc.reporting.tables import layer_counts_by_property, split_layer2_by_metric
 
@@ -65,6 +77,12 @@ def _zero_rangemode() -> dict[str, str]:
     return {"rangemode": "tozero"}
 
 
+def _apply_plot_template(fig: go.Figure) -> go.Figure:
+    """Apply the shared Plotly template to a reporting figure."""
+    fig.update_layout(template=PLOTLY_TEMPLATE)
+    return fig
+
+
 def mean_scores_frame(summary: RunSummary) -> pd.DataFrame:
     """Per-property mean scores for supplementary bar charts."""
     rows: list[dict[str, Any]] = []
@@ -78,6 +96,132 @@ def mean_scores_frame(summary: RunSummary) -> pd.DataFrame:
             }
         )
     return pd.DataFrame(rows)
+
+
+def applicable_instance_scores_frame(summary: RunSummary) -> pd.DataFrame:
+    """Eligible instance scores for mean-score scatter overlay."""
+    rows: list[dict[str, Any]] = []
+    for record in summary.records:
+        instances = record.analysis.get("instances", ())
+        if not isinstance(instances, list):
+            continue
+        doc_id = record.doc_id or ""
+        for instance in instances:
+            if not isinstance(instance, dict):
+                continue
+            leaf_property = instance.get("leaf_property")
+            if not isinstance(leaf_property, str):
+                continue
+            profile = summary.manifest.profile_for(leaf_property)
+            profiled = profile is not None and profile.is_profiled
+            if not instance_eligible_for_mean_score(instance, profiled=profiled):
+                continue
+            score = instance.get("score")
+            if not isinstance(score, (int, float)):
+                continue
+            layer2 = instance.get("layer2")
+            rows.append(
+                {
+                    "leaf_property": leaf_property,
+                    "field": leaf_property_tail(leaf_property),
+                    "doc_id": doc_id,
+                    "path": instance.get("path", ""),
+                    "score": float(score),
+                    "layer2": layer2 if isinstance(layer2, str) else None,
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def _field_numeric_positions(
+    fields: Sequence[str],
+    *,
+    spacing: float = 1.0,
+) -> dict[str, float]:
+    return {field: float(index) * spacing for index, field in enumerate(fields)}
+
+
+def plot_mean_score_with_instances(
+    summary: RunSummary,
+    *,
+    title: str | None = None,
+    seed: int = 0,
+) -> go.Figure:
+    """Layer 2 mean score bars with jittered applicable instance scores."""
+    frame = mean_scores_frame(summary)
+    inst = applicable_instance_scores_frame(summary)
+    if title is None:
+        title = MEAN_SCORE_PLOT_TITLE
+    if frame.empty:
+        fig = go.Figure()
+        fig.update_layout(title=title)
+        return _apply_plot_template(fig)
+
+    fields = frame["field"].tolist()
+    field_to_x = _field_numeric_positions(fields, spacing=MEAN_SCORE_BAR_SPACING)
+    bar_x = [field_to_x[field] for field in fields]
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=bar_x,
+            y=frame["mean_score"],
+            width=MEAN_SCORE_BAR_WIDTH,
+            marker_color=MEAN_SCORE_BAR_COLOR,
+            name="mean score",
+            hovertext=[
+                f"{field}<br>mean: {score:.3f}"
+                for field, score in zip(fields, frame["mean_score"], strict=True)
+            ],
+            hoverinfo="text",
+        )
+    )
+
+    if not inst.empty:
+        rng = np.random.default_rng(seed)
+        jitter = rng.normal(0, MEAN_SCORE_JITTER_STDDEV, size=len(inst))
+        scatter_x = [
+            field_to_x[row.field] + offset
+            for row, offset in zip(inst.itertuples(index=False), jitter, strict=True)
+        ]
+        hover_lines = []
+        for row in inst.itertuples(index=False):
+            text = f"{row.doc_id}<br>{row.path}<br>score: {row.score:.3f}"
+            if row.layer2:
+                text += f"<br>{row.layer2}"
+            hover_lines.append(text)
+        fig.add_trace(
+            go.Scatter(
+                x=scatter_x,
+                y=inst["score"],
+                mode="markers",
+                name="instance score",
+                marker=dict(
+                    size=8,
+                    color=INSTANCE_SCORE_MARKER_COLOR,
+                    opacity=0.85,
+                    line=dict(
+                        width=INSTANCE_SCORE_MARKER_BORDER_WIDTH,
+                        color=INSTANCE_SCORE_MARKER_BORDER_COLOR,
+                    ),
+                ),
+                hovertext=hover_lines,
+                hoverinfo="text",
+            )
+        )
+
+    fig.update_layout(
+        title=title,
+        barmode="overlay",
+        xaxis=dict(
+            tickmode="array",
+            tickvals=bar_x,
+            ticktext=fields,
+            title="leaf field",
+        ),
+        yaxis=dict(range=[0, MEAN_SCORE_Y_MAX], title="score"),
+    )
+    return _apply_plot_template(fig)
 
 
 def _primary_layer_s_counts(summary: RunSummary) -> dict[str, int]:
@@ -191,7 +335,7 @@ def _plot_comparison_stacked(
     if not fields or not series_order:
         fig = go.Figure()
         fig.update_layout(title=title)
-        return fig
+        return _apply_plot_template(fig)
 
     rows, cols = _comparison_subplot_grid(len(fields))
     fig = make_subplots(
@@ -251,7 +395,7 @@ def _plot_comparison_stacked(
 
     if not fig.data:
         fig.update_layout(title=title)
-        return fig
+        return _apply_plot_template(fig)
 
     fig.update_layout(
         title=title,
@@ -266,7 +410,7 @@ def _plot_comparison_stacked(
     )
     fig.update_yaxes(rangemode="tozero", title_text="count", col=1)
     fig.update_xaxes(title_text=series_label, tickangle=-25, row=rows)
-    return fig
+    return _apply_plot_template(fig)
 
 
 def plot_layer_s_bar(
@@ -287,7 +431,7 @@ def plot_layer_s_bar(
         yaxis_title="count",
         yaxis=_zero_rangemode(),
     )
-    return fig
+    return _apply_plot_template(fig)
 
 
 def plot_layer1_stacked(
@@ -333,7 +477,7 @@ def _plot_property_stacked(
     if frame.empty:
         fig = go.Figure()
         fig.update_layout(title=title)
-        return fig
+        return _apply_plot_template(fig)
 
     melted = frame.melt(
         id_vars=["leaf_property", "field"],
@@ -355,7 +499,7 @@ def _plot_property_stacked(
         labels={"field": "leaf field", "outcome": outcome_label},
     )
     fig.update_layout(yaxis=_zero_rangemode())
-    return fig
+    return _apply_plot_template(fig)
 
 
 def plot_mean_score_bars(
@@ -367,7 +511,7 @@ def plot_mean_score_bars(
     if frame.empty:
         fig = go.Figure()
         fig.update_layout(title=title)
-        return fig
+        return _apply_plot_template(fig)
     fig = px.bar(
         frame,
         x="field",
@@ -377,7 +521,7 @@ def plot_mean_score_bars(
         labels={"field": "leaf field", "mean_score": "mean score"},
     )
     fig.update_layout(yaxis=dict(range=[0, 1]))
-    return fig
+    return _apply_plot_template(fig)
 
 
 def plot_comparison_layer_s(
@@ -434,7 +578,7 @@ def plot_comparison_layer_s(
         yaxis_title="count",
         yaxis=_zero_rangemode(),
     )
-    return fig
+    return _apply_plot_template(fig)
 
 
 def plot_comparison_layer1(
@@ -684,4 +828,4 @@ def build_dashboard(
     for col, legend_layout in _DASHBOARD_LEGEND_LAYOUT.items():
         layout_kwargs[f"legend{col}"] = legend_layout
     fig.update_layout(**layout_kwargs)
-    return fig
+    return _apply_plot_template(fig)

@@ -55,6 +55,7 @@ from soda_mmqc.reporting.navigate import (
     path_string_to_steps,
 )
 from soda_mmqc.reporting.plots import (
+    applicable_instance_scores_frame,
     build_dashboard,
     mean_scores_frame,
     plot_comparison_layer1,
@@ -65,6 +66,7 @@ from soda_mmqc.reporting.plots import (
     plot_layer2_stacked,
     plot_layer_s_bar,
     plot_mean_score_bars,
+    plot_mean_score_with_instances,
 )
 from soda_mmqc.reporting.tables import (
     counts_to_frame,
@@ -92,6 +94,7 @@ __all__ = [
     "PropertyRollup",
     "RunSummaries",
     "RunSummary",
+    "applicable_instance_scores_frame",
     "aggregate_run",
     "build_comparison_report",
     "build_dashboard",
@@ -136,6 +139,7 @@ __all__ = [
     "plot_layer2_stacked",
     "plot_layer_s_bar",
     "plot_mean_score_bars",
+    "plot_mean_score_with_instances",
     "split_layer2_by_metric",
     "show_comparison_errors",
     "show_instance_context",
