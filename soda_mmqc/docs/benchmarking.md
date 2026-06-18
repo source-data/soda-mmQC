@@ -74,7 +74,7 @@ After pairing, all row leaf fields are scored at each **gold row index**. A wron
 
 ## Comparing leaf values
 
-Every leaf instance receives a **score** in `[0, 1]`.
+Every leaf instance comparison results in a **score** in the interval`[0, 1]`.
 
 ### Strings
 
@@ -90,34 +90,44 @@ Every leaf instance receives a **score** in `[0, 1]`.
 
 Each free-text field can use a different method. There is no global string metric.
 
-## From score to match / mismatch
+## From score to matching labels
 
-The raw **score** and the reporting labels are separate concepts.
+Benchmarking needs to answer three different questions about each field. They are kept separate so one number does not smuggle in policy choices that belong elsewhere.
 
-1. **Compute `score`** for the leaf instance (comparison rules above).
-2. **Layer 1 — applicability:** decide whether gold and prediction are both “in scope” for scoring (see next section).
-3. **Layer 2 — matching:** only when Layer 1 is `correct_applicable`, apply the field’s `matching_metric` to label the instance.
+| Question | What it captures | Why separate |
+|----------|------------------|--------------|
+| **How close?** | A **score** in `[0, 1]` — exact `0`/`1` for enums and numbers; graded for free text | Tracks *degree* of agreement (e.g. caption paraphrase at 0.85). Useful for `mean_score` and debugging, even when you would still call the answer “wrong” for strict QC. |
+| **Was the field in scope?** | **Applicability** — should this field have been answered, or is it N/A? | Many checks use sentinels like `""` or `not needed`. A missing scale-bar quote on a non-micrograph panel is not the same kind of error as on a micrograph panel. |
+| **Correct for benchmarking?** | A **discrete label** — match/mismatch, or TP/FP/FN/TN | Supports counting match vs mismatch events or confusion matrix-style reporting. Rules differ by field type (threshold vs exact yes/no). |
 
-For **`graded_string`** fields, Layer 2 uses a threshold:
+Pipeline for each leaf instance:
+
+1. **Score** — compare gold and prediction (rules above).
+2. **Applicability** — using manifest `na_values`, decide if both sides were in scope.
+3. **Discrete label** — only when both sides were applicable: apply the field’s `matching_metric`.
+
+For **free-text** fields (`graded_string`), the discrete label uses a **threshold** on the score:
 
 ```text
 match     if score >= match_threshold
 mismatch  otherwise
 ```
 
-A semantic similarity of `0.85` with `match_threshold: 0.8` is a **match**, even though the strings are not identical. The property’s `mean_score` still reflects the raw `0.85`.
+A semantic similarity of `0.85` with `match_threshold: 0.8` counts as a **match**, even though the strings differ. The property’s `mean_score` still reflects the raw `0.85`.
 
-For **`binary_polarity`** fields (typical yes/no enums), Layer 2 reports **TP**, **FP**, **FN**, or **TN** based on exact class identity against `positive_value` / `negative_value` — no threshold.
+For **yes/no** fields (`binary_polarity`), the discrete label is **TP**, **FP**, **FN**, or **TN** from exact class identity — not a similarity threshold.
 
-For **`multiclass`** enums, Layer 2 reports **match** or **mismatch** on exact literal equality.
+For **multiclass** enums, the discrete label is **match** or **mismatch** on exact literal equality.
 
-Fields without a manifest profile still get a **score**; Layer 1 and Layer 2 labels are omitted.
+Fields without a manifest profile still get a **score**; applicability and discrete labels are omitted.
+
+For object lists (`outputs[]`), row pairing (Layer S) runs before leaf scoring — see the next section.
 
 ---
 
 ## Three reporting layers
 
-Reporting is organized in three layers that answer different questions.
+Reporting is organized in three layers that answer the three questions above.
 
 ### Layer S — row alignment within a list
 

@@ -296,8 +296,8 @@ Evaluation uses a **flat leaf model**: scoring happens at **leaf properties** on
 | Layer | Question |
 |-------|----------|
 | **S** | Were rows in object lists (e.g. `outputs[]`) correctly paired within this example? |
-| **1** | Was each field applicable, or not applicable (N/A)? |
-| **2** | Did applicable fields match gold? |
+| **1** | Were the non-applicable fields (out of scope) correctly omitted? |
+| **2** | Did the applicable fields match gold? |
 
 Comparison methods, manifest fields, match thresholds, and output structure are documented in **[Benchmarking and evaluation](soda_mmqc/docs/benchmarking.md)**. After editing `eval-manifest.json`, re-run `evaluate` (cached model outputs can be reused).
 
