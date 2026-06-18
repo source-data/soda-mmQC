@@ -39,6 +39,8 @@ dependencies = [
     "pytest>=7.0.0",
     "openpyxl>=3.1.5",
     "mmqc-utils>=0.3.0",
+    "rapidfuzz>=3.0.0",
+    "itables>=2.0.0",
 ]
 
 [project.scripts]

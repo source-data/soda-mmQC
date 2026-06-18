@@ -1,0 +1,23 @@
+{
+  "checklist": "collated-panel-demo",
+  "defaults": {
+    "matching_metric": "binary_polarity",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "figures.panels": ["label"]
+  },
+  "fields": {
+    "figures[].panels[].label": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "figures[].panels[].is_micrograph": {
+      "na_values": [""],
+      "matching_metric": "binary_polarity"
+    }
+  }
+}

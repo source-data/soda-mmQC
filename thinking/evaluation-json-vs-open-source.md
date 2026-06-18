@@ -72,7 +72,7 @@ flowchart LR
 
 ## See also
 
-- [Hierarchical scoring: roll-up vs drill-down](evaluation-hierarchical-scoring.md) — how `ComparisonResult` carries summary and nested detail for objects vs lists.
+- [Evaluation scoring](evaluation-scoring.md) — normative flat leaf model. Legacy: [evaluation-hierarchical-scoring-DEPRECATED.md](evaluation-hierarchical-scoring-DEPRECATED.md).
 - [Leaf primitives](evaluation-leaf-primitives.md) — terminal JSON values (strings, numbers, booleans) and schema-driven comparison.
 
 ## Summary

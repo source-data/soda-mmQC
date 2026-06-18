@@ -91,17 +91,10 @@ PLOTS_DIR = DATA_DIR / "plots"
 # Default model/API options when a check has no model_config.json
 DEFAULT_MODEL_CONFIG_PATH = DATA_DIR / "model_config.json"
 
-# String comparison metrics configuration
-STRING_METRICS = [
-    "perfect_match",
-    "semantic_similarity", 
-    "longest_common_subsequence"
-]
+# Manifest string_compare modes (see core/leaves.py StringCompareMode)
+STRING_COMPARE_MODES = ("exact", "fuzzy", "semantic")
 
-# Default match threshold for string comparisons
-DEFAULT_MATCH_THRESHOLD = 0.3
-
-# SentenceTransformer model for semantic similarity
+# SentenceTransformer model for string_compare: semantic
 DEFAULT_SENTENCE_TRANSFORMER_MODEL = "all-MiniLM-L6-v2"
 
 

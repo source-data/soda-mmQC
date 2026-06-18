@@ -53,7 +53,7 @@ class TestProjectArchitecture(unittest.TestCase):
         try:
             from soda_mmqc.core import examples, evaluation, curation
             self.assertTrue(hasattr(examples, 'EXAMPLE_FACTORY'))
-            self.assertTrue(hasattr(evaluation, 'JSONEvaluator'))
+            self.assertTrue(hasattr(evaluation, 'FlatEvaluator'))
             self.assertTrue(hasattr(curation, 'load_example_data'))
             logger.info("Core imports successful")
         except ImportError as e:

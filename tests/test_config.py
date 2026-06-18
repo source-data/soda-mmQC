@@ -7,8 +7,10 @@ from soda_mmqc.config import (
     _validate_and_setup_api_provider,
     API_PROVIDER,
     DEFAULT_MODELS,
-    DEFAULT_MODEL
+    DEFAULT_MODEL,
+    STRING_COMPARE_MODES,
 )
+from soda_mmqc.core.leaves import StringCompareMode
 
 
 class TestConfig(unittest.TestCase):
@@ -103,6 +105,11 @@ class TestConfig(unittest.TestCase):
         provider = _validate_and_setup_api_provider()
         self.assertIsInstance(provider, str)
         self.assertIn(provider, ["openai", "anthropic"])
+
+    def test_string_compare_modes_match_leaves_enum(self):
+        """STRING_COMPARE_MODES aligns with manifest string_compare values."""
+        expected = {mode.value for mode in StringCompareMode}
+        self.assertEqual(set(STRING_COMPARE_MODES), expected)
 
 
 class TestConfigIntegration(unittest.TestCase):

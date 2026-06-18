@@ -11,17 +11,17 @@ from soda_mmqc.config import (
     CHECKLIST_DIR,
     CACHE_DIR,
     EVALUATION_DIR,
-    STRING_METRICS,
-    DEFAULT_MATCH_THRESHOLD,
     DEFAULT_SENTENCE_TRANSFORMER_MODEL,
     DEFAULT_MODEL,
     API_PROVIDER,
     DEFAULT_MODEL_CONFIG_PATH,
 )
 from soda_mmqc.lib.api import validate_model_for_provider, get_compatible_models
-from soda_mmqc.core.evaluation import JSONEvaluator
 from soda_mmqc import logger
+from soda_mmqc.core.eval_manifest import load_eval_manifest
+from soda_mmqc.core.evaluation import FlatEvaluator
 from soda_mmqc.core.examples import EXAMPLE_FACTORY, Example
+from soda_mmqc.core.leaves import _default_semantic_embedder
 # Load env vars and initialize Langfuse client for prompt fetching
 try:
     from dotenv import load_dotenv
@@ -299,68 +299,74 @@ def run_model(
     return results
 
 
+def _model_schema(schema_wrapper: Dict[str, Any]) -> Dict[str, Any]:
+    """Extract the inner model schema from an OpenAI-style wrapper."""
+    if "format" in schema_wrapper and "schema" in schema_wrapper["format"]:
+        return schema_wrapper["format"]["schema"]
+    return schema_wrapper
+
+
 def analyze_results(
     results: List[ModelResult],
     schema: Dict[str, Any],
     expected_outputs: List[Dict[str, Any]],
-    match_threshold: float = DEFAULT_MATCH_THRESHOLD,
+    *,
+    check_dir: Path,
+    match_threshold: float = 1.0,
     sentence_transformer_model: str = (
         DEFAULT_SENTENCE_TRANSFORMER_MODEL
-    )
+    ),
+    embedder: Optional[Any] = None,
 ) -> Dict[str, List[Dict[str, Any]]]:
-    """Analyze model outputs against expected outputs using all string metrics.
-    
-    Args:
-        results: List of ModelResult objects containing model outputs
-        schema: Dict[str, Any] for the check
-        expected_outputs: List of expected outputs
-        match_threshold: Threshold for considering a match (0-1)
-    Returns:
-        Dictionary mapping string metric names to analysis results
+    """Analyze model outputs against expected outputs with ``FlatEvaluator``.
+
+    Per-field ``string_compare`` and ``match_threshold`` live in
+    ``eval-manifest.json`` beside the check schema.
+
+    Returns a dict with a single ``"flat"`` key mapping to per-example
+    analysis records (compatible with ``save_analysis`` nesting).
     """
-    logger.info("Analyzing all results with all string metrics")
-
-    # Dictionary to store results for each string metric
-    all_metric_results = {}
-    
-    # Run evaluation for each string metric
-    for string_metric in STRING_METRICS:
-        logger.info(f"Running analysis with metric: {string_metric}")
-        
-        analyzed_results = []
-        evaluator = JSONEvaluator(
-            schema, 
-            string_metric=string_metric, 
-            match_threshold=match_threshold,
-            sentence_transformer_model=sentence_transformer_model
+    manifest_path = check_dir / "eval-manifest.json"
+    if not manifest_path.exists():
+        raise FileNotFoundError(
+            f"Missing eval manifest for check {check_dir.name}: {manifest_path}"
         )
-        
-        for result, expected_output in tqdm(
-            zip(results, expected_outputs), 
-            desc=f"Analyzing with {string_metric}", 
-            unit=" example"
-        ):
-            logger.debug(
-                f"\n\n\n========= Analyzing: {result.doc_id} "
-                f"with {string_metric}\n\n\n"
-            )
-            # Analyze response (metrics are set inside the evaluator)
-            analysis = evaluator.evaluate(
-                result.model_output,
-                expected_output,
-            )
-            analyzed_results.append({
-                "doc_id": result.doc_id,
-                "expected_output": expected_output,
-                "model_output": result.model_output,
-                "metadata": result.metadata,
-                "analysis": analysis
-            })
-        
-        # Store results for this metric
-        all_metric_results[string_metric] = analyzed_results
 
-    return all_metric_results
+    if match_threshold != 1.0:
+        logger.warning(
+            "match_threshold=%s is ignored; per-field thresholds are set in "
+            "eval-manifest.json",
+            match_threshold,
+        )
+
+    manifest = load_eval_manifest(manifest_path)
+    model_schema = _model_schema(schema)
+    if embedder is None:
+        embedder = _default_semantic_embedder(sentence_transformer_model)
+    evaluator = FlatEvaluator(model_schema, manifest, embedder=embedder)
+
+    logger.info("Analyzing results with FlatEvaluator (%s)", manifest.checklist)
+
+    analyzed_results: List[Dict[str, Any]] = []
+    for result, expected_output in tqdm(
+        zip(results, expected_outputs),
+        desc="Analyzing",
+        unit=" example",
+    ):
+        logger.debug(
+            "========= Analyzing: %s =========",
+            result.doc_id,
+        )
+        evaluation = evaluator.evaluate(expected_output, result.model_output)
+        analyzed_results.append({
+            "doc_id": result.doc_id,
+            "expected_output": expected_output,
+            "model_output": result.model_output,
+            "metadata": result.metadata,
+            "analysis": evaluation.to_dict(),
+        })
+
+    return {"flat": analyzed_results}
 
 
 def save_analysis(
@@ -1038,10 +1044,10 @@ def process_check(
     prompt_version: Optional[str] = None,
     config_from_version: bool = False,
     fixed_prompt_config: Optional[Dict[str, Any]] = None,
-    match_threshold: float = DEFAULT_MATCH_THRESHOLD,
+    match_threshold: float = 1.0,
     sentence_transformer_model: str = (
         DEFAULT_SENTENCE_TRANSFORMER_MODEL
-    )
+    ),
 ) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
     """Process a single check.
     
@@ -1119,8 +1125,9 @@ def process_check(
             results,
             check_data.schema,
             check_data.expected_outputs,
+            check_dir=check_dir,
             match_threshold=match_threshold,
-            sentence_transformer_model=sentence_transformer_model
+            sentence_transformer_model=sentence_transformer_model,
         )
 
         # Store results for this prompt
@@ -1246,10 +1253,10 @@ def process_checklist(
     prompt_version: Optional[str] = None,
     config_from_version: bool = False,
     fixed_prompt_config: Optional[Dict[str, Any]] = None,
-    match_threshold: float = DEFAULT_MATCH_THRESHOLD,
+    match_threshold: float = 1.0,
     sentence_transformer_model: str = (
         DEFAULT_SENTENCE_TRANSFORMER_MODEL
-    )
+    ),
 ):
     """Process an entire checklist.
     
@@ -1365,8 +1372,8 @@ def main():
         )
     )
     parser.add_argument(
-        "--match-threshold", type=float, default=DEFAULT_MATCH_THRESHOLD,
-        help="Threshold for considering a match (0-1)"
+        "--match-threshold", type=float, default=1.0,
+        help="Reserved for flat evaluator; per-field thresholds use eval-manifest.json"
     )
     parser.add_argument(
         "--sentence-transformer-model", type=str, 
