@@ -43,7 +43,7 @@
             "from_the_caption": [
                 "****P =3.39 × 10^–9"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -60,7 +60,7 @@
             "from_the_caption": [
                 "***P = 0.0005"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -77,7 +77,7 @@
             "from_the_caption": [
                 "****P =1.60 × 10^–9"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "G",
@@ -112,7 +112,7 @@
             "from_the_caption": [
                 "**P = 0.0040 (sgControl vs KO1) and **P = 0.0017 (sgControl vs KO2)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "J",
@@ -129,7 +129,7 @@
             "from_the_caption": [
                 "****P = 1.99 × 10^–11 (sgControl vs KO1) and ****P = 2.20 × 10^–10 (sgControl vs KO2)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "K",
@@ -159,7 +159,7 @@
                 "*P = 0.029 (sgControl vs KO1)",
                 "**P = 0.0015 (sgControl vs KO2)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "M",
@@ -185,8 +185,8 @@
             "from_the_caption": [
                 "*P = 0.040"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
     ],
-    "updated_at": "2026-04-29 13:02:58"
+    "updated_at": "2026-06-03 11:13:18"
 }

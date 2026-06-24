@@ -13,64 +13,50 @@
             "panel_label": "B",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "****",
                 "****"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
                 "yes"
             ],
             "from_the_caption": [
-                "****P < 0.0001",
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "**",
                 "**"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "no",
                 "no"
             ],
-            "from_the_caption": [
-                "",
-                ""
-            ],
-            "Decision_and_explanation": []
+            "from_the_caption": "-\"\"",
+            "Decision_and_explanation": "FAIL: While the caption of panel C described exact P-values, the '**' symbol shown in the figure panel is not described in the figure caption. "
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "**",
                 "**"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "no",
                 "no"
             ],
             "from_the_caption": [
-                "",
                 ""
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "FAIL: While the caption of panel D described exact P-values, the '**' symbol shown in the figure panel is not described in the figure caption. "
         },
         {
             "panel_label": "E",
@@ -91,7 +77,7 @@
                 "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -108,7 +94,7 @@
             "from_the_caption": [
                 ""
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "FAIL: While the caption of panel F described exact P-values, the '**' symbol shown in the figure panel is not described in the figure caption. "
         },
         {
             "panel_label": "G",
@@ -125,7 +111,8 @@
             "from_the_caption": [
                 ""
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "FAIL: While the caption of panel G described exact P-values, the '**' symbol shown in the figure panel is not described in the figure caption. "
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 10:29:43"
 }

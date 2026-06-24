@@ -1,30 +1,48 @@
 {
-    "name": "error-bars-defined",
     "outputs": [
         {
             "panel_label": "Ai",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": [
+                "not needed"
+            ]
         },
         {
             "panel_label": "Aii",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": [
+                "not needed"
+            ]
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": [
+                "not needed"
+            ]
         },
         {
             "panel_label": "C",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": [
+                "not needed"
+            ]
+        },
+        {
+            "panel_label": "",
+            "error_bar_on_figure": "",
+            "error_bar_defined_in_caption": "",
+            "from_the_caption": "",
+            "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2025-05-08 13:39:02"
+    "updated_at": "2026-05-28 11:59:57"
 }

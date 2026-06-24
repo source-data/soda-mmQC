@@ -23,9 +23,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "n.s., not significant by Mann–Whitney U test."
+                "n.s., not significant"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
@@ -40,9 +40,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "n.s., not significant by Mann–Whitney U test."
+                "n.s., not significant"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "D",
@@ -69,10 +69,10 @@
                 "yes"
             ],
             "from_the_caption": [
-                "n.s., not significant by Mann–Whitney U test.",
+                "n.s., not significant",
                 "***P = 0.0007"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -90,10 +90,10 @@
                 "yes"
             ],
             "from_the_caption": [
-                "n.s., not significant by Mann–Whitney U test.",
+                "n.s., not significant",
                 "**P = 0.0085"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "G",
@@ -120,11 +120,11 @@
                 "yes"
             ],
             "from_the_caption": [
-                "n.s., not significant by Mann–Whitney U test.",
+                "n.s., not significant",
                 "***P = 0.0009"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
     ],
-    "updated_at": "2026-04-29 13:02:56"
+    "updated_at": "2026-06-03 11:11:07"
 }

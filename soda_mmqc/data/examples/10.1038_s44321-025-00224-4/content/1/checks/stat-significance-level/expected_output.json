@@ -23,7 +23,7 @@
                 "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "B",
@@ -67,7 +67,7 @@
             "from_the_caption": [
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -88,8 +88,8 @@
                 "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
     ],
-    "updated_at": "2026-01-28 15:52:45"
+    "updated_at": "2026-06-03 11:07:20"
 }

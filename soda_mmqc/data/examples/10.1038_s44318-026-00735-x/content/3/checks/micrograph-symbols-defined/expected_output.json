@@ -1,147 +1,90 @@
 {
-  "name": "micrograph-symbols-defined",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "micrograph": "no",
-      "symbols": [],
-      "symbols_defined_in_caption": [],
-      "from_the_caption": []
-    },
-    {
-      "panel_label": "B",
-      "micrograph": "no",
-      "symbols": [
-        "black line/arrow labeled '9.7 \u00c5' indicating displacement",
-        "black arrow/line pointing to the P site"
-      ],
-      "symbols_defined_in_caption": [
-        "yes",
-        "no"
-      ],
-      "from_the_caption": [
-        "(B) Structural comparison reveals that the acceptor arm of the P-site-bound tRNA undergoes a ~9.7 \u00c5 displacement from its position associated with eIF2 in canonical 48S complexes (PDB id: 8OZ0) (tRNA is in light pink) to a new position where it interacts directly with the EMCV IRES (tRNA is in magenta).",
-        ""
-      ]
-    },
-    {
-      "panel_label": "C",
-      "micrograph": "no",
-      "symbols": [
-        "curved black rotation arrow labeled '45\u00b0' indicating orientation/rotation"
-      ],
-      "symbols_defined_in_caption": [
-        "no"
-      ],
-      "from_the_caption": [
-        ""
-      ]
-    },
-    {
-      "panel_label": "D",
-      "micrograph": "no",
-      "symbols": [
-        "black arrows/leader lines pointing to labeled nucleotides (G547, G549, C548)"
-      ],
-      "symbols_defined_in_caption": [
-        "no"
-      ],
-      "from_the_caption": [
-        ""
-      ]
-    },
-    {
-      "panel_label": "E",
-      "micrograph": "no",
-      "symbols": [
-        "black arrows/leader lines pointing to residues (G547, A550, G549, C548)",
-        "Coulomb density shown as a semi-transparent mesh/overlay"
-      ],
-      "symbols_defined_in_caption": [
-        "no",
-        "yes"
-      ],
-      "from_the_caption": [
-        "",
-        "(D and E) Interaction is shown by atomic models and by atomic models fitted into Coulomb density (rendered at 70% transparency, and highlighting the front T\u03c8C arm), respectively."
-      ]
-    },
-    {
-      "panel_label": "F",
-      "micrograph": "no",
-      "symbols": [
-        "black arrows/leader lines indicating residues in the T\u03c8C arm (labels such as G51, G48)"
-      ],
-      "symbols_defined_in_caption": [
-        "no"
-      ],
-      "from_the_caption": [
-        ""
-      ]
-    },
-    {
-      "panel_label": "G",
-      "micrograph": "no",
-      "symbols": [
-        "black arrows/leader lines indicating residues",
-        "purple/magenta coloring highlighting the rear T\u03c8C arm"
-      ],
-      "symbols_defined_in_caption": [
-        "no",
-        "yes"
-      ],
-      "from_the_caption": [
-        "",
-        "(F and G) Same interaction is shown but with a focus on the rear T\u03c8C arm."
-      ]
-    },
-    {
-      "panel_label": "H",
-      "micrograph": "no",
-      "symbols": [],
-      "symbols_defined_in_caption": [],
-      "from_the_caption": []
-    },
-    {
-      "panel_label": "I",
-      "micrograph": "no",
-      "symbols": [
-        "black arrows/leader lines labeling residues in the density (e.g., A550, U46, C47, G546)"
-      ],
-      "symbols_defined_in_caption": [
-        "no"
-      ],
-      "from_the_caption": [
-        ""
-      ]
-    },
-    {
-      "panel_label": "J",
-      "micrograph": "no",
-      "symbols": [],
-      "symbols_defined_in_caption": [],
-      "from_the_caption": []
-    },
-    {
-      "panel_label": "K",
-      "micrograph": "no",
-      "symbols": [],
-      "symbols_defined_in_caption": [],
-      "from_the_caption": []
-    },
-    {
-      "panel_label": "L",
-      "micrograph": "no",
-      "symbols": [
-        "annotation lines/labels indicating canonical GNRA tetraloop bases (labels such as R:A/G, N:A/C/G)"
-      ],
-      "symbols_defined_in_caption": [
-        "no"
-      ],
-      "from_the_caption": [
-        ""
-      ]
-    }
-  ],
-  "updated_at": "2026-04-29 12:59:57"
+    "name": "micrograph-symbols-defined",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "D",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "E",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "F",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "G",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "H",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "I",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "J",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "K",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "L",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ],
+    "updated_at": "2026-05-13 10:47:55"
 }

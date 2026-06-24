@@ -50,15 +50,12 @@
             "panel_label": "F",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "****",
                 "****"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
                 "yes"
             ],
             "from_the_caption": [

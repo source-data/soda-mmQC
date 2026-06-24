@@ -42,7 +42,7 @@
             "from_the_caption": [
                 "*P<0.05 from 0.0167 mW"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -99,5 +99,5 @@
             "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2026-02-02 11:20:00"
+    "updated_at": "2026-06-03 11:59:15"
 }

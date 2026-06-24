@@ -13,9 +13,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "B",
@@ -57,9 +57,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -92,9 +92,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "I",
@@ -118,9 +118,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "K",
@@ -144,9 +144,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "M",
@@ -161,9 +161,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "N",
@@ -187,10 +187,10 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
+                "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
     ],
-    "updated_at": "2026-03-25 10:53:32"
+    "updated_at": "2026-06-03 10:36:13"
 }

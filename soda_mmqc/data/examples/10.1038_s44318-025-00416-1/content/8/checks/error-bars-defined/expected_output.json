@@ -1,54 +1,65 @@
 {
-    "name": "error-bars-defined",
     "outputs": [
         {
             "panel_label": "A",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are mean\u2009\u00b1\u2009SD"
+            "from_the_caption": "mean +/- SD",
+            "Decision_and_explanation": [
+                "PASS: Error bars are defined in the caption as mean +/- SD."
+            ]
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are mean\u2009\u00b1\u2009SD"
+            "from_the_caption": "mean +/- SD",
+            "Decision_and_explanation": [
+                "PASS: Error bars are defined in the caption as mean +/- SD."
+            ]
         },
         {
             "panel_label": "C",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "E",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "F",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "G",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "H",
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": ""
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2025-05-08 13:40:59"
+    "updated_at": "2026-05-28 15:47:14"
 }

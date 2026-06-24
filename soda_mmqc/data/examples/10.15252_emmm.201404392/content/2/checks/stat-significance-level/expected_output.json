@@ -16,10 +16,10 @@
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "not_needed",
-                "not_needed",
-                "not_needed",
-                "not_needed"
+                "no",
+                "no",
+                "no",
+                "no"
             ],
             "from_the_caption": [
                 "not_needed",
@@ -27,7 +27,7 @@
                 "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "B",
@@ -56,5 +56,6 @@
             "from_the_caption": [],
             "Decision_and_explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 11:19:53"
 }

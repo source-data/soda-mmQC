@@ -15,13 +15,13 @@
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "yes",
+            "average_values": "no",
             "individual_values": "not needed"
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
+            "average_values": "no",
             "individual_values": "not needed"
         },
         {
@@ -61,5 +61,5 @@
             "individual_values": "not needed"
         }
     ],
-    "updated_at": "2025-05-08 13:56:48"
+    "updated_at": "2026-06-17 15:36:02"
 }

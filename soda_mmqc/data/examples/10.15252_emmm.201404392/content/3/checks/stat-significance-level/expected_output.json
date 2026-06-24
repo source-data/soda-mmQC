@@ -21,14 +21,14 @@
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "not_needed",
-                "not_needed"
+                "no",
+                "no"
             ],
             "from_the_caption": [
                 "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
@@ -49,12 +49,12 @@
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "not_needed"
+                "no"
             ],
             "from_the_caption": [
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -65,5 +65,6 @@
             "from_the_caption": [],
             "Decision_and_explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 11:20:42"
 }

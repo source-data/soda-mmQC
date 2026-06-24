@@ -37,7 +37,7 @@
                 "***P < 0.001",
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "D",
@@ -54,7 +54,7 @@
             "from_the_caption": [
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -71,7 +71,7 @@
             "from_the_caption": [
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -88,7 +88,7 @@
             "from_the_caption": [
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "G",
@@ -114,7 +114,7 @@
             "from_the_caption": [
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "I",
@@ -131,7 +131,7 @@
             "from_the_caption": [
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "J",
@@ -143,5 +143,5 @@
             "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2026-03-26 14:07:16"
+    "updated_at": "2026-06-03 10:39:32"
 }

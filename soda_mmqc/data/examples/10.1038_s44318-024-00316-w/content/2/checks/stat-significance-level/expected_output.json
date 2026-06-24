@@ -29,15 +29,9 @@
                 "*"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
-                "no",
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
-                "yes",
-                "yes",
                 "yes"
             ],
             "from_the_caption": [
@@ -70,15 +64,12 @@
             "panel_label": "F",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "P-value<0.0001",
                 "P-value<0.0001"
             ],
             "significance_level_symbols_defined_in_image": [
-                "yes",
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "not_needed",
                 "not_needed"
             ],
             "from_the_caption": [

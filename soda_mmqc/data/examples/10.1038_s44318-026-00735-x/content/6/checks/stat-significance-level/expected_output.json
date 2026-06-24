@@ -12,7 +12,7 @@
         },
         {
             "panel_label": "B",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -21,7 +21,7 @@
         },
         {
             "panel_label": "C",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
@@ -29,5 +29,5 @@
             "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2026-04-29 12:59:59"
+    "updated_at": "2026-05-13 11:09:28"
 }

@@ -78,11 +78,11 @@
             "significance_level_symbols_defined_in_caption": [
                 "no"
             ],
-            "from_the_caption": [
-                ""
-            ],
-            "Decision_and_explanation": []
+            "from_the_caption": [],
+            "Decision_and_explanation": [
+                "FAIL: no definition for the "
+            ]
         }
     ],
-    "updated_at": "2026-01-28 14:16:20"
+    "updated_at": "2026-06-01 14:04:21"
 }

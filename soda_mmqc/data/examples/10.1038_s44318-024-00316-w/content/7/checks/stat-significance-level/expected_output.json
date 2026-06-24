@@ -5,7 +5,7 @@
             "panel_label": "A",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "∗∗∗∗"
+                "\u2217\u2217\u2217\u2217"
             ],
             "significance_level_symbols_defined_in_image": [
                 "no"
@@ -14,7 +14,7 @@
                 "yes"
             ],
             "from_the_caption": [
-                "∗∗∗∗: p-value=0.000002014358640"
+                "\u2217\u2217\u2217\u2217: p-value=0.000002014358640"
             ],
             "Decision_and_explanation": []
         },
@@ -23,19 +23,17 @@
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
                 "ns",
-                "∗∗∗∗"
+                "\u2217\u2217\u2217\u2217"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
                 "yes"
             ],
             "from_the_caption": [
                 "ns: p-value = 0.428237768384628",
-                "∗∗∗∗: p-value= 0.000006748324383, 0.000001340723954"
+                "\u2217\u2217\u2217\u2217: p-value= 0.000006748324383, 0.000001340723954"
             ],
             "Decision_and_explanation": []
         },

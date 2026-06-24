@@ -1,0 +1,101 @@
+{
+  "name": "stat-significance-level",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "significance_level_symbols_on_image": [],
+      "significance_level_symbols_defined_in_image": [],
+      "significance_level_symbols_defined_in_caption": [],
+      "from_the_caption": []
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [
+        "p = 0.0102"
+      ],
+      "significance_level_symbols_defined_in_image": [
+        "yes"
+      ],
+      "significance_level_symbols_defined_in_caption": [
+        "not_needed"
+      ],
+      "from_the_caption": [
+        "not_needed"
+      ]
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "no",
+      "significance_level_symbols_on_image": [],
+      "significance_level_symbols_defined_in_image": [],
+      "significance_level_symbols_defined_in_caption": [],
+      "from_the_caption": []
+    },
+    {
+      "panel_label": "D",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [
+        "p = 0.0264",
+        "p = 0.0035",
+        "p = 0.0018"
+      ],
+      "significance_level_symbols_defined_in_image": [
+        "yes",
+        "yes",
+        "yes"
+      ],
+      "significance_level_symbols_defined_in_caption": [
+        "not_needed",
+        "not_needed",
+        "not_needed"
+      ],
+      "from_the_caption": [
+        "not_needed",
+        "not_needed",
+        "not_needed"
+      ]
+    },
+    {
+      "panel_label": "E",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [
+        "orange points",
+        "blue points"
+      ],
+      "significance_level_symbols_defined_in_image": [
+        "no",
+        "no"
+      ],
+      "significance_level_symbols_defined_in_caption": [
+        "yes",
+        "yes"
+      ],
+      "from_the_caption": [
+        "significantly upregulated and downregulated genes highlighted in orange and blue, respectively."
+      ]
+    },
+    {
+      "panel_label": "F",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [
+        "color scale (FDR)",
+        "pink highlighting"
+      ],
+      "significance_level_symbols_defined_in_image": [
+        "yes",
+        "no"
+      ],
+      "significance_level_symbols_defined_in_caption": [
+        "not_needed",
+        "yes"
+      ],
+      "from_the_caption": [
+        "not_needed",
+        "significant enrichment in Golgi-related functional annotation terms (highlighted in pink)."
+      ]
+    }
+  ],
+  "updated_at": "2026-06-08 13:31:57"
+}

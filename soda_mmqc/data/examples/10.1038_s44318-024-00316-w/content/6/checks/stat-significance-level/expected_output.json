@@ -19,19 +19,15 @@
                 "*"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
-                "yes",
                 "yes"
             ],
             "from_the_caption": [
-                "∗∗∗∗: p-value= 0.000000000273883, 0.000059345976010, <0.000000000000001, 0.000000000021184",
-                "∗∗∗: p-value=0.0002",
-                "∗: p-value=0.0473"
+                "\u2217\u2217\u2217\u2217: p-value= 0.000000000273883, 0.000059345976010, <0.000000000000001, 0.000000000021184",
+                "\u2217\u2217\u2217: p-value=0.0002",
+                "\u2217: p-value=0.0473"
             ],
             "Decision_and_explanation": []
         },
@@ -43,11 +39,9 @@
                 "ns"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
                 "yes"
             ],
             "from_the_caption": [

@@ -51,7 +51,7 @@
             "from_the_caption": [
                 "*P<0.01"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -68,7 +68,7 @@
             "from_the_caption": [
                 "*P<0.01"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "G",
@@ -130,8 +130,8 @@
             "from_the_caption": [
                 "*P<0.01"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
     ],
-    "updated_at": "2026-01-30 14:40:47"
+    "updated_at": "2026-06-03 11:16:08"
 }

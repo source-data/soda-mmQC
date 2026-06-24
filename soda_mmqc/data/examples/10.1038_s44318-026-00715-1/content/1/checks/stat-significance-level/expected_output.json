@@ -13,22 +13,18 @@
             "panel_label": "B",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "**",
                 "****"
             ],
             "significance_level_symbols_defined_in_image": [
-                "no",
                 "no"
             ],
             "significance_level_symbols_defined_in_caption": [
-                "yes",
                 "yes"
             ],
             "from_the_caption": [
-                "**P < 0.01",
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
@@ -49,7 +45,7 @@
                 "**P < 0.01",
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "D",
@@ -96,5 +92,6 @@
             "from_the_caption": [],
             "Decision_and_explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 10:35:39"
 }

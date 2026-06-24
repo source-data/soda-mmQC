@@ -1,42 +1,60 @@
 {
-    "name": "error-bars-defined",
     "outputs": [
         {
             "panel_label": "A",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean \u00b1 S.D."
+            "from_the_caption": "mean  +/- S.D.",
+            "Decision_and_explanation": [
+                "PASS: Dot/bar plots in panel A display error bars and the caption explicitly defines data as \"mean +/- S.D.\""
+            ]
         },
         {
             "panel_label": "B",
             "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "error_bar_defined_in_caption": "not needed",
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
             "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "error_bar_defined_in_caption": "not needed",
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
             "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "error_bar_defined_in_caption": "not needed",
+            "from_the_caption": "not needed",
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "E",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean \u00b1 S.D."
+            "from_the_caption": "mean  +/- S.D.",
+            "Decision_and_explanation": [
+                "PASS: Quantification bar plot in panel E includes error bars and the caption states data are presented as \"mean +/- S.D.\""
+            ]
         },
         {
             "panel_label": "F",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "Data are presented as mean \u00b1 S.D."
+            "from_the_caption": "mean  +/- S.D.",
+            "Decision_and_explanation": [
+                "PASS: Quantified TET/GAPDH ratios in panel F show error bars and the caption defines them as \"mean +/- S.D.\""
+            ]
+        },
+        {
+            "panel_label": "",
+            "error_bar_on_figure": "",
+            "error_bar_defined_in_caption": "",
+            "from_the_caption": "",
+            "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2025-05-08 13:40:36"
+    "updated_at": "2026-05-28 15:43:42"
 }

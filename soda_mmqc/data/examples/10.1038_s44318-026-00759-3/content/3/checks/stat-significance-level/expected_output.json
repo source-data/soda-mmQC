@@ -42,7 +42,7 @@
                 "****P = 9.40 × 10−5 (sgControl vs KO2)",
                 ""
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "FAIL: The significiance symbol 'ns' is not defiend. "
         },
         {
             "panel_label": "D",
@@ -63,7 +63,7 @@
                 "*P = 0.0378",
                 "***P = 0.0002"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -89,7 +89,7 @@
             "from_the_caption": [
                 "****P = 6.40 × 10−10 (sgControl vs KO1); ****P = 1.70 × 10−10 (sgControl vs KO2)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "G",
@@ -119,7 +119,7 @@
                 "***P = 0.0007",
                 "****P = 1.75 × 10−6"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "I",
@@ -145,7 +145,7 @@
             "from_the_caption": [
                 "****P = 2.58 × 10−7 (sgControl vs KO1); ****P = 1.25 × 10−5 (sgControl vs KO2)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "K",
@@ -162,8 +162,8 @@
             "from_the_caption": [
                 "****P = 5.51 × 10−6 (sgControl vs KO1); ****P = 2.03 × 10−8 (sgControl vs KO2)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
     ],
-    "updated_at": "2026-04-29 13:02:57"
+    "updated_at": "2026-06-03 11:12:51"
 }

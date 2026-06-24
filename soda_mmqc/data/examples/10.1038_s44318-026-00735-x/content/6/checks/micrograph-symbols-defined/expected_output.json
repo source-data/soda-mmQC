@@ -1,51 +1,27 @@
 {
-  "name": "micrograph-symbols-defined",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "micrograph": "no",
-      "symbols": [],
-      "symbols_defined_in_caption": [],
-      "from_the_caption": []
-    },
-    {
-      "panel_label": "B",
-      "micrograph": "yes",
-      "symbols": [
-        "red numbers",
-        "text label indicating positions of initiation codons (left)",
-        "text label indicating positions of assembled 48S complexes (right)"
-      ],
-      "symbols_defined_in_caption": [
-        "yes",
-        "yes",
-        "yes"
-      ],
-      "from_the_caption": [
-        "The efficiency of 48S complex formation on AUG_834 (red numbers) was quantified taking the efficiency of complex formation on the wt EMCV IRES mRNA as 100%.",
-        "The positions of initiation codons are indicated on the left and of assembled 48S complexes on the right.",
-        "The positions of initiation codons are indicated on the left and of assembled 48S complexes on the right."
-      ]
-    },
-    {
-      "panel_label": "C",
-      "micrograph": "yes",
-      "symbols": [
-        "red numbers",
-        "text label indicating positions of initiation codons (left)",
-        "text label indicating positions of assembled 48S complexes (right)"
-      ],
-      "symbols_defined_in_caption": [
-        "yes",
-        "yes",
-        "yes"
-      ],
-      "from_the_caption": [
-        "The efficiency of 48S complex formation on AUG_834 (red numbers) was quantified taking the efficiency of complex formation on the wt EMCV IRES mRNA as 100%.",
-        "The positions of initiation codons are indicated on the left and of assembled 48S complexes on the right.",
-        "The positions of initiation codons are indicated on the left and of assembled 48S complexes on the right."
-      ]
-    }
-  ],
-  "updated_at": "2026-04-29 12:59:59"
+    "name": "micrograph-symbols-defined",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "B",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        },
+        {
+            "panel_label": "C",
+            "micrograph": "no",
+            "symbols": [],
+            "symbols_defined_in_caption": [],
+            "from_the_caption": []
+        }
+    ],
+    "updated_at": "2026-05-13 11:08:51"
 }

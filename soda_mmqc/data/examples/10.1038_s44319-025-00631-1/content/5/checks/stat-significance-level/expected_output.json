@@ -28,17 +28,23 @@
                 "****P = 7.96E-78 (Classical monocyte), ****P = 4.74E-17 (Alveolar macrophage), ****P = 6.04E-133 (Leukocyte)",
                 "***P = 2.31E-05 (Non-classical monocyte)"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "p-value",
-                "FDR",
-                "NES"
+                "NES=3.671",
+                "FDR=0.0",
+                "p=0.0",
+                "NES=3.405",
+                "FDR=0.0",
+                "p=0.0"
             ],
             "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
                 "yes",
                 "yes",
                 "yes"
@@ -46,31 +52,80 @@
             "significance_level_symbols_defined_in_caption": [
                 "not_needed",
                 "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
                 "not_needed"
             ],
             "from_the_caption": [
                 "not_needed",
                 "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
-                "p-value"
+                "p=2.22E-190",
+                "p=2.17E-71",
+                "p=3.09E-109",
+                "p=1.56E-121",
+                "p=5.56E-115",
+                "p=1.33E-43",
+                "p=1.67E-86",
+                "p=2.59E-88",
+                "p=1.02E-105",
+                "p=1.43E-130",
+                "p=2.32E-40"
             ],
             "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
                 "not_needed"
             ],
             "from_the_caption": [
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -82,5 +137,5 @@
             "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2026-03-27 16:07:27"
+    "updated_at": "2026-06-03 10:32:51"
 }

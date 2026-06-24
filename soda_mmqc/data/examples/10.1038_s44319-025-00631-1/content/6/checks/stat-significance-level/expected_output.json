@@ -24,7 +24,7 @@
             "from_the_caption": [
                 "P = 0.0281"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
@@ -39,22 +39,44 @@
             "panel_label": "D",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [
+                "NES=4.736",
+                "FDR=0.0",
                 "p=0.0",
-                "FDR=0.0"
+                "NES=4.505",
+                "FDR=0.0",
+                "p=0.0",
+                "NES=3.769",
+                "FDR=0.0",
+                "p=0.0"
             ],
             "significance_level_symbols_defined_in_image": [
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
                 "yes",
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
                 "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
                 "not_needed"
             ],
             "from_the_caption": [
                 "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
+                "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -71,14 +93,6 @@
                 "p=1.81E-10"
             ],
             "significance_level_symbols_defined_in_image": [
-                "yes",
-                "yes",
-                "yes",
-                "yes",
-                "yes",
-                "yes",
-                "yes",
-                "yes",
                 "yes"
             ],
             "significance_level_symbols_defined_in_caption": [
@@ -103,7 +117,7 @@
                 "not_needed",
                 "not_needed"
             ],
-            "Decision_and_explanation": []
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -115,5 +129,5 @@
             "Decision_and_explanation": []
         }
     ],
-    "updated_at": "2026-03-27 16:26:18"
+    "updated_at": "2026-06-03 10:33:13"
 }
