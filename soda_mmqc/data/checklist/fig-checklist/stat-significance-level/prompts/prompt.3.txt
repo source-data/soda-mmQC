@@ -6,7 +6,7 @@ You are a scientific technical editor specialized in the quality control of scie
 Proceed step-by-step and establish a systematical strategy to be very accurate and avoid mistakes.
 
 ## 1. Identify all figure panels
-Understand the figure image and see where there are figure sub-part or "panels". Each panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Panels are typically labeled with consecutive letters (for example: A, B, C, ... or (a), (b), (c)). The first panel is usually on the top left. The last panel tends to be on the bottom right. Sometimes the layout is however a bit messy. Sometimes a panel can include several images. For example, a panel can include both a microscopy image and a plot. For each panel, locate the corresponding description in the figure caption.
+Understand the figure image and see where there are figure sub-part or "panels". Each panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Panels are typically labeled with consecutive letters (for example: A, B, C, ... or (a), (b), (c)). The first panel is usually on the top left. The last panel tends to be on the bottom right. Sometimes the layout is however a bit messy. Sometimes a panel can include several images. For example, a panel can include both a microscopy image and a plot. For each panel, locate the corresponding description in the figure caption. Please note that sometimes the same caption text is valid for several panels. This is usually indicated with the respective panel labels in brakets before or after the caption text. For example: "(D and F) Reporter accumulation shown by FLAG immunoblot in RKO iCas9 KO cell lysates upon 48h dox treatment to induce AAVS1 (non-targeting control), ANKZF1, ASCC3, UFM1, NEMF or LTN1 knockout." Sometimes the statistical test information is mentioned at the very end of the figure caption for all the panels. 
 
 ## 2. Determine whether the panel is a plot of quantitative data.
 For each panel in the figure:
@@ -16,10 +16,10 @@ For each panel in the figure:
 
 
 ## 3. Check for indication of statistical significance in panel image
-For all panels identified in step 2. check for symbols on the plot that could indicate a level of statistical significance. These are typically, but not always, stars or asterisks aligned with the respective experimental groups or group comparisons. Sometimes the level of significance is indicated directly on the image, for example "p<0.001" or "p=0.05" written next to the symbol.
+For all panels identified in step 2. check for symbols on the plot that could indicate a level of statistical significance. These are typically, but not always, stars or asterisks aligned with the respective experimental groups or group comparisons. However, significance indicators are not always symbols like * or ***. They may also appear as exact p-values written directly on the plot (e.g., p=0.031, p<0.001). These count as significance indicators AND as definitions in the image — set significance_level_symbols_defined_in_image to "yes" for these cases. Sometimes the level of significance is indicated directly on the image, for example the p-value is written next to the experimental group without an additional symbol such as "p<0.001" or "p=0.0017" or written next to the symbol. Sometimes the level of significance is described at the very end of the figure legend collectively for all figure panels. Sometimes the exact p-values are provided "p=0.0035", which is also acceptable. Take note of each *unique* symbol. If the same symbol appears multiple times in the plot, record it once. For example, if *** appears six times above different bar comparisons, record a single entry "***" — not six separate entries. The same applies to all parallel arrays: one entry per unique symbol, not per occurrence.  
 
 For each symbol found:
-- Determine if the significance level is defined directly on the image (e.g., p-value shown next to the symbol, or explicit text like "p<0.001" on the plot).
+- Determine if the significance level is defined directly on the image (e.g., p-value shown next to the symbol, or explicitly text like "p<0.001" "p=0.0013" on the plot).
 - If the significance level is defined on the image, set "significance_level_symbols_defined_in_image" to "yes" for that symbol.
 - If the significance level is not defined on the image, set "significance_level_symbols_defined_in_image" to "no" for that symbol.
 
@@ -39,6 +39,7 @@ For each symbol:
 
 ## 6. Decision and explanation
 For each panel, provide `Decision_and_explanation` as an array of one or more short strings giving your overall verdict (e.g. PASS, FAIL, or WARNING) and a concise explanation of whether all significance-level symbols in that panel are properly defined in the image and/or caption. Use an empty array `[]` when `is_a_plot` is "no" or when there are no significance symbols to assess.
+
 
 Provide your analysis in the following JSON format for EACH and EVERY panel:
 
@@ -67,9 +68,7 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
                 "***P < 0.001",
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": [
-                "PASS; all significance level symbols in the panel are defined in the image and/or caption."
-            ]
+            "Decision_and_explanation": ["PASS; all significance level symbols in the panel are defined."]
         },
         {
             "panel_label": "B",
@@ -79,6 +78,33 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
             "significance_level_symbols_defined_in_caption": [],
             "from_the_caption": [],
             "Decision_and_explanation": []
+        },
+        {
+         "panel_label": "C",
+        "is_a_plot": "yes",
+        "significance_level_symbols_on_image": [
+            "ns",
+            "*",
+            "**"
+        ],
+        "significance_level_symbols_defined_in_image": [
+            "no",
+            "no",
+            "no"
+        ],
+        "significance_level_symbols_defined_in_caption": [
+            "no",
+            "yes",
+          "yes"
+        ],
+        "from_the_caption": [
+            "",
+            "*P < 0.05",
+            "**P < 0.001"
+        ],
+        "Decision_and_explanation": [
+            "WARNING: While the 'ns' symbol in the figure image is in general understood to mean 'not significant' it is not technically defined in the figure legend. It would be more accurate to include this information in the figure legend."
+        ]
         }
     ]
 }

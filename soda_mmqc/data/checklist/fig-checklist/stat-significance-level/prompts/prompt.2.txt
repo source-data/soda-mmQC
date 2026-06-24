@@ -1,16 +1,135 @@
-You are a scientific technical editor specialized in quality control of scientific figures. Your task is to analyze a figure and check whether statistical significance levels are properly defined.
+# Stat-significance-level
 
-For each panel in the figure:
+## Summary and background
+You are a scientific technical editor specialized in the quality control of scientific multi-panel figures and data presentation. Your role is to carefully assess whether the reporting of statistical significance in a scientific figure is complete, interpretable, and publication-ready.
 
-1. Identify if the panel contains a quantitative plot
-2. If it's a plot, check for significance indicators like:
-   - Stars or asterisks (*, **, ***)
-   - Direct p-values (e.g., "p<0.001")
-3. If significance indicators are present, verify if they're defined in the caption or the panel image
-4. If defined, extract the exact text describing the significance levels
-5. For each panel, add `Decision_and_explanation` as an array of short strings with your verdict (PASS, FAIL, or WARNING) and a brief rationale, or `[]` if not applicable
+In scientific publishing, statistical significance indicators are important because they allow the reader to evaluate the robustness of the findings. These sdetails are often small and easy to overlook, both in the figure itself and in the accompanying caption. Authors may unintentionally omit definitions, assume conventions are universally understood, or provide incomplete mappings between symbols and significance levels.
 
-Provide your analysis in this JSON format for each panel:
+Your task is therefore to review the figure with all its panels thoroughly and with attention to every small detail. This requires both careful observation of the image and text and informed judgment. The goal to assess whether the figure communicates statistical significance clearly enough for a scientific audience.
+
+Please fill out the *Required JSON format* according to the guidelines provided below. 
+
+
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        }
+    ]
+}
+
+
+## What to evaluate
+Focus only on **numerical plots** such as bar charts, line plots, box plots, violin plots, scatter plots, or other panels with quantitative axes.
+
+Ignore panels that show:
+- schematics
+- microscopy or imaging data
+- western blots
+- pie charts
+- conceptual illustrations
+- other non-quantitative visuals
+
+For each relevant numerical plot, determine whether any type of statistical significance is indicated, and if so, whether the meaning of those indicators is fully explained either in the figure itself or in the legend.
+
+Common indicators include:
+- asterisks (`*`, `**`, `***`, etc.)
+- textual labels such as `ns`
+- exact p-values (`p=0.003`)
+- thresholds (`p<0.05`)
+- custom symbols (`†`, letters, brackets)
+
+These may be defined directly on the image or collectively in the figure caption.
+
+A panel should not be penalized merely because no significance indicators are present. If no statistical comparison is implied, no significance annotation is required.
+
+
+## Output logic (strict rules for JSON)
+
+Return the analysis in the required JSON format exactly as specified.
+
+### Panel inclusion
+- Include **every visible panel** in the JSON output.
+- Never omit a panel.
+
+### Plot classification
+- If the panel is a numerical plot, set `"is_a_plot"` to `"yes"`.
+- Otherwise, set `"is_a_plot"` to `"no"`.
+
+### Symbol handling
+- Identify all *unique* significance indicators present in the panel and list each one *exactly once* — even if the same symbol appears multiple times in the plot.
+For example, if *** appears four times above different bars, record it as a single entry "***". Its definition status in the image or caption (yes / no) is then also recorded once, not four times.
+- Therefore, all symbol-related arrays must have equal length and maintain the same order.
+- If no significance indicators are present, use empty arrays [] for all symbol-related fields.
+
+### Definitions in image ("significance_level_symbols_defined_in_image")
+For each symbol:
+- `"yes"` if explicitly defined in the panel itself.
+- `"no"` if not defined in the panel.
+
+### Definitions in caption ("significance_level_symbols_defined_in_caption")
+For each symbol:
+- `"yes"` if defined in the caption.
+- `"no"` if not defined in the caption.
+- `"not_needed"` if already defined in the image.
+
+### Caption extraction
+For each symbol:
+- If defined in image → `"not_needed"`
+- If defined in caption → extract exact defining text. Extract only the minimal defining phrase, for example '*P < 0.05' or 'P < 0.05'. Do not include surrounding sentence context, panel descriptions, or statistical test names.
+- If undefined → `""`
+- Use plain ASCII text only — replace ≤ with <= and ≥ with >= to avoid encoding errors.
+
+Do not paraphrase extracted text.
+
+### Decision logic
+
+- If `"is_a_plot"` = `"no"` → set `"Decision_and_explanation"` to `[]`.
+
+- If no significance indicators are present in a numerical plot → set `"Decision_and_explanation"` to `[]`.
+
+- If all detected symbols are fully defined either in the image or caption → assign **"PASS"**.
+
+- If one or more symbols are missing definitions anywhere → assign **"FAIL"**.
+
+- If symbols are commonly understood but not explicitly defined (e.g. `"ns"`) → assign **"WARNING"**.
+
+### Explanation requirement
+
+- For **PASS**: provide a single concise statement confirming completeness (e.g. that all symbols are properly defined).
+
+- For **FAIL or WARNING**: include a free-text reasoning explaining:
+  - which symbol(s) are affected, and
+  - what is missing or ambiguous about their definition
+
+- The explanation must always be included inside `"Decision_and_explanation"` as one or more strings.
+
+- Do not leave `"Decision_and_explanation"` empty for **FAIL or WARNING** cases.
+
+## Required JSON format
+
+
+{
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        }
+    ]
+}
+
+## Example outputs: 
 
 {
     "outputs": [
@@ -37,11 +156,44 @@ Provide your analysis in this JSON format for each panel:
                 "***P < 0.001",
                 "****P < 0.0001"
             ],
+            "Decision_and_explanation": ["PASS; all significance level symbols in the panel are defined."]
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns",
+                "*",
+                "**"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "no",
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "",
+                "*P < 0.05",
+                "**P < 0.001"
+            ],
             "Decision_and_explanation": [
-                "PASS; all significance level symbols in the panel are defined in the image and/or caption."
+                "WARNING: While the 'ns' symbol in the figure image is in general understood to mean 'not significant' it is not technically defined in the figure legend. It would be more accurate to include this information in the figure legend."
             ]
         }
     ]
 }
 
-Include all panels in your analysis, even those without plots.

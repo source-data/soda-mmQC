@@ -26,14 +26,22 @@
                             },
                             "from_the_caption": {
                                 "type": "string",
-                                "description": "Text from caption describing error bars, when error bars are present"
+                                "description": "Text from caption describing error bars, when error bars are present, leave empty if no definition is found, or 'not needed' if error bars are not applicable"
+                            },
+                            "Decision_and_explanation": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Panel-level verdict and brief rationale (e.g. PASS, FAIL, or WARNING) on whether error bars are adequately defined; use 'not needed' string when not applicable"
                             }
                         },
                         "required": [
                             "panel_label",
                             "error_bar_on_figure",
                             "error_bar_defined_in_caption",
-                            "from_the_caption"
+                            "from_the_caption",
+                            "Decision_and_explanation"
                         ],
                         "additionalProperties": false
                     }

@@ -10,13 +10,11 @@ Understand the figure image and see where there are figure sub-part or "panels".
 
 ## 2. Determine if the panel is a quantitative plot
 For each panel in the figure:
-- Determine whether the panel is a plot of quantitative/nummerical data. (as opposed to showing an imaging data). Nummerical data plots have a coordinate system with  axes (XY or XYZ axes).
-- If, and only if, it is a quantitative plot with axes, set "is_a_plot" to "yes" and proceed to the next step. Otherwise, set "is_a_plot" to "no" and skip unit checking.
+- Determine whether the panel is a plot of quantitative data with axes (XY or XYZ axes).
+- If, and only if, it is a quantitative plot with axes, proceed to check for units. Otherwise, set "is_a_plot" to "no" and skip unit checking. Skip this check for schematics, pie charts, heat maps and sequence alignment plots. 
 
 ## 3. Understand when units are needed
-For each quantitative plot:
-- Determine if a the axes require units to be identified. 
-Units should be clearly defined for any continuous variable that represents a physical or biological measurement.
+A unit is a standardized quantity used to express a measurement. Units should be clearly defined for any continuous variable that represents a physical or biological measurement.
 
 **Units ARE needed for:**
 - Physical measurements (e.g., meters, seconds, grams, moles, degrees Celsius)
@@ -31,10 +29,11 @@ Units should be clearly defined for any continuous variable that represents a ph
   - Log ratios (e.g., log2 fold change)
   - Normalized values (e.g., normalized to control)
   - Z-scores or other standardized scores
+  - Fluorescence intensity 
 
 ## 4. Check for units on each axis
-For each quantitative plot, examine each axis:
-- Check if the units are defined in the panel image itself. Units are typically displayed next to the axis label (e.g., "Time (hours)", "Concentration (µM)").
+For each quantitative plot, examine each axis (x-axis, y-axis, z-axis if present):
+- First, check the panel image itself. Units are typically displayed next to the axis label (e.g., "Time (hours)", "Concentration (µM)").
 - If units are not visible on the image, check the figure caption for unit definitions.
 - For each axis, determine:
   - "yes": Units are provided (either on the image or in the caption)
@@ -42,14 +41,14 @@ For each quantitative plot, examine each axis:
   - "not needed": Units are not required (categorical or unitless variable)
 
 ## 5. Document unit definitions
-For each quantitative plot and each axis that has defined units (answer in previous step is "yes"):
+If units are present (answer is "yes"):
 - Extract or describe the unit definition from either the plot image or the caption.
 - Include this in the `unit_definition_as_provided` field for that axis.
 - Be specific: quote the exact text or describe clearly (e.g., "time in hours [h]", "concentration in micromolar [µM]").
 
-## 6. Explain why units should be present
-If units are missing (answer in step 4 is "no"):
-- Provide a clear explanation why units are needed but missing.
+## 6. Justify missing units
+If units are missing (answer is "no"):
+- Provide a clear justification explaining why units are needed but missing.
 - Include this in the `justify_why_units_are_missing` field for that axis.
 - Be specific about what measurement is shown and why units are important (e.g., "protein abundance is plotted but units are not specified").
 
@@ -121,3 +120,5 @@ If units are missing (answer in step 4 is "no"):
 - Only provide justifications when units are missing but needed. If units are "not needed", no justification is required.
 - Only include entries in `unit_definition_as_provided` when units are present (answer is "yes").
 - Only include entries in `justify_why_units_are_missing` when units are missing but needed (answer is "no").
+- For FACS data scatterplot, please put "is_a_plot": "no", as these are by defintion arbitrary units and do not require axis units
+- For pie charts please put "is_a_plot": "no" as these are not plots requiring units. 

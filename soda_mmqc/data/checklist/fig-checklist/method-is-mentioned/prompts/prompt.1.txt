@@ -7,8 +7,7 @@ Proceed step-by-step and establish a systematical strategy to be very accurate a
 ## Step-by-step instructions
 
 ### 1. Identify all figure panels
-Identify every labeled panel in the figure (e.g., A, B, C, …). Panels typically depict an experiment such as a plot, micrograph, image, or schematic.
-For each panel, locate the corresponding description in the figure caption.
+Understand the figure image and see where there are figure sub-part or "panels". Each panel depicts an experiment either with a plot, a micrograph, some other kinds of images, a scheme. Panels are typically labeled with consecutive letters (for example: A, B, C, ... or (a), (b), (c)). The first panel is usually on the top left. The last panel tends to be on the bottom right. Sometimes the layout is however a bit messy. Sometimes a panel can include several images. For example, a panel can include both a microscopy image and a plot. For each panel, locate the corresponding description in the figure caption.
 
 ### 2. Check the figure caption for an experimental method
 Determine whether the figure caption explicitly mentions the experimental assay or method used for that panel.
