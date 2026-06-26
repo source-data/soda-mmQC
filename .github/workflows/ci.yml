@@ -1,0 +1,29 @@
+name: Lint & test mmqc_utils
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set up just
+      uses: extractions/setup-just@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+      with:
+        enable-cache: true
+    
+    - name: Install ImageMagick
+      run: sudo apt-get install -y imagemagick
+
+    - name: Format, lint, test
+      run: just qa
+      working-directory: ./mmqc_utils

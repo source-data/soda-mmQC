@@ -1,0 +1,18 @@
+{
+  "figures": [
+    {
+      "figure_label": "Figure 1",
+      "panels": [
+        { "label": "1A", "is_micrograph": "yes", "caption_snippet": "EM" },
+        { "label": "1B", "is_micrograph": "no", "caption_snippet": "" }
+      ]
+    },
+    {
+      "figure_label": "Figure 2",
+      "panels": [
+        { "label": "2A", "is_micrograph": "yes", "caption_snippet": " blot" },
+        { "label": "2B", "is_micrograph": "", "caption_snippet": "" }
+      ]
+    }
+  ]
+}

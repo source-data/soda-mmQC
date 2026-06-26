@@ -9,7 +9,7 @@ description = "SODA MMQC: A tool for quality control of scientific figures"
 authors = [
     {name = "SODA Team", email = "soda@example.com"},
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
     "python-dotenv>=1.0.0",
     "langfuse>=2.0.0",
@@ -38,6 +38,9 @@ dependencies = [
     "python-docx>=0.8.11",
     "pytest>=7.0.0",
     "openpyxl>=3.1.5",
+    "mmqc-utils>=0.3.0",
+    "rapidfuzz>=3.0.0",
+    "itables>=2.0.0",
 ]
 
 [project.scripts]

@@ -1,89 +1,63 @@
-# API Provider Configuration
+# API providers
 
-The SODA MMQC project now supports both OpenAI and Anthropic APIs with structured output capabilities.
+SODA MMQC supports **OpenAI** and **Anthropic** for multimodal check execution with structured JSON output. Routing is controlled by `API_PROVIDER` in `.env`; implementation lives in `soda_mmqc.lib.api`.
 
-## Environment Setup
+## Environment setup
 
-### Using .env File (Recommended)
-
-Create a `.env` file in the project root with your configuration:
+Create a `.env` file in the project root:
 
 ```bash
-# API Provider Configuration
+# API provider
 API_PROVIDER=openai  # or 'anthropic'
 
-# OpenAI Configuration (required if API_PROVIDER=openai)
+# OpenAI (required when API_PROVIDER=openai)
 OPENAI_API_KEY=your_openai_api_key_here
 
-# Anthropic Configuration (required if API_PROVIDER=anthropic)  
+# Anthropic (required when API_PROVIDER=anthropic)
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
-# Optional: Device configuration
-DEVICE=cpu  # or 'cuda', 'mps' for GPU acceleration
+# Optional: PyTorch device for semantic scoring embedder
+DEVICE=cpu  # 'cpu', 'cuda', or 'mps'
 ```
 
-### Using Environment Variables
+On import, `soda_mmqc.config` validates the setup:
 
-Alternatively, export environment variables directly:
+- Logs a warning if the selected provider’s API key is missing (does not block import).
+- Falls back to OpenAI with a warning if `API_PROVIDER` is unknown.
 
-#### OpenAI (default)
-```bash
-export API_PROVIDER=openai
-export OPENAI_API_KEY=your_openai_api_key
-```
+## Default models
 
-#### Anthropic
-```bash
-export API_PROVIDER=anthropic
-export ANTHROPIC_API_KEY=your_anthropic_api_key
-```
+Defaults are set in `soda_mmqc/config.py` and used when `--model` is omitted on the CLI:
 
-### Configuration Validation
+| Provider | Default model |
+|----------|---------------|
+| OpenAI | `gpt-5-mini-2025-08-07` |
+| Anthropic | `claude-opus-4-5-20251101` |
 
-The system automatically validates your configuration on startup:
-- ✅ **Valid setup**: Provider and API key are properly configured
-- ⚠️ **Missing API key**: Provider selected but API key not found
-- ⚠️ **Invalid provider**: Falls back to OpenAI with warning
+Pass any model ID your account supports, e.g. `evaluate fig-checklist --model gpt-5`. The CLI checks the name against models returned by the provider API (`get_compatible_models()`).
 
-## Supported Models
+## Structured output
 
-### OpenAI Models
-- `gpt-4o-2024-08-06` (default)
-- `gpt-4o-mini` 
-- `gpt-4` variants with structured output support
+Each check’s `schema.json` defines the required JSON shape. Both providers enforce it; only the mechanism differs.
 
-### Anthropic Models
-- `claude-3-5-sonnet-20241022` (default)
-- `claude-3-7-sonnet-20250219`
-- `claude-4-sonnet` and `claude-4-opus` (when available)
+### OpenAI (Responses API)
 
-## Implementation Details
+Calls use `client.responses.create()` with the check schema passed as the `text` parameter (JSON-schema structured output). Optional `model_config.json` fields (`tools`, `reasoning`, etc.) are merged into the same request.
 
-### OpenAI Structured Output
-Uses the native `response_format` parameter with JSON schema enforcement:
-```python
-response_format={
-    "type": "json_schema",
-    "json_schema": {
-        "name": "structured_output",
-        "schema": your_json_schema
-    }
-}
-```
+### Anthropic
 
-### Anthropic Structured Output
-Uses tool calling to enforce structured output:
-- Converts JSON schema to an Anthropic tool definition
-- Forces the model to use the structured output tool
-- Extracts the structured response from tool use
+The schema is converted to a `structured_output` tool. The API call sets `tool_choice` to force that tool; the parsed tool input becomes the response JSON.
 
-### Per-check model config (OpenAI)
+`model_config.json` tool and reasoning options apply to **OpenAI only**. For Anthropic, the same file may still affect input preparation (e.g. source data attachments).
 
-Checks can include a `model_config.json` to enable tools (e.g. web search). The file is passed through to `client.responses.create()` as `tools`, `tool_choice`, etc.
+## Per-check model config (OpenAI)
 
-**Valid tool types** (OpenAI Responses API): `web_search_preview`, `web_search_preview_2025_03_11`, `file_search`, `code_interpreter`, `function`, `mcp`, `image_generation`, `shell`, `computer_use_preview`, `apply_patch`, `custom`. Do **not** use `web_fetch` (unsupported; will return 400).
+Checks may include `model_config.json` beside `schema.json`. Values are passed through to `client.responses.create()` (`tools`, `tool_choice`, `max_tool_calls`, `include`, `reasoning`, `max_output_tokens`). If a check has no file, `soda_mmqc/data/model_config.json` supplies defaults (empty tools).
 
-Example for a check that may use web search:
+**Valid tool types** (Responses API): `web_search_preview`, `web_search_preview_2025_03_11`, `file_search`, `code_interpreter`, `function`, `mcp`, `image_generation`, `shell`, `computer_use_preview`, `apply_patch`, `custom`. Do **not** use `web_fetch` (unsupported; returns 400).
+
+Minimal web-search example:
+
 ```json
 {
   "tools": [{ "type": "web_search_preview" }],
@@ -91,13 +65,8 @@ Example for a check that may use web search:
 }
 ```
 
-**More agentic / coding (same endpoint):** You can enable multi-step thinking and code execution without changing the API:
+Agentic example (reasoning model + web search + code interpreter):
 
-- **Reasoning** (gpt-5, o-series): Add `"reasoning": { "effort": "medium" }` (`low` / `medium` / `high`) so the model spends more tokens on chain-of-thought before answering. Optional: `"max_output_tokens": 16384` to cap total output (reasoning + reply).
-- **Code interpreter:** Add a tool `{ "type": "code_interpreter", "container": { "type": "auto", "memory_limit": "4g" } }` so the model can write and run Python in a sandbox (e.g. for data or image analysis). Use with a reasoning model for best results.
-- **Multi-turn:** The Responses API supports `conversation` and `previous_response_id` for multi-round chats; that would require run-loop changes (multiple API calls per example) and is not yet wired through `model_config`.
-
-Example agentic + coding config (reasoning model + web search + code interpreter):
 ```json
 {
   "tools": [
@@ -110,24 +79,29 @@ Example agentic + coding config (reasoning model + web search + code interpreter
   "max_output_tokens": 16384
 }
 ```
-Use a reasoning-capable model (e.g. `gpt-5`, `gpt-5-mini`, or o-series) when setting `reasoning`.
 
-## Usage
+Use a reasoning-capable OpenAI model (e.g. `gpt-5`, `gpt-5-mini`, o-series) when setting `reasoning`. Multi-turn `conversation` / `previous_response_id` is not wired through the evaluate loop.
 
-The API automatically routes to the appropriate provider based on the `API_PROVIDER` environment variable. Both providers return the same response format:
+## Programmatic usage
+
+`generate_response` routes to the configured provider:
 
 ```python
+from soda_mmqc.scripts.run import ModelInput
+from soda_mmqc.lib.api import generate_response
+
+model_input = ModelInput(
+    example=example,
+    prompt=prompt_text,
+    schema=schema_dict,
+)
+
 response, metadata = generate_response(
-    model_input=model_input,
-    model="your-preferred-model",  # Optional
-    metadata={"custom": "metadata"}  # Optional
+    model_input,
+    model="gpt-5-mini-2025-08-07",  # optional; uses DEFAULT_MODEL if omitted
+    metadata={"doc_id": example.doc_id},
+    model_config=model_config_dict,  # optional; from check's model_config.json
 )
 ```
 
-## Benefits
-
-1. **Multimodal Support**: Both providers support text and image inputs
-2. **Structured Output**: JSON schema enforcement for consistent responses
-3. **Provider Flexibility**: Easy switching between OpenAI and Anthropic
-4. **Unified Interface**: Same API surface regardless of provider
-5. **Error Handling**: Consistent retry logic and error handling
+Returns `(parsed_json, metadata)` where `metadata` includes `response_id`, `model`, and token usage when available.

@@ -1,7 +1,6 @@
 import os
 import json
 import base64
-import io
 import math
 import numbers
 from pathlib import Path
@@ -14,14 +13,7 @@ from tenacity import (
 from typing import Dict, Any, Tuple, Optional
 from soda_mmqc import logger
 from soda_mmqc.config import API_PROVIDER, DEFAULT_MODEL, DEFAULT_MODELS
-
-# Try to import PIL for image compression
-try:
-    from PIL import Image
-    PIL_AVAILABLE = True
-except ImportError:
-    PIL_AVAILABLE = False
-    logger.warning("PIL (Pillow) not available. Image compression will be disabled.")
+from mmqc_utils.images import compress_to_bounded_jpeg
 
 # API clients will be imported dynamically when needed
 
@@ -198,113 +190,42 @@ def _create_tool_from_schema(schema: dict) -> dict:
     }
 
 
-def _compress_image_if_needed(image_data: str, mime_type: str, 
-                            max_size_bytes: int = 5 * 1024 * 1024) -> tuple[str, str]:
-    """Compress image if it exceeds the maximum size.
-    
-    Args:
-        image_data: Base64 encoded image data
-        mime_type: MIME type of the image
-        max_size_bytes: Maximum allowed size in bytes (default: 5MB)
-        
+def _compress_image_if_needed(image_data: str, mime_type: str,
+                              max_size_bytes: int = 5 * 1024 * 1024) -> tuple[str, str]:
+    """Compress image if its base64 size exceeds max_size_bytes.
+
+    Decodes base64 → compress_to_bounded_jpeg → re-encodes. The loop shrinks
+    the raw-byte target by 25% each iteration to account for base64 overhead
+    (~33%) until the encoded result fits or the target drops below 100 KB.
+
     Returns:
-        Tuple of (compressed_base64_data, mime_type)
+        Tuple of (base64_data, mime_type); mime_type is always "image/jpeg"
+        after compression, or the original values if compression is skipped/fails.
     """
-    if not PIL_AVAILABLE:
-        logger.warning("PIL not available, skipping image compression")
+    if len(image_data) <= max_size_bytes:
         return image_data, mime_type
-    
+
     try:
-        # Decode base64 data
-        image_bytes = base64.b64decode(image_data)
-        
-        # Check if compression is needed by testing the actual base64 size
-        # We need to ensure the base64-encoded result stays under the limit
-        if len(image_data) <= max_size_bytes:
-            return image_data, mime_type
-        
-        # Open image with PIL
-        image = Image.open(io.BytesIO(image_bytes))
-        
-        # Open image with PIL
-        image = Image.open(io.BytesIO(image_bytes))
-        
-        # Determine output format based on MIME type
-        if mime_type == "image/png":
-            output_format = "PNG"
-            # For PNG, try different optimization strategies
-            compressed_bytes = io.BytesIO()
-            image.save(compressed_bytes, format=output_format, optimize=True)
-            compressed_data = compressed_bytes.getvalue()
-            
-            # If still too large, try converting to JPEG for better compression
-            # Check the base64-encoded size, not the binary size
-            compressed_base64 = base64.b64encode(compressed_data).decode()
-            if len(compressed_base64) > max_size_bytes:
-                logger.info(f"PNG too large ({len(compressed_data)} bytes), "
-                           f"converting to JPEG for better compression")
-                output_format = "JPEG"
-                mime_type = "image/jpeg"
-                quality = 85
-                
-                # Convert RGBA to RGB if needed for JPEG
-                if image.mode == 'RGBA':
-                    # Create a white background
-                    rgb_image = Image.new('RGB', image.size, (255, 255, 255))
-                    rgb_image.paste(image, mask=image.split()[-1])  # Use alpha channel as mask
-                    image = rgb_image
-            else:
-                quality = None  # PNG doesn't use quality parameter
-        elif mime_type == "image/jpeg" or mime_type == "image/jpg":
-            output_format = "JPEG"
-            quality = 85  # Start with high quality
-        else:
-            # Convert to JPEG for other formats
-            output_format = "JPEG"
-            quality = 85
-            mime_type = "image/jpeg"
-        
-        # For JPEG or converted images, compress with quality reduction if needed
-        if output_format == "JPEG":
-            compressed_bytes = io.BytesIO()
-            image.save(compressed_bytes, format=output_format, quality=quality, 
-                      optimize=True)
-            compressed_data = compressed_bytes.getvalue()
-            
-            # If still too large, reduce quality further
-            # Check the base64-encoded size, not the binary size
-            compressed_base64 = base64.b64encode(compressed_data).decode()
-            if len(compressed_base64) > max_size_bytes:
-                for quality_level in [70, 60, 50, 40, 30]:
-                    compressed_bytes = io.BytesIO()
-                    image.save(compressed_bytes, format=output_format, 
-                              quality=quality_level, optimize=True)
-                    compressed_data = compressed_bytes.getvalue()
-                    compressed_base64 = base64.b64encode(compressed_data).decode()
-                    if len(compressed_base64) <= max_size_bytes:
-                        break
-        
-        # If still too large, resize the image
-        if len(compressed_data) > max_size_bytes:
-            # Calculate new size to fit within limit
-            scale_factor = (max_size_bytes / len(compressed_data)) ** 0.5
-            new_width = int(image.width * scale_factor)
-            new_height = int(image.height * scale_factor)
-            
-            resized_image = image.resize((new_width, new_height), 
-                                       Image.Resampling.LANCZOS)
-            compressed_bytes = io.BytesIO()
-            resized_image.save(compressed_bytes, format=output_format, 
-                             quality=30, optimize=True)
-            compressed_data = compressed_bytes.getvalue()
-        
-        # Encode back to base64
-        compressed_base64 = base64.b64encode(compressed_data).decode('utf-8')
-        
-        logger.info(f"Compressed image from {len(image_bytes)} to "
-                   f"{len(compressed_data)} bytes")
-        return compressed_base64, mime_type
-        
+        raw_bytes = base64.b64decode(image_data)
+        # Start target at 75% of limit to account for base64 overhead (~33%).
+        target_bytes = max_size_bytes * 3 // 4
+        compressed = raw_bytes
+        while target_bytes >= 100_000:
+            compressed = compress_to_bounded_jpeg(raw_bytes, max_bytes=target_bytes)
+            result_b64 = base64.b64encode(compressed).decode("utf-8")
+            if len(result_b64) <= max_size_bytes:
+                logger.info(
+                    f"Compressed image from {len(raw_bytes)} to {len(compressed)} bytes"
+                )
+                return result_b64, "image/jpeg"
+            target_bytes = target_bytes * 3 // 4
+        # Best-effort: return smallest result even if still over limit.
+        result_b64 = base64.b64encode(compressed).decode("utf-8")
+        logger.warning(
+            f"Could not compress image to {max_size_bytes} bytes; "
+            f"returning {len(result_b64)}-byte base64 result"
+        )
+        return result_b64, "image/jpeg"
     except Exception as e:
         logger.warning(f"Failed to compress image: {e}")
         return image_data, mime_type
