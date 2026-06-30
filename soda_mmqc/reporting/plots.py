@@ -12,6 +12,7 @@ from plotly.subplots import make_subplots
 
 from soda_mmqc.core.property_rollup import instance_eligible_for_mean_score
 from soda_mmqc.reporting.aggregate import RunSummaries, RunSummary, field_order, leaf_property_tail
+from soda_mmqc.reporting.load import record_source
 from soda_mmqc.reporting.styles import (
     COMPARISON_SERIES_OPACITIES,
     COMPARISON_SERIES_PATTERNS,
@@ -106,6 +107,7 @@ def applicable_instance_scores_frame(summary: RunSummary) -> pd.DataFrame:
         if not isinstance(instances, list):
             continue
         doc_id = record.doc_id or ""
+        source = record_source(record)
         for instance in instances:
             if not isinstance(instance, dict):
                 continue
@@ -124,6 +126,7 @@ def applicable_instance_scores_frame(summary: RunSummary) -> pd.DataFrame:
                 {
                     "leaf_property": leaf_property,
                     "field": leaf_property_tail(leaf_property),
+                    "source": source,
                     "doc_id": doc_id,
                     "path": instance.get("path", ""),
                     "score": float(score),
@@ -146,7 +149,8 @@ def plot_mean_score_with_instances(
     *,
     title: str | None = None,
     seed: int = 0,
-) -> go.Figure:
+    return_instances: bool = False,
+) -> go.Figure | tuple[go.Figure, pd.DataFrame]:
     """Layer 2 mean score bars with jittered applicable instance scores."""
     frame = mean_scores_frame(summary)
     inst = applicable_instance_scores_frame(summary)
@@ -155,7 +159,8 @@ def plot_mean_score_with_instances(
     if frame.empty:
         fig = go.Figure()
         fig.update_layout(title=title)
-        return _apply_plot_template(fig)
+        fig = _apply_plot_template(fig)
+        return (fig, inst) if return_instances else fig
 
     fields = frame["field"].tolist()
     field_to_x = _field_numeric_positions(fields, spacing=MEAN_SCORE_BAR_SPACING)
@@ -186,7 +191,7 @@ def plot_mean_score_with_instances(
         ]
         hover_lines = []
         for row in inst.itertuples(index=False):
-            text = f"{row.doc_id}<br>{row.path}<br>score: {row.score:.3f}"
+            text = f"{row.source}<br>{row.path}<br>score: {row.score:.3f}"
             if row.layer2:
                 text += f"<br>{row.layer2}"
             hover_lines.append(text)
@@ -196,6 +201,7 @@ def plot_mean_score_with_instances(
                 y=inst["score"],
                 mode="markers",
                 name="instance score",
+                customdata=np.arange(len(inst)),
                 marker=dict(
                     size=8,
                     color=INSTANCE_SCORE_MARKER_COLOR,
@@ -221,7 +227,8 @@ def plot_mean_score_with_instances(
         ),
         yaxis=dict(range=[0, MEAN_SCORE_Y_MAX], title="score"),
     )
-    return _apply_plot_template(fig)
+    fig = _apply_plot_template(fig)
+    return (fig, inst) if return_instances else fig
 
 
 def _primary_layer_s_counts(summary: RunSummary) -> dict[str, int]:
@@ -757,7 +764,6 @@ def build_dashboard(
     layer1_df = layer_counts_by_property(summary, LAYER1_ORDER, "layer1_counts")
     layer2_binary_df, layer2_graded_df = split_layer2_by_metric(summary)
     layer_s_counts = _primary_layer_s_counts(summary)
-    list_key = summary.by_list_keys[0] if summary.by_list_keys else None
 
     subplot_titles = (
         LAYER_S_TITLE,
@@ -807,16 +813,25 @@ def build_dashboard(
         order=LAYER2_GRADED_ORDER,
         color_map=LAYER2_GRADED_COLORS,
     )
+    
+    fig.update_annotations(
+        font_size=12,
+        xanchor="center",
+        yanchor="middle",
+        y=1,
+        align="center",
+    )
 
     if title is None:
         title = (
             f"{summary.check} — {summary.model} / {summary.prompt}"
         )
-        if list_key:
-            title = f"{title} ({LAYER_S_TITLE}: {list_key})"
-
+        
     layout_kwargs: dict[str, Any] = {
         "title_text": title,
+        "title_x": 0.5,
+        "title_y": 0.95,
+        "title_font_size": 16,
         "height": 460,
         "barmode": "stack",
         "showlegend": False,

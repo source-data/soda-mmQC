@@ -252,7 +252,7 @@ def ensure_record_payloads(
 
 def load_eval_manifest_for_check(checklist: str, check: str) -> EvalManifest:
     """Load ``eval-manifest.json`` for a checklist check."""
-    path = CHECKLIST_DIR / checklist / check / "eval-manifest.json"
+    path = eval_manifest_path(checklist, check)
     if not path.is_file():
         raise FileNotFoundError(f"Missing eval manifest: {path}")
     return load_eval_manifest(path)
@@ -277,6 +277,85 @@ def load_prompt_text(checklist: str, check: str, prompt: str) -> str | None:
         check_dir,
     )
     return None
+
+
+@dataclass(frozen=True)
+class EvaluationCheckRef:
+    """A checklist check that has at least one ``analysis.json`` on disk."""
+
+    checklist: str
+    check: str
+    has_manifest: bool = True
+
+
+def eval_manifest_path(checklist: str, check: str) -> Path:
+    """Path to ``eval-manifest.json`` for a checklist check."""
+    return CHECKLIST_DIR / checklist / check / "eval-manifest.json"
+
+
+def check_has_eval_manifest(checklist: str, check: str) -> bool:
+    """Return whether the check has an on-disk eval manifest."""
+    return eval_manifest_path(checklist, check).is_file()
+
+
+def try_load_run_summaries(
+    checklist: str,
+    check: str,
+) -> tuple[RunSummaries | None, str | None]:
+    """Load aggregated run summaries, or return ``(None, user_message)``."""
+    from soda_mmqc.reporting.aggregate import RunSummaries, summarize_runs
+
+    manifest_path = eval_manifest_path(checklist, check)
+    if not manifest_path.is_file():
+        return None, (
+            "This check has evaluation output but no **eval-manifest.json**. "
+            f"Add a manifest at `{manifest_path}`, then re-run `evaluate` if needed."
+        )
+
+    eval_dir = EVALUATION_DIR / checklist / check
+    if not eval_dir.is_dir():
+        return None, f"No evaluation directory at `{eval_dir}`. Run `evaluate` first."
+
+    try:
+        runs = load_flat_runs(checklist, check)
+    except FileNotFoundError as exc:
+        return None, str(exc)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        return None, f"Could not load evaluation data: {exc}"
+
+    if len(runs) == 0:
+        return None, (
+            f"No flat runs loaded under `{eval_dir}`. "
+            "Check that `analysis.json` exists for at least one model and prompt."
+        )
+
+    return summarize_runs(runs), None
+
+
+def discover_evaluation_checks() -> tuple[EvaluationCheckRef, ...]:
+    """List checks under ``EVALUATION_DIR`` with evaluation results."""
+    refs: list[EvaluationCheckRef] = []
+    if not EVALUATION_DIR.is_dir():
+        return ()
+    for checklist_dir in sorted(EVALUATION_DIR.iterdir()):
+        if not checklist_dir.is_dir():
+            continue
+        for check_dir in sorted(checklist_dir.iterdir()):
+            if not check_dir.is_dir():
+                continue
+            models = _discover_models(check_dir)
+            if models:
+                refs.append(
+                    EvaluationCheckRef(
+                        checklist=checklist_dir.name,
+                        check=check_dir.name,
+                        has_manifest=check_has_eval_manifest(
+                            checklist_dir.name,
+                            check_dir.name,
+                        ),
+                    )
+                )
+    return tuple(refs)
 
 
 def load_flat_runs(
