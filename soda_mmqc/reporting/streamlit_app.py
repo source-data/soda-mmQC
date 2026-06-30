@@ -65,7 +65,7 @@ def render_instance_context(
             if fig is not None:
                 st.plotly_chart(
                     fig,
-                    use_container_width=True,
+                    width="stretch",
                     height=figure_height,
                     config={
                         "scrollZoom": True,
@@ -165,7 +165,7 @@ def _render_mean_score_panel(
     if enable_selection and not inst.empty:
         event = st.plotly_chart(
             fig,
-            use_container_width=True,
+            width="stretch",
             on_select="rerun",
             selection_mode="points",
             key=chart_key,
@@ -174,7 +174,7 @@ def _render_mean_score_panel(
         if idx is not None and 0 <= idx < len(inst):
             return inst.iloc[idx]
     else:
-        st.plotly_chart(fig, use_container_width=True, key=chart_key)
+        st.plotly_chart(fig, width="stretch", key=chart_key)
     return None
 
 
@@ -195,7 +195,7 @@ def _render_culprit(summary: RunSummary, row: pd.Series) -> None:
                 }
             ]
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -204,7 +204,7 @@ def _render_culprit(summary: RunSummary, row: pd.Series) -> None:
         match = errors[(errors["source"] == source) & (errors["path"] == path)]
         if not match.empty:
             st.markdown("**Layer 2 error record**")
-            st.dataframe(match, use_container_width=True, hide_index=True)
+            st.dataframe(match, width="stretch", hide_index=True)
 
     ctx = inspect_instance(
         summary,
