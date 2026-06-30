@@ -307,6 +307,44 @@ def _display_side_by_side(
         print(frame.to_string())
 
 
+def build_figure_image_plot(
+    image_path: Path | str,
+    *,
+    height: int = 420,
+    width: int | None = None,
+) -> Any | None:
+    """Plotly figure for a zoomable/pannable figure image (``px.imshow``)."""
+    path = Path(image_path)
+    if not path.is_file():
+        return None
+    try:
+        import plotly.express as px
+        from PIL import Image
+    except ImportError:
+        return None
+
+    with Image.open(path) as img:
+        pixel_width, pixel_height = img.size
+        layout_width = width
+        if layout_width is None:
+            layout_width = max(240, int(height * pixel_width / pixel_height))
+        fig = px.imshow(img)
+        fig.update_layout(
+            margin=dict(l=0, r=0, t=0, b=0),
+            height=height,
+            width=layout_width,
+            dragmode="zoom",
+        )
+        fig.update_xaxes(visible=False, constrain="domain")
+        fig.update_yaxes(
+            visible=False,
+            scaleanchor="x",
+            scaleratio=1,
+            autorange="reversed",
+        )
+        return fig
+
+
 def _display_figure_image(
     image_path: Path | str,
     *,
@@ -322,28 +360,8 @@ def _display_figure_image(
 
     if zoomable:
         try:
-            import plotly.express as px
-            from PIL import Image
-
-            with Image.open(path) as img:
-                pixel_width, pixel_height = img.size
-                layout_width = width
-                if layout_width is None:
-                    layout_width = max(240, int(height * pixel_width / pixel_height))
-                fig = px.imshow(img)
-                fig.update_layout(
-                    margin=dict(l=0, r=0, t=0, b=0),
-                    height=height,
-                    width=layout_width,
-                    dragmode="zoom",
-                )
-                fig.update_xaxes(visible=False, constrain="domain")
-                fig.update_yaxes(
-                    visible=False,
-                    scaleanchor="x",
-                    scaleratio=1,
-                    autorange="reversed",
-                )
+            fig = build_figure_image_plot(path, height=height, width=width)
+            if fig is not None:
                 fig.show(config={"scrollZoom": True})
                 return
         except Exception as exc:
