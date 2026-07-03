@@ -11,16 +11,13 @@
             "panel_label": "B",
             "micrograph": "yes",
             "symbols": [
-                "green outline (annotated region / ROI)",
-                "scale bar (200 μm)"
+                "green outline (annotated region / ROI)"
             ],
             "symbols_defined_in_caption": [
-                "yes",
                 "yes"
             ],
             "from_the_caption": [
-                "with the same region annotated in green.",
-                "Scale bar, 200 μm."
+                "with the same region annotated in green."
             ]
         },
         {
@@ -44,5 +41,6 @@
             "symbols_defined_in_caption": [],
             "from_the_caption": []
         }
-    ]
+    ],
+    "updated_at": "2026-03-27 16:41:17"
 }

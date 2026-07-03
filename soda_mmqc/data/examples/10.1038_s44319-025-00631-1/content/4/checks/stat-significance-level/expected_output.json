@@ -6,7 +6,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "B",
@@ -14,7 +15,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
@@ -29,8 +31,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000<\u00001\u00000001"
-            ]
+                "*****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "D",
@@ -45,8 +48,28 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000<\u00001\u00000001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+        },
+        {
+            "panel_label": "",
+            "is_a_plot": "",
+            "significance_level_symbols_on_image": "",
+            "significance_level_symbols_defined_in_image": "",
+            "significance_level_symbols_defined_in_caption": "",
+            "from_the_caption": "",
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "",
+            "is_a_plot": "",
+            "significance_level_symbols_on_image": "",
+            "significance_level_symbols_defined_in_image": "",
+            "significance_level_symbols_defined_in_caption": "",
+            "from_the_caption": "",
+            "Decision_and_explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 10:32:16"
 }

@@ -1,0 +1,73 @@
+{
+  "name": "plot-axis-units",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "D",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "Number of IN immuno-gold labeled / HIV-MLO"
+        }
+      ]
+    },
+    {
+      "panel_label": "E",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "CPSF6 gold particles / condensate"
+        },
+        {
+          "axis": "y",
+          "definition": "Diameter of CPSF6 condensates (nm)"
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-03-27 10:09:50"
+}

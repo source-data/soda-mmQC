@@ -1,0 +1,10 @@
+{
+    "name": "AB-target-reagent-consistency",
+    "description": "Checks whether the used antibodies correspond to the protein, gene product, or biomarker that the study claims to measure or manipulate.",
+    "example_class": "word",
+    "examples": [
+        "RATT210.1038_s44318-026-00828-7",
+        "RATT210.1038_s44318-026-00828-7"
+    ]
+  }
+  

@@ -7,8 +7,8 @@
         },
         {
             "panel_label": "B",
-            "image_matches_caption": "no",
-            "discrepancies": "Right-side plate photographs are labeled ‘pacL2G17A+G20A’ (alanine mutations) while the figure caption (and accompanying data file names) refer to pacL2G17L+G20L (leucine substitutions). This is an inconsistency between the image labeling and the caption description."
+            "image_matches_caption": "yes",
+            "discrepancies": ""
         },
         {
             "panel_label": "C",
@@ -38,12 +38,13 @@
         {
             "panel_label": "H",
             "image_matches_caption": "yes",
-            "discrepancies": ""
+            "discrepancies": "Caption describes panel H as showing cluster sizes, but the image labeled H displays 'Mol.% into clusters' (proportion of molecules in clusters). Panels H and I appear swapped relative to the caption."
         },
         {
             "panel_label": "I",
             "image_matches_caption": "yes",
-            "discrepancies": ""
+            "discrepancies": "Caption describes panel I as the proportion of molecules localized within a cluster per cell, but the image labeled I displays cluster size (nm^3). Panels H and I appear swapped relative to the caption."
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 14:34:40"
 }

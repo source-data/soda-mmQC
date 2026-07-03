@@ -48,6 +48,13 @@
                                     "type": "string"
                                 },
                                 "description": "Extracted text explaining the significance level symbols (use 'not_needed' if defined in image)"
+                            },
+                            "Decision_and_explanation": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Panel-level verdict and brief rationale (e.g. PASS, FAIL, or WARNING) on whether significance levels are adequately defined; use empty array when not applicable"
                             }
                         },
                         "required": [
@@ -56,7 +63,8 @@
                             "significance_level_symbols_on_image",
                             "significance_level_symbols_defined_in_image",
                             "significance_level_symbols_defined_in_caption",
-                            "from_the_caption"
+                            "from_the_caption",
+                            "Decision_and_explanation"
                         ],
                         "additionalProperties": false
                     }

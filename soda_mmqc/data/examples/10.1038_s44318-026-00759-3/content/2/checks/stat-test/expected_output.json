@@ -1,0 +1,70 @@
+{
+  "name": "stat-test",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "no",
+      "statistical_test_mentioned": "not needed",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": ""
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "n.s., not significant by Mann\u2013Whitney U test."
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "n.s., not significant by Mann\u2013Whitney U test."
+    },
+    {
+      "panel_label": "D",
+      "is_a_plot": "no",
+      "statistical_test_needed": "no",
+      "statistical_test_mentioned": "not needed",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": ""
+    },
+    {
+      "panel_label": "E",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "2-way ANOVA followed by Sidak post-hoc test."
+    },
+    {
+      "panel_label": "F",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "2-way ANOVA followed by Sidak post-hoc test."
+    },
+    {
+      "panel_label": "G",
+      "is_a_plot": "no",
+      "statistical_test_needed": "no",
+      "statistical_test_mentioned": "not needed",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": ""
+    },
+    {
+      "panel_label": "H",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "2-way ANOVA followed by Sidak post-hoc test."
+    }
+  ],
+  "updated_at": "2026-04-29 13:02:56"
+}

@@ -11,11 +11,11 @@
         {
             "panel_label": "B",
             "is_a_plot": "yes",
-            "statistical_test_needed": "yes",
+            "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
             "justify_why_test_is_missing": "",
             "from_the_caption": ""
         }
     ],
-    "updated_at": "2025-05-08 13:44:39"
+    "updated_at": "2026-06-02 14:58:34"
 }

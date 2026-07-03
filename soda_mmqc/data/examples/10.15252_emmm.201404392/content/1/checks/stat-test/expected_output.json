@@ -11,9 +11,9 @@
         {
             "panel_label": "B",
             "is_a_plot": "yes",
-            "statistical_test_needed": "yes",
-            "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "The caption states that the ratio of aggregate-positive Purkinje cells 'did not differ' between groups (a comparative claim) but does not report which statistical test or p-value supports this claim.",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "justify_why_test_is_missing": "",
             "from_the_caption": ""
         },
         {
@@ -36,9 +36,9 @@
             "panel_label": "E",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
-            "statistical_test_mentioned": "yes",
+            "statistical_test_mentioned": "no",
             "justify_why_test_is_missing": "",
-            "from_the_caption": "Statistical analysis was performed with the Bonferroni–Dunn test and Student's t‐test."
+            "from_the_caption": ""
         },
         {
             "panel_label": "F",
@@ -65,5 +65,5 @@
             "from_the_caption": "(upper graph; Student's t‐test, P < 0.05). *P < 0.05 in Student's t‐test, #P < 0.05 in one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test."
         }
     ],
-    "updated_at": "2026-01-30 15:37:07"
+    "updated_at": "2026-06-02 15:04:58"
 }

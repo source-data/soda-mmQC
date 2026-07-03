@@ -1,0 +1,130 @@
+{
+    "name": "stat-significance-level",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "n.s., not significant"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes"
+            ],
+            "from_the_caption": [
+                "n.s., not significant"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns",
+                "***"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "n.s., not significant",
+                "***P = 0.0007"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns",
+                "**"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "n.s., not significant",
+                "**P = 0.0085"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "no",
+            "significance_level_symbols_on_image": [],
+            "significance_level_symbols_defined_in_image": [],
+            "significance_level_symbols_defined_in_caption": [],
+            "from_the_caption": [],
+            "Decision_and_explanation": []
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns",
+                "***"
+            ],
+            "significance_level_symbols_defined_in_image": [
+                "no",
+                "no"
+            ],
+            "significance_level_symbols_defined_in_caption": [
+                "yes",
+                "yes"
+            ],
+            "from_the_caption": [
+                "n.s., not significant",
+                "***P = 0.0009"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+        }
+    ],
+    "updated_at": "2026-06-03 11:11:07"
+}

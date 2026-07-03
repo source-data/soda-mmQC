@@ -38,7 +38,7 @@
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Distance (µm)  (listed in source data as Distance_(microns))"
+                    "definition": "Distance (µm)"
                 },
                 {
                     "axis": "y",
@@ -105,7 +105,7 @@
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Distance (µm)  (listed in source data as Distance_(microns))"
+                    "definition": "Distance (µm)"
                 },
                 {
                     "axis": "y",
@@ -263,7 +263,7 @@
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "definition": "Days (time; axis labeled with day values)"
+                    "definition": "Days"
                 },
                 {
                     "axis": "y",
@@ -271,5 +271,6 @@
                 }
             ]
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 11:54:02"
 }

@@ -14,7 +14,7 @@
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
             "justify_why_test_is_missing": "",
-            "from_the_caption": "A two-sided Mann–Whitney–Wilcoxon test was used for the statistical analysis (T11b-high LUSC n\u0000=\u0000344, LUAD n\u0000=\u00001148, biological replicates)"
+            "from_the_caption": "two-sided Mann–Whitney–Wilcoxon test"
         },
         {
             "panel_label": "C",
@@ -40,5 +40,6 @@
             "justify_why_test_is_missing": "",
             "from_the_caption": ""
         }
-    ]
+    ],
+    "updated_at": "2026-03-27 16:04:54"
 }

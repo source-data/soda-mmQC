@@ -4,7 +4,7 @@
             "panel_label": "A",
             "method-is-mentioned": "yes",
             "method_source": "caption",
-            "from_the_caption": "laser capture microdissection"
+            "from_the_caption": "Schematic "
         },
         {
             "panel_label": "B",
@@ -26,9 +26,10 @@
         },
         {
             "panel_label": "E",
-            "method-is-mentioned": "no",
-            "method_source": "not_identifiable",
-            "from_the_caption": ""
+            "method-is-mentioned": "yes",
+            "method_source": "caption",
+            "from_the_caption": "Schematic"
         }
-    ]
+    ],
+    "updated_at": "2026-03-27 16:40:39"
 }

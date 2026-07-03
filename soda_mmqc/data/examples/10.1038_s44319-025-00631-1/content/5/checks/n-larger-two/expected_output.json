@@ -25,7 +25,7 @@
             "panel_label": "D",
             "is_numerical_plot": "yes",
             "shows_averaged_data": "yes",
-            "n_value": "344",
+            "n_value": "3",
             "n_larger_than_two": "yes"
         },
         {
@@ -35,5 +35,6 @@
             "n_value": "not_applicable",
             "n_larger_than_two": "not_applicable"
         }
-    ]
+    ],
+    "updated_at": "2026-03-27 16:02:47"
 }

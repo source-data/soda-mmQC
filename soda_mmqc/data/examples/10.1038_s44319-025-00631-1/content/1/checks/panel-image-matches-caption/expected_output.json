@@ -27,13 +27,14 @@
         },
         {
             "panel_label": "F",
-            "image_matches_caption": "no",
-            "discrepancies": "Caption states quantification is from n = 6 fields per tumor section, three tumors per group (i.e., 18 field measurements per group), but the scatter plot shows a different and unequal number of data points for the two groups. The number of plotted points does not match the sample size stated in the caption."
+            "image_matches_caption": "yes",
+            "discrepancies": ""
         },
         {
             "panel_label": "G",
-            "image_matches_caption": "no",
-            "discrepancies": "Caption reports quantification from n = 10–14 fields per tumor section, three tumors per group, but the scatter plot displays a different number of data points (and unequal counts between groups). The plotted sample counts do not clearly match the sample sizes described in the caption."
+            "image_matches_caption": "yes",
+            "discrepancies": ""
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 15:10:03"
 }

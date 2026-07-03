@@ -1,0 +1,158 @@
+{
+  "name": "plot-axis-units",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "yes"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "x",
+          "definition": "Age (weeks)"
+        },
+        {
+          "axis": "y",
+          "definition": "Body weight (g)"
+        }
+      ]
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "yes"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "x",
+          "definition": "min"
+        },
+        {
+          "axis": "y",
+          "definition": "Blood glucose (mg/dl)"
+        }
+      ]
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "yes"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "x",
+          "definition": "min"
+        },
+        {
+          "axis": "y",
+          "definition": "Serum insulin (ng/ml)"
+        }
+      ]
+    },
+    {
+      "panel_label": "D",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "E",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "Urine albumin/Cr (\u00b5g/mg)"
+        }
+      ]
+    },
+    {
+      "panel_label": "F",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "Serum creatinine (mg/dL)"
+        }
+      ]
+    },
+    {
+      "panel_label": "G",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "H",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "Urine albumin/Cr (\u00b5g/mg)"
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-04-29 13:02:56"
+}
