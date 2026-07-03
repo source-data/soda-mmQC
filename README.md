@@ -110,6 +110,9 @@ init CHECKLIST_NAME [--no-cache]
 
 # Curate and manage checklists
 curate CHECKLIST_NAME
+
+# Interactive Layer 2 mean-score reporting (Streamlit)
+report
 ```
 
 Command line options:
@@ -305,5 +308,31 @@ Comparison methods, manifest fields, match thresholds, and output structure are 
 
 Scored runs are written to `data/evaluation/{checklist}/{check}/{model}/analysis.json`. Use `metadata.source` (not `doc_id` alone) to identify a specific figure when a paper has multiple benchmark examples.
 
-The `soda_mmqc.reporting` package loads `analysis.json` and supports dashboards and drill-down across layers, models, and prompts. See `notebooks/comparative-reporting.ipynb` for comparative plots and instance inspection.
+The `soda_mmqc.reporting` package loads `analysis.json` and supports dashboards and drill-down across layers, models, and prompts. See `notebooks/comparative-reporting.ipynb` for comparative plots and instance inspection in Jupyter.
+
+#### Interactive reporting (`report`)
+
+After running `evaluate`, launch a local Streamlit app to explore **Layer 2 mean scores** and drill into individual instances:
+
+```bash
+source .venv/bin/activate
+report
+```
+
+The app opens at [http://localhost:8502](http://localhost:8502). You can also run it directly:
+
+```bash
+streamlit run soda_mmqc/reporting/streamlit_app.py
+```
+
+**Prerequisites:** at least one `analysis.json` under `data/evaluation/{checklist}/{check}/{model}/`, and an `eval-manifest.json` for that check (checks without a manifest appear in the sidebar but cannot be loaded).
+
+**What you can do:**
+
+- **Select a check** from evaluation results discovered under `data/evaluation/`.
+- **Contrast runs** by a single model/prompt pair, by prompt (fixed model), or by model (fixed prompt).
+- **Inspect mean scores** per leaf field (applicable instances only): black bars show the mean; red dots are individual instances.
+- **Click a red dot** to open instance drill-down: figure image (zoom/pan), caption, gold vs prediction at the scored path, and the prompt text.
+
+Programmatic use of the same plots and tables remains available via `soda_mmqc.reporting` and the comparative-reporting notebook.
 
