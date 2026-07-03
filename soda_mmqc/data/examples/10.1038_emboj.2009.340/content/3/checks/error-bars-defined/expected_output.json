@@ -5,25 +5,21 @@
             "error_bar_on_figure": "no",
             "error_bar_defined_in_caption": "not needed",
             "from_the_caption": "not needed",
-            "Decision_and_explanation": [
-                "not needed"
-            ]
+            "Decision_and_explanation": "not needed"
         },
         {
             "panel_label": "B ",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "no",
             "from_the_caption": "",
-            "Decision_and_explanation": [
-                "FAIL: Plots show vertical error bars around data points, but the figure caption does not define what the error bars represent (e.g., SD, SEM, or CI) nor provide sample size."
-            ]
+            "Decision_and_explanation": "FAIL: Plots show vertical error bars around data points, but the figure caption does not define what the error bars represent (e.g., SD, SEM, or CI) nor provide sample size."
         },
         {
             "panel_label": "",
             "error_bar_on_figure": "",
             "error_bar_defined_in_caption": "",
             "from_the_caption": "",
-            "Decision_and_explanation": []
+            "Decision_and_explanation": ""
         },
         {
             "panel_label": "",

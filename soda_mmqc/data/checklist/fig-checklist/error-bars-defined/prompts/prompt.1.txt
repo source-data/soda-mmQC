@@ -20,9 +20,9 @@ Your job is to pay attention to any plots that have error bars (typically bar ch
 *IMPORTANT*: When extracting error bar definitions from the caption, ONLY include the specific text that describes what the error bars represent (e.g., "standard error of the mean", "standard deviation", "95% confidence interval"). Do NOT include general descriptions of the figure or panel content.
 
 ## 4. Decision and explanation
-For each panel, provide `Decision_and_explanation` as an array of one or more short strings giving your overall verdict (e.g. PASS, FAIL, or WARNING) and a concise explanation of whether error bars are properly defined in the caption.
+For each panel, provide `Decision_and_explanation` as a single short string giving your overall verdict (e.g. PASS, FAIL, or WARNING) and a concise explanation of whether error bars are properly defined in the caption.
 
-Use an empty array `[]` when `error_bar_on_figure` is "no".
+Use `"not needed"` when `error_bar_on_figure` is "no".
 
 
 ## 5. Provide your analysis in the following JSON format for EACH and EVERY panel:
@@ -34,7 +34,7 @@ Use an empty array `[]` when `error_bar_on_figure` is "no".
             "error_bar_on_figure": "[yes/no]",
             "error_bar_defined_in_caption": "[yes/no/not needed]",
             "from_the_caption": "[exact text from the caption, leave empty if no definition is found, or 'not needed' if error bars are not applicable]",
-            "Decision_and_explanation": ["PASS/FAIL/WARNING + explanation, or 'not needed' if error bars are not applicable"]
+            "Decision_and_explanation": "PASS/FAIL/WARNING + explanation, or 'not needed' if error bars are not applicable"
         }
     ]
 }

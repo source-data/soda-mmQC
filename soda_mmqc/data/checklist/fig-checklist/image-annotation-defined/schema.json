@@ -29,7 +29,7 @@
                                 "items": {
                                     "type": "string"
                                 },
-                                "description": "This is the description of the detected annotations predicted by model or expected output"
+                                "description": "This is the description of the detected annotations predicted by model or expected output. Eg. 'red circle', 'white arrow', 'red arrowhead'"
                             },
                             "annotation_defined_in_caption": {
                                 "type": "array",

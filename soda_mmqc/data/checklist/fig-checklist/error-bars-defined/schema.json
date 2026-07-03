@@ -29,11 +29,8 @@
                                 "description": "Text from caption describing error bars, when error bars are present, leave empty if no definition is found, or 'not needed' if error bars are not applicable"
                             },
                             "Decision_and_explanation": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "description": "Panel-level verdict and brief rationale (e.g. PASS, FAIL, or WARNING) on whether error bars are adequately defined; use 'not needed' string when not applicable"
+                                "type": "string",
+                                "description": "Panel-level verdict and brief rationale (e.g. PASS, FAIL, or WARNING) on whether error bars are adequately defined; use '' when not applicable, or 'not needed' when error bars are not required for this panel"
                             }
                         },
                         "required": [

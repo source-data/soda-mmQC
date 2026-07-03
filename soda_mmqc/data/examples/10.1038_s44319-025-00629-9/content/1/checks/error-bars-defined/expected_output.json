@@ -19,18 +19,14 @@
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
             "from_the_caption": "mean+/-SEM",
-            "Decision_and_explanation": [
-                "PASS: Error bars are present in the statistical bar plots and the caption explicitly defines them as mean+/-SEM with n=3."
-            ]
+            "Decision_and_explanation": "PASS: Error bars are present in the statistical bar plots and the caption explicitly defines them as mean+/-SEM with n=3."
         },
         {
             "panel_label": "D",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
             "from_the_caption": "mean+/-SEM",
-            "Decision_and_explanation": [
-                "PASS: Error bars are present in the statistical bar plots and the caption explicitly defines them as mean+/-SEM with n=3."
-            ]
+            "Decision_and_explanation": "PASS: Error bars are present in the statistical bar plots and the caption explicitly defines them as mean+/-SEM with n=3."
         },
         {
             "panel_label": "E",
@@ -51,9 +47,7 @@
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
             "from_the_caption": "mean+/-SEM",
-            "Decision_and_explanation": [
-                "PASS: Error bars are present in the RT-qPCR bar plots and the caption explicitly defines them as mean+/-SEM with n=3."
-            ]
+            "Decision_and_explanation": "PASS: Error bars are present in the RT-qPCR bar plots and the caption explicitly defines them as mean+/-SEM with n=3."
         },
         {
             "panel_label": "H",

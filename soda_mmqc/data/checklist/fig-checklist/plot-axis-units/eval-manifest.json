@@ -1,0 +1,50 @@
+{
+  "checklist": "plot-axis-units",
+  "defaults": {
+    "matching_metric": "binary_polarity",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["panel_label"],
+    "outputs.units_provided": ["axis"],
+    "outputs.justify_why_units_are_missing": ["axis"],
+    "outputs.unit_definition_as_provided": ["axis"]
+  },
+  "fields": {
+    "outputs[].panel_label": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].is_a_plot": {
+      "matching_metric": "binary_polarity"
+    },
+    "outputs[].units_provided[].axis": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].units_provided[].answer": {
+      "na_values": ["not needed"],
+      "matching_metric": "binary_polarity"
+    },
+    "outputs[].justify_why_units_are_missing[].axis": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].justify_why_units_are_missing[].justification": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].unit_definition_as_provided[].axis": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].unit_definition_as_provided[].definition": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}
