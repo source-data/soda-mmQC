@@ -331,12 +331,11 @@ class FlatEvaluator:
                     else None
                 )
                 path = f"{prefix}[{gold_index}].{field_name}"
-                score = score_leaf_pair(
+                score = self._score_row_leaf_value(
                     pred_value,
                     exp_value,
-                    profile,
-                    enum_values=leaf_spec.enum_values,
-                    embedder=self.embedder,
+                    leaf_spec=leaf_spec,
+                    profile=profile,
                 )
                 results.append(
                     self._instance_from_values(
@@ -350,6 +349,39 @@ class FlatEvaluator:
                     )
                 )
         return results
+
+    def _score_row_leaf_value(
+        self,
+        pred_value: Any,
+        exp_value: Any,
+        *,
+        leaf_spec: EvalLeafSpec,
+        profile: Optional[FieldProfile],
+    ) -> float:
+        use_primitive_list = isinstance(exp_value, list) or isinstance(
+            pred_value, list
+        )
+        if not use_primitive_list and profile is not None:
+            use_primitive_list = profile.primitive_list_compare is not None
+
+        if use_primitive_list:
+            exp_list = exp_value if isinstance(exp_value, list) else []
+            pred_list = pred_value if isinstance(pred_value, list) else []
+            return _compare_extended_primitive_score(
+                pred_list,
+                exp_list,
+                leaf_spec=leaf_spec,
+                profile=profile,
+                embedder=self.embedder,
+            )
+
+        return score_leaf_pair(
+            pred_value,
+            exp_value,
+            profile,
+            enum_values=leaf_spec.enum_values,
+            embedder=self.embedder,
+        )
 
     def _instance_from_values(
         self,

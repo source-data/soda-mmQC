@@ -28,6 +28,7 @@ def test_toy_schema_leaves():
         "panels[].id",
         "panels[].label",
         "panels[].status",
+        "panels[].caption",
     ]
     assert leaves[0].kind is LeafKind.EXTENDED_PRIMITIVE
     assert leaves[1].kind is LeafKind.SCALAR

@@ -83,8 +83,13 @@ def _walk_node(
             leaves.append(
                 LeafPropertySpec(
                     pattern=prefix,
-                    kind=LeafKind.EXTENDED_PRIMITIVE,
+                    kind=(
+                        LeafKind.ROW
+                        if object_list_name
+                        else LeafKind.EXTENDED_PRIMITIVE
+                    ),
                     enum_values=_enum_values(items),
+                    object_list_name=object_list_name,
                 )
             )
             return
