@@ -4,33 +4,38 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "individual data points are not required"
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "individual data points are not required"
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "The panel shows the individual data points. "
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         }
     ],
-    "updated_at": "2026-04-02 11:26:49"
+    "updated_at": "2026-07-09 10:06:44"
 }

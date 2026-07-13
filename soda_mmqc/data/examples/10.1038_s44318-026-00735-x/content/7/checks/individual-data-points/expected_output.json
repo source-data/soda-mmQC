@@ -4,15 +4,17 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is a schematic and the check does not apply"
         },
         {
             "panel_label": "B",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "PASS",
+            "explanation": "Panel is a western blot — check does not apply"
         }
     ],
-    "updated_at": "2026-05-13 10:19:06"
+    "updated_at": "2026-07-08 15:58:38"
 }

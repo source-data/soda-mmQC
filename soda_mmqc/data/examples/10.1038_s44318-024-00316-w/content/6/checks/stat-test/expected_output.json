@@ -1,30 +1,33 @@
 {
-  "name": "stat-test",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "B",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "Ordinary one-way ANOVA test; \u2217\u2217\u2217\u2217: p-value= 0.000000000273883, 0.000059345976010, <0.000000000000001, 0.000000000021184; \u2217\u2217\u2217: p-value=0.0002; \u2217: p-value=0.0473"
-    },
-    {
-      "panel_label": "C",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "An ordinary one-way ANOVA test was used for statistical analysis; **** indicates a p-value = 0.000000000000076, 0.000000000000081 and 'ns' denotes not significant p-value = 0.947850878211297."
-    }
-  ],
-  "updated_at": "2026-03-27 10:09:50"
+    "name": "stat-test",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "Ordinary one-way ANOVA test;",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "An ordinary one-way ANOVA test ",
+            "decision": "PASS",
+            "explanation": ""
+        }
+    ],
+    "updated_at": "2026-07-13 10:22:31"
 }

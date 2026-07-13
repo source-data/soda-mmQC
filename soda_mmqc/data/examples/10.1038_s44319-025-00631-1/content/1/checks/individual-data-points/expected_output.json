@@ -3,45 +3,52 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a schematic — check does not apply."
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "PASS",
+            "explanation": "Panel is a line graph -individual data points are not required. "
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         },
         {
             "panel_label": "G",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         }
     ],
-    "updated_at": "2026-06-17 15:31:38"
+    "updated_at": "2026-07-08 13:11:10"
 }

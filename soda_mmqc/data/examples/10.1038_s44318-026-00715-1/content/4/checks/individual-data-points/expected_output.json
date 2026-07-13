@@ -3,81 +3,94 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Line graph does not require individual data points. "
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Line graph does not require individual data points. "
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "G",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "H",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "I",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "J",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "K",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "L",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "M",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "PASS",
+            "explanation": "Line graph does not require individual data points. "
         }
     ],
-    "updated_at": "2026-03-26 11:50:12"
+    "updated_at": "2026-07-08 14:34:27"
 }

@@ -3,27 +3,31 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid"
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid"
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid"
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid"
         }
     ],
-    "updated_at": "2025-05-01 11:27:41"
+    "updated_at": "2026-07-08 15:59:29"
 }

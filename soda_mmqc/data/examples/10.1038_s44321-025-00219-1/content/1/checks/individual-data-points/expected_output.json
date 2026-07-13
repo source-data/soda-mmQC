@@ -3,27 +3,31 @@
         {
             "panel_label": "Ai",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "Aii",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "B",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "C",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         }
     ],
-    "updated_at": "2025-05-08 13:55:57"
+    "updated_at": "2026-07-08 13:09:13"
 }

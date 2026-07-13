@@ -29,13 +29,18 @@
                                 "enum": ["yes", "no", "not needed"],
                                 "description": "Whether the statistical test is mentioned"
                             },
-                            "justify_why_test_is_missing": {
-                                "type": "string",
-                                "description": "Only when needed, justify why the statistical test is missing"
-                            },
                             "from_the_caption": {
                                 "type": "string",
-                                "description": "Only when needed, extracted text explaining the statistical test"
+                                "description": "Extracted text describing the statistical test when mentioned"
+                            },
+                            "decision": {
+                                "type": "string",
+                                "enum": ["PASS", "FAIL"],
+                                "description": "Panel-level pass/fail verdict on whether the statistical test is adequately reported"
+                            },
+                            "explanation": {
+                                "type": "string",
+                                "description": "Short explanation of the decision, especially when the test is missing"
                             }
                         },
                         "required": [
@@ -43,8 +48,9 @@
                             "is_a_plot",
                             "statistical_test_needed",
                             "statistical_test_mentioned",
-                            "justify_why_test_is_missing",
-                            "from_the_caption"
+                            "from_the_caption",
+                            "decision",
+                            "explanation"
                         ],
                         "additionalProperties": false
                     }

@@ -44,7 +44,7 @@ For each panel:
 ## 6. Document discrepancies
 If "image_matches_caption" is "no":
 - In the "discrepancies" field, provide a clear, concise description of the specific discrepancies found.
-- Be specific about what differs between the image and caption (e.g., "Caption describes three conditions but image shows four", "Caption mentions error bars but none are visible", "Image shows a line plot but caption describes a bar chart").
+- Be specific about what differs between the image and caption (e.g., "Caption describes three conditions but image shows four", "Caption states that co‑expression of HMGB1‑GFP reduces MitoTracker Deep Red accumulation in Atxn1(86Q)‑transfected cells, but the images show the opposite: the Atxn1(86Q) column has reduced MitoTracker signal while the Atxn1(86Q)+HMGB1‑GFP column shows stronger/ restored MitoTracker staining. The visual data therefore contradict the caption wording.", "Image shows a line plot but caption describes a bar chart", "Caption describes panel I as the proportion of molecules localized within a cluster per cell, but the image labeled I displays cluster size (nm^3). Panels H and I appear swapped relative to the caption.").
 - If "image_matches_caption" is "yes" or "not_applicable", set "discrepancies" to an empty string "".
 
 *IMPORTANT*: Be thorough but fair in your assessment. Minor stylistic differences or interpretation variations should not be considered discrepancies. Focus on substantive mismatches that could mislead readers.

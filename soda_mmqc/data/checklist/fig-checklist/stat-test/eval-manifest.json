@@ -25,13 +25,16 @@
       "na_values": ["not needed", ""],
       "matching_metric": "binary_polarity"
     },
-    "outputs[].justify_why_test_is_missing": {
+    "outputs[].from_the_caption": {
       "matching_metric": "graded_string",
       "na_values": [""],
       "string_compare": "semantic",
       "match_threshold": 0.8
     },
-    "outputs[].from_the_caption": {
+    "outputs[].decision": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].explanation": {
       "matching_metric": "graded_string",
       "na_values": [""],
       "string_compare": "semantic",

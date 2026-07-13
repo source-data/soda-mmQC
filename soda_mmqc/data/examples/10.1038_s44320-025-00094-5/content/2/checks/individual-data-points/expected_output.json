@@ -3,39 +3,45 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Check does not apply."
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Check does not apply."
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Check does not apply."
         },
         {
             "panel_label": "D",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Check does not apply."
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Box plot already displays data distribution — individual points not required."
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Box plot already displays data distribution — individual points not required."
         }
     ],
-    "updated_at": "2025-05-08 13:59:39"
+    "updated_at": "2026-07-09 10:25:59"
 }
