@@ -1,0 +1,27 @@
+## AB-catalogue-number
+
+# Summary
+This check is to verify that antibodies listed in the Materials and Methods or Reagents Table correspond to the protein, gene product, or biomarker that the study claims to measure or manipulate. Flag cases where reagent identifiers, catalogue numbers, aliases, or supplier annotations indicate a different target than that described in the manuscript.
+
+## 1. Extract antibodies from Tools/Reagents table.
+## 2. Identify supplier + catalogue number.
+## 3. Resolve catalogue number against trusted sources:
+   - supplier page
+   - UniProt
+   - HGNC / NCBI Gene
+   - Antibody Registry, if available
+## 4. Normalize target gene/protein.
+## 5. Compare against manuscript usage:
+   - p16
+   - p16-INK4a
+   - CDKN2A
+   - senescence marker
+## 6. Flag mismatch, ambiguity, or missing information.
+
+{
+  "has_antibody_table": true,
+  "ambiguous_antibody_reagents": true,
+  "target_mismatch_detected": true,
+  "severity": "major",
+  "requires_editor_query": true
+}

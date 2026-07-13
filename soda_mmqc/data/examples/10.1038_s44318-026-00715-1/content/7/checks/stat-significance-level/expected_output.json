@@ -6,7 +6,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "B",
@@ -22,7 +23,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "C",
@@ -30,7 +32,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
@@ -46,7 +49,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "E",
@@ -70,7 +74,8 @@
                 "****P < 0.0001",
                 "",
                 "*P < 0.05"
-            ]
+            ],
+            "Decision_and_explanation": "FAIL: The significance symbol \"***\" is not defined in the figure caption. "
         },
         {
             "panel_label": "F",
@@ -78,7 +83,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "G",
@@ -98,7 +104,8 @@
             "from_the_caption": [
                 "****P < 0.0001",
                 "**P < 0.01"
-            ]
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "H",
@@ -114,7 +121,8 @@
             ],
             "from_the_caption": [
                 "****P < 0.0001"
-            ]
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "I",
@@ -134,7 +142,9 @@
             "from_the_caption": [
                 "****P < 0.0001",
                 "**P < 0.01"
-            ]
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 11:06:43"
 }

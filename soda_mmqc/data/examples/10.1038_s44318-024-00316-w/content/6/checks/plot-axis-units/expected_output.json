@@ -1,0 +1,81 @@
+{
+    "name": "plot-axis-units",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "no"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "justify_why_units_are_missing": [
+                {
+                    "axis": "x",
+                    "justification": "GFP fluorescence intensity is plotted on the x-axis (continuous fluorescence measurement) but no units are indicated (e.g., arbitrary units [AU] or channel units)."
+                },
+                {
+                    "axis": "y",
+                    "justification": "Forward scatter (FSC-A) or scatter intensity is plotted on the y-axis (continuous optical measurement) but no units are provided (e.g., arbitrary units)."
+                }
+            ],
+            "unit_definition_as_provided": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Number of CPSF6 clusters per cell (labelled as 'Number of CPSF6 clusters / cell')"
+                },
+                {
+                    "axis": "y",
+                    "definition": "Early viral reverse transcripts per cell (ERT / cell)"
+                },
+                {
+                    "axis": "y",
+                    "definition": "Late viral reverse transcripts per cell (LRT / cell)"
+                }
+            ]
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "justify_why_units_are_missing": [],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Number of puncta per cell (labelled as 'Number of puncta / cell' on the violin plot)"
+                }
+            ]
+        }
+    ],
+    "updated_at": "2026-03-31 15:52:11"
+}

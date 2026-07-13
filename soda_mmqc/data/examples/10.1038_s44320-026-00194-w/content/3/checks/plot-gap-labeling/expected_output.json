@@ -1,0 +1,82 @@
+{
+    "name": "plot-gap-labeling",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "no"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "x",
+                    "justification": "The x-axis displays a '0' tick at the left and then jumps to log-scale ticks (e.g., 0.1, 1, 10, 100), indicating a discontinuity between zero and the smallest nonzero value. There is no visual marker (e.g., zigzag or oblique lines) indicating an axis break, so a gap appears present but is not labeled."
+                }
+            ]
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        }
+    ],
+    "updated_at": "2026-04-02 11:26:11"
+}

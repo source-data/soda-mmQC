@@ -1,0 +1,70 @@
+{
+  "name": "stat-significance-level",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "significance_level_symbols_on_image": [],
+      "significance_level_symbols_defined_in_image": [],
+      "significance_level_symbols_defined_in_caption": [],
+      "from_the_caption": []
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [
+        "p = 0.0053",
+        "p = 0.0064",
+        "p = 0.0121",
+        "p = 0.0032"
+      ],
+      "significance_level_symbols_defined_in_image": [
+        "yes",
+        "yes",
+        "yes",
+        "yes"
+      ],
+      "significance_level_symbols_defined_in_caption": [
+        "not_needed",
+        "not_needed",
+        "not_needed",
+        "not_needed"
+      ],
+      "from_the_caption": [
+        "not_needed",
+        "not_needed",
+        "not_needed",
+        "not_needed"
+      ]
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [
+        "p = 0.8664",
+        "p = 0.9598",
+        "p = 0.3451",
+        "p = 0.7441"
+      ],
+      "significance_level_symbols_defined_in_image": [
+        "yes",
+        "yes",
+        "yes",
+        "yes"
+      ],
+      "significance_level_symbols_defined_in_caption": [
+        "not_needed",
+        "not_needed",
+        "not_needed",
+        "not_needed"
+      ],
+      "from_the_caption": [
+        "not_needed",
+        "not_needed",
+        "not_needed",
+        "not_needed"
+      ]
+    }
+  ],
+  "updated_at": "2026-06-08 13:31:56"
+}

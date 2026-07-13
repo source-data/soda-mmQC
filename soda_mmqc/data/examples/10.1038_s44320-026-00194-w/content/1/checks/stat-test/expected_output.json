@@ -1,0 +1,46 @@
+{
+  "name": "stat-test",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "statistical_test_needed": "no",
+      "statistical_test_mentioned": "not needed",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": ""
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "no",
+      "statistical_test_mentioned": "not needed",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": ""
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "no",
+      "statistical_test_mentioned": "not needed",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": ""
+    },
+    {
+      "panel_label": "D",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "Student\u2019s unpaired t-test, p-values: MDA-MB-231=2.4e-06, MDA-MD-468=4.1e-05, PDX-1432C=0.0154, PDX-4295=0.0426, CRCM434=0.0003, CRCM412=0.0009."
+    },
+    {
+      "panel_label": "E",
+      "is_a_plot": "yes",
+      "statistical_test_needed": "yes",
+      "statistical_test_mentioned": "yes",
+      "justify_why_test_is_missing": "",
+      "from_the_caption": "Significance from one-way ANOVA followed by Tukey multiple comparisons test. p-values: MDA-MB-231 Periphery-Both=0.0009, Core-Both=0.0002; MDA-MB-468 Periphery-Both=1.6e-06, Core-Both=5.1e-07; PDX-1432C Periphery-Centre=0.0229, Centre-Both=0.0002; CRCM434 Periphery-Centre=7.3e-09, Centre-Both=1.5e-11, Periphery-Both=0.0053; CRCM412 Periphery-Centre=3.4e-06, Centre-Both=2.4e-13, Periphery-Both=4.1e-13."
+    }
+  ],
+  "updated_at": "2026-03-30 08:55:49"
+}

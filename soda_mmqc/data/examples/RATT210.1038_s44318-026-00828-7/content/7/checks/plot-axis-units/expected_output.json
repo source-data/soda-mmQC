@@ -1,0 +1,55 @@
+{
+  "name": "plot-axis-units",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "Int fluorescence (AU)"
+        }
+      ]
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "Int fluorescence (AU)"
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-06-08 13:31:56"
+}

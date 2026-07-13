@@ -2,14 +2,14 @@
     "outputs": [
         {
             "panel_label": "A",
-            "is_a_micrograph": "yes",
+            "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "no",
             "is_a_scheme": "no",
             "is_mixed": "no"
         },
         {
             "panel_label": "B",
-            "is_a_micrograph": "yes",
+            "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "no",
             "is_a_scheme": "no",
             "is_mixed": "no"
@@ -37,7 +37,7 @@
         },
         {
             "panel_label": "F",
-            "is_a_micrograph": "yes",
+            "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "no",
             "is_a_scheme": "no",
             "is_mixed": "no"
@@ -51,10 +51,11 @@
         },
         {
             "panel_label": "H",
-            "is_a_micrograph": "yes",
+            "is_a_micrograph": "no",
             "is_a_nummerical_data_plot": "no",
             "is_a_scheme": "no",
             "is_mixed": "no"
         }
-    ]
+    ],
+    "updated_at": "2026-03-26 11:32:41"
 }

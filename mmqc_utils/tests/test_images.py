@@ -1,8 +1,19 @@
 from io import BytesIO
+from unittest.mock import patch
 
+import pytest
 from PIL import Image
+from wand.exceptions import CoderError
 
-from mmqc_utils.images import compress_to_bounded_jpeg, convert_to_bounded_jpeg
+from mmqc_utils.exceptions import TiffWandReadError
+from mmqc_utils.images import (
+    _is_tiff_bytes,
+    _is_tiff_source,
+    _is_tiff_wand_sampleformat_error,
+    _tiff_array_to_rgb_uint8,
+    compress_to_bounded_jpeg,
+    convert_to_bounded_jpeg,
+)
 
 
 def test_convert_to_bounded_jpeg_downscales_and_converts_rgba() -> None:
@@ -77,3 +88,69 @@ def test_compress_to_bounded_jpeg_no_compression_needed() -> None:
     result = compress_to_bounded_jpeg(tiny_png, max_bytes=10_000_000)
 
     assert len(result) <= 10_000_000
+
+
+# --- TIFF helpers and fallback ---
+
+
+def test_is_tiff_bytes() -> None:
+    buf = BytesIO()
+    Image.new("RGB", (10, 10), "red").save(buf, format="TIFF")
+    assert _is_tiff_bytes(buf.getvalue()) is True
+    assert _is_tiff_bytes(b"not-a-tiff") is False
+
+
+def test_is_tiff_source() -> None:
+    assert _is_tiff_source("figure.tiff") is True
+    assert _is_tiff_source("figure.png") is False
+
+
+def test_is_tiff_wand_sampleformat_error() -> None:
+    exc = CoderError(
+        'Incorrect count for "SampleFormat". `TIFFReadDirectory\' @ error/tiff.c/TIFFErrors/574'
+    )
+    assert _is_tiff_wand_sampleformat_error(exc) is True
+    assert _is_tiff_wand_sampleformat_error(CoderError("other tiff error")) is False
+
+
+def test_tiff_array_to_rgb_uint8_handles_rgba() -> None:
+    import numpy as np
+
+    rgba = np.zeros((2, 2, 4), dtype=np.uint8)
+    rgba[..., 0] = 255
+    rgba[..., 3] = 128
+
+    rgb = _tiff_array_to_rgb_uint8(rgba)
+
+    assert rgb.shape == (2, 2, 3)
+    assert rgb.dtype == np.uint8
+
+
+def test_convert_to_bounded_jpeg_tifffile_fallback_on_sampleformat_error() -> None:
+    buf = BytesIO()
+    Image.new("RGBA", (400, 300), (255, 0, 0, 128)).save(buf, format="TIFF")
+    tiff_bytes = buf.getvalue()
+
+    with patch("mmqc_utils.images._convert_with_wand", side_effect=TiffWandReadError("wand failed")):
+        result = convert_to_bounded_jpeg(tiff_bytes, max_dimension=200)
+
+    assert result.startswith(b"\xff\xd8")
+    converted = Image.open(BytesIO(result))
+    assert converted.format == "JPEG"
+    assert max(converted.size) <= 200
+
+
+@pytest.mark.skipif(
+    not __import__("pathlib").Path("/tmp/emboj121381/graphic/EMBOJ2025121381_Fig1.tiff").exists(),
+    reason="EMBOJ TIFF fixtures not available",
+)
+def test_convert_to_bounded_jpeg_emboj_sampleformat_tiffs() -> None:
+    from pathlib import Path
+
+    base = Path("/tmp/emboj121381/graphic")
+
+    for fig in sorted(base.glob("EMBOJ2025121381_Fig*.tiff")):
+        with patch("mmqc_utils.images._convert_with_wand", side_effect=TiffWandReadError("wand failed")):
+            result = convert_to_bounded_jpeg(fig, max_dimension=1000)
+        assert result.startswith(b"\xff\xd8"), fig.name
+        assert len(result) > 0, fig.name

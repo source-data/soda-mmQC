@@ -30,3 +30,6 @@ Your job is to pay attention to any plots that have error bars (typically bar ch
 ## 4. Please note: 
 - Be thorough and precise in your analysis. 
 - Include all panels visible in the figure, even if they don't contain error bars.
+- for line-graphs, for example something is meassured over time, it is okay to not plot the individual data points as this wold make the line graph illegible and its commonly accepted to not plot he individual data points. In these cases put "individual_values": "not needed".  
+- Similarly, if the n is very large (>200) it is ok to ommit the individual data points also in bar graphs and you can put "individual_values": "not needed". 
+- Violin plots do not need individual data points as their shape indicates the measurement distribution, so please put "individual_values": "not needed". 

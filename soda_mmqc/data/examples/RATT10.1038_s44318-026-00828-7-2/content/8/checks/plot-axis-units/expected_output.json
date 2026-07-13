@@ -1,0 +1,110 @@
+{
+  "name": "plot-axis-units",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "yes"
+        },
+        {
+          "axis": "y",
+          "answer": "not needed"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "x",
+          "definition": "time shown with hour suffix on tick labels (e.g., 0h, 2h, 6h = hours)"
+        }
+      ]
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "C",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "not needed"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "D",
+      "is_a_plot": "no",
+      "units_provided": [],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "E",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "not needed"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    },
+    {
+      "panel_label": "F",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "yes"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": [
+        {
+          "axis": "y",
+          "definition": "information content in bits (label shown as 'Bits')"
+        }
+      ]
+    },
+    {
+      "panel_label": "G",
+      "is_a_plot": "yes",
+      "units_provided": [
+        {
+          "axis": "x",
+          "answer": "not needed"
+        },
+        {
+          "axis": "y",
+          "answer": "not needed"
+        }
+      ],
+      "justify_why_units_are_missing": [],
+      "unit_definition_as_provided": []
+    }
+  ],
+  "updated_at": "2026-06-08 13:31:56"
+}

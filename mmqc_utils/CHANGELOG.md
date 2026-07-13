@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented here.
 
+## [0.3.5] - 2026-06-12
+
+### Added
+- Exception handling for malformed tiff files. These fail with the Wand conversion. A `tifffile` fallback implemented, imagemagick is still the main image reader.
+
+## [0.3.4] - 2026-06-11
+
+### Added
+
+- `html_cleanup` module and `postprocess_html` to clean common pandoc HTML artifacts (br-only placeholders, empty elements, `<li><p>` wrapping, duplicate URL paragraphs); wired into `document_to_html` post-processing.
+
+Related to changes added in 0.3.2.
+
+## [0.3.3] - 2026-06-10
+
+### Added
+
+- `document_to_html`: option to produce standalone HTML for easier readability, correct display of unicode symbols in browser.
+
+## [0.3.2] - 2026-06-10
+
+### Added
+- `document_to_html`: option to strip certain empty HTML tags (`li`, `ol`, `ul`) from the output, default `True`. Handles case of empty list items in place of tracked change (deletion) in .docx files.
+
+## [0.3.1] - 2026-06-08
+
+### Added
+- match multiple quotes from the same source text: order-aware quote alignment to prevent multiple quotes from matching to the same span in the source text, if that span is repeated later in the source.
+
+## [0.3.0] - 2026-05-11
+
+### Added
+- quote matching in & similarity to source text: find the best matching span(s) in the source text for a quote and provide a score for how literal the quote is.
+- visualization of quote matching.
+
+### Changed
+- use stdlib HTMLParser in `compute_plain_text` instead of regex solution.
+
 ## [0.2.1] - 2026-05-11
 
 ### Added

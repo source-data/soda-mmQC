@@ -13,8 +13,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "B",
@@ -22,7 +23,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "C",
@@ -30,7 +32,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "D",
@@ -38,7 +41,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "E",
@@ -53,8 +57,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "F",
@@ -62,7 +67,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "G",
@@ -70,7 +76,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "H",
@@ -85,8 +92,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "I",
@@ -94,7 +102,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "J",
@@ -109,8 +118,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "K",
@@ -118,7 +128,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "L",
@@ -133,8 +144,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "M",
@@ -149,8 +161,9 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         },
         {
             "panel_label": "N",
@@ -158,7 +171,8 @@
             "significance_level_symbols_on_image": [],
             "significance_level_symbols_defined_in_image": [],
             "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": []
+            "from_the_caption": [],
+            "Decision_and_explanation": []
         },
         {
             "panel_label": "O",
@@ -173,8 +187,10 @@
                 "yes"
             ],
             "from_the_caption": [
-                "****P\u0000\u0000<\u0000\u000030.0001"
-            ]
+                "****P < 0.0001"
+            ],
+            "Decision_and_explanation": "PASS: All significance level symbols are defined."
         }
-    ]
+    ],
+    "updated_at": "2026-06-03 10:36:13"
 }

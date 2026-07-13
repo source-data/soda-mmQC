@@ -11,3 +11,7 @@ class DocumentConversionError(MMQCUtilsError):
 
 class UnsupportedDocumentFormatError(DocumentConversionError):
     """Raised when a document format is unsupported."""
+
+
+class TiffWandReadError(MMQCUtilsError):
+    """Wand/ImageMagick failed to read a TIFF; tifffile fallback may work."""

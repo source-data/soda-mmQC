@@ -2,6 +2,7 @@ from io import BytesIO
 from pathlib import Path
 
 import pytest
+from bs4 import BeautifulSoup
 from pypdf import PdfWriter
 
 from mmqc_utils.documents import document_to_html
@@ -196,5 +197,57 @@ def test_pdf_extracts_text() -> None:
 def test_pdf_page_structure() -> None:
     html = document_to_html(FIXTURES / "doc.pdf")
 
-    assert "<div class='page'" in html
-    assert "data-page='1'" in html
+    assert '<div class="page"' in html
+    assert 'data-page="1"' in html
+
+
+# --- HTML empty-tag-stripping tests ---
+
+
+def _find_empty_tags_in_html(html: str) -> list[str]:
+    return [
+        str(tag)
+        for tag in BeautifulSoup(html, "html.parser").find_all(
+            lambda tag: tag.name != "meta" and (not tag.contents or len(tag.get_text(strip=True)) <= 0)
+        )
+    ]
+
+
+@pytest.fixture(
+    params=["docx", "odt"]
+)  # empty lists in docx/odt produce empty html tags but that doesn't work for pdf/rtf
+def doc_with_empty_tags(request) -> Path:
+    return FIXTURES / f"empty_tags.{request.param}"
+
+
+def test_html_empty_tags_stripped(doc_with_empty_tags: Path) -> None:
+    expected_text = "The lists below produces empty HTML tags that must be stripped."
+    raw_html = document_to_html(doc_with_empty_tags, post_process_html=False)
+    assert len(_find_empty_tags_in_html(raw_html)) > 0, (
+        f"Expected empty tags in raw HTML from {doc_with_empty_tags.name}: {raw_html}"
+    )
+    assert expected_text in raw_html, f"Expected text not found in raw HTML from {doc_with_empty_tags.name}: {raw_html}"
+
+    stripped_html = document_to_html(doc_with_empty_tags, post_process_html=True)
+    assert len(_find_empty_tags_in_html(stripped_html)) == 0, (
+        f"Expected no empty tags in post-processed HTML from {doc_with_empty_tags.name}: {stripped_html}"
+    )
+    assert expected_text in stripped_html, (
+        f"Expected text not found in post-processed HTML from {doc_with_empty_tags.name}: {stripped_html}"
+    )
+
+
+# --- standalone HTML tests ---
+
+
+def test_standalone_html_contains_head_and_meta() -> None:
+    html = document_to_html(FIXTURES / "doc.docx", standalone=True)
+
+    assert "<head>" in html
+    assert '<meta charset="utf-8"/>' in html
+
+
+def test_non_standalone_html_does_not_contain_head() -> None:
+    html = document_to_html(FIXTURES / "doc.docx", standalone=False)
+
+    assert "<head>" not in html

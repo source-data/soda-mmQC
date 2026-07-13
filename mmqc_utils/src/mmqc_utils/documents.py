@@ -8,9 +8,11 @@ from tempfile import NamedTemporaryFile
 from typing import BinaryIO
 
 import pypandoc
+from bs4 import BeautifulSoup
 from pypdf import PdfReader
 
 from .exceptions import DocumentConversionError, UnsupportedDocumentFormatError
+from .html_cleanup import postprocess_html as _cleanup_html
 
 PathLikeOrFile = str | Path | bytes | bytearray | BinaryIO
 _PANDOC_EXTENSIONS = {".docx", ".rtf", ".odt", ".tex"}
@@ -54,24 +56,60 @@ def _pdf_to_html(path: Path) -> str:
     return "\n".join(html_content)
 
 
+def _postprocess_html(html: str, strip_tags_if_empty: frozenset[str] = frozenset({"li", "ol", "ul"})) -> str:
+    html = _cleanup_html(html)
+    if len(strip_tags_if_empty) == 0:
+        return html
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    def do_strip(tag) -> bool:
+        return (
+            tag.name in strip_tags_if_empty  # only strip if the tag is in the specified set
+            and (
+                not tag.contents  # completely empty tag
+                or len(tag.get_text(strip=True)) <= 0  # tag with only whitespace text
+            )
+        )
+
+    for tag in soup.find_all(do_strip):
+        tag.decompose()
+    return str(soup)
+
+
+def _postprocess_html_decorator(func):
+    def wrapper(*args, post_process_html: bool = True, **kwargs) -> str:
+        html = func(*args, **kwargs)
+        if post_process_html:
+            return _postprocess_html(html)
+        return html
+
+    return wrapper
+
+
+@_postprocess_html_decorator
 def document_to_html(
     source: PathLikeOrFile,
     *,
     input_format: str | None = None,
+    standalone: bool = True,
 ) -> str:
     """Convert a supported document to HTML."""
     path, is_temporary, detected_format = _materialize_source(source, input_format)
+    convert_file_kwargs = {}
+    if standalone:
+        convert_file_kwargs["extra_args"] = ["--embed-resources", "--standalone"]
     try:
         suffix = f".{detected_format.lower().lstrip('.')}" if detected_format else path.suffix.lower()
         if suffix not in _ALLOWED_EXTENSIONS:
             raise UnsupportedDocumentFormatError(f"Unsupported document format: {suffix or '[unknown]'}")
 
         if suffix in _PANDOC_EXTENSIONS:
-            result = pypandoc.convert_file(str(path), "html", format=suffix.lstrip("."))
+            result = pypandoc.convert_file(str(path), "html", format=suffix.lstrip("."), **convert_file_kwargs)
             return str(result) if result else ""
 
         try:
-            result = pypandoc.convert_file(str(path), "html", format="pdf")
+            result = pypandoc.convert_file(str(path), "html", format="pdf", **convert_file_kwargs)
             if result:
                 return str(result)
         except Exception:

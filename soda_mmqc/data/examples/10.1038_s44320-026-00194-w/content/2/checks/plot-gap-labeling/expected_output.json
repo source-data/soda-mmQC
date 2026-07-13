@@ -1,0 +1,70 @@
+{
+    "name": "plot-gap-labeling",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "gaps_defined": [],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": []
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "gaps_defined": [
+                {
+                    "axis": "x",
+                    "answer": "no"
+                },
+                {
+                    "axis": "y",
+                    "answer": "no"
+                }
+            ],
+            "gap_description": [],
+            "justify_why_gaps_are_missing": [
+                {
+                    "axis": "x",
+                    "justification": "The x-axis uses a logarithmic-like tick spacing (e.g., 0.001, 0.01, 0.1, 1, 10) but there are additional data points plotted at 0% as a separate vertical column at the far left. This indicates a discontinuity to accommodate zero values on a log-scaled axis, yet there are no standard visual axis-break markers (zigzag or oblique break marks) to indicate the omitted interval."
+                },
+                {
+                    "axis": "y",
+                    "justification": "The y-axis displays log-scaled ticks (e.g., 0.01, 0.1, 1, 10, 100) while zero-frequency points are shown separately along the bottom (a row of points at 0%). This implies a gap between zero and the smallest plotted positive value on the log scale, but no conventional axis-break indicator (diagonal/zigzag marks) is present to denote the discontinuity."
+                }
+            ]
+        }
+    ],
+    "updated_at": "2026-04-02 11:16:54"
+}

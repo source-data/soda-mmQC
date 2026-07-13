@@ -1,0 +1,42 @@
+{
+  "name": "individual-data-points",
+  "outputs": [
+    {
+      "panel_label": "A",
+      "plot": "no",
+      "average_values": "not needed",
+      "individual_values": "not needed"
+    },
+    {
+      "panel_label": "B",
+      "plot": "yes",
+      "average_values": "yes",
+      "individual_values": "yes"
+    },
+    {
+      "panel_label": "C",
+      "plot": "no",
+      "average_values": "not needed",
+      "individual_values": "not needed"
+    },
+    {
+      "panel_label": "D",
+      "plot": "yes",
+      "average_values": "yes",
+      "individual_values": "yes"
+    },
+    {
+      "panel_label": "E",
+      "plot": "yes",
+      "average_values": "no",
+      "individual_values": "not needed"
+    },
+    {
+      "panel_label": "F",
+      "plot": "yes",
+      "average_values": "no",
+      "individual_values": "not needed"
+    }
+  ],
+  "updated_at": "2026-06-08 13:31:57"
+}
