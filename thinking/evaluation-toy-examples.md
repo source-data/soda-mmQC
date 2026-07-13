@@ -6,7 +6,7 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 
 - **Enum leaves** (`item.status`, `panels[].status`) — always exact literal match; no `string_compare` in manifest.
 - **Graded strings** (`item.label`, `panels[].label`) — `string_compare: exact`, `match_threshold: 1.0` (`τ = 1.0`).
-- **`tags`** — extended-primitive leaf (`string[]`): Hungarian element matching, one aggregate `score` on path `tags`. No layer S. No manifest profile → score only.
+- **`tags`** — extended-primitive leaf (`string[]`): default `primitive_list_compare: align` (Hungarian element matching), one aggregate `score` on path `tags`. No layer S. No manifest profile → score only.
 - **`panels[]`** — **predictive** per toy schema (model-produced rows): manifest `list_alignment.panels: ["label"]` must match schema and pairs rows by `label`; layer S in `by_list.panels`; then score `panels[k].*` at **gold indices** `k`. This toy schema has no structural collection wrappers (e.g. no `figures[]`).
 - **Manifest** — layer 1 / 2 only on profiled paths (`item.status`, `item.label`, `panels[].status`, `panels[].label`). Unprofiled leaves appear in `by_property` with `mean_score` only (`layer1_counts` / `layer2_counts` = `{}`). **`mean_score`** on profiled paths averages scores over `correct_applicable` instances only (Layer 2 eligibility); unprofiled paths average all instances.
 
@@ -16,7 +16,7 @@ Worked **gold / pred** pairs for [evaluation scoring](evaluation-scoring.md). On
 
 | Path | Value type | Manifest profile |
 |------|------------|------------------|
-| `tags` | `string[]` | — (score only) |
+| `tags` | `string[]` | — (score only; `align` by default) |
 | `item.id` | integer | — |
 | `item.label` | string | `graded_string`, `string_compare: exact` |
 | `item.status` | enum `""` / `yes` / `no` | `binary_polarity`, `na_values: [""]` |
@@ -210,6 +210,28 @@ Other leaves = baseline. Only `tags` differs. No `by_list` entry for `tags`.
 |------|---------|
 | `tags` | 0.0 |
 
+### B.4 Positional mode (illustrative)
+
+Not in the toy schema — shows why index-bound arrays need `primitive_list_compare: positional` (e.g. `outputs[].symbols_defined_in_caption` parallel to symbol names).
+
+| gold | pred | `align` | `positional` |
+|------|------|---------|--------------|
+| `["yes", "no"]` | `["no", "yes"]` | 1.0 (Hungarian permutes) | 0.0 |
+| `["yes", "no", "yes"]` | `["yes", "no"]` | 2/3 ≈ 0.67 | 2/3 ≈ 0.67 |
+
+One instance, one aggregate `score`; no layer S; no per-element TP/FP/FN.
+
+### B.5 Join-string mode (illustrative)
+
+Not in the toy schema — e.g. `outputs[].from_the_caption` with `primitive_list_compare: join_string`, `string_compare: semantic`.
+
+| gold | pred | joined gold | joined pred | exact `score` |
+|------|------|-------------|-------------|---------------|
+| `["arrow", "scale bar"]` | `["arrow", "scale bar"]` | `"arrow, scale bar"` | `"arrow, scale bar"` | 1.0 |
+| `["arrow", "scale bar"]` | `["scale bar", "arrow"]` | `"arrow, scale bar"` | `"scale bar, arrow"` | 0.0 |
+
+With `sort_before_join: true`, the second row would score 1.0 under exact compare. Semantic compare may grade partial caption overlap instead of all-or-nothing exact join match.
+
 ---
 
 ## C — Scalar leaves on `item`
@@ -356,7 +378,8 @@ List precision = 2/3. The spurious pred row (`Fig 99`) has no gold-indexed leaf 
 | Topic | Section |
 |-------|---------|
 | All leaves perfect | A |
-| Extended primitive (`tags`) | B |
+| Extended primitive (`tags`, `align`) | B |
+| Extended primitive compare modes (`positional`, `join_string`) | B.4, B.5 |
 | Layer S (`by_list.panels`) | D.4, D.5 |
 | `item.*` / `item.meta.*` scalars | C |
 | `panels[k].*` after alignment | D (D.2 = reordered rows) |

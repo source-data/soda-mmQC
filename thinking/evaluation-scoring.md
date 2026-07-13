@@ -81,7 +81,7 @@ flowchart LR
 
 1. **Flatten** — enumerate leaf paths from schema and manifest.
 2. **Join lists** — positional index for structural ancestors; Hungarian matching for predictive lists using `list_alignment` (see [List of objects](#list-of-objects)); emit **layer S** in `by_list` for predictive lists only.
-3. **Score extended primitives** — compare array-of-primitives leaves (e.g. `tags`) as a single leaf instance with aggregate `score` (see [List of primitives](#list-of-primitives)).
+3. **Score extended primitives** — compare array-of-primitives leaves (e.g. `tags`) as a single leaf instance with aggregate `score`; manifest `primitive_list_compare` selects align / positional / join_string (see [List of primitives](#list-of-primitives)).
 4. **Score row leaves** — at each gold row index: use the paired pred row (Hungarian for predictive lists, positional for structural lists); `score ∈ [0, 1]` (see [Scoring rules](#scoring-rules)).
 5. **Report** — layer 1 applicability reporting, then layer 2 matching reporting when layer 1 = `correct_applicable`.
 6. **Summarize** — required `by_property` per leaf property key (`mean_score` as Layer 2 rollup over `correct_applicable` instances only; `layer1_counts`; `layer2_counts`); `by_list` only for predictive lists.
@@ -105,7 +105,7 @@ Every concrete path:
 | `layer1` | if manifest profile | Applicability reporting outcome |
 | `layer2` | if profile and `correct_applicable` | Matching reporting outcome |
 
-For a **list-of-primitives** (extended primitive) leaf such as `tags`, the comparator emits **one** instance on path `tags` with an aggregate `score` only — no layer S structural reporting.
+For a **list-of-primitives** (extended primitive) leaf such as `tags`, the comparator emits **one** instance on path `tags` with an aggregate `score` only — no layer S structural reporting and no per-element layer 2 (TP/FP/FN).
 
 ### Per list (`by_list`)
 
@@ -204,15 +204,55 @@ Do not use Python truthiness (`if not value:`) — it conflates `""`, `null`, an
 
 ### List of primitives (extended primitive)
 
-An **extended primitive** is a leaf whose value is an **array of primitives** (e.g. `tags: string[]`). The leaf path is the array property itself (`tags`), not per-element paths. The orchestrator scores it via **`leaves.compare_primitive_list`** (bipartite element matching internally, via `matching.py`); there is **no** layer S.
+An **extended primitive** is a leaf whose value is an **array of primitives** (e.g. `tags: string[]`). The leaf path is the array property itself (`tags`), not per-element paths. The comparator emits **one** instance per array leaf with a single aggregate **`score`** — no layer S, no per-element layer 2 (TP/FP/FN/TN).
+
+Arrays of primitives are intentionally **not** modelled as list-of-objects (e.g. `{symbol, defined}` rows). That would complicate leaf discovery and manifest paths. Instead, the manifest names how to compare the two arrays.
+
+**Manifest:** `primitive_list_compare` on the field profile (default **`align`**).
+
+| Mode | `primitive_list_compare` | When to use | Score |
+|------|--------------------------|-------------|-------|
+| **Set-like align** | `align` (default) | Order-free bags — tags, filenames, symbol names | Mean over `n_all = max(len(exp), len(pred))` after Hungarian assignment |
+| **Positional** | `positional` | Index-bound parallel arrays — e.g. `yes`/`no` per symbol slot | Same mean-over-`n_all` formula, but compare `exp[i]` vs `pred[i]` only (no Hungarian) |
+| **Join string** | `join_string` | Ordered lists where holistic text match is enough | `string_compare` on joined strings → one graded score |
+
+Optional keys for **`join_string`** only:
+
+- **`join_separator`** — default `", "`
+- **`sort_before_join`** — default `false`; set `true` only for set-like stringification without Hungarian (rare)
+
+Element-level similarity (for `align` and `positional`): exact equality by default (`0` or `1`); schema `enum` arrays use exact match; a profiled `graded_string` may supply per-element graded similarity if needed. Pairs with element similarity `< τ` (`match_threshold` when profiled as `graded_string`, else `1.0`) count as `0` in the mean.
+
+#### `align` — set-like (default)
 
 Example path: `tags` (`string[]`).
 
-1. Build pairwise element similarity `exp[i]` vs `pred[j]` (exact → 0 or 1 by default).
-2. Hungarian assignment; pairs with similarity `< τ` count as unmatched slots (score contribution 0).
-3. Instance `tags` **score** = mean over `n_all = max(len(exp), len(pred))`, counting unmatched gold slots, unmatched pred slots, and below-threshold pairs as 0.
+1. Build pairwise element similarity `exp[i]` vs `pred[j]`.
+2. Hungarian assignment (`matching.py`); pairs with similarity `< τ` count as unmatched slots (score contribution `0`).
+3. Instance **score** = mean over `n_all`, counting unmatched gold slots, unmatched pred slots, and below-threshold pairs as `0`.
 
-Layer 1 / 2 apply only if the manifest defines a profile for that path. The aggregate `score` already reflects extra, missing, and mismatched elements; no separate structural layer is emitted for extended primitives.
+Use for lists where **order must not matter**. Hungarian can “fix” permutations — which is correct for set-like data but wrong for index-bound arrays (see `positional`).
+
+#### `positional` — index-bound
+
+Example path: `outputs[].symbols_defined_in_caption` (`string[]` with `enum: ["yes", "no"]`, parallel to `outputs[].symbols` by index).
+
+1. For each index `i` in `0 .. n_all - 1`, compare `exp[i]` vs `pred[i]` (missing index on either side → similarity `0`).
+2. Instance **score** = mean over `n_all = max(len(exp), len(pred))`.
+
+Use when index *i* has semantic meaning (slot *i* answers about item *i*). **Do not** use `align` for low-cardinality parallel enums — e.g. gold `["yes", "no"]` vs pred `["no", "yes"]` scores `1.0` under Hungarian but `0.0` under positional.
+
+#### `join_string` — stringified
+
+Example path: `outputs[].from_the_caption` (`string[]` of caption snippets).
+
+1. Optionally sort each array when `sort_before_join: true`.
+2. `exp_str = join_separator.join(str(x) for x in exp)`; same for `pred`.
+3. Instance **score** = `string_compare(exp_str, pred_str)` using the field’s `string_compare` and `match_threshold` (manifest must set `matching_metric: graded_string` and `string_compare`).
+
+Use when a single holistic string comparison is pragmatic. Order is preserved unless `sort_before_join` is set.
+
+**Layer 1 / 2:** apply only if the manifest defines a profile for that path. Labels apply to the **single aggregate instance** for the whole array — not per element. The aggregate `score` already reflects extra, missing, and mismatched elements; no separate structural layer is emitted for extended primitives.
 
 ### List of objects
 
@@ -413,9 +453,13 @@ When a predictive list is nested under a structural parent (e.g. `panels` under 
       "match_threshold": 1.0
     },
     "outputs[].from_the_caption": {
+      "primitive_list_compare": "join_string",
       "matching_metric": "graded_string",
       "string_compare": "semantic",
       "match_threshold": 0.8
+    },
+    "outputs[].symbols_defined_in_caption": {
+      "primitive_list_compare": "positional"
     }
   }
 }
@@ -423,18 +467,22 @@ When a predictive list is nested under a structural parent (e.g. `panels` under 
 
 - **`item.status`**, **`panels[].status`** — schema `enum` (`yes` / `no` / `""`); `binary_polarity` only; exact match implicit.
 - **`item.label`**, **`panels[].label`** — free `string`; `graded_string` + `string_compare` + `match_threshold` (also used for `list_alignment` on `panels`).
-- **`outputs[].from_the_caption`** — free text; semantic compare with a lower threshold.
+- **`outputs[].from_the_caption`** — extended primitive; `join_string` + semantic compare with a lower threshold.
+- **`outputs[].symbols_defined_in_caption`** — extended primitive; `positional` (index-bound `yes`/`no` slots; omit `primitive_list_compare` only when `align` is intended).
 
 **Manifest keys:**
 
 | Key | Role |
 |-----|------|
 | `list_alignment` | Map each **schema predictive list** → row field names for Hungarian `s(i,j)` only (e.g. `"panels": ["label"]`). Must match schema predictive set; validated at load. Structural collection lists omitted. |
+| `primitive_list_compare` | Extended primitive only: `align` (default) \| `positional` \| `join_string` — how to compare two primitive arrays (see [List of primitives](#list-of-primitives)) |
+| `join_separator` | For `join_string` only; default `", "` |
+| `sort_before_join` | For `join_string` only; default `false` |
 | `na_values` | Per field: literals meaning **not applicable** (layer 1). Omit or `[]` = always applicable. |
 | `matching_metric` | `binary_polarity` \| `multiclass` \| `graded_string` — **layer 2** reporting shape only |
-| `string_compare` | **Required** on non-enum `graded_string` fields. **Omit** on schema `enum` fields (always exact). Not a `defaults` key. |
+| `string_compare` | **Required** on non-enum `graded_string` fields (scalar or `join_string` extended primitive). **Omit** on schema `enum` fields (always exact). Not a `defaults` key. |
 | `positive_value` / `negative_value` | For `binary_polarity` (layer 2) |
-| `match_threshold` | For `graded_string` only: layer 2 **match** if `score >= match_threshold`; also gates list alignment when an alignment key is a graded string |
+| `match_threshold` | For `graded_string` only: layer 2 **match** if `score >= match_threshold`; also gates list alignment when an alignment key is a graded string; gates per-element pairs in `align` / `positional` extended primitives when profiled as `graded_string` |
 
 Put polarity defaults in manifest `defaults`; set `string_compare` per free-text `graded_string` field only.
 
@@ -458,6 +506,8 @@ For free-text and other non-enum strings, the manifest names the **comparison me
 3. Layer 2: **match** if `score >= match_threshold`, else **mismatch**.
 
 **List alignment:** when an alignment key is a free-text field (e.g. `list_alignment.panels: ["label"]` on a `graded_string` path), use that field’s `string_compare` and `match_threshold` to compute `s(i,j)`. Enum alignment keys use exact match only (no `string_compare`).
+
+**Extended primitives:** `string_compare` applies to **`join_string`** mode (whole-array score). For **`align`** and **`positional`**, element similarity is exact unless the field profile supplies graded per-element comparison.
 
 **Schema vs manifest:** JSON Schema `enum` lists allowed literals but does **not** define which is N/A or which is “positive”. Configure `na_values` and polarity in the manifest. Repo examples: `enum: ["yes", "no", ""]` needs `na_values: [""]`; `enum: ["yes", "no", "not needed"]` needs `na_values: ["not needed"]`.
 
@@ -564,14 +614,17 @@ Runs only when layer 1 = **correct_applicable**. Denominator: instances where go
 - Scores at intermediate object or list nodes (objects are not leaf values).
 - A single global score mixing unrelated leaf properties.
 - Inferring N/A or polarity from enum order or English word shape alone.
-- Layer S structural reporting on extended-primitive leaves (`tags`).
+- Layer S structural reporting on extended-primitive leaves (`tags`, `outputs[].symbols`, …).
+- Per-element layer 2 (TP/FP/FN/TN) on extended-primitive leaves — one aggregate score per array is sufficient.
 - Gold-indexed leaf instances for `spurious_row` pred rows.
 
 ---
 
 ## Implementation
 
-Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py) (scalar + `compare_primitive_list`), [`matching.py`](../soda_mmqc/core/matching.py) (shared Hungarian), [`object_list_pairing.py`](../soda_mmqc/core/object_list_pairing.py) (row pairing), [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) (layer S / `by_list`), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (layers 1 and 2), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator). Contract: flatten → pair **predictive** object lists (Hungarian) / join **structural** lists (positional) → layer S for predictive lists only → score leaf instances → layers 1 and 2 → `instances` + `by_list` + `by_property`.
+Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py) (scalar + extended-primitive compare: `align`, `positional`, `join_string`), [`matching.py`](../soda_mmqc/core/matching.py) (shared Hungarian for `align` and list-of-objects row pairing), [`object_list_pairing.py`](../soda_mmqc/core/object_list_pairing.py) (row pairing), [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) (layer S / `by_list`), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (layers 1 and 2), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator). Contract: flatten → pair **predictive** object lists (Hungarian) / join **structural** lists (positional) → layer S for predictive lists only → score leaf instances (extended primitives per `primitive_list_compare`) → layers 1 and 2 → `instances` + `by_list` + `by_property`.
+
+**Planned:** `primitive_list_compare` modes `positional` and `join_string` (today only `align` is implemented via `compare_primitive_list`).
 
 ---
 
