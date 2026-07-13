@@ -624,8 +624,6 @@ Runs only when layer 1 = **correct_applicable**. Denominator: instances where go
 
 Target modules: [`leaves.py`](../soda_mmqc/core/leaves.py) (scalar + extended-primitive compare: `align`, `positional`, `join_string`), [`matching.py`](../soda_mmqc/core/matching.py) (shared Hungarian for `align` and list-of-objects row pairing), [`object_list_pairing.py`](../soda_mmqc/core/object_list_pairing.py) (row pairing), [`structural_reporting.py`](../soda_mmqc/core/structural_reporting.py) (layer S / `by_list`), [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py), [`applicability_and_matching.py`](../soda_mmqc/core/applicability_and_matching.py) (layers 1 and 2), [`evaluation.py`](../soda_mmqc/core/evaluation.py) (orchestrator). Contract: flatten → pair **predictive** object lists (Hungarian) / join **structural** lists (positional) → layer S for predictive lists only → score leaf instances (extended primitives per `primitive_list_compare`) → layers 1 and 2 → `instances` + `by_list` + `by_property`.
 
-**Planned:** `primitive_list_compare` modes `positional` and `join_string` (today only `align` is implemented via `compare_primitive_list`).
-
 ---
 
 ## See also

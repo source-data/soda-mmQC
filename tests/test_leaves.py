@@ -16,6 +16,8 @@ from soda_mmqc.core.leaves import (
     compare_fuzzy_strings,
     compare_number,
     compare_primitive_list,
+    compare_primitive_list_join,
+    compare_primitive_list_positional,
     compare_semantic_strings,
     compare_strings,
     exact_primitive_similarity,
@@ -313,6 +315,56 @@ class TestComparePrimitiveList:
         result = compare_primitive_list(["a"], ["a"])
         assert isinstance(result, LeafComparisonResult)
         assert 0.0 <= result.score <= 1.0
+
+
+class TestComparePrimitiveListPositional:
+    """Toy example B.4 — index-bound extended primitives."""
+
+    def test_permutation_scores_zero(self):
+        exp = ["yes", "no"]
+        pred = ["no", "yes"]
+        assert compare_primitive_list_positional(pred, exp).score == 0.0
+        assert compare_primitive_list(pred, exp).score == 1.0
+
+    def test_length_mismatch(self):
+        exp = ["yes", "no", "yes"]
+        pred = ["yes", "no"]
+        assert compare_primitive_list_positional(pred, exp).score == pytest.approx(2 / 3)
+
+    def test_both_empty(self):
+        assert compare_primitive_list_positional([], []).score == 1.0
+
+
+class TestComparePrimitiveListJoin:
+    """Toy example B.5 — stringified extended primitives."""
+
+    def test_exact_join_match(self):
+        exp = ["arrow", "scale bar"]
+        pred = ["arrow", "scale bar"]
+        assert compare_primitive_list_join(pred, exp).score == 1.0
+
+    def test_order_sensitive_without_sort(self):
+        exp = ["arrow", "scale bar"]
+        pred = ["scale bar", "arrow"]
+        assert compare_primitive_list_join(pred, exp).score == 0.0
+
+    def test_sort_before_join(self):
+        exp = ["arrow", "scale bar"]
+        pred = ["scale bar", "arrow"]
+        assert compare_primitive_list_join(
+            pred,
+            exp,
+            sort_before_join=True,
+        ).score == 1.0
+
+    def test_custom_separator(self):
+        exp = ["a", "b"]
+        pred = ["a", "b"]
+        assert compare_primitive_list_join(
+            pred,
+            exp,
+            join_separator=" | ",
+        ).score == 1.0
 
 
 class TestCompareNumber:

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from soda_mmqc.core.eval_manifest import load_eval_manifest
+from soda_mmqc.core.eval_manifest import load_eval_manifest, parse_eval_manifest
 from soda_mmqc.core.evaluation import FlatEvaluator
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -259,3 +259,66 @@ class TestGoldenSnapshots:
             "by_list": result.by_list,
         }
         assert actual == expected
+
+
+class TestExtendedPrimitiveCompareModes:
+    @pytest.fixture
+    def flags_evaluator(self) -> FlatEvaluator:
+        schema = {
+            "type": "object",
+            "required": ["flags"],
+            "properties": {
+                "flags": {
+                    "type": "array",
+                    "items": {"type": "string", "enum": ["yes", "no"]},
+                }
+            },
+        }
+        manifest = parse_eval_manifest(
+            {
+                "checklist": "flags",
+                "fields": {
+                    "flags": {"primitive_list_compare": "positional"},
+                },
+            }
+        )
+        return FlatEvaluator(schema, manifest)
+
+    def test_positional_via_manifest(self, flags_evaluator: FlatEvaluator):
+        gold = {"flags": ["yes", "no"]}
+        pred = {"flags": ["no", "yes"]}
+        result = flags_evaluator.evaluate(gold, pred)
+        assert _instance(result, "flags")["score"] == 0.0
+
+    @pytest.fixture
+    def captions_evaluator(self) -> FlatEvaluator:
+        schema = {
+            "type": "object",
+            "required": ["captions"],
+            "properties": {
+                "captions": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                }
+            },
+        }
+        manifest = parse_eval_manifest(
+            {
+                "checklist": "captions",
+                "fields": {
+                    "captions": {
+                        "primitive_list_compare": "join_string",
+                        "matching_metric": "graded_string",
+                        "string_compare": "exact",
+                        "match_threshold": 1.0,
+                    }
+                },
+            }
+        )
+        return FlatEvaluator(schema, manifest)
+
+    def test_join_string_via_manifest(self, captions_evaluator: FlatEvaluator):
+        gold = {"captions": ["arrow", "scale bar"]}
+        pred = {"captions": ["scale bar", "arrow"]}
+        result = captions_evaluator.evaluate(gold, pred)
+        assert _instance(result, "captions")["score"] == 0.0

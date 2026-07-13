@@ -31,6 +31,14 @@ class StringCompareMode(str, Enum):
     SEMANTIC = "semantic"
 
 
+class PrimitiveListCompareMode(str, Enum):
+    """Manifest ``primitive_list_compare`` values for extended primitives."""
+
+    ALIGN = "align"
+    POSITIONAL = "positional"
+    JOIN_STRING = "join_string"
+
+
 @dataclass(frozen=True)
 class LeafComparisonResult:
     """Result of comparing two primitive leaf values."""
@@ -221,6 +229,67 @@ def compare_primitive_list(
         threshold=match_threshold,
     )
     return _leaf(score)
+
+
+def compare_primitive_list_positional(
+    pred: Sequence[Any],
+    exp: Sequence[Any],
+    *,
+    element_similarity: ElementSimilarity = exact_primitive_similarity,
+    match_threshold: float = 1.0,
+) -> LeafComparisonResult:
+    """Compare two primitive arrays index-by-index.
+
+    Aggregate **score** = mean over ``max(len(exp), len(pred))``; missing
+    indices and pairs below ``match_threshold`` count as 0. Both empty → 1.0.
+    """
+    if not exp and not pred:
+        return _leaf(1.0)
+
+    n_exp = len(exp)
+    n_pred = len(pred)
+    pairs = tuple(
+        (index, index, element_similarity(pred[index], exp[index]))
+        for index in range(min(n_exp, n_pred))
+    )
+    score = mean_gated_similarity(
+        pairs,
+        n_left=n_exp,
+        n_right=n_pred,
+        threshold=match_threshold,
+    )
+    return _leaf(score)
+
+
+def compare_primitive_list_join(
+    pred: Sequence[Any],
+    exp: Sequence[Any],
+    *,
+    join_separator: str = ", ",
+    sort_before_join: bool = False,
+    string_compare: StringCompareMode = StringCompareMode.EXACT,
+    embedder: Optional[Callable[[Sequence[str]], Any]] = None,
+) -> LeafComparisonResult:
+    """Compare two primitive arrays after joining elements into one string."""
+    exp_str = _join_primitive_list(exp, join_separator, sort_before_join)
+    pred_str = _join_primitive_list(pred, join_separator, sort_before_join)
+    return compare_strings(
+        pred_str,
+        exp_str,
+        mode=string_compare,
+        embedder=embedder,
+    )
+
+
+def _join_primitive_list(
+    values: Sequence[Any],
+    join_separator: str,
+    sort_before_join: bool,
+) -> str:
+    items = [str(value) for value in values]
+    if sort_before_join:
+        items.sort()
+    return join_separator.join(items)
 
 
 def _matrix_element_similarity(

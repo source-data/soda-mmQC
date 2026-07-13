@@ -182,27 +182,29 @@ Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 
 ---
 
-## Phase 5.3 — Extended-primitive compare modes *(planned)*
+## Phase 5.3 — Extended-primitive compare modes ✅ *complete*
 
 **Normative change** ([evaluation-scoring.md](evaluation-scoring.md#list-of-primitives)): manifest `primitive_list_compare` selects how to score array-of-primitives leaves:
 
-| Mode | Implementation target |
-|------|----------------------|
-| `align` (default) | Existing `compare_primitive_list` + `matching.py` |
-| `positional` | New `compare_primitive_list_positional` — per-index element similarity, mean over `max(len)` |
-| `join_string` | New `compare_primitive_list_join` — `join_separator`, optional `sort_before_join`, then `compare_strings` |
+| Mode | Implementation |
+|------|----------------|
+| `align` (default) | `compare_primitive_list` + `matching.py` |
+| `positional` | `compare_primitive_list_positional` — per-index element similarity, mean over `max(len)` |
+| `join_string` | `compare_primitive_list_join` — `join_separator`, optional `sort_before_join`, then `compare_strings` |
 
-**Code changes required:**
+**Delivered:**
 
 | Location | Change |
 |----------|--------|
-| [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py) | Parse `primitive_list_compare`, `join_separator`, `sort_before_join` on `FieldProfile` |
-| [`leaves.py`](../soda_mmqc/core/leaves.py) | `positional` and `join_string` compare functions |
-| [`evaluation.py`](../soda_mmqc/core/evaluation.py) `_evaluate_extended_primitive` | Branch on `primitive_list_compare` |
+| [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py) | `PrimitiveListCompareMode` on `FieldProfile`; parse `primitive_list_compare`, `join_separator`, `sort_before_join`; compare-only field entries |
+| [`leaves.py`](../soda_mmqc/core/leaves.py) | `compare_primitive_list_positional`, `compare_primitive_list_join` |
+| [`evaluation.py`](../soda_mmqc/core/evaluation.py) | `_compare_extended_primitive_score` branches on manifest mode |
 | [`tests/test_leaves.py`](../tests/test_leaves.py) | Toy B.4 / B.5 style cases |
-| [`tests/test_eval_manifest.py`](../tests/test_eval_manifest.py) | Manifest parsing for new keys |
-| Checklist `eval-manifest.json` files | Set `positional` / `join_string` where needed (e.g. `micrograph-symbols-defined`) |
+| [`tests/test_eval_manifest.py`](../tests/test_eval_manifest.py) | Manifest parsing and validation |
+| [`tests/test_evaluation.py`](../tests/test_evaluation.py) | Orchestrator integration for `positional` and `join_string` |
 | [`soda_mmqc/docs/benchmarking.md`](../soda_mmqc/docs/benchmarking.md) | Document three modes |
+
+**Deferred:** checklist `eval-manifest.json` updates (e.g. `micrograph-symbols-defined`) — add `primitive_list_compare` when those manifests are created.
 
 **Out of scope:** per-element layer 2 on extended primitives; modelling parallel arrays as list-of-objects.
 

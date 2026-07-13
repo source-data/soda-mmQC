@@ -23,11 +23,14 @@ from soda_mmqc.core.eval_manifest import (
     load_eval_manifest,
 )
 from soda_mmqc.core.leaves import (
+    PrimitiveListCompareMode,
     compare_boolean,
     compare_enum_string,
     compare_exact_strings,
     compare_number,
     compare_primitive_list,
+    compare_primitive_list_join,
+    compare_primitive_list_positional,
     compare_strings,
     exact_primitive_similarity,
 )
@@ -259,18 +262,13 @@ class FlatEvaluator:
         exp_list = exp_value if isinstance(exp_value, list) else []
         pred_list = pred_value if isinstance(pred_value, list) else []
         profile = self.manifest.profile_for(leaf_spec.eval_pattern)
-        threshold = _primitive_list_threshold(profile)
-        element_similarity = _element_similarity_fn(
-            leaf_spec,
-            profile,
-            embedder=self.embedder,
-        )
-        score = compare_primitive_list(
+        score = _compare_extended_primitive_score(
             pred_list,
             exp_list,
-            element_similarity=element_similarity,
-            match_threshold=threshold,
-        ).score
+            leaf_spec=leaf_spec,
+            profile=profile,
+            embedder=self.embedder,
+        )
         return self._instance_from_values(
             path=leaf_spec.eval_pattern,
             leaf_property=leaf_spec.eval_pattern,
@@ -680,6 +678,52 @@ def _serialize_by_list(
             for row in result.rows
         ],
     }
+
+
+def _compare_extended_primitive_score(
+    pred_list: list[Any],
+    exp_list: list[Any],
+    *,
+    leaf_spec: EvalLeafSpec,
+    profile: Optional[FieldProfile],
+    embedder: Optional[Any],
+) -> float:
+    compare_mode = (
+        profile.effective_primitive_list_compare()
+        if profile is not None
+        else PrimitiveListCompareMode.ALIGN
+    )
+    if compare_mode == PrimitiveListCompareMode.JOIN_STRING:
+        if profile is None or profile.string_compare is None:
+            raise ValueError("join_string extended primitive requires string_compare")
+        return compare_primitive_list_join(
+            pred_list,
+            exp_list,
+            join_separator=profile.join_separator,
+            sort_before_join=profile.sort_before_join,
+            string_compare=profile.string_compare,
+            embedder=embedder,
+        ).score
+
+    threshold = _primitive_list_threshold(profile)
+    element_similarity = _element_similarity_fn(
+        leaf_spec,
+        profile,
+        embedder=embedder,
+    )
+    if compare_mode == PrimitiveListCompareMode.POSITIONAL:
+        return compare_primitive_list_positional(
+            pred_list,
+            exp_list,
+            element_similarity=element_similarity,
+            match_threshold=threshold,
+        ).score
+    return compare_primitive_list(
+        pred_list,
+        exp_list,
+        element_similarity=element_similarity,
+        match_threshold=threshold,
+    ).score
 
 
 def _primitive_list_threshold(profile: Optional[FieldProfile]) -> float:
