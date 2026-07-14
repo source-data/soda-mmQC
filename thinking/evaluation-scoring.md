@@ -204,7 +204,9 @@ Do not use Python truthiness (`if not value:`) — it conflates `""`, `null`, an
 
 ### List of primitives (extended primitive)
 
-An **extended primitive** is a leaf whose value is an **array of primitives** (e.g. `tags: string[]`). The leaf path is the array property itself (`tags`), not per-element paths. The comparator emits **one** instance per array leaf with a single aggregate **`score`** — no layer S, no per-element layer 2 (TP/FP/FN/TN).
+An **extended primitive** is a leaf whose value is an **array of primitives** (e.g. `tags: string[]`, or `outputs[].symbols: string[]`). The leaf path is the array property itself (`tags` or `outputs[].symbols`), not per-element paths. The comparator emits **one aggregate `score` per array instance** — no layer S, no per-element layer 2 (TP/FP/FN/TN).
+
+**Spec vs implementation dispatch:** “Extended primitive” describes **value shape and compare rules** (`primitive_list_compare`). In code, `LeafKind.ROOT_PRIMITIVE_ARRAY` means a primitive array **at document root** (one instance, e.g. `tags`). Row-nested primitive arrays use `LeafKind.ROW` (one instance **per gold row**, e.g. `outputs[0].symbols`) but the same extended-primitive compare machinery. Do not conflate the wiki term with the enum name.
 
 Arrays of primitives are intentionally **not** modelled as list-of-objects (e.g. `{symbol, defined}` rows). That would complicate leaf discovery and manifest paths. Instead, the manifest names how to compare the two arrays.
 

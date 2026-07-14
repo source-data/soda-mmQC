@@ -13,7 +13,7 @@ Normative scoring contract: [evaluation-scoring.md](evaluation-scoring.md). Work
 
 A **leaf property** is a schema path to a primitive value or an **array of primitives** (extended primitive). Comparison produces **`score`** at these paths; manifest profiles add **layer 1** / **layer 2** labels per [evaluation-scoring.md](evaluation-scoring.md).
 
-**Extended primitives** (`tags: string[]`) are leaves whose value is a primitive array. Compare them as **one** leaf instance with one aggregate **`score`**. Manifest **`primitive_list_compare`** selects the mode ([evaluation-scoring.md](evaluation-scoring.md#list-of-primitives)):
+**Extended primitives** (`tags: string[]`, `outputs[].symbols: string[]`) are leaves whose value is a primitive array. Compare with **`primitive_list_compare`** ([evaluation-scoring.md](evaluation-scoring.md#list-of-primitives)). In code, root arrays use `LeafKind.ROOT_PRIMITIVE_ARRAY`; row-nested arrays use `LeafKind.ROW` — same compare rules, different instance placement (document root vs per gold row).
 
 | Mode | Behaviour |
 |------|-----------|
