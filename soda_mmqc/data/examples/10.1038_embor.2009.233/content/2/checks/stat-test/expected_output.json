@@ -5,57 +5,64 @@
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "Statistical significance is indicated by asterisks without mentioning the test used.",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "FAIL",
+            "explanation": "Statistical significance is indicated by asterisks without mentioning the test used."
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
-            "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "G",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "Statistical significance is indicated by asterisks without mentioning the test used.",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "FAIL",
+            "explanation": "Statistical significance is indicated by asterisks without mentioning the test used."
         }
     ],
-    "updated_at": "2025-05-08 13:43:29"
+    "updated_at": "2026-07-13 09:35:12"
 }

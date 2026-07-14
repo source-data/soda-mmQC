@@ -1,38 +1,42 @@
 {
-  "name": "stat-test",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "B",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "C",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "D",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "Statistics: Two-tailed t-test; n = 50 ovarioles per genotype. ns, p > 0.05; *p < 0.05; **p < 0.01; ***p < 0.001; ****p < 0.0001."
-    }
-  ],
-  "updated_at": "2026-03-30 08:49:47"
+    "name": "stat-test",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "Statistics: Two-tailed t-test;",
+            "decision": "PASS",
+            "explanation": ""
+        }
+    ],
+    "updated_at": "2026-07-13 09:41:37"
 }

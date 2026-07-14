@@ -19,7 +19,7 @@
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "no",
             "from_the_caption": "",
-            "Decision_and_explanation": "Fail: This is a boxplot. The boxes and whiskers are not defined. "
+            "Decision_and_explanation": "FAIL: This is a boxplot. The boxes and whiskers are not defined. "
         },
         {
             "panel_label": "D",
@@ -50,5 +50,5 @@
             "Decision_and_explanation": "FAIL: The bar graph of relative expression includes error bars, but the figure caption does not specify what the error bars represent (e.g., SD, SEM, 95% CI) or give sample size. Caption should explicitly define the error bars and state n."
         }
     ],
-    "updated_at": "2026-05-28 12:01:20"
+    "updated_at": "2026-07-09 12:45:09"
 }

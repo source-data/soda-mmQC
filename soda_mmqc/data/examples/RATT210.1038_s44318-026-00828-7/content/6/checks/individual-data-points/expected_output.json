@@ -1,36 +1,41 @@
 {
-  "name": "individual-data-points",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "plot": "yes",
-      "average_values": "no",
-      "individual_values": "not needed"
-    },
-    {
-      "panel_label": "B",
-      "plot": "yes",
-      "average_values": "no",
-      "individual_values": "not needed"
-    },
-    {
-      "panel_label": "C",
-      "plot": "yes",
-      "average_values": "no",
-      "individual_values": "not needed"
-    },
-    {
-      "panel_label": "D",
-      "plot": "yes",
-      "average_values": "no",
-      "individual_values": "not needed"
-    },
-    {
-      "panel_label": "E",
-      "plot": "yes",
-      "average_values": "no",
-      "individual_values": "not needed"
-    }
-  ],
-  "updated_at": "2026-06-08 13:31:56"
+    "name": "individual-data-points",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "plot": "yes",
+            "individual_values": "not needed",
+            "decision": "",
+            "explanation": ""
+        },
+        {
+            "panel_label": "B",
+            "plot": "yes",
+            "individual_values": "not needed",
+            "decision": "",
+            "explanation": ""
+        },
+        {
+            "panel_label": "C",
+            "plot": "yes",
+            "individual_values": "not needed",
+            "decision": "",
+            "explanation": ""
+        },
+        {
+            "panel_label": "D",
+            "plot": "yes",
+            "individual_values": "not needed",
+            "decision": "",
+            "explanation": ""
+        },
+        {
+            "panel_label": "E",
+            "plot": "yes",
+            "individual_values": "not needed",
+            "decision": "",
+            "explanation": ""
+        }
+    ],
+    "updated_at": "2026-06-08 13:31:56"
 }

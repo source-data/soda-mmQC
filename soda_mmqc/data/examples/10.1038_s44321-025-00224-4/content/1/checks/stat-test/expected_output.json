@@ -5,49 +5,55 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": "P values were determined using unpaired two-tailed Student\u2019s T test."
+            "from_the_caption": "unpaired two-tailed Student’s T test.",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": "P values were determined using unpaired two-tailed Student\u2019s T test."
+            "from_the_caption": "unpaired two-tailed Student’s T test.",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "F",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": "P values were determined using unpaired two-tailed Student\u2019s T test."
+            "from_the_caption": "unpaired two-tailed Student’s T test.",
+            "decision": "PASS",
+            "explanation": ""
         }
     ],
-    "updated_at": "2025-05-08 13:43:44"
+    "updated_at": "2026-07-13 09:51:51"
 }

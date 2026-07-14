@@ -33,15 +33,15 @@
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
             "from_the_caption": " median. The box displays the interquartile range (IQR), 25th to 75th percentile. Whiskers represent a distance of 1.5 × IQR",
-            "Decision_and_explanation": "PASS: This is a boxplot and all features ae descibed in the figure legend. "
+            "Decision_and_explanation": "PASS: This is a boxplot and all features ae described in the figure legend. "
         },
         {
             "panel_label": "F",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
             "from_the_caption": " median. The box displays the interquartile range (IQR), 25th to 75th percentile. Whiskers represent a distance of 1.5 × IQR",
-            "Decision_and_explanation": "PASS: This is a boxplot and all features ae descibed in the figure legend. "
+            "Decision_and_explanation": "PASS: This is a boxplot and all features ae described in the figure legend. "
         }
     ],
-    "updated_at": "2026-05-28 16:20:23"
+    "updated_at": "2026-07-09 12:46:12"
 }

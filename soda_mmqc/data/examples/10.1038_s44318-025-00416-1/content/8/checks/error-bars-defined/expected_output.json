@@ -16,17 +16,17 @@
         },
         {
             "panel_label": "C",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": "not needed",
-            "Decision_and_explanation": "not needed"
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "no",
+            "from_the_caption": "\"\"",
+            "Decision_and_explanation": "FAIL: Dashed lines in violin plot are not defined in the figure legend. "
         },
         {
             "panel_label": "D",
-            "error_bar_on_figure": "no",
-            "error_bar_defined_in_caption": "not needed",
-            "from_the_caption": "not needed",
-            "Decision_and_explanation": "not needed"
+            "error_bar_on_figure": "yes",
+            "error_bar_defined_in_caption": "no",
+            "from_the_caption": "\"\"",
+            "Decision_and_explanation": "FAIL: Dashed lines in violin plot are not defined in the figure legend. "
         },
         {
             "panel_label": "E",
@@ -57,5 +57,5 @@
             "Decision_and_explanation": "not needed"
         }
     ],
-    "updated_at": "2026-05-28 15:47:14"
+    "updated_at": "2026-07-09 14:45:47"
 }

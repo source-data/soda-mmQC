@@ -6,49 +6,55 @@
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": "Differences in log₂ fold change were assessed using a likelihood ratio test, and p-values were corrected using the Benjamini–Hochberg false discovery rate (FDR)."
+            "from_the_caption": "Differences in log₂ fold change were assessed using a likelihood ratio test, and p-values were corrected using the Benjamini–Hochberg false discovery rate (FDR).",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "F",
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": "Statistics: Fisher’s Exact Test; "
+            "from_the_caption": "Statistics: Fisher’s Exact Test; ",
+            "decision": "PASS",
+            "explanation": ""
         }
     ],
-    "updated_at": "2026-03-31 14:59:01"
+    "updated_at": "2026-07-13 09:44:07"
 }

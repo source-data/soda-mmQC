@@ -13,21 +13,7 @@
             "error_bar_defined_in_caption": "no",
             "from_the_caption": "",
             "Decision_and_explanation": "FAIL: Plots show vertical error bars around data points, but the figure caption does not define what the error bars represent (e.g., SD, SEM, or CI) nor provide sample size."
-        },
-        {
-            "panel_label": "",
-            "error_bar_on_figure": "",
-            "error_bar_defined_in_caption": "",
-            "from_the_caption": "",
-            "Decision_and_explanation": ""
-        },
-        {
-            "panel_label": "",
-            "error_bar_on_figure": "",
-            "error_bar_defined_in_caption": "",
-            "from_the_caption": "",
-            "Decision_and_explanation": ""
         }
     ],
-    "updated_at": "2026-05-28 16:04:32"
+    "updated_at": "2026-07-03 10:52:30"
 }

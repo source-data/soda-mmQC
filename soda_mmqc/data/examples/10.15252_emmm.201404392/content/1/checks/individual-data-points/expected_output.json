@@ -3,51 +3,59 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid "
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid "
         },
         {
             "panel_label": "C",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a western blot — check does not apply"
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "PASS",
+            "explanation": "Panel is a line graph -individual data points are not required. "
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "PASS",
+            "explanation": "Panel is a line graph -individual data points are not required. "
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a line graph -individual data points are not required. "
         },
         {
             "panel_label": "G",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "H",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid "
         }
     ],
-    "updated_at": "2026-01-30 15:41:41"
+    "updated_at": "2026-07-09 09:54:41"
 }
