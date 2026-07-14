@@ -184,7 +184,7 @@ class FlatEvaluator:
         pairings = self._align_eval_lists(exp, pred, layout, by_list)
 
         for leaf_spec in leaf_specs:
-            if leaf_spec.kind is LeafKind.EXTENDED_PRIMITIVE:
+            if leaf_spec.kind is LeafKind.ROOT_PRIMITIVE_ARRAY:
                 instances.append(
                     self._evaluate_extended_primitive(exp, pred, leaf_spec)
                 )
