@@ -3,33 +3,38 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is FACS data and shows the individual data points. "
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is FACS data and shows the individual data points. "
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is FACS data and shows the individual data points. "
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is FACS data and shows the individual data points. "
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is FACS data and shows the individual data points. "
         }
     ],
-    "updated_at": "2025-05-08 13:56:31"
+    "updated_at": "2026-07-08 15:49:02"
 }

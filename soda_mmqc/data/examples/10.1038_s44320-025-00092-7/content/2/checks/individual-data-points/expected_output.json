@@ -3,51 +3,59 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panels shows individual data points. "
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Plot does not require individual data points."
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Plot does not require individual data points."
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Individual data points are shown."
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Plot does not require individual data points."
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Plot does not require individual data points."
         },
         {
             "panel_label": "G",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Plot does not require individual data points."
         },
         {
             "panel_label": "H",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Plot does not require individual data points."
         }
     ],
-    "updated_at": "2026-06-17 15:34:08"
+    "updated_at": "2026-07-09 10:28:45"
 }

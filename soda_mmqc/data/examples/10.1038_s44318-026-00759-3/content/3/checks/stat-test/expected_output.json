@@ -1,94 +1,105 @@
 {
-  "name": "stat-test",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "B",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "C",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "by one-way ANOVA, followed by Dunnett\u2019s correction."
-    },
-    {
-      "panel_label": "D",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "by Kruskal\u2013Wallis test, followed by Dunn\u2019s multiple comparison test."
-    },
-    {
-      "panel_label": "E",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "F",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "one-way ANOVA, followed by Dunnett\u2019s correction."
-    },
-    {
-      "panel_label": "G",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "H",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "one-way ANOVA, followed by Dunnett\u2019s correction."
-    },
-    {
-      "panel_label": "I",
-      "is_a_plot": "no",
-      "statistical_test_needed": "no",
-      "statistical_test_mentioned": "not needed",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": ""
-    },
-    {
-      "panel_label": "J",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "Analysis by one-way ANOVA, followed by Dunnett\u2019s correction."
-    },
-    {
-      "panel_label": "K",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "Analysis by one-way ANOVA, followed by Dunnett\u2019s correction."
-    }
-  ],
-  "updated_at": "2026-04-29 13:02:57"
+    "name": "stat-test",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "by one-way ANOVA, followed by Dunnett’s correction.",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "by Kruskal–Wallis test, followed by Dunn’s multiple comparison test.",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "E",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "one-way ANOVA, followed by Dunnett’s correction.",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "G",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "H",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "one-way ANOVA, followed by Dunnett’s correction.",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "I",
+            "is_a_plot": "no",
+            "statistical_test_needed": "no",
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "J",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "Analysis by one-way ANOVA, followed by Dunnett’s correction.",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "K",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "Analysis by one-way ANOVA, followed by Dunnett’s correction.",
+            "decision": "PASS",
+            "explanation": ""
+        }
+    ],
+    "updated_at": "2026-07-13 09:56:50"
 }

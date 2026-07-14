@@ -3,75 +3,87 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "B",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "C",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         },
         {
             "panel_label": "E",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         },
         {
             "panel_label": "G",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "H",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "I",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "J",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         },
         {
             "panel_label": "K",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         },
         {
             "panel_label": "L",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing means with individual data points overlaid"
         }
     ],
-    "updated_at": "2025-05-08 13:56:37"
+    "updated_at": "2026-07-08 15:50:17"
 }

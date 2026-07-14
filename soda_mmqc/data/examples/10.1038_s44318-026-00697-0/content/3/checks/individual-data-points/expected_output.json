@@ -4,27 +4,31 @@
         {
             "panel_label": "A",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "No individual data points are required for this plot. "
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "No individual data points are required for this plot. "
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "No individual data points are required for this plot. "
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "No individual data points are required for this plot. "
         }
     ],
-    "updated_at": "2026-03-31 14:54:03"
+    "updated_at": "2026-07-08 14:15:12"
 }

@@ -5,29 +5,37 @@
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "B",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "C",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         },
         {
             "panel_label": "D",
             "micrograph": "no",
             "scale_bar_on_image": "",
             "scale_bar_defined_in_caption": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "scale_bar_defined_in_image": "",
+            "from_the_image": ""
         }
     ],
-    "updated_at": "2025-05-08 13:54:47"
+    "updated_at": "2026-07-09 15:07:56"
 }

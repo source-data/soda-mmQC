@@ -30,7 +30,7 @@
                             },
                             "Decision_and_explanation": {
                                 "type": "string",
-                                "description": "Panel-level verdict and brief rationale (e.g. PASS, FAIL, or WARNING) on whether error bars are adequately defined; use '' when not applicable, or 'not needed' when error bars are not required for this panel"
+                                "description": "Panel-level verdict and brief rationale (PASS or FAIL) on whether error bars or box-plot whiskers are adequately defined; use 'not needed' when error_bar_on_figure is 'no'"
                             }
                         },
                         "required": [

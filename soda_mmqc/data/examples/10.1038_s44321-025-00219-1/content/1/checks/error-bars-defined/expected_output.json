@@ -27,14 +27,9 @@
             "error_bar_defined_in_caption": "not needed",
             "from_the_caption": "not needed",
             "Decision_and_explanation": "not needed"
-        },
-        {
-            "panel_label": "",
-            "error_bar_on_figure": "",
-            "error_bar_defined_in_caption": "",
-            "from_the_caption": "",
-            "Decision_and_explanation": ""
         }
     ],
     "updated_at": "2026-05-28 11:59:57"
 }
+
+

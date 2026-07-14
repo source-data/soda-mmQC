@@ -5,32 +5,37 @@
             "is_a_plot": "yes",
             "statistical_test_needed": "yes",
             "statistical_test_mentioned": "yes",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": "Statistical analysis involved Student's t‐test and one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test."
+            "from_the_caption": "Student's t‐test and one‐way ANOVA followed by post hoc Tukey's HSD (honestly significant difference) test.",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         }
-    ]
+    ],
+    "updated_at": "2026-07-13 10:11:11"
 }

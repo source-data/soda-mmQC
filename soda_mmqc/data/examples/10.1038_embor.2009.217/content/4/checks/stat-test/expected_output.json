@@ -4,34 +4,38 @@
             "panel_label": "A",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
-            "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
-            "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
-            "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
             "statistical_test_needed": "no",
-            "statistical_test_mentioned": "no",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "statistical_test_mentioned": "not needed",
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         }
     ],
-    "updated_at": "2025-05-08 13:44:34"
+    "updated_at": "2026-07-13 10:04:07"
 }

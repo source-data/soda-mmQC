@@ -4,39 +4,45 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is a schematic -no individual data points are required for this panel."
         },
         {
             "panel_label": "B",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "No individual data points are required for this plot. "
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "no",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "This is a scatterplot and individual data points are shown. "
         },
         {
             "panel_label": "D",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "No individual data points are required for this plot. "
         },
         {
             "panel_label": "E",
             "plot": "no",
-            "average_values": "not needed",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "This is a representative micrograph that does not require individual data points."
         },
         {
             "panel_label": "F",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "no"
+            "individual_values": "no",
+            "decision": "FAIL",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid "
         }
     ],
-    "updated_at": "2026-03-31 15:03:59"
+    "updated_at": "2026-07-08 14:16:47"
 }

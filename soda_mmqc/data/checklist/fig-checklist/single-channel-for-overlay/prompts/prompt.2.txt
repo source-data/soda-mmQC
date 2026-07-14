@@ -28,7 +28,7 @@ For each panel:
 
 ### 1. Determine whether a multicolored overlay micrograph is present. 
 Answer yes only if the panel contains a microscopy image with two or more distinct channels merged into one image.
-If the panel does not contain a merged microscopy image (e.g., plots, schematics, brightfield images), answer no. Schematics, Crystal structures, Cryo-EM maps or three dimensional rendering of molecular structures are not considered microscopy images and the answer is therefore, no. 
+If the panel does not contain a merged microscopy image (e.g., plots, schematics, brightfield images), answer no. Schematics, Crystal structures, Cryo-EM maps or three dimensional rendering of molecular structures and kymographs are not considered multi-channel microscopy images and the answer is therefore, no. 
 
 ### 2. Count the number of channels in the overlay
 If multicolored_overlay_micrograph = yes, count the number of distinct channels merged. Count only channels that are visually distinguishable and relevant.

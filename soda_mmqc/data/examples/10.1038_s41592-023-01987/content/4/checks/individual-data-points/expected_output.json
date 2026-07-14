@@ -3,45 +3,52 @@
         {
             "panel_label": "a",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "b",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "c",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "d",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "e",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "f",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         },
         {
             "panel_label": "g",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply"
         }
     ],
-    "updated_at": "2026-01-28 15:49:11"
+    "updated_at": "2026-07-08 14:08:34"
 }

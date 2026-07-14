@@ -102,9 +102,9 @@
             "panel_label": "O",
             "error_bar_on_figure": "yes",
             "error_bar_defined_in_caption": "yes",
-            "from_the_caption": "mean +/-  SEM\n",
+            "from_the_caption": "mean +/-  SEM",
             "Decision_and_explanation": "PASS: Error bars are shown and the caption explicitly reports they are mean \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 + SEM."
         }
     ],
-    "updated_at": "2026-05-28 15:34:13"
+    "updated_at": "2026-07-09 12:43:38"
 }

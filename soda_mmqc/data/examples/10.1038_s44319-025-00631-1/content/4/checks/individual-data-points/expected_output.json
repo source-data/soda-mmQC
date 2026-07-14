@@ -3,27 +3,31 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "B",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a representative micrograph — check does not apply."
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing means with individual data points overlaid.\""
         }
     ],
-    "updated_at": "2026-03-27 11:27:12"
+    "updated_at": "2026-07-08 13:14:41"
 }

@@ -1,22 +1,24 @@
 {
-  "name": "stat-test",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "Statistical analysis was performed using one-way ANOVA test;"
-    },
-    {
-      "panel_label": "B",
-      "is_a_plot": "yes",
-      "statistical_test_needed": "yes",
-      "statistical_test_mentioned": "yes",
-      "justify_why_test_is_missing": "",
-      "from_the_caption": "Statistical analysis was performed using a one-way ANOVA test,"
-    }
-  ],
-  "updated_at": "2026-03-27 10:09:51"
+    "name": "stat-test",
+    "outputs": [
+        {
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "one-way ANOVA test;",
+            "decision": "PASS",
+            "explanation": ""
+        },
+        {
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "statistical_test_needed": "yes",
+            "statistical_test_mentioned": "yes",
+            "from_the_caption": "one-way ANOVA test,",
+            "decision": "PASS",
+            "explanation": ""
+        }
+    ],
+    "updated_at": "2026-07-13 10:23:35"
 }

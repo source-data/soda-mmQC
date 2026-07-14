@@ -3,33 +3,38 @@
         {
             "panel_label": "A",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a schematic -no individual data points are required"
         },
         {
             "panel_label": "B",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a microgrpah -no individual data points are required"
         },
         {
             "panel_label": "C",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid"
         },
         {
             "panel_label": "D",
             "plot": "yes",
-            "average_values": "yes",
-            "individual_values": "yes"
+            "individual_values": "yes",
+            "decision": "PASS",
+            "explanation": "Bar chart showing averaged data but is missing individual data points overlaid"
         },
         {
             "panel_label": "E",
             "plot": "no",
-            "average_values": "no",
-            "individual_values": "not needed"
+            "individual_values": "not needed",
+            "decision": "PASS",
+            "explanation": "Panel is a schematic -no individual data points are required"
         }
     ],
-    "updated_at": "2026-03-27 16:38:38"
+    "updated_at": "2026-07-08 14:08:01"
 }

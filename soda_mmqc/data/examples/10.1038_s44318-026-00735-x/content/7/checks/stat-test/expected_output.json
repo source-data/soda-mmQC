@@ -6,16 +6,18 @@
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "statistical_test_needed": "no",
             "statistical_test_mentioned": "not needed",
-            "justify_why_test_is_missing": "",
-            "from_the_caption": ""
+            "from_the_caption": "",
+            "decision": "PASS",
+            "explanation": ""
         }
     ],
     "updated_at": "2026-05-13 10:18:21"
