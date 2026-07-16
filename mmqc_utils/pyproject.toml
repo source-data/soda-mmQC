@@ -52,8 +52,8 @@ publish = [
 ]
 
 [project.urls]
-bugs = "https://github.com/source-data/soda-mmQC/issues"
-homepage = "https://github.com/source-data/soda-mmQC"
+bugs = "https://github.com/source-data/mmQC/issues"
+homepage = "https://github.com/source-data/mmQC"
 
 [tool.ty]
 # All rules are enabled as "error" by default; no need to specify unless overriding.

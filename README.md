@@ -11,8 +11,8 @@ Requires **Python 3.12+**. Dependencies are managed in `pyproject.toml`. Use **u
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/soda-mmqc.git
-cd soda-mmqc
+git clone https://github.com/source-data/mmQC.git
+cd mmQC
 
 # Install uv if needed: https://docs.astral.sh/uv/
 # Then create venv and install dependencies (generates uv.lock)
@@ -26,8 +26,8 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/soda-mmqc.git
-cd soda-mmqc
+git clone https://github.com/source-data/mmQC.git
+cd mmQC
 
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
