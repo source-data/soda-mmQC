@@ -1,4 +1,4 @@
-# SODA MMQC
+# mmQC
 
 
 An open library of multimodal editorial AI skills for manuscript quality control.
