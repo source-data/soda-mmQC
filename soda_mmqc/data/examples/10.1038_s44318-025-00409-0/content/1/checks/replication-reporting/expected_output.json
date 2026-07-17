@@ -110,7 +110,9 @@
         {
             "panel_label": "J",
             "involves_replicates": "yes",
-            "replicate_statements": "-\"RNA-seq data from the 8 populations\"",
+            "replicate_statements": [
+                "RNA-seq data from the 8 populations"
+            ],
             "n_reported": "yes",
             "n_value_min": 8,
             "replicate_type_reported": "yes",
