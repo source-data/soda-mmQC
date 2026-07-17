@@ -42,28 +42,6 @@
                                     "additionalProperties": false
                                 }
                             },
-                            "justify_why_units_are_missing": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "axis": {
-                                            "type": "string",
-                                            "enum": ["x", "y", "z"],
-                                            "description": "The axis to be labeled"
-                                        },
-                                        "justification": {
-                                            "type": "string",
-                                            "description": "Justification for why the units are missing"
-                                        }
-                                    },
-                                    "required": [
-                                        "axis",
-                                        "justification"
-                                    ],
-                                    "additionalProperties": false
-                                }
-                            },
                             "unit_definition_as_provided": {
                                 "type": "array",
                                 "items": {
@@ -85,14 +63,42 @@
                                     ],
                                     "additionalProperties": false
                                 }
+                            },
+                            "decision": {
+                                "type": "string",
+                                "enum": ["PASS", "FAIL", "N/A"],
+                                "description": "Panel-level verdict: PASS if all required axes have adequate units, FAIL if any required axis lacks units, N/A if the panel is not a quantitative plot"
+                            },
+                            "explanation": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "axis": {
+                                            "type": "string",
+                                            "enum": ["x", "y", "z"],
+                                            "description": "The axis to be labeled"
+                                        },
+                                        "explanation": {
+                                            "type": "string",
+                                            "description": "Explanation for why the units are missing"
+                                        }
+                                    },
+                                    "required": [
+                                        "axis",
+                                        "explanation"
+                                    ],
+                                    "additionalProperties": false
+                                }
                             }
                         },
                         "required": [
                             "panel_label",
                             "is_a_plot",
                             "units_provided",
-                            "justify_why_units_are_missing",
-                            "unit_definition_as_provided"
+                            "unit_definition_as_provided",
+                            "decision",
+                            "explanation"
                         ],
                         "additionalProperties": false
                     }

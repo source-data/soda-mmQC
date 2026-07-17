@@ -13,8 +13,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -29,13 +30,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "justification": "Position relative to TSS in base pairs (bp)"
+                    "definition": "Position relative to TSS in base pairs (bp)"
                 }
             ],
-            "unit_definition_as_provided": []
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -50,8 +52,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -66,13 +69,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [
                 {
                     "axis": "x",
-                    "justification": "Position relative to TSS in base pairs (bp)"
+                    "definition": "Position relative to TSS in base pairs (bp)"
                 }
             ],
-            "unit_definition_as_provided": []
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -87,8 +91,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
@@ -103,9 +108,10 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
-    "updated_at": "2025-05-08 14:05:48"
+    "updated_at": "2026-07-16 09:53:13"
 }

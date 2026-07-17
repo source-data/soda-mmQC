@@ -1,90 +1,93 @@
 {
-  "name": "plot-axis-units",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "is_a_plot": "yes",
-      "units_provided": [
+    "outputs": [
         {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "A",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Number of vDNA spots (EdU) colocalized with CPSF6 per nucleus"
+                }
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "yes"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": [
-        {
-          "axis": "y",
-          "definition": "Number of vDNA spots (EdU) colocalized with CPSF6 per nucleus"
-        }
-      ]
-    },
-    {
-      "panel_label": "B",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "yes"
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Fold increase cGAMP (pmol/ng of protein) with respect to uninfected cells"
+                }
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": [
-        {
-          "axis": "x",
-          "definition": "Fold increase cGAMP (pmol/ng of protein) with respect to uninfected cells"
-        }
-      ]
-    },
-    {
-      "panel_label": "C",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "yes"
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "yes"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "x",
+                    "definition": "Fold increase cGAMP (pmol/ng of protein) with respect to uninfected cells"
+                }
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "yes"
+                }
+            ],
+            "unit_definition_as_provided": [
+                {
+                    "axis": "y",
+                    "definition": "Fold increase cGAMP (pmol/ng of protein)"
+                }
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": [
-        {
-          "axis": "x",
-          "definition": "Fold increase cGAMP (pmol/ng of protein) with respect to uninfected cells"
-        }
-      ]
-    },
-    {
-      "panel_label": "D",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
-        },
-        {
-          "axis": "y",
-          "answer": "yes"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": [
-        {
-          "axis": "y",
-          "definition": "Fold increase cGAMP (pmol/ng of protein)"
-        }
-      ]
-    }
-  ],
-  "updated_at": "2026-03-27 10:09:51"
+    ],
+    "updated_at": "2026-03-27 10:09:51"
 }

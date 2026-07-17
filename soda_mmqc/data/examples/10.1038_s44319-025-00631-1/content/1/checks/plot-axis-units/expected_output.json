@@ -4,8 +4,9 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -20,8 +21,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -36,13 +38,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Tumor volume (mm^3)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -57,8 +60,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -73,7 +77,6 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -83,7 +86,9 @@
                     "axis": "y",
                     "definition": "Tumor volume (mm^3)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
@@ -98,13 +103,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "CD4 Intensity Mean Fluorescence (a.u.)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -119,13 +125,15 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "pERK Intensity Mean Fluorescence (a.u.)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
-    ]
+    ],
+    "updated_at": "2026-07-15 11:19:43"
 }

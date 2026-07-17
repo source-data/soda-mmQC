@@ -1,194 +1,207 @@
 {
-  "name": "plot-axis-units",
-  "outputs": [
-    {
-      "panel_label": "A",
-      "is_a_plot": "no",
-      "units_provided": [],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "B",
-      "is_a_plot": "yes",
-      "units_provided": [
+    "outputs": [
         {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "A",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "C",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "B",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "D",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "E",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "D",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "F",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "E",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "G",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "F",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "H",
-      "is_a_plot": "no",
-      "units_provided": [],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "I",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "G",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "J",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "H",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "K",
-      "is_a_plot": "no",
-      "units_provided": [],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "L",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "I",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
-        }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "M",
-      "is_a_plot": "no",
-      "units_provided": [],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    },
-    {
-      "panel_label": "N",
-      "is_a_plot": "yes",
-      "units_provided": [
-        {
-          "axis": "x",
-          "answer": "not needed"
+            "panel_label": "J",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
-          "axis": "y",
-          "answer": "not needed"
+            "panel_label": "K",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
+        },
+        {
+            "panel_label": "L",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
+        },
+        {
+            "panel_label": "M",
+            "is_a_plot": "no",
+            "units_provided": [],
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
+        },
+        {
+            "panel_label": "N",
+            "is_a_plot": "yes",
+            "units_provided": [
+                {
+                    "axis": "x",
+                    "answer": "not needed"
+                },
+                {
+                    "axis": "y",
+                    "answer": "not needed"
+                }
+            ],
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         }
-      ],
-      "justify_why_units_are_missing": [],
-      "unit_definition_as_provided": []
-    }
-  ],
-  "updated_at": "2026-04-29 13:02:58"
+    ],
+    "updated_at": "2026-04-29 13:02:58"
 }

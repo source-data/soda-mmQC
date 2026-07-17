@@ -4,22 +4,25 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -34,20 +37,22 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Normalized Fluorescence Intensity (A.U.)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "F",
@@ -62,13 +67,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Exposure time (ms)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -83,13 +89,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Exposure time (ms)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "H",
@@ -104,20 +111,22 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Exposure time (ms)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "I",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "J",
@@ -132,13 +141,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Normalized Intensity (A.U.)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
     "updated_at": "2026-02-02 11:22:09"

@@ -4,15 +4,17 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -27,13 +29,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Number of clusters/cell"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -48,13 +51,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Clusters size (nm3)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -69,20 +73,22 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Mol. % into clusters"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
-            "is_a_plot": "[]",
+            "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -105,12 +111,6 @@
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
-                {
-                    "axis": "y",
-                    "justification": "Mean square displacement (MSD) is plotted in the bottom panel but the units for MSD (e.g., µm^2) are not specified on the image or in the caption."
-                }
-            ],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -120,21 +120,22 @@
                     "axis": "y",
                     "definition": "Top (histogram): Counts , bottom: Counts"
                 }
+            ],
+            "decision": "FAIL",
+            "explanation": [
+                {
+                    "axis": "y",
+                    "explanation": "Mean square displacement (MSD) is plotted in the bottom panel but the units for MSD (e.g., µm^2) are not specified on the image or in the caption."
+                }
             ]
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
-        },
-        {
-            "panel_label": "",
-            "is_a_plot": "",
-            "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         }
     ],
     "updated_at": "2026-03-26 11:29:34"

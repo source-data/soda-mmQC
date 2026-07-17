@@ -4,15 +4,17 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "C top",
@@ -27,8 +29,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C bottom",
@@ -40,20 +43,21 @@
                 },
                 {
                     "axis": "y",
-                    "answer": "True"
+                    "answer": "yes"
                 },
                 {
                     "axis": "z",
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Polyp diameter (mm)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -61,20 +65,21 @@
             "units_provided": [
                 {
                     "axis": "x",
-                    "answer": "True"
+                    "answer": "yes"
                 },
                 {
                     "axis": "y",
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time after birth (months)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -89,15 +94,17 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -112,8 +119,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
     "updated_at": "2025-05-19 10:58:03"

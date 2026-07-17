@@ -13,15 +13,17 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -36,20 +38,22 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time is indicated on the x-axis in hours [h]."
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -64,15 +68,17 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -87,13 +93,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time is indicated on the x-axis in hours [h]."
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "H",
@@ -108,13 +115,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time is indicated on the x-axis in hours [h]."
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "I",
@@ -129,20 +137,22 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time is indicated on the x-axis in hours [h]."
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "J",
-            "is_a_plot": "yes",
+            "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "K",
@@ -157,14 +167,15 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time is indicated on the x-axis in hours [h]."
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
-    "updated_at": "2025-05-08 14:05:03"
+    "updated_at": "2026-07-16 14:59:43"
 }

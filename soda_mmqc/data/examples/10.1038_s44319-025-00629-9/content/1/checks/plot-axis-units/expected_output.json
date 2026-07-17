@@ -4,15 +4,17 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -27,13 +29,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Percentage of cells (%)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -48,13 +51,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Percentage of cells (%)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -67,26 +71,19 @@
                 {
                     "axis": "y",
                     "answer": "not needed"
-                },
-                {
-                    "axis": "z",
-                    "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": [
-                {
-                    "axis": "z",
-                    "definition": "The color represents Z-Scores"
-                }
-            ]
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -101,16 +98,18 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         }
     ],
-    "updated_at": "2026-02-02 10:42:13"
+    "updated_at": "2026-07-15 14:42:14"
 }
