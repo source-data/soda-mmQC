@@ -75,6 +75,52 @@ class TestBuildEvalLeafSpecs:
         assert "panels[].label" not in patterns
 
 
+class TestNestedPredictiveLists:
+    def test_nested_lists_link_to_parent_outputs(self):
+        schema_path = (
+            Path(__file__).resolve().parents[1]
+            / "soda_mmqc/data/checklist/fig-checklist/plot-axis-units/schema.json"
+        )
+        schema = json.loads(schema_path.read_text())["format"]["schema"]
+        sample_path = (
+            Path(__file__).resolve().parents[1]
+            / "soda_mmqc/data/examples/10.1038_s44319-025-00631-1/content/2"
+            / "checks/plot-axis-units/expected_output.json"
+        )
+        sample = json.loads(sample_path.read_text())
+        layout = discover_collation_layout(schema, sample, sample)
+        by_key = {spec.by_list_key: spec for spec in layout.eval_lists}
+        assert by_key["units_provided"].parent is by_key["outputs"]
+        manifest = load_eval_manifest(schema_path.parent / "eval-manifest.json")
+        validate_manifest_list_alignment(manifest, schema, layout)
+
+    def test_sibling_nested_lists_self_eval(self):
+        import torch
+
+        from soda_mmqc.core.evaluation import FlatEvaluator
+
+        for check in ("plot-axis-units", "plot-gap-labeling"):
+            schema_path = (
+                Path(__file__).resolve().parents[1]
+                / f"soda_mmqc/data/checklist/fig-checklist/{check}/schema.json"
+            )
+            schema = json.loads(schema_path.read_text())["format"]["schema"]
+            sample_path = (
+                Path(__file__).resolve().parents[1]
+                / "soda_mmqc/data/examples/10.1038_s44319-025-00631-1/content/2"
+                / f"checks/{check}/expected_output.json"
+            )
+            sample = json.loads(sample_path.read_text())
+            manifest = load_eval_manifest(schema_path.parent / "eval-manifest.json")
+
+            def mock_embedder(texts):
+                return torch.stack([torch.ones(8) for _ in texts])
+
+            evaluator = FlatEvaluator(schema, manifest, embedder=mock_embedder)
+            result = evaluator.evaluate(sample, sample)
+            assert all(instance.pred_value is not None for instance in result.instances)
+
+
 class TestValidateManifestFieldPatterns:
     def test_structural_field_rejected(self, tmp_path):
         layout = discover_collation_layout(PANEL_SCHEMA, COLLATED_GOLD, COLLATED_PRED)

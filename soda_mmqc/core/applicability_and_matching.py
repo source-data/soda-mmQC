@@ -142,7 +142,4 @@ def _binary_polarity_label(
         return Layer2Label.FN
     if gold_negative:
         return Layer2Label.FP
-    raise ValueError(
-        f"binary_polarity: exp value {exp_value!r} is neither "
-        f"{positive!r} nor {negative!r}"
-    )
+    return Layer2Label.MISMATCH

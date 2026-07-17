@@ -128,6 +128,19 @@ class TestAlignObjectRows:
         assert result.gold_to_pred == ()
         assert result.pair_similarities == ()
 
+    def test_ignores_non_mapping_rows_in_pred(self):
+        pred = [
+            {"id": 1, "label": "Fig 1", "status": "yes"},
+            "malformed",
+        ]
+        result = align_object_rows(
+            BASELINE_GOLD_PANELS,
+            pred,
+            list_name="panels",
+            manifest=TOY_MANIFEST,
+        )
+        assert result.gold_to_pred == ((0, 0),)
+
 
 class TestSemanticAlignmentKey:
     def test_uses_string_compare_from_fields_profile(self):

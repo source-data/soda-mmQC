@@ -110,6 +110,11 @@ class TestLayer2BinaryPolarity:
             == Layer2Label.FN
         )
 
+    def test_invalid_gold_value_is_mismatch(self, panels_status_profile: FieldProfile):
+        assert (
+            layer2_label("[]", "no", panels_status_profile, 0.0)
+            == Layer2Label.MISMATCH
+        )
 
 class TestLayer2GradedString:
     def test_match_at_threshold(self, item_label_profile: FieldProfile):

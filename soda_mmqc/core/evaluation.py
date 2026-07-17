@@ -34,7 +34,7 @@ from soda_mmqc.core.leaves import (
     compare_strings,
     exact_primitive_similarity,
 )
-from soda_mmqc.core.object_list_pairing import align_object_rows
+from soda_mmqc.core.object_list_pairing import align_object_rows, mapping_rows_only
 from soda_mmqc.core.schema_discovery import LeafKind
 from soda_mmqc.core.property_rollup import property_mean_score
 from soda_mmqc.core.structural_reporting import ByListResult, build_by_list
@@ -208,8 +208,8 @@ class FlatEvaluator:
         pred: Mapping[str, Any],
         layout: CollationLayout,
         by_list_out: dict[str, dict[str, Any]],
-    ) -> dict[tuple[Any, ...], RowPairing]:
-        pairings: dict[tuple[Any, ...], RowPairing] = {}
+    ) -> dict[str, dict[tuple[Any, ...], RowPairing]]:
+        pairings: dict[str, dict[tuple[Any, ...], RowPairing]] = {}
         for spec in layout.eval_lists:
             for (
                 context_key,
@@ -232,7 +232,7 @@ class FlatEvaluator:
                         n_gold=len(gold_rows),
                         n_pred=len(pred_rows),
                     )
-                    pairings[context_key] = pairing
+                    pairings.setdefault(spec.by_list_key, {})[context_key] = pairing
                     alignment_keys = self.manifest.alignment_keys_for(
                         spec.alignment_list_name
                     )
@@ -248,7 +248,9 @@ class FlatEvaluator:
                     )
                     _merge_by_list(by_list_out, spec.by_list_key, serialized)
                 else:
-                    pairings[context_key] = PositionalPairing(n_pred=len(pred_rows))
+                    pairings.setdefault(spec.by_list_key, {})[context_key] = (
+                        PositionalPairing(n_pred=len(pred_rows))
+                    )
         return pairings
 
     def _evaluate_extended_primitive(
@@ -310,7 +312,7 @@ class FlatEvaluator:
         exp: Mapping[str, Any],
         pred: Mapping[str, Any],
         leaf_spec: EvalLeafSpec,
-        pairings: dict[tuple[Any, ...], RowPairing],
+        pairings: dict[str, dict[tuple[Any, ...], RowPairing]],
     ) -> list[LeafInstanceResult]:
         assert leaf_spec.eval_list is not None
         field_name = leaf_spec.eval_pattern.rsplit(".", maxsplit=1)[-1]
@@ -320,7 +322,7 @@ class FlatEvaluator:
         for context_key, gold_rows, pred_rows, _, _ in _iter_eval_list_contexts(
             leaf_spec.eval_list, exp, pred, pairings
         ):
-            pairing = pairings[context_key]
+            pairing = pairings[leaf_spec.eval_list.by_list_key][context_key]
             prefix = _instance_prefix_for_context(leaf_spec.eval_list, context_key)
             for gold_index, gold_row in enumerate(gold_rows):
                 pred_index = pairing.pred_index_for_gold(gold_index)
@@ -484,7 +486,7 @@ def _iter_eval_list_contexts(
     spec: EvalListSpec,
     exp: Mapping[str, Any],
     pred: Mapping[str, Any],
-    pairings: dict[tuple[Any, ...], RowPairing],
+    pairings: dict[str, dict[tuple[Any, ...], RowPairing]],
     gold_ancestors: tuple[Mapping[str, Any], ...] = (),
     pred_ancestors: tuple[Mapping[str, Any], ...] = (),
 ):
@@ -504,7 +506,8 @@ def _iter_eval_list_contexts(
     ) in _iter_eval_list_contexts(
         spec.parent, exp, pred, pairings
     ):
-        parent_pairing = pairings.get(context_key)
+        parent_pairings = pairings.get(spec.parent.by_list_key, {})
+        parent_pairing = parent_pairings.get(context_key)
         for parent_index in range(len(parent_gold_rows)):
             gold_parent_row = parent_gold_rows[parent_index]
             if parent_pairing is not None:
@@ -537,14 +540,14 @@ def _rows_at_field(doc: Mapping[str, Any], field_name: str) -> list[Mapping[str,
     rows = doc.get(field_name)
     if not isinstance(rows, list):
         return []
-    return rows
+    return list(mapping_rows_only(rows))
 
 
 def _rows_in_parent(parent_row: Mapping[str, Any], field: str) -> list[Mapping[str, Any]]:
     rows = parent_row.get(field)
     if not isinstance(rows, list):
         return []
-    return rows
+    return list(mapping_rows_only(rows))
 
 
 def _get_value_at_eval_pattern(doc: Mapping[str, Any], pattern: str) -> Any:

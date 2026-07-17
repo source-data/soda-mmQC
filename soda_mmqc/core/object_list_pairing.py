@@ -23,6 +23,11 @@ from soda_mmqc.core.matching import hungarian_match_pairs, pairs_at_threshold
 MatchedPair = tuple[int, int, float]
 
 
+def mapping_rows_only(rows: Sequence[Any]) -> tuple[Mapping[str, Any], ...]:
+    """Keep only mapping rows from a list-of-objects property."""
+    return tuple(row for row in rows if isinstance(row, Mapping))
+
+
 @dataclass(frozen=True)
 class ObjectListPairingResult:
     """Row pairing outcome for one list-of-objects property."""
@@ -52,6 +57,8 @@ def align_object_rows(
     Each key uses the ``fields`` profile for ``{list_name}[].{key}``.
     ``gold_to_pred`` contains only pairs with ``s(i,j) >= match_threshold``.
     """
+    exp_rows = mapping_rows_only(exp_rows)
+    pred_rows = mapping_rows_only(pred_rows)
     alignment_keys = manifest.alignment_keys_for(list_name)
     if not alignment_keys:
         raise ValueError(
@@ -124,6 +131,8 @@ def row_similarity(
     embedder: Optional[Any] = None,
 ) -> float:
     """Mean alignment-key score between two object rows."""
+    if not isinstance(exp_row, Mapping) or not isinstance(pred_row, Mapping):
+        return 0.0
     if not alignment_keys:
         return 0.0
     scores = [
