@@ -52,7 +52,15 @@ Strings, numbers, integers, and booleans are compared directly at their path.
 
 ### Arrays of primitives
 
-When a leaf is an array of primitives (for example `tags: string[]`), the whole array is one leaf instance on path `tags`. Elements are matched with a bipartite assignment; the instance **score** is the mean similarity over `max(len(gold), len(pred))`, counting unmatched slots as `0`.
+When a leaf is an array of primitives (for example `tags: string[]`), the whole array is one leaf instance on path `tags`. Configure comparison in **`fields`** via **`primitive_list_compare`** (see [Evaluation manifest](#evaluation-manifest) → arrays of primitives). The manifest field selects how gold and prediction are compared:
+
+| `primitive_list_compare` | When to use | Score |
+|--------------------------|-------------|-------|
+| `align` (default) | Set-like lists where order does not matter | Hungarian element matching; mean over `max(len(gold), len(pred))`, unmatched slots as `0` |
+| `positional` | Index-bound parallel arrays (for example `yes`/`no` per slot) | Compare `gold[i]` to `pred[i]`; same mean-over-`max(len)` formula, no Hungarian |
+| `join_string` | Holistic text comparison | Join elements (default separator `", "`), then apply `string_compare` once on the whole string |
+
+For `join_string`, set `matching_metric: graded_string`, `string_compare`, and `match_threshold` on the same field. Optional `join_separator` and `sort_before_join` apply only to `join_string`.
 
 There is no row-level structural reporting for primitive arrays — extra or missing elements are reflected in the aggregate score only.
 
@@ -191,11 +199,19 @@ Each check ships an `eval-manifest.json` next to `schema.json`, for example:
 
 `soda_mmqc/data/checklist/fig-checklist/micrograph-scale-bar/eval-manifest.json`
 
-The manifest has three main sections:
+The manifest has three top-level sections (`defaults`, `list_alignment`, `fields`). **Which section you use depends on the leaf type:**
+
+| Leaf type in schema | Example path | Manifest configuration |
+|---------------------|--------------|------------------------|
+| Scalar primitive | `outputs[].micrograph` | `fields` only — `matching_metric`, `na_values`, … |
+| **Array of primitives** | `tags`, `outputs[].symbols` | `fields` — **`primitive_list_compare`** (and optional layer 1/2 keys) |
+| **List of objects** (rows) | `outputs[]` with `outputs[].panel_label`, … | Top-level **`list_alignment`** for row pairing **plus** `fields` per row leaf |
+
+`list_alignment` and `primitive_list_compare` solve **different** problems. Do not put primitive-array paths in `list_alignment`, and do not use `primitive_list_compare` on object lists.
 
 ### `defaults`
 
-Default profile merged into every entry in `fields` unless overridden:
+Default profile merged into every entry in `fields` unless overridden (layer 1 / layer 2 keys only — not compare modes):
 
 ```json
 {
@@ -206,11 +222,11 @@ Default profile merged into every entry in `fields` unless overridden:
 }
 ```
 
-`string_compare` is **not** a defaults key — set it per free-text field.
+`string_compare`, `match_threshold`, and `primitive_list_compare` are **not** defaults keys — set them per field.
 
-### `list_alignment`
+### `list_alignment` — list-of-objects row pairing only
 
-Maps each object list in the schema to the row field names used for Hungarian row pairing:
+Use **`list_alignment`** when the schema has a **list of objects** whose rows must be paired before scoring row fields (for example `outputs[]` with one object per panel). The evaluator runs Hungarian matching on rows, then scores leaves such as `outputs[].panel_label` at each gold row index. Layer S (`by_list`) reports `correct_row` / `missing_row` / `spurious_row`.
 
 ```json
 "list_alignment": {
@@ -218,11 +234,17 @@ Maps each object list in the schema to the row field names used for Hungarian ro
 }
 ```
 
-Keys use the list path without `[]` (for example `outputs`). Values are short field names from the row object, not full leaf paths. Every object list in the schema must have exactly one entry.
+- **Keys** — list path **without** `[]` (for example `outputs`, or `figures.panels` when panels are nested under a collection wrapper).
+- **Values** — short field names **inside each row object** used only to compute pairing similarity `s(i, j)` — not full leaf paths like `outputs[].panel_label`.
+- **Required** for every **predictive** list-of-objects in the schema (model-produced row arrays).
+- **Not used** for arrays of primitives (`string[]`, `number[]`, …). Those are single leaves scored via `primitive_list_compare` in `fields` (below).
+- **Not used** for structural collection wrappers (for example a `figures[]` envelope around model output) — those lists are joined by position only.
 
-### `fields`
+### `fields` — per leaf property
 
-Per leaf property overrides. Keys use `[]` for list indices, for example `outputs[].from_the_caption`:
+Keys are leaf property patterns with `[]` for list indices (for example `outputs[].panel_label`, `tags`).
+
+#### Scalar leaves
 
 ```json
 "fields": {
@@ -237,23 +259,58 @@ Per leaf property overrides. Keys use `[]` for list indices, for example `output
   "outputs[].scale_bar_on_image": {
     "na_values": [""],
     "matching_metric": "binary_polarity"
-  },
-  "outputs[].from_the_caption": {
-    "matching_metric": "graded_string",
-    "na_values": [""],
-    "string_compare": "semantic",
-    "match_threshold": 0.8
   }
 }
 ```
 
-| Manifest key | Purpose |
-|--------------|---------|
-| `na_values` | Literals treated as not applicable (Layer 1) |
-| `matching_metric` | Layer 2 reporting shape: `binary_polarity`, `multiclass`, or `graded_string` |
-| `positive_value` / `negative_value` | For `binary_polarity` (typically `yes` / `no`) |
-| `string_compare` | Required on non-enum `graded_string` fields: `exact`, `fuzzy`, or `semantic` |
-| `match_threshold` | For `graded_string`: minimum score for Layer 2 `match` (default `1.0` for exact compare) |
+#### Arrays of primitives (extended-primitive leaves)
+
+When the schema type is `array` whose `items` is a primitive (for example `tags: string[]` or `outputs[].source_data_filenames: string[]`), the **whole array is one leaf**. Add an entry under `fields` with **`primitive_list_compare`**. Omit it to use the default **`align`** (set-like, order-free Hungarian matching).
+
+**Set-like bag** — filenames, tags, symbol names (order should not matter):
+
+```json
+"outputs[].source_data_filenames": {}
+```
+
+Default `align` applies; no other keys required unless you want layer 1 / layer 2 reporting on the aggregate score.
+
+**Index-bound parallel array** — slot `i` answers about item `i` (for example `yes`/`no` per symbol, parallel to another array):
+
+```json
+"outputs[].symbols_defined_in_caption": {
+  "primitive_list_compare": "positional"
+}
+```
+
+Use **`positional`** when permutations must score badly. Do **not** rely on default `align` for low-cardinality enums like `yes`/`no` — Hungarian matching would treat `["yes","no"]` vs `["no","yes"]` as a perfect match.
+
+**Holistic string comparison** — join elements, then compare as one string:
+
+```json
+"outputs[].from_the_caption": {
+  "primitive_list_compare": "join_string",
+  "matching_metric": "graded_string",
+  "na_values": [""],
+  "string_compare": "semantic",
+  "match_threshold": 0.8
+}
+```
+
+`join_string` requires `matching_metric: graded_string` plus `string_compare` and `match_threshold`. Optional: `join_separator` (default `", "`), `sort_before_join` (default `false`).
+
+Primitive arrays emit **one aggregate score** per path. There is no `by_list` / row structural reporting for them — extra or missing elements affect the score only.
+
+| Manifest key | Applies to | Purpose |
+|--------------|------------|---------|
+| `primitive_list_compare` | Array-of-primitives leaves only | `align` (default), `positional`, or `join_string` — see [Arrays of primitives](#arrays-of-primitives) |
+| `join_separator` | `join_string` only | String joiner between elements (default `", "`) |
+| `sort_before_join` | `join_string` only | Sort elements before join (default `false`) |
+| `na_values` | Any profiled leaf | Literals treated as not applicable (Layer 1) |
+| `matching_metric` | Profiled leaves | Layer 2 reporting shape: `binary_polarity`, `multiclass`, or `graded_string` |
+| `positive_value` / `negative_value` | `binary_polarity` | Typically `yes` / `no` |
+| `string_compare` | `graded_string` scalars or `join_string` arrays | `exact`, `fuzzy`, or `semantic` |
+| `match_threshold` | `graded_string` | Minimum score for Layer 2 `match` |
 
 JSON Schema `enum` lists allowed literals but does not define which mean N/A or which is “positive”. Those semantics belong in the manifest.
 

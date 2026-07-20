@@ -117,6 +117,16 @@ class TestTryLoadRunSummaries:
         assert summaries is not None
         assert len(summaries) == 1
 
+    def test_loads_image_annotation_defined(self):
+        summaries, error = try_load_run_summaries(
+            "fig-checklist",
+            "image-annotation-defined",
+        )
+        assert error is None, error
+        assert summaries is not None
+        assert len(summaries) > 0
+        assert "gpt-5-mini-2025-08-07" in summaries.models
+
 
 class TestStreamlitSelectionParsing:
     def test_selected_instance_index_from_customdata(self):

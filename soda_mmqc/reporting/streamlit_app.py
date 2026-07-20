@@ -14,6 +14,7 @@ from soda_mmqc.reporting.display import build_figure_image_plot
 from soda_mmqc.reporting.load import (
     EvaluationCheckRef,
     discover_evaluation_checks,
+    evaluation_data_cache_key,
     load_prompt_text,
     try_load_run_summaries,
 )
@@ -133,7 +134,11 @@ def _selected_instance_index(selection: Any) -> int | None:
 
 
 @st.cache_data(show_spinner="Loading evaluation runs…")
-def _load_summaries(checklist: str, check: str) -> tuple[RunSummaries | None, str | None]:
+def _load_summaries(
+    checklist: str,
+    check: str,
+    _cache_key: str,
+) -> tuple[RunSummaries | None, str | None]:
     return try_load_run_summaries(checklist, check)
 
 
@@ -258,7 +263,11 @@ def main() -> None:
             horizontal=True,
         )
 
-        summaries, load_error = _load_summaries(ref.checklist, ref.check)
+        summaries, load_error = _load_summaries(
+            ref.checklist,
+            ref.check,
+            evaluation_data_cache_key(ref.checklist, ref.check),
+        )
 
         if load_error:
             st.error("Cannot load")

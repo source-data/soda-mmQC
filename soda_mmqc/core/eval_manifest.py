@@ -9,9 +9,14 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Mapping, Optional
 
-from soda_mmqc.core.leaves import StringCompareMode
+from soda_mmqc.core.leaves import PrimitiveListCompareMode, StringCompareMode
 
 _INDEX_RE = re.compile(r"^(\w+)\[(\d+)\]$")
+
+_COMPARE_ONLY_KEYS = frozenset(
+    {"primitive_list_compare", "join_separator", "sort_before_join"}
+)
+DEFAULT_JOIN_SEPARATOR = ", "
 
 
 class MatchingMetric(str, Enum):
@@ -32,10 +37,19 @@ class FieldProfile:
     negative_value: Optional[str] = None
     string_compare: Optional[StringCompareMode] = None
     match_threshold: Optional[float] = None
+    primitive_list_compare: Optional[PrimitiveListCompareMode] = None
+    join_separator: str = DEFAULT_JOIN_SEPARATOR
+    sort_before_join: bool = False
 
     @property
     def is_profiled(self) -> bool:
         return self.matching_metric is not None
+
+    def effective_primitive_list_compare(self) -> PrimitiveListCompareMode:
+        """Resolved extended-primitive compare mode (default ``align``)."""
+        if self.primitive_list_compare is None:
+            return PrimitiveListCompareMode.ALIGN
+        return self.primitive_list_compare
 
 
 @dataclass(frozen=True)
@@ -107,7 +121,10 @@ def parse_eval_manifest(data: Mapping[str, Any]) -> EvalManifest:
         merged = _merge_profiles(
             defaults, profile, override_keys=frozenset(field_raw)
         )
-        _validate_field_profile(path_key, merged)
+        if _is_compare_only_override(frozenset(field_raw)):
+            _validate_compare_only_field(path_key, merged)
+        else:
+            _validate_field_profile(path_key, merged)
         fields[path_key] = profile
         field_keys[path_key] = frozenset(field_raw)
 
@@ -165,6 +182,13 @@ def _profile_from_raw(raw: Mapping[str, Any], *, context: str) -> FieldProfile:
     match_threshold = _parse_match_threshold(
         raw.get("match_threshold"), context=context
     )
+    primitive_list_compare = _parse_primitive_list_compare(
+        raw.get("primitive_list_compare"), context=context
+    )
+    join_separator = _parse_join_separator(raw.get("join_separator"), context=context)
+    sort_before_join = _parse_sort_before_join(
+        raw.get("sort_before_join"), context=context
+    )
     return FieldProfile(
         matching_metric=matching_metric,
         na_values=na_values,
@@ -172,6 +196,9 @@ def _profile_from_raw(raw: Mapping[str, Any], *, context: str) -> FieldProfile:
         negative_value=negative_value,
         string_compare=string_compare,
         match_threshold=match_threshold,
+        primitive_list_compare=primitive_list_compare,
+        join_separator=join_separator,
+        sort_before_join=sort_before_join,
     )
 
 
@@ -181,6 +208,8 @@ def _merge_profiles(
     *,
     override_keys: frozenset[str],
 ) -> FieldProfile:
+    if _is_compare_only_override(override_keys):
+        return override
     return FieldProfile(
         matching_metric=(
             override.matching_metric
@@ -212,6 +241,21 @@ def _merge_profiles(
             if "match_threshold" in override_keys
             else defaults.match_threshold
         ),
+        primitive_list_compare=(
+            override.primitive_list_compare
+            if "primitive_list_compare" in override_keys
+            else defaults.primitive_list_compare
+        ),
+        join_separator=(
+            override.join_separator
+            if "join_separator" in override_keys
+            else defaults.join_separator
+        ),
+        sort_before_join=(
+            override.sort_before_join
+            if "sort_before_join" in override_keys
+            else defaults.sort_before_join
+        ),
     )
 
 
@@ -220,10 +264,35 @@ def _validate_defaults(raw: Mapping[str, Any]) -> None:
         raise ValueError("string_compare must not appear in defaults")
     if "match_threshold" in raw:
         raise ValueError("match_threshold must not appear in defaults")
+    if "primitive_list_compare" in raw:
+        raise ValueError("primitive_list_compare must not appear in defaults")
+    if "join_separator" in raw:
+        raise ValueError("join_separator must not appear in defaults")
+    if "sort_before_join" in raw:
+        raise ValueError("sort_before_join must not appear in defaults")
+
+
+def _is_compare_only_override(override_keys: frozenset[str]) -> bool:
+    return bool(override_keys) and override_keys <= _COMPARE_ONLY_KEYS
+
+
+def _validate_compare_only_field(path_key: str, merged: FieldProfile) -> None:
+    if merged.primitive_list_compare is None:
+        raise ValueError(
+            f"fields[{path_key!r}] compare-only entry requires primitive_list_compare"
+        )
+    if merged.primitive_list_compare == PrimitiveListCompareMode.JOIN_STRING:
+        raise ValueError(
+            f"fields[{path_key!r}] join_string requires matching_metric "
+            "graded_string in the same field"
+        )
 
 
 def _validate_field_profile(path_key: str, merged: FieldProfile) -> None:
     if merged.matching_metric is None:
+        if merged.primitive_list_compare is not None:
+            _validate_compare_only_field(path_key, merged)
+            return
         raise ValueError(f"fields[{path_key!r}] must set matching_metric")
 
     if merged.matching_metric == MatchingMetric.GRADED_STRING:
@@ -241,6 +310,13 @@ def _validate_field_profile(path_key: str, merged: FieldProfile) -> None:
             raise ValueError(
                 f"fields[{path_key!r}] binary_polarity requires "
                 "positive_value and negative_value (field or defaults)"
+            )
+
+    if merged.primitive_list_compare == PrimitiveListCompareMode.JOIN_STRING:
+        if merged.matching_metric != MatchingMetric.GRADED_STRING:
+            raise ValueError(
+                f"fields[{path_key!r}] join_string requires "
+                "matching_metric graded_string"
             )
 
 
@@ -296,6 +372,38 @@ def _parse_na_values(value: Any, *, context: str) -> tuple[str, ...]:
         if not isinstance(item, str):
             raise ValueError(f"{context}.na_values must contain strings only")
     return tuple(value)
+
+
+def _parse_primitive_list_compare(
+    value: Any, *, context: str
+) -> Optional[PrimitiveListCompareMode]:
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        raise ValueError(f"{context}.primitive_list_compare must be a string")
+    try:
+        return PrimitiveListCompareMode(value)
+    except ValueError as exc:
+        allowed = ", ".join(mode.value for mode in PrimitiveListCompareMode)
+        raise ValueError(
+            f"{context}.primitive_list_compare must be one of: {allowed}"
+        ) from exc
+
+
+def _parse_join_separator(value: Any, *, context: str) -> str:
+    if value is None:
+        return DEFAULT_JOIN_SEPARATOR
+    if not isinstance(value, str):
+        raise ValueError(f"{context}.join_separator must be a string")
+    return value
+
+
+def _parse_sort_before_join(value: Any, *, context: str) -> bool:
+    if value is None:
+        return False
+    if not isinstance(value, bool):
+        raise ValueError(f"{context}.sort_before_join must be a boolean")
+    return value
 
 
 def _require_str(data: Mapping[str, Any], key: str) -> str:

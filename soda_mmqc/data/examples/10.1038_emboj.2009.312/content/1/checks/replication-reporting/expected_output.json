@@ -43,8 +43,8 @@
             "n_value_min": 15,
             "replicate_type_reported": "no",
             "replicate_type": "not_reported",
-            "decision": "PASS",
-            "explanation": "Number and type of replicates reported (WT n=15; others n=25)."
+            "decision": "FAIL",
+            "explanation": "n is reported (WT n=15; others n=25) but the type of replicate is not specified."
         },
         {
             "panel_label": "E",
@@ -56,8 +56,8 @@
             "n_value_min": 15,
             "replicate_type_reported": "no",
             "replicate_type": "not_reported",
-            "decision": "PASS",
-            "explanation": "Number and type of replicates reported (WT n=15; others n=25)."
+            "decision": "FAIL",
+            "explanation": "n is reported (WT n=15; others n=25) but the type of replicate is not specified."
         },
         {
             "panel_label": "F",
@@ -69,8 +69,8 @@
             "n_value_min": 15,
             "replicate_type_reported": "no",
             "replicate_type": "not_reported",
-            "decision": "PASS",
-            "explanation": "Number and type of replicates reported (WT n=15; others n=25)."
+            "decision": "FAIL",
+            "explanation": "n is reported (WT n=15; others n=25) but the type of replicate is not specified."
         },
         {
             "panel_label": "G",

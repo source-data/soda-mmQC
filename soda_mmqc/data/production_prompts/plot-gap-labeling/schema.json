@@ -1,0 +1,106 @@
+{
+    "format": {
+        "type": "json_schema",
+        "name": "plot-gap-labeling",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "panel_label": {
+                                "type": "string",
+                                "description": "Label of the panel (e.g., A, B, C)"
+                            },
+                            "is_a_plot": {
+                                "type": "string",
+                                "enum": ["yes", "no"],
+                                "description": "Whether the panel contains a plot"
+                            },
+                            "gaps_defined": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "axis": {
+                                            "type": "string",
+                                            "enum": ["x", "y", "z"],
+                                            "description": "The axis to be labeled"
+                                        },
+                                        "answer": {
+                                            "type": "string",
+                                            "enum": ["yes", "no", "not needed"],
+                                            "description": "Whether axis gaps or breaks are defined"
+                                        }
+                                    },
+                                    "required": [
+                                        "axis",
+                                        "answer"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            },
+                            "gap_description": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "axis": {
+                                            "type": "string",
+                                            "enum": ["x", "y", "z"],
+                                            "description": "The axis to be labeled"
+                                        },
+                                        "definition": {
+                                            "type": "string",
+                                            "description": "A description or quote the text of the caption that defines the axis gaps or breaks"
+                                        }
+                                    },
+                                    "required": [
+                                        "axis",
+                                        "definition"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            },
+                            "justify_why_gaps_are_missing": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "axis": {
+                                            "type": "string",
+                                            "enum": ["x", "y", "z"],
+                                            "description": "The axis to be labeled"
+                                        },
+                                        "justification": {
+                                            "type": "string",
+                                            "description": "Justification for why the axis gaps or breaks are missing"
+                                        }
+                                    },
+                                    "required": [
+                                        "axis",
+                                        "justification"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "required": [
+                            "panel_label",
+                            "is_a_plot",
+                            "gaps_defined",
+                            "gap_description",
+                            "justify_why_gaps_are_missing"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["outputs"],
+            "additionalProperties": false
+        },
+        "strict": true
+    }
+}

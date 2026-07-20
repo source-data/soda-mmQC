@@ -1,5 +1,4 @@
 {
-    "name": "plot-axis-units",
     "outputs": [
         {
             "panel_label": "A",
@@ -14,15 +13,17 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -37,13 +38,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "log2(TPM + 1), where TPM = transcripts per million"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -58,7 +60,6 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -68,14 +69,17 @@
                     "axis": "y",
                     "definition": "RPKM-normalized RNA-seq coverage (RPKM)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "F",
@@ -90,13 +94,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "log2(TPM + 1), where TPM = transcripts per million"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "G",
@@ -111,7 +116,6 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -121,7 +125,9 @@
                     "axis": "y",
                     "definition": "RPKM-normalized RNA-seq coverage (RPKM)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
     "updated_at": "2026-03-31 14:44:50"

@@ -2,28 +2,11 @@
     "outputs": [
         {
             "panel_label": "A",
-            "is_a_plot": "yes",
-            "units_provided": [
-                {
-                    "axis": "x",
-                    "answer": "no"
-                },
-                {
-                    "axis": "y",
-                    "answer": "no"
-                }
-            ],
-            "justify_why_units_are_missing": [
-                {
-                    "axis": "x",
-                    "justification": "Spatial coordinate (label 'spatial1' visible) is plotted along the x-axis but no physical units (e.g., µm, mm or pixels) are provided on the image or in the caption."
-                },
-                {
-                    "axis": "y",
-                    "justification": "Spatial coordinate is plotted along the y-axis (tissue image), but no physical units (e.g., µm, mm or pixels) are provided on the image or in the caption."
-                }
-            ],
-            "unit_definition_as_provided": []
+            "is_a_plot": "no",
+            "units_provided": [],
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -38,13 +21,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Y-axis labeled as 'Fraction of cells (%)' (percent)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -59,8 +43,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -75,16 +60,18 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         }
     ],
-    "updated_at": "2026-03-27 16:11:23"
+    "updated_at": "2026-07-15 11:21:36"
 }

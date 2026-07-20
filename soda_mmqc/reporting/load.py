@@ -298,6 +298,25 @@ def check_has_eval_manifest(checklist: str, check: str) -> bool:
     return eval_manifest_path(checklist, check).is_file()
 
 
+def evaluation_data_cache_key(checklist: str, check: str) -> str:
+    """Fingerprint on-disk manifest and analysis files for Streamlit cache busting."""
+    parts = [checklist, check]
+    manifest_path = eval_manifest_path(checklist, check)
+    if manifest_path.is_file():
+        parts.append(f"manifest:{manifest_path.stat().st_mtime_ns}")
+    eval_dir = EVALUATION_DIR / checklist / check
+    if eval_dir.is_dir():
+        for model_dir in sorted(eval_dir.iterdir()):
+            if not model_dir.is_dir():
+                continue
+            analysis_path = model_dir / "analysis.json"
+            if analysis_path.is_file():
+                parts.append(
+                    f"{model_dir.name}:{analysis_path.stat().st_mtime_ns}"
+                )
+    return "|".join(parts)
+
+
 def try_load_run_summaries(
     checklist: str,
     check: str,
@@ -326,7 +345,10 @@ def try_load_run_summaries(
     if len(runs) == 0:
         return None, (
             f"No flat runs loaded under `{eval_dir}`. "
-            "Check that `analysis.json` exists for at least one model and prompt."
+            "Each `analysis.json` prompt entry needs a `flat` array (from `evaluate`). "
+            "Legacy files that only contain `perfect_match` must be re-evaluated. "
+            "If you recently added `eval-manifest.json`, clear the Streamlit cache "
+            "(⋮ menu → Clear cache) and reload."
         )
 
     return summarize_runs(runs), None

@@ -1,12 +1,12 @@
 {
-    "name": "plot-axis-units",
     "outputs": [
         {
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -21,13 +21,14 @@
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [],
+            "decision": "FAIL",
+            "explanation": [
                 {
                     "axis": "y",
-                    "justification": "Absorbance is plotted on the y-axis but no units or wavelength (e.g., A260, OD) are specified; absorbance is a measured continuous variable and the axis lacks a unit definition."
+                    "explanation": "Absorbance is plotted on the y-axis but no units or wavelength (e.g., A260, OD) are specified; absorbance is a measured continuous variable and the axis lacks a unit definition."
                 }
-            ],
-            "unit_definition_as_provided": []
+            ]
         },
         {
             "panel_label": "C",
@@ -42,22 +43,25 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "F",
@@ -72,8 +76,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
     "updated_at": "2026-03-31 15:03:01"

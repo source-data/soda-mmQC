@@ -4,8 +4,9 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -20,13 +21,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Normalized Fluorescence Intensity (A.U.)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -41,16 +43,17 @@
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
-                {
-                    "axis": "y",
-                    "justification": "Change in ROS (ΔROS) is plotted as a continuous measured quantity but no units are indicated on the axis; ROS signal change should have units (e.g., fluorescence arbitrary units) or be labeled as normalized/AU."
-                }
-            ],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Exposure time (ms)"
+                }
+            ],
+            "decision": "FAIL",
+            "explanation": [
+                {
+                    "axis": "y",
+                    "explanation": "Change in ROS (ΔROS) is plotted as a continuous measured quantity but no units are indicated on the axis; ROS signal change should have units (e.g., fluorescence arbitrary units) or be labeled as normalized/AU."
                 }
             ]
         },
@@ -67,7 +70,6 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -77,7 +79,9 @@
                     "axis": "y",
                     "definition": "Y position (μm)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -92,34 +96,38 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Migration speed (μm h−1)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "G",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "I",
@@ -134,13 +142,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time (min)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "J",
@@ -155,13 +164,14 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time (min)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
     "updated_at": "2026-02-02 12:22:35"

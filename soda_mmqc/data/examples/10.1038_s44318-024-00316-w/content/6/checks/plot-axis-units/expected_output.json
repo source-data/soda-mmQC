@@ -1,5 +1,4 @@
 {
-    "name": "plot-axis-units",
     "outputs": [
         {
             "panel_label": "A",
@@ -7,24 +6,16 @@
             "units_provided": [
                 {
                     "axis": "x",
-                    "answer": "no"
+                    "answer": "not needed"
                 },
                 {
                     "axis": "y",
-                    "answer": "no"
+                    "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [
-                {
-                    "axis": "x",
-                    "justification": "GFP fluorescence intensity is plotted on the x-axis (continuous fluorescence measurement) but no units are indicated (e.g., arbitrary units [AU] or channel units)."
-                },
-                {
-                    "axis": "y",
-                    "justification": "Forward scatter (FSC-A) or scatter intensity is plotted on the y-axis (continuous optical measurement) but no units are provided (e.g., arbitrary units)."
-                }
-            ],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -39,7 +30,6 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
@@ -53,7 +43,9 @@
                     "axis": "y",
                     "definition": "Late viral reverse transcripts per cell (LRT / cell)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
@@ -68,14 +60,15 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Number of puncta per cell (labelled as 'Number of puncta / cell' on the violin plot)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
-    "updated_at": "2026-03-31 15:52:11"
+    "updated_at": "2026-07-16 09:40:45"
 }

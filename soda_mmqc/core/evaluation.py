@@ -23,15 +23,18 @@ from soda_mmqc.core.eval_manifest import (
     load_eval_manifest,
 )
 from soda_mmqc.core.leaves import (
+    PrimitiveListCompareMode,
     compare_boolean,
     compare_enum_string,
     compare_exact_strings,
     compare_number,
     compare_primitive_list,
+    compare_primitive_list_join,
+    compare_primitive_list_positional,
     compare_strings,
     exact_primitive_similarity,
 )
-from soda_mmqc.core.object_list_pairing import align_object_rows
+from soda_mmqc.core.object_list_pairing import align_object_rows, mapping_rows_only
 from soda_mmqc.core.schema_discovery import LeafKind
 from soda_mmqc.core.property_rollup import property_mean_score
 from soda_mmqc.core.structural_reporting import ByListResult, build_by_list
@@ -181,7 +184,7 @@ class FlatEvaluator:
         pairings = self._align_eval_lists(exp, pred, layout, by_list)
 
         for leaf_spec in leaf_specs:
-            if leaf_spec.kind is LeafKind.EXTENDED_PRIMITIVE:
+            if leaf_spec.kind is LeafKind.ROOT_PRIMITIVE_ARRAY:
                 instances.append(
                     self._evaluate_extended_primitive(exp, pred, leaf_spec)
                 )
@@ -205,8 +208,8 @@ class FlatEvaluator:
         pred: Mapping[str, Any],
         layout: CollationLayout,
         by_list_out: dict[str, dict[str, Any]],
-    ) -> dict[tuple[Any, ...], RowPairing]:
-        pairings: dict[tuple[Any, ...], RowPairing] = {}
+    ) -> dict[str, dict[tuple[Any, ...], RowPairing]]:
+        pairings: dict[str, dict[tuple[Any, ...], RowPairing]] = {}
         for spec in layout.eval_lists:
             for (
                 context_key,
@@ -229,7 +232,7 @@ class FlatEvaluator:
                         n_gold=len(gold_rows),
                         n_pred=len(pred_rows),
                     )
-                    pairings[context_key] = pairing
+                    pairings.setdefault(spec.by_list_key, {})[context_key] = pairing
                     alignment_keys = self.manifest.alignment_keys_for(
                         spec.alignment_list_name
                     )
@@ -245,7 +248,9 @@ class FlatEvaluator:
                     )
                     _merge_by_list(by_list_out, spec.by_list_key, serialized)
                 else:
-                    pairings[context_key] = PositionalPairing(n_pred=len(pred_rows))
+                    pairings.setdefault(spec.by_list_key, {})[context_key] = (
+                        PositionalPairing(n_pred=len(pred_rows))
+                    )
         return pairings
 
     def _evaluate_extended_primitive(
@@ -259,18 +264,13 @@ class FlatEvaluator:
         exp_list = exp_value if isinstance(exp_value, list) else []
         pred_list = pred_value if isinstance(pred_value, list) else []
         profile = self.manifest.profile_for(leaf_spec.eval_pattern)
-        threshold = _primitive_list_threshold(profile)
-        element_similarity = _element_similarity_fn(
-            leaf_spec,
-            profile,
-            embedder=self.embedder,
-        )
-        score = compare_primitive_list(
+        score = _compare_extended_primitive_score(
             pred_list,
             exp_list,
-            element_similarity=element_similarity,
-            match_threshold=threshold,
-        ).score
+            leaf_spec=leaf_spec,
+            profile=profile,
+            embedder=self.embedder,
+        )
         return self._instance_from_values(
             path=leaf_spec.eval_pattern,
             leaf_property=leaf_spec.eval_pattern,
@@ -312,7 +312,7 @@ class FlatEvaluator:
         exp: Mapping[str, Any],
         pred: Mapping[str, Any],
         leaf_spec: EvalLeafSpec,
-        pairings: dict[tuple[Any, ...], RowPairing],
+        pairings: dict[str, dict[tuple[Any, ...], RowPairing]],
     ) -> list[LeafInstanceResult]:
         assert leaf_spec.eval_list is not None
         field_name = leaf_spec.eval_pattern.rsplit(".", maxsplit=1)[-1]
@@ -322,7 +322,7 @@ class FlatEvaluator:
         for context_key, gold_rows, pred_rows, _, _ in _iter_eval_list_contexts(
             leaf_spec.eval_list, exp, pred, pairings
         ):
-            pairing = pairings[context_key]
+            pairing = pairings[leaf_spec.eval_list.by_list_key][context_key]
             prefix = _instance_prefix_for_context(leaf_spec.eval_list, context_key)
             for gold_index, gold_row in enumerate(gold_rows):
                 pred_index = pairing.pred_index_for_gold(gold_index)
@@ -333,12 +333,11 @@ class FlatEvaluator:
                     else None
                 )
                 path = f"{prefix}[{gold_index}].{field_name}"
-                score = score_leaf_pair(
+                score = self._score_row_leaf_value(
                     pred_value,
                     exp_value,
-                    profile,
-                    enum_values=leaf_spec.enum_values,
-                    embedder=self.embedder,
+                    leaf_spec=leaf_spec,
+                    profile=profile,
                 )
                 results.append(
                     self._instance_from_values(
@@ -352,6 +351,39 @@ class FlatEvaluator:
                     )
                 )
         return results
+
+    def _score_row_leaf_value(
+        self,
+        pred_value: Any,
+        exp_value: Any,
+        *,
+        leaf_spec: EvalLeafSpec,
+        profile: Optional[FieldProfile],
+    ) -> float:
+        use_primitive_list = isinstance(exp_value, list) or isinstance(
+            pred_value, list
+        )
+        if not use_primitive_list and profile is not None:
+            use_primitive_list = profile.primitive_list_compare is not None
+
+        if use_primitive_list:
+            exp_list = exp_value if isinstance(exp_value, list) else []
+            pred_list = pred_value if isinstance(pred_value, list) else []
+            return _compare_extended_primitive_score(
+                pred_list,
+                exp_list,
+                leaf_spec=leaf_spec,
+                profile=profile,
+                embedder=self.embedder,
+            )
+
+        return score_leaf_pair(
+            pred_value,
+            exp_value,
+            profile,
+            enum_values=leaf_spec.enum_values,
+            embedder=self.embedder,
+        )
 
     def _instance_from_values(
         self,
@@ -454,7 +486,7 @@ def _iter_eval_list_contexts(
     spec: EvalListSpec,
     exp: Mapping[str, Any],
     pred: Mapping[str, Any],
-    pairings: dict[tuple[Any, ...], RowPairing],
+    pairings: dict[str, dict[tuple[Any, ...], RowPairing]],
     gold_ancestors: tuple[Mapping[str, Any], ...] = (),
     pred_ancestors: tuple[Mapping[str, Any], ...] = (),
 ):
@@ -474,7 +506,8 @@ def _iter_eval_list_contexts(
     ) in _iter_eval_list_contexts(
         spec.parent, exp, pred, pairings
     ):
-        parent_pairing = pairings.get(context_key)
+        parent_pairings = pairings.get(spec.parent.by_list_key, {})
+        parent_pairing = parent_pairings.get(context_key)
         for parent_index in range(len(parent_gold_rows)):
             gold_parent_row = parent_gold_rows[parent_index]
             if parent_pairing is not None:
@@ -507,14 +540,14 @@ def _rows_at_field(doc: Mapping[str, Any], field_name: str) -> list[Mapping[str,
     rows = doc.get(field_name)
     if not isinstance(rows, list):
         return []
-    return rows
+    return list(mapping_rows_only(rows))
 
 
 def _rows_in_parent(parent_row: Mapping[str, Any], field: str) -> list[Mapping[str, Any]]:
     rows = parent_row.get(field)
     if not isinstance(rows, list):
         return []
-    return rows
+    return list(mapping_rows_only(rows))
 
 
 def _get_value_at_eval_pattern(doc: Mapping[str, Any], pattern: str) -> Any:
@@ -680,6 +713,52 @@ def _serialize_by_list(
             for row in result.rows
         ],
     }
+
+
+def _compare_extended_primitive_score(
+    pred_list: list[Any],
+    exp_list: list[Any],
+    *,
+    leaf_spec: EvalLeafSpec,
+    profile: Optional[FieldProfile],
+    embedder: Optional[Any],
+) -> float:
+    compare_mode = (
+        profile.effective_primitive_list_compare()
+        if profile is not None
+        else PrimitiveListCompareMode.ALIGN
+    )
+    if compare_mode == PrimitiveListCompareMode.JOIN_STRING:
+        if profile is None or profile.string_compare is None:
+            raise ValueError("join_string extended primitive requires string_compare")
+        return compare_primitive_list_join(
+            pred_list,
+            exp_list,
+            join_separator=profile.join_separator,
+            sort_before_join=profile.sort_before_join,
+            string_compare=profile.string_compare,
+            embedder=embedder,
+        ).score
+
+    threshold = _primitive_list_threshold(profile)
+    element_similarity = _element_similarity_fn(
+        leaf_spec,
+        profile,
+        embedder=embedder,
+    )
+    if compare_mode == PrimitiveListCompareMode.POSITIONAL:
+        return compare_primitive_list_positional(
+            pred_list,
+            exp_list,
+            element_similarity=element_similarity,
+            match_threshold=threshold,
+        ).score
+    return compare_primitive_list(
+        pred_list,
+        exp_list,
+        element_similarity=element_similarity,
+        match_threshold=threshold,
+    ).score
 
 
 def _primitive_list_threshold(profile: Optional[FieldProfile]) -> float:

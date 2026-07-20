@@ -11,7 +11,7 @@ Understand the figure image and see where there are figure sub-part or "panels".
 ## 2. Determine if the panel is a quantitative plot
 For each panel in the figure:
 - Determine whether the panel is a plot of quantitative data with axes (XY or XYZ axes).
-- If, and only if, it is a quantitative plot with axes, proceed to check for units. Otherwise, set "is_a_plot" to "no" and skip unit checking.
+- If, and only if, it is a quantitative plot with axes, proceed to check for units. Otherwise, set "is_a_plot" to "no" and skip unit checking. Skip this check for schematics, pie charts, heat maps and sequence alignment plots.
 
 ## 3. Understand when units are needed
 A unit is a standardized quantity used to express a measurement. Units should be clearly defined for any continuous variable that represents a physical or biological measurement.
@@ -46,15 +46,21 @@ If units are present (answer is "yes"):
 - Include this in the `unit_definition_as_provided` field for that axis.
 - Be specific: quote the exact text or describe clearly (e.g., "time in hours [h]", "concentration in micromolar [µM]").
 
-## 6. Justify missing units
+## 6. Explain why you think units are missing
 If units are missing (answer is "no"):
-- Provide a clear justification explaining why units are needed but missing.
-- Include this in the `justify_why_units_are_missing` field for that axis.
+- Provide a clear explanation why units are needed but missing.
+- Include this in the `explanation` field for that axis.
 - Be specific about what measurement is shown and why units are important (e.g., "protein abundance is plotted but units are not specified").
 
 *IMPORTANT*: When extracting text from the caption, ONLY include the text that is specific to axis units. Do NOT include general descriptions of the figure or panel content.
 
-## 7. Provide your analysis in the following JSON format for EACH and EVERY panel:
+## 7. Panel decision
+Set `decision` for each panel:
+- `"N/A"` when `is_a_plot` is `"no"` (unit checking does not apply).
+- `"PASS"` when `is_a_plot` is `"yes"` and every axis answer for 'units_provided' is `"yes"` or `"not needed"` (no axis with `"no"`).
+- `"FAIL"` when `is_a_plot` is `"yes"` and any axis has answer to  'units_provided' `"no"`.
+
+## 8. Provide your analysis in the following JSON format for EACH and EVERY panel:
 
 {
     "outputs": [
@@ -71,13 +77,14 @@ If units are missing (answer is "no"):
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [],
+            "decision": "FAIL",
+            "explanation": [
                 {
                     "axis": "y",
-                    "justification": "protein abundance is plotted, but units are not specified"
+                    "explanation": "protein abundance is plotted, but units are not specified"
                 }
-            ],
-            "unit_definition_as_provided": []
+            ]
         },
         {
             "panel_label": "B",
@@ -92,7 +99,6 @@ If units are missing (answer is "no"):
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -102,14 +108,17 @@ If units are missing (answer is "no"):
                     "axis": "y",
                     "definition": "mRNA abundance is reported in arbitrary units [AU]"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         }
     ]
 }
@@ -117,8 +126,9 @@ If units are missing (answer is "no"):
 ## Please note:
 - Be thorough and precise in your analysis.
 - Include all panels visible in the figure, even if they don't contain numerical plots.
-- Only provide justifications when units are missing but needed. If units are "not needed", no justification is required.
+- Only provide explanation when units are missing but are needed. If units are "not needed", no explanation is required.
 - Only include entries in `unit_definition_as_provided` when units are present (answer is "yes").
-- Only include entries in `justify_why_units_are_missing` when units are missing but needed (answer is "no").
+- Only include entries in `explanation` when units are missing but needed (answer is "no").
+- Set `decision` to `"N/A"` for non-plot panels; use `"PASS"` or `"FAIL"` only when `is_a_plot` is `"yes"`.
 - For FACS data scatterplot, please put "is_a_plot": "no", as these are by defintion arbitrary units and do not require axis units
 - For pie charts please put "is_a_plot": "no" as these are not plots requiring units. 

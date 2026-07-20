@@ -211,23 +211,29 @@ def _build_eval_list_tree(
         structural_nodes[prefix] = node
         specs.append(node)
 
+    predictive_nodes: dict[str, EvalListSpec] = {}
+
     for schema_list in schema_lists:
-        parent = structural_nodes.get(embedding_prefix)
+        parent: Optional[EvalListSpec] = None
+        if schema_list.parent is not None:
+            parent = predictive_nodes.get(schema_list.parent.list_name)
+        if parent is None:
+            parent = structural_nodes.get(embedding_prefix)
         field = _terminal_field_name(schema_list.list_name)
         by_list_key = _resolved_by_list_key(schema_list.list_name, embedding_prefix)
         alignment_list_name = _resolved_alignment_list_name(
             schema_list.list_name, embedding_prefix
         )
-        specs.append(
-            EvalListSpec(
-                by_list_key=by_list_key,
-                field_name=field,
-                is_predictive=True,
-                alignment_list_name=alignment_list_name,
-                parent=parent,
-                schema_list_name=schema_list.list_name,
-            )
+        node = EvalListSpec(
+            by_list_key=by_list_key,
+            field_name=field,
+            is_predictive=True,
+            alignment_list_name=alignment_list_name,
+            parent=parent,
+            schema_list_name=schema_list.list_name,
         )
+        predictive_nodes[schema_list.list_name] = node
+        specs.append(node)
 
     return tuple(specs)
 

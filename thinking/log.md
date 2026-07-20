@@ -133,3 +133,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-12] design | Viz first validation: micrograph-scale-bar with `gpt-5` + `gpt-5-mini`; prompt and model contrast.
 
 ## [2026-06-12] ingest | Phase 1 visualization: `soda_mmqc/reporting/` (load, aggregate, tables, styles); `tests/test_reporting_phase1.py`.
+
+## [2026-07-13] impl | Phase 5.3 extended-primitive compare modes: `primitive_list_compare` (`align` / `positional` / `join_string`) in manifest; `compare_primitive_list_positional`, `compare_primitive_list_join` in `leaves.py`; orchestrator branch in `evaluation.py`; tests + `benchmarking.md`.

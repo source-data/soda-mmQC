@@ -13,7 +13,15 @@ Normative scoring contract: [evaluation-scoring.md](evaluation-scoring.md). Work
 
 A **leaf property** is a schema path to a primitive value or an **array of primitives** (extended primitive). Comparison produces **`score`** at these paths; manifest profiles add **layer 1** / **layer 2** labels per [evaluation-scoring.md](evaluation-scoring.md).
 
-**Extended primitives** (`tags: string[]`) are leaves whose value is a primitive array. Compare them as one leaf instance with aggregate `score` via **`leaves.compare_primitive_list`** (uses `matching.py` internally). There is no structural (layer S) reporting for extended primitives — unmatched elements are reflected in the aggregate `score` only.
+**Extended primitives** (`tags: string[]`, `outputs[].symbols: string[]`) are leaves whose value is a primitive array. Compare with **`primitive_list_compare`** ([evaluation-scoring.md](evaluation-scoring.md#list-of-primitives)). In code, root arrays use `LeafKind.ROOT_PRIMITIVE_ARRAY`; row-nested arrays use `LeafKind.ROW` — same compare rules, different instance placement (document root vs per gold row).
+
+| Mode | Behaviour |
+|------|-----------|
+| **`align`** (default) | Set-like: Hungarian element matching via `matching.py` (`compare_primitive_list`) |
+| **`positional`** | Index-bound: compare `exp[i]` vs `pred[i]`; mean over `max(len)` |
+| **`join_string`** | Join with `join_separator`, then `string_compare` on the whole string |
+
+There is no structural (layer S) reporting for extended primitives — unmatched or misaligned elements are reflected in the aggregate **`score`** only. No per-element layer 2 (TP/FP/FN/TN).
 
 **List-of-objects** (`panels[]` with row fields) is **not** a leaf value. Objects are containers; only their primitive descendants are leaves. **Predictive** lists (model-produced per schema) are row-paired in **`object_list_pairing.py`** using manifest `list_alignment` keys and feed layer S (`by_list`). **Structural** collection lists use positional join only — no layer S. See [evaluation-scoring.md](evaluation-scoring.md#structural-vs-predictive-lists-schema-driven).
 
@@ -29,6 +37,7 @@ A **leaf property** is a schema path to a primitive value or an **array of primi
 
 - `matching_metric`, `na_values`, `positive_value` / `negative_value` — layers 1–2.
 - `string_compare`, `match_threshold` — **only** on non-enum `graded_string` fields ([evaluation-scoring.md](evaluation-scoring.md#string_compare--how-the-leaf-score-is-computed)).
+- `primitive_list_compare`, `join_separator`, `sort_before_join` — extended-primitive compare mode ([evaluation-scoring.md](evaluation-scoring.md#list-of-primitives)).
 
 There is no global string metric: each free-text `graded_string` field declares its own `string_compare`. Schema `enum` fields are always exact; omit `string_compare` on those profiles.
 
@@ -102,7 +111,9 @@ Every primitive leaf instance returns at minimum **`score` in `[0, 1]`**:
 
 | Leaf type | How `score` is formed |
 |-----------|------------------------|
-| **primitive array** (extended primitive) | `compare_primitive_list` → mean over matched slots → `[0, 1]` |
+| **primitive array** (`align`) | Hungarian element matching → mean over `max(len)` → `[0, 1]` |
+| **primitive array** (`positional`) | Per-index element compare → mean over `max(len)` → `[0, 1]` |
+| **primitive array** (`join_string`) | `join_separator.join(...)` then `string_compare` → `[0, 1]` |
 | **free `string`** (`graded_string`) | `string_compare` from manifest → `[0, 1]` |
 | **schema `enum` string** | Exact literal match → `0.0` or `1.0` |
 | **number / integer** | Exact equality → `0.0` or `1.0` |
@@ -115,7 +126,7 @@ The flat comparator stores one result per leaf **instance** path (`panels[1].sta
 **Separation of concerns:**
 
 - **Scalar leaf compare** (`leaves.py`) — two primitive values → **`score`** via `LeafComparisonResult`.
-- **Extended primitive compare** (`leaves.compare_primitive_list` + `matching.py`) — two primitive arrays → one aggregate **`score`** on one leaf path.
+- **Extended primitive compare** (`leaves.py` + `matching.py` for `align`) — two primitive arrays → one aggregate **`score`** on one leaf path; mode from `primitive_list_compare`.
 - **Object row pairing** (`object_list_pairing.py`) — structural prerequisite for row leaves; not a leaf comparison.
 - **Layer S** (`structural_reporting.py`) — `by_list` row outcomes; not mixed into `by_property`.
 - **Comparator** (`evaluation.py`) — flatten paths, pair predictive rows / join structural rows, emit layer S for predictive lists, score leaves, apply layers 1 and 2, emit `instances` + `by_list` + `by_property`.

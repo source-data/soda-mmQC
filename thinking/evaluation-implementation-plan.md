@@ -162,24 +162,51 @@ Pipeline from [evaluation-scoring.md](evaluation-scoring.md):
 
 ---
 
-## Phase 5.2 — Layer 2 `mean_score` denominator *(planned)*
+## Phase 5.2 — Layer 2 `mean_score` denominator ✅ *complete*
 
 **Normative change** ([evaluation-scoring.md](evaluation-scoring.md#layer-2--matching)): `mean_score` is a **Layer 2 continuous rollup**. Average instance `score`s over **`correct_applicable` instances only** — same eligibility as `layer2_counts`. Exclude `correct_NA`, `withheld_applicable`, and `spurious_applicable` so N/A fields (matching `""`) do not dominate. If no eligible instances on a profiled property, `mean_score` = `0.0`. Unprofiled properties unchanged (mean over all instances).
 
-**Code changes required:**
+**Delivered:**
 
 | Location | Change |
 |----------|--------|
-| [`evaluation.py`](../soda_mmqc/core/evaluation.py) `_summarize_by_property` | Filter to `layer1 == "correct_applicable"` before averaging; unprofiled properties keep all instances |
-| [`reporting/aggregate.py`](../soda_mmqc/reporting/aggregate.py) `_pool_instances` / `aggregate_run` | Same filter when pooling `instances` across a run |
-| [`tests/test_evaluation.py`](../tests/test_evaluation.py) | Update expectations for mixed applicable/N/A properties |
-| [`tests/fixtures/evaluation_snapshots/`](../tests/fixtures/evaluation_snapshots/) | Regenerate golden `by_property` snapshots |
-| [`tests/test_run_analyze_results.py`](../tests/test_run_analyze_results.py) | Adjust if integration asserts on `mean_score` for N/A-heavy fields |
-| [`soda_mmqc/docs/benchmarking.md`](../soda_mmqc/docs/benchmarking.md) | Document Layer 2 `mean_score` rule (after normative sign-off) |
+| [`property_rollup.py`](../soda_mmqc/core/property_rollup.py) | `property_mean_score`, `instance_eligible_for_mean_score` — shared eligibility rule |
+| [`evaluation.py`](../soda_mmqc/core/evaluation.py) `_summarize_by_property` | Uses `property_mean_score` with `profiled` flag |
+| [`reporting/aggregate.py`](../soda_mmqc/reporting/aggregate.py) `aggregate_run` | Same filter when pooling `instances` across a run |
+| [`reporting/plots.py`](../soda_mmqc/reporting/plots.py) | Scatter plots use `instance_eligible_for_mean_score` |
+| [`tests/test_property_rollup.py`](../tests/test_property_rollup.py) | Unit tests for profiled vs unprofiled denominators |
+| [`tests/test_evaluation.py`](../tests/test_evaluation.py) | Toy deltas: `item.status` N/A-only → `mean_score` `0.0`; D.2 `panels[].status` → `0.0` |
+| [`soda_mmqc/docs/benchmarking.md`](../soda_mmqc/docs/benchmarking.md) | Documents applicable-only `mean_score` rule |
 
-**Toy example deltas:** `item.status` (N/A only) → `mean_score` `0.0`; `panels[].status` in D.2 → `0.0` not `0.5` (one applicable instance at score `0.0`).
+**Log:** [2026-06-18] impl entry in `thinking/log.md`.
 
-**Out of scope:** changing per-instance `score` computation or Layer 1 / Layer 2 label rules.
+---
+
+## Phase 5.3 — Extended-primitive compare modes ✅ *complete*
+
+**Normative change** ([evaluation-scoring.md](evaluation-scoring.md#list-of-primitives)): manifest `primitive_list_compare` selects how to score array-of-primitives leaves:
+
+| Mode | Implementation |
+|------|----------------|
+| `align` (default) | `compare_primitive_list` + `matching.py` |
+| `positional` | `compare_primitive_list_positional` — per-index element similarity, mean over `max(len)` |
+| `join_string` | `compare_primitive_list_join` — `join_separator`, optional `sort_before_join`, then `compare_strings` |
+
+**Delivered:**
+
+| Location | Change |
+|----------|--------|
+| [`eval_manifest.py`](../soda_mmqc/core/eval_manifest.py) | `PrimitiveListCompareMode` on `FieldProfile`; parse `primitive_list_compare`, `join_separator`, `sort_before_join`; compare-only field entries |
+| [`leaves.py`](../soda_mmqc/core/leaves.py) | `compare_primitive_list_positional`, `compare_primitive_list_join` |
+| [`evaluation.py`](../soda_mmqc/core/evaluation.py) | `_compare_extended_primitive_score` branches on manifest mode |
+| [`tests/test_leaves.py`](../tests/test_leaves.py) | Toy B.4 / B.5 style cases |
+| [`tests/test_eval_manifest.py`](../tests/test_eval_manifest.py) | Manifest parsing and validation |
+| [`tests/test_evaluation.py`](../tests/test_evaluation.py) | Orchestrator integration for `positional` and `join_string` |
+| [`soda_mmqc/docs/benchmarking.md`](../soda_mmqc/docs/benchmarking.md) | Document three modes |
+
+**Deferred:** checklist `eval-manifest.json` updates (e.g. `micrograph-symbols-defined`) — add `primitive_list_compare` when those manifests are created.
+
+**Out of scope:** per-element layer 2 on extended primitives; modelling parallel arrays as list-of-objects.
 
 ---
 

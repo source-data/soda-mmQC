@@ -4,8 +4,9 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -24,20 +25,22 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Intensity (AU)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -56,17 +59,18 @@
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [],
+            "decision": "FAIL",
+            "explanation": [
                 {
                     "axis": "y",
-                    "justification": "SDH signal intensity (continuous measurement) is plotted but no units are specified; intensity should indicate units (e.g., arbitrary units [AU] or optical density)."
+                    "explanation": "SDH signal intensity (continuous measurement) is plotted but no units are specified; intensity should indicate units (e.g., arbitrary units [AU] or optical density)."
                 },
                 {
                     "axis": "y",
-                    "justification": "COX signal intensity (continuous measurement) is plotted but no units are specified; intensity should indicate units (e.g., arbitrary units [AU] or optical density)."
+                    "explanation": "COX signal intensity (continuous measurement) is plotted but no units are specified; intensity should indicate units (e.g., arbitrary units [AU] or optical density)."
                 }
-            ],
-            "unit_definition_as_provided": []
+            ]
         },
         {
             "panel_label": "E",
@@ -81,18 +85,20 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [
-                {
-                    "axis": "x",
-                    "justification": "TMRM fluorescence intensity is displayed as channel 'FL2-H' with tick values (10^1–10^4) but no defined unit is given; fluorescence intensity should be labeled (e.g., arbitrary units [AU] or clarified as instrument channel units)."
-                }
-            ],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Counts"
                 }
+            ],
+            "decision": "FAIL",
+            "explanation": [
+                {
+                    "axis": "x",
+                    "explanation": "TMRM fluorescence intensity is displayed as channel 'FL2-H' with tick values (10^1–10^4) but no defined unit is given; fluorescence intensity should be labeled (e.g., arbitrary units [AU] or clarified as instrument channel units)."
+                }
             ]
         }
-    ]
+    ],
+    "updated_at": "2026-07-15 11:57:23"
 }

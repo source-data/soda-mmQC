@@ -13,13 +13,14 @@
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [],
+            "decision": "FAIL",
+            "explanation": [
                 {
                     "axis": "y",
-                    "justification": "The lower graph plots HMGB1 signal intensity (continuous fluorescent signal) for nuclear and cytoplasmic compartments, but no units are given on the y-axis or in the caption. A unit such as 'arbitrary units (AU)' or similar fluorescence intensity units should be specified."
+                    "explanation": "The lower graph plots HMGB1 signal intensity (continuous fluorescent signal) for nuclear and cytoplasmic compartments, but no units are given on the y-axis or in the caption. A unit such as 'arbitrary units (AU)' or similar fluorescence intensity units should be specified."
                 }
-            ],
-            "unit_definition_as_provided": []
+            ]
         },
         {
             "panel_label": "B",
@@ -34,15 +35,17 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -57,7 +60,6 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
@@ -67,7 +69,9 @@
                     "axis": "y",
                     "definition": "Time on Rotarod (sec)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -82,13 +86,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Time on Rotarod (sec)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
@@ -103,20 +108,22 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "x",
                     "definition": "Time axis labeled in weeks"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "G",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "H",
@@ -131,13 +138,14 @@
                     "answer": "yes"
                 }
             ],
-            "justify_why_units_are_missing": [],
             "unit_definition_as_provided": [
                 {
                     "axis": "y",
                     "definition": "Thickness of molecular layer (µm)"
                 }
-            ]
+            ],
+            "decision": "PASS",
+            "explanation": []
         }
     ],
     "updated_at": "2026-01-30 15:45:50"

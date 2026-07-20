@@ -15,7 +15,7 @@ from soda_mmqc.core.eval_manifest import (
     parse_eval_manifest,
     path_matches_pattern,
 )
-from soda_mmqc.core.leaves import StringCompareMode
+from soda_mmqc.core.leaves import PrimitiveListCompareMode, StringCompareMode
 
 FIXTURES = Path(__file__).parent / "fixtures"
 TOY_MANIFEST = FIXTURES / "eval_manifest_toy.json"
@@ -291,3 +291,75 @@ class TestMergeProfiles:
         assert merged is not None
         assert merged.string_compare == StringCompareMode.FUZZY
         assert merged.match_threshold == 0.9
+
+
+class TestPrimitiveListCompare:
+    def test_compare_only_positional(self):
+        manifest = parse_eval_manifest(
+            {
+                "checklist": "x",
+                "fields": {
+                    "outputs[].symbols_defined_in_caption": {
+                        "primitive_list_compare": "positional",
+                    }
+                },
+            }
+        )
+        profile = manifest.profile_for("outputs[].symbols_defined_in_caption")
+        assert profile is not None
+        assert profile.effective_primitive_list_compare() == (
+            PrimitiveListCompareMode.POSITIONAL
+        )
+        assert profile.is_profiled is False
+
+    def test_join_string_requires_graded_string(self):
+        with pytest.raises(ValueError, match="join_string requires"):
+            parse_eval_manifest(
+                {
+                    "checklist": "x",
+                    "fields": {
+                        "outputs[].from_the_caption": {
+                            "primitive_list_compare": "join_string",
+                            "matching_metric": "binary_polarity",
+                            "positive_value": "yes",
+                            "negative_value": "no",
+                        }
+                    },
+                }
+            )
+
+    def test_join_string_profile(self):
+        manifest = parse_eval_manifest(
+            {
+                "checklist": "x",
+                "fields": {
+                    "outputs[].from_the_caption": {
+                        "primitive_list_compare": "join_string",
+                        "matching_metric": "graded_string",
+                        "string_compare": "semantic",
+                        "match_threshold": 0.8,
+                        "join_separator": " | ",
+                        "sort_before_join": True,
+                    }
+                },
+            }
+        )
+        profile = manifest.profile_for("outputs[].from_the_caption")
+        assert profile is not None
+        assert profile.effective_primitive_list_compare() == (
+            PrimitiveListCompareMode.JOIN_STRING
+        )
+        assert profile.matching_metric == MatchingMetric.GRADED_STRING
+        assert profile.string_compare == StringCompareMode.SEMANTIC
+        assert profile.join_separator == " | "
+        assert profile.sort_before_join is True
+
+    def test_defaults_reject_primitive_list_compare(self):
+        with pytest.raises(ValueError, match="primitive_list_compare must not appear"):
+            parse_eval_manifest(
+                {
+                    "checklist": "x",
+                    "defaults": {"primitive_list_compare": "align"},
+                    "fields": {},
+                }
+            )

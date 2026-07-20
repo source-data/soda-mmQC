@@ -42,7 +42,7 @@
             "replicate_statements": [],
             "n_reported": "no",
             "n_value_min": "not_reported",
-            "replicate_type_reported": "not_reported",
+            "replicate_type_reported": "no",
             "replicate_type": "not_reported",
             "decision": "FAIL",
             "explanation": "Violin plots are derived from IP‑MS data which the legend states were averaged over two biological replicates; n = 2 is reported and the replicate type is biological, but n is ≤2 so does not meet the recommended threshold."
@@ -78,7 +78,7 @@
             "replicate_statements": [],
             "n_reported": "no",
             "n_value_min": "not_reported",
-            "replicate_type_reported": "not_reported",
+            "replicate_type_reported": "no",
             "replicate_type": "not_reported",
             "decision": "FAIL",
             "explanation": "Scatterplots are based on IP‑MS data are described but it is unclear if and what kind of replicates were analysed."
@@ -89,7 +89,7 @@
             "replicate_statements": [],
             "n_reported": "no",
             "n_value_min": "not_reported",
-            "replicate_type_reported": "not_reported",
+            "replicate_type_reported": "no",
             "replicate_type": "not_reported",
             "decision": "FAIL",
             "explanation": "Scatterplots are based on IP‑MS data are described but it is unclear if and what kind of replicates were analysed."

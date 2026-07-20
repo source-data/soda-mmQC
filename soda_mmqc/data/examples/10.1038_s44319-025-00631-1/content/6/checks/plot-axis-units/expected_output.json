@@ -4,8 +4,9 @@
             "panel_label": "A",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "B",
@@ -20,20 +21,22 @@
                     "answer": "no"
                 }
             ],
-            "justify_why_units_are_missing": [
+            "unit_definition_as_provided": [],
+            "decision": "FAIL",
+            "explanation": [
                 {
                     "axis": "y",
-                    "justification": "Mean ICG fluorescence intensity (continuous measurement) is plotted on the y-axis but no units are given on the axis, colorbar, or figure caption. This should state units (e.g., arbitrary units / mean fluorescence intensity [MFI] or AU) but none are provided."
+                    "explanation": "Mean ICG fluorescence intensity (continuous measurement) is plotted on the y-axis but no units are given on the axis, colorbar, or figure caption. This should state units (e.g., arbitrary units / mean fluorescence intensity [MFI] or AU) but none are provided."
                 }
-            ],
-            "unit_definition_as_provided": []
+            ]
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         },
         {
             "panel_label": "D",
@@ -48,8 +51,9 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "E",
@@ -64,15 +68,17 @@
                     "answer": "not needed"
                 }
             ],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "PASS",
+            "explanation": []
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
             "units_provided": [],
-            "justify_why_units_are_missing": [],
-            "unit_definition_as_provided": []
+            "unit_definition_as_provided": [],
+            "decision": "N/A",
+            "explanation": []
         }
     ],
     "updated_at": "2026-03-27 16:28:39"

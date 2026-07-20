@@ -8,10 +8,16 @@ from typing import Any, Mapping, Optional
 
 
 class LeafKind(str, Enum):
-    """Kind of leaf property discovered from schema."""
+    """Evaluator dispatch kind from schema placement (not full value typing).
+
+    ``ROOT_PRIMITIVE_ARRAY`` — primitive array at document root (e.g. ``tags``);
+    one instance, document-level read. Row-nested primitive arrays (e.g.
+    ``outputs[].symbols``) are ``ROW`` — same extended-primitive *compare*
+    rules, but scored per gold row after ``list_alignment`` pairing.
+    """
 
     SCALAR = "scalar"
-    EXTENDED_PRIMITIVE = "extended_primitive"
+    ROOT_PRIMITIVE_ARRAY = "root_primitive_array"
     ROW = "row"
 
 
@@ -83,8 +89,13 @@ def _walk_node(
             leaves.append(
                 LeafPropertySpec(
                     pattern=prefix,
-                    kind=LeafKind.EXTENDED_PRIMITIVE,
+                    kind=(
+                        LeafKind.ROW
+                        if object_list_name
+                        else LeafKind.ROOT_PRIMITIVE_ARRAY
+                    ),
                     enum_values=_enum_values(items),
+                    object_list_name=object_list_name,
                 )
             )
             return
