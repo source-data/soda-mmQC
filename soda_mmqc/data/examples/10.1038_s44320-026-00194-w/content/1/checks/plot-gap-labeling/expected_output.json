@@ -1,76 +1,44 @@
 {
-    "name": "plot-gap-labeling",
     "outputs": [
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "yes",
-            "gaps_defined": [
-                {
-                    "axis": "x",
-                    "answer": "not needed"
-                },
-                {
-                    "axis": "y",
-                    "answer": "not needed"
-                }
-            ],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "no",
+            "gap_visually_marked": "not_applicable",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "yes",
-            "gaps_defined": [
-                {
-                    "axis": "x",
-                    "answer": "not needed"
-                },
-                {
-                    "axis": "y",
-                    "answer": "not needed"
-                }
-            ],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "no",
+            "gap_visually_marked": "not_applicable",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "yes",
-            "gaps_defined": [
-                {
-                    "axis": "x",
-                    "answer": "not needed"
-                },
-                {
-                    "axis": "y",
-                    "answer": "not needed"
-                }
-            ],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "no",
+            "gap_visually_marked": "not_applicable",
+            "decision": "PASS",
+            "explanation": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "yes",
-            "gaps_defined": [
-                {
-                    "axis": "x",
-                    "answer": "not needed"
-                },
-                {
-                    "axis": "y",
-                    "answer": "not needed"
-                }
-            ],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "no",
+            "gap_visually_marked": "not_applicable",
+            "decision": "PASS",
+            "explanation": ""
         }
     ],
     "updated_at": "2026-04-02 10:57:12"

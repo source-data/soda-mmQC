@@ -7,10 +7,7 @@
     "na_values": []
   },
   "list_alignment": {
-    "outputs": ["panel_label"],
-    "outputs.gaps_defined": ["axis"],
-    "outputs.gap_description": ["axis"],
-    "outputs.justify_why_gaps_are_missing": ["axis"]
+    "outputs": ["panel_label"]
   },
   "fields": {
     "outputs[].panel_label": {
@@ -21,26 +18,18 @@
     "outputs[].is_a_plot": {
       "matching_metric": "binary_polarity"
     },
-    "outputs[].gaps_defined[].axis": {
-      "matching_metric": "multiclass"
-    },
-    "outputs[].gaps_defined[].answer": {
-      "na_values": ["not needed"],
+    "outputs[].tick_sequence_anomaly": {
+      "na_values": ["not_applicable"],
       "matching_metric": "binary_polarity"
     },
-    "outputs[].gap_description[].axis": {
+    "outputs[].gap_visually_marked": {
+      "na_values": ["not_applicable"],
+      "matching_metric": "binary_polarity"
+    },
+    "outputs[].decision": {
       "matching_metric": "multiclass"
     },
-    "outputs[].gap_description[].definition": {
-      "matching_metric": "graded_string",
-      "na_values": [""],
-      "string_compare": "semantic",
-      "match_threshold": 0.8
-    },
-    "outputs[].justify_why_gaps_are_missing[].axis": {
-      "matching_metric": "multiclass"
-    },
-    "outputs[].justify_why_gaps_are_missing[].justification": {
+    "outputs[].explanation": {
       "matching_metric": "graded_string",
       "na_values": [""],
       "string_compare": "semantic",

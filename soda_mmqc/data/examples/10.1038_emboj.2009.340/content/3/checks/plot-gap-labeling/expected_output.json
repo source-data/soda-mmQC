@@ -3,17 +3,19 @@
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "B",
-            "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "is_a_plot": "yes",
+            "tick_sequence_anomaly": "no",
+            "gap_visually_marked": "not_applicable",
+            "decision": "PASS",
+            "explanation": ""
         }
     ],
-    "updated_at": "2026-01-30 15:18:52"
+    "updated_at": "2026-07-20 16:15:50"
 }
