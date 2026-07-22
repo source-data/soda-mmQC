@@ -60,3 +60,4 @@ Canonical list with blurbs: **[`index.md`](index.md)**. Quick links:
 | Evaluation toy examples (shared schema/manifest) | [`evaluation-toy-examples.md`](evaluation-toy-examples.md) |
 | Leaf primitives (`score`, strings, numbers, booleans) | [`evaluation-leaf-primitives.md`](evaluation-leaf-primitives.md) |
 | Hierarchical scoring (DEPRECATED) | [`evaluation-hierarchical-scoring-DEPRECATED.md`](evaluation-hierarchical-scoring-DEPRECATED.md) |
+| Agentic checklist skills (design brief) | [`agentic-checklist-skills.md`](agentic-checklist-skills.md) |
