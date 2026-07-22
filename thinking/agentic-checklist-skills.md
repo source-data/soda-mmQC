@@ -11,7 +11,7 @@ Planning only. No implementation in this note.
 
 ## Goal
 
-Replace the current one-prompt-per-check model call (`run_model` → `generate_response` with prompt + schema) with an **agentic skill DAG** per checklist:
+Replace the current one-prompt-per-check model call (`run_model` → `generate_response` with prompt + schema) with a **hierarchy of nested skills** per checklist (dependencies form a directed acyclic graph, or DAG):
 
 - Skills can be **chained and reused** (e.g. panel identification → applicability → leaf analysis).
 - Skills may invoke **Python tools** (and later MCP).
@@ -39,8 +39,8 @@ There is already a check named `external-data-url-validation-agentic`, but it is
 
 | Topic | Decision |
 |-------|----------|
-| What owns the skill graph? | The **checklist** (scope of related reusable skills) |
-| What is a check? | A **leaf skill** in the checklist DAG |
+| What owns the skill graph? | The **checklist** (scope of related reusable nested skills) |
+| What is a check? | A **leaf skill** in that hierarchy (a skill with no checklist-local dependents; it owns `schema.json`) |
 | Leaf contents | Folder with `SKILL.md` + `schema.json` (+ `eval-manifest.json`, `benchmark.json` as today) |
 | Intermediate skills | Folder with `SKILL.md` only (no eval schema); may declare tools/needs |
 | Graph source of truth | **Skills** — frontmatter `requires` / `produces` (option C earlier) |
