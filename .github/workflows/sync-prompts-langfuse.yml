@@ -3,8 +3,7 @@ name: Sync production prompts to Langfuse
 on:
     push:
         branches:
-            # - master
-            - cg_dev
+            - master
         paths:
         - 'soda_mmqc/data/production_prompts/**/*.txt'
         - 'soda_mmqc/data/production_prompts/**/*.json'
