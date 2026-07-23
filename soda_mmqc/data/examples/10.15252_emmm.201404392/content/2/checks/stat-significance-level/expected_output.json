@@ -9,53 +9,48 @@
                 "#",
                 "##"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes",
                 "yes",
                 "yes",
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "no",
-                "no",
-                "no",
-                "no"
-            ],
-            "from_the_caption": [
-                "not_needed",
-                "not_needed",
-                "not_needed",
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "*p<0.05",
+                "**p<0.01",
+                "#p<0.05",
+                "##p<0.01"
+            ]
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         }
     ],
-    "updated_at": "2026-06-03 11:19:53"
+    "updated_at": "2026-07-21 10:52:32"
 }

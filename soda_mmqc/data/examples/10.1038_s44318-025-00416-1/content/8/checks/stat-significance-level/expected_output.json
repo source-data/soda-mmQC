@@ -8,22 +8,18 @@
                 "P=6.5e-5",
                 "P=1.2e-4"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes",
                 "yes",
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed",
-                "not_needed",
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed",
-                "not_needed",
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=8.0e-6",
+                "P=6.5e-5",
+                "P=1.2e-4"
+            ]
         },
         {
             "panel_label": "B",
@@ -32,19 +28,16 @@
                 "P=0.003",
                 "ns"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "FAIL",
+            "explanation": "The significiance symbol 'ns' is not defiend.",
+            "symbols_defined": [
                 "yes",
                 "no"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed",
-                "no"
-            ],
-            "from_the_caption": [
-                "not_needed",
+            "symbol_definition": [
+                "P=0.003",
                 ""
-            ],
-            "Decision_and_explanation": "FAIL: The significiance symbol 'ns' is not defiend. "
+            ]
         },
         {
             "panel_label": "C",
@@ -52,16 +45,14 @@
             "significance_level_symbols_on_image": [
                 "P=3.7e-5"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=3.7e-5"
+            ]
         },
         {
             "panel_label": "D",
@@ -69,16 +60,14 @@
             "significance_level_symbols_on_image": [
                 "P=0.022"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=0.022"
+            ]
         },
         {
             "panel_label": "E",
@@ -86,16 +75,14 @@
             "significance_level_symbols_on_image": [
                 "P=0.047"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=0.047"
+            ]
         },
         {
             "panel_label": "F",
@@ -103,16 +90,14 @@
             "significance_level_symbols_on_image": [
                 "P=0.008"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=0.008"
+            ]
         },
         {
             "panel_label": "G",
@@ -120,16 +105,14 @@
             "significance_level_symbols_on_image": [
                 "P=0.22"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=0.22"
+            ]
         },
         {
             "panel_label": "H",
@@ -137,17 +120,15 @@
             "significance_level_symbols_on_image": [
                 "P=0.99"
             ],
-            "significance_level_symbols_defined_in_image": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "not_needed"
-            ],
-            "from_the_caption": [
-                "not_needed"
-            ],
-            "Decision_and_explanation": "PASS: All significance level symbols are defined."
+            "symbol_definition": [
+                "P=0.99"
+            ]
         }
     ],
-    "updated_at": "2026-06-03 11:08:57"
+    "updated_at": "2026-07-21 10:36:48"
 }

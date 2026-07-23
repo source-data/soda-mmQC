@@ -1,13 +1,13 @@
 {
-  "name": "stat-significance-level",
   "outputs": [
     {
       "panel_label": "A",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "B",
@@ -15,23 +15,23 @@
       "significance_level_symbols_on_image": [
         "p = 0.0102"
       ],
-      "significance_level_symbols_defined_in_image": [
+      "decision": "PASS",
+      "explanation": "All significance level symbols are defined.",
+      "symbols_defined": [
         "yes"
       ],
-      "significance_level_symbols_defined_in_caption": [
-        "not_needed"
-      ],
-      "from_the_caption": [
-        "not_needed"
+      "symbol_definition": [
+        "p = 0.0102"
       ]
     },
     {
       "panel_label": "C",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "D",
@@ -41,20 +41,17 @@
         "p = 0.0035",
         "p = 0.0018"
       ],
-      "significance_level_symbols_defined_in_image": [
+      "decision": "PASS",
+      "explanation": "All significance level symbols are defined.",
+      "symbols_defined": [
         "yes",
         "yes",
         "yes"
       ],
-      "significance_level_symbols_defined_in_caption": [
-        "not_needed",
-        "not_needed",
-        "not_needed"
-      ],
-      "from_the_caption": [
-        "not_needed",
-        "not_needed",
-        "not_needed"
+      "symbol_definition": [
+        "p = 0.0264",
+        "p = 0.0035",
+        "p = 0.0018"
       ]
     },
     {
@@ -64,16 +61,15 @@
         "orange points",
         "blue points"
       ],
-      "significance_level_symbols_defined_in_image": [
-        "no",
-        "no"
-      ],
-      "significance_level_symbols_defined_in_caption": [
+      "decision": "PASS",
+      "explanation": "All significance level symbols are defined.",
+      "symbols_defined": [
         "yes",
         "yes"
       ],
-      "from_the_caption": [
-        "significantly upregulated and downregulated genes highlighted in orange and blue, respectively."
+      "symbol_definition": [
+        "significantly upregulated and downregulated genes highlighted in orange and blue, respectively.",
+        "blue points"
       ]
     },
     {
@@ -83,16 +79,14 @@
         "color scale (FDR)",
         "pink highlighting"
       ],
-      "significance_level_symbols_defined_in_image": [
+      "decision": "PASS",
+      "explanation": "All significance level symbols are defined.",
+      "symbols_defined": [
         "yes",
-        "no"
-      ],
-      "significance_level_symbols_defined_in_caption": [
-        "not_needed",
         "yes"
       ],
-      "from_the_caption": [
-        "not_needed",
+      "symbol_definition": [
+        "color scale (FDR)",
         "significant enrichment in Golgi-related functional annotation terms (highlighted in pink)."
       ]
     }

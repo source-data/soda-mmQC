@@ -19,27 +19,27 @@
       "matching_metric": "binary_polarity"
     },
     "outputs[].significance_level_symbols_on_image": {
-      "matching_metric": "graded_string",
-      "string_compare": "semantic",
-      "match_threshold": 0.8
-    },
-    "outputs[].significance_level_symbols_defined_in_image": {
+      "primitive_list_compare": "positional",
       "matching_metric": "graded_string",
       "string_compare": "exact",
       "match_threshold": 1.0
     },
-    "outputs[].significance_level_symbols_defined_in_caption": {
-      "matching_metric": "graded_string",
-      "string_compare": "exact",
-      "match_threshold": 1.0
+    "outputs[].symbols_defined": {
+      "primitive_list_compare": "positional"
     },
-    "outputs[].from_the_caption": {
+    "outputs[].symbol_definition": {
+      "primitive_list_compare": "positional",
       "matching_metric": "graded_string",
       "string_compare": "semantic",
-      "match_threshold": 0.8
+      "match_threshold": 0.8,
+      "na_values": ["", "not_needed"]
     },
-    "outputs[].Decision_and_explanation": {
+    "outputs[].decision": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].explanation": {
       "matching_metric": "graded_string",
+      "na_values": [""],
       "string_compare": "semantic",
       "match_threshold": 0.8
     }

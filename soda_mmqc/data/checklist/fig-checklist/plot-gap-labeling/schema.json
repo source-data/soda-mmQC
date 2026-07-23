@@ -17,82 +17,35 @@
                             "is_a_plot": {
                                 "type": "string",
                                 "enum": ["yes", "no"],
-                                "description": "Whether the panel contains a plot"
+                                "description": "Whether the panel contains a quantitative plot with axes"
                             },
-                            "gaps_defined": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "axis": {
-                                            "type": "string",
-                                            "enum": ["x", "y", "z"],
-                                            "description": "The axis to be labeled"
-                                        },
-                                        "answer": {
-                                            "type": "string",
-                                            "enum": ["yes", "no", "not needed"],
-                                            "description": "Whether axis gaps or breaks are defined"
-                                        }
-                                    },
-                                    "required": [
-                                        "axis",
-                                        "answer"
-                                    ],
-                                    "additionalProperties": false
-                                }
+                            "tick_sequence_anomaly": {
+                                "type": "string",
+                                "enum": ["yes", "no", "not_applicable"],
+                                "description": "Whether tick labels show an anomalous jump or skip suggesting an axis gap"
                             },
-                            "gap_description": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "axis": {
-                                            "type": "string",
-                                            "enum": ["x", "y", "z"],
-                                            "description": "The axis to be labeled"
-                                        },
-                                        "definition": {
-                                            "type": "string",
-                                            "description": "A description or quote the text of the caption that defines the axis gaps or breaks"
-                                        }
-                                    },
-                                    "required": [
-                                        "axis",
-                                        "definition"
-                                    ],
-                                    "additionalProperties": false
-                                }
+                            "gap_visually_marked": {
+                                "type": "string",
+                                "enum": ["yes", "no", "not_applicable"],
+                                "description": "Whether a detected gap/break is visually marked on the axis; not_applicable when no anomaly"
                             },
-                            "justify_why_gaps_are_missing": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "axis": {
-                                            "type": "string",
-                                            "enum": ["x", "y", "z"],
-                                            "description": "The axis to be labeled"
-                                        },
-                                        "justification": {
-                                            "type": "string",
-                                            "description": "Justification for why the axis gaps or breaks are missing"
-                                        }
-                                    },
-                                    "required": [
-                                        "axis",
-                                        "justification"
-                                    ],
-                                    "additionalProperties": false
-                                }
+                            "decision": {
+                                "type": "string",
+                                "enum": ["PASS", "FAIL", "N/A"],
+                                "description": "Panel-level verdict: FAIL only when a tick-sequence anomaly is present and not visually marked; N/A if not a plot"
+                            },
+                            "explanation": {
+                                "type": "string",
+                                "description": "Brief description of the unlabeled gap when decision is FAIL; empty string otherwise"
                             }
                         },
                         "required": [
                             "panel_label",
                             "is_a_plot",
-                            "gaps_defined",
-                            "gap_description",
-                            "justify_why_gaps_are_missing"
+                            "tick_sequence_anomaly",
+                            "gap_visually_marked",
+                            "decision",
+                            "explanation"
                         ],
                         "additionalProperties": false
                     }

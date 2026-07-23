@@ -135,3 +135,21 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-06-12] ingest | Phase 1 visualization: `soda_mmqc/reporting/` (load, aggregate, tables, styles); `tests/test_reporting_phase1.py`.
 
 ## [2026-07-13] impl | Phase 5.3 extended-primitive compare modes: `primitive_list_compare` (`align` / `positional` / `join_string`) in manifest; `compare_primitive_list_positional`, `compare_primitive_list_join` in `leaves.py`; orchestrator branch in `evaluation.py`; tests + `benchmarking.md`.
+
+## [2026-07-22] design | Agentic checklist skills brief: checklist owns skill DAG; check=leaf (`SKILL.md`+`schema.json`); skills SoT (`requires`/`produces`) + generated `dag.yaml`/README; Python owns example/cache loop, agent per example; eval as separate CLI; config = checklist defaults + skill `needs`; Anthropic Agent SDK first, Python tools + MCP adapter. See [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-22] design | Skill versioning: GitHub = SoT for skill history; Langfuse stays the surface apps use for production prompts/skills. Promote git→Langfuse still open. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-22] design | Skill versioning locked toward single agent-visible `SKILL.md`; versions via git ref / Langfuse production; orchestrator resolves closure; no side-by-side `SKILL.N` in the agent workspace. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-22] design | Skill versioning revised: reject pure git-history-as-API; **skill store + SkillSet lock + runtime assembly (symlink)**; agent sees one version per name; comparative eval via SkillSets; cache whole SkillSet only in v1 (no intermediate reuse). Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-22] design | Combinatorial version matrix: store may hold N×M pairings but eval must **not** grid-search; curated SkillSets only; default comparisons are 1D (baseline pin + vary one skill). Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-22] design | Versioning workflow locked: checklist **versioning manifest** (all skills pinned); new skills must be pinned; CLI **unpin exactly one** skill; runner sweeps that skill’s versions against pins. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-22] design | Manifest **pre-run validation** required: every skill pinned and resolvable in the store; fail fast if a pin is missing. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-23] design | fig-checklist modular rewrite: shared `identify-panels` entry, optional `classify-panel-kind`, leaves keep schemas; pilot two-level then add mid skill if needed. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-23] design | Schemas: leaf = eval/gold only; intermediate schemas optional as **runtime contracts**; reject nested mega-schema for FlatEvaluator. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).

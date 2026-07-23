@@ -122,6 +122,9 @@ venv.bak/
 # tensorboard logs
 runs/
 
+# static evaluation report snapshots
+reports/
+
 #visual studio
 .vscode
 
