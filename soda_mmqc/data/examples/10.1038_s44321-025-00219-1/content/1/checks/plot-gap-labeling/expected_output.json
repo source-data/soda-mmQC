@@ -3,30 +3,34 @@
         {
             "panel_label": "Ai",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "Aii",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         }
     ],
     "updated_at": "2025-05-14 10:39:09"

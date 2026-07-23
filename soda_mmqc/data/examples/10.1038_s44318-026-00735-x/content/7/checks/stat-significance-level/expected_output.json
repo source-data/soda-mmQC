@@ -1,24 +1,23 @@
 {
-    "name": "stat-significance-level",
-    "outputs": [
-        {
-            "panel_label": "A",
-            "is_a_plot": "no",
-            "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
-        },
-        {
-            "panel_label": "B",
-            "is_a_plot": "yes",
-            "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
-        }
-    ],
-    "updated_at": "2026-04-29 12:59:59"
+  "outputs": [
+    {
+      "panel_label": "A",
+      "is_a_plot": "no",
+      "significance_level_symbols_on_image": [],
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
+    },
+    {
+      "panel_label": "B",
+      "is_a_plot": "yes",
+      "significance_level_symbols_on_image": [],
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
+    }
+  ],
+  "updated_at": "2026-04-29 12:59:59"
 }

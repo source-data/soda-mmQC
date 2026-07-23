@@ -334,5 +334,17 @@ streamlit run soda_mmqc/reporting/streamlit_app.py
 - **Inspect mean scores** per leaf field (applicable instances only): black bars show the mean; red dots are individual instances.
 - **Click a red dot** to open instance drill-down: figure image (zoom/pan), caption, gold vs prediction at the scored path, and the prompt text.
 
+#### Static fig-checklist snapshot (`export-fig-report`)
+
+To freeze the current evaluation state as shareable HTML (mean-score charts per model, Layer overlays, winner lines, and score tables):
+
+```bash
+export-fig-report
+export-fig-report --models gpt-5.4,gpt-5-mini-2025-08-07
+export-fig-report --checks stat-significance-level,plot-gap-labeling --out reports/fig-checklist/demo
+```
+
+Open `reports/fig-checklist/<date>/index.html` in a browser. Interactive drill-down remains in the Streamlit app.
+
 Programmatic use of the same plots and tables remains available via `soda_mmqc.reporting` and the comparative-reporting notebook.
 

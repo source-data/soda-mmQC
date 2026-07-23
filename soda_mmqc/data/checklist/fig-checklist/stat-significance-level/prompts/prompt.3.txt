@@ -16,29 +16,26 @@ For each panel in the figure:
 
 
 ## 3. Check for indication of statistical significance in panel image
-For all panels identified in step 2. check for symbols on the plot that could indicate a level of statistical significance. These are typically, but not always, stars or asterisks aligned with the respective experimental groups or group comparisons. However, significance indicators are not always symbols like * or ***. They may also appear as exact p-values written directly on the plot (e.g., p=0.031, p<0.001). These count as significance indicators AND as definitions in the image — set significance_level_symbols_defined_in_image to "yes" for these cases. Sometimes the level of significance is indicated directly on the image, for example the p-value is written next to the experimental group without an additional symbol such as "p<0.001" or "p=0.0017" or written next to the symbol. Sometimes the level of significance is described at the very end of the figure legend collectively for all figure panels. Sometimes the exact p-values are provided "p=0.0035", which is also acceptable. Take note of each *unique* symbol. If the same symbol appears multiple times in the plot, record it once. For example, if *** appears six times above different bar comparisons, record a single entry "***" — not six separate entries. The same applies to all parallel arrays: one entry per unique symbol, not per occurrence.  
+For all panels identified in step 2. check for symbols on the plot that could indicate a level of statistical significance. These are typically, but not always, stars or asterisks aligned with the respective experimental groups or group comparisons. However, significance indicators are not always symbols like * or ***. They may also appear as exact p-values written directly on the plot (e.g., p=0.031, p<0.001). These count as significance indicators AND count as defined (`symbols_defined` = "yes"). Sometimes the level of significance is indicated directly on the image, for example the p-value is written next to the experimental group without an additional symbol such as "p<0.001" or "p=0.0017" or written next to the symbol. Sometimes the level of significance is described at the very end of the figure legend collectively for all figure panels. Sometimes the exact p-values are provided "p=0.0035", which is also acceptable. Take note of each *unique* symbol. If the same symbol appears multiple times in the plot, record it once. For example, if *** appears six times above different bar comparisons, record a single entry "***" — not six separate entries. The same applies to all parallel arrays: one entry per unique symbol, not per occurrence.  
 
-For each symbol found:
-- Determine if the significance level is defined directly on the image (e.g., p-value shown next to the symbol, or explicitly text like "p<0.001" "p=0.0013" on the plot).
-- If the significance level is defined on the image, set "significance_level_symbols_defined_in_image" to "yes" for that symbol.
-- If the significance level is not defined on the image, set "significance_level_symbols_defined_in_image" to "no" for that symbol.
+## 4. Check whether each symbol is defined
+For each symbol found, determine whether its meaning is clearly defined **either** directly on the image **or** in the figure caption (or both). Record the result in `"symbols_defined"`:
+- `"yes"` if the symbol is defined in the image and/or the caption.
+- `"no"` if the symbol is defined in neither the image nor the caption.
 
-## 4. Check for indication of statistical significance in figure caption
-For symbols where "significance_level_symbols_defined_in_image" is "no", check the text of the figure caption to see if they are clearly defined there.
-- If a symbol is defined in the caption, set "significance_level_symbols_defined_in_caption" to "yes" for that symbol.
-- If a symbol is not defined in the caption, set "significance_level_symbols_defined_in_caption" to "no" for that symbol.
-- If a symbol is defined in the image (significance_level_symbols_defined_in_image = "yes"), set "significance_level_symbols_defined_in_caption" to "not_needed" for that symbol.
+Where the definition is found does not matter for this field — only whether a definition exists.
 
-## 5. Extract levels of significance information 
-For each symbol:
-- If the symbol is defined in the image (significance_level_symbols_defined_in_image = "yes"), set "from_the_caption" to "not_needed" for that symbol.
-- If the symbol is defined in the caption (significance_level_symbols_defined_in_caption = "yes"), extract the exact text from the caption that defines the significance level for that symbol.
-- If the symbol is not defined in either the image or caption, leave "from_the_caption" as an empty string "" for that symbol.
+## 5. Extract the symbol definition
+For each symbol, put the defining text into `"symbol_definition"`:
+- If the definition appears on the image, read/transcribe that text from the image (e.g. "p<0.001", "* P < 0.05").
+- If the definition appears in the caption, extract the exact defining phrase from the caption.
+- If both sources provide a definition, use the clearest minimal defining phrase from either.
+- If the symbol is not defined in either the image or caption, use an empty string "".
 
-*IMPORTANT:* When extracting the text from the caption, ONLY include the specific text that describes the levels of significance. Do NOT include general descriptions of the figure or panel content. If there is no relevant text, do not extract anything for this panel.
+*IMPORTANT:* ONLY include the specific text that describes the significance level. Do NOT include general descriptions of the figure or panel content. Prefer plain ASCII (e.g. replace ≤ with <= and ≥ with >=).
 
 ## 6. Decision and explanation
-For each panel, provide `Decision_and_explanation` as an array of one or more short strings giving your overall verdict (e.g. PASS, FAIL, or WARNING) and a concise explanation of whether all significance-level symbols in that panel are properly defined in the image and/or caption. Use an empty array `[]` when `is_a_plot` is "no" or when there are no significance symbols to assess.
+For each panel, set `decision` to one of PASS, FAIL, or N/A, and provide a concise `explanation` of whether all significance-level symbols in that panel are properly defined in the image and/or caption. Use `decision` = "N/A" and `explanation` = "" when `is_a_plot` is "no" or when there are no significance symbols to assess.
 
 
 Provide your analysis in the following JSON format for EACH and EVERY panel:
@@ -53,58 +50,48 @@ Provide your analysis in the following JSON format for EACH and EVERY panel:
                 "***",
                 "****"
             ],
-            "significance_level_symbols_defined_in_image": [
-                "no",
-                "no",
+            "symbols_defined": [
+                "yes",
+                "yes",
                 "yes"
             ],
-            "significance_level_symbols_defined_in_caption": [
-                "yes",
-                "yes",
-                "not_needed"
-            ],
-            "from_the_caption": [
+            "symbol_definition": [
                 "*P < 0.05",
                 "***P < 0.001",
                 "****P < 0.0001"
             ],
-            "Decision_and_explanation": ["PASS; all significance level symbols in the panel are defined."]
+            "decision": "PASS",
+            "explanation": "all significance level symbols in the panel are defined."
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "symbols_defined": [],
+            "symbol_definition": [],
+            "decision": "N/A",
+            "explanation": ""
         },
         {
-         "panel_label": "C",
-        "is_a_plot": "yes",
-        "significance_level_symbols_on_image": [
-            "ns",
-            "*",
-            "**"
-        ],
-        "significance_level_symbols_defined_in_image": [
-            "no",
-            "no",
-            "no"
-        ],
-        "significance_level_symbols_defined_in_caption": [
-            "no",
-            "yes",
-          "yes"
-        ],
-        "from_the_caption": [
-            "",
-            "*P < 0.05",
-            "**P < 0.001"
-        ],
-        "Decision_and_explanation": [
-            "WARNING: While the 'ns' symbol in the figure image is in general understood to mean 'not significant' it is not technically defined in the figure legend. It would be more accurate to include this information in the figure legend."
-        ]
+            "panel_label": "C",
+            "is_a_plot": "yes",
+            "significance_level_symbols_on_image": [
+                "ns",
+                "*",
+                "**"
+            ],
+            "symbols_defined": [
+                "no",
+                "yes",
+                "yes"
+            ],
+            "symbol_definition": [
+                "",
+                "*P < 0.05",
+                "**P < 0.001"
+            ],
+            "decision": "FAIL",
+            "explanation": "The 'ns' symbol is not defined in the figure image or legend."
         }
     ]
 }

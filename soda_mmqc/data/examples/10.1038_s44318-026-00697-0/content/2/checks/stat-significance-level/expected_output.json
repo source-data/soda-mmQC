@@ -1,23 +1,22 @@
 {
-    "name": "stat-significance-level",
     "outputs": [
         {
             "panel_label": "A",
             "is_a_plot": "yes",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         },
         {
             "panel_label": "C",
@@ -26,36 +25,34 @@
                 "****",
                 "***"
             ],
-            "significance_level_symbols_defined_in_image": [
-                "no"
-            ],
-            "significance_level_symbols_defined_in_caption": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
+                "yes",
                 "yes"
             ],
-            "from_the_caption": [
-                "\u2217\u2217\u2217\u2217p < 0.0001",
-                "\u2217\u2217\u2217\u2217p < 0.0001",
-                "\u2217\u2217\u2217p < 0.001"
-            ],
-            "Decision_and_explanation": []
+            "symbol_definition": [
+                "∗∗∗∗p < 0.0001",
+                "∗∗∗p < 0.001"
+            ]
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         },
         {
             "panel_label": "F",
@@ -64,28 +61,26 @@
                 "**",
                 "*"
             ],
-            "significance_level_symbols_defined_in_image": [
-                "no"
-            ],
-            "significance_level_symbols_defined_in_caption": [
+            "decision": "PASS",
+            "explanation": "All significance level symbols are defined.",
+            "symbols_defined": [
+                "yes",
                 "yes"
             ],
-            "from_the_caption": [
-                "\u2217\u2217p < 0.01",
-                "\u2217p < 0.05",
-                "\u2217\u2217p < 0.01"
-            ],
-            "Decision_and_explanation": []
+            "symbol_definition": [
+                "∗∗p < 0.01",
+                "∗p < 0.05"
+            ]
         },
         {
             "panel_label": "G",
             "is_a_plot": "no",
             "significance_level_symbols_on_image": [],
-            "significance_level_symbols_defined_in_image": [],
-            "significance_level_symbols_defined_in_caption": [],
-            "from_the_caption": [],
-            "Decision_and_explanation": []
+            "decision": "N/A",
+            "explanation": "",
+            "symbols_defined": [],
+            "symbol_definition": []
         }
     ],
-    "updated_at": "2026-03-31 14:42:59"
+    "updated_at": "2026-07-21 11:03:42"
 }

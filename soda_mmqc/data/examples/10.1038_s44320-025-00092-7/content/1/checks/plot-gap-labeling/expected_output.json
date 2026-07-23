@@ -3,66 +3,75 @@
         {
             "panel_label": "A",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "B",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "C",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "D",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "E",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "F",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "G",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "H",
             "is_a_plot": "no",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         },
         {
             "panel_label": "I",
-            "is_a_plot": "yes",
-            "gaps_defined": [],
-            "gap_description": [],
-            "justify_why_gaps_are_missing": []
+            "is_a_plot": "no",
+            "tick_sequence_anomaly": "not_applicable",
+            "gap_visually_marked": "not_applicable",
+            "decision": "N/A",
+            "explanation": ""
         }
     ],
-    "updated_at": "2025-05-08 11:02:34"
+    "updated_at": "2026-07-20 15:34:34"
 }

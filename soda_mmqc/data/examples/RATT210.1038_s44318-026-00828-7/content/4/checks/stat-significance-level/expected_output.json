@@ -1,37 +1,40 @@
 {
-  "name": "stat-significance-level",
   "outputs": [
     {
       "panel_label": "A",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "B",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "C",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "D",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "E",
@@ -40,34 +43,34 @@
         "p=4.57E-05",
         "p=4.77E-06"
       ],
-      "significance_level_symbols_defined_in_image": [
+      "decision": "PASS",
+      "explanation": "All significance level symbols are defined.",
+      "symbols_defined": [
         "yes",
         "yes"
       ],
-      "significance_level_symbols_defined_in_caption": [
-        "not_needed",
-        "not_needed"
-      ],
-      "from_the_caption": [
-        "not_needed",
-        "not_needed"
+      "symbol_definition": [
+        "p=4.57E-05",
+        "p=4.77E-06"
       ]
     },
     {
       "panel_label": "F",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "G",
       "is_a_plot": "no",
       "significance_level_symbols_on_image": [],
-      "significance_level_symbols_defined_in_image": [],
-      "significance_level_symbols_defined_in_caption": [],
-      "from_the_caption": []
+      "decision": "N/A",
+      "explanation": "",
+      "symbols_defined": [],
+      "symbol_definition": []
     },
     {
       "panel_label": "H",
@@ -76,17 +79,15 @@
         "p=3.83E-07",
         "p=3.67E-06"
       ],
-      "significance_level_symbols_defined_in_image": [
+      "decision": "PASS",
+      "explanation": "All significance level symbols are defined.",
+      "symbols_defined": [
         "yes",
         "yes"
       ],
-      "significance_level_symbols_defined_in_caption": [
-        "not_needed",
-        "not_needed"
-      ],
-      "from_the_caption": [
-        "not_needed",
-        "not_needed"
+      "symbol_definition": [
+        "p=3.83E-07",
+        "p=3.67E-06"
       ]
     }
   ],

@@ -531,6 +531,70 @@ def plot_mean_score_bars(
     return _apply_plot_template(fig)
 
 
+def plot_comparison_mean_scores(
+    summaries: RunSummaries | Sequence[RunSummary],
+    *,
+    compare: Literal["prompt", "model"] = "prompt",
+    model: str | None = None,
+    prompt: str | None = None,
+    title: str | None = None,
+) -> go.Figure:
+    """Grouped mean-score bars across prompts (or models) per leaf field."""
+    selected = _comparison_summaries(
+        summaries,
+        compare=compare,
+        model=model,
+        prompt=prompt,
+    )
+    field_order_keys: list[str] = []
+    seen: set[str] = set()
+    for summary in selected:
+        for leaf_property in field_order(
+            summary.manifest, summary.by_property.keys()
+        ):
+            if leaf_property not in seen:
+                seen.add(leaf_property)
+                field_order_keys.append(leaf_property)
+    field_labels = [leaf_property_tail(key) for key in field_order_keys]
+
+    fig = go.Figure()
+    series_count = len(selected)
+    for series_index, summary in enumerate(selected):
+        label = _series_label(summary, compare=compare)
+        scores = [
+            summary.by_property[key].mean_score
+            if key in summary.by_property
+            else None
+            for key in field_order_keys
+        ]
+        fig.add_trace(
+            go.Bar(
+                name=label,
+                x=field_labels,
+                y=scores,
+                marker_opacity=_comparison_series_opacity(series_index, series_count),
+                legendgroup=label,
+                showlegend=True,
+                hovertemplate=(
+                    f"{label}<br>%{{x}}<br>mean: %{{y:.3f}}<extra></extra>"
+                ),
+            )
+        )
+
+    if title is None:
+        if compare == "prompt":
+            title = f"Mean scores by field — model={model}"
+        else:
+            title = f"Mean scores by field — prompt={prompt}"
+    fig.update_layout(
+        title=title,
+        barmode="group",
+        xaxis_title="leaf field",
+        yaxis=dict(range=[0, MEAN_SCORE_Y_MAX], title="mean score"),
+    )
+    return _apply_plot_template(fig)
+
+
 def plot_comparison_layer_s(
     summaries: RunSummaries | Sequence[RunSummary],
     *,
