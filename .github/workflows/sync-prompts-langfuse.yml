@@ -115,6 +115,8 @@ jobs:
                   echo "mapped_files=$MAPPED_FILES" >> "$GITHUB_OUTPUT"
                 fi
 
+                echo "Mapped files ($(echo \"$MAPPED_FILES\" | tr ',' '\n' | sed '/^$/d' | wc -l)): $MAPPED_FILES"
+
                 echo "CHECKLIST_ROOT=$TMP_CHECKLIST_ROOT" >> "$GITHUB_ENV"
                 echo "WATCHED_CHECKLISTS=fig-checklist" >> "$GITHUB_ENV"
 

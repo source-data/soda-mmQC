@@ -1,24 +1,18 @@
 #!/usr/bin/env python3
-"""Sync changed checklist prompt files to Langfuse.
+"""Sync prompt files to Langfuse for changed checks.
 
 Usage:
-    python scripts/sync_langfuse_checklist.py <comma-separated-files|ALL>
+    python .github/scripts/sync_langfuse_checklist.py <comma-separated-files|ALL>
 
-For each changed .txt or .json file under soda_mmqc/data/checklist/, this
-script derives the Langfuse prompt key and creates a new prompt version.
+How this script works:
+1. Read changed files (or discover all files when input is "ALL").
+2. Group files by check directory.
+3. Build one Langfuse config dictionary per check by loading every JSON file
+   in that check directory, keyed by JSON filename.
+4. Upload prompt text files for each affected check.
 
-Prompt key format:  checklists/{checklist_name}/{check_name}
-  e.g.  checklists/fig-checklist/error-bars-defined
-        checklists/doc-checklist/DAS-present-and-correct
-
-Rules:
-    - A changed prompt*.txt file → create a new Langfuse version from that file.
-    - A changed .json file within a check directory → re-sync ALL prompt*.txt
-                                                                    files for that check.
-
-Langfuse config structure per check:
-  benchmark.json  → top-level config fields (name, description, example_class, examples, …)
-  schema.json     → nested under the "output_schema" key
+Prompt key format:
+    checklists/{checklist_name}/{check_name}
 """
 
 import json
@@ -53,7 +47,7 @@ def get_langfuse_client():
 # ---------------------------------------------------------------------------
 
 def collect_all_files() -> list[str]:
-    """Return every .txt and .json under the watched checklist dirs."""
+    """Return every .txt and .json under watched checklist directories."""
     files: list[str] = []
     for checklist in WATCHED_CHECKLISTS:
         checklist_dir = CHECKLIST_ROOT / checklist
@@ -83,8 +77,28 @@ def extract_check_info(filepath: str) -> tuple[str, str] | None:
 
 
 def load_text(path: Path) -> str:
+    """Read a UTF-8 text file and return its contents."""
     with open(path, "r", encoding="utf-8") as fh:
         return fh.read()
+
+
+def load_check_json_config(check_dir: Path) -> dict:
+    """Load all JSON files in a check directory into one config dictionary.
+
+    Output format:
+        {
+            "schema.json": {...},
+            "model_config.json": {...},
+            ...
+        }
+    """
+    config: dict = {}
+    for json_path in sorted(check_dir.glob("*.json")):
+        try:
+            config[json_path.name] = json.loads(load_text(json_path))
+        except Exception as exc:
+            print(f"  Warning: failed to parse {json_path.name} for {check_dir.name}: {exc}")
+    return config
 
 
 # ---------------------------------------------------------------------------
@@ -97,7 +111,7 @@ def sync_check(
     check_name: str,
     only_txts: list[Path] | None = None,
 ) -> None:
-    """Create new Langfuse prompt version(s) for a single check.
+    """Create Langfuse prompt version(s) for one check.
 
     Args:
         only_txts: If given, only upload those specific .txt files.
@@ -106,27 +120,15 @@ def sync_check(
     check_dir = CHECKLIST_ROOT / checklist_name / check_name
     prompt_key = f"checklists/{checklist_name}/{check_name}"
 
-    # Build config: benchmark.json fields at the top level, schema.json nested under "output_schema".
-    benchmark_path = check_dir / "benchmark.json"
-    schema_path = check_dir / "schema.json"
-    config: dict = {}
-    if benchmark_path.exists():
-        try:
-            config = json.loads(load_text(benchmark_path))
-        except Exception as exc:
-            print(f"  Warning: failed to parse benchmark.json for {check_name}: {exc}")
-    if schema_path.exists():
-        try:
-            config["output_schema"] = json.loads(load_text(schema_path))
-        except Exception as exc:
-            print(f"  Warning: failed to parse schema.json for {check_name}: {exc}")
+    # Bundle all JSON files for this check into the Langfuse config payload.
+    config = load_check_json_config(check_dir)
 
-    # Determine which .txt files to upload
+    # Determine which prompt text files to upload.
     if only_txts is not None:
         txt_files = sorted(only_txts)
     else:
-        # Support both checklist source layout (prompts/prompt*.txt)
-        # and production snapshot layout (prompt*.txt in check root).
+        # Support both source layout (prompts/prompt*.txt)
+        # and snapshot layout (prompt*.txt in check root).
         txt_files = sorted((check_dir / "prompts").glob("prompt*.txt"))
         if not txt_files:
             txt_files = sorted(check_dir.glob("prompt*.txt"))
@@ -177,8 +179,8 @@ def main() -> None:
         changed_files = [f.strip() for f in arg.split(",") if f.strip()]
         print(f"Processing {len(changed_files)} changed file(s) ...")
 
-        # Group by check; note whether schema.json changed for that check.
-        schema_changed: set[tuple[str, str]] = set()
+        # Group by check; any JSON change triggers a full prompt re-upload for that check.
+        json_changed: set[tuple[str, str]] = set()
         txt_changed: dict[tuple[str, str], list[Path]] = {}
 
         for fp in changed_files:
@@ -190,17 +192,17 @@ def main() -> None:
             p = Path(fp)
             if p.suffix == ".json":
                 # Any JSON change in this check re-uploads all prompts.
-                schema_changed.add(key)
+                json_changed.add(key)
             elif p.suffix == ".txt":
                 txt_changed.setdefault(key, []).append(p)
 
         # Build the sync plan:
-        #   schema changed → re-upload ALL prompts for that check
-        #   only .txt changed → upload only those specific files
-        all_keys = schema_changed | set(txt_changed.keys())
+        #   JSON changed  -> re-upload all prompts for that check
+        #   only TXT changed -> upload only the changed prompt files
+        all_keys = json_changed | set(txt_changed.keys())
         checks_to_sync: dict[tuple[str, str], list[Path] | None] = {}
         for key in all_keys:
-            if key in schema_changed:
+            if key in json_changed:
                 checks_to_sync[key] = None  # None = sync all
             else:
                 checks_to_sync[key] = txt_changed[key]
