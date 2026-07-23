@@ -87,15 +87,15 @@ def load_check_json_config(check_dir: Path) -> dict:
 
     Output format:
         {
-            "schema.json": {...},
-            "model_config.json": {...},
+            "schema": {...},
+            "model_config": {...},
             ...
         }
     """
     config: dict = {}
     for json_path in sorted(check_dir.glob("*.json")):
         try:
-            config[json_path.name] = json.loads(load_text(json_path))
+            config[json_path.stem] = json.loads(load_text(json_path))
         except Exception as exc:
             print(f"  Warning: failed to parse {json_path.name} for {check_dir.name}: {exc}")
     return config
