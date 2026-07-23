@@ -1,0 +1,21 @@
+{
+  "path_templates": {
+    "prompt": "soda_mmqc/data/checklist/fig-checklist/{check}/prompts/prompt.{version}.txt",
+    "schema": "soda_mmqc/data/checklist/fig-checklist/{check}/schema.json",
+    "eval_manifest": "soda_mmqc/data/checklist/fig-checklist/{check}/eval-manifest.json",
+    "model_config": "soda_mmqc/data/model_config.json"
+  },
+  "checks": [
+    { "check": "error-bars-defined", "prompt_version": 2 },
+    { "check": "image-annotation-defined", "prompt_version": 2 },
+    { "check": "individual-data-points", "prompt_version": 2 },
+    { "check": "micrograph-scale-bar", "prompt_version": 1 },
+    { "check": "panel-image-matches-caption", "prompt_version": 1 },
+    { "check": "plot-axis-units", "prompt_version": 1 },
+    { "check": "plot-gap-labeling", "prompt_version": 1 },
+    { "check": "replication-reporting", "prompt_version": 3 },
+    { "check": "single-channel-for-overlay", "prompt_version": 2 },
+    { "check": "stat-significance-level", "prompt_version": 2 },
+    { "check": "stat-test", "prompt_version": 3 }
+  ]
+}

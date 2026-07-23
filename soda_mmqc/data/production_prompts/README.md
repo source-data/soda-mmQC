@@ -1,39 +1,53 @@
 # Production prompts
 
-Snapshot of fig-checklist assets selected for production use.
+Index of fig-checklist assets selected for production use.
 
-Each subdirectory is one check. Layout:
+`production.json` stores **prompt version numbers only**. Full paths are derived
+from `path_templates` (JSON cannot expand placeholders itself; consumers fill
+`{check}` and `{version}`).
+
+## Layout
 
 ```text
 production_prompts/
-├── <check-name>/
-│   ├── prompt.<N>.txt          # production prompt (version N), if selected
-│   ├── schema.json             # structured-output schema
-│   ├── eval-manifest.json      # evaluation field config
-│   └── model_config.json       # model/API options (default if check has none)
-├── …
+├── production.json
 └── README.md
 ```
 
-## Checks
+## Editing winners
 
-| Check | Prompt version | schema | eval-manifest | model_config |
-|-------|----------------|:------:|:-------------:|:------------:|
-| `error-bars-defined` | `prompt.2.txt` | ✓ | ✓ | default |
-| `image-annotation-defined` | `prompt.2.txt` | ✓ | ✓ | default |
-| `individual-data-points` | `prompt.2.txt` | ✓ | ✓ | default |
-| `micrograph-scale-bar` | `prompt.1.txt` | ✓ | ✓ | default |
-| `panel-image-matches-caption` | `prompt.1.txt` | ✓ | ✓ | default |
-| `plot-axis-units` | `prompt.1.txt` | ✓ | ✓ | default |
-| `plot-gap-labeling` | — (none selected) | ✓ | ✓ | default |
-| `replication-reporting` | `prompt.3.txt` | ✓ | ✓ | default |
-| `single-channel-for-overlay` | `prompt.2.txt` | ✓ | ✓ | default |
-| `stat-significance-level` | — (none selected) | ✓ | ✓ | default |
-| `stat-test` | `prompt.3.txt` | ✓ | ✓ | default |
+Change only `prompt_version` in the `checks` list:
 
-## Notes
+```json
+{ "check": "error-bars-defined", "prompt_version": 2 }
+```
 
-- Prompt versions are copies from `soda_mmqc/data/checklist/fig-checklist/<check>/prompts/`.
-- `schema.json` and `eval-manifest.json` are copies from the same check folder.
-- `model_config.json` is the shared default from `soda_mmqc/data/model_config.json` (no check-specific configs were present).
-- Folders without a prompt are placeholders (schema / eval-manifest / model_config only).
+Use `"prompt_version": null` when no production prompt is selected yet.
+
+## Path resolution
+
+| Key | Template |
+|-----|----------|
+| `prompt` | `soda_mmqc/data/checklist/fig-checklist/{check}/prompts/prompt.{version}.txt` |
+| `schema` | `soda_mmqc/data/checklist/fig-checklist/{check}/schema.json` |
+| `eval_manifest` | `soda_mmqc/data/checklist/fig-checklist/{check}/eval-manifest.json` |
+| `model_config` | `soda_mmqc/data/model_config.json` (shared default; no `{check}`) |
+
+Example: `error-bars-defined` + version `2` →
+`soda_mmqc/data/checklist/fig-checklist/error-bars-defined/prompts/prompt.2.txt`
+
+## Current selections
+
+| Check | Version |
+|-------|--------:|
+| `error-bars-defined` | 2 |
+| `image-annotation-defined` | 2 |
+| `individual-data-points` | 2 |
+| `micrograph-scale-bar` | 1 |
+| `panel-image-matches-caption` | 1 |
+| `plot-axis-units` | 1 |
+| `plot-gap-labeling` | 1 |
+| `replication-reporting` | 3 |
+| `single-channel-for-overlay` | 2 |
+| `stat-significance-level` | 2 |
+| `stat-test` | 3 |
