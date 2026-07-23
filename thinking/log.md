@@ -151,3 +151,5 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-07-22] design | Manifest **pre-run validation** required: every skill pinned and resolvable in the store; fail fast if a pin is missing. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
 
 ## [2026-07-23] design | fig-checklist modular rewrite: shared `identify-panels` entry, optional `classify-panel-kind`, leaves keep schemas; pilot two-level then add mid skill if needed. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-07-23] design | Schemas: leaf = eval/gold only; intermediate schemas optional as **runtime contracts**; reject nested mega-schema for FlatEvaluator. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
