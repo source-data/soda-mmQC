@@ -1,0 +1,29 @@
+{
+  "checklist": "AB-target-reagent-consistency",
+  "defaults": {
+    "matching_metric": "multiclass",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["severity"]
+  },
+  "fields": {
+    "outputs[].has_antibody_table": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].ambiguous_antibody_reagents": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].target_mismatch_detected": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].severity": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].requires_editor_query": {
+      "matching_metric": "multiclass"
+    }
+  }
+}

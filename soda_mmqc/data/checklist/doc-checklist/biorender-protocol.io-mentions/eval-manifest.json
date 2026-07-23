@@ -1,0 +1,27 @@
+{
+  "checklist": "biorender-protocol.io-mentions",
+  "defaults": {
+    "matching_metric": "graded_string",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["service", "location"]
+  },
+  "fields": {
+    "outputs[].service": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].location": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].excerpt": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}

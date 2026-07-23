@@ -1,0 +1,38 @@
+{
+  "checklist": "section-order-alt",
+  "defaults": {
+    "matching_metric": "graded_string",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["sections_as_in_manuscript"],
+    "sections_as_in_manuscript": ["name"],
+    "missing_sections": ["name"]
+  },
+  "fields": {
+    "outputs[].sections_as_in_manuscript[].name": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].sections_as_in_manuscript[].correct_name": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].sections_as_in_manuscript[].correct_position": {
+      "matching_metric": "binary_polarity"
+    },
+    "outputs[].sections_as_in_manuscript[].to_remove": {
+      "matching_metric": "binary_polarity"
+    },
+    "outputs[].missing_sections[].name": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    }
+  }
+}

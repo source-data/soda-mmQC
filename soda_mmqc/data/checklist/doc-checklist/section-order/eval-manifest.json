@@ -1,0 +1,54 @@
+{
+  "checklist": "section-order",
+  "defaults": {
+    "matching_metric": "graded_string",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["sections_as_in_manuscript"],
+    "sections_to_rename": ["original"],
+    "sections_to_move": ["section_in_manuscript"]
+  },
+  "fields": {
+    "outputs[].sections_as_in_manuscript": {
+      "primitive_list_compare": "positional",
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].missing_sections": {
+      "primitive_list_compare": "align",
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].sections_to_remove": {
+      "primitive_list_compare": "align",
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].sections_to_rename[].original": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].sections_to_rename[].renamed": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].sections_to_move[].section_in_manuscript": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].sections_to_move[].move_before": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    }
+  }
+}

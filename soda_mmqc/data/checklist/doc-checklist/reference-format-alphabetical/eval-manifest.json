@@ -1,0 +1,23 @@
+{
+  "checklist": "reference-format-alphabetical",
+  "defaults": {
+    "matching_metric": "multiclass",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["alphabetical"]
+  },
+  "fields": {
+    "outputs[].alphabetical": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].et_al_after_n_authors": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].dois_in_bibliography": {
+      "matching_metric": "multiclass"
+    }
+  }
+}

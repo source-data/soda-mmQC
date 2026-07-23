@@ -1,0 +1,32 @@
+{
+  "checklist": "DAS-present-and-correct",
+  "defaults": {
+    "matching_metric": "multiclass",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["location"]
+  },
+  "fields": {
+    "outputs[].present": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].location": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].formatted_correctly": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].issues": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}
