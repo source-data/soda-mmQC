@@ -98,7 +98,8 @@ jobs:
 
                 CHANGED="${{ steps.changed.outputs.files }}"
                 if [ "$CHANGED" = "ALL" ]; then
-                  echo "mapped_files=ALL" >> "$GITHUB_OUTPUT"
+                  MAPPED_FILES=$(find -L "$TMP_FIG_ROOT" -type f \( -name "*.txt" -o -name "*.json" \) | paste -sd "," -)
+                  echo "mapped_files=$MAPPED_FILES" >> "$GITHUB_OUTPUT"
                 else
                   MAPPED_FILES=""
                   IFS=',' read -ra RAW_FILES <<< "$CHANGED"
