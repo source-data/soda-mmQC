@@ -75,7 +75,7 @@ jobs:
                 fi
 
             - name: Stop if nothing relevant changed
-              if: steps.changed.outputs.files == ''
+              if: github.event_name != 'workflow_dispatch' && steps.changed.outputs.files == ''
               run: |
                 echo "No .txt or .json changes detected under production prompts directories"
                 exit 0
