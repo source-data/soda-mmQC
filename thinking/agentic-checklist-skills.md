@@ -341,6 +341,102 @@ Keep argument names of the run CLI stable where possible (`CHECKLIST_NAME`, `--c
 5. Split scoring into new CLI; `evaluate` stops writing analysis or shells out.
 6. Retire monolithic `prompts/prompt.N.txt` once leaves are skills; versions live in the skill store; production SkillSet published to Langfuse.
 
+## Rewriting fig-checklist into nested skills
+
+### What today’s prompts already share
+
+Almost every active fig-checklist prompt repeats the same opening:
+
+1. **Identify panels** — labels (A, B, …), layout quirks, composite panels, map panel → caption span.
+2. **Applicability / type gate** — is this a quantitative plot? micrograph? image data? overlay? (wording differs per check).
+3. **Check-specific analysis** — error bars, scale bars, annotations, stats, etc.
+4. **Leaf JSON** — per-panel fields + PASS/FAIL/N/A (today inlined in the prompt; target: leaf `schema.json` only).
+
+Duplication of (1) is the main rewrite target. (2) is partially shared (several “is this a plot?” checks) but criteria are not identical (e.g. image-annotation’s `image_data` vs micrograph-scale-bar’s `micrograph`).
+
+### Target shape
+
+```text
+                    identify-panels          ← shared entry (no leaf schema)
+                           │
+                           ▼
+              classify-panel-kind            ← optional shared mid skill
+                           │
+        ┌──────────────────┼──────────────────┐
+        ▼                  ▼                  ▼
+   plot leaves      image/micrograph     caption/layout leaves
+   (error-bars,     (scale-bar,          (panel-image-matches-
+    axis-units,      annotations,         caption, …)
+    gap, stats,      single-channel)
+    individual-
+    points,
+    replication…)
+```
+
+- **Entry skill** `identify-panels`: produce a stable artifact, e.g. list of `{panel_label, caption_excerpt, region notes}`. No check `schema.json`.
+- **Optional mid skill** `classify-panel-kind`: attach coarse kinds (`plot`, `micrograph`, `image`, `schematic`, `blot`, `composite`, …) so leaves do not re-argue “what is a panel.”
+- **Leaf skills** = today’s checks: consume upstream artifacts; contain only applicability nuances + analysis; **own** `schema.json` / `eval-manifest.json` / `benchmark.json`.
+
+`requires` / `produces` example:
+
+| Skill | requires | produces |
+|-------|----------|----------|
+| `identify-panels` | — | `panels` |
+| `classify-panel-kind` | `panels` | `panels_with_kind` |
+| `micrograph-scale-bar` | `panels_with_kind` (or `panels`) | leaf JSON per schema |
+| `error-bars-defined` | `panels_with_kind` | leaf JSON per schema |
+
+### How to split an existing prompt (recipe)
+
+For each current check (start with one pilot, e.g. `micrograph-scale-bar`):
+
+1. **Cut** the “Identify all figure panels” section → contribute to / reuse `identify-panels` (merge the best wording once; do not keep N copies).
+2. **Extract** the type gate into either:
+   - shared `classify-panel-kind` + a short leaf rule (“only panels with kind micrograph”), or
+   - leaf-local applicability if the definition is idiosyncratic (document why).
+3. **Keep** in the leaf `SKILL.md` only: detection rules, caption extraction rules, decision/PASS-FAIL logic, examples tied to that check.
+4. **Move** the JSON example block out of prose into `schema.json` (leaf already has this; skill text should say “conform to schema.json” rather than paste a full example, or keep one short example).
+5. **Pin** new/shared skills in the checklist versioning manifest.
+
+### Suggested first DAG for fig-checklist (concrete)
+
+**Shared (non-leaf)**
+
+- `identify-panels` — entry for all figure checks.
+- `classify-panel-kind` — recommended once two+ leaves need “is plot / is micrograph / is image.”
+
+**Leaves (checks; keep current names)**
+
+| Branch | Leaves |
+|--------|--------|
+| Plot-oriented | `error-bars-defined`, `individual-data-points`, `plot-axis-units`, `plot-gap-labeling`, `stat-test`, `stat-significance-level`, `replication-reporting` |
+| Image / micrograph | `micrograph-scale-bar`, `image-annotation-defined`, `single-channel-for-overlay` |
+| Cross-cutting | `panel-image-matches-caption` (panels + caption alignment; may skip kind classification) |
+
+Do **not** force every leaf through the same mid skill if it adds noise; `requires` can point at `identify-panels` only.
+
+### Authoring pitfalls
+
+- **Drift in panel lists:** if each leaf re-identifies panels, labels disagree across checks on the same figure. Shared `identify-panels` is what makes the DAG worth it.
+- **Over-shared classification:** one global ontology that fights check-specific nuance (e.g. “is a kymograph a micrograph?”). Prefer a coarse shared kind + leaf overrides.
+- **Monolithic leaf again:** resist pasting the whole old prompt into `SKILL.md`; the leaf should assume upstream artifacts exist.
+- **Gold / expected_output:** panel labels must stay consistent with `identify-panels` versions — unpinning that skill is high-impact; treat it as a carefully pinned baseline.
+
+### Pilot order (recommended)
+
+1. Extract `identify-panels` from the best current wording (error-bars / scale-bar / image-annotation share nearly the same §1).
+2. Convert **one** leaf (`micrograph-scale-bar`) to `requires: [identify-panels]` and drop duplicated §1.
+3. Convert a second leaf on the same branch (`image-annotation-defined` or `single-channel-for-overlay`).
+4. Only then introduce `classify-panel-kind` if both leaves still duplicate type gates.
+5. Roll plot leaves similarly.
+
+### Open choice for this rewrite
+
+**A.** Two levels only: `identify-panels` → leaves (leaves keep their own applicability text). Faster migration.  
+**B.** Three levels: add `classify-panel-kind` early. More modular; more design work on the kind taxonomy.
+
+Lean **A** for the pilot, introduce **B** when the second leaf shows painful duplication of type gates.
+
 ## Open questions
 
 1. **Manifest + CLI:** filename; `--unpin` / optional `--versions`; replace `--prompt-version`.
@@ -351,11 +447,13 @@ Keep argument names of the run CLI stable where possible (`CHECKLIST_NAME`, `--c
 6. **Mock mode:** `--mock` should short-circuit agent and return expected leaf JSON (keep for CI).
 7. **Langfuse tracing:** whole agent session vs per-skill spans (separate from Langfuse-as-production-surface).
 8. **When (if ever) to cache intermediate skill outputs** — deferred; v1 session-level only.
+9. **fig-checklist rewrite depth:** two-level (`identify-panels` → leaf) vs three-level (+ `classify-panel-kind`) for the pilot.
 
 ## Non-goals (this brief)
 
 - Implementing the Agent SDK integration.
-- Rewriting all existing prompts to `SKILL.md`.
+- Rewriting all existing prompts to `SKILL.md` in one shot (pilot first; see rewrite section).
+- Freezing the panel-kind taxonomy before a second leaf needs it.
 - Replacing `FlatEvaluator` scoring semantics.
 - Committing to MCP-only (MCP is an adapter, not the only tool surface).
 
