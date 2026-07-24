@@ -1,31 +1,31 @@
 #!/usr/bin/env python3
-"""Sync prompt files to Langfuse for changed checks.
+"""Sync Langfuse prompts using a production manifest file.
 
 Usage:
-    python .github/scripts/sync_langfuse_checklist.py <comma-separated-files|ALL>
+    python .github/scripts/sync_langfuse_checklist.py [manifest-path]
 
-How this script works:
-1. Read changed files (or discover all files when input is "ALL").
-2. Group files by check directory.
-3. Build one Langfuse config dictionary per check by loading every JSON file
-   in that check directory, keyed by JSON filename.
-4. Upload prompt text files for each affected check.
+Default manifest path:
+    soda_mmqc/data/production_prompts/production.json
 
-Prompt key format:
-    checklists/{checklist_name}/{check_name}
+Manifest expectations:
+- path_templates: format-string templates that resolve repository file paths
+- checks: per-check records containing values used to render templates
+
+Per check, the script:
+1. Renders the prompt path from path_templates.prompt.
+2. Renders all JSON paths from templates ending in .json.
+3. Loads JSON files into one config payload keyed by filename stem.
+4. Uploads one Langfuse prompt version with the rendered prompt/config.
 """
 
 import json
 import os
 import sys
 from pathlib import Path
+from string import Formatter
+from typing import Any
 
-CHECKLIST_ROOT = Path(os.environ.get("CHECKLIST_ROOT", "soda_mmqc/data/checklist"))
-WATCHED_CHECKLISTS = {
-    x.strip()
-    for x in os.environ.get("WATCHED_CHECKLISTS", "fig-checklist,doc-checklist").split(",")
-    if x.strip()
-}
+DEFAULT_MANIFEST_PATH = Path("soda_mmqc/data/production_prompts/production.json")
 
 
 # ---------------------------------------------------------------------------
@@ -42,115 +42,104 @@ def get_langfuse_client():
     )
 
 
-# ---------------------------------------------------------------------------
-# File helpers
-# ---------------------------------------------------------------------------
-
-def collect_all_files() -> list[str]:
-    """Return every .txt and .json under watched checklist directories."""
-    files: list[str] = []
-    for checklist in WATCHED_CHECKLISTS:
-        checklist_dir = CHECKLIST_ROOT / checklist
-        if not checklist_dir.exists():
-            continue
-        for f in checklist_dir.rglob("*.txt"):
-            files.append(str(f))
-        for f in checklist_dir.rglob("*.json"):
-            files.append(str(f))
-    return files
-
-
-def extract_check_info(filepath: str) -> tuple[str, str] | None:
-    """Return (checklist_name, check_name) from a filepath, or None."""
-    p = Path(filepath)
-    try:
-        rel = p.relative_to(CHECKLIST_ROOT)
-    except ValueError:
-        return None
-    parts = rel.parts  # ('fig-checklist', 'error-bars-defined', ...)
-    if len(parts) < 2:
-        return None
-    checklist_name, check_name = parts[0], parts[1]
-    if checklist_name not in WATCHED_CHECKLISTS:
-        return None
-    return checklist_name, check_name
-
-
 def load_text(path: Path) -> str:
     """Read a UTF-8 text file and return its contents."""
     with open(path, "r", encoding="utf-8") as fh:
         return fh.read()
 
 
-def load_check_json_config(check_dir: Path) -> dict:
-    """Load all JSON files in a check directory into one config dictionary.
+def load_manifest(manifest_path: Path) -> dict[str, Any]:
+    """Load and minimally validate the production manifest JSON."""
+    data = json.loads(load_text(manifest_path))
+    if not isinstance(data, dict):
+        raise ValueError("Manifest root must be a JSON object")
+    if "path_templates" not in data or "checks" not in data:
+        raise ValueError("Manifest must contain 'path_templates' and 'checks'")
+    if not isinstance(data["path_templates"], dict):
+        raise ValueError("Manifest 'path_templates' must be an object")
+    if not isinstance(data["checks"], list):
+        raise ValueError("Manifest 'checks' must be a list")
+    return data
 
-    Output format:
-        {
-            "schema": {...},
-            "model_config": {...},
-            ...
-        }
+
+def template_fields(template: str) -> set[str]:
+    """Extract placeholder field names from a Python format template."""
+    names: set[str] = set()
+    for _, field_name, _, _ in Formatter().parse(template):
+        if field_name:
+            names.add(field_name)
+    return names
+
+
+def render_path(template: str, context: dict[str, Any], repo_root: Path) -> Path:
+    """Render a repository-relative template and return an absolute path.
+
+    The rendered path must stay within repo_root to guard against accidental
+    path traversal in manifest values.
     """
-    config: dict = {}
-    for json_path in sorted(check_dir.glob("*.json")):
+    rel_path = template.format(**context)
+    path = (repo_root / rel_path).resolve()
+    try:
+        path.relative_to(repo_root.resolve())
+    except ValueError as exc:
+        raise ValueError(f"Rendered path escapes repository root: {rel_path}") from exc
+    return path
+
+
+def build_config_from_manifest_paths(json_paths: list[Path]) -> dict[str, Any]:
+    """Build Langfuse config from manifest-resolved JSON files.
+
+        Keys use filename stems (without .json), for example:
+            schema.json -> schema
+            eval-manifest.json -> eval-manifest
+    """
+    config: dict[str, Any] = {}
+    for json_path in json_paths:
         try:
             config[json_path.stem] = json.loads(load_text(json_path))
-        except Exception as exc:
-            print(f"  Warning: failed to parse {json_path.name} for {check_dir.name}: {exc}")
+        except FileNotFoundError as exc:
+            raise FileNotFoundError(f"Missing JSON file: {json_path}") from exc
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Invalid JSON in {json_path}: {exc}") from exc
     return config
 
 
-# ---------------------------------------------------------------------------
-# Sync logic
-# ---------------------------------------------------------------------------
+def enrich_prompt_context(entry: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
+    """Return template context enriched from prompt_version.
 
-def sync_check(
-    langfuse,
-    checklist_name: str,
-    check_name: str,
-    only_txts: list[Path] | None = None,
-) -> None:
-    """Create Langfuse prompt version(s) for one check.
-
-    Args:
-        only_txts: If given, only upload those specific .txt files.
-                   If None, upload ALL prompt*.txt files for the check.
+    Adds these derived fields when prompt_version is present:
+    - version: same numeric/string version value for templates using {version}
+    - prompt_filename: prompt.<N>.txt
+    - prompt_filename_nodot: prompt<N>.txt
     """
-    check_dir = CHECKLIST_ROOT / checklist_name / check_name
+    context = dict(entry)
+    prompt_version = context.get("prompt_version")
+    if prompt_version is None:
+        return context, "missing prompt_version"
+
+    version_str = str(prompt_version).strip()
+    if not version_str:
+        return context, "empty prompt_version"
+
+    context.setdefault("version", prompt_version)
+    context.setdefault("prompt_filename", f"prompt.{version_str}.txt")
+    context.setdefault("prompt_filename_nodot", f"prompt{version_str}.txt")
+    return context, None
+
+
+def sync_check(langfuse, checklist_name: str, check_name: str, prompt_path: Path, config: dict[str, Any]) -> None:
+    """Upload one prompt/config pair for a single check."""
     prompt_key = f"checklists/{checklist_name}/{check_name}"
-
-    # Bundle all JSON files for this check into the Langfuse config payload.
-    config = load_check_json_config(check_dir)
-
-    # Determine which prompt text files to upload.
-    if only_txts is not None:
-        txt_files = sorted(only_txts)
-    else:
-        # Support both source layout (prompts/prompt*.txt)
-        # and snapshot layout (prompt*.txt in check root).
-        txt_files = sorted((check_dir / "prompts").glob("prompt*.txt"))
-        if not txt_files:
-            txt_files = sorted(check_dir.glob("prompt*.txt"))
-        if not txt_files:
-            single = check_dir / "prompt.txt"
-            txt_files = [single] if single.exists() else []
-
-    if not txt_files:
-        print(f"  Skipped {prompt_key}: no prompt .txt files found")
-        return
-
-    for txt_path in txt_files:
-        prompt_text = load_text(txt_path)
-        print(f"  Uploading: {prompt_key}  ({txt_path.name}) ...")
-        langfuse.create_prompt(
-            name=prompt_key,
-            prompt=prompt_text,
-            config=config,
-            labels=["production"],
-            type="text",
-        )
-        print(f"  Done:      {prompt_key}  ({txt_path.name})")
+    prompt_text = load_text(prompt_path)
+    print(f"  Uploading: {prompt_key}  ({prompt_path.name}) ...")
+    langfuse.create_prompt(
+        name=prompt_key,
+        prompt=prompt_text,
+        config=config,
+        labels=["production"],
+        type="text",
+    )
+    print(f"  Done:      {prompt_key}  ({prompt_path.name})")
 
 
 # ---------------------------------------------------------------------------
@@ -158,67 +147,76 @@ def sync_check(
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    if len(sys.argv) < 2:
-        print("Usage: sync_langfuse_checklist.py <comma-separated-files|ALL>")
-        sys.exit(1)
+    manifest_path = Path(sys.argv[1]) if len(sys.argv) >= 2 else DEFAULT_MANIFEST_PATH
+    repo_root = Path.cwd().resolve()
+    abs_manifest_path = (repo_root / manifest_path).resolve() if not manifest_path.is_absolute() else manifest_path.resolve()
 
-    arg = sys.argv[1].strip()
-    if arg == "ALL":
-        files = collect_all_files()
-        print(f"Syncing ALL checklist files ({len(files)} file(s)) ...")
-        # For a full resync, process every check completely.
-        seen: set[tuple[str, str]] = set()
-        for fp in files:
-            info = extract_check_info(fp)
-            if info:
-                seen.add(info)
-        checks_to_sync: dict[tuple[str, str], list[Path] | None] = {
-            k: None for k in seen
-        }
-    else:
-        changed_files = [f.strip() for f in arg.split(",") if f.strip()]
-        print(f"Processing {len(changed_files)} changed file(s) ...")
+    print(f"Loading manifest: {abs_manifest_path}")
+    manifest = load_manifest(abs_manifest_path)
+    path_templates = manifest["path_templates"]
+    checks = manifest["checks"]
 
-        # Group by check; any JSON change triggers a full prompt re-upload for that check.
-        json_changed: set[tuple[str, str]] = set()
-        txt_changed: dict[tuple[str, str], list[Path]] = {}
+    # Required template for the prompt text payload.
+    prompt_template = path_templates.get("prompt")
+    if not isinstance(prompt_template, str):
+        raise ValueError("Manifest path_templates.prompt must be a string")
 
-        for fp in changed_files:
-            info = extract_check_info(fp)
-            if info is None:
-                print(f"  Skipping (not a watched checklist file): {fp}")
-                continue
-            key = info
-            p = Path(fp)
-            if p.suffix == ".json":
-                # Any JSON change in this check re-uploads all prompts.
-                json_changed.add(key)
-            elif p.suffix == ".txt":
-                txt_changed.setdefault(key, []).append(p)
-
-        # Build the sync plan:
-        #   JSON changed  -> re-upload all prompts for that check
-        #   only TXT changed -> upload only the changed prompt files
-        all_keys = json_changed | set(txt_changed.keys())
-        checks_to_sync: dict[tuple[str, str], list[Path] | None] = {}
-        for key in all_keys:
-            if key in json_changed:
-                checks_to_sync[key] = None  # None = sync all
-            else:
-                checks_to_sync[key] = txt_changed[key]
-
-    if not checks_to_sync:
-        print("No relevant checklist files to sync.")
-        return
+    # Any template ending in .json is treated as part of Langfuse config.
+    json_templates = {
+        key: value
+        for key, value in path_templates.items()
+        if isinstance(value, str) and value.endswith(".json")
+    }
+    if not json_templates:
+        raise ValueError("No JSON templates found in manifest path_templates")
 
     langfuse = get_langfuse_client()
     print(f"Connected to Langfuse at {os.environ.get('LANGFUSE_BASE_URL')}\n")
 
     errors: list[str] = []
-    for (checklist_name, check_name), only_txts in sorted(checks_to_sync.items()):
-        print(f"Syncing: {checklist_name}/{check_name}")
+    synced = 0
+    for entry in checks:
+        # Each entry should resolve to exactly one prompt upload.
+        checklist_name = entry.get("checklist")
+        check_name = entry.get("check")
+        if not checklist_name or not check_name:
+            errors.append(f"Invalid check entry missing checklist/check: {entry}")
+            continue
+
+        # Enrich template context with fields derived from prompt_version.
+        context, prompt_context_error = enrich_prompt_context(dict(entry))
+        if prompt_context_error:
+            print(f"Skipping {checklist_name}/{check_name}: {prompt_context_error}")
+            continue
+
+        needed_fields = template_fields(prompt_template)
+        missing_prompt_fields = [f for f in needed_fields if context.get(f) is None]
+        if missing_prompt_fields:
+            print(
+                f"Skipping {checklist_name}/{check_name}: missing values for prompt template fields {missing_prompt_fields}"
+            )
+            continue
+
         try:
-            sync_check(langfuse, checklist_name, check_name, only_txts)
+            prompt_path = render_path(prompt_template, context, repo_root)
+            if not prompt_path.exists():
+                raise FileNotFoundError(f"Missing prompt file: {prompt_path}")
+
+            # Resolve and validate all JSON config paths declared in path_templates.
+            json_paths: list[Path] = []
+            for _, template in sorted(json_templates.items()):
+                fields = template_fields(template)
+                missing_json_fields = [f for f in fields if context.get(f) is None]
+                if missing_json_fields:
+                    raise ValueError(
+                        f"Missing values for JSON template fields {missing_json_fields} in check {checklist_name}/{check_name}"
+                    )
+                json_paths.append(render_path(template, context, repo_root))
+
+            config = build_config_from_manifest_paths(json_paths)
+            print(f"Syncing: {checklist_name}/{check_name}")
+            sync_check(langfuse, checklist_name, check_name, prompt_path, config)
+            synced += 1
         except Exception as exc:
             msg = f"ERROR syncing {checklist_name}/{check_name}: {exc}"
             print(f"  {msg}")
@@ -232,7 +230,10 @@ def main() -> None:
             print(f"  - {e}")
         sys.exit(1)
 
-    print("\nAll done.")
+    if synced == 0:
+        print("\nNo checks were synced.")
+    else:
+        print(f"\nAll done. Synced {synced} check(s).")
 
 
 if __name__ == "__main__":
