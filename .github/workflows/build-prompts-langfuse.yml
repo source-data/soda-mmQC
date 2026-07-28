@@ -1,4 +1,4 @@
-name: Sync production prompts to Langfuse
+name: Build production prompts from GitHub to Langfuse
 
 on:
     push:
@@ -9,11 +9,11 @@ on:
     workflow_dispatch:
 
 concurrency:
-    group: sync-prompts-langfuse
+    group: build-prompts-langfuse
     cancel-in-progress: true
 
 jobs:
-    sync-prompts:
+    build-prompts:
         runs-on: ubuntu-latest
 
         env:
@@ -42,6 +42,6 @@ jobs:
               run: |
                 pip install "langfuse>=2.0.0"
 
-            - name: Build production prompts to Langfuse
+            - name: Build production prompts from GitHub to Langfuse
               run: |
                 python .github/scripts/build_langfuse_checklist.py soda_mmqc/data/production_prompts/production.json
