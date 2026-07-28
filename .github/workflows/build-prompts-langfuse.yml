@@ -42,6 +42,6 @@ jobs:
               run: |
                 pip install "langfuse>=2.0.0"
 
-            - name: Sync production prompts to Langfuse
+            - name: Build production prompts to Langfuse
               run: |
-                python .github/scripts/sync_langfuse_checklist.py soda_mmqc/data/production_prompts/production.json
+                python .github/scripts/build_langfuse_checklist.py soda_mmqc/data/production_prompts/production.json

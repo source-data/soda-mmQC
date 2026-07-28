@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Sync Langfuse prompts using a production manifest file.
+"""Build Langfuse prompts using a production manifest file.
 
 Usage:
-    python .github/scripts/sync_langfuse_checklist.py [manifest-path]
+    python .github/scripts/build_langfuse_checklist.py [manifest-path]
 
 Default manifest path:
     soda_mmqc/data/production_prompts/production.json
@@ -127,7 +127,7 @@ def enrich_prompt_context(entry: dict[str, Any]) -> tuple[dict[str, Any], str | 
     return context, None
 
 
-def sync_check(langfuse, checklist_name: str, check_name: str, prompt_path: Path, config: dict[str, Any]) -> None:
+def build_check(langfuse, checklist_name: str, check_name: str, prompt_path: Path, config: dict[str, Any]) -> None:
     """Upload one prompt/config pair for a single check."""
     prompt_key = f"checklists/{checklist_name}/{check_name}"
     prompt_text = load_text(prompt_path)
@@ -215,7 +215,7 @@ def main() -> None:
 
             config = build_config_from_manifest_paths(json_paths)
             print(f"Syncing: {checklist_name}/{check_name}")
-            sync_check(langfuse, checklist_name, check_name, prompt_path, config)
+            build_check(langfuse, checklist_name, check_name, prompt_path, config)
             synced += 1
         except Exception as exc:
             msg = f"ERROR syncing {checklist_name}/{check_name}: {exc}"
