@@ -1,0 +1,47 @@
+name: Build production prompts from GitHub to Langfuse
+
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - 'soda_mmqc/data/production_prompts/production.json'
+    workflow_dispatch:
+
+concurrency:
+    group: build-prompts-langfuse
+    cancel-in-progress: true
+
+jobs:
+    build-prompts:
+        runs-on: ubuntu-latest
+
+        env:
+            LANGFUSE_BASE_URL: ${{ secrets.LANGFUSE_BASE_URL }}
+            LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+            LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+
+            - name: Validate required secrets
+              run: |
+                test -n "$LANGFUSE_BASE_URL" || (echo "Missing LANGFUSE_BASE_URL" && exit 1)
+                test -n "$LANGFUSE_PUBLIC_KEY" || (echo "Missing LANGFUSE_PUBLIC_KEY" && exit 1)
+                test -n "$LANGFUSE_SECRET_KEY" || (echo "Missing LANGFUSE_SECRET_KEY" && exit 1)
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.11"
+
+            - name: Install dependencies
+              run: |
+                pip install "langfuse>=2.0.0"
+
+            - name: Build production prompts from GitHub to Langfuse
+              run: |
+                python .github/scripts/build_langfuse_checklist.py soda_mmqc/data/production_prompts/production.json

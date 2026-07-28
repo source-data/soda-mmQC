@@ -1,0 +1,37 @@
+{
+  "checklist": "external-data-url-validation-agentic",
+  "defaults": {
+    "matching_metric": "graded_string",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["url"]
+  },
+  "fields": {
+    "outputs[].url": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].repository": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].accession_number_or_identifier": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].resolves_to_data_page": {
+      "matching_metric": "binary_polarity"
+    },
+    "outputs[].justification": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}

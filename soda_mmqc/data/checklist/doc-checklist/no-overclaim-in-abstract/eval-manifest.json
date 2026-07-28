@@ -1,0 +1,29 @@
+{
+  "checklist": "no-overclaim-in-abstract",
+  "defaults": {
+    "matching_metric": "multiclass",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["overclaim_detected"]
+  },
+  "fields": {
+    "outputs[].overclaim_detected": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].location": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].excerpt": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "path_templates": {
+    "prompt": "soda_mmqc/data/checklist/{checklist}/{check}/prompts/prompt.{version}.txt",
+    "schema": "soda_mmqc/data/checklist/{checklist}/{check}/schema.json",
+    "eval_manifest": "soda_mmqc/data/checklist/{checklist}/{check}/eval-manifest.json",
+    "model_config": "soda_mmqc/data/model_config.json"
+  },
+  "checks": [
+    { "checklist": "fig-checklist", "check": "error-bars-defined", "prompt_version": 2 },
+    { "checklist": "fig-checklist", "check": "image-annotation-defined", "prompt_version": 2 },
+    { "checklist": "fig-checklist", "check": "individual-data-points", "prompt_version": 2 },
+    { "checklist": "fig-checklist", "check": "micrograph-scale-bar", "prompt_version": 1 },
+    { "checklist": "fig-checklist", "check": "panel-image-matches-caption", "prompt_version": 1 },
+    { "checklist": "fig-checklist", "check": "plot-axis-units", "prompt_version": 1 },
+    { "checklist": "fig-checklist", "check": "plot-gap-labeling", "prompt_version": 1 },
+    { "checklist": "fig-checklist", "check": "replication-reporting", "prompt_version": 3 },
+    { "checklist": "fig-checklist", "check": "single-channel-for-overlay", "prompt_version": 2 },
+    { "checklist": "fig-checklist", "check": "stat-significance-level", "prompt_version": 2 },
+    { "checklist": "fig-checklist", "check": "stat-test", "prompt_version": 3 },
+    { "checklist": "doc-checklist", "check": "AB-target-reagent-consistency", "prompt_version": 1 },
+    { "checklist": "doc-checklist", "check": "DAS-present-and-correct", "prompt_version": 2 },
+    { "checklist": "doc-checklist", "check": "author-contribution-in-ms", "prompt_version": 1 },
+    { "checklist": "doc-checklist", "check": "biorender-protocol.io-mentions", "prompt_version": 1 },
+    { "checklist": "doc-checklist", "check": "data-not-shown", "prompt_version": 2 },
+    { "checklist": "doc-checklist", "check": "external-data-url-validation", "prompt_version": 1 },
+    { "checklist": "doc-checklist", "check": "external-data-url-validation-agentic", "prompt_version": null },
+    { "checklist": "doc-checklist", "check": "no-overclaim-in-abstract", "prompt_version": 1 },
+    { "checklist": "doc-checklist", "check": "reference-format-alphabetical", "prompt_version": 2 },
+    { "checklist": "doc-checklist", "check": "section-order", "prompt_version": 2 },
+    { "checklist": "doc-checklist", "check": "section-order-alt", "prompt_version": 1 }
+  ]
+}
