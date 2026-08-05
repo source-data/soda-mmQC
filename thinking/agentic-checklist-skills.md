@@ -44,7 +44,7 @@ There is already a check named `external-data-url-validation-agentic`, but it is
 | Leaf contents | Folder with `SKILL.md` + `schema.json` (+ `eval-manifest.json`, `benchmark.json` as today) |
 | Intermediate skills | Folder with `SKILL.md`; **may** have a `schema.json` as a **runtime / chaining contract** (not an eval gold target). See “Schemas and evaluation” below. |
 | Eval / gold / FlatEvaluator | **Leaves only** — same as today: score final check JSON vs `expected_output.json` + leaf `eval-manifest.json`. Do **not** nest upstream schemas into the scored document. |
-| Graph source of truth | **Skills** — frontmatter `requires` / `produces` (option C earlier) |
+| Graph source of truth | each `SKILL.md` **frontmatter** declares `requires` / `produces` to define DAG edges |
 | Hierarchy for humans/tools | **Generated** `dag.yaml` + README from skill metadata (not hand-edited) |
 | Example / cache loop | **Python orchestrator (A)** — deterministic batching; agent runs **per example** |
 | Evaluation | **Separate CLI** from check execution |
@@ -256,6 +256,8 @@ needs: []    # e.g. [web, code] — usually empty; checklist defaults apply
 ---
 ```
 
+`needs` is read by **our** runner (unioned into session options), not enforced by Anthropic/OpenAI Agent SDKs — see “Note: frontmatter is not provider-enforced (SDK)” under Config model.
+
 `schema.json` on a **leaf** remains the **eval/curation contract**. Upstream skills may also declare a schema — see next section.
 
 ## Schemas and evaluation: are upstream structures “lost”?
@@ -364,10 +366,22 @@ Needed so skills can call deterministic helpers (load figure, parse caption, val
 
 1. **Checklist** `model_defaults.json` (name TBD): provider-agnostic defaults used in practice — effort, max tokens, allowed tool families, etc.
 2. **Skill** `needs: […]`: rare overrides when a skill truly requires web/code/etc.
-3. **Runner** maps `(defaults ∪ needs ∪ CLI --model)` → Anthropic Agent SDK session config (v1) or OpenAI Agents config (later).
+3. **Runner** maps `(defaults ∪ needs ∪ CLI --model)` → Anthropic Agent SDK session config (v1) or OpenAI Agents config (later). For a multi-skill closure in one session, effective permissions are the **union** of checklist defaults and every skill’s `needs`.
 4. **Cache key** includes: leaf id, skill closure hash (or content hashes), example id, model id, effective config hash, schema hash.
 
 Avoid shipping OpenAI-shaped `model_config.json` as the long-term skill contract; keep migration shims if needed.
+
+### Note: frontmatter is not provider-enforced (SDK)
+
+Putting permissions / model settings only in skill frontmatter (or relying on Anthropic’s `allowed-tools` field) is **not** enough for our planned runtimes:
+
+| Surface | Honors skill-level tool restrictions in `SKILL.md`? |
+|---------|-----------------------------------------------------|
+| Claude Code **CLI** | Yes — `allowed-tools` frontmatter applies |
+| Claude **Agent SDK** | **No** — docs: frontmatter `allowed-tools` is ignored; set `allowed_tools` / `permission_mode` on session options |
+| OpenAI Agents / Codex skills | Frontmatter is mainly `name` / `description`; optional `agents/openai.yaml` covers UI / invocation policy / MCP deps — **not** a portable session permission or model-config contract. Tools/permissions are set on the agent/run in code |
+
+So: skill `needs` (and any richer frontmatter we invent) is **orchestrator-owned metadata**. The Python runner must read it and map into provider session options. Prefer checklist `model_defaults.json` for the common session profile; use per-skill `needs` only for rare exceptions. Do not assume Anthropic or OpenAI will enforce those fields for us on the Agent SDK path.
 
 ## CLAUDE.md role
 
