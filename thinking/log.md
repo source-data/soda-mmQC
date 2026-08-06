@@ -153,3 +153,9 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-07-23] design | fig-checklist modular rewrite: shared `identify-panels` entry, optional `classify-panel-kind`, leaves keep schemas; pilot two-level then add mid skill if needed. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
 
 ## [2026-07-23] design | Schemas: leaf = eval/gold only; intermediate schemas optional as **runtime contracts**; reject nested mega-schema for FlatEvaluator. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-08-05] design | Added [agentic-checklist-conversion-plan.md](agentic-checklist-conversion-plan.md): 14-phase migration from the current prompt runner to versioned checklist skill DAGs, with exact implementation surfaces, validation strategy, rollout/rollback controls, and a required human decision gate after every phase.
+
+## [2026-08-06] design | Revised [agentic-checklist-conversion-plan.md](agentic-checklist-conversion-plan.md): reusable `scientific_qc_dag` package plus standalone collection boundary; collection-owned DAG; orchestrator launches one restricted sub-agent per skill; typed artifact contracts; host-approved MCP/pre-generated script operations only; host-neutral artifact stores; package-independence test; Langfuse and mmQC deployment removed from scope.
+
+## [2026-08-06] design | Corrected [agentic-checklist-conversion-plan.md](agentic-checklist-conversion-plan.md) to one mmQC branch: removed top-level `packages/` and `skill-collections/`; pipeline code now lives under `soda_mmqc/agentic/`; each checklist owns `agentic/` skills, contracts, pins, and generated DAG beside existing benchmark/evaluation assets. Retained topological skill-scoped sub-agents and strict MCP/pre-generated-script permissions.
