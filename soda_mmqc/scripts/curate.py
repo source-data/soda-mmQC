@@ -23,7 +23,17 @@ def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("checklist", type=str, help="Name of the checklist to curate")
+    parser.add_argument(
+        "--local-prompts",
+        action="store_true",
+        help="Load prompts from local files only (disable Langfuse)",
+    )
     args = parser.parse_args()
+
+    if args.local_prompts:
+        # Empty values block load_dotenv() from re-loading Langfuse keys from .env
+        os.environ["LANGFUSE_PUBLIC_KEY"] = ""
+        os.environ["LANGFUSE_SECRET_KEY"] = ""
     
     # Prepare streamlit arguments
     sys.argv = [

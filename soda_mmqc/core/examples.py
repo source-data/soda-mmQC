@@ -7,9 +7,9 @@ import json
 import logging
 import base64
 import mimetypes
-import subprocess
 from soda_mmqc.config import EXAMPLES_DIR
-from mmqc_utils import convert_to_bounded_jpeg
+from mmqc_utils import convert_to_bounded_jpeg, document_to_html
+from mmqc_utils.exceptions import DocumentConversionError
 try:
     from openai import OpenAI
 except Exception:
@@ -518,71 +518,58 @@ class FigureExample(Example):
 
 
 class WordExample(Example):
-    """Example containing only text content."""
-    
-    def __init__(self, relative_source_path: str, destination_format: str = "markdown"):
+    """Example containing a manuscript converted to HTML for model input."""
+
+    def __init__(self, relative_source_path: str):
         super().__init__(relative_source_path)
         self.content: Optional[str] = None
-        self.destination_format = destination_format
+        self.word_file_path: Optional[Path] = None
 
     def load_from_source(self) -> None:
-        """Load the example's content from the provided dictionary.
-        
-        Args:
-            example: Dictionary containing example data with at least 'doc_id'
-                
-        Raises:
-            FileNotFoundError: If content file is missing
-            ValueError: If required data is missing
-        """
+        """Load manuscript HTML from exactly one .docx in content/.
 
+        Raises:
+            FileNotFoundError: If source, content directory, or .docx is missing
+            ValueError: If multiple .docx files are present or conversion fails
+        """
         if not self.source_path.exists():
             raise FileNotFoundError(
                 f"Content directory not found: {self.source_path}"
             )
 
-        # Load Word file
         content_path = self.source_path / "content"
         if not content_path.exists():
             raise FileNotFoundError(
                 f"Content directory not found: {content_path}"
             )
 
-        # Find Word file (.docx only)
-        word_files = list(content_path.glob("*.docx"))
+        word_files = sorted(content_path.glob("*.docx"))
         if not word_files:
             raise FileNotFoundError(
                 f"No .docx file found in {content_path}. "
-                "Only .docx files are supported."
+                "Exactly one .docx file is required."
+            )
+        if len(word_files) > 1:
+            names = ", ".join(path.name for path in word_files)
+            raise ValueError(
+                f"Expected exactly one .docx in {content_path}, "
+                f"found {len(word_files)}: {names}"
             )
 
-        word_file_path = word_files[0]  # Use the first .docx file found
+        word_file_path = word_files[0]
+        self.word_file_path = word_file_path
 
-        # Extract text from Word file using Pandoc
         try:
-            result = subprocess.run(
-                ["pandoc", str(word_file_path), "-t", self.destination_format],
-                capture_output=True,
-                text=True,
-                check=True
-            )
-            self.content = result.stdout.strip()
-
-        except subprocess.CalledProcessError as e:
+            self.content = document_to_html(word_file_path)
+        except DocumentConversionError as e:
             raise ValueError(
-                f"Pandoc error reading Word file {word_file_path}: {e.stderr}"
-            )
-        except FileNotFoundError:
-            raise ValueError(
-                "Pandoc not found. Install from: "
-                "https://pandoc.org/installing.html"
-            )
+                f"Error converting Word file {word_file_path}: {e}"
+            ) from e
         except Exception as e:
             raise ValueError(
-                f"Error reading Word file {word_file_path}: {str(e)}"
-            )
+                f"Error reading Word file {word_file_path}: {e}"
+            ) from e
 
-        # Store doc_id
         self.doc_id = self.source_path.name
 
     def get_content_hash(self) -> str:
