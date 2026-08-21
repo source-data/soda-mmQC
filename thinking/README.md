@@ -61,3 +61,4 @@ Canonical list with blurbs: **[`index.md`](index.md)**. Quick links:
 | Leaf primitives (`score`, strings, numbers, booleans) | [`evaluation-leaf-primitives.md`](evaluation-leaf-primitives.md) |
 | Hierarchical scoring (DEPRECATED) | [`evaluation-hierarchical-scoring-DEPRECATED.md`](evaluation-hierarchical-scoring-DEPRECATED.md) |
 | Agentic checklist skills (design brief) | [`agentic-checklist-skills.md`](agentic-checklist-skills.md) |
+| Doc-checklist roadmap | [`doc-checklist-roadmap.md`](doc-checklist-roadmap.md) |
