@@ -153,3 +153,15 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-07-23] design | fig-checklist modular rewrite: shared `identify-panels` entry, optional `classify-panel-kind`, leaves keep schemas; pilot two-level then add mid skill if needed. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
 
 ## [2026-07-23] design | Schemas: leaf = eval/gold only; intermediate schemas optional as **runtime contracts**; reject nested mega-schema for FlatEvaluator. Updated [agentic-checklist-skills.md](agentic-checklist-skills.md).
+
+## [2026-08-11] design | Document-level curation UI plan: mode switch via `benchmark.json` `example_class`, HTML viewer with `mmqc_utils.document_to_html`, reuse expected-output table. See [curation-document-viewer.md](curation-document-viewer.md).
+
+## [2026-08-11] design | Curation doc viewer revised: render `WordExample.content` (pandoc markdown = model input), not `document_to_html`; noted `example_class` in `benchmark.json` as debt → future `input_manifest`. Updated [curation-document-viewer.md](curation-document-viewer.md).
+
+## [2026-08-11] design | Cross-repo doc conversion audit: soda-curation production uses `mmqc_utils.document_to_html` (HTML); mmQC `WordExample` still uses pandoc markdown — misaligned. Target: align WordExample + curation viewer with production HTML. Updated [curation-document-viewer.md](curation-document-viewer.md).
+
+## [2026-08-11] design | Curation plan locked: Phase 0 `WordExample`→`document_to_html`, HTML viewer from `WordExample.content`, single docx (raise if multiple), manual QA, defer `input_manifest`. Updated [curation-document-viewer.md](curation-document-viewer.md).
+
+## [2026-08-11] impl | Phase 0: `WordExample` now uses `document_to_html`, enforces single `.docx`, adds `word_file_path`; tests in `tests/test_word_example.py`.
+
+## [2026-08-11] impl | Phase 1: document curation UI in `curation.py` — `example_class` branching, HTML viewer, shared output editor; tests for discovery helpers.
