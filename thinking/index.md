@@ -14,5 +14,6 @@ Optional columns: **date** (last meaningful update), **sources** (rough count or
 | [evaluation-hierarchical-scoring-DEPRECATED.md](evaluation-hierarchical-scoring-DEPRECATED.md) | **DEPRECATED:** recursive roll-up/drill-down; use [evaluation-scoring.md](evaluation-scoring.md). | 2026-05-21 | — |
 | [evaluation-leaf-primitives.md](evaluation-leaf-primitives.md) | Primitives, extended primitives (`string[]`, three compare modes), and **`score`**; layer S is out of scope here. | 2026-07-13 | — |
 | [visualization-plan.md](visualization-plan.md) | Flat eval reporting: notebook-first `soda_mmqc/reporting/` API, Layer S/1/2 plots, interactive drill-down tables (itables); CLI deferred. | 2026-06-12 | — |
+| [curation-document-viewer.md](curation-document-viewer.md) | Document curation plan **locked**: Phase 0 `WordExample`→`document_to_html`, HTML viewer, single-docx rule, manual QA. | 2026-08-11 | ext |
 | [agentic-checklist-skills.md](agentic-checklist-skills.md) | Design brief: nested skills per checklist (DAG), leaf=check+schema, skills SoT + generated dag, Python example loop, eval CLI split, Anthropic agents first. | 2026-07-22 | — |
 | [doc-checklist-roadmap.md](doc-checklist-roadmap.md) | Bring manuscript `doc-checklist` to flat eval + reporting parity with fig-checklist; phases 0–6, inventory, open questions. | 2026-08-21 | — |

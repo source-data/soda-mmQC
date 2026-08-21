@@ -2,10 +2,22 @@ import os
 import json
 import unittest
 import tempfile
+import shutil
 from pathlib import Path
+from unittest.mock import patch
 
 from soda_mmqc.core.curation import (
-    load_checklist, load_example_data, get_example_hierarchy, save_check_output
+    load_checklist,
+    load_example_data,
+    get_example_hierarchy,
+    get_document_examples,
+    get_example_class,
+    save_check_output,
+    build_document_viewer_html,
+    _extract_body_html,
+    get_word_docx_path,
+    word_example_cache_key,
+    load_cached_word_example,
 )
 from soda_mmqc.config import CHECKLIST_DIR, EXAMPLES_DIR
 
@@ -505,6 +517,23 @@ class TestCuration(unittest.TestCase):
         # Verify prompts are loaded
         self.assertIn("prompt.1.txt", checklist["incomplete-check"]["prompts"])
 
+    def test_load_checklist_skips_empty_schema_file(self):
+        """Test load_checklist skips checks with empty schema.json."""
+        empty_schema_dir = self.test_checklist_dir / "empty-schema-check"
+        empty_schema_dir.mkdir()
+        (empty_schema_dir / "schema.json").write_text("")
+        (empty_schema_dir / "benchmark.json").write_text(
+            json.dumps({"example_class": "word", "examples": []})
+        )
+
+        with patch("soda_mmqc.core.curation.st.warning") as mock_warning:
+            checklist = load_checklist(self.test_checklist_dir)
+
+        self.assertNotIn("empty-schema-check", checklist)
+        mock_warning.assert_any_call(
+            "Skipping check 'empty-schema-check': schema.json is empty or invalid"
+        )
+
     def test_load_checklist_with_empty_directory(self):
         """Test load_checklist with an empty checklist directory."""
         empty_dir = Path(tempfile.mkdtemp())
@@ -585,7 +614,7 @@ class TestCuration(unittest.TestCase):
             self.skipTest("No valid figure examples found")
         
         # Test with actual data
-        example_data = load_example_data(doc_id, fig_path)
+        example_data = load_example_data(fig_path)
         
         # Verify the example data is loaded correctly
         self.assertIsNotNone(example_data)
@@ -643,7 +672,7 @@ class TestCuration(unittest.TestCase):
         mock_checklist = {"test-check": {}}
         
         # Test with checklist filtering
-        example_data = load_example_data(doc_id, fig_path, mock_checklist)
+        example_data = load_example_data(fig_path, mock_checklist)
         
         # Verify the example data is loaded
         self.assertIsNotNone(example_data)
@@ -658,7 +687,7 @@ class TestCuration(unittest.TestCase):
         """Test load_example_data with a nonexistent figure path."""
         # Test with a path that doesn't exist
         nonexistent_path = Path("/nonexistent/path")
-        example_data = load_example_data("test-doc", nonexistent_path)
+        example_data = load_example_data(nonexistent_path)
         
         # Should return None for nonexistent paths
         self.assertIsNone(example_data)
@@ -672,7 +701,7 @@ class TestCuration(unittest.TestCase):
             invalid_fig_dir = temp_dir / "invalid-fig"
             invalid_fig_dir.mkdir()
             
-            example_data = load_example_data("test-doc", invalid_fig_dir)
+            example_data = load_example_data(invalid_fig_dir)
             
             # Should return None for invalid structure
             self.assertIsNone(example_data)
@@ -767,6 +796,173 @@ class TestCuration(unittest.TestCase):
         # Verify other components are loaded
         self.assertIn("schema", checklist["no-prompts-check"])
         self.assertIn("benchmark", checklist["no-prompts-check"])
+
+    def test_get_example_class_from_benchmark(self):
+        checklist = {
+            "url-check": {
+                "benchmark": {"example_class": "word"},
+            }
+        }
+        self.assertEqual(get_example_class(checklist), "word")
+
+    def test_get_example_class_defaults_to_figure(self):
+        self.assertEqual(get_example_class({}), "figure")
+
+    def test_get_document_examples_from_benchmark_list(self):
+        test_examples_dir = Path(tempfile.mkdtemp())
+        try:
+            for doc_id in ("doc-a", "doc-b", "missing-doc"):
+                if doc_id != "missing-doc":
+                    (test_examples_dir / doc_id / "content").mkdir(parents=True)
+
+            checklist = {
+                "url-check": {
+                    "benchmark": {
+                        "example_class": "word",
+                        "examples": ["doc-b", "doc-a", "missing-doc"],
+                    }
+                }
+            }
+
+            doc_ids = get_document_examples(test_examples_dir, checklist)
+            self.assertEqual(doc_ids, ["doc-a", "doc-b"])
+        finally:
+            shutil.rmtree(test_examples_dir)
+
+    def test_get_document_examples_empty_benchmark_list(self):
+        test_examples_dir = Path(tempfile.mkdtemp())
+        try:
+            (test_examples_dir / "discovered-doc" / "content").mkdir(parents=True)
+            (test_examples_dir / "discovered-doc" / "content" / "paper.docx").write_bytes(
+                b"PK\x03\x04"
+            )
+            checks_dir = test_examples_dir / "discovered-doc" / "checks" / "url-check"
+            checks_dir.mkdir(parents=True)
+            (checks_dir / "expected_output.json").write_text("{}")
+
+            checklist = {
+                "url-check": {
+                    "benchmark": {
+                        "example_class": "word",
+                        "examples": [],
+                    }
+                }
+            }
+
+            doc_ids = get_document_examples(test_examples_dir, checklist)
+            self.assertEqual(doc_ids, [])
+        finally:
+            shutil.rmtree(test_examples_dir)
+
+    def test_get_document_examples_discovers_from_layout(self):
+        test_examples_dir = Path(tempfile.mkdtemp())
+        try:
+            doc_dir = test_examples_dir / "EMBOJ-2024-119734R"
+            content_dir = doc_dir / "content"
+            content_dir.mkdir(parents=True)
+            (content_dir / "paper.docx").write_bytes(b"PK\x03\x04")
+            checks_dir = doc_dir / "checks" / "url-check"
+            checks_dir.mkdir(parents=True)
+            (checks_dir / "expected_output.json").write_text("{}")
+
+            checklist = {"url-check": {"benchmark": {}}}
+            doc_ids = get_document_examples(test_examples_dir, checklist)
+            self.assertEqual(doc_ids, ["EMBOJ-2024-119734R"])
+        finally:
+            shutil.rmtree(test_examples_dir)
+
+
+class TestDocumentViewer(unittest.TestCase):
+    """Tests for document viewer HTML generation."""
+
+    def test_build_document_viewer_html_includes_content_and_search_ui(self):
+        content = "<p>Deposit at https://example.org/data</p>"
+        html = build_document_viewer_html(content)
+
+        self.assertIn(content, html)
+        self.assertIn('id="doc-search-input"', html)
+        self.assertIn("mark.doc-search-hit", html)
+        self.assertIn("doc-search-current", html)
+        self.assertIn("function escapeRegex", html)
+
+    def test_build_document_viewer_html_preserves_nested_markup(self):
+        content = "<section><h1>Title</h1><p>See <strong>Figure 1</strong>.</p></section>"
+        html = build_document_viewer_html(content)
+
+        self.assertIn("<strong>Figure 1</strong>", html)
+        self.assertIn('id="doc-content"', html)
+
+    def test_extract_body_html_strips_wrapper(self):
+        wrapped = (
+            "<html><head><title>T</title></head>"
+            "<body><p>Inside body</p></body></html>"
+        )
+        self.assertEqual(_extract_body_html(wrapped), "<p>Inside body</p>")
+
+    def test_extract_body_html_returns_fragment_unchanged(self):
+        fragment = "<p>Already a fragment</p>"
+        self.assertEqual(_extract_body_html(fragment), fragment)
+
+    def test_build_document_viewer_html_opens_links_in_new_tab(self):
+        content = '<p>See <a href="https://example.org">link</a></p>'
+        html = build_document_viewer_html(content)
+        self.assertIn('setAttribute("target", "_blank")', html)
+        self.assertIn("configureLinks", html)
+
+
+class TestWordExampleCache(unittest.TestCase):
+    """Tests for WordExample loading helpers and session cache."""
+
+    def test_get_word_docx_path_requires_single_docx(self):
+        test_dir = Path(tempfile.mkdtemp())
+        try:
+            content_dir = test_dir / "doc-a" / "content"
+            content_dir.mkdir(parents=True)
+            docx = content_dir / "paper.docx"
+            docx.write_bytes(b"PK\x03\x04")
+
+            path = get_word_docx_path(test_dir, "doc-a")
+            self.assertEqual(path, docx)
+        finally:
+            shutil.rmtree(test_dir)
+
+    def test_get_word_docx_path_raises_for_multiple_docx(self):
+        test_dir = Path(tempfile.mkdtemp())
+        try:
+            content_dir = test_dir / "doc-a" / "content"
+            content_dir.mkdir(parents=True)
+            (content_dir / "a.docx").write_bytes(b"PK\x03\x04")
+            (content_dir / "b.docx").write_bytes(b"PK\x03\x04")
+
+            with self.assertRaises(ValueError):
+                get_word_docx_path(test_dir, "doc-a")
+        finally:
+            shutil.rmtree(test_dir)
+
+    def test_load_cached_word_example_reuses_cache(self):
+        test_dir = Path(tempfile.mkdtemp())
+        try:
+            content_dir = test_dir / "doc-a" / "content"
+            content_dir.mkdir(parents=True)
+            docx = content_dir / "paper.docx"
+            docx.write_bytes(b"PK\x03\x04")
+
+            cache = {}
+            with patch(
+                "soda_mmqc.core.curation.EXAMPLE_FACTORY.create"
+            ) as mock_create:
+                mock_create.return_value = object()
+                first = load_cached_word_example("doc-a", test_dir, cache)
+                second = load_cached_word_example("doc-a", test_dir, cache)
+
+            self.assertIs(first, second)
+            mock_create.assert_called_once()
+            self.assertEqual(
+                list(cache.keys()),
+                [word_example_cache_key("doc-a", docx.stat().st_mtime)],
+            )
+        finally:
+            shutil.rmtree(test_dir)
 
 
 if __name__ == "__main__":

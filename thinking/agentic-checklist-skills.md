@@ -42,8 +42,9 @@ There is already a check named `external-data-url-validation-agentic`, but it is
 | What owns the skill graph? | The **checklist** (scope of related reusable nested skills) |
 | What is a check? | A **leaf skill** in that hierarchy (a skill with no checklist-local dependents; it owns `schema.json`) |
 | Leaf contents | Folder with `SKILL.md` + `schema.json` (+ `eval-manifest.json`, `benchmark.json` as today) |
-| Intermediate skills | Folder with `SKILL.md` only (no eval schema); may declare tools/needs |
-| Graph source of truth | **Skills** — frontmatter `requires` / `produces` (option C earlier) |
+| Intermediate skills | Folder with `SKILL.md`; **may** have a `schema.json` as a **runtime / chaining contract** (not an eval gold target). See “Schemas and evaluation” below. |
+| Eval / gold / FlatEvaluator | **Leaves only** — same as today: score final check JSON vs `expected_output.json` + leaf `eval-manifest.json`. Do **not** nest upstream schemas into the scored document. |
+| Graph source of truth | each `SKILL.md` **frontmatter** declares `requires` / `produces` to define DAG edges |
 | Hierarchy for humans/tools | **Generated** `dag.yaml` + README from skill metadata (not hand-edited) |
 | Example / cache loop | **Python orchestrator (A)** — deterministic batching; agent runs **per example** |
 | Evaluation | **Separate CLI** from check execution |
@@ -255,7 +256,62 @@ needs: []    # e.g. [web, code] — usually empty; checklist defaults apply
 ---
 ```
 
-`schema.json` remains the **eval/curation contract** for leaves only. Intermediate skills use informal or typed `produces` names; they do not need full JSON Schema unless we later want typed intermediate artifacts.
+`needs` is read by **our** runner (unioned into session options), not enforced by Anthropic/OpenAI Agent SDKs — see “Note: frontmatter is not provider-enforced (SDK)” under Config model.
+
+`schema.json` on a **leaf** remains the **eval/curation contract**. Upstream skills may also declare a schema — see next section.
+
+## Schemas and evaluation: are upstream structures “lost”?
+
+### Short answer
+
+**No for the agent session; mostly yes for FlatEvaluator (by design).**
+
+Upstream skills still emit **structured artifacts** (e.g. a `panels` JSON list). Those are passed into downstream skills. What we *avoid* is making the **scored** model output a nested mega-document of every skill’s schema — that would break today’s evaluation model and explode gold curation when you unpin an upstream skill.
+
+### Three options
+
+| | A. Informal upstream only | B. Nested mega-schema (all skills in one scored tree) | C. Dual role (recommended) |
+|--|---------------------------|------------------------------------------------------|----------------------------|
+| Upstream structure | Prose / ad hoc JSON | Part of final scored JSON | Validated JSON per skill schema |
+| Agent chaining | Fragile | Strong | Strong |
+| FlatEvaluator / gold | Unchanged (leaf only) | Must score nested tree; gold includes intermediates | **Unchanged (leaf only)** |
+| Unpin upstream skill | Leaf gold still valid | Gold shape may change with upstream | Leaf gold still valid; optional debug dumps of intermediates |
+| Complexity | Low | High | Medium |
+
+**Reject B for v1.** Nesting every skill schema into one “overall generated response” couples evaluation-scoring to the whole DAG, forces nested `expected_output`, and makes 1D unpin experiments rewrite gold.
+
+### Recommended: C — contract schemas vs eval schemas
+
+1. **Leaf `schema.json` + `eval-manifest.json` + `expected_output.json`**  
+   - Exactly today’s contract for scoring and curation.  
+   - Final agent answer for a check **must** validate against the leaf schema.  
+   - FlatEvaluator compares **only** that leaf JSON to gold.
+
+2. **Intermediate `schema.json` (optional but encouraged for shared skills like `identify-panels`)**  
+   - Runtime contract: validate the artifact before handing it to the next skill.  
+   - Documented by `produces: panels` → schema defines `panels`.  
+   - **Not** listed in benchmark gold; **not** scored by FlatEvaluator in v1.  
+   - May be written to a debug/sidecar path (`intermediates/identify-panels.json`) for inspection when unpinning upstream skills.
+
+3. **Composition is sequential, not nested-in-the-scored-output**  
+   - Session state: `{ panels: {...}, panels_with_kind: {...}, leaf: {...} }`.  
+   - Persisted prediction for eval: **`leaf` only** (plus metadata: skillset hash, optional intermediate digests).
+
+### Implication for evaluation-scoring
+
+- [evaluation-scoring.md](evaluation-scoring.md) stays focused on **leaf** predictive fields.  
+- No change to layer S / leaf primitives because of nesting.  
+- Measuring upstream quality (e.g. “did identify-panels miss panel C?”) is a **separate** concern later: either dedicated gold for that skill, or qualitative debug — not by folding panels into every check’s `expected_output`.
+
+### What “lost” would actually mean
+
+| If we only had leaf schemas and no intermediate contract | Risk |
+|----------------------------------------------------------|------|
+| Downstream skills re-derive panels ad hoc | Panel label drift across checks |
+| No validation of upstream JSON | Silent shape bugs |
+| No sidecar dump | Hard to debug unpin of `identify-panels` |
+
+Hence: **keep structure in the session (+ optional intermediate schemas); keep scoring flat at the leaf.**
 
 ## Approaches considered
 
@@ -271,22 +327,27 @@ needs: []    # e.g. [web, code] — usually empty; checklist defaults apply
 
 ### 2. Graph representation: `dag.yaml` vs skills-only vs FS tree
 
-| | Explicit only | Skills SoT + generated dag (chosen) | FS tree |
-|--|---------------|--------------------------------------|---------|
+| | Hand-maintained `dag.yaml` as SoT | Skills SoT + **generated** `dag.yaml` (chosen) | FS tree as graph |
+|--|-----------------------------------|-----------------------------------------------|------------------|
 | Reuse (multi-parent) | Easy | Easy | Awkward |
-| Drift | High if hand-edited | Low if generated + CI check | Medium |
-| Visualize | Good | Good (generated README) | Local only |
+| Drift | High (edges edited twice) | Low if generated + CI check | Medium |
+| Visualize | Good | Good (generated README / dag) | Local only |
 
-**Rejected:** filesystem tree as graph; hand-maintained `dag.yaml` as SoT.
+**Rejected:** filesystem tree as the graph; **hand-edited** `dag.yaml` as the source of truth.
+
+**Chosen:** each skill’s `requires` / `produces` is SoT. A **generated** `dag.yaml` (plus README) is a derived view — never edited by hand; regenerate or CI-fail on drift.
+
+**Purpose of generated `dag.yaml`:** human/tooling convenience only — visualize the hierarchy, validate the versioning manifest against the full skill inventory, debug closures, and document the checklist. The runner may read it as a cache of the same graph it could rebuild by walking skill frontmatter; it must not be a second place people maintain edges.
 
 ### 3. Schema placement
 
-| | Leaf schema (chosen) | Checklist-wide schema | Schema only in prompt text |
-|--|----------------------|------------------------|----------------------------|
-| Eval/curation | Natural path to leaf dir | Ambiguous multi-check | Brittle |
-| Reuse of upstream skills | Unaffected | N/A | N/A |
+| | Leaf schema for **eval** (chosen) | Nested mega-schema for eval | Schema only in prompt text |
+|--|-----------------------------------|-----------------------------|----------------------------|
+| Eval/curation | Natural path to leaf dir | Gold must nest; brittle under unpin | Brittle |
+| Reuse of upstream skills | Unaffected | Couples all leaves to upstream shape | N/A |
+| Upstream structure | Session + optional intermediate schema | Inside scored tree | Ad hoc |
 
-**Chosen:** schema on leaf folders; evaluation and curation resolve `…/skills/{leaf}/schema.json` (or keep today’s path shape via compatibility).
+**Chosen for scoring:** leaf folders only. **Chosen for chaining:** optional intermediate `schema.json` as runtime contract (not gold). See “Schemas and evaluation.”
 
 ### 4. Code layer: in-process Python tools vs MCP
 
@@ -305,10 +366,22 @@ Needed so skills can call deterministic helpers (load figure, parse caption, val
 
 1. **Checklist** `model_defaults.json` (name TBD): provider-agnostic defaults used in practice — effort, max tokens, allowed tool families, etc.
 2. **Skill** `needs: […]`: rare overrides when a skill truly requires web/code/etc.
-3. **Runner** maps `(defaults ∪ needs ∪ CLI --model)` → Anthropic Agent SDK session config (v1) or OpenAI Agents config (later).
+3. **Runner** maps `(defaults ∪ needs ∪ CLI --model)` → Anthropic Agent SDK session config (v1) or OpenAI Agents config (later). For a multi-skill closure in one session, effective permissions are the **union** of checklist defaults and every skill’s `needs`.
 4. **Cache key** includes: leaf id, skill closure hash (or content hashes), example id, model id, effective config hash, schema hash.
 
 Avoid shipping OpenAI-shaped `model_config.json` as the long-term skill contract; keep migration shims if needed.
+
+### Note: frontmatter is not provider-enforced (SDK)
+
+Putting permissions / model settings only in skill frontmatter (or relying on Anthropic’s `allowed-tools` field) is **not** enough for our planned runtimes:
+
+| Surface | Honors skill-level tool restrictions in `SKILL.md`? |
+|---------|-----------------------------------------------------|
+| Claude Code **CLI** | Yes — `allowed-tools` frontmatter applies |
+| Claude **Agent SDK** | **No** — docs: frontmatter `allowed-tools` is ignored; set `allowed_tools` / `permission_mode` on session options |
+| OpenAI Agents / Codex skills | Frontmatter is mainly `name` / `description`; optional `agents/openai.yaml` covers UI / invocation policy / MCP deps — **not** a portable session permission or model-config contract. Tools/permissions are set on the agent/run in code |
+
+So: skill `needs` (and any richer frontmatter we invent) is **orchestrator-owned metadata**. The Python runner must read it and map into provider session options. Prefer checklist `model_defaults.json` for the common session profile; use per-skill `needs` only for rare exceptions. Do not assume Anthropic or OpenAI will enforce those fields for us on the Agent SDK path.
 
 ## CLAUDE.md role
 
@@ -441,7 +514,7 @@ Lean **A** for the pilot, introduce **B** when the second leaf shows painful dup
 
 1. **Manifest + CLI:** filename; `--unpin` / optional `--versions`; replace `--prompt-version`.
 2. **Git → Langfuse promote:** publish versioning manifest / closure.
-3. **Intermediate artifact schema:** informal `produces` names vs optional JSON Schema for upstream skills (better debugging, more authoring cost).
+3. **Intermediate schemas:** encourage `schema.json` on shared upstream skills as **runtime contracts**; still **no** nested mega-schema for FlatEvaluator (see “Schemas and evaluation”). Whether to ever score intermediates separately remains open.
 4. **Shared skills across checklists:** global store vs per-checklist store (manifest still per checklist).
 5. **Parallelism:** Python may run multiple example agent sessions concurrently — rate limits and cache atomicity.
 6. **Mock mode:** `--mock` should short-circuit agent and return expected leaf JSON (keep for CI).
