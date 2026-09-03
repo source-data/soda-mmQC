@@ -1,0 +1,37 @@
+{
+  "checklist": "external-data-url-validation",
+  "defaults": {
+    "matching_metric": "graded_string",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["url"]
+  },
+  "fields": {
+    "outputs[].url": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].repository": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].identifier": {
+      "matching_metric": "graded_string",
+      "string_compare": "exact",
+      "match_threshold": 1.0
+    },
+    "outputs[].status": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].reason": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}

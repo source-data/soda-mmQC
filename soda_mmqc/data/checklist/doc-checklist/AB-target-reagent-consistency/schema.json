@@ -1,0 +1,51 @@
+{
+  "format": {
+    "type": "json_schema",
+    "name": "AB-target-reagent-consistency",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "has_antibody_table": {
+                "type": "boolean",
+                "description": "Whether an antibody / reagents table was found in the manuscript."
+              },
+              "ambiguous_antibody_reagents": {
+                "type": "boolean",
+                "description": "Whether any antibody reagents are ambiguous (unclear catalogue/target mapping)."
+              },
+              "target_mismatch_detected": {
+                "type": "boolean",
+                "description": "Whether any antibody target appears inconsistent with manuscript usage."
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["none", "minor", "major"],
+                "description": "Overall severity of antibody–target consistency issues."
+              },
+              "requires_editor_query": {
+                "type": "boolean",
+                "description": "Whether an editor query is warranted."
+              }
+            },
+            "required": [
+              "has_antibody_table",
+              "ambiguous_antibody_reagents",
+              "target_mismatch_detected",
+              "severity",
+              "requires_editor_query"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["outputs"],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

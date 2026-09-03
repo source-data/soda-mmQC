@@ -43,6 +43,6 @@ For each panel, provide `Decision_and_explanation` as a single short string with
 ## Please note: 
 - If the caption defines error bars for multiple panels, include the same definition for each relevant panel.
 
-- For panels without error bars or box-plot elements to define, set `error_bar_defined_in_caption`, `from_the_caption`, and `Decision_and_explanation` to "not needed".
+- For panels without error bars or box-plot elements to define, set `error_bar_defined_in_caption`,`from_the_caption`, and `Decision_and_explanation` to "not needed".
 
 - Be thorough and precise in your analysis. Include all panels visible in the figure, even if they don't contain error bars.

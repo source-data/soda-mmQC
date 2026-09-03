@@ -1,0 +1,31 @@
+{
+  "checklist": "author-contribution-in-ms",
+  "defaults": {
+    "matching_metric": "multiclass",
+    "positive_value": "yes",
+    "negative_value": "no",
+    "na_values": []
+  },
+  "list_alignment": {
+    "outputs": ["statement_type"]
+  },
+  "fields": {
+    "outputs[].present": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].location": {
+      "matching_metric": "graded_string",
+      "na_values": [""],
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    },
+    "outputs[].statement_type": {
+      "matching_metric": "multiclass"
+    },
+    "outputs[].excerpt": {
+      "matching_metric": "graded_string",
+      "string_compare": "semantic",
+      "match_threshold": 0.8
+    }
+  }
+}

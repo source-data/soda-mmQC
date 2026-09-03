@@ -165,3 +165,9 @@ grep '^## \[' thinking/log.md | tail -5
 ## [2026-08-11] impl | Phase 0: `WordExample` now uses `document_to_html`, enforces single `.docx`, adds `word_file_path`; tests in `tests/test_word_example.py`.
 
 ## [2026-08-11] impl | Phase 1: document curation UI in `curation.py` — `example_class` branching, HTML viewer, shared output editor; tests for discovery helpers.
+
+## [2026-08-05] design | Added [agentic-checklist-conversion-plan.md](agentic-checklist-conversion-plan.md): 14-phase migration from the current prompt runner to versioned checklist skill DAGs, with exact implementation surfaces, validation strategy, rollout/rollback controls, and a required human decision gate after every phase.
+
+## [2026-08-06] design | Revised [agentic-checklist-conversion-plan.md](agentic-checklist-conversion-plan.md): reusable `scientific_qc_dag` package plus standalone collection boundary; collection-owned DAG; orchestrator launches one restricted sub-agent per skill; typed artifact contracts; host-approved MCP/pre-generated script operations only; host-neutral artifact stores; package-independence test; Langfuse and mmQC deployment removed from scope.
+
+## [2026-08-06] design | Corrected [agentic-checklist-conversion-plan.md](agentic-checklist-conversion-plan.md) to one mmQC branch: removed top-level `packages/` and `skill-collections/`; pipeline code now lives under `soda_mmqc/agentic/`; each checklist owns `agentic/` skills, contracts, pins, and generated DAG beside existing benchmark/evaluation assets. Retained topological skill-scoped sub-agents and strict MCP/pre-generated-script permissions.
