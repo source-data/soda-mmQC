@@ -175,6 +175,8 @@ Worry: leaf check + three chained skills at independent versions → combinatori
 
 v1 recommendation: **session-level cache only** (whole check run for one example under one expanded SkillSet from manifest ± one unpin). Intermediate skill caches deferred.
 
+**No second hash needed.** Removing the pre-run closure walk does not touch `skillset_hash`: it hashes the checklist's pinned version manifest (± one unpin), which fixes every skill's version regardless of whether, or how many times, the agent actually invokes a given skill for a particular example — “the agent never sees multiple versions” already guarantees that *if* a skill is called, it resolves to the one pinned version. What changes with agent-driven discovery is only *which skills get exercised*, never *which version they'd resolve to* — so the pre-run cache key is unaffected and stays exactly `(example, skillset_hash, model, config)`. The skill-invocation log (“Logging skill invocations” above) is still worth keeping, but purely as a **debugging artifact**: comparing two examples' logs directly (e.g. “did the leaf skip its declared `requires`?”) is more informative than comparing a hash of them, and there is no caching decision a trace hash would improve on what `skillset_hash` already provides.
+
 Comparative reporting: baseline manifest vs each version of the unpinned skill (same idea as today’s prompt.1 vs prompt.4, with the rest of the chain held fixed).
 
 ### Langfuse’s role
@@ -218,10 +220,26 @@ Separate CLI (e.g. score / evaluate-outputs):
 ### Per-example agent session
 
 1. Load checklist context (`CLAUDE.md` / project instructions describing `soda_mmqc/data`).
-2. Resolve the **closure** of skills needed for the target leaf (walk `requires` backward from the leaf; optionally use generated `dag.yaml` for the same graph).
-3. Run skills in dependency order (or let the agent schedule within the closure), passing artifacts via `produces` contracts.
-4. Enforce / request structured output against the **leaf** `schema.json`.
-5. Return JSON to the orchestrator for caching and later scoring.
+2. Invoke the agent with the target leaf as the instruction (e.g. “run check `micrograph-scale-bar` on this example”). **Skill discovery is the agent's responsibility, per example** — there is no pre-run closure walk. The agent reads the leaf's `SKILL.md`, which states its `requires` as an instruction (e.g. “call `identify-panels` first”), and invokes upstream skills itself via nested `Skill` tool calls, passing artifacts via `produces` contracts. `requires`/`produces` frontmatter remains the source of truth for the *generated* `dag.yaml` (docs, manifest validation, CI drift-check) — it is read by tooling, not walked by the runner at execution time.
+3. Enforce / request structured output against the **leaf** `schema.json`.
+4. Return JSON to the runner for caching and later scoring, together with the per-example skill-invocation log — see “Logging skill invocations” below.
+
+### Logging skill invocations (per example)
+
+Because skill discovery and ordering now happen inside the agent session rather than as a pre-run closure walk, the *actual* sequence of skills a given example exercised is no longer known in advance — it must be observed. This is needed for downstream analysis and debugging (e.g. “did this leaf actually call `identify-panels`, and in what order, for example #42?”), independent of any caching concern.
+
+**Mechanism:** a `PostToolUse` hook (Claude Agent SDK) attached to each per-example session. The hook fires on every tool call with structured `{tool_name, tool_input, tool_use_id}`, taken from the API's own `tool_use` blocks — not from the model's prose. Filtering `tool_name == "Skill"` isolates skill invocations; `tool_input` carries the invoked skill's name/args, `tool_use_id` lets Pre/Post events be correlated if both are needed.
+
+Do **not** use:
+- The agent's own natural-language description of what it did (self-report is not verifiable and drifts under prompt/model changes).
+- The on-disk Claude Code session transcript (`~/.claude/projects/.../<session-id>.jsonl`) — documented as an internal format that changes between releases; not meant to be parsed by scripts.
+
+**Output:** one skill-invocation log per example run, e.g. `intermediates/<example_id>/skill_trace.json` — an ordered list of `{skill, version, tool_input, timestamp}` entries, written as the hook fires (so it exists even if the session errors out mid-run). This sits alongside the existing intermediate sidecar dumps (see “Schemas and evaluation” above) and is not itself scored by `FlatEvaluator`.
+
+**Use cases:**
+- Debugging an unpin sweep: confirm the swept skill was actually invoked (and at the pinned version) rather than assuming it from the manifest.
+- Detecting drift: a leaf whose `SKILL.md` declares `requires: [identify-panels]` but whose trace shows it wasn't called is a bug in the skill body, not the runner.
+- Comparing two runs of the same configuration directly, if their behavior is ever suspected to differ — see “Caching” below for why this is a log-diffing job, not a hashing one.
 
 ### On-disk sketch (illustrative)
 
